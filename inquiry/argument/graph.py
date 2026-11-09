@@ -129,6 +129,10 @@ class Evidence(BaseModel):
         default_factory=dict,
         description="For model_output: model version, parameters, seed, run id.",
     )
+    bears_on: dict[str, Literal["for", "against", "neutral"]] = Field(
+        default_factory=dict,
+        description="claim id -> direction this item bears on it, as appraised. A hint for Argue, not an argument.",
+    )
 
 
 class Source(BaseModel):
@@ -139,11 +143,13 @@ class Source(BaseModel):
     date: str = ""
     fetched_at: str = Field(default_factory=now_iso)
     kind: Literal["primary", "secondary", "derivative", "unknown"] = "unknown"
-    derived_from: Optional[str] = None
+    derived_from: Optional[str] = Field(default=None, description="Source id of the original, for derivative sources.")
+    derived_from_note: str = Field(default="", description="Named origin that is not (yet) a source in the graph.")
     competence: str = ""
     incentives: str = ""
     text_path: str = ""
     query: str = ""
+    read_fully: bool = Field(default=False, description="True when every part of the text has been appraised.")
 
 
 # ---------------------------------------------------------------------------
@@ -306,6 +312,8 @@ class ArgumentGraph(BaseModel):
         for pid in premise_ids or []:
             if self.ev(pid) is None and self.claim(pid) is None:
                 raise KeyError(f"premise {pid!r} is not evidence or a claim")
+            if pid == target_id:
+                raise ValueError(f"attack on {target_id} cannot use {target_id} as its own grounds")
         x = Argument(id=self._next("A", self.arguments), scheme=scheme,
                      premise_ids=premise_ids or [], attacks=Attack(target_id=target_id, type=type), **kw)
         for cq in SCHEMES[scheme].critical_questions:

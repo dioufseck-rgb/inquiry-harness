@@ -288,6 +288,31 @@ _register(Scheme(
 ))
 
 _register(Scheme(
+    name="study_result",
+    title="Argument from a study's reported result",
+    description="An empirical study with a stated design reports an estimate, so the quantity it estimates plausibly has that value in the setting the claim is about.",
+    premises=["Study T used design D on population P with outcome O", "T reports estimate R with uncertainty U",
+              "D is adequate for the kind of claim being made, and P and O match the claim's setting"],
+    conclusion="The claim's quantity plausibly takes the value R (within U)",
+    default_strength="strong",
+    critical_questions=[
+        _cq("design", "Is D adequate for this kind of claim: for a causal claim, does it identify the effect by intervention, a credible control, or a defensible counterfactual rather than a before/after comparison?", "assumption", "inference", [CM, CF, EV]),
+        _cq("directness", "Do the study's population, setting, intervention and outcome match the claim's, or is the result being carried across to a different place, period, site type or measure?", "assumption", "inference", [EV, IL]),
+        _cq("uncertainty", "Is the uncertainty of R reported (interval, standard error, sample size), and is it narrow enough to bear on the claim?", "assumption", "premise", [IL, CONF]),
+        _cq("reported", "Does the source state R and D as used here, rather than a paraphrase or a press summary of them?", "assumption", "premise", [EV, T]),
+        _cq("bias", "Is there a specific risk of bias in T: selection, contamination of the comparison, anticipation, outcome measurement, selective reporting, or the authors' interest?", "exception", "inference", [SO, EV]),
+        _cq("consistency", "Do other studies of comparable design disagree with R?", "exception", "conclusion", [CONF, "Disagreement"]),
+        _cq("precision", "Is U wide enough that values on both sides of the claim's threshold remain plausible?", "exception", "conclusion", [IL]),
+    ],
+    sep=[EV, CONF, IL, CM],
+    stance="The questions follow the GRADE domains (risk of bias, inconsistency, indirectness, imprecision, and design) "
+           "because those are what methodologists actually ask of a result. Design and directness are assumptions: a "
+           "study result does not transfer to a claim about a different setting until the proponent shows it does. "
+           "This is the scheme for 'a study found X', which document_record is not: the record states the estimate, "
+           "but the inference from estimate to the world is what this scheme makes explicit.",
+))
+
+_register(Scheme(
     name="model_output",
     title="Argument from a model or simulation",
     description="A model, when run on sourced inputs, produces the claimed result.",

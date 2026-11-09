@@ -137,6 +137,20 @@ def summary(g: ArgumentGraph, ev: Evaluation, lb: list[LoadBearing] | None = Non
     open_assumptions = [(aid, why) for aid, why in ev.inapplicable_reasons.items()]
     lines.append("## Arguments")
     lines.append("")
+
+    def attackers(a):
+        out = []
+        for x in g.arguments:
+            if not x.is_attack:
+                continue
+            t = x.attacks
+            if (t.type == "undercut" and t.target_id == a.id) or (t.type == "undermine" and t.target_id in a.premise_ids) \
+                    or (t.type == "rebut" and t.target_id == a.id):
+                st = "inapplicable" if not ev.applicable.get(x.id, True) else ev.labels.get(x.id, "?")
+                what = f"{t.type} {t.target_id}" if t.type == "undermine" else t.type
+                out.append(f"{x.id} ({what}, {st})")
+        return out
+
     for a in g.arguments:
         strength = ev.argument_strength[a.id]
         if not ev.applicable[a.id]:
@@ -144,7 +158,11 @@ def summary(g: ArgumentGraph, ev: Evaluation, lb: list[LoadBearing] | None = Non
         else:
             status = ev.labels[a.id]
         tgt = a.claim_id if a.claim_id else f"{a.attacks.type} → {a.attacks.target_id}"
-        lines.append(f"- {a.id} ({a.scheme}, {strength}) → {tgt}: **{status}**")
+        line = f"- {a.id} ({a.scheme}, {strength}) → {tgt}: **{status}**"
+        atks = attackers(a)
+        if atks:
+            line += "  attacked by " + ", ".join(atks)
+        lines.append(line)
     lines.append("")
 
     if open_assumptions:
@@ -158,14 +176,18 @@ def summary(g: ArgumentGraph, ev: Evaluation, lb: list[LoadBearing] | None = Non
         lines.append("## Load-bearing nodes")
         lines.append("")
         for x in lb:
-            lines.append(f"- {x.node_id} ({x.kind}): {x.detail} → would become {x.effect}")
+            watched = f" for {x.claim_id}" if x.claim_id else ""
+            lines.append(f"- {x.node_id} ({x.kind}){watched}: {x.detail} → {x.claim_id or 'claim'} would become {x.effect}")
         lines.append("")
 
-    flags = [f for f in ev.flags if f.code != "inapplicable_argument"]
-    if flags:
+    flags = [f for f in ev.flags if f.code not in ("inapplicable_argument", "orphan_evidence")]
+    orphans = [f.node_id for f in ev.flags if f.code == "orphan_evidence"]
+    if flags or orphans:
         lines.append("## Flags")
         lines.append("")
         for f in flags:
             lines.append(f"- `{f.code}` {f.node_id}: {f.detail}")
+        if orphans:
+            lines.append(f"- `orphan_evidence` ({len(orphans)}): {', '.join(orphans)} used in no argument")
         lines.append("")
     return "\n".join(lines).rstrip() + "\n"

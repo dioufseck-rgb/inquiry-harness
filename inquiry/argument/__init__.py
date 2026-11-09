@@ -5,5 +5,7 @@ from .graph import (  # noqa: F401
     CQAnswer, DEFAULT_STANDARD, STRENGTH_ORDER,
 )
 from .schemes import SCHEMES, Scheme, CriticalQuestion, scheme, list_schemes  # noqa: F401
-from .evaluate import evaluate, load_bearing, Evaluation, ClaimDetail, Flag, LoadBearing  # noqa: F401
+from .evaluate import (  # noqa: F401
+    evaluate, load_bearing, what_would_settle, Evaluation, ClaimDetail, Flag, LoadBearing, Settler,
+)
 from .render import toulmin, wigmore, summary  # noqa: F401

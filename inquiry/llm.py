@@ -35,25 +35,22 @@ def extract_json(text: str) -> Any:
         text = fence.group(1)
     start = text.find("{")
     if start == -1:
-        raise ValueError("no JSON object in reply")
-    depth = 0
-    for i in range(start, len(text)):
-        if text[i] == "{":
-            depth += 1
-        elif text[i] == "}":
-            depth -= 1
-            if depth == 0:
-                return json.loads(text[start : i + 1])
-    raise ValueError("unbalanced JSON object in reply")
+        raise ValueError(f"no JSON object in reply: {text[:120]!r}")
+    try:
+        obj, _ = json.JSONDecoder().raw_decode(text[start:])
+    except json.JSONDecodeError as e:
+        raise ValueError(f"malformed or truncated JSON in reply ({e.msg} at char {e.pos}); "
+                         f"reply ends: {text[-120:]!r}") from e
+    return obj
 
 
 class LLM:
     name: str = "base"
 
-    def complete(self, system: str, user: str, max_tokens: int = 4000) -> str:  # pragma: no cover
+    def complete(self, system: str, user: str, max_tokens: int = 16000) -> str:  # pragma: no cover
         raise NotImplementedError
 
-    def complete_json(self, system: str, user: str, schema: Type[T], max_tokens: int = 4000) -> T:
+    def complete_json(self, system: str, user: str, schema: Type[T], max_tokens: int = 16000) -> T:
         reply = self.complete(system, user, max_tokens=max_tokens)
         try:
             return schema.model_validate(extract_json(reply))
@@ -67,23 +64,35 @@ class LLM:
 
 
 class AnthropicLLM(LLM):
-    def __init__(self, model: str, temperature: float = 0.2):
+    """
+    Claude 5 family models reject sampling parameters (temperature, top_p);
+    depth is controlled by `effort` instead, and thinking is adaptive by
+    default. The system prompt (skill text) is stable across calls, so it is
+    marked for prompt caching.
+    """
+
+    def __init__(self, model: str, effort: str = "medium"):
         import anthropic  # imported here so tests can run without the SDK configured
 
         self.client = anthropic.Anthropic()  # reads ANTHROPIC_API_KEY
         self.model = model
-        self.temperature = temperature
+        self.effort = effort
         self.name = model
 
     def complete(self, system: str, user: str, max_tokens: int = 4000) -> str:
         resp = self.client.messages.create(
             model=self.model,
             max_tokens=max_tokens,
-            temperature=self.temperature,
-            system=system,
+            output_config={"effort": self.effort},
+            system=[{"type": "text", "text": system, "cache_control": {"type": "ephemeral"}}],
             messages=[{"role": "user", "content": user}],
         )
-        return "".join(block.text for block in resp.content if getattr(block, "type", "") == "text")
+        if resp.stop_reason == "refusal":
+            raise RuntimeError(f"{self.model} declined the request: {getattr(resp.stop_details, 'category', None)}")
+        text = "".join(block.text for block in resp.content if getattr(block, "type", "") == "text")
+        if not text.strip() and resp.stop_reason == "max_tokens":
+            raise RuntimeError(f"{self.model} hit max_tokens={max_tokens} before producing text; raise max_tokens")
+        return text
 
 
 class FakeLLM(LLM):
@@ -119,5 +128,5 @@ def llm_from_env(role: str) -> LLM:
     """
     defaults = {"proposer": "claude-sonnet-5-5", "critic": "claude-opus-5-5"}
     model = os.environ.get(f"INQUIRY_{role.upper()}_MODEL", defaults[role])
-    temp = 0.2 if role == "proposer" else 0.4
-    return AnthropicLLM(model=model, temperature=temp)
+    effort = os.environ.get(f"INQUIRY_{role.upper()}_EFFORT", "medium" if role == "proposer" else "high")
+    return AnthropicLLM(model=model, effort=effort)

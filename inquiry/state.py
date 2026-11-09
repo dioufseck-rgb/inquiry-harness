@@ -10,6 +10,7 @@ from typing import Literal, Optional
 
 from pydantic import BaseModel, Field
 
+from .argument.evaluate import Evaluation
 from .argument.graph import ArgumentGraph, QuestionType, now_iso  # noqa: F401  (now_iso re-exported)
 
 Phase = Literal["new", "framed", "hypothesized", "inquiring", "concluded"]
@@ -84,6 +85,7 @@ class Inquiry(BaseModel):
     reflections: list[Reflection] = Field(default_factory=list)
     stop_assessments: list[StopAssessment] = Field(default_factory=list)
     conclusion: Optional[Conclusion] = None
+    evaluation: Optional[Evaluation] = Field(default=None, description="Result of the last Evaluate move.")
     notes: list[str] = Field(default_factory=list)
 
     def main_claims(self):

@@ -1,0 +1,1081 @@
+"""
+Moves of the cycle.
+
+A model-backed move has three parts:
+
+    view      a typed rendering of the relevant subgraph; this is the user
+              message. The model never sees the transcript, only the view.
+    contract  a pydantic schema the reply must satisfy; LLM.complete_json
+              validates and retries once.
+    apply     the deterministic update of the inquiry from a valid reply.
+              Dangling ids are dropped, duplicates merged, and anything the
+              model got wrong is recorded in the returned summary.
+
+The skill text (inquiry/skills/<name>.md) is the system prompt. The
+contracts here are the source of truth; skill text is adjusted to match.
+
+Code-only moves (evaluate, reflect, stop) live here too so the cycle in
+live.py is just sequencing.
+"""
+
+from __future__ import annotations
+
+import re
+from pathlib import Path
+from typing import Literal, Optional
+
+from pydantic import BaseModel, Field
+
+from .argument.evaluate import Evaluation, Settler, evaluate, load_bearing, what_would_settle
+from .argument.graph import (
+    STRENGTH_ORDER, Argument, ArgumentGraph, AttackType, CQAnswer, Credentials, EvidenceKind, ProofStandard,
+    QuestionType, Source, Strength,
+)
+from .argument.schemes import SCHEMES
+from .llm import LLM
+from .state import (
+    Conclusion, Framing, Inquiry, Judgement, PlannedTest, Reflection, StopAssessment,
+)
+from .tools.compute import INSTRUMENT_VERSION, ComputeError, safe_eval
+
+SKILLS_DIR = Path(__file__).parent / "skills"
+
+
+def skill_text(name: str) -> str:
+    return (SKILLS_DIR / f"{name}.md").read_text(encoding="utf-8")
+
+
+# ---------------------------------------------------------------------------
+# View fragments
+# ---------------------------------------------------------------------------
+
+def _clip(text: str, n: int) -> str:
+    text = " ".join(text.split())
+    return text if len(text) <= n else text[: n - 1] + "…"
+
+
+def _framing_block(inq: Inquiry) -> str:
+    f = inq.framing
+    lines = [f"# Question\n\n{inq.question}", ""]
+    if f.restatement:
+        lines += [f"Restated: {f.restatement}", f"Type: {f.question_type}"]
+        if f.answerhood:
+            lines.append(f"A complete answer contains: {f.answerhood}")
+        if f.scope_in:
+            lines.append("In scope: " + "; ".join(f.scope_in))
+        if f.scope_out:
+            lines.append("Out of scope: " + "; ".join(f.scope_out))
+        if f.presuppositions:
+            lines.append("Presuppositions: " + "; ".join(f.presuppositions))
+    return "\n".join(lines)
+
+
+def _issues_block(inq: Inquiry, ev: Optional[Evaluation] = None, with_claims: bool = True) -> str:
+    g = inq.graph
+    lines = ["# Issues and claims", ""]
+    for iss in g.issues:
+        tag = " (main)" if iss.id == g.main_issue_id else ""
+        dep = f" depends on {', '.join(iss.depends_on)}" if iss.depends_on else ""
+        lines.append(f"- {iss.id}{tag} [{iss.question_type}]{dep}: {iss.text}")
+        if iss.answerhood:
+            lines.append(f"  complete answer: {iss.answerhood}")
+        if with_claims:
+            for c in g.claims_for_issue(iss.id):
+                st = f" [{ev.status(c.id)}]" if ev else ""
+                lines.append(f"  - {c.id} ({c.kind}){st}: {c.text}")
+    return "\n".join(lines)
+
+
+def _sources_block(g: ArgumentGraph) -> str:
+    if not g.sources:
+        return "# Sources\n\n(none yet)"
+    lines = ["# Sources", ""]
+    for s in g.sources:
+        bits = [s.kind]
+        if s.publisher:
+            bits.append(s.publisher)
+        if s.date:
+            bits.append(s.date)
+        lines.append(f"- {s.id} ({', '.join(bits)}): {s.title or s.url}  <{s.url}>")
+    return "\n".join(lines)
+
+
+def _evidence_block(g: ArgumentGraph, ids: Optional[list[str]] = None, title: str = "Evidence",
+                    mark_unused: bool = False) -> str:
+    items = [e for e in g.evidence if ids is None or e.id in ids]
+    if not items:
+        return f"# {title}\n\n(none)"
+    used: dict[str, list[str]] = {}
+    for a in g.arguments:
+        for p in a.premise_ids:
+            used.setdefault(p, []).append(a.id)
+    lines = [f"# {title}", ""]
+    for e in items:
+        src = g.source(e.source_id) if e.source_id else None
+        cred = e.credentials
+        tag = ""
+        if mark_unused and e.id not in used:
+            tag = " UNUSED: no argument uses this item; attacking it changes nothing"
+        if e.provenance.get("unusable"):
+            tag = f" UNUSABLE: {e.provenance['unusable']}"
+        lines.append(f"- {e.id} [{e.kind}; relevance {cred.relevance}, credibility {cred.credibility}, "
+                     f"force {cred.force}; origin group {e.independence_group or 'source:' + (e.source_id or e.id)}]"
+                     f" from {src.id + ' ' + (src.title or src.url) if src else 'no source'}{tag}")
+        lines.append(f"  text: {e.text}")
+        if e.quote:
+            lines.append(f"  quote: \"{_clip(e.quote, 300)}\" ({e.location or 'no location'})")
+        if cred.credibility_notes:
+            lines.append(f"  credibility notes: {cred.credibility_notes}")
+        if e.bears_on:
+            lines.append("  bears on: " + ", ".join(f"{k} {v}" for k, v in e.bears_on.items()))
+        if e.id in used and used[e.id]:
+            lines.append("  used in: " + ", ".join(used[e.id]))
+    return "\n".join(lines)
+
+
+def _schemes_block() -> str:
+    lines = ["# Scheme catalogue", ""]
+    for name, s in SCHEMES.items():
+        if name == "attack":
+            continue
+        lines.append(f"## {name}: {s.title}")
+        lines.append(s.description)
+        lines.append("premises: " + "; ".join(s.premises))
+        for q in s.critical_questions:
+            lines.append(f"- {q.id} ({q.kind}, probes {q.probes}): {q.text}")
+        lines.append("")
+    return "\n".join(lines).rstrip()
+
+
+def _arguments_block(g: ArgumentGraph, ev: Optional[Evaluation], show_exceptions: bool = False) -> str:
+    if not g.arguments:
+        return "# Arguments\n\n(none yet)"
+    lines = ["# Arguments", ""]
+    for a in g.arguments:
+        sch = SCHEMES[a.scheme]
+        if a.is_attack:
+            head = f"{a.id} {a.attacks.type} attack on {a.attacks.target_id} (origin {a.origin})"
+        else:
+            head = f"{a.id} {a.scheme} → {a.claim_id} (origin {a.origin})"
+        if ev is not None:
+            if not ev.applicable.get(a.id, True):
+                head += " — INAPPLICABLE: " + "; ".join(ev.inapplicable_reasons.get(a.id, []))
+            else:
+                head += f" — {ev.labels.get(a.id, '?')}, strength {ev.argument_strength.get(a.id, '?')}"
+        lines.append(f"- {head}")
+        lines.append("  premises: " + (", ".join(a.premise_ids) or "(none)"))
+        if a.note:
+            lines.append(f"  note: {a.note}")
+        for q in sch.critical_questions:
+            st = a.cq.get(q.id)
+            if q.kind == "exception" and not show_exceptions:
+                continue
+            status = st.status if st else "open"
+            ans = f" — {st.answer}" if st and st.answer else ""
+            evs = f" [{', '.join(st.evidence_ids)}]" if st and st.evidence_ids else ""
+            lines.append(f"  cq {q.id} ({q.kind}, probes {q.probes}) [{status}]: {q.text}{ans}{evs}")
+    return "\n".join(lines)
+
+
+def _settlers_block(inq: Inquiry, ev: Evaluation) -> str:
+    g = inq.graph
+    lines = ["# What stands between undecided claims and acceptance", ""]
+    any_ = False
+    for c in g.claims:
+        if ev.status(c.id) == "in":
+            continue
+        settlers = what_would_settle(g, c.id, ev)
+        if not settlers:
+            continue
+        any_ = True
+        lines.append(f"- {c.id}: {c.text}")
+        for s in settlers:
+            node = f" ({s.node_id})" if s.node_id else ""
+            lines.append(f"  - {s.kind}{node}: {s.detail}")
+    if not any_:
+        lines.append("(nothing recorded)")
+    return "\n".join(lines)
+
+
+def _tests_block(inq: Inquiry) -> str:
+    if not inq.tests:
+        return "# Tests already planned\n\n(none)"
+    lines = ["# Tests already planned", ""]
+    for t in inq.tests:
+        lines.append(f"- {t.id} [{t.status}, round {t.round}, {t.diagnosticity}] on {', '.join(t.claim_ids)}: {t.observation}")
+        lines.append("  queries: " + "; ".join(t.queries))
+    return "\n".join(lines)
+
+
+# ---------------------------------------------------------------------------
+# Frame
+# ---------------------------------------------------------------------------
+
+class SubIssue(BaseModel):
+    text: str
+    question_type: QuestionType = "mixed"
+    answerhood: str = ""
+    depends_on: list[int] = Field(default_factory=list, description="Zero-based indexes into sub_issues.")
+
+
+class FrameOutput(BaseModel):
+    restatement: str
+    question_type: QuestionType = "mixed"
+    scope_in: list[str] = Field(default_factory=list)
+    scope_out: list[str] = Field(default_factory=list)
+    presuppositions: list[str] = Field(default_factory=list)
+    answerhood: str = ""
+    standard_override: Optional[ProofStandard] = None
+    sub_issues: list[SubIssue] = Field(default_factory=list)
+
+
+def frame_view(inq: Inquiry) -> str:
+    return _framing_block(inq)
+
+
+def apply_frame(inq: Inquiry, out: FrameOutput) -> dict:
+    g = inq.graph
+    inq.framing = Framing(
+        restatement=out.restatement, question_type=out.question_type, scope_in=out.scope_in,
+        scope_out=out.scope_out, presuppositions=out.presuppositions, answerhood=out.answerhood,
+        standard_override=out.standard_override,
+    )
+    main = g.add_issue(inq.question, question_type=out.question_type, answerhood=out.answerhood,
+                       presuppositions=out.presuppositions)
+    g.main_issue_id = main.id
+    subs = [g.add_issue(s.text, question_type=s.question_type, answerhood=s.answerhood, parent_id=main.id)
+            for s in out.sub_issues]
+    for s, iss in zip(out.sub_issues, subs):
+        iss.depends_on = [subs[i].id for i in s.depends_on if 0 <= i < len(subs) and subs[i].id != iss.id]
+    inq.phase = "framed"
+    return {"main_issue": main.id, "sub_issues": [x.id for x in subs], "question_type": out.question_type}
+
+
+def frame(inq: Inquiry, llm: LLM) -> dict:
+    out = llm.complete_json(skill_text("frame"), frame_view(inq), FrameOutput)
+    return apply_frame(inq, out)
+
+
+# ---------------------------------------------------------------------------
+# Hypothesize
+# ---------------------------------------------------------------------------
+
+class ClaimProposal(BaseModel):
+    issue_id: str
+    text: str
+    kind: Literal["substantive", "null", "deflationary"] = "substantive"
+    rationale: str = ""
+
+
+class HypothesizeOutput(BaseModel):
+    claims: list[ClaimProposal]
+
+
+def hypothesize_view(inq: Inquiry) -> str:
+    return "\n\n".join([_framing_block(inq), _issues_block(inq, with_claims=False)])
+
+
+def apply_hypothesize(inq: Inquiry, out: HypothesizeOutput) -> dict:
+    g = inq.graph
+    added: list[str] = []
+    dropped: list[str] = []
+    for p in out.claims:
+        if g.issue(p.issue_id) is None:
+            dropped.append(f"{p.issue_id}: unknown issue")
+            continue
+        if any(c.issue_id == p.issue_id and c.text.strip().lower() == p.text.strip().lower() for c in g.claims):
+            continue
+        c = g.add_claim(p.text, issue_id=p.issue_id, kind=p.kind, rationale=p.rationale)
+        added.append(c.id)
+    # every issue gets a null answer to beat, even if the model forgot one
+    for iss in g.issues:
+        claims = g.claims_for_issue(iss.id)
+        if claims and not any(c.kind in ("null", "deflationary") for c in claims):
+            c = g.add_claim(f"None of the proposed answers to {iss.id} is established", issue_id=iss.id,
+                            kind="null", rationale="added by the harness: every issue needs a null to beat")
+            added.append(c.id)
+    for iss in g.issues:
+        ids = [c.id for c in g.claims_for_issue(iss.id)]
+        if len(ids) > 1:
+            g.set_contraries(*ids)
+    if inq.framing.standard_override and g.main_issue_id:
+        for c in g.claims_for_issue(g.main_issue_id):
+            c.proof_standard = inq.framing.standard_override  # type: ignore[assignment]
+    inq.phase = "hypothesized"
+    return {"claims": added, "dropped": dropped}
+
+
+def hypothesize(inq: Inquiry, llm: LLM) -> dict:
+    out = llm.complete_json(skill_text("hypothesize"), hypothesize_view(inq), HypothesizeOutput)
+    return apply_hypothesize(inq, out)
+
+
+# ---------------------------------------------------------------------------
+# Plan
+# ---------------------------------------------------------------------------
+
+class TestProposal(BaseModel):
+    claim_ids: list[str]
+    observation: str
+    expected_if: dict[str, str] = Field(default_factory=dict)
+    diagnosticity: Literal["high", "medium", "low"] = "medium"
+    queries: list[str] = Field(default_factory=list)
+
+
+class PlanOutput(BaseModel):
+    tests: list[TestProposal]
+
+
+def plan_view(inq: Inquiry, extra_queries: Optional[list[str]] = None) -> str:
+    ev = inq.evaluation
+    parts = [_framing_block(inq), _issues_block(inq, ev)]
+    if ev is not None:
+        parts.append(_settlers_block(inq, ev))
+    parts.append(_tests_block(inq))
+    if extra_queries:
+        parts.append("# Evidence the critic asked for\n\n" + "\n".join(f"- {q}" for q in extra_queries))
+    return "\n\n".join(parts)
+
+
+def apply_plan(inq: Inquiry, out: PlanOutput) -> dict:
+    g = inq.graph
+    added: list[str] = []
+    dropped: list[str] = []
+    for t in out.tests:
+        claim_ids = [c for c in t.claim_ids if g.claim(c) is not None]
+        queries = [q.strip() for q in t.queries if q.strip()]
+        if not claim_ids or not queries:
+            dropped.append(f"{t.observation[:60]}: no known claims or no queries")
+            continue
+        pt = PlannedTest(id=inq.next_test_id(), claim_ids=claim_ids, observation=t.observation,
+                         expected_if={k: v for k, v in t.expected_if.items() if k in claim_ids},
+                         diagnosticity=t.diagnosticity, queries=queries, round=inq.round)
+        inq.tests.append(pt)
+        added.append(pt.id)
+    return {"tests": added, "dropped": dropped}
+
+
+def plan(inq: Inquiry, llm: LLM, extra_queries: Optional[list[str]] = None) -> dict:
+    out = llm.complete_json(skill_text("plan"), plan_view(inq, extra_queries), PlanOutput)
+    return apply_plan(inq, out)
+
+
+# ---------------------------------------------------------------------------
+# Appraise (one source)
+# ---------------------------------------------------------------------------
+
+class EvidenceProposal(BaseModel):
+    text: str
+    kind: EvidenceKind = "tangible"
+    quote: str = ""
+    location: str = ""
+    relevance: Strength = "moderate"
+    credibility: Strength = "moderate"
+    force: Strength = "moderate"
+    credibility_notes: str = ""
+    bears_on: dict[str, Literal["for", "against", "neutral"]] = Field(default_factory=dict)
+
+
+class AppraiseOutput(BaseModel):
+    kind: Literal["primary", "secondary", "derivative", "unknown"] = "unknown"
+    publisher: str = ""
+    date: str = ""
+    competence: str = ""
+    incentives: str = ""
+    derived_from: str = Field(default="", description="URL or source id of the original, when derivative.")
+    evidence: list[EvidenceProposal] = Field(default_factory=list)
+
+
+APPRAISE_WINDOW = 12_000
+
+
+def appraise_view(inq: Inquiry, src: Source, text: str, test: Optional[PlannedTest],
+                  part: tuple[int, int] = (1, 1)) -> str:
+    parts = [_framing_block(inq), _issues_block(inq, inq.evaluation)]
+    if test is not None:
+        exp = "\n".join(f"  - if {k}: {v}" for k, v in test.expected_if.items())
+        parts.append(f"# Test this source was fetched for\n\n{test.id}: {test.observation}\n{exp}")
+    parts.append(_sources_block(inq.graph))
+    if part != (1, 1):
+        already = [e.id for e in inq.graph.evidence if e.source_id == src.id]
+        head = (f"# Source to appraise, part {part[0]} of {part[1]}\n\n"
+                f"This is a later part of a document already classified as {src.kind}. "
+                f"Evidence already extracted from earlier parts: {', '.join(already) or 'none'}. "
+                "Extract only what this part adds; keep kind, publisher and date as before.\n\n")
+    else:
+        head = "# Source to appraise\n\n"
+        if len(text) < 1:
+            text = "(empty)"
+    parts.append(f"{head}{src.id}: {src.title or '(no title)'}\nURL: {src.url}\n\n{text}")
+    return "\n\n".join(parts)
+
+
+def _origin_group(g: ArgumentGraph, src: Source, derived_from: str) -> str:
+    """
+    Independence group for a source's evidence. A derivative source joins its
+    original's group when the original is in the graph. If it names an origin
+    the graph does not hold, the name is kept and the source stays derivative
+    with no derived_from, which evaluate treats as unable to corroborate.
+    """
+    key = derived_from.strip()
+    if key:
+        orig = g.source(key) or next((s for s in g.sources if s.url and s.url == key), None)
+        if orig is not None and orig.id != src.id:
+            src.derived_from = orig.id
+            other = next((e.independence_group for e in g.evidence if e.source_id == orig.id and e.independence_group), None)
+            return other or f"source:{orig.id}"
+        src.derived_from_note = key
+    return f"source:{src.id}"
+
+
+def apply_appraise(inq: Inquiry, src: Source, out: AppraiseOutput, first: bool = True) -> dict:
+    g = inq.graph
+    if first:
+        src.kind = out.kind
+        src.competence = out.competence
+        src.incentives = out.incentives
+    src.publisher = out.publisher or src.publisher
+    src.date = out.date or src.date
+    group = _origin_group(g, src, out.derived_from) if first else \
+        next((e.independence_group for e in g.evidence if e.source_id == src.id), f"source:{src.id}")
+    known = {c.id for c in g.claims}
+    added: list[str] = []
+    for p in out.evidence:
+        e = g.add_evidence(
+            p.text, kind=p.kind, source_id=src.id, quote=_clip(p.quote, 300), location=p.location,
+            credentials=Credentials(relevance=p.relevance, credibility=p.credibility, force=p.force,
+                                    credibility_notes=p.credibility_notes),
+            independence_group=group, bears_on={k: v for k, v in p.bears_on.items() if k in known},
+        )
+        added.append(e.id)
+    return {"source": src.id, "kind": src.kind, "group": group, "evidence": added}
+
+
+def _chunks(text: str, window: int, overlap: int) -> list[str]:
+    if len(text) <= window:
+        return [text]
+    out, start = [], 0
+    while start < len(text):
+        out.append(text[start:start + window])
+        if start + window >= len(text):
+            break
+        start += window - overlap
+    return out
+
+
+def appraise(inq: Inquiry, llm: LLM, src: Source, text: str, test: Optional[PlannedTest] = None,
+             part: tuple[int, int] = (1, 1)) -> dict:
+    out = llm.complete_json(skill_text("appraise"), appraise_view(inq, src, text, test, part), AppraiseOutput)
+    return apply_appraise(inq, src, out, first=(part[0] == 1))
+
+
+def appraise_full(inq: Inquiry, llm: LLM, src: Source, text: str, test: Optional[PlannedTest] = None,
+                  window: int = APPRAISE_WINDOW, overlap: int = 500, max_parts: int = 36,
+                  text_complete: bool = True) -> dict:
+    """
+    Appraise a source. The first window classifies it; a primary source is
+    then read to the end, window by window, so that an attack grounded in
+    what the document does not say can be trusted. Other kinds are sampled.
+    `text_complete` is False when the fetcher cut the text; the source is
+    then never marked as read in full, whatever was appraised.
+    """
+    parts = _chunks(text, window, overlap)
+    total: dict = {"source": src.id, "evidence": [], "parts": 0, "of": len(parts), "text_complete": text_complete}
+    for i, chunk in enumerate(parts):
+        res = appraise(inq, llm, src, chunk, test, part=(i + 1, len(parts)))
+        total["evidence"].extend(res["evidence"])
+        total["parts"] += 1
+        if i == 0:
+            total["kind"], total["group"] = res["kind"], res["group"]
+            if len(parts) > 1 and src.kind != "primary":
+                break
+        if total["parts"] >= max_parts:
+            break
+    src.read_fully = text_complete and total["parts"] == len(parts)
+    return total
+
+
+# ---------------------------------------------------------------------------
+# Argue
+# ---------------------------------------------------------------------------
+
+class CQAnswerProposal(BaseModel):
+    answer: str = ""
+    evidence_ids: list[str] = Field(default_factory=list)
+    defaulted: bool = False
+
+
+class ArgumentProposal(BaseModel):
+    scheme: str
+    claim_id: str
+    premise_ids: list[str]
+    cq_answers: dict[str, CQAnswerProposal] = Field(default_factory=dict)
+    note: str = ""
+
+
+class UnusableProposal(BaseModel):
+    evidence_id: str
+    reason: str
+
+
+class ArgueOutput(BaseModel):
+    arguments: list[ArgumentProposal] = Field(default_factory=list)
+    unusable: list[UnusableProposal] = Field(
+        default_factory=list, description="Evidence bearing on these claims that cannot ground any argument, with why.")
+
+
+def issue_evidence(g: ArgumentGraph, issue_id: str, include_unassigned: bool = False) -> tuple[set[str], list[str]]:
+    """Claim ids of an issue and the evidence ids recorded as bearing on them."""
+    claim_ids = {c.id for c in g.claims_for_issue(issue_id)}
+    ev_ids = [e.id for e in g.evidence
+              if (set(e.bears_on) & claim_ids) or (include_unassigned and not e.bears_on)]
+    return claim_ids, ev_ids
+
+
+def argue_view(inq: Inquiry, issue_id: str) -> str:
+    """Argue is called once per issue, with that issue's claims and the evidence bearing on them."""
+    g = inq.graph
+    ev = inq.evaluation
+    iss = g.issue(issue_id)
+    claim_ids, ev_ids = issue_evidence(g, issue_id, include_unassigned=(issue_id == g.main_issue_id))
+    used = {p for a in g.arguments for p in a.premise_ids}
+    orphans = [e for e in ev_ids if e not in used and not g.ev(e).provenance.get("unusable")]
+    lines = [f"# Issue under argument\n\n{iss.id}{' (main)' if iss.id == g.main_issue_id else ''} "
+             f"[{iss.question_type}]: {iss.text}"]
+    if iss.answerhood:
+        lines.append(f"complete answer: {iss.answerhood}")
+    lines.append("")
+    lines.append("Claims (mutually exclusive answers):")
+    for c in g.claims_for_issue(issue_id):
+        st = f" [{ev.status(c.id)}]" if ev else ""
+        lines.append(f"- {c.id} ({c.kind}){st}: {c.text}")
+    issue_block = "\n".join(lines)
+    orphan_block = ("# Evidence bearing on these claims and not yet in any argument\n\n"
+                    + ("\n".join(f"- {e}" for e in orphans) if orphans else "(none)")
+                    + "\n\nEvery item above must end up as a premise of an argument below, or in `unusable` with a reason.")
+    args_for_issue = [a for a in g.arguments if a.claim_id in claim_ids]
+    sub = g.model_copy(update={"arguments": args_for_issue})
+    return "\n\n".join([
+        _framing_block(inq), issue_block, _sources_block(g), _evidence_block(g, ev_ids),
+        orphan_block, _arguments_block(sub, ev), _schemes_block(),
+    ])
+
+
+def apply_argue(inq: Inquiry, out: ArgueOutput, allowed_claims: Optional[set[str]] = None) -> dict:
+    g = inq.graph
+    added: list[str] = []
+    merged: list[str] = []
+    dropped: list[str] = []
+    still_open: dict[str, list[str]] = {}
+    unusable: list[str] = []
+    for u in out.unusable:
+        e = g.ev(u.evidence_id)
+        if e is not None and u.reason.strip():
+            e.provenance["unusable"] = u.reason.strip()
+            unusable.append(e.id)
+    for p in out.arguments:
+        if p.scheme not in SCHEMES or p.scheme == "attack":
+            dropped.append(f"unknown scheme {p.scheme!r}")
+            continue
+        if g.claim(p.claim_id) is None:
+            dropped.append(f"unknown claim {p.claim_id!r}")
+            continue
+        if allowed_claims is not None and p.claim_id not in allowed_claims:
+            dropped.append(f"{p.claim_id} is not a claim of the issue under argument")
+            continue
+        premises = [x for x in p.premise_ids if g.ev(x) is not None or g.claim(x) is not None]
+        premises = [x for x in premises if x != p.claim_id]
+        if not premises:
+            dropped.append(f"{p.scheme} → {p.claim_id}: no known premises")
+            continue
+        existing = next((a for a in g.arguments if not a.is_attack and a.scheme == p.scheme
+                         and a.claim_id == p.claim_id and set(a.premise_ids) == set(premises)), None)
+        if existing is None:
+            a = g.add_argument(p.scheme, premises, p.claim_id, note=p.note, round=inq.round)
+            added.append(a.id)
+        else:
+            a = existing
+            merged.append(a.id)
+        sch = SCHEMES[p.scheme]
+        valid_cq = {q.id for q in sch.critical_questions}
+        for qid, ans in p.cq_answers.items():
+            if qid not in valid_cq:
+                continue
+            if sch.cq(qid).kind == "exception":
+                continue  # exceptions are the critic's to raise
+            ev_ids = [x for x in ans.evidence_ids if g.ev(x) is not None]
+            if not ans.answer and not ev_ids:
+                continue
+            g.answer_cq(a.id, qid, ans.answer, ev_ids, defaulted=ans.defaulted and not ev_ids)
+        open_ = [q.id for q in sch.assumptions() if a.cq[q.id].status == "open"]
+        if open_:
+            still_open[a.id] = open_
+    # an item that is a premise somewhere is usable by definition
+    in_use = {p for a in g.arguments for p in a.premise_ids}
+    for eid in list(unusable):
+        if eid in in_use:
+            g.ev(eid).provenance.pop("unusable", None)
+            unusable.remove(eid)
+    return {"arguments": added, "merged": merged, "dropped": dropped, "unusable": unusable,
+            "still_inapplicable": still_open}
+
+
+def argue(inq: Inquiry, llm: LLM) -> dict:
+    """One call per issue that has evidence bearing on it; results are merged into one summary."""
+    g = inq.graph
+    total = {"arguments": [], "merged": [], "dropped": [], "unusable": [], "still_inapplicable": {}, "issues": []}
+    for iss in g.issues:
+        claim_ids, ev_ids = issue_evidence(g, iss.id, include_unassigned=(iss.id == g.main_issue_id))
+        if not claim_ids or not ev_ids:
+            continue
+        out = llm.complete_json(skill_text("argue"), argue_view(inq, iss.id), ArgueOutput)
+        part = apply_argue(inq, out, allowed_claims=claim_ids)
+        for k in ("arguments", "merged", "dropped", "unusable"):
+            total[k].extend(part[k])
+        total["still_inapplicable"].update(part["still_inapplicable"])
+        total["issues"].append(iss.id)
+    return total
+
+
+# ---------------------------------------------------------------------------
+# Critique
+# ---------------------------------------------------------------------------
+
+class AttackProposal(BaseModel):
+    target_id: str
+    type: AttackType
+    premise_ids: list[str] = Field(default_factory=list)
+    cq_id: str = ""
+    basis: Literal["presence", "absence"] = Field(
+        default="presence",
+        description="presence: grounded in what a source says. absence: grounded in what a source does not say.")
+    note: str = ""
+
+
+class CritiqueOutput(BaseModel):
+    attacks: list[AttackProposal] = Field(default_factory=list)
+    needed_evidence: list[str] = Field(default_factory=list)
+
+
+def _sources_behind(g: ArgumentGraph, target_id: str) -> list[Source]:
+    """The sources whose text an attack on `target_id` is about."""
+    node = g.node(target_id)
+    ev_ids: list[str] = []
+    if node is None:
+        return []
+    if hasattr(node, "credentials"):  # Evidence
+        ev_ids = [node.id]
+    elif isinstance(node, Argument):
+        ev_ids = [p for p in node.premise_ids if g.ev(p) is not None]
+    else:  # claim: the evidence behind its supporting arguments
+        ev_ids = [p for a in g.arguments_for(target_id) for p in a.premise_ids if g.ev(p) is not None]
+    out: list[Source] = []
+    for eid in ev_ids:
+        e = g.ev(eid)
+        s = g.source(e.source_id) if e and e.source_id else None
+        if s is not None and s not in out:
+            out.append(s)
+    return out
+
+
+def critique_view(inq: Inquiry) -> str:
+    g = inq.graph
+    ev = inq.evaluation
+    return "\n\n".join([
+        _framing_block(inq), _issues_block(inq, ev), _sources_block(g), _evidence_block(g, mark_unused=True),
+        _arguments_block(g, ev, show_exceptions=True),
+    ])
+
+
+def apply_critique(inq: Inquiry, out: CritiqueOutput) -> dict:
+    g = inq.graph
+    added: list[str] = []
+    dropped: list[str] = []
+    absence_unverified: list[str] = []
+    needed_extra: list[str] = []
+    for p in out.attacks:
+        premises = [x for x in p.premise_ids if g.ev(x) is not None or g.claim(x) is not None]
+        premises = [x for x in premises if x != p.target_id]
+        if not premises:
+            dropped.append(f"{p.type} on {p.target_id}: no grounds (bare denial)")
+            continue
+        if any(a.is_attack and a.attacks.target_id == p.target_id and a.attacks.type == p.type
+               and set(a.premise_ids) == set(premises) for a in g.arguments):
+            continue
+        note = p.note if not p.cq_id else f"[{p.cq_id}] {p.note}"
+        try:
+            a = g.add_attack(p.target_id, p.type, premise_ids=premises, origin="critic", note=note, round=inq.round)
+        except (KeyError, ValueError) as e:
+            dropped.append(f"{p.type} on {p.target_id}: {e}")
+            continue
+        added.append(a.id)
+        if p.basis == "absence":
+            # "the source does not report X" is grounded only if the source was read to the end
+            unread = [s.id for s in _sources_behind(g, p.target_id) if not s.read_fully]
+            if unread:
+                a.cq["grounds"] = CQAnswer(status="open",
+                                           answer=f"rests on an absence in {', '.join(unread)}, not read in full")
+                absence_unverified.append(a.id)
+                for sid in unread:
+                    needed_extra.append(f"read {sid} in full to confirm it does not report what {a.id} says it lacks")
+    needed = [q.strip() for q in out.needed_evidence if q.strip()] + needed_extra
+    return {"attacks": added, "dropped": dropped, "absence_unverified": absence_unverified, "needed_evidence": needed}
+
+
+def critique(inq: Inquiry, llm: LLM) -> dict:
+    out = llm.complete_json(skill_text("critique"), critique_view(inq), CritiqueOutput)
+    return apply_critique(inq, out)
+
+
+# ---------------------------------------------------------------------------
+# Respond: the proposer answers standing attacks
+# ---------------------------------------------------------------------------
+
+class ResponseProposal(BaseModel):
+    attack_id: str
+    action: Literal["concede", "counter"]
+    premise_ids: list[str] = Field(default_factory=list, description="Grounds for a counter: evidence or accepted claim ids.")
+    cq_answers: dict[str, CQAnswerProposal] = Field(
+        default_factory=dict, description="Answers to the attacked argument's assumptions, if the counter supplies them.")
+    note: str = ""
+
+
+class RespondOutput(BaseModel):
+    responses: list[ResponseProposal] = Field(default_factory=list)
+
+
+def standing_attacks(inq: Inquiry, ev: Evaluation) -> list[Argument]:
+    """Critic or human attacks that are IN and bear on a proposer argument, its evidence, or its claim."""
+    g = inq.graph
+    out = []
+    for a in g.arguments:
+        if not a.is_attack or a.origin == "proposer" or ev.labels.get(a.id) != "in":
+            continue
+        t = a.attacks
+        target = g.node(t.target_id)
+        if target is None:
+            continue
+        if isinstance(target, Argument) and target.origin == "proposer":
+            out.append(a)
+        elif hasattr(target, "credentials") and any(t.target_id in x.premise_ids for x in g.arguments if not x.is_attack):
+            out.append(a)
+        elif g.claim(t.target_id) is not None:
+            out.append(a)
+    return out
+
+
+CONCEDED_MARK = "(conceded by proposer"
+
+
+def respond_view(inq: Inquiry, attacks: list[Argument]) -> str:
+    g = inq.graph
+    ev = inq.evaluation
+    new = [a for a in attacks if CONCEDED_MARK not in a.note]
+    old = [a for a in attacks if CONCEDED_MARK in a.note]
+    lines = ["# Standing attacks on your arguments", ""]
+    if old:
+        lines.append("Previously conceded, listed for reference; respond to one of these only if evidence gathered "
+                     "since now answers it: " + ", ".join(f"{a.id} (on {a.attacks.target_id})" for a in old))
+        lines.append("")
+    for a in new:
+        t = a.attacks
+        lines.append(f"## {a.id}: {t.type} on {t.target_id} (by {a.origin}, strength {ev.argument_strength.get(a.id, '?')})")
+        lines.append(f"grounds: {', '.join(a.premise_ids) or '(reviewer)'}")
+        lines.append(f"note: {a.note}")
+        target = g.node(t.target_id)
+        if isinstance(target, Argument):
+            sch = SCHEMES[target.scheme]
+            lines.append(f"attacked argument {target.id}: {target.scheme} from {', '.join(target.premise_ids)} to {target.claim_id}")
+            for q in sch.critical_questions:
+                st = target.cq.get(q.id)
+                ans = f" — {st.answer}" if st and st.answer else ""
+                lines.append(f"  cq {q.id} ({q.kind}) [{st.status if st else 'open'}]: {q.text}{ans}")
+        elif hasattr(target, "credentials"):
+            users = [x.id for x in g.arguments if t.target_id in x.premise_ids and not x.is_attack]
+            lines.append(f"attacked evidence {t.target_id}, used by {', '.join(users) or 'nothing'}")
+        else:
+            lines.append(f"attacked claim {t.target_id}: {target.text}")
+        lines.append("")
+    return "\n\n".join([_framing_block(inq), _issues_block(inq, ev), "\n".join(lines),
+                        _sources_block(g), _evidence_block(g)])
+
+
+def apply_respond(inq: Inquiry, out: RespondOutput) -> dict:
+    g = inq.graph
+    conceded: list[str] = []
+    countered: list[str] = []
+    dropped: list[str] = []
+    for r in out.responses:
+        atk = g.arg(r.attack_id)
+        if atk is None or not atk.is_attack:
+            dropped.append(f"{r.attack_id}: not an attack")
+            continue
+        if r.action == "concede":
+            if CONCEDED_MARK not in atk.note:
+                atk.note = (atk.note + f" {CONCEDED_MARK}: {r.note})").strip() if r.note else f"{atk.note} {CONCEDED_MARK})".strip()
+                conceded.append(atk.id)
+            continue
+        premises = [x for x in r.premise_ids if (g.ev(x) is not None or g.claim(x) is not None) and x != atk.id]
+        if not premises:
+            dropped.append(f"counter to {atk.id}: no grounds")
+            continue
+        if any(a.is_attack and a.attacks.target_id == atk.id and set(a.premise_ids) == set(premises)
+               for a in g.arguments):
+            continue
+        try:
+            c = g.add_attack(atk.id, "undercut", premise_ids=premises, origin="proposer", note=r.note, round=inq.round)
+        except (KeyError, ValueError) as e:
+            dropped.append(f"counter to {atk.id}: {e}")
+            continue
+        countered.append(c.id)
+        target = g.node(atk.attacks.target_id)
+        if isinstance(target, Argument) and r.cq_answers:
+            sch = SCHEMES[target.scheme]
+            for qid, ans in r.cq_answers.items():
+                if qid in {q.id for q in sch.assumptions()}:
+                    ev_ids = [x for x in ans.evidence_ids if g.ev(x) is not None]
+                    if ans.answer or ev_ids:
+                        g.answer_cq(target.id, qid, ans.answer, ev_ids, defaulted=ans.defaulted and not ev_ids)
+    return {"conceded": conceded, "countered": countered, "dropped": dropped}
+
+
+def respond(inq: Inquiry, llm: LLM) -> dict:
+    ev = inq.evaluation or evaluate_move(inq)
+    attacks = standing_attacks(inq, ev)
+    new = [a for a in attacks if CONCEDED_MARK not in a.note]
+    if not new:
+        return {"conceded": [], "countered": [], "dropped": [], "standing": len(attacks), "new": 0}
+    out = llm.complete_json(skill_text("respond"), respond_view(inq, attacks), RespondOutput)
+    res = apply_respond(inq, out)
+    res["standing"] = len(attacks)
+    res["new"] = len(new)
+    return res
+
+
+# ---------------------------------------------------------------------------
+# Compute: the arithmetic instrument
+# ---------------------------------------------------------------------------
+
+# a number with a unit or sign, excluding bare years
+_NUM = re.compile(r"(?<![\d.])\d+(?:[.,]\d+)?\s*(?:%|percent|pp|µg|ug|mg|ppb|ppm|km|m\b|min\b|minutes|hours|per\b|/)", re.I)
+_YEAR = re.compile(r"^(?:19|20)\d\d$")
+
+
+def numeric_evidence(g: ArgumentGraph) -> list:
+    out = []
+    for e in g.evidence:
+        if e.kind == "model_output":
+            continue
+        if _NUM.search(e.text) or _NUM.search(e.quote):
+            out.append(e)
+    return out
+
+
+class VariableBinding(BaseModel):
+    value: float
+    evidence_id: str
+    what: str = Field(default="", description="What this number is, in the source's terms.")
+
+
+class ComputationProposal(BaseModel):
+    name: str
+    expression: str = Field(description="Arithmetic over the variable names, e.g. (a - b) / a * 100")
+    variables: dict[str, VariableBinding]
+    text: str = Field(description="What the result establishes, in our words, without the number.")
+    unit: str = ""
+    bears_on: dict[str, Literal["for", "against", "neutral"]] = Field(default_factory=dict)
+    note: str = ""
+
+
+class ComputeOutput(BaseModel):
+    computations: list[ComputationProposal] = Field(default_factory=list)
+
+
+def compute_view(inq: Inquiry) -> str:
+    g = inq.graph
+    nums = [e.id for e in numeric_evidence(g)]
+    done = [e for e in g.evidence if e.kind == "model_output"]
+    done_block = "# Computations already made\n\n" + ("\n".join(
+        f"- {e.id}: {e.text} [{e.provenance.get('expression', '')}]" for e in done) if done else "(none)")
+    return "\n\n".join([_framing_block(inq), _issues_block(inq, inq.evaluation),
+                        _evidence_block(g, nums, title="Evidence carrying numbers"), done_block])
+
+
+def apply_compute(inq: Inquiry, out: ComputeOutput) -> dict:
+    g = inq.graph
+    added: list[str] = []
+    dropped: list[str] = []
+    known = {c.id for c in g.claims}
+    for p in out.computations:
+        inputs = []
+        for name, b in p.variables.items():
+            e = g.ev(b.evidence_id)
+            if e is None:
+                inputs = None
+                dropped.append(f"{p.name}: unknown evidence {b.evidence_id}")
+                break
+            inputs.append((name, b, e))
+        if inputs is None or not inputs:
+            if inputs is not None:
+                dropped.append(f"{p.name}: no inputs")
+            continue
+        try:
+            result = safe_eval(p.expression, {n: b.value for n, b, _ in inputs})
+        except ComputeError as err:
+            dropped.append(f"{p.name}: {err}")
+            continue
+        # the weakest input rules; the arithmetic adds nothing to credibility
+        cred = Credentials(
+            relevance="moderate",
+            credibility=min((e.credentials.credibility for _, _, e in inputs), key=lambda s: STRENGTH_ORDER[s]),
+            force=min((e.credentials.force for _, _, e in inputs), key=lambda s: STRENGTH_ORDER[s]),
+            credibility_notes=f"computed from {', '.join(e.id for _, _, e in inputs)}",
+        )
+        first = inputs[0][2]
+        shown = f"{result:.4g}{' ' + p.unit if p.unit else ''}"
+        e = g.add_evidence(
+            f"{p.text}: {shown}", kind="model_output", quote=p.expression, location="computed",
+            credentials=cred, independence_group=first.independence_group or f"source:{first.source_id or first.id}",
+            origin="instrument", bears_on={k: v for k, v in p.bears_on.items() if k in known},
+            provenance={
+                "instrument": INSTRUMENT_VERSION, "name": p.name, "expression": p.expression,
+                "inputs": "; ".join(f"{n}={b.value:g} from {b.evidence_id} ({b.what})" for n, b, _ in inputs),
+                "result": repr(result), "round": str(inq.round),
+            },
+        )
+        added.append(e.id)
+    return {"computed": added, "dropped": dropped}
+
+
+def compute(inq: Inquiry, llm: LLM) -> Optional[dict]:
+    """Returns None when there is nothing to compute over (fewer than two numeric items)."""
+    if len(numeric_evidence(inq.graph)) < 2:
+        return None
+    out = llm.complete_json(skill_text("compute"), compute_view(inq), ComputeOutput)
+    return apply_compute(inq, out)
+
+
+# ---------------------------------------------------------------------------
+# Evaluate, reflect, stop  (code only)
+# ---------------------------------------------------------------------------
+
+def evaluate_move(inq: Inquiry) -> Evaluation:
+    ev = evaluate(inq.graph)
+    inq.evaluation = ev
+    return ev
+
+
+def main_claim_settlers(inq: Inquiry, ev: Evaluation) -> dict[str, list[Settler]]:
+    return {c.id: what_would_settle(inq.graph, c.id, ev) for c in inq.main_claims() if ev.status(c.id) != "in"}
+
+
+def reflect(inq: Inquiry, ev: Evaluation) -> Reflection:
+    g = inq.graph
+    established = [f"{c.id}: {c.text}" for c in g.claims if ev.status(c.id) == "in"]
+    assumed: list[str] = []
+    for a in g.arguments:
+        for qid, ans in a.cq.items():
+            if ans.status == "defaulted":
+                assumed.append(f"{a.id}:{qid} defaulted — {ans.answer}")
+    for f in ev.flags:
+        if f.code == "single_origin":
+            assumed.append(f"{f.node_id} rests on one origin")
+    lb_ids: list[str] = []
+    for c in inq.main_claims():
+        for x in load_bearing(g, c.id):
+            if x.node_id not in lb_ids:
+                lb_ids.append(x.node_id)
+    directives: list[str] = []
+    for cid, settlers in main_claim_settlers(inq, ev).items():
+        for s in settlers[:3]:
+            directives.append(f"{cid} {s.kind}: {s.detail}")
+    r = Reflection(round=inq.round, established=established, assumed=assumed, load_bearing_node_ids=lb_ids,
+                   directive="; ".join(directives) if directives else "main issue has an accepted claim")
+    inq.reflections.append(r)
+    return r
+
+
+def stop(inq: Inquiry, ev: Evaluation, rounds_left: int, new_evidence_this_round: int) -> StopAssessment:
+    g = inq.graph
+    accepted = ev.issues.get(g.main_issue_id, []) if g.main_issue_id else []
+    undecided = [c.id for c in inq.main_claims() if ev.status(c.id) == "undecided"]
+    settlers = main_claim_settlers(inq, ev)
+    addressable = [cid for cid in undecided if settlers.get(cid)]
+    if accepted:
+        decision, reason = "stop", f"main issue answered by {', '.join(accepted)}"
+    elif rounds_left <= 0:
+        decision, reason = "stop", "rounds exhausted"
+    elif not addressable:
+        decision, reason = "stop", "no undecided main claim has anything evidence could settle"
+    elif inq.round > 0 and new_evidence_this_round == 0:
+        decision, reason = "stop", "the last round found no new evidence; planned tests are unobtainable"
+    else:
+        decision, reason = "continue", f"{len(addressable)} undecided main claim(s) could still be settled by evidence"
+    sa = StopAssessment(round=inq.round, decision=decision, reason=reason, undecided_on_path=undecided,
+                        obtainable=[t.id for t in inq.tests if t.status == "planned"])
+    inq.stop_assessments.append(sa)
+    return sa
+
+
+# ---------------------------------------------------------------------------
+# Conclude
+# ---------------------------------------------------------------------------
+
+class JudgementProposal(BaseModel):
+    text: str
+    confidence: Literal["high", "moderate", "low"] = "low"
+    rests_on: str = ""
+    claim_ids: list[str] = Field(default_factory=list)
+
+
+class ConcludeOutput(BaseModel):
+    answer: str
+    judgements: list[JudgementProposal] = Field(default_factory=list)
+    what_would_change_this: list[str] = Field(default_factory=list)
+    unresolved: list[str] = Field(default_factory=list)
+
+
+def conclude_view(inq: Inquiry) -> str:
+    g = inq.graph
+    ev = inq.evaluation or evaluate_move(inq)
+    parts = [_framing_block(inq), _issues_block(inq, ev), _arguments_block(g, ev), _evidence_block(g)]
+    lb_lines = ["# Load-bearing nodes for main-issue claims", ""]
+    for c in inq.main_claims():
+        for x in load_bearing(g, c.id):
+            lb_lines.append(f"- {c.id} depends on {x.node_id} ({x.kind}): {x.detail} → would become {x.effect}")
+    if len(lb_lines) == 2:
+        lb_lines.append("(none)")
+    parts.append("\n".join(lb_lines))
+    parts.append(_settlers_block(inq, ev))
+    if inq.reflections:
+        r = inq.reflections[-1]
+        parts.append("# Last reflection\n\n" + "\n".join(
+            [f"established: {'; '.join(r.established) or 'nothing'}", f"assumed: {'; '.join(r.assumed) or 'nothing'}",
+             f"directive: {r.directive}"]))
+    ungrounded = [n for n in inq.notes if n.startswith("critic needs:")]
+    if ungrounded:
+        parts.append("# Critic concerns never grounded\n\n" + "\n".join(f"- {n[len('critic needs:'):].strip()}" for n in ungrounded))
+    return "\n\n".join(parts)
+
+
+def apply_conclude(inq: Inquiry, out: ConcludeOutput) -> dict:
+    ev = inq.evaluation or evaluate_move(inq)
+    g = inq.graph
+    judgements: list[Judgement] = []
+    capped: list[str] = []
+    for j in out.judgements:
+        ids = [c for c in j.claim_ids if g.claim(c) is not None]
+        conf = j.confidence
+        if not any(ev.status(c) == "in" for c in ids) and conf != "low":
+            conf = "low"
+            capped.append(j.text[:60])
+        judgements.append(Judgement(text=j.text, confidence=conf, rests_on=j.rests_on, claim_ids=ids))
+    inq.conclusion = Conclusion(round=inq.round, answer=out.answer, judgements=judgements,
+                                what_would_change_this=out.what_would_change_this, unresolved=out.unresolved)
+    inq.phase = "concluded"
+    return {"judgements": len(judgements), "capped_to_low": capped}
+
+
+def conclude(inq: Inquiry, llm: LLM) -> dict:
+    out = llm.complete_json(skill_text("conclude"), conclude_view(inq), ConcludeOutput, max_tokens=6000)
+    return apply_conclude(inq, out)

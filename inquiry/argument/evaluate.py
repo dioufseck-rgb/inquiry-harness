@@ -65,6 +65,7 @@ class LoadBearing(BaseModel):
     kind: Literal["evidence", "argument", "cq_answer"]
     detail: str = ""
     effect: str = Field(description="Status of the watched claim if this node were removed or reopened.")
+    claim_id: str = Field(default="", description="The watched claim.")
 
 
 class Evaluation(BaseModel):
@@ -99,11 +100,19 @@ def argument_strength(g: ArgumentGraph, a: Argument) -> Strength:
 
 
 def _independence_groups(g: ArgumentGraph, args: list[Argument]) -> set[str]:
+    """
+    Distinct origins among the evidence used by `args`. A derivative source
+    that does not name its origin contributes no origin: it repeats something,
+    and we do not know what, so it cannot corroborate anything.
+    """
     groups: set[str] = set()
     for a in args:
         for pid in a.premise_ids:
             e = g.ev(pid)
             if e is None:
+                continue
+            src = g.source(e.source_id) if e.source_id else None
+            if src is not None and src.kind == "derivative" and not src.derived_from:
                 continue
             groups.add(e.independence_group or f"source:{e.source_id or e.id}")
     return groups
@@ -284,7 +293,7 @@ def _flags(g: ArgumentGraph, ev: Evaluation) -> list[Flag]:
         flags.append(Flag(code="inapplicable_argument", node_id=aid, detail="; ".join(why)))
     used = {pid for a in g.arguments for pid in a.premise_ids}
     for e in g.evidence:
-        if e.id not in used:
+        if e.id not in used and not e.provenance.get("unusable"):
             flags.append(Flag(code="orphan_evidence", node_id=e.id, detail="evidence used in no argument"))
     for c in g.claims:
         d = ev.claims[c.id]
@@ -322,7 +331,7 @@ def load_bearing(g: ArgumentGraph, claim_id: str) -> list[LoadBearing]:
         mutate(g2)
         s = evaluate(g2).status(claim_id)
         if s != base:
-            out.append(LoadBearing(node_id=node_id, kind=kind, detail=detail, effect=s))
+            out.append(LoadBearing(node_id=node_id, kind=kind, detail=detail, effect=s, claim_id=claim_id))
 
     for e in g.evidence:
         def drop_ev(g2, eid=e.id):
@@ -346,4 +355,93 @@ def load_bearing(g: ArgumentGraph, claim_id: str) -> list[LoadBearing]:
                 g2.arg(aid).cq[qid].status = "open"
             probe(reopen, "cq_answer", f"{a.id}:{qid}", SCHEMES[a.scheme].cq(qid).text)
 
+    return out
+
+
+# ---------------------------------------------------------------------------
+# What would settle an undecided claim
+# ---------------------------------------------------------------------------
+
+SettlerKind = Literal[
+    "no_argument",        # nothing supports the claim yet
+    "open_assumption",    # a supporting argument has an unanswered assumption
+    "premise_claim",      # a supporting argument rests on a claim not yet accepted
+    "defeated_by",        # a supporting argument is out because an attack on it is in
+    "strength_short",     # surviving support does not reach the proof standard
+    "corroboration",      # a second independent origin would raise strength one level
+    "rebutted",           # an in rebuttal counts against the claim
+    "contrary_supported", # a contrary claim has surviving support
+]
+
+
+class Settler(BaseModel):
+    claim_id: str
+    kind: SettlerKind
+    node_id: str = ""
+    detail: str = ""
+
+
+_REQUIRED = {"scintilla": 1, "clear_and_convincing": 3, "beyond_reasonable_doubt": 3}
+
+
+def what_would_settle(g: ArgumentGraph, claim_id: str, ev: Optional[Evaluation] = None) -> list[Settler]:
+    """
+    For a claim that is not IN, list the concrete things that stand between it
+    and acceptance. This is what Plan should target next and what Stop checks:
+    if nothing on this list can be addressed by obtainable evidence, further
+    search has no value.
+    """
+    ev = ev or evaluate(g)
+    if claim_id not in ev.claims:
+        raise KeyError(claim_id)
+    d = ev.claims[claim_id]
+    out: list[Settler] = []
+    if d.status == "in":
+        return out
+
+    pro_args = g.arguments_for(claim_id)
+    if not pro_args:
+        out.append(Settler(claim_id=claim_id, kind="no_argument",
+                           detail="no argument supports this claim; evidence bearing on it is needed"))
+
+    for a in pro_args:
+        if not ev.applicable.get(a.id, False):
+            for why in ev.inapplicable_reasons.get(a.id, []):
+                if why.startswith("open assumption: "):
+                    qid = why.split(": ", 1)[1]
+                    out.append(Settler(claim_id=claim_id, kind="open_assumption", node_id=f"{a.id}:{qid}",
+                                       detail=SCHEMES[a.scheme].cq(qid).text))
+                elif why.startswith("premise claim not accepted: "):
+                    pid = why.split(": ", 1)[1]
+                    out.append(Settler(claim_id=claim_id, kind="premise_claim", node_id=pid,
+                                       detail=f"{a.id} rests on {pid}, which is not accepted"))
+        elif ev.labels.get(a.id) == "out":
+            for atk in g.arguments:
+                if not atk.is_attack or ev.labels.get(atk.id) != "in":
+                    continue
+                t = atk.attacks
+                hits = (t.type == "undercut" and t.target_id == a.id) or \
+                       (t.type == "undermine" and t.target_id in a.premise_ids)
+                if hits:
+                    out.append(Settler(claim_id=claim_id, kind="defeated_by", node_id=atk.id,
+                                       detail=f"{a.id} is out because {atk.id} ({t.type}) stands: {atk.note or 'answer or undercut it'}"))
+
+    if d.pro_ids and not d.met:
+        required = _REQUIRED.get(d.standard, d.con_strength + 1)
+        out.append(Settler(claim_id=claim_id, kind="strength_short",
+                           detail=f"pro strength {d.pro_strength} vs con {d.con_strength}; {d.standard} needs {required}"))
+        if not d.corroborated:
+            out.append(Settler(claim_id=claim_id, kind="corroboration",
+                               detail="support comes from one origin; an independent second origin would raise strength one level"))
+
+    for cid in d.con_ids:
+        a = g.arg(cid)
+        if a is None:
+            continue
+        if a.is_attack:
+            out.append(Settler(claim_id=claim_id, kind="rebutted", node_id=a.id,
+                               detail=f"rebuttal {a.id} stands: {a.note or 'answer or undercut it'}"))
+        else:
+            out.append(Settler(claim_id=claim_id, kind="contrary_supported", node_id=a.id,
+                               detail=f"{a.id} supports contrary {a.claim_id}"))
     return out

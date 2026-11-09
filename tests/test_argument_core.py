@@ -3,7 +3,7 @@ import json
 import pytest
 
 from inquiry.argument import (
-    ArgumentGraph, Credentials, evaluate, load_bearing,
+    ArgumentGraph, Credentials, evaluate, load_bearing, what_would_settle,
     summary, toulmin, wigmore, SCHEMES,
 )
 
@@ -116,6 +116,27 @@ def test_undercut_with_grounds_defeats_and_reinstatement_works():
     assert ev.status(c.id) == "in"
 
 
+def test_attack_cannot_cite_its_own_target():
+    g, q, c, n, s = base_graph()
+    e = g.add_evidence("record says X", source_id=s.id, credentials=strong())
+    with pytest.raises(ValueError):
+        g.add_attack(e.id, "undermine", premise_ids=[e.id])
+
+
+def test_unusable_evidence_is_not_flagged_orphan_and_load_bearing_names_claim():
+    g, q, c, n, s = base_graph()
+    e = g.add_evidence("record says X", source_id=s.id, credentials=strong())
+    e2 = g.add_evidence("press restatement", source_id=s.id, provenance={"unusable": "repeats E1"})
+    a = g.add_argument("document_record", [e.id], c.id)
+    discharge(g, a.id)
+    ev = evaluate(g)
+    orphan_ids = {f.node_id for f in ev.flags if f.code == "orphan_evidence"}
+    assert e2.id not in orphan_ids
+    lb = load_bearing(g, c.id)
+    assert lb and all(x.claim_id == c.id for x in lb)
+    assert f"for {c.id}" in summary(g, ev, lb)
+
+
 def test_human_attack_needs_no_premises():
     g, q, c, n, s = base_graph()
     e = g.add_evidence("record says X", source_id=s.id, credentials=strong())
@@ -218,6 +239,45 @@ def test_corroboration_raises_pro_strength_and_single_origin_flag():
     assert not any(f.code == "single_origin" for f in ev.flags)
 
 
+def test_derivative_source_without_origin_cannot_corroborate():
+    g, q, c, n, s = base_graph(question_type="causal")
+    s2 = g.add_source(url="https://example.org/news", kind="derivative")  # no derived_from
+    e1 = g.add_evidence("report: X", source_id=s.id, credentials=moderate())
+    e2 = g.add_evidence("news says X", source_id=s2.id, credentials=moderate())
+    a1 = g.add_argument("document_record", [e1.id], c.id)
+    a2 = g.add_argument("document_record", [e2.id], c.id)
+    discharge(g, a1.id)
+    discharge(g, a2.id)
+    ev = evaluate(g)
+    assert ev.claims[c.id].corroborated is False and ev.status(c.id) == "undecided"
+    s2.kind = "secondary"
+    ev = evaluate(g)
+    assert ev.claims[c.id].corroborated is True and ev.status(c.id) == "in"
+
+
+def test_study_result_scheme_asks_the_grade_questions():
+    sch = SCHEMES["study_result"]
+    assert {q.id for q in sch.assumptions()} == {"design", "directness", "uncertainty", "reported"}
+    assert {q.id for q in sch.exceptions()} == {"bias", "consistency", "precision"}
+    g, q, c, n, s = base_graph(question_type="causal")
+    e = g.add_evidence("study found no detectable effect", source_id=s.id, credentials=strong())
+    a = g.add_argument("study_result", [e.id], n.id)
+    assert evaluate(g).applicable[a.id] is False  # design and directness are open
+    discharge(g, a.id)
+    assert evaluate(g).status(n.id) == "in"
+
+
+def test_safe_eval_is_arithmetic_only():
+    from inquiry.tools.compute import ComputeError, safe_eval
+    assert safe_eval("(a - b) / a * 100", {"a": 118, "b": 104}) == pytest.approx(11.864, rel=1e-3)
+    assert safe_eval("max(abs(-x), 2) ** 2", {"x": 3}) == 9
+    for bad in ["__import__('os')", "a.real", "x if 1 else 2", "[1][0]", "open('f')", "a + c"]:
+        with pytest.raises(ComputeError):
+            safe_eval(bad, {"a": 1, "x": 2})
+    with pytest.raises(ComputeError):
+        safe_eval("a / 0", {"a": 1})
+
+
 def test_beyond_reasonable_doubt_requires_no_surviving_con():
     g, q, c, n, s = base_graph()
     c.proof_standard = "beyond_reasonable_doubt"
@@ -251,6 +311,25 @@ def test_load_bearing_finds_evidence_and_answers():
     assert ("argument", a.id) in kinds
     assert any(k == "cq_answer" for k, _ in kinds)
     assert all(x.effect == "undecided" for x in lb)
+
+
+def test_what_would_settle_names_the_obstacle():
+    g, q, c, n, s = base_graph(question_type="causal")
+    assert {x.kind for x in what_would_settle(g, c.id)} == {"no_argument"}
+    e = g.add_evidence("record says X", source_id=s.id, credentials=moderate())
+    a = g.add_argument("document_record", [e.id], c.id)
+    kinds = {x.kind for x in what_would_settle(g, c.id)}
+    assert "open_assumption" in kinds and "no_argument" not in kinds
+    discharge(g, a.id)
+    kinds = {x.kind for x in what_would_settle(g, c.id)}
+    assert kinds == {"strength_short", "corroboration"}  # moderate on one origin vs clear_and_convincing
+    e2 = g.add_evidence("withdrawn", source_id=s.id, credentials=strong())
+    x = g.add_attack(a.id, "undercut", premise_ids=[e2.id])
+    settlers = what_would_settle(g, c.id)
+    assert any(z.kind == "defeated_by" and z.node_id == x.id for z in settlers)
+    c.proof_standard = "scintilla"
+    g.arguments.remove(x)
+    assert what_would_settle(g, c.id) == []
 
 
 def test_graph_round_trips_through_json():

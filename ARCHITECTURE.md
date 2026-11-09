@@ -22,7 +22,7 @@ Toulmin's layout (claim, grounds, warrant, backing, qualifier, rebuttal) is kept
 
 ### 2.1 Structure (ASPIC+, Walton)
 
-An argument is a set of premises supporting a claim through a defeasible inference rule that instantiates a named scheme. The scheme library (`inquiry/argument/schemes.py`) holds twelve schemes: expert opinion, position to know, document record, sign, statistical generalization, cause to effect, correlation to cause, inference to the best explanation, analogy, consequences, definition to classification, and argument from a model or simulation. Toulmin maps onto this exactly: grounds are the premises, the warrant is the scheme's rule, backing is the record of the scheme's critical questions having been answered, the qualifier is the resulting strength, the rebuttal is the set of known attackers.
+An argument is a set of premises supporting a claim through a defeasible inference rule that instantiates a named scheme. The scheme library (`inquiry/argument/schemes.py`) holds thirteen substantive schemes: expert opinion, position to know, document record, study result, sign, statistical generalization, cause to effect, correlation to cause, inference to the best explanation, analogy, consequences, definition to classification, and argument from a model or simulation. A fourteenth, `attack`, is the scheme every attack argument instantiates (section 2.2). Study result is distinct from document record: the record states an estimate, but the inference from a study's estimate to the world has to survive the questions methodologists ask, and its critical questions follow the GRADE domains (design, directness, uncertainty, risk of bias, inconsistency, imprecision). Toulmin maps onto this exactly: grounds are the premises, the warrant is the scheme's rule, backing is the record of the scheme's critical questions having been answered, the qualifier is the resulting strength, the rebuttal is the set of known attackers.
 
 Critical questions come in two kinds, following Carneades. An *assumption* must be discharged by the proponent before the argument is applicable; an open assumption makes the argument inert. An *exception* stands unless an opponent raises it with grounds; raising it is an undercutting attack. This distinction is what makes rigor mechanical. An argument does not count because it was made; it counts when the questions its scheme is known to be vulnerable to have been answered or explicitly defaulted, and a defaulted assumption costs one level of strength.
 
@@ -42,20 +42,26 @@ The critical questions are Walton's in shape, but the account of what each quest
 
 ## 3. The cycle
 
-Frame → Hypothesize → Plan → Gather → Argue → Critique → Evaluate → Reflect → Stop or loop → Conclude.
+Frame → Hypothesize → Plan → Gather → Compute → Argue → Critique → Respond → Evaluate → Reflect → Stop or loop → Conclude.
 
-- **Frame** states the question's presuppositions, what a complete answer would contain, and the issue tree. Each sub-question becomes an issue node.
+- **Frame** states the question's presuppositions, what a complete answer would contain, and the issue tree. Each sub-question becomes an issue node. Sub-questions are about the world; robustness, independence and whether a standard is met are computed from the graph, not asked of the sources.
 - **Hypothesize** adds rival claims to each issue, including the null and the deflationary answer, and marks them contraries.
 - **Plan** names the observations that would discriminate between live claims and the queries that would find them. Queries come from here, not from the question.
-- **Gather** searches, fetches, extracts, and records sources and evidence with credentials and provenance; derivative sources join the independence group of the primary they repeat.
-- **Argue** builds explicit arguments from evidence to claims and answers the critical questions it can answer with evidence.
-- **Critique**, on a separate model, walks every argument's open exceptions and attacks where one can be grounded, attempts a rebuttal of every accepted claim, and probes every evidence item's credentials. Its view holds the arguments and evidence, not the proposer's reasoning.
+- **Gather** searches, fetches, extracts, and records sources and evidence with credentials and provenance; derivative sources join the independence group of the primary they repeat, and a derivative source that cannot name its origin corroborates nothing. A primary document is appraised to its end, window by window; other kinds are sampled. The source records whether it was read in full.
+- **Compute** is the arithmetic instrument: the proposer names variables bound to numbers in evidence items and an expression over them; code evaluates it on a restricted syntax tree and writes a `model_output` evidence item whose provenance holds the expression, inputs and result. It is how the harness notices that two estimates are compatible.
+- **Argue** builds explicit arguments from evidence to claims, one call per issue, and answers the critical questions it can answer with evidence. Every evidence item bearing on the issue's claims ends up in an argument or is marked unusable with a reason.
+- **Critique**, on a separate model, walks every argument's open exceptions and attacks where one can be grounded, attempts a rebuttal of every accepted claim, and probes every evidence item's credentials. Its view holds the arguments and evidence, not the proposer's reasoning. Each attack records whether its grounds are something a source says or something it does not say; an absence counts only if the source was read in full, otherwise the attack's grounds stay open.
+- **Respond** gives the proposer the reply a proponent is owed. For each standing attack it concedes, or counters with an undercut grounded in evidence showing the exception does not obtain here, which can also answer an assumption the attack exposed. Without this move the critic wins by default and procedural uncertainty is indistinguishable from real uncertainty.
 - **Evaluate** is pure code: applicability, grounded labelling, proof standards, flags.
 - **Reflect** reports what is established and what is assumed. Its core is computable: the load-bearing nodes are those whose removal changes the main claim's status.
 - **Stop** asks whether any planned, obtainable evidence could change an undecided node on the path to the main claim. If none can, further search has no value.
 - **Conclude** renders the accepted claims as key judgements, each with its confidence and the assumption it rests on, and lists what would change the answer.
 
 Human pushback enters at Reflect and before Conclude as attack nodes tagged `human`.
+
+Each model-backed move is shown a typed view of the subgraph it needs and must return one JSON object matching a contract in `inquiry/moves.py`. The apply step is deterministic and defensive: unknown ids are dropped, duplicate arguments merged, answers to exception questions ignored at Argue, attacks without grounds discarded at Critique, and a judgement that cites no accepted claim capped at low confidence at Conclude. Critique runs on the critic model; everything else on the proposer. Evaluate, Reflect and Stop are code: Reflect combines `load_bearing()` with `what_would_settle()`, which lists for each undecided claim what stands between it and acceptance (no argument, an open assumption, a standing attack, a shortfall against the standard, a missing second origin, a surviving contrary). Stop halts when the main issue has an accepted claim, when no undecided main claim has a settler, when a round found no new evidence, or when rounds are exhausted. The critic's requests for evidence feed the next round's Plan.
+
+**Worked example.** `examples/turn_time.py` builds the turn-time case by hand. A regulator's table shows mean turn time falling from 118 to 104 minutes; a statistical-generalization argument for a 12% fall is inapplicable while its measurement assumption is open, becomes applicable once that is answered, and is then undercut by a methodology note showing the two years define "turn" differently. The claim ends undecided, which is the correct result, and the load-bearing list names the undercut as the node that would change it.
 
 ## 4. Web layer
 
@@ -68,24 +74,31 @@ A simulation run, causal estimate or optimization result enters the graph as `mo
 ## 6. Build phases
 
 1. **Argument core** (done): graph, schemes, evaluation, renderers, tests. Deterministic; no model calls.
-2. **Web layer**: search, fetch, extract, appraisal skill, source store.
-3. **Moves as skills** and the cycle: each move a SKILL.md (SEP-grounded procedure, output contract) plus a thin Python adapter; proposer and critic on different models; interactive mode with the human as reviewer.
-4. **Instruments**: the first model-backed test.
+2. **Web layer** (done): Serper search, httpx fetch, trafilatura and pypdf extraction, appraisal skill, source text in the store. Fakes for both tools.
+3. **Moves as skills** and the cycle (done, tested with fakes): each move a SKILL.md (SEP-grounded procedure, output contract) plus views, contract and apply step in `moves.py`; proposer and critic on different models; interactive mode with the human as reviewer. Not yet run against live models; expect contract mismatches on the first live runs.
+4. **Instruments** (started): the arithmetic instrument is built as the Compute move. The next is a data-fetch tool: questions about what monitors recorded live in ratified data tables (LAQN, AURN and the like), which web prose never settles. Such a tool pulls site-level data and writes tangible evidence with provenance. Simulation and causal-estimate instruments follow the same pattern.
 
 ## 7. Repository layout
 
 ```
 inquiry/
   argument/
-    graph.py      issues, claims, evidence with credentials, sources, arguments, attacks
-    schemes.py    twelve schemes with typed critical questions and SEP grounding
-    evaluate.py   applicability, grounded labelling, proof standards, flags, load-bearing
+    graph.py      issues, claims, evidence with credentials and bears_on, sources, arguments, attacks
+    schemes.py    thirteen schemes plus attack, typed critical questions, SEP grounding
+    evaluate.py   applicability, grounded labelling, proof standards, flags, load_bearing, what_would_settle
     render.py     Toulmin view, Wigmore chart (Mermaid), markdown summary
-  state.py        Inquiry: framing, planned tests, reflections, stop assessments, conclusion
+  skills/         frame, hypothesize, plan, appraise, compute, argue, critique, respond, conclude (SKILL.md each)
+  tools/
+    search.py     SerperSearch, FakeSearch
+    fetch.py      HttpFetcher, FakeFetcher
+    compute.py    restricted arithmetic evaluator for the compute instrument
+  moves.py        views, output contracts, apply steps; evaluate, reflect and stop as code
+  live.py         Harness: the cycle, gather, human review, report; CLI (python -m inquiry.live)
+  state.py        Inquiry: framing, planned tests, reflections, stop assessments, evaluation, conclusion
   store.py        inquiry.json, hash-chained ledger.jsonl, sources/
-  llm.py          proposer/critic LLM handles; JSON-validated completions; a fake for tests
-examples/turn_time.py   the worked example from this note
-tests/                   argument-core tests
+  llm.py          proposer/critic LLM handles; JSON-validated completions; FakeLLM scripted by skill name
+examples/turn_time.py   the worked example from section 3
+tests/                   argument-core tests; one full cycle on fakes
 ```
 
 ## 8. References

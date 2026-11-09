@@ -5,26 +5,64 @@ accepted only when a named argument scheme supports them, the scheme's critical
 questions are answered, the evidence clears a proof standard, and no surviving
 attack defeats the argument. See `ARCHITECTURE.md` for the design.
 
-Phase 1 (this release) is the argument core: deterministic, no model calls.
+Phases 1 to 3 are built: the argument core (deterministic, no model calls),
+the web layer, and the cycle of moves driven by a proposer and a critic on
+different models. The cycle is tested end to end with fakes, and has run
+once against live models (Sonnet 5.5 proposer, Opus 5.5 critic) with fake
+search and fetch; every move's JSON contract held. Live search has not been
+exercised yet.
 
 ## Install
 
 ```bash
 git clone <repo> && cd inquiry-harness
 python -m venv .venv && source .venv/bin/activate     # .venv\Scripts\activate on Windows
-pip install -e ".[dev]"
+pip install -e ".[dev,llm,web]"
 pytest
 ```
 
-## Try it
+`dev` is enough for the tests. `llm` adds the Anthropic SDK; `web` adds
+httpx, trafilatura and pypdf for search and fetch.
+
+## Run an inquiry
+
+```bash
+cp .env.example .env     # fill in ANTHROPIC_API_KEY and SERPER_API_KEY
+python -m inquiry.live "Did the 2024 schedule change reduce fleet turn time?" --rounds 2
+```
+
+Round 0 frames the question and proposes rival claims. Each round plans the
+discriminating tests, searches and fetches sources, appraises them into
+evidence with credentials (primary documents read to the end), computes
+over the numbers it found, builds arguments, has the critic attack them,
+lets the proposer answer the attacks that stand, evaluates the graph,
+reflects, and decides whether another round could change anything. Then it
+concludes. Output goes to `runs/<id>/`:
+`report.md` (answer, judgements, graph summary, surviving arguments in
+Toulmin layout), `chart.mmd` (Wigmore chart in Mermaid), `inquiry.json`
+(full state), `ledger.jsonl` (hash-chained record of every move) and
+`sources/` (extracted text).
+
+Options: `--rounds N`, `--max-sources N` new sources per round, `--queries N`
+per round, `--hits N` per query, `--read-parts N` appraisal windows of about
+12k characters per primary document (default 36, enough for a 400k-character
+report; other source kinds get one window), `--interactive` to enter
+objections after each critique as `<target_id> <undermine|undercut|rebut>
+<text>`, and `--id NAME` to name the run or resume one that stopped.
+
+Models come from `INQUIRY_PROPOSER_MODEL` and `INQUIRY_CRITIC_MODEL`; the
+critic should be a different model from the proposer.
+
+## Worked example without models
 
 ```bash
 python examples/turn_time.py
 ```
 
-This builds the worked example by hand, evaluates it at each step, and writes
-`runs/turn-time/summary.md`, `chart.mmd` (a Wigmore-style chart in Mermaid) and
-`a3_toulmin.md` (one argument in Toulmin's layout).
+This builds the turn-time example by hand, evaluates it at each step, and writes
+`runs/turn-time/summary.md`, `chart.mmd` and `a3_toulmin.md` (one argument in
+Toulmin's layout). It ends undecided on purpose: the one argument for a fall
+in turn time is undercut by a definition change the critic found.
 
 ## Use the core directly
 
@@ -55,16 +93,24 @@ An attack with no premises is inapplicable unless `origin="human"`.
 ## Layout
 
 ```
-inquiry/argument/   graph, schemes, evaluate, render
+inquiry/argument/   graph, schemes, evaluate (incl. load_bearing, what_would_settle), render
+inquiry/skills/     one SKILL.md per model-backed move: frame, hypothesize, plan,
+                    appraise, compute, argue, critique, respond, conclude
+inquiry/tools/      search (Serper + fake), fetch (httpx/trafilatura/pypdf + fake),
+                    compute (restricted arithmetic evaluator)
+inquiry/moves.py    views, output contracts and apply steps for every move
+inquiry/live.py     the cycle, gather, human review, report, CLI
 inquiry/state.py    Inquiry wrapper (framing, planned tests, reflections, conclusion)
-inquiry/store.py    inquiry.json + hash-chained ledger
-inquiry/llm.py      proposer/critic handles (used from phase 3)
+inquiry/store.py    inquiry.json + hash-chained ledger + source text
+inquiry/llm.py      proposer/critic handles; FakeLLM scripted by skill name
 examples/           worked example
-tests/              argument-core tests
+tests/              argument-core tests and a full fake-driven cycle
 ```
 
-## Next phases
+## Next
 
-2. Web layer: Serper search, fetch, extract, appraisal, source store.
-3. Moves as SEP-grounded skills and the cycle; proposer and critic on different models.
-4. Model instruments: simulation and causal estimates as `model_output` evidence.
+- Run against live models and search; expect JSON-contract mismatches. The
+  contracts in `inquiry/moves.py` are the source of truth; adjust the skill
+  text to match them, not the reverse.
+- Phase 4, model instruments: a `run_model` tool that writes `model_output`
+  evidence with provenance and builds a `model_output` argument.
