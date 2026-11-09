@@ -110,13 +110,16 @@ def make_scripts(plan_calls: list[str], overrides: dict | None = None):
 
 def make_harness(tmp_path, rounds_plan_calls, overrides=None, **kw):
     proposer, critic = make_scripts(rounds_plan_calls, overrides)
-    search = FakeSearch(default=[{"url": U1, "title": "Regulator annual report 2024"},
+    search = FakeSearch(default=[{"url": U1, "title": "Regulator annual operational report 2024"},
                                  {"url": U2, "title": "Methodology note"},
-                                 {"url": "https://example.org/dead", "title": "dead link"}])
+                                 {"url": "https://example.org/dead", "title": "dead link"},
+                                 {"url": "https://mirror.example.org/report.pdf",
+                                  "title": "Regulator Annual Operational Report 2024 (PDF)"}])
     filler = " Operational returns were collected from every operator on the standard form." * 6
     fetcher = FakeFetcher({U1: "Table 4. mean turn time 118 / 104 ..." + filler,
                            U2: "Definitions. arrival-to-ready ..." + filler,
-                           "https://example.org/dead": "too short"})
+                           "https://example.org/dead": "too short",
+                           "https://mirror.example.org/report.pdf": "Table 4 again." + filler})
     store = InquiryStore(tmp_path, "t1")
     inq = Inquiry(id="t1", question=QUESTION)
     return Harness(inq, store, proposer, critic, search, fetcher, log=lambda s: None, **kw), store
@@ -198,6 +201,7 @@ def test_one_round_builds_graph_and_ledger(tmp_path):
     assert "A1 (document_record" in report and "attacked by A2 (undercut, in)" in report
     gather = [e for e in store.events() if e["move"] == "gather"][0]["summary"]
     assert any("chars of text" in s for s in gather["skipped"])  # the short page was not kept
+    assert any("same document as S1 by title" in s for s in gather["skipped"])  # the mirror was not a second origin
     assert g.validate_refs() == []
 
 
@@ -279,7 +283,12 @@ def test_primary_sources_are_read_to_the_end_and_others_sampled():
 
     def script(user):
         calls.append(user)
-        kind = "primary" if "PRIMARY" in user else "derivative"
+        if "PRIMARY" in user:
+            kind = "primary"
+        elif "FRONTMATTER" in user:
+            kind = "unknown" if "part 3 of 3" not in user else "primary"  # settled only by the last part
+        else:
+            kind = "derivative"
         return {"kind": kind, "evidence": [{"text": f"fact {len(calls)} with 10 min", "bears_on": {"C1": "for"}}]}
 
     llm = FakeLLM({"appraise": script})
@@ -295,6 +304,11 @@ def test_primary_sources_are_read_to_the_end_and_others_sampled():
     s2 = g.add_source(url="https://example.org/b")
     res2 = appraise_full(inq, llm, s2, "x" * 30_000, window=12_000, overlap=500)
     assert res2["parts"] == 1 and s2.read_fully is False and s2.kind == "derivative" and len(calls) == 1
+    # a source still unknown after its front matter is read on, and a later part may settle its kind
+    calls.clear()
+    s4 = g.add_source(url="https://example.org/d")
+    res4 = appraise_full(inq, llm, s4, "FRONTMATTER " * 2_500, window=12_000, overlap=500)
+    assert res4["parts"] == 3 and s4.read_fully is True and s4.kind == "primary" and res4["kind"] == "primary"
     # text the fetcher cut is never "read fully", even when every part was appraised
     s3 = g.add_source(url="https://example.org/c")
     res3 = appraise_full(inq, llm, s3, "PRIMARY " + "x" * 20_000, window=12_000, overlap=500, text_complete=False)

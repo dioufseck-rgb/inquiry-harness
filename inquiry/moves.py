@@ -434,6 +434,11 @@ def apply_appraise(inq: Inquiry, src: Source, out: AppraiseOutput, first: bool =
         src.kind = out.kind
         src.competence = out.competence
         src.incentives = out.incentives
+    elif src.kind == "unknown" and out.kind != "unknown":
+        # the front matter did not say what the document is; a later part did
+        src.kind = out.kind
+        src.competence = out.competence or src.competence
+        src.incentives = out.incentives or src.incentives
     src.publisher = out.publisher or src.publisher
     src.date = out.date or src.date
     group = _origin_group(g, src, out.derived_from) if first else \
@@ -475,7 +480,10 @@ def appraise_full(inq: Inquiry, llm: LLM, src: Source, text: str, test: Optional
     """
     Appraise a source. The first window classifies it; a primary source is
     then read to the end, window by window, so that an attack grounded in
-    what the document does not say can be trusted. Other kinds are sampled.
+    what the document does not say can be trusted. A source still "unknown"
+    after its first window is read on too: the front matter of a long report
+    rarely says what it is, and later parts may settle the kind. Secondary
+    and derivative sources are sampled.
     `text_complete` is False when the fetcher cut the text; the source is
     then never marked as read in full, whatever was appraised.
     """
@@ -486,11 +494,12 @@ def appraise_full(inq: Inquiry, llm: LLM, src: Source, text: str, test: Optional
         total["evidence"].extend(res["evidence"])
         total["parts"] += 1
         if i == 0:
-            total["kind"], total["group"] = res["kind"], res["group"]
-            if len(parts) > 1 and src.kind != "primary":
-                break
+            total["group"] = res["group"]
+        if len(parts) > 1 and src.kind in ("secondary", "derivative"):
+            break
         if total["parts"] >= max_parts:
             break
+    total["kind"] = src.kind
     src.read_fully = text_complete and total["parts"] == len(parts)
     return total
 

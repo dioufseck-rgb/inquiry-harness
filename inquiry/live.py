@@ -31,6 +31,13 @@ from .tools.fetch import Fetcher
 from .tools.search import Search
 
 
+def title_key(title: str) -> str:
+    """Normalised prefix of a title, for spotting one document hosted at two URLs."""
+    t = re.sub(r"[^a-z0-9 ]+", " ", title.lower())
+    t = re.sub(r"\s+", " ", t).strip()
+    return t[:40]
+
+
 def slug_for(question: str) -> str:
     base = re.sub(r"[^a-z0-9]+", "-", question.lower()).strip("-")[:40].rstrip("-")
     digest = hashlib.sha1(question.encode("utf-8")).hexdigest()[:6]
@@ -85,6 +92,7 @@ class Harness:
     def gather(self) -> dict:
         inq, g = self.inq, self.inq.graph
         known_urls = {s.url for s in g.sources}
+        known_titles = {title_key(s.title): s.id for s in g.sources if len(title_key(s.title)) >= 25}
         new_sources: list[str] = []
         new_evidence: list[str] = []
         skipped: list[str] = []
@@ -110,7 +118,15 @@ class Harness:
                     if len(f.text.strip()) < self.min_chars:
                         skipped.append(f"{h.url}: {f.error or f'only {len(f.text.strip())} chars of text'}")
                         continue
-                    src = g.add_source(url=h.url, title=h.title or f.title, query=q, date=h.date)
+                    title = h.title or f.title
+                    key = title_key(title)
+                    if len(key) >= 25 and key in known_titles:
+                        # the same document at another host is the same origin, not a second source
+                        skipped.append(f"{h.url}: same document as {known_titles[key]} by title")
+                        continue
+                    src = g.add_source(url=h.url, title=title, query=q, date=h.date)
+                    if len(key) >= 25:
+                        known_titles[key] = src.id
                     src.text_path = self.store.write_source_text(src.id, f.text)
                     out = moves.appraise_full(inq, self.proposer, src, f.text, t, max_parts=self.read_parts,
                                               text_complete=not f.truncated)
