@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "inquiry-harness"
+version = "0.1.0"
+description = "Research agent harness with an explicit argument model: schemes, critical questions, grounded semantics, proof standards."
+requires-python = ">=3.11"
+dependencies = [
+    "pydantic>=2.5",
+]
+
+[project.optional-dependencies]
+llm = ["anthropic>=0.40", "python-dotenv>=1.0"]
+web = ["httpx>=0.27", "trafilatura>=1.8"]
+dev = ["pytest>=8"]
+
+[tool.setuptools.packages.find]
+include = ["inquiry*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

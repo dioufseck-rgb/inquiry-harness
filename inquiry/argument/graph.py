@@ -1,0 +1,354 @@
+"""
+The argument graph — primary state of the research harness.
+
+Node kinds (AIF vocabulary in brackets):
+
+    Issue      a question under inquiry; IBIS-style, with candidate claims as answers
+    Claim      a proposition that may answer an issue           [I-node]
+    Evidence   a proposition grounded in a source, with Schum credentials   [I-node]
+    Argument   premises -> claim through a named scheme         [RA-node]
+               or, when `attacks` is set, an attack on another node [CA-node]
+
+Relations are carried on the nodes:
+    Argument.premise_ids      evidence or claims used as premises
+    Argument.claim_id         the conclusion (for supporting arguments)
+    Argument.attacks          {target_id, type} for attack arguments
+    Claim.contrary_ids        rival claims (mutually exclusive answers)
+    Claim.issue_id            the issue this claim answers
+
+Everything is plain pydantic so the graph serializes to JSON and the
+ledger can hash it.
+"""
+
+from __future__ import annotations
+
+from datetime import datetime, timezone
+from typing import Literal, Optional
+
+from pydantic import BaseModel, Field
+
+
+def now_iso() -> str:
+    return datetime.now(timezone.utc).isoformat(timespec="seconds")
+
+
+Strength = Literal["weak", "moderate", "strong"]
+STRENGTH_ORDER: dict[str, int] = {"weak": 1, "moderate": 2, "strong": 3}
+
+ProofStandard = Literal["scintilla", "preponderance", "clear_and_convincing", "beyond_reasonable_doubt"]
+QuestionType = Literal["empirical", "causal", "predictive", "evaluative", "conceptual", "design", "mixed"]
+
+DEFAULT_STANDARD: dict[str, ProofStandard] = {
+    "empirical": "preponderance",
+    "causal": "clear_and_convincing",
+    "predictive": "preponderance",
+    "evaluative": "preponderance",
+    "conceptual": "preponderance",
+    "design": "preponderance",
+    "mixed": "preponderance",
+}
+
+AttackType = Literal["undermine", "rebut", "undercut"]
+Status = Literal["in", "out", "undecided"]
+Origin = Literal["proposer", "critic", "human", "instrument"]
+
+
+# ---------------------------------------------------------------------------
+# Issues and claims
+# ---------------------------------------------------------------------------
+
+class Issue(BaseModel):
+    id: str
+    text: str
+    answerhood: str = Field(default="", description="What a complete answer would contain.")
+    question_type: QuestionType = "mixed"
+    parent_id: Optional[str] = None
+    depends_on: list[str] = Field(default_factory=list)
+    status: Literal["open", "answered", "dropped"] = "open"
+    presuppositions: list[str] = Field(default_factory=list)
+
+
+class Claim(BaseModel):
+    id: str
+    text: str
+    issue_id: Optional[str] = None
+    kind: Literal["substantive", "null", "deflationary"] = "substantive"
+    contrary_ids: list[str] = Field(default_factory=list)
+    proof_standard: Optional[ProofStandard] = Field(
+        default=None, description="Override; otherwise derived from the issue's question type."
+    )
+    credence: Optional[float] = Field(
+        default=None, ge=0.0, le=1.0,
+        description="Optional numeric credence. Not used by evaluation in v1; checked for coherence only.",
+    )
+    origin: Origin = "proposer"
+    rationale: str = ""
+
+
+# ---------------------------------------------------------------------------
+# Evidence (Schum credentials)
+# ---------------------------------------------------------------------------
+
+EvidenceKind = Literal["tangible", "testimonial", "statistical", "model_output", "missing", "negative"]
+
+
+class Credentials(BaseModel):
+    """
+    Schum's three credentials of evidence.
+
+    relevance   how directly the item bears on the claim it is used for
+    credibility for testimonial evidence: the source's veracity, objectivity
+                and access to the facts; for tangible evidence: authenticity
+                and accuracy
+    force       the inferential force the item carries once relevance and
+                credibility are taken into account — the weakest link rules
+    """
+    relevance: Strength = "moderate"
+    credibility: Strength = "moderate"
+    force: Strength = "moderate"
+    credibility_notes: str = ""
+
+    def effective(self) -> Strength:
+        lo = min(STRENGTH_ORDER[self.relevance], STRENGTH_ORDER[self.credibility], STRENGTH_ORDER[self.force])
+        return {1: "weak", 2: "moderate", 3: "strong"}[lo]  # type: ignore[return-value]
+
+
+class Evidence(BaseModel):
+    id: str
+    text: str = Field(description="What the source establishes, in our words.")
+    kind: EvidenceKind = "tangible"
+    source_id: Optional[str] = None
+    quote: str = Field(default="", description="Short verbatim passage, under 300 characters.")
+    location: str = ""
+    credentials: Credentials = Field(default_factory=Credentials)
+    independence_group: str = Field(
+        default="", description="Shared by evidence tracing to one origin; counted once."
+    )
+    origin: Origin = "proposer"
+    provenance: dict[str, str] = Field(
+        default_factory=dict,
+        description="For model_output: model version, parameters, seed, run id.",
+    )
+
+
+class Source(BaseModel):
+    id: str
+    url: str = ""
+    title: str = ""
+    publisher: str = ""
+    date: str = ""
+    fetched_at: str = Field(default_factory=now_iso)
+    kind: Literal["primary", "secondary", "derivative", "unknown"] = "unknown"
+    derived_from: Optional[str] = None
+    competence: str = ""
+    incentives: str = ""
+    text_path: str = ""
+    query: str = ""
+
+
+# ---------------------------------------------------------------------------
+# Arguments and attacks
+# ---------------------------------------------------------------------------
+
+CQStatus = Literal["open", "answered", "defaulted"]
+
+
+class CQAnswer(BaseModel):
+    status: CQStatus = "open"
+    answer: str = ""
+    evidence_ids: list[str] = Field(default_factory=list)
+
+
+class Attack(BaseModel):
+    target_id: str
+    type: AttackType
+    note: str = ""
+
+
+class Argument(BaseModel):
+    id: str
+    scheme: str
+    premise_ids: list[str] = Field(default_factory=list)
+    claim_id: Optional[str] = Field(default=None, description="Conclusion, for supporting arguments.")
+    attacks: Optional[Attack] = Field(default=None, description="Set for attack arguments.")
+    cq: dict[str, CQAnswer] = Field(
+        default_factory=dict, description="critical question id -> status and answer."
+    )
+    strength_override: Optional[Strength] = None
+    origin: Origin = "proposer"
+    note: str = ""
+    round: int = 0
+
+    @property
+    def is_attack(self) -> bool:
+        return self.attacks is not None
+
+
+# ---------------------------------------------------------------------------
+# The graph
+# ---------------------------------------------------------------------------
+
+class ArgumentGraph(BaseModel):
+    issues: list[Issue] = Field(default_factory=list)
+    claims: list[Claim] = Field(default_factory=list)
+    evidence: list[Evidence] = Field(default_factory=list)
+    sources: list[Source] = Field(default_factory=list)
+    arguments: list[Argument] = Field(default_factory=list)
+    main_issue_id: Optional[str] = None
+
+    # -- lookups ------------------------------------------------------------
+
+    def issue(self, iid: str) -> Optional[Issue]:
+        return next((x for x in self.issues if x.id == iid), None)
+
+    def claim(self, cid: str) -> Optional[Claim]:
+        return next((x for x in self.claims if x.id == cid), None)
+
+    def ev(self, eid: str) -> Optional[Evidence]:
+        return next((x for x in self.evidence if x.id == eid), None)
+
+    def source(self, sid: str) -> Optional[Source]:
+        return next((x for x in self.sources if x.id == sid), None)
+
+    def arg(self, aid: str) -> Optional[Argument]:
+        return next((x for x in self.arguments if x.id == aid), None)
+
+    def node(self, nid: str):
+        return self.issue(nid) or self.claim(nid) or self.ev(nid) or self.arg(nid) or self.source(nid)
+
+    def arguments_for(self, claim_id: str) -> list[Argument]:
+        return [a for a in self.arguments if a.claim_id == claim_id and not a.is_attack]
+
+    def attacks_on(self, target_id: str) -> list[Argument]:
+        return [a for a in self.arguments if a.is_attack and a.attacks.target_id == target_id]
+
+    def claims_for_issue(self, issue_id: str) -> list[Claim]:
+        return [c for c in self.claims if c.issue_id == issue_id]
+
+    def standard_for(self, claim: Claim) -> ProofStandard:
+        if claim.proof_standard:
+            return claim.proof_standard
+        issue = self.issue(claim.issue_id) if claim.issue_id else None
+        return DEFAULT_STANDARD[issue.question_type if issue else "mixed"]
+
+    # -- construction helpers ---------------------------------------------------
+
+    def _next(self, prefix: str, items: list) -> str:
+        return f"{prefix}{len(items) + 1}"
+
+    def add_issue(self, text: str, **kw) -> Issue:
+        x = Issue(id=self._next("Q", self.issues), text=text, **kw)
+        self.issues.append(x)
+        if self.main_issue_id is None:
+            self.main_issue_id = x.id
+        return x
+
+    def add_claim(self, text: str, **kw) -> Claim:
+        x = Claim(id=self._next("C", self.claims), text=text, **kw)
+        self.claims.append(x)
+        return x
+
+    def set_contraries(self, *claim_ids: str) -> None:
+        """Mark a set of claims as mutually exclusive answers."""
+        for cid in claim_ids:
+            c = self.claim(cid)
+            if c is None:
+                raise KeyError(cid)
+            c.contrary_ids = sorted({*c.contrary_ids, *(o for o in claim_ids if o != cid)})
+
+    def add_evidence(self, text: str, **kw) -> Evidence:
+        x = Evidence(id=self._next("E", self.evidence), text=text, **kw)
+        self.evidence.append(x)
+        return x
+
+    def add_source(self, **kw) -> Source:
+        x = Source(id=self._next("S", self.sources), **kw)
+        self.sources.append(x)
+        return x
+
+    def add_argument(self, scheme: str, premise_ids: list[str], claim_id: str, **kw) -> Argument:
+        from .schemes import SCHEMES  # local import to avoid a cycle
+
+        if scheme not in SCHEMES:
+            raise KeyError(f"unknown scheme {scheme!r}")
+        for pid in premise_ids:
+            if self.ev(pid) is None and self.claim(pid) is None:
+                raise KeyError(f"premise {pid!r} is not evidence or a claim")
+        if self.claim(claim_id) is None:
+            raise KeyError(f"claim {claim_id!r} not found")
+        x = Argument(id=self._next("A", self.arguments), scheme=scheme, premise_ids=premise_ids,
+                     claim_id=claim_id, **kw)
+        # open every critical question of the scheme by default
+        for cq in SCHEMES[scheme].critical_questions:
+            x.cq.setdefault(cq.id, CQAnswer())
+        self.arguments.append(x)
+        return x
+
+    def add_attack(self, target_id: str, type: AttackType, premise_ids: list[str] | None = None,
+                   scheme: str = "attack", **kw) -> Argument:
+        """
+        An attack is an argument whose conclusion is that the target fails.
+        undermine -> target is evidence (or a claim used as a premise)
+        rebut     -> target is a claim or a supporting argument
+        undercut  -> target is an argument (its inference is challenged)
+        """
+        target = self.node(target_id)
+        if target is None:
+            raise KeyError(f"target {target_id!r} not found")
+        if type == "undercut" and not isinstance(target, Argument):
+            raise ValueError("undercut must target an argument")
+        if type == "undermine" and not isinstance(target, (Evidence, Claim)):
+            raise ValueError("undermine must target evidence or a claim used as a premise")
+        if type == "rebut" and not isinstance(target, (Claim, Argument)):
+            raise ValueError("rebut must target a claim or an argument")
+        from .schemes import SCHEMES
+
+        for pid in premise_ids or []:
+            if self.ev(pid) is None and self.claim(pid) is None:
+                raise KeyError(f"premise {pid!r} is not evidence or a claim")
+        x = Argument(id=self._next("A", self.arguments), scheme=scheme,
+                     premise_ids=premise_ids or [], attacks=Attack(target_id=target_id, type=type), **kw)
+        for cq in SCHEMES[scheme].critical_questions:
+            x.cq.setdefault(cq.id, CQAnswer())
+        # An attack needs grounds. Supplied premises discharge the assumption;
+        # so does a human reviewer raising it, who is answerable for the grounds.
+        if scheme == "attack" and "grounds" in x.cq:
+            if premise_ids:
+                x.cq["grounds"] = CQAnswer(status="answered", answer="premises supplied", evidence_ids=list(premise_ids))
+            elif x.origin == "human":
+                x.cq["grounds"] = CQAnswer(status="answered", answer="raised by human reviewer")
+        self.arguments.append(x)
+        return x
+
+    def answer_cq(self, argument_id: str, cq_id: str, answer: str, evidence_ids: list[str] | None = None,
+                  defaulted: bool = False) -> None:
+        a = self.arg(argument_id)
+        if a is None:
+            raise KeyError(argument_id)
+        a.cq[cq_id] = CQAnswer(status="defaulted" if defaulted else "answered",
+                               answer=answer, evidence_ids=evidence_ids or [])
+
+    # -- integrity ------------------------------------------------------------------
+
+    def validate_refs(self) -> list[str]:
+        """Return dangling references, if any."""
+        problems = []
+        ids = {n.id for n in [*self.issues, *self.claims, *self.evidence, *self.arguments, *self.sources]}
+        for c in self.claims:
+            if c.issue_id and c.issue_id not in ids:
+                problems.append(f"{c.id}: issue {c.issue_id} missing")
+            for o in c.contrary_ids:
+                if o not in ids:
+                    problems.append(f"{c.id}: contrary {o} missing")
+        for e in self.evidence:
+            if e.source_id and e.source_id not in ids:
+                problems.append(f"{e.id}: source {e.source_id} missing")
+        for a in self.arguments:
+            for p in a.premise_ids:
+                if p not in ids:
+                    problems.append(f"{a.id}: premise {p} missing")
+            if a.claim_id and a.claim_id not in ids:
+                problems.append(f"{a.id}: claim {a.claim_id} missing")
+            if a.attacks and a.attacks.target_id not in ids:
+                problems.append(f"{a.id}: attack target {a.attacks.target_id} missing")
+        return problems
