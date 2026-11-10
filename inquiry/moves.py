@@ -1244,6 +1244,26 @@ def conclude_view(inq: Inquiry) -> str:
     return "\n\n".join(parts)
 
 
+# "there is no X" where X is a kind of evidence: the inquiry can only say it did not retrieve one.
+# "no detectable effect" and the like are findings, not absence assertions, and are excluded.
+_ABSENCE = re.compile(
+    r"\b(?:there\s+(?:is|are|was|were)\s+no|does\s+not\s+exist|do\s+not\s+exist|"
+    r"no(?!\s+(?:detectable|significant|statistically|measurable|material|net|clear|longer|more|such\s+effect))"
+    r"(?:\s+(?:independent|published|external|peer-reviewed|other|separate|official|public|robust|such))*)"
+    r"\s+(?:\w+\s+){0,2}?(?:stud(?:y|ies)|analys[ie]s|control(?:\s+group|\s+site|\s+area)?s?|data(?:set)?|"
+    r"evaluations?|intervals?|methods?|trials?|replications?|comparisons?)\b",
+    re.I)
+
+
+def absence_assertions(text: str) -> list[str]:
+    """Sentences that assert a kind of evidence does not exist."""
+    out: list[str] = []
+    for sentence in re.split(r"(?<=[.!?])\s+", text):
+        if _ABSENCE.search(sentence):
+            out.append(" ".join(sentence.split()))
+    return out
+
+
 def apply_conclude(inq: Inquiry, out: ConcludeOutput) -> dict:
     ev = inq.evaluation or evaluate_move(inq)
     g = inq.graph
@@ -1256,10 +1276,14 @@ def apply_conclude(inq: Inquiry, out: ConcludeOutput) -> dict:
             conf = "low"
             capped.append(j.text[:60])
         judgements.append(Judgement(text=j.text, confidence=conf, rests_on=j.rests_on, claim_ids=ids))
+    flags = [f"absence_assertion: {s}" for s in absence_assertions(out.answer)]
+    for j in judgements:
+        flags += [f"absence_assertion: {s}" for s in absence_assertions(j.text + " " + j.rests_on)]
     inq.conclusion = Conclusion(round=inq.round, answer=out.answer, judgements=judgements,
-                                what_would_change_this=out.what_would_change_this, unresolved=out.unresolved)
+                                what_would_change_this=out.what_would_change_this, unresolved=out.unresolved,
+                                flags=flags)
     inq.phase = "concluded"
-    return {"judgements": len(judgements), "capped_to_low": capped}
+    return {"judgements": len(judgements), "capped_to_low": capped, "absence_assertions": len(flags)}
 
 
 def conclude(inq: Inquiry, llm: LLM) -> dict:

@@ -330,6 +330,32 @@ def test_argue_view_prefers_the_origin_over_its_relay():
     assert any(f.code == "derivative_premise" and f.node_id == a.id for f in ev.flags)
 
 
+def test_conclude_flags_assertions_of_absence_but_not_findings():
+    from inquiry.moves import ConcludeOutput, JudgementProposal, absence_assertions, apply_conclude
+    assert absence_assertions("There is no independent analysis of the expansion.") == ["There is no independent analysis of the expansion."]
+    assert absence_assertions("The report uses no control group.") == ["The report uses no control group."]
+    assert absence_assertions("No published study separates anticipation from the start date.")
+    assert absence_assertions("The interval does not exist in the report.") == []  # reversed order: not matched, acceptable
+    assert absence_assertions("The study found no detectable effect on NO2.") == []
+    assert absence_assertions("No significant change was found in the data.") == []
+    assert absence_assertions("No independent analysis was retrieved in this inquiry.") == \
+        ["No independent analysis was retrieved in this inquiry."]  # still an absence form; the permitted form avoids 'no'
+    assert absence_assertions("An independent analysis was not retrieved in this inquiry.") == []
+    inq = Inquiry(id="x", question="q")
+    g = inq.graph
+    q = g.add_issue("Q?")
+    g.add_claim("C", issue_id=q.id)
+    res = apply_conclude(inq, ConcludeOutput(
+        answer="Not settled. There is no external control in the official analysis. The null study found no detectable effect.",
+        judgements=[JudgementProposal(text="No interval is reported for the 4.8%.", confidence="low", rests_on="E1", claim_ids=["C1"]),
+                    JudgementProposal(text="Compliance rose.", confidence="low", rests_on="E2")]))
+    assert res["absence_assertions"] == 2
+    assert inq.conclusion.flags == [
+        "absence_assertion: There is no external control in the official analysis.",
+        "absence_assertion: No interval is reported for the 4.8%.",
+    ]
+
+
 def test_frame_drops_sub_issues_about_the_inquiry_itself():
     from inquiry.moves import FrameOutput, SubIssue, apply_frame, is_meta_issue
     assert is_meta_issue("Are the published evaluations robust to weather adjustment?")

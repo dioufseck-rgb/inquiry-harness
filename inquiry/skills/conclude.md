@@ -25,6 +25,14 @@ their status, not from how the answer feels.
 4. List what remains unresolved: issues with no accepted claim, and
    critic concerns that were never grounded.
 
+5. Never state that a source, study, analysis, control group, interval or
+   dataset does not exist. The inquiry read what it retrieved; it did not
+   search the world. The permitted form is "not retrieved in this inquiry"
+   or "not found in the documents read". The harness scans the answer and
+   the judgements for assertions of absence and flags each one. Findings
+   are different: "the study found no detectable effect" reports what a
+   source says and is fine.
+
 Write for a reader who will act on the answer and needs to know how far
 to trust it. No hedging beyond what the graph supports; no confidence
 beyond it either.
