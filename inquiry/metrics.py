@@ -89,6 +89,9 @@ def metrics(inq: Inquiry, ev: Evaluation, gold: Optional[dict[str, Any]] = None,
     if expected and expected.get("shape"):
         m["shape_expected"] = expected["shape"]
         m["shape_match"] = shape_match(inq, ev, expected["shape"])
+    if not g.evidence:
+        m["shape_match"] = False
+        m["error"] = "no_evidence"
     return m
 
 

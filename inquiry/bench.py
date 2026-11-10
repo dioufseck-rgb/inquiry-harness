@@ -69,7 +69,7 @@ def run_question(q: dict[str, Any], root: Path, rounds: int, tag: str, **harness
     m = metrics(inq, ev, q.get("gold"), q.get("expected"))
     m["seconds"] = round(time.time() - t0)
     m["split"] = q.get("split", "")
-    m["error"] = error
+    m["error"] = error or m.get("error", "")
     m["run_dir"] = str(store.dir)
     (store.dir / "metrics.json").write_text(json.dumps(m, indent=2), encoding="utf-8")
     return m

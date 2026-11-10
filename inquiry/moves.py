@@ -1376,7 +1376,9 @@ def stop(inq: Inquiry, ev: Evaluation, rounds_left: int, new_evidence_this_round
     settlers = main_claim_settlers(inq, ev)
     addressable = [cid for cid in undecided if settlers.get(cid)]
     tokens = sum(u["input_tokens"] + u["output_tokens"] for u in inq.llm_usage)
-    if max_tokens_run and tokens > max_tokens_run:
+    if not g.evidence:
+        decision, reason = "stop", "retrieval failed: no evidence"
+    elif max_tokens_run and tokens > max_tokens_run:
         decision, reason = "stop", "token budget exhausted"
     elif accepted:
         decision, reason = "stop", f"main issue answered by {', '.join(accepted)}"

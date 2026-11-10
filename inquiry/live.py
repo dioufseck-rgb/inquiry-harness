@@ -28,7 +28,7 @@ from .argument.evaluate import Evaluation, load_bearing
 from .argument.render import summary, toulmin, wigmore
 from .llm import LLM, llm_from_env
 from .metrics import metrics, one_line
-from .state import Inquiry
+from .state import Conclusion, Inquiry
 from .store import InquiryStore
 from .tools.fetch import Fetcher
 from .tools.search import Search
@@ -295,6 +295,13 @@ class Harness:
             self.pending_queries = []
             gathered = self.gather()
             self._record("gather", gathered)
+            if not inq.graph.evidence:
+                ev = moves.evaluate_move(inq)
+                sa = moves.stop(inq, ev, rounds_left, 0, max_tokens_run=self.max_tokens_run)
+                inq.conclusion = Conclusion(round=inq.round, answer="No evidence was retrieved; the question was not examined.")
+                inq.phase = "concluded"
+                self._record("stop", {"decision": sa.decision, "reason": sa.reason})
+                break
             computed = moves.compute(inq, self.proposer)
             if computed is not None:
                 self._record("compute", computed)
@@ -325,7 +332,8 @@ class Harness:
             if sa.decision == "stop":
                 break
 
-        self._record("conclude", moves.conclude(inq, self.proposer))
+        if inq.graph.evidence:
+            self._record("conclude", moves.conclude(inq, self.proposer))
         self.write_report()
         m = metrics(inq, inq.evaluation or moves.evaluate_move(inq))
         (self.store.dir / "metrics.json").write_text(json.dumps(m, indent=2), encoding="utf-8")

@@ -144,6 +144,24 @@ def test_token_budget_stops_but_still_concludes(tmp_path, monkeypatch):
     assert store.verify_ledger()
 
 
+def test_no_evidence_skips_conclude_and_marks_failure(tmp_path):
+    from inquiry.metrics import metrics
+
+    h, store = make_harness(tmp_path, [])
+    h.search = FakeSearch(default=[])
+    inq = h.run(rounds=3)
+    assert inq.round == 1 and inq.phase == "concluded"
+    assert inq.stop_assessments[-1].reason == "retrieval failed: no evidence"
+    assert inq.conclusion.answer == "No evidence was retrieved; the question was not examined."
+    assert "conclude" not in [e["move"] for e in store.events()]
+    assert not any(s.startswith("# SKILL: conclude") for s, _ in h.proposer.calls)
+    m = metrics(inq, inq.evaluation, expected={"shape": "undecided"})
+    assert m["shape_match"] is False and m["error"] == "no_evidence"
+    assert inq.conclusion.answer in (store.dir / "report.md").read_text(encoding="utf-8")
+    assert store.load().conclusion.answer == inq.conclusion.answer
+    assert store.verify_ledger()
+
+
 def test_one_round_builds_graph_and_ledger(tmp_path):
     plan_calls: list[str] = []
     h, store = make_harness(tmp_path, plan_calls)
