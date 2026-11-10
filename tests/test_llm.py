@@ -46,6 +46,7 @@ def test_openai_complete_and_usage(client):
     assert params["reasoning"] == {"effort": "medium"}
     assert params["text"] == {"format": {"type": "json_object"}}
     assert params["max_output_tokens"] == 123
+    assert "JSON" in params["input"]
     assert "temperature" not in params
     assert model.usage == [{"provider": "openai", "model": "reasoner-test", "input_tokens": 12, "output_tokens": 7}]
 

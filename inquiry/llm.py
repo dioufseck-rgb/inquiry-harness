@@ -141,7 +141,7 @@ class OpenAILLM(LLM):
         while True:
             params: dict[str, Any] = {
                 "model": self.model, "instructions": system + "\nReturn a JSON object.",
-                "input": user, "max_output_tokens": max_tokens,
+                "input": user + "\n\nReturn a JSON object.", "max_output_tokens": max_tokens,
                 "text": {"format": {"type": "json_object"}},
             }
             if self._reasoning_supported:
