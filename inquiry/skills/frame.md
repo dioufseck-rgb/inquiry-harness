@@ -13,6 +13,9 @@ answer contains, and the tree of sub-questions whose answers compose it.
    asks whether something is good by some standard; `conceptual` asks what a
    term means or whether something falls under it; `design` asks what should
    be built or done; `mixed` when two of these are inseparable.
+   Classify the actual question: "does initiating X reduce net harm" is
+   causal; "what does body B recommend" is empirical, even when the
+   recommendation discusses causal evidence.
 3. State the presuppositions: what must already be true for the question to
    have an answer at all. A false presupposition is a possible finding.
 4. State what is in scope and what is out, so later moves do not drift.

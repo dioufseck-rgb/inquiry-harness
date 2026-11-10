@@ -19,13 +19,15 @@ import hashlib
 import json
 import os
 import re
+import shlex
 import sys
 from pathlib import Path
-from typing import Callable, Optional
+from typing import Callable, Optional, get_args
 
 from . import moves
 from .argument.evaluate import Evaluation, load_bearing
 from .argument.render import summary, toulmin, wigmore
+from .argument.graph import QuestionType
 from .llm import LLM, llm_from_env
 from .metrics import metrics, one_line
 from .state import Conclusion, Inquiry
@@ -61,6 +63,8 @@ class Harness:
         queries_per_round: int = 6,
         hits_per_query: int = 5,
         interactive: bool = False,
+        review_frame: bool = False,
+        frame_samples: int = 1,
         min_chars: int = 300,
         read_parts: int = 36,
         log: Optional[Callable[[str], None]] = None,
@@ -78,6 +82,10 @@ class Harness:
         self.queries_per_round = queries_per_round
         self.hits_per_query = hits_per_query
         self.interactive = interactive
+        if frame_samples < 1:
+            raise ValueError("frame samples must be positive")
+        self.review_frame = review_frame
+        self.frame_samples = frame_samples
         self.log = log or (lambda s: print(s, file=sys.stderr))
         self.ask = ask or input
         self.pending_queries: list[str] = []
@@ -225,6 +233,89 @@ class Harness:
 
     # -- human review --------------------------------------------------------------
 
+    def human_frame(self) -> dict:
+        g = self.inq.graph
+        edits = []
+
+        def attach_claim(claim, issue) -> None:
+            for other in g.claims:
+                if claim.id in other.contrary_ids:
+                    other.contrary_ids.remove(claim.id)
+            claim.contrary_ids = []
+            claim.issue_id = issue.id
+            claim.answers_issue = True
+            claim.proof_standard = self.inq.framing.standard_override if issue.id == g.main_issue_id else None
+            nulls = [c for c in g.claims_for_issue(issue.id) if c.kind in ("null", "deflationary") and c.id != claim.id]
+            if not nulls and claim.kind == "substantive":
+                nulls = [g.add_claim(f"None of the proposed answers to {issue.id} is established", issue_id=issue.id, kind="null")]
+            rivals = nulls if claim.kind == "substantive" else [c for c in g.claims_for_issue(issue.id) if c.kind == "substantive"]
+            for other in rivals:
+                g.set_contraries(claim.id, other.id)
+
+        while True:
+            print(moves._issues_block(self.inq))
+            print('Frame edits: type Q1 causal | move C5 Q1 | drop Q3 | add Q1 "claim text". Enter accepts.')
+            try:
+                line = self.ask("frame> ").strip()
+            except EOFError:
+                break
+            if not line:
+                break
+            try:
+                parts = shlex.split(line)
+                if len(parts) < 2:
+                    raise ValueError("an edit needs a command and a target")
+                command, target = parts[:2]
+                if command == "type" and len(parts) == 3:
+                    issue = g.issue(target)
+                    if issue is None or issue.status == "dropped" or parts[2] not in get_args(QuestionType):
+                        raise ValueError("unknown issue or question type")
+                    before = issue.question_type
+                    issue.question_type = parts[2]
+                    if issue.id == g.main_issue_id:
+                        self.inq.framing.question_type = parts[2]
+                    edit = {"command": "type", "issue_id": target, "before": before, "after": parts[2]}
+                elif command == "move" and len(parts) == 3:
+                    claim, issue = g.claim(target), g.issue(parts[2])
+                    if claim is None or not claim.live or issue is None or issue.status == "dropped":
+                        raise ValueError("unknown claim or active issue")
+                    before = claim.issue_id
+                    attach_claim(claim, issue)
+                    edit = {"command": "move", "claim_id": target, "from_issue": before, "to_issue": issue.id}
+                elif command == "drop" and len(parts) == 2:
+                    issue = g.issue(target)
+                    if issue is None or issue.id == g.main_issue_id:
+                        raise ValueError("drop requires an existing sub-issue")
+                    dropped = {target}
+                    while True:
+                        descendants = {i.id for i in g.issues if i.parent_id in dropped}
+                        if descendants <= dropped:
+                            break
+                        dropped |= descendants
+                    for item in g.issues:
+                        if item.id in dropped:
+                            item.status = "dropped"
+                        item.depends_on = [x for x in item.depends_on if x not in dropped]
+                    for claim in g.claims:
+                        if claim.issue_id in dropped:
+                            claim.answers_issue = False
+                    edit = {"command": "drop", "issue_ids": sorted(dropped)}
+                elif command == "add" and len(parts) >= 3:
+                    issue = g.issue(target)
+                    text = " ".join(parts[2:]).strip()
+                    if issue is None or issue.status == "dropped" or not text:
+                        raise ValueError("add requires an active issue and claim text")
+                    claim = g.add_claim(text, issue_id=issue.id, origin="human")
+                    attach_claim(claim, issue)
+                    edit = {"command": "add", "claim_id": claim.id, "issue_id": issue.id, "text": text}
+                else:
+                    raise ValueError("unknown command or wrong number of arguments")
+            except ValueError as exc:
+                print(f"Rejected: {exc}")
+                continue
+            edits.append(edit)
+        return {"edits": edits}
+
     def human_review(self) -> dict:
         """Prompt for objections as `target_id type text`; blank line ends."""
         g = self.inq.graph
@@ -264,7 +355,7 @@ class Harness:
     def run(self, rounds: int = 2) -> Inquiry:
         inq = self.inq
         if inq.phase == "new":
-            self._record("frame", moves.frame(inq, self.proposer))
+            self._record("frame", moves.frame(inq, self.proposer, samples=self.frame_samples))
         if inq.phase == "framed":
             self._record("hypothesize", moves.hypothesize(inq, self.proposer))
             if not inq.main_claims():
@@ -276,6 +367,8 @@ class Harness:
                     raise RuntimeError("hypothesize produced no claims on the main issue twice; "
                                        "see the hypothesize skill and the model's reply")
         if inq.phase == "hypothesized":
+            if self.review_frame:
+                self._record("human_frame", self.human_frame())
             inq.phase = "inquiring"
 
         ev: Evaluation = moves.evaluate_move(inq)
@@ -401,11 +494,15 @@ def main(argv: Optional[list[str]] = None) -> int:
     p.add_argument("--read-parts", type=int, default=36,
                    help="Appraisal windows (~12k chars each) to read per primary document; others are sampled.")
     p.add_argument("--interactive", action="store_true", help="Prompt for human objections after each critique.")
+    p.add_argument("--review-frame", action="store_true", help="Edit issue types and claim placement after Hypothesize.")
+    p.add_argument("--frame-samples", type=int, default=1, help="Frame samples; choose the modal type and median-sized tree.")
     p.add_argument("--id", help="Inquiry id under --root; resumes if it exists.")
     p.add_argument("--root", default="runs")
     p.add_argument("--evidence-from", default="",
                    help="Replay: use the sources an earlier run directory holds instead of live search and fetch.")
     args = p.parse_args(argv)
+    if args.frame_samples < 1:
+        p.error("--frame-samples must be positive")
 
     _load_env()
     inquiry_id = args.id or (slug_for(args.question) if args.question else None)
@@ -433,7 +530,7 @@ def main(argv: Optional[list[str]] = None) -> int:
     harness = Harness(
         inq, store, llm_from_env("proposer"), llm_from_env("critic"), search, fetcher,
         max_sources=args.max_sources, queries_per_round=args.queries, hits_per_query=args.hits,
-        interactive=args.interactive, read_parts=args.read_parts,
+        interactive=args.interactive, review_frame=args.review_frame, frame_samples=args.frame_samples, read_parts=args.read_parts,
     )
     harness.run(rounds=args.rounds)
     print(f"\nwrote {store.dir / 'report.md'}; ledger ok = {store.verify_ledger()}", file=sys.stderr)

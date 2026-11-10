@@ -32,6 +32,13 @@ answers; you do not list those pairs.
    records the second as attacks. Write instead what the studies found and
    by what design, which is something a source can establish.
 5. Use the issue ids exactly as shown in the framing.
+   For a claim reporting a recommendation body's verdict, include
+   `recommendation_body` and `target.population`, `target.outcome`, and
+   `target.evidence_status="recommended"`. Copy the population and outcome
+   labels from the main answerhood when they are the same, and state them
+   in the claim itself. A recommendation about the main population and
+   outcome belongs on the main issue; a narrower population or different
+   outcome remains a component finding on its own issue.
 6. In `exclusive_groups`, list the groups of claims that are mutually
    exclusive, as zero-based indexes into `claims`. A group must lie within
    one issue. A claim may appear in no group. If an issue has several
@@ -44,7 +51,8 @@ Return one JSON object and nothing else:
 ```json
 {
   "claims": [
-    {"issue_id": "Q1", "text": "string", "kind": "substantive | null | deflationary", "rationale": "string"}
+    {"issue_id": "Q1", "text": "string", "kind": "substantive | null | deflationary", "rationale": "string",
+     "recommendation_body": "", "target": {"population": "", "outcome": "", "evidence_status": ""}}
   ],
   "exclusive_groups": [[0, 1, 2], [5, 6]]
 }

@@ -271,6 +271,9 @@ class ArgumentGraph(BaseModel):
         return [a for a in self.arguments if a.is_attack and a.attacks.target_id == target_id]
 
     def claims_for_issue(self, issue_id: str, live_only: bool = True) -> list[Claim]:
+        issue = self.issue(issue_id)
+        if issue is not None and issue.status == "dropped":
+            return []
         return [c for c in self.claims if c.issue_id == issue_id and (c.live or not live_only)]
 
     def live_claims(self) -> list[Claim]:

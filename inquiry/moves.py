@@ -21,7 +21,9 @@ live.py is just sequencing.
 from __future__ import annotations
 
 import re
+from collections import Counter
 from pathlib import Path
+from statistics import median
 from typing import Literal, Optional
 
 from pydantic import BaseModel, Field
@@ -74,7 +76,11 @@ def _issues_block(inq: Inquiry, ev: Optional[Evaluation] = None, with_claims: bo
     g = inq.graph
     lines = ["# Issues and claims", ""]
     for iss in g.issues:
+        if iss.status == "dropped":
+            continue
         tag = " (main)" if iss.id == g.main_issue_id else ""
+        if iss.parent_id:
+            tag += f" (under {iss.parent_id})"
         dep = f" depends on {', '.join(iss.depends_on)}" if iss.depends_on else ""
         lines.append(f"- {iss.id}{tag} [{iss.question_type}]{dep}: {iss.text}")
         if iss.answerhood:
@@ -251,6 +257,16 @@ def is_meta_issue(text: str) -> bool:
 
 def apply_frame(inq: Inquiry, out: FrameOutput) -> dict:
     g = inq.graph
+    original_type = out.question_type
+    question = inq.question.lower()
+    if re.search(r"\bwhat\b.*\b(?:recommend|advise)", question):
+        out = out.model_copy(update={"question_type": "empirical"})
+    elif re.search(r"\b(?:does?|did|can|could|would|will|has|have|whether)\b.*\b"
+                   r"(?:caus(?:e[sd]?|ing)|reduc(?:e[sd]?|ing)|increas(?:e[sd]?|ing)|"
+                   r"lower(?:s|ed)?|rais(?:e[sd]?|ing)|affect(?:s|ed)?|lead to|led to)\b", question):
+        out = out.model_copy(update={"question_type": "causal"})
+    elif out.question_type == "causal":
+        out = out.model_copy(update={"question_type": "empirical"})
     inq.framing = Framing(
         restatement=out.restatement, question_type=out.question_type, scope_in=out.scope_in,
         scope_out=out.scope_out, presuppositions=out.presuppositions, answerhood=out.answerhood,
@@ -275,12 +291,21 @@ def apply_frame(inq: Inquiry, out: FrameOutput) -> dict:
         iss.depends_on = [index_to_issue[j].id for j in s.depends_on if j in index_to_issue and j != i]
     inq.phase = "framed"
     return {"main_issue": main.id, "sub_issues": [x.id for x in index_to_issue.values()],
-            "dropped": dropped, "question_type": out.question_type}
+            "dropped": dropped, "question_type": out.question_type, "type_by_rule": original_type != out.question_type}
 
 
-def frame(inq: Inquiry, llm: LLM) -> dict:
-    out = llm.complete_json(skill_text("frame"), frame_view(inq), FrameOutput)
-    return apply_frame(inq, out)
+def frame(inq: Inquiry, llm: LLM, samples: int = 1) -> dict:
+    if samples < 1:
+        raise ValueError("frame samples must be positive")
+    outputs = [llm.complete_json(skill_text("frame"), frame_view(inq), FrameOutput) for _ in range(samples)]
+    mode = Counter(o.question_type for o in outputs).most_common(1)[0][0]
+    candidates = [i for i, o in enumerate(outputs) if o.question_type == mode]
+    middle = median(len(outputs[i].sub_issues) for i in candidates)
+    chosen = min(candidates, key=lambda i: abs(len(outputs[i].sub_issues) - middle))
+    result = apply_frame(inq, outputs[chosen])
+    result["samples"] = [{"question_type": o.question_type, "sub_issue_count": len(o.sub_issues)} for o in outputs]
+    result["selected_sample"] = chosen
+    return result
 
 
 # ---------------------------------------------------------------------------
@@ -292,6 +317,8 @@ class ClaimProposal(BaseModel):
     text: str
     kind: Literal["substantive", "null", "deflationary"] = "substantive"
     rationale: str = ""
+    recommendation_body: str = ""
+    target: dict[str, str] = Field(default_factory=dict)
 
 
 class HypothesizeOutput(BaseModel):
@@ -311,16 +338,41 @@ def apply_hypothesize(inq: Inquiry, out: HypothesizeOutput) -> dict:
     added: list[str] = []
     dropped: list[str] = []
     index_to_id: dict[int, str] = {}
+    placed_by_rule: list[dict] = []
     for i, p in enumerate(out.claims):
         if g.issue(p.issue_id) is None:
             dropped.append(f"{p.issue_id}: unknown issue")
             continue
+        # The proposal supplies explicit population/outcome labels copied from
+        # answerhood. Require both labels and the body's verdict in the claim;
+        # a mention of a recommendation alone cannot promote a component claim.
+        def normalise_scope(text: str) -> str:
+            text = re.sub(r"(\d+)\s*\+", r"\1 and over", text.lower())
+            text = re.sub(r"\b(?:or older|and older|or over)\b", "and over", text)
+            text = re.sub(r"\b(?:aged?|years?)\b", " ", text)
+            return " ".join(re.findall(r"[a-z0-9]+", text))
+
+        population, outcome = p.target.get("population", ""), p.target.get("outcome", "")
+        main_issue = g.issue(g.main_issue_id) if g.main_issue_id else None
+        answerhood = normalise_scope(inq.framing.answerhood or (main_issue.answerhood if main_issue else ""))
+        claim_text = normalise_scope(p.text)
+        labels = [normalise_scope(population), normalise_scope(outcome)]
+        recommendation = bool(p.recommendation_body and normalise_scope(p.recommendation_body) in claim_text
+                              and re.search(r"\brecommend|\badvise|\bgrade [a-di]\b", p.text, re.I))
+        same_scope = all(label and label in answerhood and label in claim_text for label in labels)
+        original_issue = p.issue_id
+        if recommendation and same_scope and g.main_issue_id:
+            p = p.model_copy(update={"issue_id": g.main_issue_id,
+                                     "target": {**p.target, "evidence_status": "recommended"}})
         existing = next((c for c in g.claims if c.issue_id == p.issue_id
                          and c.text.strip().lower() == p.text.strip().lower()), None)
         if existing is not None:
             index_to_id[i] = existing.id
             continue
-        c = g.add_claim(p.text, issue_id=p.issue_id, kind=p.kind, rationale=p.rationale)
+        c = g.add_claim(p.text, issue_id=p.issue_id, kind=p.kind, rationale=p.rationale, target=p.target)
+        if p.issue_id != original_issue:
+            placed_by_rule.append({"claim_id": c.id, "from_issue": original_issue, "to_issue": p.issue_id,
+                                   "body": p.recommendation_body, "population": population, "outcome": outcome})
         added.append(c.id)
         index_to_id[i] = c.id
     # every issue gets a null answer to beat, even if the model forgot one
@@ -359,7 +411,7 @@ def apply_hypothesize(inq: Inquiry, out: HypothesizeOutput) -> dict:
         for c in g.claims_for_issue(g.main_issue_id):
             c.proof_standard = inq.framing.standard_override  # type: ignore[assignment]
     inq.phase = "hypothesized"
-    return {"claims": added, "dropped": dropped, "exclusive_groups": groups_applied}
+    return {"claims": added, "dropped": dropped, "exclusive_groups": groups_applied, "placed_by_rule": placed_by_rule}
 
 
 def hypothesize(inq: Inquiry, llm: LLM) -> dict:
