@@ -6,8 +6,9 @@ system prompt, the rendered state view is the user message, and the reply
 is parsed and validated against a pydantic schema. One repair attempt is
 made if validation fails, feeding the error back to the model.
 
-Two implementations:
-    AnthropicLLM  - the real thing
+Implementations:
+    AnthropicLLM  - Anthropic Messages API
+    OpenAILLM     - OpenAI Responses API
     FakeLLM       - returns scripted outputs, for tests and dry runs
 
 The harness keeps two LLM handles: `proposer` for the constructive moves
@@ -77,13 +78,14 @@ class LLM:
 
 
 class AnthropicLLM(LLM):
-    provider = "anthropic"
     """
     Claude 5 family models reject sampling parameters (temperature, top_p);
     depth is controlled by `effort` instead, and thinking is adaptive by
     default. The system prompt (skill text) is stable across calls, so it is
     marked for prompt caching.
     """
+
+    provider = "anthropic"
 
     def __init__(self, model: str, effort: str = "medium"):
         import anthropic  # imported here so tests can run without the SDK configured
@@ -205,6 +207,10 @@ def llm_from_env(role: str) -> LLM:
     """
     Build the proposer or critic from environment variables.
 
+    Model values are provider:model; bare names select Anthropic. OpenAI
+    effort defaults to medium for both roles. Anthropic retains its legacy
+    medium proposer / high critic defaults.
+
         INQUIRY_PROPOSER_MODEL  default claude-sonnet-5-5
         INQUIRY_CRITIC_MODEL    default claude-opus-5-5
     """
@@ -214,7 +220,8 @@ def llm_from_env(role: str) -> LLM:
     provider, model = provider.strip().lower(), model.strip()
     if not model:
         raise ValueError(f"INQUIRY_{role.upper()}_MODEL needs a model name")
-    effort = os.environ.get(f"INQUIRY_{role.upper()}_EFFORT", "medium")
+    default_effort = "medium" if provider == "openai" or role == "proposer" else "high"
+    effort = os.environ.get(f"INQUIRY_{role.upper()}_EFFORT", default_effort)
     if provider == "openai":
         return OpenAILLM(model=model, reasoning_effort=effort)
     if provider == "anthropic":

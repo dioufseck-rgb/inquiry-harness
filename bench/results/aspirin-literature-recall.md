@@ -12,6 +12,10 @@ The integrated workspace was verified byte-for-byte against that snapshot.
 No tuning was performed on energy-pjm or it-genai-95. All saved ledgers and
 graph references verify. The frozen snapshot passes 84 tests.
 
+A later compatibility correction restores the unset Anthropic critic effort
+default to `high`; the recorded run explicitly used OpenAI medium/high. The
+final suite, including both-role provider parsing checks, passes 87 tests.
+
 Run: `runs/bench/health-aspirin-tonight-openai-t7`. Full metrics are in
 `tonight-openai-health-aspirin.json`; the report, sources, inquiry state and
 ledger remain in the run directory.

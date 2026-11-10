@@ -9,8 +9,13 @@ budget. No human frame edits; one Frame sample. Sources were discovered live.
 All three processes loaded the same frozen T5–T7 snapshot. Its inquiry source
 tree SHA-256 is `ca76f9e818063bc9d7a26114809b7604b1741e0e51a9cfcf59bfb4f5e37068ac`.
 The integrated workspace was verified byte-for-byte against that snapshot.
+The equivalent repository code is `9a374bb`.
 No tuning was performed on energy-pjm or it-genai-95. All saved ledgers and
 graph references verify. The frozen snapshot passes 84 tests.
+
+After these measurements, the factory's legacy default for an unset Anthropic
+critic effort was restored to `high`. The tests now cover both roles for each
+provider spelling (87 pass). These runs explicitly used OpenAI medium/high.
 
 `energy-pjm` and `it-genai-95` each ran once for two rounds. Aspirin is included
 as the third held-in line from T7. These measurements were not used to adjust

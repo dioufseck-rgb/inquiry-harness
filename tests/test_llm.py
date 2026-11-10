@@ -21,22 +21,23 @@ def client(monkeypatch):
     return client
 
 
+@pytest.mark.parametrize("role", ["proposer", "critic"])
 @pytest.mark.parametrize("configured,provider,model", [
     ("claude-test", "anthropic", "claude-test"),
     ("anthropic:claude-test", "anthropic", "claude-test"),
     ("openai:reasoner-test", "openai", "reasoner-test"),
 ])
-def test_provider_parsing(monkeypatch, configured, provider, model):
-    monkeypatch.setenv("INQUIRY_PROPOSER_MODEL", configured)
-    monkeypatch.delenv("INQUIRY_PROPOSER_EFFORT", raising=False)
+def test_provider_parsing(monkeypatch, configured, provider, model, role):
+    monkeypatch.setenv(f"INQUIRY_{role.upper()}_MODEL", configured)
+    monkeypatch.delenv(f"INQUIRY_{role.upper()}_EFFORT", raising=False)
     anthropic, openai = Mock(), Mock()
     monkeypatch.setattr(llm, "AnthropicLLM", anthropic)
     monkeypatch.setattr(llm, "OpenAILLM", openai)
-    llm.llm_from_env("proposer")
+    llm.llm_from_env(role)
     if provider == "openai":
         openai.assert_called_once_with(model=model, reasoning_effort="medium")
     else:
-        anthropic.assert_called_once_with(model=model, effort="medium")
+        anthropic.assert_called_once_with(model=model, effort="high" if role == "critic" else "medium")
 
 
 def test_openai_complete_and_usage(client):
