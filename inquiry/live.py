@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import json
 import re
 import sys
 from pathlib import Path
@@ -25,6 +26,7 @@ from . import moves
 from .argument.evaluate import Evaluation, load_bearing
 from .argument.render import summary, toulmin, wigmore
 from .llm import LLM, llm_from_env
+from .metrics import metrics, one_line
 from .state import Inquiry
 from .store import InquiryStore
 from .tools.fetch import Fetcher
@@ -248,6 +250,9 @@ class Harness:
 
         self._record("conclude", moves.conclude(inq, self.proposer))
         self.write_report()
+        m = metrics(inq, inq.evaluation or moves.evaluate_move(inq))
+        (self.store.dir / "metrics.json").write_text(json.dumps(m, indent=2), encoding="utf-8")
+        self.log(one_line(m))
         return inq
 
     # -- report -----------------------------------------------------------------------

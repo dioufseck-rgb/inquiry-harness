@@ -1,0 +1,176 @@
+# Six questions. ulez is the regression test and runs with every split.
+# split: held_in questions may be used to diagnose and tune; held_out may
+# only be run to check for regressions.
+#
+# Gold entries marked "verify wording" are matched by substring; adjust the
+# string to what the source actually says the first time the question is run,
+# then freeze it.
+
+- id: ulez
+  split: regression
+  sector: environment
+  question: >
+    Did the August 2023 expansion of London's Ultra Low Emission Zone reduce
+    roadside NO2 concentrations in outer London?
+  stresses: two-study reconciliation; period alignment; single-origin modelled estimate
+  gold:
+    sources:
+      - "London-wide ULEZ One Year Report"
+      - "London-wide ULEZ Six Month Report"
+      - "s44407-025-00030-9"          # Tong et al., npj Clean Air 2025
+      - "Supplementary"               # the paper's supplementary tables
+    facts:
+      - "Table 70"
+      - "4.8"
+      - "5-40 km"                     # control belt outside Greater London (verify wording)
+      - "December 2022"               # start of the official counterfactual
+      - "synthetic control"
+  expected:
+    shape: undecided
+    notes: >
+      Small effect plausible (<= ~1 ug/m3), not established at a causal standard;
+      the official endpoint estimate and the independent interval are compatible
+      once periods are aligned; anticipation is the identification problem.
+  traps:
+    - counting press relays of the TfL report as corroboration
+    - treating the two hosts of the npj paper as two origins
+    - asserting "no control group" or "no independent study" without reading Appendix 3 / the supplement
+
+- id: energy-pjm
+  split: held_in
+  sector: energy
+  question: >
+    Can PJM serve projected data-centre load growth in Northern Virginia
+    through 2030 without new dispatchable generation?
+  stresses: dependency chain with arithmetic; compute instrument; model-output evidence
+  gold:
+    sources:
+      - "PJM"                         # most recent Long-Term Load Forecast Report
+      - "Integrated Resource Plan"    # Dominion Energy, current filing
+      - "Base Residual Auction"       # two most recent results
+      - "Data Center Energy Usage Report"   # LBNL 2024 (Shehabi et al.)
+      - "interconnection queue"
+    facts:
+      - "load forecast"
+      - "MW-day"                      # auction clearing price unit
+      - "accredited"                  # accredited vs nameplate capacity
+      - "queue"
+  expected:
+    shape: undecided
+    notes: >
+      Main claim undecided with the load-bearing assumption named (queue
+      conversion rate or forecast adjustment); sub-claims on forecast figures
+      and auction prices accepted.
+  traps:
+    - treating the utility forecast and the RTO forecast as independent origins
+    - mixing nameplate with accredited capacity
+    - summing forecast MW across overlapping sources
+
+- id: it-genai-95
+  split: held_in
+  sector: it
+  question: >
+    Is it established that about 95% of enterprise generative-AI pilots
+    deliver no measurable return?
+  stresses: single origin with many relays; definitions behind a headline; corroboration rules
+  gold:
+    sources:
+      - "GenAI Divide"                # MIT NANDA report, 2025
+      - "State of AI"                 # McKinsey survey, for comparison
+      - "Gartner"
+    facts:
+      - "95"
+      - "P&L"                         # the report's definition of return (verify wording)
+      - "interview"                   # sampling description
+  expected:
+    shape: undecided
+    notes: >
+      The number itself undecided (single origin, contested method); the claim
+      that the figure traces to one report accepted; at least two independent
+      critiques retrieved.
+  traps:
+    - counting press relays as corroboration
+    - accepting the figure because of its ubiquity
+    - conflating "no measurable return" with "failed"
+
+- id: health-aspirin
+  split: held_in
+  sector: health
+  question: >
+    Does initiating low-dose aspirin for primary prevention reduce net
+    cardiovascular harm in adults aged 60 and over?
+  stresses: study_result with population matching; meta-analysis vs trial; accepting a settled negative
+  gold:
+    sources:
+      - "ASPREE"                      # NEJM 2018, three papers
+      - "ARRIVE"
+      - "ASCEND"
+      - "USPSTF"                      # 2022 recommendation statement
+      - "JAMA"                        # 2019 meta-analysis (Zheng & Roddick)
+    facts:
+      - "bleeding"
+      - "primary prevention"
+      - "grade D"                     # USPSTF grade for initiation at 60+ (verify wording)
+  expected:
+    shape: "accepted:no net benefit|does not reduce net|should not be initiated"
+    notes: >
+      Accepted under clear and convincing; corroborated across independent
+      trials and the guideline body; bleeding counted against benefit.
+  traps:
+    - carrying secondary-prevention evidence across to primary prevention
+    - ignoring bleeding
+    - population mismatch (ASPREE enrolled 70+; US minorities 65+)
+
+- id: geo-redsea
+  split: held_out
+  sector: geopolitics
+  question: >
+    Did the Red Sea shipping disruptions from late 2023 raise Asia-Europe
+    container freight rates above the 2021 pandemic peak?
+  stresses: retrieval-bound time series; route vs composite index; false absences
+  gold:
+    sources:
+      - "World Container Index"       # Drewry
+      - "Freightos"                   # FBX
+      - "Suez Canal"                  # transit counts
+      - "UNCTAD"
+    facts:
+      - "2021"
+      - "Shanghai"                    # Shanghai-Genoa or Shanghai-Rotterdam route
+      - "per 40ft"                    # unit (verify wording)
+  expected:
+    shape: "accepted:below the 2021|did not exceed|lower than the 2021"
+    notes: >
+      2024 peaks below 2021 on the composite and on the main Asia-Europe
+      routes; numbers in the graph with table or page locations.
+  traps:
+    - comparing a route peak with a composite peak
+    - using a press summary instead of the index table
+    - reading a weekly spike as the peak of a different series
+
+- id: lead-psychsafety
+  split: held_out
+  sector: leadership
+  question: >
+    Is psychological safety, as Edmondson defines it, distinct from trust,
+    and does its effect on team performance hold independently of trust?
+  stresses: Frame and definition scheme; expert opinion vs study result; a corporate relay cited as evidence
+  gold:
+    sources:
+      - "Edmondson"                   # 1999 ASQ; Edmondson & Lei 2014
+      - "Frazier"                     # 2017 meta-analysis, Personnel Psychology
+      - "Newman"                      # Newman, Donohue & Eva 2017 review
+      - "Project Aristotle"           # Google re:Work
+    facts:
+      - "group-level"                 # vs dyadic trust (verify wording)
+      - "meta-analysis"
+      - "effect size"
+  expected:
+    shape: "accepted:distinct|group-level"
+    notes: >
+      Conceptual distinction accepted; independent effect accepted at
+      preponderance with a single_origin flag if only one meta-analysis is
+      found; Project Aristotle credited as testimony, not as a study.
+  traps:
+    - accepting Project Aristotle as a study
+    - conflating the conceptual claim with the empirical one

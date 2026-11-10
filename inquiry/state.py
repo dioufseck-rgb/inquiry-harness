@@ -71,6 +71,7 @@ class Conclusion(BaseModel):
     judgements: list[Judgement] = Field(default_factory=list)
     what_would_change_this: list[str] = Field(default_factory=list)
     unresolved: list[str] = Field(default_factory=list)
+    flags: list[str] = Field(default_factory=list, description="Checks on the text, e.g. absence_assertion: <sentence>.")
 
 
 class Inquiry(BaseModel):
