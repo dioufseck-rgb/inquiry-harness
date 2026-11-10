@@ -4,3 +4,4 @@ __pycache__/
 runs/
 .env
 *.egg-info/
+.claude/
