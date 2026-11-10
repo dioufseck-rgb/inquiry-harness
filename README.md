@@ -48,7 +48,13 @@ per round, `--hits N` per query, `--read-parts N` appraisal windows of about
 12k characters per primary document (default 36, enough for a 400k-character
 report; other source kinds get one window), `--interactive` to enter
 objections after each critique as `<target_id> <undermine|undercut|rebut>
-<text>`, and `--id NAME` to name the run or resume one that stopped.
+<text>`, `--id NAME` to name the run or resume one that stopped, and
+`--evidence-from runs/<id>` to replay the cycle on the sources an earlier run
+held, with retrieval fixed, so two versions of the harness can be compared.
+
+Benchmark: `python -m inquiry.bench bench/questions.yaml --split held_in`
+runs the question set by split and writes a metrics table to
+`bench/results/`.
 
 Models come from `INQUIRY_PROPOSER_MODEL` and `INQUIRY_CRITIC_MODEL`; the
 critic should be a different model from the proposer.
