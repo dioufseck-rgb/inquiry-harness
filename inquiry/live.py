@@ -381,6 +381,8 @@ def main(argv: Optional[list[str]] = None) -> int:
     p.add_argument("--interactive", action="store_true", help="Prompt for human objections after each critique.")
     p.add_argument("--id", help="Inquiry id under --root; resumes if it exists.")
     p.add_argument("--root", default="runs")
+    p.add_argument("--evidence-from", default="",
+                   help="Replay: use the sources an earlier run directory holds instead of live search and fetch.")
     args = p.parse_args(argv)
 
     _load_env()
@@ -397,11 +399,17 @@ def main(argv: Optional[list[str]] = None) -> int:
         store = InquiryStore(args.root, inquiry_id)
         inq = Inquiry(id=inquiry_id, question=args.question)
 
-    from .tools.fetch import HttpFetcher
-    from .tools.search import SerperSearch
+    if args.evidence_from:
+        from .tools.replay import replay_tools
+        search, fetcher = replay_tools(args.evidence_from)
+        inq.notes.append(f"replay: evidence packet from {args.evidence_from} ({len(fetcher.pages)} sources)")
+    else:
+        from .tools.fetch import HttpFetcher
+        from .tools.search import SerperSearch
+        search, fetcher = SerperSearch(), HttpFetcher()
 
     harness = Harness(
-        inq, store, llm_from_env("proposer"), llm_from_env("critic"), SerperSearch(), HttpFetcher(),
+        inq, store, llm_from_env("proposer"), llm_from_env("critic"), search, fetcher,
         max_sources=args.max_sources, queries_per_round=args.queries, hits_per_query=args.hits,
         interactive=args.interactive, read_parts=args.read_parts,
     )
