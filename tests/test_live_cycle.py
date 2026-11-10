@@ -333,12 +333,13 @@ def test_absence_attack_needs_a_fully_read_source():
     e1 = g.add_evidence("report says X", source_id=s.id, credentials=Credentials(force="strong"))
     e2 = g.add_evidence("report gives no interval", source_id=s.id)
     a = g.add_argument("document_record", [e1.id], c.id)
+    n_before = len(g.arguments)
     out = apply_critique(inq, CritiqueOutput(attacks=[
         AttackProposal(target_id=a.id, type="undercut", premise_ids=[e2.id], basis="absence", note="no interval")]))
-    atk = g.arg(out["attacks"][0])
-    assert out["absence_unverified"] == [atk.id]
-    assert atk.cq["grounds"].status == "open" and "not read in full" in atk.cq["grounds"].answer
-    assert any(f"read {s.id} in full" in n for n in out["needed_evidence"])
+    # not an argument: a request to read the source
+    assert out["attacks"] == [] and len(g.arguments) == n_before
+    assert out["absence_unverified"] == [f"undercut on {a.id}"]
+    assert any(n.startswith(f"read {s.id} fully: no interval") for n in out["needed_evidence"])
     s.read_fully = True
     e3 = g.add_evidence("report has no method section", source_id=s.id)
     out2 = apply_critique(inq, CritiqueOutput(attacks=[

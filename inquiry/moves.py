@@ -743,6 +743,15 @@ def apply_critique(inq: Inquiry, out: CritiqueOutput) -> dict:
                and set(a.premise_ids) == set(premises) for a in g.arguments):
             continue
         note = p.note if not p.cq_id else f"[{p.cq_id}] {p.note}"
+        if p.basis == "absence":
+            # "the source does not report X" is grounded only if the source was read to the end;
+            # until then it is a request to read, not an attack
+            unread = [s.id for s in _sources_behind(g, p.target_id) if not s.read_fully]
+            if unread:
+                absence_unverified.append(f"{p.type} on {p.target_id}")
+                for sid in unread:
+                    needed_extra.append(f"read {sid} fully: {p.note or 'confirm the absence the critic relies on'}")
+                continue
         try:
             a = g.add_attack(p.target_id, p.type, premise_ids=premises, origin="critic", note=note, round=inq.round)
         except (KeyError, ValueError) as e:
@@ -752,15 +761,6 @@ def apply_critique(inq: Inquiry, out: CritiqueOutput) -> dict:
         if p.cq_id and isinstance(target, Argument) and p.cq_id in {q.id for q in SCHEMES[target.scheme].critical_questions}:
             a.attacks.raises_cq = p.cq_id
         added.append(a.id)
-        if p.basis == "absence":
-            # "the source does not report X" is grounded only if the source was read to the end
-            unread = [s.id for s in _sources_behind(g, p.target_id) if not s.read_fully]
-            if unread:
-                a.cq["grounds"] = CQAnswer(status="open",
-                                           answer=f"rests on an absence in {', '.join(unread)}, not read in full")
-                absence_unverified.append(a.id)
-                for sid in unread:
-                    needed_extra.append(f"read {sid} in full to confirm it does not report what {a.id} says it lacks")
     needed = [q.strip() for q in out.needed_evidence if q.strip()] + needed_extra
     return {"attacks": added, "dropped": dropped, "absence_unverified": absence_unverified, "needed_evidence": needed}
 

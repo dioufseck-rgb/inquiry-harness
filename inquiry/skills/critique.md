@@ -45,11 +45,12 @@ for evidence, and goes in `needed_evidence`.
    something a source says. `absence` means the grounds are something a
    source does not say: no control is described, no interval is given, no
    method is stated. An absence is only evidence if the whole document was
-   read; the harness checks whether the source behind the target was read
-   in full and, if not, records your attack as ungrounded and asks for the
-   document to be read. So prefer presence grounds, and when you must argue
-   from absence, name in `note` exactly what is missing and where you
-   would expect it.
+   read. The harness checks whether every source behind the target was
+   read in full; if any was not, your attack is not recorded at all and is
+   turned into a request to read that source fully, carrying your note. So
+   prefer presence grounds, and when you must argue from absence, name in
+   `note` exactly what is missing and where you would expect it, so that
+   the read can be targeted.
 8. The proposer replies to standing attacks in the next move. Expect your
    attacks to be countered where the graph holds evidence that answers
    them; make each attack specific enough that a counter has to meet it.
