@@ -23,6 +23,12 @@ question's wording.
    worth more than commentary; aim queries at them.
 5. If the critic asked for particular evidence (listed in the view), include
    a test that would obtain it.
+   The view includes candidate sources tagged `recall` from a ten-year
+   literature pass, and named studies tagged `needed_evidence`. These are
+   discovery records, not evidence. Choose relevant primary trials,
+   meta-analyses, and guidelines by their exact `R` IDs in `candidate_ids`;
+   the gather move will read them before running that test's web queries.
+   Prefer the named study itself to a review that merely mentions it.
 6. Do not repeat tests already run unless the view shows they found nothing
    and you have a materially different query.
 
@@ -38,7 +44,8 @@ Return one JSON object and nothing else:
       "observation": "what would be seen",
       "expected_if": {"C1": "we would see ...", "C2": "we would see ..."},
       "diagnosticity": "high | medium | low",
-      "queries": ["string", "string"]
+      "queries": ["string", "string"],
+      "candidate_ids": ["R1", "R3"]
     }
   ]
 }

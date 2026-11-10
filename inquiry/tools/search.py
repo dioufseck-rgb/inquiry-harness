@@ -8,9 +8,11 @@ Web search.
 from __future__ import annotations
 
 import os
+import re
+import html
 from typing import Any
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class SearchHit(BaseModel):
@@ -19,6 +21,8 @@ class SearchHit(BaseModel):
     snippet: str = ""
     date: str = ""
     query: str = ""
+    doi: str = ""
+    tags: list[str] = Field(default_factory=list)
 
 
 class Search:
@@ -26,6 +30,68 @@ class Search:
 
     def search(self, query: str, k: int = 5) -> list[SearchHit]:  # pragma: no cover
         raise NotImplementedError
+
+
+class EuropePMCSearch(Search):
+    """Bibliographic discovery; the normal fetcher reads the selected records."""
+
+    name = "europepmc"
+    endpoint = "https://www.ebi.ac.uk/europepmc/webservices/rest/search"
+
+    def __init__(self, timeout: float = 20.0):
+        self.timeout = timeout
+
+    def search(self, query: str, k: int = 5) -> list[SearchHit]:
+        import httpx
+
+        # Explicit ranking is important for recall: a five-hit date-ranked
+        # result page hides the established trials behind recent follow-ups.
+        api_query = query if re.search(r"sort_(?:cited|date):", query) else query + " sort_cited:y"
+        response = httpx.get(self.endpoint, params={"query": api_query, "format": "json", "resultType": "core", "pageSize": k},
+                             timeout=self.timeout)
+        response.raise_for_status()
+        hits = []
+        seen = set()
+        for record in response.json().get("resultList", {}).get("result", []):
+            doi = record.get("doi", "").strip().lower()
+            pmcid, record_id = record.get("pmcid", ""), record.get("id", "")
+            if pmcid:
+                url = f"https://pmc.ncbi.nlm.nih.gov/articles/{pmcid}/"
+            elif doi:
+                url = f"https://doi.org/{doi}"
+            elif record.get("source") == "MED" and record_id:
+                url = f"https://pubmed.ncbi.nlm.nih.gov/{record_id}/"
+            else:
+                continue
+            key = doi or url
+            if key in seen:
+                continue
+            seen.add(key)
+            abstract = html.unescape(re.sub(r"<[^>]*>", " ", record.get("abstractText", "")))
+            hits.append(SearchHit(url=url, title=html.unescape(record.get("title", "")), snippet=abstract[:1600],
+                                  date=record.get("firstPublicationDate", record.get("pubYear", "")), query=query,
+                                  doi=doi))
+            if len(hits) >= k:
+                break
+        return hits
+
+
+def recall_query(topic: str, kind: str, floor: str, today: str) -> str:
+    terms = " AND ".join(dict.fromkeys(re.findall(r"[a-z0-9]+", topic.lower())))
+    methods = {
+        "randomised trial": "((randomised OR randomized) AND trial)",
+        "meta-analysis": '"meta-analysis"',
+        "systematic review": "(systematic AND review)",
+        "guideline recommendation": "(guideline AND recommendation)",
+    }
+    return f"TITLE_ABS:({terms}) AND {methods[kind]} AND FIRST_PDATE:[{floor} TO {today}] sort_cited:y"
+
+
+def named_study_queries(request: str) -> list[str]:
+    """Try explicit titles and study acronyms before the full evidence request."""
+    titles = re.findall(r'["“]([^"”]{5,})["”]', request)
+    names = re.findall(r"\b[A-Z][A-Z0-9-]{3,}\b", request)
+    return list(dict.fromkeys(titles + names)) or [request]
 
 
 class SerperSearch(Search):

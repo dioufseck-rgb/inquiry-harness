@@ -69,6 +69,7 @@ class Issue(BaseModel):
     depends_on: list[str] = Field(default_factory=list)
     status: Literal["open", "answered", "dropped"] = "open"
     presuppositions: list[str] = Field(default_factory=list)
+    search_topic: str = ""
 
 
 class Claim(BaseModel):

@@ -21,6 +21,7 @@ import os
 import re
 import shlex
 import sys
+from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Callable, Optional, get_args
 
@@ -30,10 +31,10 @@ from .argument.render import summary, toulmin, wigmore
 from .argument.graph import QuestionType
 from .llm import LLM, llm_from_env
 from .metrics import metrics, one_line
-from .state import Conclusion, Inquiry
+from .state import Conclusion, Inquiry, PlannedTest, SourceCandidate
 from .store import InquiryStore
 from .tools.fetch import Fetcher
-from .tools.search import Search
+from .tools.search import Search, SearchHit, named_study_queries, recall_query
 
 
 def title_key(title: str) -> str:
@@ -65,6 +66,7 @@ class Harness:
         interactive: bool = False,
         review_frame: bool = False,
         frame_samples: int = 1,
+        literature_search: Search | None = None,
         min_chars: int = 300,
         read_parts: int = 36,
         log: Optional[Callable[[str], None]] = None,
@@ -86,6 +88,8 @@ class Harness:
             raise ValueError("frame samples must be positive")
         self.review_frame = review_frame
         self.frame_samples = frame_samples
+        self.literature_search = literature_search
+        self.study_web_queries: list[str] = []
         self.log = log or (lambda s: print(s, file=sys.stderr))
         self.ask = ask or input
         self.pending_queries: list[str] = []
@@ -121,6 +125,53 @@ class Harness:
 
     # -- gather ------------------------------------------------------------------
 
+    def discover_literature(self, requests: list[str] | None = None) -> dict:
+        """Recall precedes Plan; candidates become evidence only if Plan reads them."""
+        if self.literature_search is None:
+            return {"queries": [], "candidates": [], "skipped": []}
+        inq = self.inq
+        queries: list[tuple[str, list[str], str]] = []
+        if not inq.recall_done and inq.round == 1:
+            today = datetime.now(timezone.utc).date()
+            floor = date(today.year - 10, today.month, min(today.day, 28) if today.month == 2 else today.day)
+            for issue in inq.graph.issues:
+                if issue.status == "dropped":
+                    continue
+                topic = issue.search_topic or issue.text
+                for suffix in ("randomised trial", "meta-analysis", "systematic review", "guideline recommendation"):
+                    query = recall_query(topic, suffix, floor.isoformat(), today.isoformat())
+                    queries.append((query, [issue.id], "recall"))
+            inq.recall_done = True
+        for request in requests or []:
+            if request in inq.literature_requests_done:
+                continue
+            inq.literature_requests_done.append(request)
+            named = named_study_queries(request)
+            self.study_web_queries.extend(q for q in named if q not in self.study_web_queries)
+            for query in named:
+                queries.append((query, [], "needed_evidence"))
+        added, skipped, ran = [], [], []
+        for query, issue_ids, tag in queries:
+            ran.append(query)
+            try:
+                hits = self.literature_search.search(query, k=5)
+            except Exception as exc:
+                skipped.append(f"{query}: {type(exc).__name__}: {exc}")
+                continue
+            for hit in hits:
+                doi = hit.doi.lower().removeprefix("https://doi.org/").removeprefix("doi:").strip()
+                existing = next((c for c in inq.candidates if (doi and c.doi == doi) or c.url == hit.url), None)
+                if existing:
+                    existing.issue_ids = sorted(set(existing.issue_ids + issue_ids))
+                    existing.tags = sorted(set(existing.tags + [tag]))
+                    continue
+                candidate = SourceCandidate(id=f"R{len(inq.candidates) + 1}", url=hit.url, title=hit.title,
+                                            snippet=hit.snippet, date=hit.date, doi=doi, query=query,
+                                            issue_ids=issue_ids, tags=[tag])
+                inq.candidates.append(candidate)
+                added.append(candidate.id)
+        return {"queries": ran, "candidates": added, "skipped": skipped}
+
     def gather(self) -> dict:
         inq, g = self.inq, self.inq.graph
         known_urls = {s.url for s in g.sources}
@@ -148,12 +199,20 @@ class Harness:
             new_evidence.extend(out["evidence"])
         for t in [t for t in inq.tests if t.status == "planned"]:
             found = False
-            for q in t.queries:
+            candidate_queries = {f"candidate:{cid}": next(c for c in inq.candidates if c.id == cid)
+                                 for cid in t.candidate_ids if any(c.id == cid for c in inq.candidates)}
+            for q in [*candidate_queries, *t.queries]:
                 if queries_run >= self.queries_per_round or len(new_sources) >= self.max_sources:
                     break
-                queries_run += 1
+                candidate = candidate_queries.get(q)
+                if candidate and candidate.status != "candidate":
+                    continue
+                if candidate is None:
+                    queries_run += 1
                 try:
-                    hits = self.search.search(q, k=self.hits_per_query)
+                    hits = ([SearchHit(url=candidate.url, title=candidate.title, date=candidate.date,
+                                       doi=candidate.doi, query=candidate.query, tags=candidate.tags)] if candidate
+                            else self.search.search(q, k=self.hits_per_query))
                 except Exception as e:  # noqa: BLE001 — a failed query is not a failed round
                     skipped.append(f"search {q!r}: {type(e).__name__}: {e}")
                     continue
@@ -161,19 +220,27 @@ class Harness:
                     if len(new_sources) >= self.max_sources:
                         break
                     if not h.url or h.url in known_urls:
+                        if candidate:
+                            candidate.status = "read" if any(s.url == h.url for s in g.sources) else "failed"
                         continue
                     known_urls.add(h.url)
                     f = self.fetcher.fetch(h.url, h.title)
                     if len(f.text.strip()) < self.min_chars:
+                        if candidate:
+                            candidate.status = "failed"
                         skipped.append(f"{h.url}: {f.error or f'only {len(f.text.strip())} chars of text'}")
                         continue
                     title = h.title or f.title
                     key = title_key(title)
                     if len(key) >= 25 and key in known_titles:
+                        if candidate:
+                            candidate.status = "read"
                         # the same document at another host is the same origin, not a second source
                         skipped.append(f"{h.url}: same document as {known_titles[key]} by title")
                         continue
-                    src = g.add_source(url=h.url, title=title, query=q, date=h.date)
+                    src = g.add_source(url=h.url, title=title, query=h.query or q, date=h.date)
+                    if candidate:
+                        candidate.status = "failed"  # changed to read only after useful appraisal
                     if len(key) >= 25:
                         known_titles[key] = src.id
                     src.text_path = self.store.write_source_text(src.id, f.text)
@@ -199,6 +266,8 @@ class Harness:
                         skipped.append(f"{h.url}: appraised, no evidence bearing on the claims")
                         continue
                     new_sources.append(src.id)
+                    if candidate:
+                        candidate.status = "read"
                     new_evidence.extend(out["evidence"])
                     found = True
                     # one hop to a primary article's supplementary material: same origin, read in full
@@ -383,7 +452,24 @@ class Harness:
                 self.log(f"[round {inq.round}] resume: continuing the planned round; skipping plan")
             else:
                 inq.round += 1
-                self._record("plan", moves.plan(inq, self.proposer, self.pending_queries or None))
+                if self.literature_search is not None:
+                    requests = [note[len("critic needs: "):] for note in inq.notes if note.startswith("critic needs: ")]
+                    discovered = self.discover_literature(requests)
+                    if discovered["queries"]:
+                        self._record("recall", discovered)
+                planned = moves.plan(inq, self.proposer, self.pending_queries or None)
+                if self.study_web_queries:
+                    target = next((t for t in inq.tests if t.id in planned["tests"]), None)
+                    if target is None and inq.main_claims():
+                        target = PlannedTest(id=inq.next_test_id(), claim_ids=[c.id for c in inq.main_claims()],
+                                             observation="Retrieve studies requested in review", round=inq.round)
+                        inq.tests.append(target)
+                        planned["tests"].append(target.id)
+                    if target is not None:
+                        target.queries = list(dict.fromkeys(self.study_web_queries + target.queries))
+                        planned["literature_web_queries"] = list(self.study_web_queries)
+                        self.study_web_queries = []
+                self._record("plan", planned)
             rounds_left = rounds - inq.round
             self.pending_queries = []
             gathered = self.gather()
@@ -522,15 +608,18 @@ def main(argv: Optional[list[str]] = None) -> int:
         from .tools.replay import replay_tools
         search, fetcher = replay_tools(args.evidence_from)
         inq.notes.append(f"replay: evidence packet from {args.evidence_from} ({len(fetcher.pages)} sources)")
+        literature = None
     else:
         from .tools.fetch import HttpFetcher
-        from .tools.search import SerperSearch
+        from .tools.search import EuropePMCSearch, SerperSearch
         search, fetcher = SerperSearch(), HttpFetcher()
+        literature = EuropePMCSearch()
 
     harness = Harness(
         inq, store, llm_from_env("proposer"), llm_from_env("critic"), search, fetcher,
         max_sources=args.max_sources, queries_per_round=args.queries, hits_per_query=args.hits,
         interactive=args.interactive, review_frame=args.review_frame, frame_samples=args.frame_samples, read_parts=args.read_parts,
+        literature_search=literature,
     )
     harness.run(rounds=args.rounds)
     print(f"\nwrote {store.dir / 'report.md'}; ledger ok = {store.verify_ledger()}", file=sys.stderr)

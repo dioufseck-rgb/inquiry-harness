@@ -226,6 +226,7 @@ class SubIssue(BaseModel):
     question_type: QuestionType = "mixed"
     answerhood: str = ""
     depends_on: list[int] = Field(default_factory=list, description="Zero-based indexes into sub_issues.")
+    search_topic: str = ""
 
 
 class FrameOutput(BaseModel):
@@ -237,6 +238,7 @@ class FrameOutput(BaseModel):
     answerhood: str = ""
     standard_override: Optional[ProofStandard] = None
     sub_issues: list[SubIssue] = Field(default_factory=list)
+    search_topic: str = ""
 
 
 def frame_view(inq: Inquiry) -> str:
@@ -273,7 +275,7 @@ def apply_frame(inq: Inquiry, out: FrameOutput) -> dict:
         standard_override=out.standard_override,
     )
     main = g.add_issue(inq.question, question_type=out.question_type, answerhood=out.answerhood,
-                       presuppositions=out.presuppositions)
+                       presuppositions=out.presuppositions, search_topic=out.search_topic)
     g.main_issue_id = main.id
     kept: list[tuple[int, SubIssue]] = []
     dropped: list[str] = []
@@ -285,7 +287,8 @@ def apply_frame(inq: Inquiry, out: FrameOutput) -> dict:
             kept.append((i, s))
     index_to_issue: dict[int, Issue] = {}
     for i, s in kept:
-        index_to_issue[i] = g.add_issue(s.text, question_type=s.question_type, answerhood=s.answerhood, parent_id=main.id)
+        index_to_issue[i] = g.add_issue(s.text, question_type=s.question_type, answerhood=s.answerhood,
+                                       parent_id=main.id, search_topic=s.search_topic)
     for i, s in kept:
         iss = index_to_issue[i]
         iss.depends_on = [index_to_issue[j].id for j in s.depends_on if j in index_to_issue and j != i]
@@ -429,6 +432,7 @@ class TestProposal(BaseModel):
     expected_if: dict[str, str] = Field(default_factory=dict)
     diagnosticity: Literal["high", "medium", "low"] = "medium"
     queries: list[str] = Field(default_factory=list)
+    candidate_ids: list[str] = Field(default_factory=list)
 
 
 class PlanOutput(BaseModel):
@@ -441,6 +445,11 @@ def plan_view(inq: Inquiry, extra_queries: Optional[list[str]] = None) -> str:
     if ev is not None:
         parts.append(_settlers_block(inq, ev))
     parts.append(_tests_block(inq))
+    candidates = [c for c in inq.candidates if c.status == "candidate"]
+    if candidates:
+        parts.append("# Candidate sources (discovered, not yet evidence)\n\n" + "\n".join(
+            f"{c.id} [{','.join(c.tags)}] issues={','.join(c.issue_ids)} DOI={c.doi or '?'} {c.title}\n"
+            f"  {c.url}\n  {c.snippet}" for c in candidates))
     if extra_queries:
         parts.append("# Evidence the critic asked for\n\n" + "\n".join(f"- {q}" for q in extra_queries))
     return "\n\n".join(parts)
@@ -453,12 +462,13 @@ def apply_plan(inq: Inquiry, out: PlanOutput) -> dict:
     for t in out.tests:
         claim_ids = [c for c in t.claim_ids if g.claim(c) is not None]
         queries = [q.strip() for q in t.queries if q.strip()]
-        if not claim_ids or not queries:
+        candidate_ids = [cid for cid in t.candidate_ids if any(c.id == cid and c.status == "candidate" for c in inq.candidates)]
+        if not claim_ids or not (queries or candidate_ids):
             dropped.append(f"{t.observation[:60]}: no known claims or no queries")
             continue
         pt = PlannedTest(id=inq.next_test_id(), claim_ids=claim_ids, observation=t.observation,
                          expected_if={k: v for k, v in t.expected_if.items() if k in claim_ids},
-                         diagnosticity=t.diagnosticity, queries=queries, round=inq.round)
+                         diagnosticity=t.diagnosticity, queries=queries, candidate_ids=candidate_ids, round=inq.round)
         inq.tests.append(pt)
         added.append(pt.id)
     return {"tests": added, "dropped": dropped}

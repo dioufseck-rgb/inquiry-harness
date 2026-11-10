@@ -37,6 +37,7 @@ class PlannedTest(BaseModel):
     expected_if: dict[str, str] = Field(default_factory=dict, description="claim id -> what we would see if true.")
     diagnosticity: Literal["high", "medium", "low"] = "medium"
     queries: list[str] = Field(default_factory=list)
+    candidate_ids: list[str] = Field(default_factory=list)
     status: Literal["planned", "run", "unobtainable"] = "planned"
     round: int = 0
 
@@ -74,6 +75,19 @@ class Conclusion(BaseModel):
     flags: list[str] = Field(default_factory=list, description="Checks on the text, e.g. absence_assertion: <sentence>.")
 
 
+class SourceCandidate(BaseModel):
+    id: str
+    url: str
+    title: str = ""
+    snippet: str = ""
+    date: str = ""
+    doi: str = ""
+    query: str = ""
+    issue_ids: list[str] = Field(default_factory=list)
+    tags: list[str] = Field(default_factory=list)
+    status: Literal["candidate", "read", "failed"] = "candidate"
+
+
 class Inquiry(BaseModel):
     id: str
     question: str
@@ -91,6 +105,9 @@ class Inquiry(BaseModel):
     llm_usage: list[dict] = Field(default_factory=list)
     llm_config: dict[str, dict] = Field(default_factory=dict)
     counter_drops: list[dict] = Field(default_factory=list)
+    candidates: list[SourceCandidate] = Field(default_factory=list)
+    recall_done: bool = False
+    literature_requests_done: list[str] = Field(default_factory=list)
 
     def main_claims(self):
         if not self.graph.main_issue_id:

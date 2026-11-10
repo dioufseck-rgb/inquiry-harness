@@ -80,12 +80,13 @@ def select(questions: list[dict[str, Any]], split: str, ids: list[str] | None) -
 
 def run_question(q: dict[str, Any], root: Path, rounds: int, tag: str, **harness_kw) -> dict[str, Any]:
     from .tools.fetch import HttpFetcher
-    from .tools.search import SerperSearch
+    from .tools.search import EuropePMCSearch, SerperSearch
 
     run_id = f"{q['id']}-{tag}"
     store = InquiryStore(root, run_id)
     inq = Inquiry(id=run_id, question=" ".join(q["question"].split()))
     h = Harness(inq, store, llm_from_env("proposer"), llm_from_env("critic"), SerperSearch(), HttpFetcher(),
+                literature_search=EuropePMCSearch(),
                 **harness_kw)
     t0 = time.time()
     error = ""

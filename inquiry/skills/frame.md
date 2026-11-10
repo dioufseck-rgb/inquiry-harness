@@ -37,6 +37,10 @@ answer contains, and the tree of sub-questions whose answers compose it.
    appraisal and per argument by the critic. The harness drops a
    sub-question that asks whether evidence is robust, reliable, sufficient,
    independent, or meets a standard, and records the drop.
+   Give the main issue and each sub-issue a short `search_topic` for
+   literature discovery (for example, "aspirin primary prevention"). Use
+   the intervention or phenomenon, without the question's full wording or
+   methodological constraints that would hide relevant trials and reviews.
 7. Set `standard_override` only when the asker's stake warrants a higher
    proof standard than the default (causal: clear and convincing; others:
    preponderance). Leave it null otherwise.
@@ -48,6 +52,7 @@ Return one JSON object and nothing else:
 ```json
 {
   "restatement": "string",
+  "search_topic": "short literature topic",
   "question_type": "empirical | causal | predictive | evaluative | conceptual | design | mixed",
   "scope_in": ["string"],
   "scope_out": ["string"],
@@ -55,7 +60,7 @@ Return one JSON object and nothing else:
   "answerhood": "string",
   "standard_override": null,
   "sub_issues": [
-    {"text": "string", "question_type": "empirical", "answerhood": "string", "depends_on": [0]}
+    {"text": "string", "question_type": "empirical", "answerhood": "string", "depends_on": [0], "search_topic": "short literature topic"}
   ]
 }
 ```
