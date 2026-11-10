@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c ' *)",
+      "Bash(python -m inquiry.live --id ulez-live-5 --rounds 2 --max-sources 6 --queries 6 --hits 4)"
+    ]
+  }
+}

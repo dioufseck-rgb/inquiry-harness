@@ -128,8 +128,21 @@ class Harness:
                     if len(key) >= 25:
                         known_titles[key] = src.id
                     src.text_path = self.store.write_source_text(src.id, f.text)
-                    out = moves.appraise_full(inq, self.proposer, src, f.text, t, max_parts=self.read_parts,
-                                              text_complete=not f.truncated)
+                    try:
+                        out = moves.appraise_full(inq, self.proposer, src, f.text, t, max_parts=self.read_parts,
+                                                  text_complete=not f.truncated)
+                    except Exception as e:  # noqa: BLE001 — a model or network failure on one source is not a failed round
+                        partial = [x for x in g.evidence if x.source_id == src.id]
+                        if partial:
+                            out = {"evidence": [x.id for x in partial]}
+                            src.read_fully = False
+                            skipped.append(f"{h.url}: appraisal interrupted after {len(partial)} items: {type(e).__name__}")
+                        else:
+                            g.sources.remove(src)
+                            (self.store.dir / src.text_path).unlink(missing_ok=True)
+                            skipped.append(f"{h.url}: appraisal failed: {type(e).__name__}: {str(e)[:80]}")
+                            self.store.save(inq)
+                            continue
                     if not out["evidence"]:
                         # nothing to the point: do not keep a source that grounds nothing
                         g.sources.remove(src)
@@ -194,9 +207,14 @@ class Harness:
 
         ev: Evaluation = moves.evaluate_move(inq)
         while inq.phase == "inquiring":
-            inq.round += 1
+            pending = [t for t in inq.tests if t.status == "planned" and t.round == inq.round]
+            if pending and inq.round > 0:
+                # resuming a round that was planned but not gathered: continue it rather than start a new one
+                self.log(f"[round {inq.round}] resume: {len(pending)} planned tests pending; skipping plan")
+            else:
+                inq.round += 1
+                self._record("plan", moves.plan(inq, self.proposer, self.pending_queries or None))
             rounds_left = rounds - inq.round
-            self._record("plan", moves.plan(inq, self.proposer, self.pending_queries or None))
             self.pending_queries = []
             gathered = self.gather()
             self._record("gather", gathered)
