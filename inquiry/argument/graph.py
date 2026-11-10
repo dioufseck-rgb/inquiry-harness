@@ -160,12 +160,26 @@ class Source(BaseModel):
 # ---------------------------------------------------------------------------
 
 CQStatus = Literal["open", "answered", "defaulted"]
+CQOutcome = Literal["", "satisfied", "unsatisfied", "unresolved"]
 
 
 class CQAnswer(BaseModel):
+    """
+    Three things are kept apart: whether the check was performed (status),
+    what it established (outcome), and what followed (the evaluator's use of
+    it). An answer that establishes the condition does NOT hold ("this
+    measures a different outcome") is `unsatisfied`; it makes the argument
+    inapplicable rather than counting as a discharged question. An empty
+    outcome on an answered question means satisfied, for older graphs.
+    """
     status: CQStatus = "open"
+    outcome: CQOutcome = ""
     answer: str = ""
     evidence_ids: list[str] = Field(default_factory=list)
+
+    @property
+    def satisfied(self) -> bool:
+        return self.status == "answered" and self.outcome in ("", "satisfied")
 
 
 class Attack(BaseModel):
@@ -191,6 +205,8 @@ class Argument(BaseModel):
     origin: Origin = "proposer"
     note: str = ""
     round: int = 0
+    withdrawn: str = Field(default="", description="Set when the support relation was removed on review; the reason. "
+                                                  "A withdrawn argument neither supports nor attacks; its evidence stays.")
 
     @property
     def is_attack(self) -> bool:
@@ -380,11 +396,11 @@ class ArgumentGraph(BaseModel):
         return x
 
     def answer_cq(self, argument_id: str, cq_id: str, answer: str, evidence_ids: list[str] | None = None,
-                  defaulted: bool = False) -> None:
+                  defaulted: bool = False, outcome: CQOutcome = "") -> None:
         a = self.arg(argument_id)
         if a is None:
             raise KeyError(argument_id)
-        a.cq[cq_id] = CQAnswer(status="defaulted" if defaulted else "answered",
+        a.cq[cq_id] = CQAnswer(status="defaulted" if defaulted else "answered", outcome=outcome,
                                answer=answer, evidence_ids=evidence_ids or [])
 
     # -- integrity ------------------------------------------------------------------

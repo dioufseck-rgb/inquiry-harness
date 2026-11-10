@@ -52,8 +52,12 @@ def toulmin(g: ArgumentGraph, argument_id: str, ev: Evaluation | None = None) ->
     for q in sch.critical_questions:
         st = a.cq.get(q.id)
         status = st.status if st else "open"
+        if st and st.status == "answered" and st.outcome and st.outcome != "satisfied":
+            status = f"answered, {st.outcome}"
         ans = f" — {st.answer}" if st and st.answer else ""
         lines.append(f"- [{status}] ({q.kind}) {q.text}{ans}")
+    if a.withdrawn:
+        lines.append(f"- withdrawn on review: {a.withdrawn}")
     if ev is not None:
         strength = ev.argument_strength.get(a.id, "?")
         label = ev.labels.get(a.id, "inapplicable" if not ev.applicable.get(a.id, True) else "?")

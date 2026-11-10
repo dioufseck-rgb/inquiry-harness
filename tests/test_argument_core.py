@@ -152,6 +152,40 @@ def test_unusable_evidence_is_not_flagged_orphan_and_load_bearing_names_claim():
     assert f"for {c.id}" in summary(g, ev, lb)
 
 
+def test_an_unsatisfied_answer_is_not_a_discharged_question():
+    g, q, c, n, s = base_graph()
+    e = g.add_evidence("trial in adults 70+ found more bleeding", source_id=s.id, credentials=strong())
+    a = g.add_argument("study_result", [e.id], c.id)
+    for qid in ("design", "uncertainty", "reported"):
+        g.answer_cq(a.id, qid, "ok", [e.id])
+    # the directness check was performed and found the population does not match: inapplicable, with the reason
+    g.answer_cq(a.id, "directness", "population is 70+, claim is 60+", [e.id], outcome="unsatisfied")
+    ev = evaluate(g)
+    assert ev.applicable[a.id] is False and "assumption unsatisfied: directness" in ev.inapplicable_reasons[a.id]
+    g.answer_cq(a.id, "directness", "cannot tell from the abstract", [e.id], outcome="unresolved")
+    ev = evaluate(g)
+    assert ev.applicable[a.id] is False and "assumption unresolved: directness" in ev.inapplicable_reasons[a.id]
+    g.answer_cq(a.id, "directness", "same population", [e.id], outcome="satisfied")
+    assert evaluate(g).status(c.id) == "in"
+    # the proponent's own check of an exception that finds it obtains defeats the argument
+    g.answer_cq(a.id, "bias", "the authors concede contamination of the comparison", [e.id], outcome="unsatisfied")
+    ev = evaluate(g)
+    assert ev.applicable[a.id] is False and "exception obtains: bias" in ev.inapplicable_reasons[a.id]
+    # an undercut raising a question is discharged only by a satisfied answer with evidence
+    g.answer_cq(a.id, "bias", "no interest shown", [e.id], outcome="satisfied")
+    x = g.add_attack(a.id, "undercut", premise_ids=[e.id], origin="critic")
+    x.attacks.raises_cq = "consistency"
+    g.answer_cq(a.id, "consistency", "other trials disagree", [e.id], outcome="unsatisfied")
+    ev = evaluate(g)
+    assert ev.applicable[a.id] is False  # the exception obtains by the proponent's own account
+    g.answer_cq(a.id, "consistency", "pooled estimates agree", [e.id], outcome="satisfied")
+    assert evaluate(g).labels[a.id] == "in"
+    # a withdrawn support relation neither supports nor attacks, and keeps its evidence
+    a.withdrawn = "outcome mismatch: supports a narrower claim"
+    ev = evaluate(g)
+    assert ev.applicable[a.id] is False and ev.status(c.id) == "undecided" and g.ev(e.id) is not None
+
+
 def test_answering_the_raised_question_with_evidence_discharges_an_undercut():
     g, q, c, n, s = base_graph()
     e = g.add_evidence("record says X", source_id=s.id, credentials=strong())

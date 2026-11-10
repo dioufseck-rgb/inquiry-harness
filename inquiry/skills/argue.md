@@ -50,7 +50,17 @@ of this move.
    only premise is weak-credibility testimony about a technical matter is
    one the critic will remove.
 3. Answer every `assumption` question you can answer from evidence, citing
-   the evidence ids that answer it. Look for the answer in the other items
+   the evidence ids that answer it, and say what the check established in
+   `outcome`. `satisfied` means the condition holds here. `unsatisfied`
+   means you checked and it does not: the study measured a different
+   outcome, the population is not the claim's, the record uses another
+   definition. An unsatisfied assumption makes the argument inapplicable,
+   and that is the correct result; do not write a satisfied-sounding answer
+   to a question whose honest outcome is unsatisfied, and do not build an
+   argument whose directness or design question you already know fails.
+   Build it instead for the narrower claim the evidence does support, if
+   such a claim exists, or leave the evidence for the revise move to
+   narrow the claim. `unresolved` means the evidence does not settle it. Look for the answer in the other items
    from the same source before defaulting: a report's method section, its
    definitions, its stated coverage. An assumption left open makes the
    argument inapplicable: it then counts for nothing. If you have no
@@ -82,8 +92,9 @@ Return one JSON object and nothing else:
       "claim_id": "C1",
       "premise_ids": ["E1", "E2"],
       "cq_answers": {
-        "authentic": {"answer": "string", "evidence_ids": ["E1"], "defaulted": false},
-        "accuracy": {"answer": "string", "evidence_ids": [], "defaulted": true}
+        "authentic": {"answer": "string", "evidence_ids": ["E1"], "defaulted": false, "outcome": "satisfied"},
+        "accuracy": {"answer": "string", "evidence_ids": [], "defaulted": true},
+        "directness": {"answer": "the trial population is 70+, the claim is 60+", "evidence_ids": ["E3"], "outcome": "unsatisfied"}
       },
       "note": "string"
     }

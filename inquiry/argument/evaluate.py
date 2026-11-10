@@ -143,10 +143,20 @@ def _applicability(g: ArgumentGraph, accepted: set[str]) -> tuple[dict[str, bool
     for a in g.arguments:
         why: list[str] = []
         sch = SCHEMES[a.scheme]
+        if a.withdrawn:
+            why.append(f"withdrawn: {a.withdrawn}")
         for q in sch.assumptions():
             st = a.cq.get(q.id)
             if st is None or st.status == "open":
                 why.append(f"open assumption: {q.id}")
+            elif st.status == "answered" and st.outcome == "unsatisfied":
+                why.append(f"assumption unsatisfied: {q.id}")
+            elif st.status == "answered" and st.outcome == "unresolved":
+                why.append(f"assumption unresolved: {q.id}")
+        for q in sch.exceptions():
+            st = a.cq.get(q.id)
+            if st is not None and st.status == "answered" and st.outcome == "unsatisfied":
+                why.append(f"exception obtains: {q.id}")  # the proponent's own check found the exception holds
         for pid in a.premise_ids:
             if g.claim(pid) is not None and pid not in accepted:
                 why.append(f"premise claim not accepted: {pid}")
@@ -174,7 +184,7 @@ def _discharged(g: ArgumentGraph, atk: Argument) -> bool:
     if target is None:
         return False
     ans = target.cq.get(qid)
-    return ans is not None and ans.status == "answered" and bool(ans.evidence_ids)
+    return ans is not None and ans.satisfied and bool(ans.evidence_ids)
 
 
 def is_discharged(g: ArgumentGraph, atk: Argument) -> bool:

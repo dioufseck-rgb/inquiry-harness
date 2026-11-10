@@ -172,6 +172,8 @@ def _arguments_block(g: ArgumentGraph, ev: Optional[Evaluation], show_exceptions
             if q.kind == "exception" and not show_exceptions:
                 continue
             status = st.status if st else "open"
+            if st and st.status == "answered" and st.outcome and st.outcome != "satisfied":
+                status = f"answered, {st.outcome}"
             ans = f" — {st.answer}" if st and st.answer else ""
             evs = f" [{', '.join(st.evidence_ids)}]" if st and st.evidence_ids else ""
             lines.append(f"  cq {q.id} ({q.kind}, probes {q.probes}) [{status}]: {q.text}{ans}{evs}")
@@ -630,6 +632,10 @@ class CQAnswerProposal(BaseModel):
     answer: str = ""
     evidence_ids: list[str] = Field(default_factory=list)
     defaulted: bool = False
+    outcome: Literal["satisfied", "unsatisfied", "unresolved"] = Field(
+        default="satisfied",
+        description="What the check established. unsatisfied: the condition does not hold here (the argument then "
+                    "does not apply); unresolved: the evidence does not settle it.")
 
 
 class ArgumentProposal(BaseModel):
@@ -762,10 +768,12 @@ def apply_argue(inq: Inquiry, out: ArgueOutput, allowed_claims: Optional[set[str
             ev_ids = [x for x in ans.evidence_ids if g.ev(x) is not None]
             if not ans.answer and not ev_ids:
                 continue
-            g.answer_cq(a.id, qid, ans.answer, ev_ids, defaulted=ans.defaulted and not ev_ids)
+            g.answer_cq(a.id, qid, ans.answer, ev_ids, defaulted=ans.defaulted and not ev_ids,
+                        outcome="" if ans.defaulted and not ev_ids else ans.outcome)
         open_ = [q.id for q in sch.assumptions() if a.cq[q.id].status == "open"]
-        if open_:
-            still_open[a.id] = open_
+        failed = [q.id for q in sch.assumptions() if a.cq[q.id].status == "answered" and a.cq[q.id].outcome == "unsatisfied"]
+        if open_ or failed:
+            still_open[a.id] = open_ + [f"{q} (unsatisfied)" for q in failed]
     # an item that is a premise somewhere is usable by definition
     in_use = {p for a in g.arguments for p in a.premise_ids}
     for eid in list(unusable):
@@ -1021,7 +1029,7 @@ def apply_respond(inq: Inquiry, out: RespondOutput) -> dict:
                     continue
                 if not ans.evidence_ids or any(g.ev(x) is None for x in ans.evidence_ids):
                     continue  # an answer without evidence in the graph discharges nothing
-                g.answer_cq(target.id, qid, ans.answer, list(ans.evidence_ids))
+                g.answer_cq(target.id, qid, ans.answer, list(ans.evidence_ids), outcome=ans.outcome)
                 written.append(qid)
             if written:
                 discharged.append(atk.id)
@@ -1054,7 +1062,8 @@ def apply_respond(inq: Inquiry, out: RespondOutput) -> dict:
                 if qid in {q.id for q in sch.assumptions()}:
                     ev_ids = [x for x in ans.evidence_ids if g.ev(x) is not None]
                     if ans.answer or ev_ids:
-                        g.answer_cq(target.id, qid, ans.answer, ev_ids, defaulted=ans.defaulted and not ev_ids)
+                        g.answer_cq(target.id, qid, ans.answer, ev_ids, defaulted=ans.defaulted and not ev_ids,
+                                    outcome="" if ans.defaulted and not ev_ids else ans.outcome)
     return {"conceded": conceded, "countered": countered, "discharged": discharged, "dropped": dropped}
 
 
