@@ -58,6 +58,31 @@ class Fetcher:
 
 
 _PMC = re.compile(r"https?://(?:www\.)?(?:pmc\.ncbi\.nlm\.nih\.gov|ncbi\.nlm\.nih\.gov/pmc)/articles/(PMC\d+)", re.I)
+_PUBMED = re.compile(r"https?://(?:www\.)?pubmed\.ncbi\.nlm\.nih\.gov/(\d+)", re.I)
+_DOI_IN_URL = re.compile(r"10\.\d{4,9}/[^\s\"'<>?#]+", re.I)
+EUROPEPMC_SEARCH = "https://www.ebi.ac.uk/europepmc/webservices/rest/search"
+
+
+def europepmc_query_for(url: str) -> str | None:
+    """A Europe PMC query for a PubMed record or a DOI-bearing article URL, else None."""
+    m = _PUBMED.search(url)
+    if m:
+        return f"EXT_ID:{m.group(1)} AND SRC:MED"
+    m = _DOI_IN_URL.search(url)
+    if m:
+        return f'DOI:"{m.group(0).rstrip(".,;)")}"'
+    return None
+
+
+def europepmc_record_text(result: dict) -> tuple[str, str]:
+    """Title and readable text (title, journal, year, abstract) from one Europe PMC search result."""
+    title = html.unescape(re.sub(r"<[^>]+>", "", result.get("title", "") or "")).strip().rstrip(".")
+    abstract = html.unescape(re.sub(r"<[^>]+>", " ", result.get("abstractText", "") or ""))
+    abstract = re.sub(r"\s+", " ", abstract).strip()
+    meta = ", ".join(x for x in [result.get("journalTitle") or (result.get("journalInfo") or {}).get("journal", {}).get("title"),
+                                 str(result.get("pubYear") or ""), result.get("authorString", "")] if x)
+    text = f"{title}\n{meta}\n\nAbstract\n{abstract}" if abstract else f"{title}\n{meta}"
+    return title, text
 _ARXIV = re.compile(r"https?://(?:www\.)?arxiv\.org/abs/(\d{4}\.\d{4,5}|[a-z\-]+(?:\.[A-Z]{2})?/\d{7})(?:v\d+)?/?$", re.I)
 
 
@@ -113,6 +138,11 @@ class HttpFetcher(Fetcher):
         self.user_agent = user_agent or self.DEFAULT_UA
 
     def fetch(self, url: str) -> Fetched:
+        if _PUBMED.search(url):
+            # PubMed pages block automated clients; Europe PMC holds the same record
+            via = self._europepmc(url)
+            if via is not None:
+                return via
         target = rewrite_url(url)
         got = self._get(url, target)
         if target != url and got.error:
@@ -121,7 +151,40 @@ class HttpFetcher(Fetcher):
             if not direct.error:
                 return direct
             got.error = f"{got.error}; direct: {direct.error}"
+        if got.error and europepmc_query_for(url):
+            # a paywalled or blocked article page: at least its abstract, and full text when open access
+            via = self._europepmc(url)
+            if via is not None:
+                via.error = ""
+                return via
         return got
+
+    def _europepmc(self, url: str) -> Fetched | None:
+        import httpx
+
+        query = europepmc_query_for(url)
+        if not query:
+            return None
+        try:
+            r = httpx.get(EUROPEPMC_SEARCH, params={"query": query, "resultType": "core", "format": "json", "pageSize": 1},
+                          timeout=self.timeout, headers={"User-Agent": self.user_agent})
+            if r.status_code != 200:
+                return None
+            results = (r.json().get("resultList") or {}).get("result") or []
+        except Exception:  # noqa: BLE001 — a lookup failure just means no fallback
+            return None
+        if not results:
+            return None
+        rec = results[0]
+        title, text = europepmc_record_text(rec)
+        pmcid = rec.get("pmcid")
+        if pmcid and (rec.get("isOpenAccess") == "Y" or rec.get("inPMC") == "Y"):
+            full = self._get(url, f"https://www.ebi.ac.uk/europepmc/webservices/rest/{pmcid}/fullTextXML")
+            if not full.error and len(full.text) > len(text):
+                full.title = full.title or title
+                return full
+        return Fetched(url=url, final_url=f"{EUROPEPMC_SEARCH}?query={query}", title=title, text=text,
+                       content_type="application/json; europepmc", status=200, total_chars=len(text))
 
     def _get(self, url: str, target: str, retries: int = 3) -> Fetched:
         import time

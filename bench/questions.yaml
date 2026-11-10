@@ -112,7 +112,8 @@
       - "primary prevention"
       - "grade D"                     # USPSTF grade for initiation at 60+ (verify wording)
   expected:
-    shape: "accepted:no net benefit|does not reduce net|should not be initiated"
+    # wording verified on the first run (2026-11-10): the accepted claim read "increases net cardiovascular harm"
+    shape: "accepted:no net benefit|does not reduce net|should not be initiated|increases net .{0,20}harm|net harm"
     notes: >
       Accepted under clear and convincing; corroborated across independent
       trials and the guideline body; bleeding counted against benefit.

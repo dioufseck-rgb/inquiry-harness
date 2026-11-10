@@ -1,0 +1,47 @@
+{
+  "split": "held_in",
+  "rounds": 2,
+  "runs": [
+    {
+      "id": "health-aspirin-20261110-0209",
+      "rounds": 1,
+      "sources": 5,
+      "origins": 5,
+      "duplicate_sources": 0,
+      "evidence": 59,
+      "orphans": 0,
+      "supporting_args": 25,
+      "supporting_in": 12,
+      "attacks": 21,
+      "attacks_out": 0,
+      "attacks_discharged": 3,
+      "accepted_claims": 5,
+      "single_origin_accepts": 1,
+      "main_status": {
+        "C1": "in",
+        "C2": "out",
+        "C3": "out",
+        "C4": "out",
+        "C5": "out"
+      },
+      "absence_assertions": 1,
+      "gold_sources_found": 1,
+      "gold_sources_total": 5,
+      "gold_sources_missing": [
+        "ASPREE",
+        "ARRIVE",
+        "ASCEND",
+        "JAMA"
+      ],
+      "gold_facts_found": 3,
+      "gold_facts_total": 3,
+      "gold_facts_missing": [],
+      "shape_expected": "accepted:no net benefit|does not reduce net|should not be initiated",
+      "shape_match": false,
+      "seconds": 495,
+      "split": "held_in",
+      "error": "",
+      "run_dir": "runs\\bench\\health-aspirin-20261110-0209"
+    }
+  ]
+}

@@ -568,6 +568,19 @@ def test_article_urls_are_routed_to_open_forms():
     assert rewrite_url("https://example.org/page") == "https://example.org/page"
 
 
+def test_europepmc_fallback_queries_and_record_text():
+    from inquiry.tools.fetch import europepmc_query_for, europepmc_record_text
+    assert europepmc_query_for("https://pubmed.ncbi.nlm.nih.gov/38204851/") == "EXT_ID:38204851 AND SRC:MED"
+    assert europepmc_query_for("https://www.nejm.org/doi/full/10.1056/NEJMoa1805819") == 'DOI:"10.1056/NEJMoa1805819"'
+    assert europepmc_query_for("https://jamanetwork.com/journals/jama/fullarticle/2791401") is None
+    title, text = europepmc_record_text({
+        "title": "Effect of Aspirin on Cardiovascular Events and Bleeding in the Healthy Elderly.",
+        "abstractText": "<h4>Background</h4>Aspirin is a well-established therapy... <h4>Results</h4>Major hemorrhage 3.8% vs 2.8%.",
+        "journalTitle": "N Engl J Med", "pubYear": "2018", "authorString": "McNeil JJ, Wolfe R, et al."})
+    assert title == "Effect of Aspirin on Cardiovascular Events and Bleeding in the Healthy Elderly"
+    assert text.startswith(title) and "N Engl J Med, 2018" in text and "Major hemorrhage 3.8% vs 2.8%" in text and "<h4>" not in text
+
+
 def test_bot_challenge_pages_are_not_pages():
     from inquiry.tools.fetch import looks_like_challenge
     assert looks_like_challenge("", "Checking your browser before accessing pmc.ncbi.nlm.nih.gov ... Click here")
