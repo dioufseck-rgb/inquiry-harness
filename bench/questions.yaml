@@ -117,7 +117,7 @@
     # speaks to 60+. The right accepted answer is the recommendation against initiation, or a net
     # harm / no-net-benefit claim that is explicitly a recommendation or scoped to the trial
     # population. A bare "increases net harm in adults 60+" on ASPREE alone is an overclaim.
-    shape: "accepted:grade D|recommends? against|not recommend|no net benefit|increased major h(a|e)morrhage|should not be initiated"
+    shape: "accepted:grade D|recommends? against|not recommend|no net benefit|increases net.*harm|net harm|increased major h(a|e)morrhage|should not be initiated"
     notes: >
       Recommendation (USPSTF 2022, Grade D at 60+) accepted on the guideline; the
       ASPREE bleeding excess accepted as a component finding scoped to 70+;
