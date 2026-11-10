@@ -172,6 +172,10 @@ class Attack(BaseModel):
     target_id: str
     type: AttackType
     note: str = ""
+    raises_cq: str = Field(
+        default="",
+        description="For an undercut: the critical question of the target it raises. Answering that question "
+                    "with evidence discharges the attack.")
 
 
 class Argument(BaseModel):

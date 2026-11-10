@@ -253,6 +253,42 @@ def test_counter_attack_reinstates_argument_and_accepts_claim(tmp_path):
     assert respond_event["countered"] and any("not an attack" in d for d in respond_event["dropped"])
 
 
+def test_respond_discharge_writes_the_answer_and_creates_no_attack():
+    from inquiry.moves import AttackProposal, CritiqueOutput, RespondOutput, ResponseProposal, CQAnswerProposal, \
+        apply_critique, apply_respond, evaluate_move
+    from inquiry.argument import Credentials
+    inq = Inquiry(id="x", question="q")
+    g = inq.graph
+    q = g.add_issue("Did X happen?")
+    c = g.add_claim("X happened", issue_id=q.id)
+    s = g.add_source(url="https://example.org/report", kind="primary", read_fully=True)
+    e1 = g.add_evidence("report says X", source_id=s.id, credentials=Credentials(force="strong"))
+    e2 = g.add_evidence("units changed", source_id=s.id)
+    e3 = g.add_evidence("appendix: same units both years", source_id=s.id)
+    a = g.add_argument("document_record", [e1.id], c.id)
+    for qid in ("authentic", "accuracy", "reading"):
+        g.answer_cq(a.id, qid, "ok", [e1.id])
+    out = apply_critique(inq, CritiqueOutput(attacks=[
+        AttackProposal(target_id=a.id, type="undercut", premise_ids=[e2.id], cq_id="definitions")]))
+    atk = g.arg(out["attacks"][0])
+    assert atk.attacks.raises_cq == "definitions"
+    assert evaluate_move(inq).labels[a.id] == "out"
+    n_before = len(g.arguments)
+    res = apply_respond(inq, RespondOutput(responses=[
+        ResponseProposal(attack_id=atk.id, action="discharge",
+                         cq_answers={"definitions": CQAnswerProposal(answer="appendix", evidence_ids=[e3.id]),
+                                     "currency": CQAnswerProposal(answer="no evidence"),  # ignored: no evidence
+                                     "bogus": CQAnswerProposal(answer="x", evidence_ids=[e3.id])}),  # ignored: not a cq
+    ]))
+    assert res["discharged"] == [atk.id] and len(g.arguments) == n_before
+    assert a.cq["definitions"].status == "answered" and a.cq["definitions"].evidence_ids == [e3.id]
+    assert "currency" not in a.cq or a.cq["currency"].status == "open"
+    assert evaluate_move(inq).labels[a.id] == "in"
+    res2 = apply_respond(inq, RespondOutput(responses=[
+        ResponseProposal(attack_id=atk.id, action="discharge", cq_answers={"currency": CQAnswerProposal(answer="no evidence")})]))
+    assert res2["discharged"] == [] and any("no critical question answered" in d for d in res2["dropped"])
+
+
 def test_absence_attack_needs_a_fully_read_source():
     from inquiry.moves import AttackProposal, CritiqueOutput, apply_critique
     from inquiry.argument import Credentials

@@ -718,6 +718,9 @@ def apply_critique(inq: Inquiry, out: CritiqueOutput) -> dict:
         except (KeyError, ValueError) as e:
             dropped.append(f"{p.type} on {p.target_id}: {e}")
             continue
+        target = g.node(p.target_id)
+        if p.cq_id and isinstance(target, Argument) and p.cq_id in {q.id for q in SCHEMES[target.scheme].critical_questions}:
+            a.attacks.raises_cq = p.cq_id
         added.append(a.id)
         if p.basis == "absence":
             # "the source does not report X" is grounded only if the source was read to the end
@@ -743,10 +746,12 @@ def critique(inq: Inquiry, llm: LLM) -> dict:
 
 class ResponseProposal(BaseModel):
     attack_id: str
-    action: Literal["concede", "counter"]
+    action: Literal["discharge", "counter", "concede"]
     premise_ids: list[str] = Field(default_factory=list, description="Grounds for a counter: evidence or accepted claim ids.")
     cq_answers: dict[str, CQAnswerProposal] = Field(
-        default_factory=dict, description="Answers to the attacked argument's assumptions, if the counter supplies them.")
+        default_factory=dict,
+        description="discharge: answers, with evidence ids, to the critical questions of the attacked argument that the "
+                    "attack raised. counter: answers the counter also supplies. Each answer needs evidence ids.")
     note: str = ""
 
 
@@ -791,6 +796,8 @@ def respond_view(inq: Inquiry, attacks: list[Argument]) -> str:
         t = a.attacks
         lines.append(f"## {a.id}: {t.type} on {t.target_id} (by {a.origin}, strength {ev.argument_strength.get(a.id, '?')})")
         lines.append(f"grounds: {', '.join(a.premise_ids) or '(reviewer)'}")
+        if t.raises_cq:
+            lines.append(f"raises critical question: {t.raises_cq} — answering it with evidence discharges this attack")
         lines.append(f"note: {a.note}")
         target = g.node(t.target_id)
         if isinstance(target, Argument):
@@ -814,11 +821,32 @@ def apply_respond(inq: Inquiry, out: RespondOutput) -> dict:
     g = inq.graph
     conceded: list[str] = []
     countered: list[str] = []
+    discharged: list[str] = []
     dropped: list[str] = []
     for r in out.responses:
         atk = g.arg(r.attack_id)
         if atk is None or not atk.is_attack:
             dropped.append(f"{r.attack_id}: not an attack")
+            continue
+        if r.action == "discharge":
+            target = g.node(atk.attacks.target_id)
+            if not isinstance(target, Argument):
+                dropped.append(f"discharge {atk.id}: target is not an argument")
+                continue
+            valid = {q.id for q in SCHEMES[target.scheme].critical_questions}
+            written = []
+            for qid, ans in r.cq_answers.items():
+                if qid not in valid:
+                    continue
+                if not ans.evidence_ids or any(g.ev(x) is None for x in ans.evidence_ids):
+                    continue  # an answer without evidence in the graph discharges nothing
+                g.answer_cq(target.id, qid, ans.answer, list(ans.evidence_ids))
+                written.append(qid)
+            if written:
+                discharged.append(atk.id)
+                atk.note = (atk.note + f" (discharge attempted by proposer: {', '.join(written)} answered)").strip()
+            else:
+                dropped.append(f"discharge {atk.id}: no critical question answered with evidence in the graph")
             continue
         if r.action == "concede":
             if CONCEDED_MARK not in atk.note:
@@ -846,7 +874,7 @@ def apply_respond(inq: Inquiry, out: RespondOutput) -> dict:
                     ev_ids = [x for x in ans.evidence_ids if g.ev(x) is not None]
                     if ans.answer or ev_ids:
                         g.answer_cq(target.id, qid, ans.answer, ev_ids, defaulted=ans.defaulted and not ev_ids)
-    return {"conceded": conceded, "countered": countered, "dropped": dropped}
+    return {"conceded": conceded, "countered": countered, "discharged": discharged, "dropped": dropped}
 
 
 def respond(inq: Inquiry, llm: LLM) -> dict:
@@ -854,7 +882,7 @@ def respond(inq: Inquiry, llm: LLM) -> dict:
     attacks = standing_attacks(inq, ev)
     new = [a for a in attacks if CONCEDED_MARK not in a.note]
     if not new:
-        return {"conceded": [], "countered": [], "dropped": [], "standing": len(attacks), "new": 0}
+        return {"conceded": [], "countered": [], "discharged": [], "dropped": [], "standing": len(attacks), "new": 0}
     out = llm.complete_json(skill_text("respond"), respond_view(inq, attacks), RespondOutput)
     res = apply_respond(inq, out)
     res["standing"] = len(attacks)

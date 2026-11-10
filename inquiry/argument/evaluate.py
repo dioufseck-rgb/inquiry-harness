@@ -160,6 +160,27 @@ def _applicability(g: ArgumentGraph, accepted: set[str]) -> tuple[dict[str, bool
 # Grounded labelling
 # ---------------------------------------------------------------------------
 
+def _discharged(g: ArgumentGraph, atk: Argument) -> bool:
+    """
+    An undercut that raises a named critical question is discharged when the
+    target has answered that question with evidence. An answer without
+    evidence, or a defaulted one, does not discharge it (Carneades: the
+    proponent must meet a raised exception, not merely deny it).
+    """
+    qid = atk.attacks.raises_cq
+    if not qid:
+        return False
+    target = g.arg(atk.attacks.target_id)
+    if target is None:
+        return False
+    ans = target.cq.get(qid)
+    return ans is not None and ans.status == "answered" and bool(ans.evidence_ids)
+
+
+def is_discharged(g: ArgumentGraph, atk: Argument) -> bool:
+    return atk.is_attack and _discharged(g, atk)
+
+
 def _attack_edges(g: ArgumentGraph, applicable: dict[str, bool]) -> dict[str, set[str]]:
     """target argument id -> set of attacker argument ids (undercuts and undermines only)."""
     attackers: dict[str, set[str]] = {a.id: set() for a in g.arguments if applicable[a.id]}
@@ -168,7 +189,7 @@ def _attack_edges(g: ArgumentGraph, applicable: dict[str, bool]) -> dict[str, se
             continue
         t = atk.attacks
         if t.type == "undercut":
-            if t.target_id in attackers:
+            if t.target_id in attackers and not _discharged(g, atk):
                 attackers[t.target_id].add(atk.id)
         elif t.type == "undermine":
             for a in g.arguments:

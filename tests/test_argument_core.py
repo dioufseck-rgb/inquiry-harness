@@ -137,6 +137,28 @@ def test_unusable_evidence_is_not_flagged_orphan_and_load_bearing_names_claim():
     assert f"for {c.id}" in summary(g, ev, lb)
 
 
+def test_answering_the_raised_question_with_evidence_discharges_an_undercut():
+    g, q, c, n, s = base_graph()
+    e = g.add_evidence("record says X", source_id=s.id, credentials=strong())
+    a = g.add_argument("document_record", [e.id], c.id)
+    discharge(g, a.id)
+    e2 = g.add_evidence("units differ between periods", source_id=s.id, credentials=moderate())
+    x = g.add_attack(a.id, "undercut", premise_ids=[e2.id], origin="critic")
+    x.attacks.raises_cq = "definitions"
+    ev = evaluate(g)
+    assert ev.labels[a.id] == "out" and ev.status(c.id) == "undecided"
+    # (b) an answer without evidence does not discharge
+    g.answer_cq(a.id, "definitions", "same units, trust me")
+    ev = evaluate(g)
+    assert ev.labels[a.id] == "out"
+    # (a) an answer with evidence does
+    e3 = g.add_evidence("appendix states identical units both years", source_id=s.id, credentials=strong())
+    g.answer_cq(a.id, "definitions", "appendix gives one definition", [e3.id])
+    ev = evaluate(g)
+    assert ev.labels[a.id] == "in" and ev.status(c.id) == "in"
+    assert ev.labels[x.id] == "in"  # the attack node itself is untouched; it simply no longer defeats
+
+
 def test_human_attack_needs_no_premises():
     g, q, c, n, s = base_graph()
     e = g.add_evidence("record says X", source_id=s.id, credentials=strong())
