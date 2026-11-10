@@ -51,7 +51,9 @@ Frame → Hypothesize → Plan → Gather → Compute → Argue → Critique →
 - **Compute** is the arithmetic instrument: the proposer names variables bound to numbers in evidence items and an expression over them; code evaluates it on a restricted syntax tree and writes a `model_output` evidence item whose provenance holds the expression, inputs and result. It is how the harness notices that two estimates are compatible.
 - **Argue** builds explicit arguments from evidence to claims, one call per issue, and answers the critical questions it can answer with evidence. Every evidence item bearing on the issue's claims ends up in an argument or is marked unusable with a reason.
 - **Critique**, on a separate model, walks every argument's open exceptions and attacks where one can be grounded, attempts a rebuttal of every accepted claim, and probes every evidence item's credentials. Its view holds the arguments and evidence, not the proposer's reasoning. Each attack records whether its grounds are something a source says or something it does not say; an absence counts only if the source was read in full, otherwise the attack's grounds stay open.
-- **Respond** gives the proposer the reply a proponent is owed. For each standing attack it concedes, or counters with an undercut grounded in evidence showing the exception does not obtain here, which can also answer an assumption the attack exposed. Without this move the critic wins by default and procedural uncertainty is indistinguishable from real uncertainty.
+- **Respond** gives the proposer the reply a proponent is owed. For each standing attack it discharges, counters, or concedes. An undercut records the critical question it raises; answering that question with evidence discharges the attack with no new node (Carneades: a raised exception is met, not denied). A counter is an undercut of the critic's attack grounded in evidence. Without this move the critic wins by default and procedural uncertainty is indistinguishable from real uncertainty.
+
+Three further rules shape the graph. Rivalry is declared, not assumed: Hypothesize names which claims are mutually exclusive, and only those are contraries, besides the null and deflationary answers which are rivals of every substantive answer. Origins are computed from sources, not items: a source's origin is its DOI, else the origin of what it derives from, else its normalised title, else its publisher, and corroboration requires two accepted arguments whose origins are disjoint. A relay yields to its original: when the original's own evidence bears on a claim, the relay's items are set aside.
 - **Evaluate** is pure code: applicability, grounded labelling, proof standards, flags.
 - **Reflect** reports what is established and what is assumed. Its core is computable: the load-bearing nodes are those whose removal changes the main claim's status.
 - **Stop** asks whether any planned, obtainable evidence could change an undecided node on the path to the main claim. If none can, further search has no value.
@@ -93,7 +95,10 @@ inquiry/
     fetch.py      HttpFetcher, FakeFetcher
     compute.py    restricted arithmetic evaluator for the compute instrument
   moves.py        views, output contracts, apply steps; evaluate, reflect and stop as code
-  live.py         Harness: the cycle, gather, human review, report; CLI (python -m inquiry.live)
+  live.py         Harness: the cycle, gather (targeted reads, supplementary hop), human review, report; CLI
+  metrics.py      one line of numbers per run; gold matching and expected shape
+  bench.py        runs bench/questions.yaml by split, writes bench/results/<date>.json
+bench/questions.yaml    six questions: one regression, three held_in, two held_out
   state.py        Inquiry: framing, planned tests, reflections, stop assessments, evaluation, conclusion
   store.py        inquiry.json, hash-chained ledger.jsonl, sources/
   llm.py          proposer/critic LLM handles; JSON-validated completions; FakeLLM scripted by skill name
