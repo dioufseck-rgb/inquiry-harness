@@ -253,6 +253,56 @@ def test_counter_attack_reinstates_argument_and_accepts_claim(tmp_path):
     assert respond_event["countered"] and any("not an attack" in d for d in respond_event["dropped"])
 
 
+def test_targeted_read_extracts_a_named_table_from_a_held_document(tmp_path):
+    from inquiry.moves import locate_requests, appraise_full
+    from inquiry.state import PlannedTest
+    calls: list[str] = []
+
+    def script(user):
+        calls.append(user)
+        if "Find and extract" in user and "Table 7" in user.split("# Source to appraise")[-1]:
+            return {"kind": "primary", "evidence": [{"text": "Table 7: outer London mean 104 min", "location": "Table 7, p. 61",
+                                                     "bears_on": {"C1": "for"}}]}
+        return {"kind": "primary", "evidence": []}
+
+    proposer = FakeLLM({"appraise": script})
+    store = InquiryStore(tmp_path, "loc")
+    inq = Inquiry(id="loc", question="q")
+    g = inq.graph
+    q = g.add_issue("Q?")
+    g.add_claim("C", issue_id=q.id)
+    src = g.add_source(url="https://tfl.example/one-year.pdf", title="London-wide ULEZ One Year Report", kind="primary")
+    doc = ("x" * 11_000 + "\n") * 2 + "Section 4. Table 7 Outer London roadside NO2 by month ..." + "y" * 11_000
+    src.text_path = store.write_source_text(src.id, doc)
+    inq.tests.append(PlannedTest(id="T1", claim_ids=["C1"], observation="Table 7 of the One Year Report, outer London roadside means",
+                                 queries=["x"], round=1))
+    inq.notes.append("critic needs: read S1 fully: Appendix 3 interval")
+    reqs = locate_requests(inq)
+    assert (src.id, "Table 7") in reqs and (src.id, "Appendix 3") in reqs
+    # the targeted read appraises only the window that mentions the table
+    res = appraise_full(inq, proposer, src, doc, None, window=12_000, overlap=500, locate="Table 7")
+    assert res["parts"] == 1 and len(calls) == 1 and "part 2 of 3" in calls[0]  # windows overlap; the table sits in window 2
+    e = g.ev(res["evidence"][0])
+    assert "Table 7" in e.location and e.source_id == src.id
+    # once covered, the same request is not raised again
+    assert (src.id, "Table 7") not in locate_requests(inq)
+    # and gather runs the targeted reads before searching
+    h = Harness(inq, store, proposer, FakeLLM({}), FakeSearch(default=[]), FakeFetcher({}), log=lambda s: None)
+    out = h.gather()
+    assert any(x.startswith(f"{src.id} Appendix 3") for x in out["located"])
+    assert any(n == f"located: {src.id} Appendix 3" for n in inq.notes)
+
+
+def test_supplementary_links_are_found_in_article_html():
+    from inquiry.tools.fetch import extract_supplementary_links
+    html_doc = '''<a href="/articles/s44407-025-00030-9#Sec12">Methods</a>
+      <a href="https://static-content.springer.com/esm/art%3A10.1038%2Fs44407-025-00030-9/MediaObjects/44407_2025_30_MOESM1_ESM.pdf">Supplementary Information</a>
+      <a href="/suppl/tables.xlsx">Supplementary Tables</a> <a href="#suppl">anchor</a>'''
+    links = extract_supplementary_links(html_doc, "https://www.nature.com/articles/s44407-025-00030-9")
+    assert links == ["https://static-content.springer.com/esm/art%3A10.1038%2Fs44407-025-00030-9/MediaObjects/44407_2025_30_MOESM1_ESM.pdf",
+                     "https://www.nature.com/suppl/tables.xlsx"]
+
+
 def test_argue_view_prefers_the_origin_over_its_relay():
     from inquiry.moves import argue_view, issue_evidence
     inq = Inquiry(id="x", question="q")

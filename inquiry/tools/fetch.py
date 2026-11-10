@@ -27,6 +27,27 @@ class Fetched(BaseModel):
     error: str = ""
     truncated: bool = Field(default=False, description="True when text was cut at the fetcher's cap.")
     total_chars: int = Field(default=0, description="Length of the extracted text before any cap.")
+    links: list[str] = Field(default_factory=list, description="Supplementary-material links found in the page.")
+
+
+_SUPP_HREF = re.compile(r"""href=["']([^"']+)["']""", re.I)
+_SUPP_WORDS = re.compile(r"suppl|MOESM|/esm/|additional[-_ ]?file|appendix", re.I)
+
+
+def extract_supplementary_links(markup: str, base_url: str, limit: int = 4) -> list[str]:
+    """Absolute URLs of supplementary material linked from an article page, in page order."""
+    from urllib.parse import urljoin
+
+    out: list[str] = []
+    for href in _SUPP_HREF.findall(markup):
+        if not _SUPP_WORDS.search(href) or href.startswith(("#", "mailto:", "javascript:")):
+            continue
+        url = urljoin(base_url, html.unescape(href))
+        if url not in out and url != base_url:
+            out.append(url)
+        if len(out) >= limit:
+            break
+    return out
 
 
 class Fetcher:
@@ -121,6 +142,7 @@ class HttpFetcher(Fetcher):
                 continue
             break
         ct = r.headers.get("content-type", "")
+        links: list[str] = []
         if r.status_code >= 400:
             return Fetched(url=url, final_url=str(r.url), content_type=ct, status=r.status_code,
                            error=f"HTTP {r.status_code}")
@@ -133,9 +155,10 @@ class HttpFetcher(Fetcher):
             if looks_like_challenge(title, text):
                 return Fetched(url=url, final_url=str(r.url), title=title, content_type=ct,
                                status=r.status_code, error="bot-protection interstitial, not the page")
+            links = extract_supplementary_links(r.text, str(r.url))
         return Fetched(url=url, final_url=str(r.url), title=title, text=text[: self.max_chars],
                        content_type=ct, status=r.status_code, truncated=len(text) > self.max_chars,
-                       total_chars=len(text))
+                       total_chars=len(text), links=links)
 
     @staticmethod
     def _html_text(markup: str) -> tuple[str, str]:

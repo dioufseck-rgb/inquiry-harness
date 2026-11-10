@@ -419,13 +419,68 @@ class AppraiseOutput(BaseModel):
 
 APPRAISE_WINDOW = 12_000
 
+# named places inside a document that a plan or a critic can ask to be read
+LOCATION_RE = re.compile(
+    r"(Supplementary\s+(?:Table|Fig(?:ure)?|Data|Information)s?\s*[A-Z]?\d*|Appendix\s+[A-Z0-9]+|Annex\s+[A-Z0-9]+|"
+    r"Table\s+[A-Z]?\d+|Fig(?:ure)?\.?\s*[A-Z]?\d+|Section\s+\d+(?:\.\d+)*|pp?\.\s?\d+(?:\s?[-–]\s?\d+)?)",
+    re.I)
+
+
+def locate_requests(inq: Inquiry) -> list[tuple[str, str]]:
+    """
+    (source id, location) pairs the inquiry has asked for: location patterns in
+    planned test observations and in critic requests, resolved to a source by
+    an explicit source id, by words of the source's title in the same text, or,
+    failing both, to the only primary source in the graph. Already-located
+    pairs and locations the source's evidence already covers are skipped.
+    """
+    g = inq.graph
+    texts = [t.observation for t in inq.tests if t.status == "planned"]
+    texts += [n[len("critic needs:"):] for n in inq.notes if n.startswith("critic needs:")]
+    done = {n[len("located: "):] for n in inq.notes if n.startswith("located: ")}
+    primaries = [s for s in g.sources if s.kind == "primary"]
+    out: list[tuple[str, str]] = []
+    for text in texts:
+        locs = {" ".join(m.group(0).split()) for m in LOCATION_RE.finditer(text)}
+        if not locs:
+            continue
+        sid = None
+        m = re.search(r"\b(S\d+)\b", text)
+        if m and g.source(m.group(1)) is not None:
+            sid = m.group(1)
+        if sid is None:
+            low = text.lower()
+            for s in g.sources:
+                words = [w for w in re.findall(r"[a-z0-9]{4,}", s.title.lower())]
+                if len(words) >= 2 and sum(w in low for w in words) >= max(2, len(words) // 2):
+                    sid = s.id
+                    break
+        if sid is None and len(primaries) == 1:
+            sid = primaries[0].id
+        if sid is None:
+            continue
+        for loc in sorted(locs):
+            key = f"{sid} {loc}"
+            if key in done or (sid, loc) in out:
+                continue
+            covered = any(e.source_id == sid and loc.lower() in (e.location + " " + e.text).lower() for e in g.evidence)
+            if covered:
+                continue
+            out.append((sid, loc))
+    return out
+
 
 def appraise_view(inq: Inquiry, src: Source, text: str, test: Optional[PlannedTest],
-                  part: tuple[int, int] = (1, 1)) -> str:
+                  part: tuple[int, int] = (1, 1), locate: str = "") -> str:
     parts = [_framing_block(inq), _issues_block(inq, inq.evaluation)]
     if test is not None:
         exp = "\n".join(f"  - if {k}: {v}" for k, v in test.expected_if.items())
         parts.append(f"# Test this source was fetched for\n\n{test.id}: {test.observation}\n{exp}")
+    if locate:
+        parts.append(f"# Find and extract\n\nThe inquiry asked for: {locate}. If this part of the document contains it, "
+                     "extract everything that belongs to it (every figure, with its row and column labels, units and "
+                     "notes) as evidence items whose `location` names it. If this part does not contain it, extract "
+                     "only what bears on the claims, as usual.")
     parts.append(_sources_block(inq.graph))
     if part != (1, 1):
         already = [e.id for e in inq.graph.evidence if e.source_id == src.id]
@@ -500,14 +555,16 @@ def _chunks(text: str, window: int, overlap: int) -> list[str]:
 
 
 def appraise(inq: Inquiry, llm: LLM, src: Source, text: str, test: Optional[PlannedTest] = None,
-             part: tuple[int, int] = (1, 1)) -> dict:
-    out = llm.complete_json(skill_text("appraise"), appraise_view(inq, src, text, test, part), AppraiseOutput)
-    return apply_appraise(inq, src, out, first=(part[0] == 1))
+             part: tuple[int, int] = (1, 1), locate: str = "") -> dict:
+    out = llm.complete_json(skill_text("appraise"), appraise_view(inq, src, text, test, part, locate), AppraiseOutput)
+    # a located re-read must not reclassify a source already appraised
+    first = part[0] == 1 and not (locate and any(e.source_id == src.id for e in inq.graph.evidence))
+    return apply_appraise(inq, src, out, first=first)
 
 
 def appraise_full(inq: Inquiry, llm: LLM, src: Source, text: str, test: Optional[PlannedTest] = None,
                   window: int = APPRAISE_WINDOW, overlap: int = 500, max_parts: int = 36,
-                  text_complete: bool = True) -> dict:
+                  text_complete: bool = True, locate: str = "") -> dict:
     """
     Appraise a source. The first window classifies it; a primary source is
     then read to the end, window by window, so that an attack grounded in
@@ -520,18 +577,25 @@ def appraise_full(inq: Inquiry, llm: LLM, src: Source, text: str, test: Optional
     """
     parts = _chunks(text, window, overlap)
     total: dict = {"source": src.id, "evidence": [], "parts": 0, "of": len(parts), "text_complete": text_complete}
-    for i, chunk in enumerate(parts):
-        res = appraise(inq, llm, src, chunk, test, part=(i + 1, len(parts)))
+    if locate:
+        # a targeted read: only the windows that mention the location, all of them
+        wanted = [i for i, ch in enumerate(parts) if locate.lower() in ch.lower()]
+        indices = wanted or list(range(len(parts)))
+    else:
+        indices = list(range(len(parts)))
+    for n, i in enumerate(indices):
+        res = appraise(inq, llm, src, parts[i], test, part=(i + 1, len(parts)), locate=locate)
         total["evidence"].extend(res["evidence"])
         total["parts"] += 1
-        if i == 0:
+        if n == 0:
             total["group"] = res["group"]
-        if len(parts) > 1 and src.kind in ("secondary", "derivative"):
+        if not locate and len(parts) > 1 and src.kind in ("secondary", "derivative"):
             break
         if total["parts"] >= max_parts:
             break
     total["kind"] = src.kind
-    src.read_fully = text_complete and total["parts"] == len(parts)
+    if not locate:
+        src.read_fully = text_complete and total["parts"] == len(parts)
     return total
 
 

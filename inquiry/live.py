@@ -98,7 +98,24 @@ class Harness:
         new_sources: list[str] = []
         new_evidence: list[str] = []
         skipped: list[str] = []
+        located: list[str] = []
         queries_run = 0
+
+        # targeted reads first: places in documents we already hold that the plan or the critic named
+        for sid, loc in moves.locate_requests(inq):
+            src = g.source(sid)
+            text = self.store.read_source_text(sid)
+            if src is None or not text:
+                continue
+            try:
+                out = moves.appraise_full(inq, self.proposer, src, text, None, max_parts=self.read_parts,
+                                          text_complete=src.read_fully, locate=loc)
+            except Exception as e:  # noqa: BLE001
+                skipped.append(f"{sid} {loc}: targeted read failed: {type(e).__name__}")
+                continue
+            inq.notes.append(f"located: {sid} {loc}")
+            located.append(f"{sid} {loc}: {len(out['evidence'])} items from {out['parts']} window(s)")
+            new_evidence.extend(out["evidence"])
         for t in [t for t in inq.tests if t.status == "planned"]:
             found = False
             for q in t.queries:
@@ -154,11 +171,35 @@ class Harness:
                     new_sources.append(src.id)
                     new_evidence.extend(out["evidence"])
                     found = True
+                    # one hop to a primary article's supplementary material: same origin, read in full
+                    if src.kind == "primary" and f.links:
+                        for link in f.links[:2]:
+                            if link in known_urls:
+                                continue
+                            known_urls.add(link)
+                            sf = self.fetcher.fetch(link)
+                            if len(sf.text.strip()) < self.min_chars:
+                                skipped.append(f"{link}: supplementary, {sf.error or 'too short'}")
+                                continue
+                            supp = g.add_source(url=link, title=f"{src.title} (supplementary)", kind="primary",
+                                                derived_from=src.id, query=q)
+                            supp.text_path = self.store.write_source_text(supp.id, sf.text)
+                            try:
+                                so = moves.appraise_full(inq, self.proposer, supp, sf.text, t, max_parts=self.read_parts,
+                                                         text_complete=not sf.truncated)
+                            except Exception as e:  # noqa: BLE001
+                                g.sources.remove(supp)
+                                skipped.append(f"{link}: supplementary appraisal failed: {type(e).__name__}")
+                                continue
+                            supp.kind, supp.derived_from = "primary", src.id  # the appraisal must not detach it
+                            new_sources.append(supp.id)
+                            new_evidence.extend(so["evidence"])
             if queries_run >= self.queries_per_round or len(new_sources) >= self.max_sources:
                 if not found:
                     continue  # leave it planned for the next round
             t.status = "run" if found else "unobtainable"
-        return {"queries": queries_run, "sources": new_sources, "evidence": new_evidence, "skipped": skipped}
+        return {"queries": queries_run, "sources": new_sources, "evidence": new_evidence, "skipped": skipped,
+                "located": located}
 
     # -- human review --------------------------------------------------------------
 
