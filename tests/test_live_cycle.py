@@ -148,7 +148,7 @@ def test_one_round_builds_graph_and_ledger(tmp_path):
     assert store.read_source_text("S1").startswith("Table 4")
     assert len(g.evidence) == 2
     assert g.ev("E1").bears_on == {"C1": "for", "C2": "against"}
-    assert g.ev("E1").independence_group == "source:S1"
+    assert g.evidence_origin(g.ev("E1")) == g.origin_key(g.source("S1"))
 
     # argue: called once (only Q1 has evidence bearing on it); one valid argument,
     # bogus scheme and off-issue claim dropped, exception answer ignored, E2 marked unusable
@@ -359,7 +359,7 @@ def test_compute_instrument_writes_model_output_evidence():
     e4 = g.ev("E4")
     assert e4.kind == "model_output" and e4.origin == "instrument" and e4.text.endswith("11.86 %")
     assert e4.provenance["expression"] == "(a - b) / a * 100" and "E1" in e4.provenance["inputs"]
-    assert e4.independence_group == "reg" and e4.credentials.credibility == "moderate" and e4.credentials.force == "moderate"
+    assert g.evidence_origin(e4) == "reg" and e4.credentials.credibility == "moderate" and e4.credentials.force == "moderate"
     assert e4.bears_on == {"C1": "for"}
     a = g.add_argument("model_output", [e4.id], c.id)
     assert a.scheme == "model_output"

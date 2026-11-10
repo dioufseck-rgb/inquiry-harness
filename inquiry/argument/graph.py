@@ -22,6 +22,7 @@ ledger can hash it.
 
 from __future__ import annotations
 
+import re
 from datetime import datetime, timezone
 from typing import Literal, Optional
 
@@ -51,6 +52,8 @@ DEFAULT_STANDARD: dict[str, ProofStandard] = {
 AttackType = Literal["undermine", "rebut", "undercut"]
 Status = Literal["in", "out", "undecided"]
 Origin = Literal["proposer", "critic", "human", "instrument"]
+
+_DOI = re.compile(r"10\.\d{4,9}/[^\s\"'<>]+", re.I)
 
 
 # ---------------------------------------------------------------------------
@@ -236,6 +239,44 @@ class ArgumentGraph(BaseModel):
             return claim.proof_standard
         issue = self.issue(claim.issue_id) if claim.issue_id else None
         return DEFAULT_STANDARD[issue.question_type if issue else "mixed"]
+
+    # -- origins ------------------------------------------------------------------
+
+    def origin_key(self, src: Source, _seen: Optional[set[str]] = None) -> str:
+        """
+        What a source ultimately traces to, for counting independent origins.
+        DOI if the URL or title carries one; else the origin of the source it
+        derives from; else its normalised title; else its publisher; else itself.
+        """
+        m = _DOI.search(src.url) or _DOI.search(src.title)
+        if m:
+            return "doi:" + m.group(0).lower().rstrip(".,;)")
+        if src.derived_from:
+            seen = _seen or set()
+            if src.id not in seen:
+                orig = self.source(src.derived_from)
+                if orig is not None:
+                    return self.origin_key(orig, seen | {src.id})
+        t = re.sub(r"[^a-z0-9]+", "", src.title.lower())
+        if len(t) >= 25:
+            return "title:" + t[:60]
+        if src.publisher.strip():
+            return "publisher:" + src.publisher.strip().lower()
+        return f"source:{src.id}"
+
+    def evidence_origin(self, e: Evidence) -> Optional[str]:
+        """
+        Origin of one evidence item, or None when it cannot count as an origin:
+        a derivative source that does not say what it derives from.
+        """
+        if e.independence_group:
+            return e.independence_group
+        src = self.source(e.source_id) if e.source_id else None
+        if src is None:
+            return f"evidence:{e.id}"
+        if src.kind == "derivative" and not src.derived_from:
+            return None
+        return self.origin_key(src)
 
     # -- construction helpers ---------------------------------------------------
 

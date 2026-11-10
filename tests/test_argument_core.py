@@ -255,6 +255,69 @@ def test_derivative_source_without_origin_cannot_corroborate():
     assert ev.claims[c.id].corroborated is True and ev.status(c.id) == "in"
 
 
+def test_origin_key_prefers_doi_then_derivation_then_title_then_publisher():
+    g = ArgumentGraph()
+    paper = g.add_source(url="https://www.nature.com/articles/s44407-025-00030-9", title="Further improvement", publisher="Nature")
+    mirror = g.add_source(url="https://pmc.ncbi.nlm.nih.gov/articles/PMC1/", title="Further improvement in London's air quality demands more")
+    assert g.origin_key(paper).startswith("title:") or g.origin_key(paper).startswith("publisher:")
+    doi = g.add_source(url="https://doi.org/10.1038/s44407-025-00030-9", title="x")
+    assert g.origin_key(doi) == "doi:10.1038/s44407-025-00030-9"
+    relay = g.add_source(url="https://news.example/x", title="Short", kind="derivative", derived_from=doi.id)
+    assert g.origin_key(relay) == g.origin_key(doi)
+    report = g.add_source(url="https://a.example/r.pdf", title="London-wide ULEZ One Year Report", publisher="TfL")
+    report2 = g.add_source(url="https://b.example/r.pdf", title="London-wide ULEZ one year report")
+    assert g.origin_key(report) == g.origin_key(report2) == "title:londonwideulezoneyearreport"
+    brief = g.add_source(url="https://c.example/", title="Brief", publisher="TfL")
+    assert g.origin_key(brief) == "publisher:tfl"
+    bare = g.add_source(url="https://d.example/")
+    assert g.origin_key(bare) == f"source:{bare.id}"
+    assert g.origin_key(mirror).startswith("title:")
+
+
+def test_corroboration_needs_two_arguments_with_disjoint_origins():
+    g, q, c, n, s = base_graph(question_type="causal")
+    s.title, s.publisher = "Report A", "Regulator"
+    s2 = g.add_source(url="https://example.org/b", title="Methodology note B", publisher="Regulator", kind="primary")
+    e1 = g.add_evidence("table", source_id=s.id, credentials=moderate())
+    e2 = g.add_evidence("method", source_id=s2.id, credentials=moderate())
+    # (a) one argument spanning two documents of one publisher is not corroboration
+    a = g.add_argument("document_record", [e1.id, e2.id], c.id)
+    discharge(g, a.id)
+    ev = evaluate(g)
+    assert ev.claims[c.id].corroborated is False and ev.status(c.id) == "undecided"
+    # (b) two arguments from two publishers are
+    s3 = g.add_source(url="https://example.org/c", title="Independent study C", publisher="University", kind="primary")
+    e3 = g.add_evidence("finding", source_id=s3.id, credentials=moderate())
+    b = g.add_argument("study_result", [e3.id], c.id)
+    discharge(g, b.id)
+    ev = evaluate(g)
+    assert ev.claims[c.id].corroborated is True and ev.status(c.id) == "in"
+    assert not any(f.code == "single_origin" for f in ev.flags)
+
+
+def test_same_document_at_two_hosts_is_flagged_and_does_not_corroborate():
+    g, q, c, n, s = base_graph()
+    s.title = "Further improvement in London's air quality demands more"
+    s2 = g.add_source(url="https://pmc.example/PMC1/", title="Further improvement in London's air quality demands more", kind="primary")
+    e1 = g.add_evidence("finding", source_id=s.id, credentials=moderate())
+    e2 = g.add_evidence("same finding", source_id=s2.id, credentials=moderate())
+    a = g.add_argument("document_record", [e1.id], c.id)
+    b = g.add_argument("document_record", [e2.id], c.id)
+    discharge(g, a.id)
+    discharge(g, b.id)
+    ev = evaluate(g)
+    assert ev.claims[c.id].corroborated is False
+    dup = [f for f in ev.flags if f.code == "duplicate_source"]
+    assert len(dup) == 1 and dup[0].node_id == f"{s.id},{s2.id}"
+    assert any(f.code == "single_origin" and f.node_id == c.id for f in ev.flags)
+    # (d) marking one as derived from the other removes the duplicate flag and keeps one origin
+    s2.kind, s2.derived_from = "derivative", s.id
+    ev = evaluate(g)
+    assert not any(f.code == "duplicate_source" for f in ev.flags)
+    assert g.evidence_origin(e2) == g.evidence_origin(e1)
+    assert ev.claims[c.id].corroborated is False
+
+
 def test_study_result_scheme_asks_the_grade_questions():
     sch = SCHEMES["study_result"]
     assert {q.id for q in sch.assumptions()} == {"design", "directness", "uncertainty", "reported"}

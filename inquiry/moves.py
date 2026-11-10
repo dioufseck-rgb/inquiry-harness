@@ -118,8 +118,9 @@ def _evidence_block(g: ArgumentGraph, ids: Optional[list[str]] = None, title: st
             tag = " UNUSED: no argument uses this item; attacking it changes nothing"
         if e.provenance.get("unusable"):
             tag = f" UNUSABLE: {e.provenance['unusable']}"
+        origin = g.evidence_origin(e) or "none (derivative of an unnamed original)"
         lines.append(f"- {e.id} [{e.kind}; relevance {cred.relevance}, credibility {cred.credibility}, "
-                     f"force {cred.force}; origin group {e.independence_group or 'source:' + (e.source_id or e.id)}]"
+                     f"force {cred.force}; origin {origin}]"
                      f" from {src.id + ' ' + (src.title or src.url) if src else 'no source'}{tag}")
         lines.append(f"  text: {e.text}")
         if e.quote:
@@ -412,20 +413,21 @@ def appraise_view(inq: Inquiry, src: Source, text: str, test: Optional[PlannedTe
 
 def _origin_group(g: ArgumentGraph, src: Source, derived_from: str) -> str:
     """
-    Independence group for a source's evidence. A derivative source joins its
-    original's group when the original is in the graph. If it names an origin
-    the graph does not hold, the name is kept and the source stays derivative
-    with no derived_from, which evaluate treats as unable to corroborate.
+    Link a derivative source to its original when the graph holds it. If it
+    names an origin the graph does not hold, the name is kept and the source
+    stays derivative with no derived_from, which evaluate treats as unable to
+    corroborate. Returns the source's origin key for the ledger; evidence
+    items carry no independence_group of their own, so origins are computed
+    from the source (DOI, derivation, title, publisher) at evaluation time.
     """
     key = derived_from.strip()
     if key:
         orig = g.source(key) or next((s for s in g.sources if s.url and s.url == key), None)
         if orig is not None and orig.id != src.id:
             src.derived_from = orig.id
-            other = next((e.independence_group for e in g.evidence if e.source_id == orig.id and e.independence_group), None)
-            return other or f"source:{orig.id}"
-        src.derived_from_note = key
-    return f"source:{src.id}"
+        else:
+            src.derived_from_note = key
+    return g.origin_key(src)
 
 
 def apply_appraise(inq: Inquiry, src: Source, out: AppraiseOutput, first: bool = True) -> dict:
@@ -441,8 +443,7 @@ def apply_appraise(inq: Inquiry, src: Source, out: AppraiseOutput, first: bool =
         src.incentives = out.incentives or src.incentives
     src.publisher = out.publisher or src.publisher
     src.date = out.date or src.date
-    group = _origin_group(g, src, out.derived_from) if first else \
-        next((e.independence_group for e in g.evidence if e.source_id == src.id), f"source:{src.id}")
+    group = _origin_group(g, src, out.derived_from) if first else g.origin_key(src)
     known = {c.id for c in g.claims}
     added: list[str] = []
     for p in out.evidence:
@@ -450,7 +451,7 @@ def apply_appraise(inq: Inquiry, src: Source, out: AppraiseOutput, first: bool =
             p.text, kind=p.kind, source_id=src.id, quote=_clip(p.quote, 300), location=p.location,
             credentials=Credentials(relevance=p.relevance, credibility=p.credibility, force=p.force,
                                     credibility_notes=p.credibility_notes),
-            independence_group=group, bears_on={k: v for k, v in p.bears_on.items() if k in known},
+            bears_on={k: v for k, v in p.bears_on.items() if k in known},
         )
         added.append(e.id)
     return {"source": src.id, "kind": src.kind, "group": group, "evidence": added}
@@ -942,9 +943,11 @@ def apply_compute(inq: Inquiry, out: ComputeOutput) -> dict:
         )
         first = inputs[0][2]
         shown = f"{result:.4g}{' ' + p.unit if p.unit else ''}"
+        # a computation inherits the origin of its inputs; it is never a new origin
+        origin = g.evidence_origin(first) or f"source:{first.source_id or first.id}"
         e = g.add_evidence(
             f"{p.text}: {shown}", kind="model_output", quote=p.expression, location="computed",
-            credentials=cred, independence_group=first.independence_group or f"source:{first.source_id or first.id}",
+            credentials=cred, independence_group=origin,
             origin="instrument", bears_on={k: v for k, v in p.bears_on.items() if k in known},
             provenance={
                 "instrument": INSTRUMENT_VERSION, "name": p.name, "expression": p.expression,

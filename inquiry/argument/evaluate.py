@@ -99,23 +99,38 @@ def argument_strength(g: ArgumentGraph, a: Argument) -> Strength:
     return _LEVEL[base]  # type: ignore[return-value]
 
 
-def _independence_groups(g: ArgumentGraph, args: list[Argument]) -> set[str]:
+def argument_origins(g: ArgumentGraph, a: Argument) -> set[str]:
     """
-    Distinct origins among the evidence used by `args`. A derivative source
-    that does not name its origin contributes no origin: it repeats something,
-    and we do not know what, so it cannot corroborate anything.
+    Origins of the evidence an argument rests on. A derivative source that
+    does not name its origin contributes none: it repeats something, and we
+    do not know what, so it cannot corroborate anything.
     """
-    groups: set[str] = set()
-    for a in args:
-        for pid in a.premise_ids:
-            e = g.ev(pid)
-            if e is None:
-                continue
-            src = g.source(e.source_id) if e.source_id else None
-            if src is not None and src.kind == "derivative" and not src.derived_from:
-                continue
-            groups.add(e.independence_group or f"source:{e.source_id or e.id}")
-    return groups
+    out: set[str] = set()
+    for pid in a.premise_ids:
+        e = g.ev(pid)
+        if e is None:
+            continue
+        o = g.evidence_origin(e)
+        if o is not None:
+            out.add(o)
+    return out
+
+
+def _corroborated(origins: dict[str, set[str]]) -> bool:
+    """Two distinct IN pro arguments whose origins are both non-empty and disjoint."""
+    ids = list(origins)
+    for i, a in enumerate(ids):
+        for b in ids[i + 1:]:
+            if origins[a] and origins[b] and not (origins[a] & origins[b]):
+                return True
+    return False
+
+
+def _all_origins(origins: dict[str, set[str]]) -> set[str]:
+    out: set[str] = set()
+    for s in origins.values():
+        out |= s
+    return out
 
 
 # ---------------------------------------------------------------------------
@@ -225,7 +240,7 @@ def _claim_pass(g: ArgumentGraph, labels: dict[str, Status], strengths: dict[str
             con.extend(in_support(other))
         pro_s = max((STRENGTH_ORDER[strengths[a.id]] for a in pro), default=0)
         con_s = max((STRENGTH_ORDER[strengths[a.id]] for a in con), default=0)
-        corroborated = len(_independence_groups(g, pro)) >= 2
+        corroborated = _corroborated({a.id: argument_origins(g, a) for a in pro})
         if corroborated and pro_s:
             pro_s = min(3, pro_s + 1)
         standard = g.standard_for(c)
@@ -295,11 +310,24 @@ def _flags(g: ArgumentGraph, ev: Evaluation) -> list[Flag]:
     for e in g.evidence:
         if e.id not in used and not e.provenance.get("unusable"):
             flags.append(Flag(code="orphan_evidence", node_id=e.id, detail="evidence used in no argument"))
+    keys: dict[str, list[str]] = {}
+    for s in g.sources:
+        keys.setdefault(g.origin_key(s), []).append(s.id)
+    for key, ids in keys.items():
+        if len(ids) < 2:
+            continue
+        for i, a in enumerate(ids):
+            for b in ids[i + 1:]:
+                sa, sb = g.source(a), g.source(b)
+                if sa.derived_from == b or sb.derived_from == a:
+                    continue
+                flags.append(Flag(code="duplicate_source", node_id=f"{a},{b}",
+                                  detail=f"same origin ({key}) and neither is marked as derived from the other"))
     for c in g.claims:
         d = ev.claims[c.id]
         if d.status == "in":
-            pro = [g.arg(x) for x in d.pro_ids]
-            if len(_independence_groups(g, pro)) == 1:
+            origins = _all_origins({x: argument_origins(g, g.arg(x)) for x in d.pro_ids})
+            if len(origins) <= 1:
                 flags.append(Flag(code="single_origin", node_id=c.id, detail="accepted on evidence from one origin"))
         if c.credence is not None:
             if c.credence >= 0.7 and d.status != "in":
