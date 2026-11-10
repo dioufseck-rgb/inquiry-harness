@@ -126,6 +126,24 @@ def make_harness(tmp_path, rounds_plan_calls, overrides=None, **kw):
     return Harness(inq, store, proposer, critic, search, fetcher, log=lambda s: None, **kw), store
 
 
+def test_token_budget_stops_but_still_concludes(tmp_path, monkeypatch):
+    from inquiry.metrics import metrics
+
+    monkeypatch.setenv("INQUIRY_MAX_TOKENS_RUN", "20")
+    h, store = make_harness(tmp_path, [])
+    h.proposer.usage.append({"provider": "fake", "model": "fake", "input_tokens": 20, "output_tokens": 1})
+    inq = h.run(rounds=3)
+    assert inq.stop_assessments[-1].reason == "token budget exhausted"
+    assert inq.round == 1 and inq.conclusion is not None
+    events = store.events()
+    assert events[-1]["move"] == "conclude"
+    assert sum(len(e["usage"]) for e in events) == len(inq.llm_usage)
+    m = metrics(inq, inq.evaluation)
+    assert m["tokens_in"] == 20 and m["tokens_out"] == 1
+    assert m["calls"] == len(inq.llm_usage) and m["provider_proposer"] == "fake"
+    assert store.verify_ledger()
+
+
 def test_one_round_builds_graph_and_ledger(tmp_path):
     plan_calls: list[str] = []
     h, store = make_harness(tmp_path, plan_calls)

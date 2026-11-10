@@ -88,6 +88,8 @@ class Inquiry(BaseModel):
     conclusion: Optional[Conclusion] = None
     evaluation: Optional[Evaluation] = Field(default=None, description="Result of the last Evaluate move.")
     notes: list[str] = Field(default_factory=list)
+    llm_usage: list[dict] = Field(default_factory=list)
+    llm_config: dict[str, dict] = Field(default_factory=dict)
 
     def main_claims(self):
         if not self.graph.main_issue_id:

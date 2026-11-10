@@ -1368,13 +1368,17 @@ def reflect(inq: Inquiry, ev: Evaluation) -> Reflection:
     return r
 
 
-def stop(inq: Inquiry, ev: Evaluation, rounds_left: int, new_evidence_this_round: int) -> StopAssessment:
+def stop(inq: Inquiry, ev: Evaluation, rounds_left: int, new_evidence_this_round: int,
+         *, max_tokens_run: int = 0) -> StopAssessment:
     g = inq.graph
     accepted = ev.issues.get(g.main_issue_id, []) if g.main_issue_id else []
     undecided = [c.id for c in inq.main_claims() if ev.status(c.id) == "undecided"]
     settlers = main_claim_settlers(inq, ev)
     addressable = [cid for cid in undecided if settlers.get(cid)]
-    if accepted:
+    tokens = sum(u["input_tokens"] + u["output_tokens"] for u in inq.llm_usage)
+    if max_tokens_run and tokens > max_tokens_run:
+        decision, reason = "stop", "token budget exhausted"
+    elif accepted:
         decision, reason = "stop", f"main issue answered by {', '.join(accepted)}"
     elif rounds_left <= 0:
         decision, reason = "stop", "rounds exhausted"

@@ -49,6 +49,12 @@ class LLM:
 
     def __init__(self) -> None:
         self.repairs: list[dict[str, str]] = []  # one entry per reply that failed its contract and was repaired
+        self.usage: list[dict[str, Any]] = []
+
+    def _usage(self, response: Any) -> None:
+        usage = response.usage
+        self.usage.append({"provider": self.provider, "model": self.model,
+                           "input_tokens": usage.input_tokens, "output_tokens": usage.output_tokens})
 
     def complete(self, system: str, user: str, max_tokens: int = 16000) -> str:  # pragma: no cover
         raise NotImplementedError
@@ -71,6 +77,7 @@ class LLM:
 
 
 class AnthropicLLM(LLM):
+    provider = "anthropic"
     """
     Claude 5 family models reject sampling parameters (temperature, top_p);
     depth is controlled by `effort` instead, and thinking is adaptive by
@@ -95,12 +102,74 @@ class AnthropicLLM(LLM):
             system=[{"type": "text", "text": system, "cache_control": {"type": "ephemeral"}}],
             messages=[{"role": "user", "content": user}],
         )
+        self._usage(resp)
         if resp.stop_reason == "refusal":
             raise RuntimeError(f"{self.model} declined the request: {getattr(resp.stop_details, 'category', None)}")
         text = "".join(block.text for block in resp.content if getattr(block, "type", "") == "text")
         if not text.strip() and resp.stop_reason == "max_tokens":
             raise RuntimeError(f"{self.model} hit max_tokens={max_tokens} before producing text; raise max_tokens")
         return text
+
+
+class OpenAILLM(LLM):
+    """Responses API JSON mode, with capability negotiation cached per handle.
+
+    The models endpoint does not advertise parameter support. Try reasoning
+    once and omit it if the API identifies it as unsupported; this avoids a
+    model-name allowlist that becomes stale as new models are released.
+    """
+
+    provider = "openai"
+
+    def __init__(self, model: str, reasoning_effort: str = "medium", temperature: float | None = None):
+        import openai
+
+        super().__init__()
+        if reasoning_effort not in {"low", "medium", "high"}:
+            raise ValueError("OpenAI effort must be low, medium or high")
+        self.client = openai.OpenAI()
+        self.model = self.name = model
+        self.reasoning_effort = reasoning_effort
+        self.temperature = temperature
+        self._reasoning_supported = True
+        self._temperature_supported = True
+
+    def complete(self, system: str, user: str, max_tokens: int = 16000) -> str:
+        from openai import BadRequestError
+
+        # A reasoning-capable model never receives sampling parameters.
+        while True:
+            params: dict[str, Any] = {
+                "model": self.model, "instructions": system + "\nReturn a JSON object.",
+                "input": user, "max_output_tokens": max_tokens,
+                "text": {"format": {"type": "json_object"}},
+            }
+            if self._reasoning_supported:
+                params["reasoning"] = {"effort": self.reasoning_effort}
+            elif self.temperature is not None and self._temperature_supported:
+                params["temperature"] = self.temperature
+            try:
+                resp = self.client.responses.create(**params)
+                break
+            except BadRequestError as exc:
+                body = exc.body if isinstance(exc.body, dict) else {}
+                error = body.get("error", body)
+                param = str(error.get("param", ""))
+                message = str(error.get("message", "")).lower()
+                unsupported = "unsupported" in message or "not supported" in message
+                if (unsupported and self._reasoning_supported
+                        and (param.startswith("reasoning") or "reasoning" in message)):
+                    self._reasoning_supported = False
+                    continue
+                if unsupported and "temperature" in params and (param == "temperature" or "temperature" in message):
+                    self._temperature_supported = False
+                    continue
+                raise
+        self._usage(resp)
+        if not resp.output_text.strip():
+            raise RuntimeError(f"{self.model} returned no text (status={getattr(resp, 'status', 'unknown')}); "
+                               f"max_output_tokens={max_tokens}")
+        return resp.output_text
 
 
 class FakeLLM(LLM):
@@ -111,6 +180,8 @@ class FakeLLM(LLM):
     """
 
     name = "fake"
+    model = "fake"
+    provider = "fake"
 
     def __init__(self, script: dict[str, Any]):
         super().__init__()
@@ -125,6 +196,8 @@ class FakeLLM(LLM):
         out = self.script[key]
         if callable(out):
             out = out(user)
+        self.usage.append({"provider": self.provider, "model": self.model,
+                           "input_tokens": 0, "output_tokens": 0})
         return json.dumps(out)
 
 
@@ -136,6 +209,14 @@ def llm_from_env(role: str) -> LLM:
         INQUIRY_CRITIC_MODEL    default claude-opus-5-5
     """
     defaults = {"proposer": "claude-sonnet-5-5", "critic": "claude-opus-5-5"}
-    model = os.environ.get(f"INQUIRY_{role.upper()}_MODEL", defaults[role])
-    effort = os.environ.get(f"INQUIRY_{role.upper()}_EFFORT", "medium" if role == "proposer" else "high")
-    return AnthropicLLM(model=model, effort=effort)
+    configured = os.environ.get(f"INQUIRY_{role.upper()}_MODEL", defaults[role])
+    provider, model = configured.split(":", 1) if ":" in configured else ("anthropic", configured)
+    provider, model = provider.strip().lower(), model.strip()
+    if not model:
+        raise ValueError(f"INQUIRY_{role.upper()}_MODEL needs a model name")
+    effort = os.environ.get(f"INQUIRY_{role.upper()}_EFFORT", "medium")
+    if provider == "openai":
+        return OpenAILLM(model=model, reasoning_effort=effort)
+    if provider == "anthropic":
+        return AnthropicLLM(model=model, effort=effort)
+    raise ValueError(f"unknown LLM provider: {provider}")

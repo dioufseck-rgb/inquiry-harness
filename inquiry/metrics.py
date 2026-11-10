@@ -65,6 +65,16 @@ def metrics(inq: Inquiry, ev: Evaluation, gold: Optional[dict[str, Any]] = None,
         "single_origin_accepts": flags.count("single_origin"),
         "main_status": {c.id: ev.status(c.id) for c in inq.main_claims()},
         "absence_assertions": len(inq.conclusion.flags) if inq.conclusion else 0,
+        "provider_proposer": inq.llm_config.get("proposer", {}).get("provider", ""),
+        "provider_critic": inq.llm_config.get("critic", {}).get("provider", ""),
+        "model_proposer": inq.llm_config.get("proposer", {}).get("model", ""),
+        "model_critic": inq.llm_config.get("critic", {}).get("model", ""),
+        "effort_proposer": inq.llm_config.get("proposer", {}).get("effort", ""),
+        "effort_critic": inq.llm_config.get("critic", {}).get("effort", ""),
+        "tokens_in": sum(u["input_tokens"] for u in inq.llm_usage),
+        "tokens_out": sum(u["output_tokens"] for u in inq.llm_usage),
+        "calls": len(inq.llm_usage),
+        "stop_reason": inq.stop_assessments[-1].reason if inq.stop_assessments else "",
     }
     if gold:
         src_hay = [s.title for s in g.sources] + [s.url for s in g.sources]
@@ -83,7 +93,8 @@ def metrics(inq: Inquiry, ev: Evaluation, gold: Optional[dict[str, Any]] = None,
 
 
 def one_line(m: dict[str, Any]) -> str:
-    keys = ["sources", "origins", "duplicate_sources", "evidence", "orphans", "supporting_args", "supporting_in",
+    keys = ["provider_proposer", "model_proposer", "effort_proposer", "provider_critic", "model_critic", "effort_critic",
+            "tokens_in", "tokens_out", "calls", "sources", "origins", "duplicate_sources", "evidence", "orphans", "supporting_args", "supporting_in",
             "attacks", "attacks_out", "attacks_discharged", "accepted_claims", "single_origin_accepts",
             "absence_assertions"]
     parts = [f"{k}={m[k]}" for k in keys if k in m]
@@ -92,5 +103,7 @@ def one_line(m: dict[str, Any]) -> str:
         parts.append(f"gold_facts={m['gold_facts_found']}/{m['gold_facts_total']}")
     if "shape_match" in m:
         parts.append(f"shape_match={m['shape_match']}")
+    if m.get("stop_reason"):
+        parts.append(f"stop_reason={m['stop_reason']!r}")
     parts.append("main=" + ",".join(f"{k}:{v}" for k, v in m["main_status"].items()))
     return "metrics " + " ".join(parts)

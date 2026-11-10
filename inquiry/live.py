@@ -17,6 +17,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import re
 import sys
 from pathlib import Path
@@ -81,10 +82,23 @@ class Harness:
         self.ask = ask or input
         self.pending_queries: list[str] = []
         self._repairs_seen: dict[int, int] = {}
+        self._usage_seen: dict[int, int] = {}
+        self.max_tokens_run = int(os.environ.get("INQUIRY_MAX_TOKENS_RUN", "0"))
+        if self.max_tokens_run < 0:
+            raise ValueError("INQUIRY_MAX_TOKENS_RUN must be nonnegative")
+        for role, llm in (("proposer", proposer), ("critic", critic)):
+            inq.llm_config[role] = {"provider": llm.provider, "model": llm.name,
+                                    "effort": getattr(llm, "reasoning_effort", getattr(llm, "effort", ""))}
 
     # -- bookkeeping -------------------------------------------------------------
 
     def _record(self, move: str, summary_: dict) -> None:
+        usage = []
+        for role, llm in (("proposer", self.proposer), ("critic", self.critic)):
+            calls = getattr(llm, "usage", [])
+            usage.extend({**call, "role": role} for call in calls[self._usage_seen.get(id(llm), 0):])
+            self._usage_seen[id(llm)] = len(calls)
+        self.inq.llm_usage.extend(usage)
         # contract repairs since the last move are part of the record: they explain thin or odd outputs
         for llm in (self.proposer, self.critic):
             seen = self._repairs_seen.setdefault(id(llm), 0)
@@ -93,7 +107,7 @@ class Harness:
             self._repairs_seen[id(llm)] = len(getattr(llm, "repairs", []))
             summary_ = {**summary_, "contract_repairs": len(getattr(llm, "repairs", []))} if getattr(llm, "repairs", []) else summary_
         self.store.save(self.inq)
-        self.store.append_event(move, self.inq, summary_)
+        self.store.append_event(move, self.inq, summary_, usage=usage)
         short = {k: (v if not isinstance(v, list) else len(v)) for k, v in summary_.items()}
         self.log(f"[round {self.inq.round}] {move}: {short}")
 
@@ -306,7 +320,7 @@ class Harness:
             if self.interactive:
                 self._record("human_review", self.human_review())
                 ev = inq.evaluation or ev
-            sa = moves.stop(inq, ev, rounds_left, len(gathered["evidence"]))
+            sa = moves.stop(inq, ev, rounds_left, len(gathered["evidence"]), max_tokens_run=self.max_tokens_run)
             self._record("stop", {"decision": sa.decision, "reason": sa.reason})
             if sa.decision == "stop":
                 break

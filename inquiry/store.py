@@ -63,7 +63,8 @@ class InquiryStore:
                     last = line
         return json.loads(last)["hash"] if last else "0" * 64
 
-    def append_event(self, move: str, inquiry: Inquiry, summary: dict[str, Any]) -> dict:
+    def append_event(self, move: str, inquiry: Inquiry, summary: dict[str, Any],
+                     usage: list[dict[str, Any]] | None = None) -> dict:
         state_hash = hashlib.sha256(inquiry.model_dump_json().encode("utf-8")).hexdigest()
         event = {
             "ts": now_iso(),
@@ -73,6 +74,8 @@ class InquiryStore:
             "state_hash": state_hash,
             "prev_hash": self._last_hash(),
         }
+        if usage is not None:
+            event["usage"] = usage
         payload = json.dumps(event, sort_keys=True, ensure_ascii=False)
         event["hash"] = hashlib.sha256(payload.encode("utf-8")).hexdigest()
         with self.ledger_path.open("a", encoding="utf-8") as f:
