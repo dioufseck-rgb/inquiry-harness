@@ -270,6 +270,10 @@ class ClaimProposal(BaseModel):
 
 class HypothesizeOutput(BaseModel):
     claims: list[ClaimProposal]
+    exclusive_groups: list[list[int]] = Field(
+        default_factory=list,
+        description="Lists of zero-based indexes into `claims` that are mutually exclusive answers (at most one true). "
+                    "Claims in no group are contraries only of their issue's null and deflationary claims.")
 
 
 def hypothesize_view(inq: Inquiry) -> str:
@@ -280,14 +284,19 @@ def apply_hypothesize(inq: Inquiry, out: HypothesizeOutput) -> dict:
     g = inq.graph
     added: list[str] = []
     dropped: list[str] = []
-    for p in out.claims:
+    index_to_id: dict[int, str] = {}
+    for i, p in enumerate(out.claims):
         if g.issue(p.issue_id) is None:
             dropped.append(f"{p.issue_id}: unknown issue")
             continue
-        if any(c.issue_id == p.issue_id and c.text.strip().lower() == p.text.strip().lower() for c in g.claims):
+        existing = next((c for c in g.claims if c.issue_id == p.issue_id
+                         and c.text.strip().lower() == p.text.strip().lower()), None)
+        if existing is not None:
+            index_to_id[i] = existing.id
             continue
         c = g.add_claim(p.text, issue_id=p.issue_id, kind=p.kind, rationale=p.rationale)
         added.append(c.id)
+        index_to_id[i] = c.id
     # every issue gets a null answer to beat, even if the model forgot one
     for iss in g.issues:
         claims = g.claims_for_issue(iss.id)
@@ -295,15 +304,36 @@ def apply_hypothesize(inq: Inquiry, out: HypothesizeOutput) -> dict:
             c = g.add_claim(f"None of the proposed answers to {iss.id} is established", issue_id=iss.id,
                             kind="null", rationale="added by the harness: every issue needs a null to beat")
             added.append(c.id)
-    for iss in g.issues:
-        ids = [c.id for c in g.claims_for_issue(iss.id)]
-        if len(ids) > 1:
-            g.set_contraries(*ids)
+    groups_applied = 0
+    if out.exclusive_groups:
+        # rivals are only the claims the model says are rivals, within one issue
+        for grp in out.exclusive_groups:
+            by_issue: dict[str, list[str]] = {}
+            for i in grp:
+                cid = index_to_id.get(i)
+                if cid is not None:
+                    by_issue.setdefault(g.claim(cid).issue_id or "", []).append(cid)
+            for ids in by_issue.values():
+                if len(ids) > 1:
+                    g.set_contraries(*ids)
+                    groups_applied += 1
+        # the null and deflationary answers are rivals of every substantive answer to their issue
+        for iss in g.issues:
+            claims = g.claims_for_issue(iss.id)
+            for nc in (c for c in claims if c.kind in ("null", "deflationary")):
+                for sc in (c for c in claims if c.kind == "substantive"):
+                    g.set_contraries(nc.id, sc.id)
+    else:
+        inq.notes.append("hypothesize: no exclusive_groups returned; all claims of an issue treated as contraries")
+        for iss in g.issues:
+            ids = [c.id for c in g.claims_for_issue(iss.id)]
+            if len(ids) > 1:
+                g.set_contraries(*ids)
     if inq.framing.standard_override and g.main_issue_id:
         for c in g.claims_for_issue(g.main_issue_id):
             c.proof_standard = inq.framing.standard_override  # type: ignore[assignment]
     inq.phase = "hypothesized"
-    return {"claims": added, "dropped": dropped}
+    return {"claims": added, "dropped": dropped, "exclusive_groups": groups_applied}
 
 
 def hypothesize(inq: Inquiry, llm: LLM) -> dict:

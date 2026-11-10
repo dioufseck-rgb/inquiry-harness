@@ -253,6 +253,39 @@ def test_counter_attack_reinstates_argument_and_accepts_claim(tmp_path):
     assert respond_event["countered"] and any("not an attack" in d for d in respond_event["dropped"])
 
 
+def test_hypothesize_exclusive_groups_decide_who_is_a_rival():
+    from inquiry.moves import ClaimProposal, HypothesizeOutput, apply_hypothesize
+    inq = Inquiry(id="x", question="q")
+    g = inq.graph
+    q1 = g.add_issue("What do the evaluations report?")
+    q2 = g.add_issue("How big was the effect?")
+    out = HypothesizeOutput(claims=[
+        ClaimProposal(issue_id=q1.id, text="The official evaluation estimates a reduction"),
+        ClaimProposal(issue_id=q1.id, text="The independent study finds no significant effect"),
+        ClaimProposal(issue_id=q2.id, text="Large", kind="substantive"),
+        ClaimProposal(issue_id=q2.id, text="Small", kind="substantive"),
+        ClaimProposal(issue_id=q2.id, text="None", kind="null"),
+        ClaimProposal(issue_id=q2.id, text="Unanswerable as posed", kind="deflationary"),
+    ], exclusive_groups=[[2, 3], [0, 3]])  # the second group spans issues and is split per issue
+    res = apply_hypothesize(inq, out)
+    c1, c2, big, small, null, defl = g.claims[:6]
+    # (a) descriptive claims in no group: not rivals of each other, both rivals of the harness-added null
+    assert c2.id not in c1.contrary_ids and c1.id not in c2.contrary_ids
+    harness_null = next(c for c in g.claims_for_issue(q1.id) if c.kind == "null")
+    assert harness_null.id in c1.contrary_ids and harness_null.id in c2.contrary_ids
+    # (b) a group: pairwise contraries; null and deflationary rivals of every substantive answer
+    assert small.id in big.contrary_ids and big.id in small.contrary_ids
+    assert {null.id, defl.id} <= set(big.contrary_ids) and {null.id, defl.id} <= set(small.contrary_ids)
+    assert defl.id not in null.contrary_ids  # the two non-answers are not rivals of each other
+    assert res["exclusive_groups"] == 1 and not any(n.startswith("hypothesize:") for n in inq.notes)
+    # fallback when the model gives no groups: all claims of an issue are rivals, and a note records it
+    inq2 = Inquiry(id="y", question="q")
+    q = inq2.graph.add_issue("Q")
+    apply_hypothesize(inq2, HypothesizeOutput(claims=[ClaimProposal(issue_id=q.id, text="A"), ClaimProposal(issue_id=q.id, text="B")]))
+    a, b = inq2.graph.claims[:2]
+    assert b.id in a.contrary_ids and any(n.startswith("hypothesize: no exclusive_groups") for n in inq2.notes)
+
+
 def test_respond_discharge_writes_the_answer_and_creates_no_attack():
     from inquiry.moves import AttackProposal, CritiqueOutput, RespondOutput, ResponseProposal, CQAnswerProposal, \
         apply_critique, apply_respond, evaluate_move

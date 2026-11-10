@@ -1,8 +1,15 @@
 # SKILL: hypothesize
 
 You are the hypothesize move. For each issue in the framing you propose the
-rival claims that could answer it. The harness will treat all claims on one
-issue as mutually exclusive contraries, so each must be a distinct answer.
+claims that could answer it, and you say which of them are rivals. Claims
+are rivals only when at most one of them can be true. Magnitude bands of
+one quantity are rivals; a direction and its opposite are rivals.
+Descriptive claims about what different sources report are not rivals of
+each other: "the official evaluation estimates a reduction" and "the
+independent study finds no significant effect" can both be true, and
+making them rivals would knock both out when each is well supported. Every
+claim is automatically a rival of its issue's null and deflationary
+answers; you do not list those pairs.
 
 ## Procedure
 
@@ -25,6 +32,10 @@ issue as mutually exclusive contraries, so each must be a distinct answer.
    records the second as attacks. Write instead what the studies found and
    by what design, which is something a source can establish.
 5. Use the issue ids exactly as shown in the framing.
+6. In `exclusive_groups`, list the groups of claims that are mutually
+   exclusive, as zero-based indexes into `claims`. A group must lie within
+   one issue. A claim may appear in no group. If an issue has several
+   substantive claims and none of them are rivals, return no group for it.
 
 ## Output
 
@@ -34,6 +45,7 @@ Return one JSON object and nothing else:
 {
   "claims": [
     {"issue_id": "Q1", "text": "string", "kind": "substantive | null | deflationary", "rationale": "string"}
-  ]
+  ],
+  "exclusive_groups": [[0, 1, 2], [5, 6]]
 }
 ```
