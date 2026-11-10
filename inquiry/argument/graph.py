@@ -93,6 +93,10 @@ class Claim(BaseModel):
     superseded_by: Optional[str] = Field(default=None, description="Set when a revision replaced this claim.")
     revision_of: Optional[str] = Field(default=None, description="The claim this one narrowed or split from.")
     review_note: str = Field(default="", description="Why a criticism did or did not change this claim.")
+    answers_issue: bool = Field(
+        default=True,
+        description="False when a revision narrowed the claim to a population, outcome or horizon that no longer "
+                    "answers the issue as posed; it is then a component finding, not an answer.")
 
     @property
     def live(self) -> bool:
@@ -274,7 +278,7 @@ class ArgumentGraph(BaseModel):
 
     def supersede_claim(self, old_id: str, texts: list[str], carry_arguments: list[str] | None = None,
                         kind: Optional[str] = None, target: Optional[dict[str, str]] = None,
-                        reason: str = "") -> list[Claim]:
+                        reason: str = "", answers_issue: bool = True) -> list[Claim]:
         """
         Replace a claim with one (narrow) or several (split) revised claims on
         the same issue. Rivals of the old claim become rivals of each new one;
@@ -295,7 +299,7 @@ class ArgumentGraph(BaseModel):
         for t in texts:
             c = self.add_claim(t, issue_id=old.issue_id, kind=kind or old.kind, origin=old.origin,
                                rationale=f"revision of {old.id}: {reason}" if reason else f"revision of {old.id}",
-                               target=dict(target or {}), revision_of=old.id)
+                               target=dict(target or {}), revision_of=old.id, answers_issue=answers_issue)
             new.append(c)
         rivals = [self.claim(o) for o in old.contrary_ids if self.claim(o) is not None and self.claim(o).live]
         for c in new:

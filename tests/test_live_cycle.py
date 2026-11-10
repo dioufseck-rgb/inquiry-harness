@@ -428,6 +428,16 @@ def test_revise_operations_change_claims_and_support_relations():
     ev = evaluate_move(inq)
     assert ev.status(part.id) == "in" and ev.status(balance.id) == "undecided" and ev.issues[q.id] == [part.id]
     assert inq.main_claims() == [null, part, balance]
+    # a component finding narrowed off the question (70+ vs 60+) is accepted but does not answer the issue
+    out2 = apply_revise(inq, ReviseOutput(operations=[
+        RevisionOp(op="narrow", claim_id=part.id, texts=["In adults 70+ (ASPREE) aspirin increased major haemorrhage"],
+                   carry_arguments=[a_bleed.id], answers_issue=False, reason="70+ is not the 60+ population asked about")]))
+    comp = g.claim(out2["narrowed"][0].split("->")[1])
+    ev = evaluate_move(inq)
+    assert ev.status(comp.id) == "in" and comp.answers_issue is False and ev.issues[q.id] == []
+    flag = next(f for f in ev.flags if f.code == "main_issue_unresolved")
+    assert comp.id in flag.detail and "component findings" in flag.detail
+    assert "component finding" in summary(g, ev)
     assert e_model.id not in issue_evidence(g, q.id)[1]  # context grounds nothing
     assert any(n == "critic needs: ASPREE CV composite HR with 95% CI" for n in inq.notes)
     text = summary(g, ev)

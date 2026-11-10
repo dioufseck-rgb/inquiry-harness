@@ -132,7 +132,8 @@ def summary(g: ArgumentGraph, ev: Evaluation, lb: list[LoadBearing] | None = Non
             lines.append(
                 f"- {_MARK[d.status]} {c.id}: {c.text}  "
                 f"[{d.standard}; pro {d.pro_strength} vs con {d.con_strength}"
-                f"{'; corroborated' if d.corroborated else ''}]"
+                f"{'; corroborated' if d.corroborated else ''}"
+                f"{'; component finding, not an answer to the issue as posed' if not c.answers_issue else ''}]"
             )
         if not accepted:
             lines.append("- no accepted answer yet")

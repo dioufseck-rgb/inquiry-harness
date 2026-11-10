@@ -112,11 +112,17 @@
       - "primary prevention"
       - "grade D"                     # USPSTF grade for initiation at 60+ (verify wording)
   expected:
-    # wording verified on the first run (2026-11-10): the accepted claim read "increases net cardiovascular harm"
-    shape: "accepted:no net benefit|does not reduce net|should not be initiated|increases net .{0,20}harm|net harm"
+    # Revised after the methodological review of the first runs (2026-11-10). The question asks
+    # about adults 60+; the trial evidence is mostly 70+ and the guideline is the only source that
+    # speaks to 60+. The right accepted answer is the recommendation against initiation, or a net
+    # harm / no-net-benefit claim that is explicitly a recommendation or scoped to the trial
+    # population. A bare "increases net harm in adults 60+" on ASPREE alone is an overclaim.
+    shape: "accepted:grade D|recommends? against|not recommend|no net benefit|increased major h(a|e)morrhage|should not be initiated"
     notes: >
-      Accepted under clear and convincing; corroborated across independent
-      trials and the guideline body; bleeding counted against benefit.
+      Recommendation (USPSTF 2022, Grade D at 60+) accepted on the guideline; the
+      ASPREE bleeding excess accepted as a component finding scoped to 70+;
+      the 60+ net event balance left unestablished unless a 60+ estimate with
+      an interval is retrieved; bleeding counted against benefit.
   traps:
     - carrying secondary-prevention evidence across to primary prevention
     - ignoring bleeding

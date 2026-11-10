@@ -12,7 +12,12 @@ disposition that changes the inquiry's state, or to say why it does not.
 - **narrow** a claim: replace it with a claim whose population, outcome,
   horizon, quantity or scope matches what the evidence supports. Name the
   arguments that support the narrowed claim in `carry_arguments`; the rest
-  are withdrawn with your reason. Fill `target` so the narrowed claim says
+  are withdrawn with your reason. Set `answers_issue` to false when the
+  narrowing moved the claim off the question as posed: a finding about
+  adults 70+ does not answer a question about adults 60+, a finding about
+  bleeding alone does not answer a question about the net balance. Such a
+  claim is kept, evaluated and reported as a component finding, but it does
+  not settle the issue, and the inquiry continues looking for what would. Fill `target` so the narrowed claim says
   what it is about: population, intervention, comparator, outcome,
   horizon, quantity, scope, evidence_status (observed, estimated, modelled,
   recommended, inferred).
@@ -61,7 +66,7 @@ Return one JSON object and nothing else:
     {"op": "narrow", "claim_id": "C9", "texts": ["In adults 70+ without prior CVD, low-dose aspirin increased major haemorrhage over about 4.7 years"],
      "target": {"population": "adults 70+ without prior CVD (ASPREE)", "intervention": "aspirin 100 mg daily", "comparator": "placebo",
                 "outcome": "major haemorrhage", "horizon": "median 4.7 years", "quantity": "absolute risk difference", "scope": "trial population", "evidence_status": "observed"},
-     "carry_arguments": ["A12"], "reason": "the 'about 10 per 1,000' range was not supported; the direction and population are"},
+     "carry_arguments": ["A12"], "answers_issue": false, "reason": "the 'about 10 per 1,000' range was not supported; the direction and population are; 70+ does not answer the 60+ question"},
     {"op": "split", "claim_id": "C1", "texts": ["Bleeding rose", "Net balance is harm"], "carry_arguments": ["A1@0"], "reason": "A1 supports the component, not the balance"},
     {"op": "withdraw_support", "argument_id": "A17", "reason": "all-cause mortality is a different outcome from the event balance"},
     {"op": "reclassify", "evidence_id": "E40", "role": "context", "reason": "lifetime QALY model, not a five-year event count"},

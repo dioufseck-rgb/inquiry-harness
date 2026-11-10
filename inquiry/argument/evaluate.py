@@ -323,7 +323,8 @@ def evaluate(g: ArgumentGraph, max_iter: int = 10) -> Evaluation:
     ev = Evaluation(applicable=applicable, inapplicable_reasons=reasons, argument_strength=strengths,
                     labels=labels, claims=details, converged=converged)
     for iss in g.issues:
-        ev.issues[iss.id] = [c.id for c in g.claims_for_issue(iss.id) if details[c.id].status == "in"]  # live claims only
+        # live claims that still answer the issue as posed; a component finding does not answer it
+        ev.issues[iss.id] = [c.id for c in g.claims_for_issue(iss.id) if details[c.id].status == "in" and c.answers_issue]
     ev.flags = _flags(g, ev)
     return ev
 
@@ -390,7 +391,12 @@ def _flags(g: ArgumentGraph, ev: Evaluation) -> list[Flag]:
         if d.met and any(ev.claims[o].met for o in c.contrary_ids if o in ev.claims):
             flags.append(Flag(code="contraries_both_meet_standard", node_id=c.id, detail="raise the standard or find discriminating evidence"))
     if g.main_issue_id and not ev.issues.get(g.main_issue_id):
-        flags.append(Flag(code="main_issue_unresolved", node_id=g.main_issue_id, detail="no accepted claim answers the main issue"))
+        components = [c.id for c in g.claims_for_issue(g.main_issue_id)
+                      if ev.claims[c.id].status == "in" and not c.answers_issue]
+        detail = "no accepted claim answers the main issue"
+        if components:
+            detail += f"; accepted component findings that do not answer it as posed: {', '.join(components)}"
+        flags.append(Flag(code="main_issue_unresolved", node_id=g.main_issue_id, detail=detail))
     for c in g.claims:
         if c.live and ev.claims[c.id].status == "in" and c.revision_of is None:
             # an accepted claim that carries a number should say what it is a number of

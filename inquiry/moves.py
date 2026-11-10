@@ -82,7 +82,8 @@ def _issues_block(inq: Inquiry, ev: Optional[Evaluation] = None, with_claims: bo
         if with_claims:
             for c in g.claims_for_issue(iss.id):
                 st = f" [{ev.status(c.id)}]" if ev else ""
-                lines.append(f"  - {c.id} ({c.kind}){st}: {c.text}")
+                comp = " (component finding; does not answer the issue as posed)" if not c.answers_issue else ""
+                lines.append(f"  - {c.id} ({c.kind}){st}: {c.text}{comp}")
     return "\n".join(lines)
 
 
@@ -1093,6 +1094,11 @@ class RevisionOp(BaseModel):
     kind: Optional[Literal["substantive", "null", "deflationary"]] = None
     target: dict[str, str] = Field(default_factory=dict, description="narrow: population, intervention, comparator, outcome, horizon, quantity, scope, evidence_status.")
     carry_arguments: list[str] = Field(default_factory=list, description="Argument ids that support the revised claim(s); 'A3@1' sends A3 to the second part of a split.")
+    answers_issue: bool = Field(
+        default=True,
+        description="narrow/split: does the revised claim still answer the issue as posed? False when the population, "
+                    "outcome or horizon was narrowed away from the question's (e.g. the question asks about 60+ and the "
+                    "evidence supports 70+). A component finding is kept and reported but does not settle the issue.")
     argument_id: str = Field(default="", description="withdraw_support: the argument whose support relation is removed.")
     evidence_id: str = Field(default="", description="reclassify: the evidence item.")
     role: Literal["evidence", "context", "indirect", "lead"] = "context"
@@ -1149,7 +1155,7 @@ def apply_revise(inq: Inquiry, out: ReviseOutput) -> dict:
                     continue
                 carry = [x for x in op.carry_arguments if g.arg(x.partition("@")[0]) is not None]
                 new = g.supersede_claim(op.claim_id, texts, carry_arguments=carry, kind=op.kind,
-                                        target=op.target, reason=op.reason)
+                                        target=op.target, reason=op.reason, answers_issue=op.answers_issue)
                 done["narrowed" if op.op == "narrow" else "split"].append(f"{op.claim_id}->{','.join(x.id for x in new)}")
                 inq.notes.append(f"revise: {op.op} {op.claim_id} -> {', '.join(x.id for x in new)}: {op.reason}")
             elif op.op == "reclassify":
