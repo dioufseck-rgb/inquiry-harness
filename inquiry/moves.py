@@ -28,7 +28,7 @@ from pydantic import BaseModel, Field
 
 from .argument.evaluate import Evaluation, Settler, evaluate, load_bearing, what_would_settle
 from .argument.graph import (
-    STRENGTH_ORDER, Argument, ArgumentGraph, AttackType, CQAnswer, Credentials, EvidenceKind, ProofStandard,
+    STRENGTH_ORDER, Argument, ArgumentGraph, AttackType, CQAnswer, Credentials, EvidenceKind, Issue, ProofStandard,
     QuestionType, Source, Strength,
 )
 from .argument.schemes import SCHEMES
@@ -234,6 +234,18 @@ def frame_view(inq: Inquiry) -> str:
     return _framing_block(inq)
 
 
+# a sub-issue about the inquiry itself rather than the world: robustness, sufficiency, reliability,
+# meeting a standard, or whether sources are independent (not what independent sources report)
+_META_ISSUE = re.compile(
+    r"\b(robust|sufficien|reliab)|\bmeets?\s+(?:the\s+)?(?:\w+\s+){0,3}standard\b|"
+    r"\b(?:are|is|were|was|whether|how)\b[^?.]{0,60}\bindependent\b",
+    re.I)
+
+
+def is_meta_issue(text: str) -> bool:
+    return bool(_META_ISSUE.search(text))
+
+
 def apply_frame(inq: Inquiry, out: FrameOutput) -> dict:
     g = inq.graph
     inq.framing = Framing(
@@ -244,12 +256,23 @@ def apply_frame(inq: Inquiry, out: FrameOutput) -> dict:
     main = g.add_issue(inq.question, question_type=out.question_type, answerhood=out.answerhood,
                        presuppositions=out.presuppositions)
     g.main_issue_id = main.id
-    subs = [g.add_issue(s.text, question_type=s.question_type, answerhood=s.answerhood, parent_id=main.id)
-            for s in out.sub_issues]
-    for s, iss in zip(out.sub_issues, subs):
-        iss.depends_on = [subs[i].id for i in s.depends_on if 0 <= i < len(subs) and subs[i].id != iss.id]
+    kept: list[tuple[int, SubIssue]] = []
+    dropped: list[str] = []
+    for i, s in enumerate(out.sub_issues):
+        if is_meta_issue(s.text):
+            dropped.append(s.text)
+            inq.notes.append(f"frame: dropped sub-issue about the inquiry itself: {s.text}")
+        else:
+            kept.append((i, s))
+    index_to_issue: dict[int, Issue] = {}
+    for i, s in kept:
+        index_to_issue[i] = g.add_issue(s.text, question_type=s.question_type, answerhood=s.answerhood, parent_id=main.id)
+    for i, s in kept:
+        iss = index_to_issue[i]
+        iss.depends_on = [index_to_issue[j].id for j in s.depends_on if j in index_to_issue and j != i]
     inq.phase = "framed"
-    return {"main_issue": main.id, "sub_issues": [x.id for x in subs], "question_type": out.question_type}
+    return {"main_issue": main.id, "sub_issues": [x.id for x in index_to_issue.values()],
+            "dropped": dropped, "question_type": out.question_type}
 
 
 def frame(inq: Inquiry, llm: LLM) -> dict:

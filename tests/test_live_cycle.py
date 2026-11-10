@@ -330,6 +330,27 @@ def test_argue_view_prefers_the_origin_over_its_relay():
     assert any(f.code == "derivative_premise" and f.node_id == a.id for f in ev.flags)
 
 
+def test_frame_drops_sub_issues_about_the_inquiry_itself():
+    from inquiry.moves import FrameOutput, SubIssue, apply_frame, is_meta_issue
+    assert is_meta_issue("Are the published evaluations robust to weather adjustment?")
+    assert is_meta_issue("Is the evidence sufficient to meet the clear and convincing standard?")
+    assert is_meta_issue("How independent are the official and academic analyses?")
+    assert is_meta_issue("Do the estimates, mechanism and robustness checks meet the required standard?")
+    assert not is_meta_issue("What do independent evaluations estimate for the effect, and by what method?")
+    assert not is_meta_issue("What did roadside monitors record before and after August 2023?")
+    inq = Inquiry(id="x", question="Did X reduce Y?")
+    res = apply_frame(inq, FrameOutput(restatement="r", question_type="causal", sub_issues=[
+        SubIssue(text="What did monitors record?"),
+        SubIssue(text="Are the evaluations robust and independent?"),
+        SubIssue(text="What do independent evaluations estimate?", depends_on=[0, 1]),
+    ]))
+    g = inq.graph
+    assert [i.text for i in g.issues[1:]] == ["What did monitors record?", "What do independent evaluations estimate?"]
+    assert res["dropped"] == ["Are the evaluations robust and independent?"]
+    assert g.issues[2].depends_on == [g.issues[1].id]  # the dependency on the dropped one is gone
+    assert any(n.startswith("frame: dropped sub-issue") for n in inq.notes)
+
+
 def test_hypothesize_exclusive_groups_decide_who_is_a_rival():
     from inquiry.moves import ClaimProposal, HypothesizeOutput, apply_hypothesize
     inq = Inquiry(id="x", question="q")

@@ -31,7 +31,9 @@ answer contains, and the tree of sub-questions whose answers compose it.
    circular or that the sources cannot answer. "What do the published
    evaluations conclude, by what method?" is a fair factual sub-question.
    "Are the evaluations weak?" is not; that judgement is made per item at
-   appraisal and per argument by the critic.
+   appraisal and per argument by the critic. The harness drops a
+   sub-question that asks whether evidence is robust, reliable, sufficient,
+   independent, or meets a standard, and records the drop.
 7. Set `standard_override` only when the asker's stake warrants a higher
    proof standard than the default (causal: clear and convincing; others:
    preponderance). Leave it null otherwise.
