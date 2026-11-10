@@ -359,6 +359,12 @@ class ArgumentGraph(BaseModel):
                 raise KeyError(f"premise {pid!r} is not evidence or a claim")
             if pid == target_id:
                 raise ValueError(f"attack on {target_id} cannot use {target_id} as its own grounds")
+            if type == "undermine" and isinstance(target, Evidence):
+                p = self.ev(pid)
+                if (p is not None and p.source_id and p.source_id == target.source_id
+                        and p.location.strip() and p.location.strip().lower() == target.location.strip().lower()):
+                    raise ValueError(f"undermine of {target_id} cannot be grounded in {pid}: the same passage "
+                                     f"({target.location}) used against itself")
         x = Argument(id=self._next("A", self.arguments), scheme=scheme,
                      premise_ids=premise_ids or [], attacks=Attack(target_id=target_id, type=type), **kw)
         for cq in SCHEMES[scheme].critical_questions:

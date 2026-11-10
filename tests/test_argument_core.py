@@ -123,6 +123,21 @@ def test_attack_cannot_cite_its_own_target():
         g.add_attack(e.id, "undermine", premise_ids=[e.id])
 
 
+def test_undermine_cannot_use_the_same_passage_against_itself():
+    g, q, c, n, s = base_graph()
+    e = g.add_evidence("table says 104", source_id=s.id, location="Table 4, p. 37")
+    same = g.add_evidence("table says 104 on a different basis", source_id=s.id, location="table 4, P. 37")
+    other = g.add_evidence("methodology note: definitions changed", source_id=s.id, location="p. 80")
+    with pytest.raises(ValueError):
+        g.add_attack(e.id, "undermine", premise_ids=[same.id])
+    x = g.add_attack(e.id, "undermine", premise_ids=[other.id])
+    assert x.attacks.type == "undermine"
+    # the rule is specific to undermining evidence: an undercut may cite any passage
+    a = g.add_argument("document_record", [e.id], c.id)
+    y = g.add_attack(a.id, "undercut", premise_ids=[same.id])
+    assert y.attacks.target_id == a.id
+
+
 def test_unusable_evidence_is_not_flagged_orphan_and_load_bearing_names_claim():
     g, q, c, n, s = base_graph()
     e = g.add_evidence("record says X", source_id=s.id, credentials=strong())
