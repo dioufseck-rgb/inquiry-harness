@@ -162,6 +162,30 @@ def test_no_evidence_skips_conclude_and_marks_failure(tmp_path):
     assert store.verify_ledger()
 
 
+def test_counter_diagnostics_separate_rejections_from_inapplicability(tmp_path):
+    from inquiry import moves
+    from inquiry.metrics import metrics
+
+    h, store = make_harness(tmp_path, [], overrides={"respond": {"responses": [
+        {"attack_id": "A2", "action": "counter", "premise_ids": ["E999"]},
+        {"attack_id": "A1", "action": "counter", "premise_ids": ["E1"]},
+    ]}})
+    inq = h.run(rounds=1)
+    m = metrics(inq, inq.evaluation)
+    assert m["counters_dropped"] == 2
+    assert m["counters_dropped_reasons"] == {"no grounds": 1, "not an attack": 1}
+    res = moves.apply_respond(inq, moves.RespondOutput(responses=[
+        moves.ResponseProposal(attack_id="A2", action="counter", premise_ids=["E1"]) ]))
+    counter = inq.graph.arg(res["countered"][0])
+    assert counter.premise_ids == ["E1"] and counter.cq["grounds"].status == "answered"
+    ev = moves.evaluate_move(inq)
+    assert ev.applicable[counter.id] and ev.labels[counter.id] == "in" and ev.labels["A2"] == "out"
+    counter.cq["grounds"].status = "open"
+    m = metrics(inq, moves.evaluate_move(inq))
+    assert m["counters_inapplicable"] == 1
+    assert m["counters_inapplicable_reasons"][counter.id]
+
+
 def test_one_round_builds_graph_and_ledger(tmp_path):
     plan_calls: list[str] = []
     h, store = make_harness(tmp_path, plan_calls)

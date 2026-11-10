@@ -90,6 +90,7 @@ class Inquiry(BaseModel):
     notes: list[str] = Field(default_factory=list)
     llm_usage: list[dict] = Field(default_factory=list)
     llm_config: dict[str, dict] = Field(default_factory=dict)
+    counter_drops: list[dict] = Field(default_factory=list)
 
     def main_claims(self):
         if not self.graph.main_issue_id:

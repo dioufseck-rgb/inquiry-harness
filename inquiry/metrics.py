@@ -47,6 +47,12 @@ def metrics(inq: Inquiry, ev: Evaluation, gold: Optional[dict[str, Any]] = None,
     g = inq.graph
     supporting = [a for a in g.arguments if not a.is_attack]
     attacks = [a for a in g.arguments if a.is_attack]
+    counters = [a for a in attacks if a.origin == "proposer" and g.arg(a.attacks.target_id)
+                and g.arg(a.attacks.target_id).is_attack]
+    counter_reasons: dict[str, int] = {}
+    for d in inq.counter_drops:
+        counter_reasons[d["reason"]] = counter_reasons.get(d["reason"], 0) + 1
+    inapplicable = {a.id: ev.inapplicable_reasons.get(a.id, []) for a in counters if not ev.applicable.get(a.id, False)}
     flags = [f.code for f in ev.flags]
     m: dict[str, Any] = {
         "id": inq.id,
@@ -61,6 +67,10 @@ def metrics(inq: Inquiry, ev: Evaluation, gold: Optional[dict[str, Any]] = None,
         "attacks": len(attacks),
         "attacks_out": sum(1 for a in attacks if ev.labels.get(a.id) == "out"),
         "attacks_discharged": sum(1 for a in attacks if is_discharged(g, a)),
+        "counters_dropped": len(inq.counter_drops),
+        "counters_dropped_reasons": counter_reasons,
+        "counters_inapplicable": len(inapplicable),
+        "counters_inapplicable_reasons": inapplicable,
         "accepted_claims": sum(1 for c in g.claims if ev.status(c.id) == "in"),
         "single_origin_accepts": flags.count("single_origin"),
         "main_status": {c.id: ev.status(c.id) for c in inq.main_claims()},
@@ -98,7 +108,8 @@ def metrics(inq: Inquiry, ev: Evaluation, gold: Optional[dict[str, Any]] = None,
 def one_line(m: dict[str, Any]) -> str:
     keys = ["provider_proposer", "model_proposer", "effort_proposer", "provider_critic", "model_critic", "effort_critic",
             "tokens_in", "tokens_out", "calls", "sources", "origins", "duplicate_sources", "evidence", "orphans", "supporting_args", "supporting_in",
-            "attacks", "attacks_out", "attacks_discharged", "accepted_claims", "single_origin_accepts",
+            "attacks", "attacks_out", "attacks_discharged", "counters_dropped", "counters_dropped_reasons",
+            "counters_inapplicable", "counters_inapplicable_reasons", "accepted_claims", "single_origin_accepts",
             "absence_assertions"]
     parts = [f"{k}={m[k]}" for k in keys if k in m]
     if "gold_sources_total" in m:

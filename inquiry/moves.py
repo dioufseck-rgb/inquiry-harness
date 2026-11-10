@@ -1015,10 +1015,19 @@ def apply_respond(inq: Inquiry, out: RespondOutput) -> dict:
     countered: list[str] = []
     discharged: list[str] = []
     dropped: list[str] = []
+    counter_drops: list[dict] = []
+
+    def drop_counter(r: ResponseProposal, reason: str) -> None:
+        detail = {"attack_id": r.attack_id, "reason": reason, "premise_ids": r.premise_ids, "round": inq.round}
+        counter_drops.append(detail)
+        inq.counter_drops.append(detail)
+
     for r in out.responses:
         atk = g.arg(r.attack_id)
         if atk is None or not atk.is_attack:
             dropped.append(f"{r.attack_id}: not an attack")
+            if r.action == "counter":
+                drop_counter(r, "not an attack")
             continue
         if r.action == "discharge":
             target = g.node(atk.attacks.target_id)
@@ -1048,14 +1057,17 @@ def apply_respond(inq: Inquiry, out: RespondOutput) -> dict:
         premises = [x for x in r.premise_ids if (g.ev(x) is not None or g.claim(x) is not None) and x != atk.id]
         if not premises:
             dropped.append(f"counter to {atk.id}: no grounds")
+            drop_counter(r, "no grounds")
             continue
         if any(a.is_attack and a.attacks.target_id == atk.id and set(a.premise_ids) == set(premises)
                for a in g.arguments):
+            drop_counter(r, "duplicate counter")
             continue
         try:
             c = g.add_attack(atk.id, "undercut", premise_ids=premises, origin="proposer", note=r.note, round=inq.round)
         except (KeyError, ValueError) as e:
             dropped.append(f"counter to {atk.id}: {e}")
+            drop_counter(r, str(e))
             continue
         countered.append(c.id)
         target = g.node(atk.attacks.target_id)
@@ -1067,7 +1079,11 @@ def apply_respond(inq: Inquiry, out: RespondOutput) -> dict:
                     if ans.answer or ev_ids:
                         g.answer_cq(target.id, qid, ans.answer, ev_ids, defaulted=ans.defaulted and not ev_ids,
                                     outcome="" if ans.defaulted and not ev_ids else ans.outcome)
-    return {"conceded": conceded, "countered": countered, "discharged": discharged, "dropped": dropped}
+    reasons: dict[str, int] = {}
+    for d in counter_drops:
+        reasons[d["reason"]] = reasons.get(d["reason"], 0) + 1
+    return {"conceded": conceded, "countered": countered, "discharged": discharged, "dropped": dropped,
+            "counters_dropped": len(counter_drops), "counters_dropped_reasons": reasons, "counter_drops": counter_drops}
 
 
 def respond(inq: Inquiry, llm: LLM) -> dict:
@@ -1075,7 +1091,8 @@ def respond(inq: Inquiry, llm: LLM) -> dict:
     attacks = standing_attacks(inq, ev)
     new = [a for a in attacks if CONCEDED_MARK not in a.note]
     if not new:
-        return {"conceded": [], "countered": [], "discharged": [], "dropped": [], "standing": len(attacks), "new": 0}
+        return {"conceded": [], "countered": [], "discharged": [], "dropped": [], "standing": len(attacks), "new": 0,
+                "counters_dropped": 0, "counters_dropped_reasons": {}, "counter_drops": []}
     out = llm.complete_json(skill_text("respond"), respond_view(inq, attacks), RespondOutput)
     res = apply_respond(inq, out)
     res["standing"] = len(attacks)
