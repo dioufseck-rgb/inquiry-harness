@@ -31,6 +31,7 @@ depends on applicability, stages 1–3 iterate to a fixed point.
 
 from __future__ import annotations
 
+import re
 from typing import Literal, Optional
 
 from pydantic import BaseModel, Field
@@ -322,7 +323,7 @@ def evaluate(g: ArgumentGraph, max_iter: int = 10) -> Evaluation:
     ev = Evaluation(applicable=applicable, inapplicable_reasons=reasons, argument_strength=strengths,
                     labels=labels, claims=details, converged=converged)
     for iss in g.issues:
-        ev.issues[iss.id] = [c.id for c in g.claims_for_issue(iss.id) if details[c.id].status == "in"]
+        ev.issues[iss.id] = [c.id for c in g.claims_for_issue(iss.id) if details[c.id].status == "in"]  # live claims only
     ev.flags = _flags(g, ev)
     return ev
 
@@ -339,8 +340,15 @@ def _flags(g: ArgumentGraph, ev: Evaluation) -> list[Flag]:
         flags.append(Flag(code="inapplicable_argument", node_id=aid, detail="; ".join(why)))
     used = {pid for a in g.arguments for pid in a.premise_ids}
     for e in g.evidence:
-        if e.id not in used and not e.provenance.get("unusable"):
+        if e.id not in used and not e.provenance.get("unusable") and e.role == "evidence":
             flags.append(Flag(code="orphan_evidence", node_id=e.id, detail="evidence used in no argument"))
+    for a in g.arguments:
+        if a.is_attack or a.withdrawn:
+            continue
+        bad = [p for p in a.premise_ids if g.ev(p) is not None and g.ev(p).role in ("context", "lead")]
+        if bad:
+            flags.append(Flag(code="context_as_premise", node_id=a.id,
+                              detail=f"{', '.join(bad)} reclassified as context or lead but still used as grounds"))
     for a in g.arguments:
         if a.is_attack or not a.claim_id:
             continue
@@ -368,6 +376,8 @@ def _flags(g: ArgumentGraph, ev: Evaluation) -> list[Flag]:
                                   detail=f"same origin ({key}) and neither is marked as derived from the other"))
     for c in g.claims:
         d = ev.claims[c.id]
+        if not c.live:
+            continue
         if d.status == "in":
             origins = _all_origins({x: argument_origins(g, g.arg(x)) for x in d.pro_ids})
             if len(origins) <= 1:
@@ -381,7 +391,16 @@ def _flags(g: ArgumentGraph, ev: Evaluation) -> list[Flag]:
             flags.append(Flag(code="contraries_both_meet_standard", node_id=c.id, detail="raise the standard or find discriminating evidence"))
     if g.main_issue_id and not ev.issues.get(g.main_issue_id):
         flags.append(Flag(code="main_issue_unresolved", node_id=g.main_issue_id, detail="no accepted claim answers the main issue"))
+    for c in g.claims:
+        if c.live and ev.claims[c.id].status == "in" and c.revision_of is None:
+            # an accepted claim that carries a number should say what it is a number of
+            if _NUMBER.search(c.text) and not c.target:
+                flags.append(Flag(code="untyped_quantity", node_id=c.id,
+                                  detail="accepted claim states a quantity but no target (population, outcome, horizon, quantity) is recorded"))
     return flags
+
+
+_NUMBER = re.compile(r"\d+(?:[.,]\d+)?\s*(?:%|µg|ug|mg|per\b|/\s*1,?000|percentage points|pp\b|µ)", re.I)
 
 
 # ---------------------------------------------------------------------------

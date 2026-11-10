@@ -684,6 +684,8 @@ def issue_evidence(g: ArgumentGraph, issue_id: str, include_unassigned: bool = F
     claim_ids = {c.id for c in g.claims_for_issue(issue_id)}
     ev_ids = []
     for e in g.evidence:
+        if e.role in ("context", "lead"):
+            continue  # reclassified on review: informs, but grounds nothing
         if not ((set(e.bears_on) & claim_ids) or (include_unassigned and not e.bears_on)):
             continue
         orig = shadowed_by_origin(g, e, claim_ids)
@@ -1081,6 +1083,112 @@ def respond(inq: Inquiry, llm: LLM) -> dict:
 
 
 # ---------------------------------------------------------------------------
+# Revise: review findings become changes to claims and support relations
+# ---------------------------------------------------------------------------
+
+class RevisionOp(BaseModel):
+    op: Literal["narrow", "split", "reclassify", "withdraw_support", "retain", "request"]
+    claim_id: str = Field(default="", description="narrow, split, retain: the claim concerned.")
+    texts: list[str] = Field(default_factory=list, description="narrow: one revised text; split: one text per part.")
+    kind: Optional[Literal["substantive", "null", "deflationary"]] = None
+    target: dict[str, str] = Field(default_factory=dict, description="narrow: population, intervention, comparator, outcome, horizon, quantity, scope, evidence_status.")
+    carry_arguments: list[str] = Field(default_factory=list, description="Argument ids that support the revised claim(s); 'A3@1' sends A3 to the second part of a split.")
+    argument_id: str = Field(default="", description="withdraw_support: the argument whose support relation is removed.")
+    evidence_id: str = Field(default="", description="reclassify: the evidence item.")
+    role: Literal["evidence", "context", "indirect", "lead"] = "context"
+    reason: str = ""
+    request: str = Field(default="", description="request: what to retrieve or compute, specific enough to search for.")
+
+
+class ReviseOutput(BaseModel):
+    operations: list[RevisionOp] = Field(default_factory=list)
+
+
+def revise_view(inq: Inquiry) -> str:
+    g = inq.graph
+    ev = inq.evaluation or evaluate_move(inq)
+    lines = ["# Review findings that may need a disposition", ""]
+    for a in g.arguments:
+        if a.is_attack or a.withdrawn:
+            continue
+        sch = SCHEMES[a.scheme]
+        bad = [(q.id, a.cq[q.id]) for q in sch.critical_questions
+               if q.id in a.cq and a.cq[q.id].status == "answered" and a.cq[q.id].outcome in ("unsatisfied", "unresolved")]
+        standing = [x for x in g.arguments if x.is_attack and ev.labels.get(x.id) == "in"
+                    and (x.attacks.target_id == a.id or x.attacks.target_id in a.premise_ids)]
+        if bad or standing:
+            st = "inapplicable" if not ev.applicable.get(a.id, True) else ev.labels.get(a.id, "?")
+            lines.append(f"- {a.id} ({a.scheme}) → {a.claim_id} [{st}]")
+            for qid, ans in bad:
+                lines.append(f"  check {qid}: {ans.outcome} — {ans.answer}")
+            for x in standing:
+                lines.append(f"  standing {x.attacks.type} {x.id}: {x.note[:200]}")
+    for f in ev.flags:
+        if f.code in ("derivative_premise", "untyped_quantity", "single_origin", "context_as_premise"):
+            lines.append(f"- flag {f.code} on {f.node_id}: {f.detail}")
+    if len(lines) == 2:
+        lines.append("(none)")
+    return "\n\n".join([_framing_block(inq), _issues_block(inq, ev), "\n".join(lines),
+                        _arguments_block(g, ev), _evidence_block(g)])
+
+
+def apply_revise(inq: Inquiry, out: ReviseOutput) -> dict:
+    g = inq.graph
+    done: dict[str, list[str]] = {"narrowed": [], "split": [], "reclassified": [], "withdrawn": [], "retained": [], "requested": []}
+    dropped: list[str] = []
+    for op in out.operations:
+        try:
+            if op.op in ("narrow", "split"):
+                c = g.claim(op.claim_id)
+                if c is None or not c.live:
+                    dropped.append(f"{op.op} {op.claim_id}: not a live claim")
+                    continue
+                texts = op.texts[:1] if op.op == "narrow" else op.texts
+                if op.op == "split" and len(texts) < 2:
+                    dropped.append(f"split {op.claim_id}: needs two or more parts")
+                    continue
+                carry = [x for x in op.carry_arguments if g.arg(x.partition("@")[0]) is not None]
+                new = g.supersede_claim(op.claim_id, texts, carry_arguments=carry, kind=op.kind,
+                                        target=op.target, reason=op.reason)
+                done["narrowed" if op.op == "narrow" else "split"].append(f"{op.claim_id}->{','.join(x.id for x in new)}")
+                inq.notes.append(f"revise: {op.op} {op.claim_id} -> {', '.join(x.id for x in new)}: {op.reason}")
+            elif op.op == "reclassify":
+                e = g.ev(op.evidence_id)
+                if e is None:
+                    dropped.append(f"reclassify {op.evidence_id}: unknown evidence")
+                    continue
+                e.role = op.role
+                e.provenance["reclassified"] = op.reason or op.role
+                done["reclassified"].append(f"{e.id}:{op.role}")
+            elif op.op == "withdraw_support":
+                a = g.arg(op.argument_id)
+                if a is None or a.is_attack:
+                    dropped.append(f"withdraw_support {op.argument_id}: not a supporting argument")
+                    continue
+                a.withdrawn = op.reason or "withdrawn on review"
+                done["withdrawn"].append(a.id)
+            elif op.op == "retain":
+                c = g.claim(op.claim_id)
+                if c is None or not c.live:
+                    dropped.append(f"retain {op.claim_id}: not a live claim")
+                    continue
+                c.review_note = op.reason
+                done["retained"].append(c.id)
+            elif op.op == "request":
+                if op.request.strip():
+                    inq.notes.append(f"critic needs: {op.request.strip()}")
+                    done["requested"].append(op.request.strip()[:80])
+        except (KeyError, ValueError) as e:
+            dropped.append(f"{op.op} {op.claim_id or op.argument_id or op.evidence_id}: {e}")
+    return {**done, "dropped": dropped}
+
+
+def revise(inq: Inquiry, llm: LLM) -> dict:
+    out = llm.complete_json(skill_text("revise"), revise_view(inq), ReviseOutput)
+    return apply_revise(inq, out)
+
+
+# ---------------------------------------------------------------------------
 # Compute: the arithmetic instrument
 # ---------------------------------------------------------------------------
 
@@ -1277,6 +1385,15 @@ def conclude_view(inq: Inquiry) -> str:
         lb_lines.append("(none)")
     parts.append("\n".join(lb_lines))
     parts.append(_settlers_block(inq, ev))
+    revised = [c for c in g.claims if not c.live]
+    if revised:
+        parts.append("# Claims revised on review (write from the revised claims, never the originals)\n\n" + "\n".join(
+            f"- {c.id} \"{_clip(c.text, 100)}\" → {c.superseded_by}" + (f": {c.review_note}" if c.review_note else "")
+            for c in revised))
+    retained = [c for c in g.live_claims() if c.review_note]
+    if retained:
+        parts.append("# Claims retained despite criticism, with the reason\n\n" + "\n".join(
+            f"- {c.id}: {c.review_note}" for c in retained))
     if inq.reflections:
         r = inq.reflections[-1]
         parts.append("# Last reflection\n\n" + "\n".join(

@@ -83,6 +83,7 @@ def make_scripts(plan_calls: list[str], overrides: dict | None = None):
         }],
             "unusable": [{"evidence_id": "E2", "reason": "grounds an objection, not a claim"}]},
         "respond": {"responses": [{"attack_id": "A2", "action": "concede", "note": "need the errata"}]},
+        "revise": {"operations": []},
         "compute": {"computations": []},
         "conclude": {
             "answer": "Not settled: the only support for a fall is undercut by a definition change.",
@@ -191,8 +192,8 @@ def test_one_round_builds_graph_and_ledger(tmp_path):
     # persistence
     assert store.verify_ledger() is True
     moves_run = [e["move"] for e in store.events()]
-    assert moves_run == ["frame", "hypothesize", "plan", "gather", "argue", "critique", "respond", "evaluate",
-                         "reflect", "stop", "conclude"]
+    assert moves_run == ["frame", "hypothesize", "plan", "gather", "argue", "critique", "respond", "revise",
+                         "evaluate", "reflect", "stop", "conclude"]
     reloaded = store.load()
     assert reloaded.model_dump() == inq.model_dump()
     assert (store.dir / "report.md").exists() and (store.dir / "chart.mmd").exists()
@@ -383,6 +384,76 @@ def test_conclude_flags_assertions_of_absence_but_not_findings():
         "absence_assertion: There is no external control in the official analysis.",
         "absence_assertion: No interval is reported for the 4.8%.",
     ]
+
+
+def test_revise_operations_change_claims_and_support_relations():
+    import pytest
+    from inquiry.moves import ReviseOutput, RevisionOp, apply_revise, evaluate_move, issue_evidence, conclude_view
+    from inquiry.argument import Credentials, summary
+    inq = Inquiry(id="x", question="Does aspirin reduce net harm in adults 60+?")
+    g = inq.graph
+    q = g.add_issue("Does aspirin reduce net harm in adults 60+?", question_type="causal")
+    c1 = g.add_claim("Aspirin increases net harm in adults 60+: bleeding (about 10 per 1,000) exceeds events prevented", issue_id=q.id)
+    null = g.add_claim("No net effect", issue_id=q.id, kind="null")
+    g.set_contraries(c1.id, null.id)
+    s = g.add_source(url="https://nejm.example/aspree", title="ASPREE bleeding paper", kind="primary")
+    e_bleed = g.add_evidence("ASPREE (70+): major haemorrhage 3.8% vs 2.8%", source_id=s.id, credentials=Credentials(force="strong", credibility="strong", relevance="strong"), bears_on={c1.id: "for"})
+    e_mort = g.add_evidence("ASPREE: all-cause mortality HR 1.14", source_id=s.id, bears_on={c1.id: "for"})
+    e_model = g.add_evidence("USPSTF model: lifetime QALYs slightly negative at 60-69", source_id=s.id, bears_on={c1.id: "for"})
+    a_bleed = g.add_argument("study_result", [e_bleed.id], c1.id)
+    a_mort = g.add_argument("study_result", [e_mort.id], c1.id)
+    for a in (a_bleed, a_mort):
+        for qid in ("design", "directness", "uncertainty", "reported"):
+            g.answer_cq(a.id, qid, "ok", [a.premise_ids[0]])
+    assert evaluate_move(inq).status(c1.id) == "in"
+    out = apply_revise(inq, ReviseOutput(operations=[
+        RevisionOp(op="split", claim_id=c1.id,
+                   texts=["In adults 70+ (ASPREE), aspirin increased major haemorrhage over about 4.7 years",
+                          "In adults 60+, the net balance of bleeding against events prevented is harm"],
+                   carry_arguments=[f"{a_bleed.id}@0"], reason="A1 supports the component, not the balance"),
+        RevisionOp(op="withdraw_support", argument_id=a_mort.id, reason="mortality is a different outcome from the balance"),
+        RevisionOp(op="reclassify", evidence_id=e_model.id, role="context", reason="lifetime QALY model"),
+        RevisionOp(op="retain", claim_id=null.id, reason="no criticism bears on it"),
+        RevisionOp(op="request", request="ASPREE CV composite HR with 95% CI"),
+        RevisionOp(op="narrow", claim_id="C99", texts=["x"]),
+    ]))
+    assert out["split"] == [f"{c1.id}->C3,C4"] and out["withdrawn"] == [a_mort.id]
+    assert out["reclassified"] == [f"{e_model.id}:context"] and out["retained"] == [null.id]
+    assert out["requested"] and any(d.startswith("narrow C99") for d in out["dropped"])
+    part, balance = g.claim("C3"), g.claim("C4")
+    assert not c1.live and c1.superseded_by == part.id and part.revision_of == c1.id
+    assert a_bleed.claim_id == part.id and a_mort.withdrawn.startswith("mortality is")
+    assert null.id in part.contrary_ids and null.id in balance.contrary_ids and part.id not in balance.contrary_ids
+    assert g.claims_for_issue(q.id) == [null, part, balance] and c1 in g.claims_for_issue(q.id, live_only=False)
+    ev = evaluate_move(inq)
+    assert ev.status(part.id) == "in" and ev.status(balance.id) == "undecided" and ev.issues[q.id] == [part.id]
+    assert inq.main_claims() == [null, part, balance]
+    assert e_model.id not in issue_evidence(g, q.id)[1]  # context grounds nothing
+    assert any(n == "critic needs: ASPREE CV composite HR with 95% CI" for n in inq.notes)
+    text = summary(g, ev)
+    assert "## Revisions" in text and f"{c1.id} → {part.id}" in text and c1.text[:30] not in text.split("## Revisions")[0]
+    view = conclude_view(inq)
+    assert "Claims revised on review" in view and "retained despite criticism" in view
+    # a superseded claim cannot be revised again
+    with pytest.raises(ValueError):
+        g.supersede_claim(c1.id, ["again"])
+
+
+def test_accepted_quantity_without_a_target_is_flagged():
+    from inquiry.argument import Credentials, evaluate
+    inq = Inquiry(id="x", question="q")
+    g = inq.graph
+    q = g.add_issue("Q?")
+    c = g.add_claim("Turn time fell by about 12%", issue_id=q.id)
+    s = g.add_source(url="https://a.example/", kind="primary")
+    e = g.add_evidence("table", source_id=s.id, credentials=Credentials(force="strong", credibility="strong", relevance="strong"))
+    a = g.add_argument("document_record", [e.id], c.id)
+    for qid in ("authentic", "accuracy", "reading"):
+        g.answer_cq(a.id, qid, "ok", [e.id])
+    ev = evaluate(g)
+    assert ev.status(c.id) == "in" and any(f.code == "untyped_quantity" and f.node_id == c.id for f in ev.flags)
+    c.target = {"population": "fleet", "outcome": "mean turn time", "horizon": "2023 vs 2024", "quantity": "relative change"}
+    assert not any(f.code == "untyped_quantity" for f in evaluate(g).flags)
 
 
 def test_frame_drops_sub_issues_about_the_inquiry_itself():

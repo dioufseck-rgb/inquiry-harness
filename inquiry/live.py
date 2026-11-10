@@ -293,6 +293,8 @@ class Harness:
             self.pending_queries = list(crit["needed_evidence"])
             ev = moves.evaluate_move(inq)  # the proposer sees which attacks stand
             self._record("respond", moves.respond(inq, self.proposer))
+            ev = moves.evaluate_move(inq)  # review findings now have their effect; revise turns them into claim changes
+            self._record("revise", moves.revise(inq, self.proposer))
             ev = moves.evaluate_move(inq)
             self._record("evaluate", {
                 "accepted": {k: v for k, v in ev.issues.items() if v},

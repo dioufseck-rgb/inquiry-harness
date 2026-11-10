@@ -138,6 +138,14 @@ def summary(g: ArgumentGraph, ev: Evaluation, lb: list[LoadBearing] | None = Non
             lines.append("- no accepted answer yet")
         lines.append("")
 
+    revised = [c for c in g.claims if not c.live]
+    if revised:
+        lines.append("## Revisions")
+        lines.append("")
+        for c in revised:
+            lines.append(f"- {c.id} → {c.superseded_by}: {_short(c.text, 90)}" + (f" ({c.review_note})" if c.review_note else ""))
+        lines.append("")
+
     open_assumptions = [(aid, why) for aid, why in ev.inapplicable_reasons.items()]
     lines.append("## Arguments")
     lines.append("")

@@ -86,6 +86,17 @@ class Claim(BaseModel):
     )
     origin: Origin = "proposer"
     rationale: str = ""
+    target: dict[str, str] = Field(
+        default_factory=dict,
+        description="What the claim is about, where changing it would change the answer: population, intervention, "
+                    "comparator, outcome, horizon, quantity, scope, evidence_status.")
+    superseded_by: Optional[str] = Field(default=None, description="Set when a revision replaced this claim.")
+    revision_of: Optional[str] = Field(default=None, description="The claim this one narrowed or split from.")
+    review_note: str = Field(default="", description="Why a criticism did or did not change this claim.")
+
+    @property
+    def live(self) -> bool:
+        return self.superseded_by is None
 
 
 # ---------------------------------------------------------------------------
@@ -136,6 +147,10 @@ class Evidence(BaseModel):
         default_factory=dict,
         description="claim id -> direction this item bears on it, as appraised. A hint for Argue, not an argument.",
     )
+    role: Literal["evidence", "context", "indirect", "lead"] = Field(
+        default="evidence",
+        description="evidence grounds arguments; context informs but grounds nothing; indirect bears on a claim only "
+                    "through a stated bridge; lead points to something worth retrieving.")
 
 
 class Source(BaseModel):
@@ -251,8 +266,56 @@ class ArgumentGraph(BaseModel):
     def attacks_on(self, target_id: str) -> list[Argument]:
         return [a for a in self.arguments if a.is_attack and a.attacks.target_id == target_id]
 
-    def claims_for_issue(self, issue_id: str) -> list[Claim]:
-        return [c for c in self.claims if c.issue_id == issue_id]
+    def claims_for_issue(self, issue_id: str, live_only: bool = True) -> list[Claim]:
+        return [c for c in self.claims if c.issue_id == issue_id and (c.live or not live_only)]
+
+    def live_claims(self) -> list[Claim]:
+        return [c for c in self.claims if c.live]
+
+    def supersede_claim(self, old_id: str, texts: list[str], carry_arguments: list[str] | None = None,
+                        kind: Optional[str] = None, target: Optional[dict[str, str]] = None,
+                        reason: str = "") -> list[Claim]:
+        """
+        Replace a claim with one (narrow) or several (split) revised claims on
+        the same issue. Rivals of the old claim become rivals of each new one;
+        supporting arguments listed in carry_arguments move to the first new
+        claim (or to the one named as "<id>@<index>"); the rest are withdrawn
+        with the reason, keeping their evidence. Attacks on the old claim stay
+        where they are and become inert with it.
+        """
+        old = self.claim(old_id)
+        if old is None:
+            raise KeyError(old_id)
+        if not old.live:
+            raise ValueError(f"{old_id} is already superseded by {old.superseded_by}")
+        texts = [t.strip() for t in texts if t.strip()]
+        if not texts:
+            raise ValueError("a revision needs at least one claim text")
+        new: list[Claim] = []
+        for t in texts:
+            c = self.add_claim(t, issue_id=old.issue_id, kind=kind or old.kind, origin=old.origin,
+                               rationale=f"revision of {old.id}: {reason}" if reason else f"revision of {old.id}",
+                               target=dict(target or {}), revision_of=old.id)
+            new.append(c)
+        rivals = [self.claim(o) for o in old.contrary_ids if self.claim(o) is not None and self.claim(o).live]
+        for c in new:
+            for r in rivals:
+                if len(new) == 1 or r.kind in ("null", "deflationary"):
+                    self.set_contraries(c.id, r.id)
+        old.superseded_by = new[0].id
+        old.review_note = reason
+        carry: dict[str, int] = {}
+        for item in carry_arguments or []:
+            aid, _, idx = item.partition("@")
+            carry[aid] = int(idx) if idx.isdigit() and int(idx) < len(new) else 0
+        for a in self.arguments:
+            if a.is_attack or a.claim_id != old.id:
+                continue
+            if a.id in carry:
+                a.claim_id = new[carry[a.id]].id
+            else:
+                a.withdrawn = f"claim {old.id} revised to {', '.join(c.id for c in new)}; not carried over" + (f": {reason}" if reason else "")
+        return new
 
     def standard_for(self, claim: Claim) -> ProofStandard:
         if claim.proof_standard:
