@@ -263,10 +263,14 @@ def test_argue_view_prefers_the_origin_over_its_relay():
     relay = g.add_source(url="https://news.example/story", title="Story", kind="derivative", derived_from=report.id)
     orig = g.add_evidence("report: 4.8% lower", source_id=report.id, bears_on={c.id: "for"})
     rel = g.add_evidence("BBC: 4.8% lower", source_id=relay.id, bears_on={c.id: "for"})
-    other = g.add_evidence("BBC: minister quoted", source_id=relay.id, bears_on={c.id: "against"})  # not shadowed
+    other = g.add_evidence("BBC: minister quoted", source_id=relay.id, bears_on={c.id: "against"})
+    unrelated = g.add_evidence("BBC: on a different claim", source_id=relay.id, bears_on={"C99": "for"})
     claim_ids, ids = issue_evidence(g, q.id)
-    assert ids == [orig.id, other.id]
+    # both relay items on C are shadowed, whatever their direction; the one on another claim is untouched
+    assert ids == [orig.id]
     assert rel.provenance["unusable"].startswith(f"relay of {report.id}")
+    assert other.provenance["unusable"].startswith(f"relay of {report.id}")
+    assert "unusable" not in unrelated.provenance
     view = argue_view(inq, q.id)
     assert f"- {orig.id} " in view and f"- {rel.id} " not in view
     # an argument built on the relay anyway is flagged
