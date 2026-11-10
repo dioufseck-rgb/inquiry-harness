@@ -141,7 +141,7 @@ class Harness:
                     if not h.url or h.url in known_urls:
                         continue
                     known_urls.add(h.url)
-                    f = self.fetcher.fetch(h.url)
+                    f = self.fetcher.fetch(h.url, h.title)
                     if len(f.text.strip()) < self.min_chars:
                         skipped.append(f"{h.url}: {f.error or f'only {len(f.text.strip())} chars of text'}")
                         continue
@@ -265,11 +265,15 @@ class Harness:
             inq.phase = "inquiring"
 
         ev: Evaluation = moves.evaluate_move(inq)
+        first_pass = True
         while inq.phase == "inquiring":
-            pending = [t for t in inq.tests if t.status == "planned" and t.round == inq.round]
-            if pending and inq.round > 0:
-                # resuming a round that was planned but not gathered: continue it rather than start a new one
-                self.log(f"[round {inq.round}] resume: {len(pending)} planned tests pending; skipping plan")
+            events = self.store.events()
+            interrupted = (first_pass and inq.round > 0 and events and events[-1]["move"] == "plan"
+                           and events[-1]["round"] == inq.round)
+            first_pass = False
+            if interrupted:
+                # resuming a run that stopped right after plan: continue that round rather than start a new one
+                self.log(f"[round {inq.round}] resume: continuing the planned round; skipping plan")
             else:
                 inq.round += 1
                 self._record("plan", moves.plan(inq, self.proposer, self.pending_queries or None))

@@ -53,7 +53,8 @@ def extract_supplementary_links(markup: str, base_url: str, limit: int = 4) -> l
 class Fetcher:
     name: str = "base"
 
-    def fetch(self, url: str) -> Fetched:  # pragma: no cover
+    def fetch(self, url: str, title: str = "") -> Fetched:  # pragma: no cover
+        """`title` is what the search engine reported for the page; a hint for fallbacks, never trusted as content."""
         raise NotImplementedError
 
 
@@ -63,15 +64,51 @@ _DOI_IN_URL = re.compile(r"10\.\d{4,9}/[^\s\"'<>?#]+", re.I)
 EUROPEPMC_SEARCH = "https://www.ebi.ac.uk/europepmc/webservices/rest/search"
 
 
-def europepmc_query_for(url: str) -> str | None:
-    """A Europe PMC query for a PubMed record or a DOI-bearing article URL, else None."""
+def europepmc_query_for(url: str, title: str = "") -> str | None:
+    """
+    A Europe PMC query for a PubMed record, a DOI-bearing article URL, or,
+    failing both, the article's title as a search engine reported it.
+    """
     m = _PUBMED.search(url)
     if m:
         return f"EXT_ID:{m.group(1)} AND SRC:MED"
     m = _DOI_IN_URL.search(url)
     if m:
         return f'DOI:"{m.group(0).rstrip(".,;)")}"'
+    words = re.sub(r"[^\w\s-]", " ", title.replace("...", " ")).split()
+    if len(words) >= 5:
+        return 'TITLE:"' + " ".join(words[:10]) + '"'
     return None
+
+
+_SCHOLARLY_HOST = re.compile(
+    r"nejm\.org|jamanetwork\.com|thelancet\.com|bmj\.com|acpjournals\.org|sciencedirect\.com|springer\.com|"
+    r"wiley\.com|nature\.com|cell\.com|ahajournals\.org|oup\.com|tandfonline\.com|sagepub\.com|cambridge\.org|"
+    r"pubmed|ncbi\.nlm\.nih\.gov|doi\.org|/doi/", re.I)
+
+
+def _looks_scholarly(url: str, title: str) -> bool:
+    """Only article pages are worth a bibliographic lookup; a blocked news page is not in Europe PMC."""
+    return bool(_SCHOLARLY_HOST.search(url) or _DOI_IN_URL.search(url))
+
+
+def title_matches(hint: str, found: str) -> bool:
+    """
+    Is the record Europe PMC returned the paper the search engine named? The
+    hint's words (truncation marks removed) must nearly all appear in the found
+    title, in order; phrase search alone returns near neighbours.
+    """
+    if not hint.strip():
+        return True
+    norm = lambda s: re.sub(r"[^a-z0-9\s]", " ", s.lower().replace("...", " ")).split()  # noqa: E731
+    h, f = norm(hint), norm(found)
+    if not h:
+        return True
+    i = 0
+    for w in f:
+        if i < len(h) and w == h[i]:
+            i += 1
+    return i >= max(4, int(0.9 * len(h)))
 
 
 def europepmc_record_text(result: dict) -> tuple[str, str]:
@@ -137,7 +174,7 @@ class HttpFetcher(Fetcher):
         self.max_chars = max_chars
         self.user_agent = user_agent or self.DEFAULT_UA
 
-    def fetch(self, url: str) -> Fetched:
+    def fetch(self, url: str, title: str = "") -> Fetched:
         if _PUBMED.search(url):
             # PubMed pages block automated clients; Europe PMC holds the same record
             via = self._europepmc(url)
@@ -151,18 +188,18 @@ class HttpFetcher(Fetcher):
             if not direct.error:
                 return direct
             got.error = f"{got.error}; direct: {direct.error}"
-        if got.error and europepmc_query_for(url):
+        if got.error and _looks_scholarly(url, title) and europepmc_query_for(url, title):
             # a paywalled or blocked article page: at least its abstract, and full text when open access
-            via = self._europepmc(url)
+            via = self._europepmc(url, title)
             if via is not None:
                 via.error = ""
                 return via
         return got
 
-    def _europepmc(self, url: str) -> Fetched | None:
+    def _europepmc(self, url: str, title: str = "") -> Fetched | None:
         import httpx
 
-        query = europepmc_query_for(url)
+        query = europepmc_query_for(url, title)
         if not query:
             return None
         try:
@@ -176,14 +213,16 @@ class HttpFetcher(Fetcher):
         if not results:
             return None
         rec = results[0]
-        title, text = europepmc_record_text(rec)
+        found_title, text = europepmc_record_text(rec)
+        if query.startswith("TITLE:") and not title_matches(title, found_title):
+            return None  # a near neighbour, not the paper the search engine named
         pmcid = rec.get("pmcid")
         if pmcid and (rec.get("isOpenAccess") == "Y" or rec.get("inPMC") == "Y"):
             full = self._get(url, f"https://www.ebi.ac.uk/europepmc/webservices/rest/{pmcid}/fullTextXML")
             if not full.error and len(full.text) > len(text):
-                full.title = full.title or title
+                full.title = full.title or found_title
                 return full
-        return Fetched(url=url, final_url=f"{EUROPEPMC_SEARCH}?query={query}", title=title, text=text,
+        return Fetched(url=url, final_url=f"{EUROPEPMC_SEARCH}?query={query}", title=found_title, text=text,
                        content_type="application/json; europepmc", status=200, total_chars=len(text))
 
     def _get(self, url: str, target: str, retries: int = 3) -> Fetched:
@@ -263,7 +302,7 @@ class FakeFetcher(Fetcher):
         self.pages = pages or {}
         self.calls: list[str] = []
 
-    def fetch(self, url: str) -> Fetched:
+    def fetch(self, url: str, title: str = "") -> Fetched:
         self.calls.append(url)
         page = self.pages.get(url)
         if page is None:

@@ -928,6 +928,35 @@ def standing_attacks(inq: Inquiry, ev: Evaluation) -> list[Argument]:
 CONCEDED_MARK = "(conceded by proposer"
 
 
+def _attack_context_evidence(g: ArgumentGraph, atk: Argument) -> list[str]:
+    """
+    The evidence most likely to answer an attack: items from the same sources
+    as the attacked argument's premises (a report answers questions about its
+    own method), items bearing on the attacked claim, and the attack's own
+    grounds. The proposer sees these first; the full list follows.
+    """
+    t = atk.attacks
+    target = g.node(t.target_id)
+    premise_ids: list[str] = []
+    claim_id: Optional[str] = None
+    if isinstance(target, Argument):
+        premise_ids, claim_id = list(target.premise_ids), target.claim_id
+    elif hasattr(target, "credentials"):
+        premise_ids = [t.target_id]
+        users = [x for x in g.arguments if t.target_id in x.premise_ids and not x.is_attack]
+        claim_id = users[0].claim_id if users else None
+    else:
+        claim_id = t.target_id
+        premise_ids = [p for a in g.arguments_for(t.target_id) for p in a.premise_ids]
+    sources = {g.ev(p).source_id for p in premise_ids if g.ev(p) is not None and g.ev(p).source_id}
+    out: list[str] = []
+    for e in g.evidence:
+        if e.id in premise_ids or e.id in atk.premise_ids or (e.source_id and e.source_id in sources) \
+                or (claim_id and claim_id in e.bears_on):
+            out.append(e.id)
+    return out
+
+
 def respond_view(inq: Inquiry, attacks: list[Argument]) -> str:
     g = inq.graph
     ev = inq.evaluation
@@ -938,6 +967,7 @@ def respond_view(inq: Inquiry, attacks: list[Argument]) -> str:
         lines.append("Previously conceded, listed for reference; respond to one of these only if evidence gathered "
                      "since now answers it: " + ", ".join(f"{a.id} (on {a.attacks.target_id})" for a in old))
         lines.append("")
+    focus: list[str] = []
     for a in new:
         t = a.attacks
         lines.append(f"## {a.id}: {t.type} on {t.target_id} (by {a.origin}, strength {ev.argument_strength.get(a.id, '?')})")
@@ -958,9 +988,14 @@ def respond_view(inq: Inquiry, attacks: list[Argument]) -> str:
             lines.append(f"attacked evidence {t.target_id}, used by {', '.join(users) or 'nothing'}")
         else:
             lines.append(f"attacked claim {t.target_id}: {target.text}")
+        ctx = _attack_context_evidence(g, a)
+        lines.append("evidence to check first for this attack: " + (", ".join(ctx) if ctx else "(none)"))
+        focus += [x for x in ctx if x not in focus]
         lines.append("")
-    return "\n\n".join([_framing_block(inq), _issues_block(inq, ev), "\n".join(lines),
-                        _sources_block(g), _evidence_block(g)])
+    rest = [e.id for e in g.evidence if e.id not in focus]
+    return "\n\n".join([_framing_block(inq), _issues_block(inq, ev), "\n".join(lines), _sources_block(g),
+                        _evidence_block(g, focus, title="Evidence from the same sources and on the same claims as the attacked arguments"),
+                        _evidence_block(g, rest, title="Other evidence")])
 
 
 def apply_respond(inq: Inquiry, out: RespondOutput) -> dict:

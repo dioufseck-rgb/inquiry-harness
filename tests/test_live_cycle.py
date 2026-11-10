@@ -219,6 +219,35 @@ def test_second_round_gets_critic_queries_and_stops_on_no_new_evidence(tmp_path)
     assert store.verify_ledger() is True
 
 
+def test_leftover_planned_tests_do_not_freeze_the_round_and_resume_continues_a_planned_round(tmp_path):
+    plan_calls: list[str] = []
+    two_tests = {"plan": lambda user: (plan_calls.append(user) or {"tests": [
+        {"claim_ids": ["C1"], "observation": "first", "queries": ["q1"]},
+        {"claim_ids": ["C1"], "observation": "second", "queries": ["q2"]},
+    ]})}
+    # a budget of one query per round leaves the second test planned at the end of round 1
+    h, store = make_harness(tmp_path, [], overrides=two_tests, queries_per_round=1)
+    inq = h.run(rounds=2)
+    rounds_logged = [e["round"] for e in store.events() if e["move"] == "plan"]
+    assert rounds_logged == [1, 2] and inq.round == 2  # the round advanced; plan ran again
+    # a run interrupted right after plan continues that round when resumed
+    h2, store2 = make_harness(tmp_path, [], overrides=two_tests)
+    h2.store = InquiryStore(tmp_path, "t4")
+    inq2 = h2.inq
+    h2._record("frame", moves_frame(inq2, h2.proposer))
+    h2._record("hypothesize", moves_hyp(inq2, h2.proposer))
+    inq2.phase = "inquiring"
+    inq2.round = 1
+    h2._record("plan", moves_plan(inq2, h2.proposer))
+    resumed = Harness(h2.store.load(), h2.store, h2.proposer, h2.critic, h2.search, h2.fetcher, log=lambda s: None)
+    out = resumed.run(rounds=1)
+    assert [e["move"] for e in resumed.store.events()][:4] == ["frame", "hypothesize", "plan", "gather"]
+    assert out.round == 1 and out.phase == "concluded"
+
+
+from inquiry.moves import frame as moves_frame, hypothesize as moves_hyp, plan as moves_plan  # noqa: E402
+
+
 def test_interactive_human_objection(tmp_path):
     plan_calls: list[str] = []
     answers = iter(["A2 undercut the methodology note covers a different fleet", "bogus", "Q1 rebut nope", ""])
@@ -573,6 +602,16 @@ def test_europepmc_fallback_queries_and_record_text():
     assert europepmc_query_for("https://pubmed.ncbi.nlm.nih.gov/38204851/") == "EXT_ID:38204851 AND SRC:MED"
     assert europepmc_query_for("https://www.nejm.org/doi/full/10.1056/NEJMoa1805819") == 'DOI:"10.1056/NEJMoa1805819"'
     assert europepmc_query_for("https://jamanetwork.com/journals/jama/fullarticle/2791401") is None
+    assert europepmc_query_for("https://jamanetwork.com/journals/jama/fullarticle/2721178",
+                               "Association of Aspirin Use for Primary Prevention With Cardiovascular Events and Bleeding ...") == \
+        'TITLE:"Association of Aspirin Use for Primary Prevention With Cardiovascular Events"'
+    assert europepmc_query_for("https://news.example/x", "Short title") is None
+    # a looked-up record must be the paper asked for, not a near neighbour
+    from inquiry.tools.fetch import title_matches
+    hint = "Association of Aspirin Use for Primary Prevention With Cardiovascular Events and Bleeding Events ..."
+    assert title_matches(hint, "Association of Aspirin Use for Primary Prevention With Cardiovascular Events and Bleeding Events: A Systematic Review and Meta-analysis")
+    assert not title_matches(hint, "Association of Aspirin Use in Primary Prevention and Cardiovascular Events: A Retrospective Cohort Study")
+    assert title_matches("", "anything")  # no hint, nothing to contradict
     title, text = europepmc_record_text({
         "title": "Effect of Aspirin on Cardiovascular Events and Bleeding in the Healthy Elderly.",
         "abstractText": "<h4>Background</h4>Aspirin is a well-established therapy... <h4>Results</h4>Major hemorrhage 3.8% vs 2.8%.",
