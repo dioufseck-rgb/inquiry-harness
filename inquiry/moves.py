@@ -1211,6 +1211,9 @@ class VariableBinding(BaseModel):
     value: float
     evidence_id: str
     what: str = Field(default="", description="What this number is, in the source's terms.")
+    population: str = Field(default="", description="Whose number it is: the population or sample.")
+    outcome: str = Field(default="", description="What it measures: the endpoint, quantity or construct.")
+    comparison: str = Field(default="", description="The comparison or period it belongs to, e.g. 'aspirin vs placebo, 4.7 y'.")
 
 
 class ComputationProposal(BaseModel):
@@ -1220,7 +1223,19 @@ class ComputationProposal(BaseModel):
     text: str = Field(description="What the result establishes, in our words, without the number.")
     unit: str = ""
     bears_on: dict[str, Literal["for", "against", "neutral"]] = Field(default_factory=dict)
+    harmonised: str = Field(default="", description="When inputs differ in population, outcome or comparison: how they were made comparable. Required then.")
+    uncertainty: str = Field(default="", description="The result's uncertainty, if it can be stated from the inputs; otherwise leave empty and it is recorded as not established.")
     note: str = ""
+
+
+def _inputs_comparable(variables: dict[str, VariableBinding]) -> list[str]:
+    """Dimensions on which the declared inputs differ; a computation over them needs a stated harmonisation."""
+    diffs = []
+    for dim in ("population", "outcome", "comparison"):
+        vals = {getattr(b, dim).strip().lower() for b in variables.values() if getattr(b, dim).strip()}
+        if len(vals) > 1:
+            diffs.append(dim)
+    return diffs
 
 
 class ComputeOutput(BaseModel):
@@ -1255,6 +1270,10 @@ def apply_compute(inq: Inquiry, out: ComputeOutput) -> dict:
             if inputs is not None:
                 dropped.append(f"{p.name}: no inputs")
             continue
+        diffs = _inputs_comparable(p.variables)
+        if diffs and not p.harmonised.strip():
+            dropped.append(f"{p.name}: inputs differ in {', '.join(diffs)} and no harmonisation is stated")
+            continue
         try:
             result = safe_eval(p.expression, {n: b.value for n, b, _ in inputs})
         except ComputeError as err:
@@ -1269,15 +1288,25 @@ def apply_compute(inq: Inquiry, out: ComputeOutput) -> dict:
         )
         first = inputs[0][2]
         shown = f"{result:.4g}{' ' + p.unit if p.unit else ''}"
+        uncertainty = p.uncertainty.strip() or "not established"
         # a computation inherits the origin of its inputs; it is never a new origin
         origin = g.evidence_origin(first) or f"source:{first.source_id or first.id}"
+
+        def lineage(n: str, b: VariableBinding, e) -> str:
+            src = g.source(e.source_id) if e.source_id else None
+            where = f"{src.id} {src.title[:40]!r}" if src else "no source"
+            ver = f", {src.date}" if src and src.date else ""
+            dims = ", ".join(x for x in (b.population, b.outcome, b.comparison) if x)
+            return f"{n}={b.value:g} <- {b.evidence_id} ({b.what}) @ {where}{ver} [{e.location or 'no location'}]" + (f" {{{dims}}}" if dims else "")
+
         e = g.add_evidence(
-            f"{p.text}: {shown}", kind="model_output", quote=p.expression, location="computed",
+            f"{p.text}: {shown} (uncertainty {uncertainty})", kind="model_output", quote=p.expression, location="computed",
             credentials=cred, independence_group=origin,
             origin="instrument", bears_on={k: v for k, v in p.bears_on.items() if k in known},
             provenance={
                 "instrument": INSTRUMENT_VERSION, "name": p.name, "expression": p.expression,
-                "inputs": "; ".join(f"{n}={b.value:g} from {b.evidence_id} ({b.what})" for n, b, _ in inputs),
+                "inputs": "; ".join(lineage(n, b, e) for n, b, e in inputs),
+                "harmonised": p.harmonised.strip(), "uncertainty": uncertainty,
                 "result": repr(result), "round": str(inq.round),
             },
         )

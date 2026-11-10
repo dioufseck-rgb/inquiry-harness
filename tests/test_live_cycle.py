@@ -640,19 +640,35 @@ def test_compute_instrument_writes_model_output_evidence():
                         credentials=Credentials(credibility="moderate", force="strong"))
     g.add_evidence("the change took effect in 2024", source_id=s.id)  # a year is not a number to compute with
     assert [e.id for e in numeric_evidence(g)] == [e1.id, e2.id]
+    s.title, s.date = "Regulator annual report", "2024"
+    e1.location = "Table 4, p. 37"
     llm = FakeLLM({"compute": {"computations": [
         {"name": "relative fall", "expression": "(a - b) / a * 100",
-         "variables": {"a": {"value": 118, "evidence_id": "E1", "what": "2023 mean"},
-                       "b": {"value": 104, "evidence_id": "E2", "what": "2024 mean"}},
+         "variables": {"a": {"value": 118, "evidence_id": "E1", "what": "2023 mean", "population": "whole fleet", "outcome": "mean turn time"},
+                       "b": {"value": 104, "evidence_id": "E2", "what": "2024 mean", "population": "whole fleet", "outcome": "mean turn time"}},
          "text": "The raw fall in mean turn time between 2023 and 2024 is", "unit": "%", "bears_on": {"C1": "for"}},
         {"name": "bad", "expression": "__import__('os').system('x')", "variables": {"a": {"value": 1, "evidence_id": "E1"}}, "text": "t"},
         {"name": "unknown", "expression": "a", "variables": {"a": {"value": 1, "evidence_id": "E99"}}, "text": "t"},
+        {"name": "mixed comparisons", "expression": "1000/a - 1000/b",
+         "variables": {"a": {"value": 210, "evidence_id": "E1", "what": "NNH", "population": "all ages", "outcome": "major bleeding", "comparison": "meta-analysis A"},
+                       "b": {"value": 265, "evidence_id": "E2", "what": "NNT", "population": "all ages", "outcome": "CV events", "comparison": "meta-analysis B"}},
+         "text": "net"},
+        {"name": "harmonised", "expression": "a - b",
+         "variables": {"a": {"value": 3.8, "evidence_id": "E1", "what": "bleeding %", "population": "70+", "outcome": "major haemorrhage"},
+                       "b": {"value": 2.8, "evidence_id": "E2", "what": "bleeding %", "population": "70+ placebo arm", "outcome": "major haemorrhage"}},
+         "text": "absolute bleeding excess", "unit": "percentage points", "harmonised": "both arms of one trial, same follow-up",
+         "uncertainty": "95% CI roughly 0.4 to 1.6 pp from the reported arm rates"},
     ]}})
     res = compute(inq, llm)
-    assert res["computed"] == ["E4"] and len(res["dropped"]) == 2
+    assert res["computed"] == ["E4", "E5"] and len(res["dropped"]) == 3
+    assert any("differ in outcome, comparison" in d for d in res["dropped"])
     e4 = g.ev("E4")
-    assert e4.kind == "model_output" and e4.origin == "instrument" and e4.text.endswith("11.86 %")
-    assert e4.provenance["expression"] == "(a - b) / a * 100" and "E1" in e4.provenance["inputs"]
+    assert e4.kind == "model_output" and e4.origin == "instrument"
+    assert e4.text.endswith("11.86 % (uncertainty not established)")
+    assert e4.provenance["expression"] == "(a - b) / a * 100" and e4.provenance["uncertainty"] == "not established"
+    assert "a=118 <- E1 (2023 mean) @ S1 'Regulator annual report', 2024 [Table 4, p. 37] {whole fleet, mean turn time}" in e4.provenance["inputs"]
+    e5 = g.ev("E5")
+    assert e5.provenance["harmonised"].startswith("both arms") and "0.4 to 1.6" in e5.text
     assert g.evidence_origin(e4) == "reg" and e4.credentials.credibility == "moderate" and e4.credentials.force == "moderate"
     assert e4.bears_on == {"C1": "for"}
     a = g.add_argument("model_output", [e4.id], c.id)
