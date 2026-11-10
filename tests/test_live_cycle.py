@@ -576,6 +576,54 @@ def test_bot_challenge_pages_are_not_pages():
     assert not looks_like_challenge("Air quality trends", "Roadside NO2 fell by 4.8% in outer London " * 10)
 
 
+def test_empty_hypothesize_is_retried_then_fatal(tmp_path):
+    import pytest
+    plan_calls: list[str] = []
+    attempts = {"n": 0}
+
+    def flaky(user):
+        attempts["n"] += 1
+        if attempts["n"] == 1:
+            return {"claims": []}
+        return {"claims": [{"issue_id": "Q1", "text": "Turn time fell", "kind": "substantive"},
+                           {"issue_id": "Q1", "text": "No change", "kind": "null"}]}
+
+    h, store = make_harness(tmp_path, plan_calls, overrides={"hypothesize": flaky})
+    inq = h.run(rounds=1)
+    assert attempts["n"] == 2 and len(inq.main_claims()) == 2
+    assert any(n.startswith("hypothesize: no claims on the main issue; retrying") for n in inq.notes)
+    assert [e["move"] for e in store.events()][:3] == ["frame", "hypothesize", "hypothesize"]
+
+    h2, _ = make_harness(tmp_path, plan_calls, overrides={"hypothesize": {"claims": []}})
+    h2.store = InquiryStore(tmp_path, "t2")
+    with pytest.raises(RuntimeError, match="no claims on the main issue twice"):
+        h2.run(rounds=1)
+
+
+def test_contract_repairs_are_recorded_in_notes(tmp_path):
+    plan_calls: list[str] = []
+    bad_then_good = {"n": 0}
+
+    class Flaky(FakeLLM):
+        def complete(self, system, user, max_tokens=16000):
+            if system.startswith("# SKILL: plan") and bad_then_good["n"] == 0:
+                bad_then_good["n"] += 1
+                return "Sure! Here is the plan: {\"tests\": [{\"claim_ids\": \"C1\"}"  # truncated and wrong types
+            return super().complete(system, user, max_tokens)
+
+    proposer, critic = make_scripts(plan_calls)
+    flaky = Flaky(proposer.script)
+    search = FakeSearch(default=[])
+    store = InquiryStore(tmp_path, "t3")
+    inq = Inquiry(id="t3", question=QUESTION)
+    h = Harness(inq, store, flaky, critic, search, FakeFetcher({}), log=lambda s: None)
+    h.run(rounds=1)
+    assert len(flaky.repairs) == 1 and flaky.repairs[0]["skill"] == "# SKILL: plan"
+    assert any(n.startswith("contract repair in plan (# SKILL: plan)") for n in inq.notes)
+    plan_event = [e for e in store.events() if e["move"] == "plan"][0]
+    assert plan_event["summary"]["contract_repairs"] == 1 and plan_event["summary"]["tests"] == ["T1"]
+
+
 def test_slug_is_stable_and_filesystem_safe():
     s = slug_for(QUESTION)
     assert s == slug_for(QUESTION)

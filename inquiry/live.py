@@ -80,10 +80,18 @@ class Harness:
         self.log = log or (lambda s: print(s, file=sys.stderr))
         self.ask = ask or input
         self.pending_queries: list[str] = []
+        self._repairs_seen: dict[int, int] = {}
 
     # -- bookkeeping -------------------------------------------------------------
 
     def _record(self, move: str, summary_: dict) -> None:
+        # contract repairs since the last move are part of the record: they explain thin or odd outputs
+        for llm in (self.proposer, self.critic):
+            seen = self._repairs_seen.setdefault(id(llm), 0)
+            for r in getattr(llm, "repairs", [])[seen:]:
+                self.inq.notes.append(f"contract repair in {move} ({r['skill']}): {r['error'][:160]}")
+            self._repairs_seen[id(llm)] = len(getattr(llm, "repairs", []))
+            summary_ = {**summary_, "contract_repairs": len(getattr(llm, "repairs", []))} if getattr(llm, "repairs", []) else summary_
         self.store.save(self.inq)
         self.store.append_event(move, self.inq, summary_)
         short = {k: (v if not isinstance(v, list) else len(v)) for k, v in summary_.items()}
@@ -245,6 +253,14 @@ class Harness:
             self._record("frame", moves.frame(inq, self.proposer))
         if inq.phase == "framed":
             self._record("hypothesize", moves.hypothesize(inq, self.proposer))
+            if not inq.main_claims():
+                # nothing to inquire into; try once more, then stop rather than conclude on an empty graph
+                inq.notes.append("hypothesize: no claims on the main issue; retrying once")
+                inq.phase = "framed"
+                self._record("hypothesize", moves.hypothesize(inq, self.proposer))
+                if not inq.main_claims():
+                    raise RuntimeError("hypothesize produced no claims on the main issue twice; "
+                                       "see the hypothesize skill and the model's reply")
         if inq.phase == "hypothesized":
             inq.phase = "inquiring"
 

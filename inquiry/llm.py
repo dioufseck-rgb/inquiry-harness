@@ -47,6 +47,9 @@ def extract_json(text: str) -> Any:
 class LLM:
     name: str = "base"
 
+    def __init__(self) -> None:
+        self.repairs: list[dict[str, str]] = []  # one entry per reply that failed its contract and was repaired
+
     def complete(self, system: str, user: str, max_tokens: int = 16000) -> str:  # pragma: no cover
         raise NotImplementedError
 
@@ -55,9 +58,13 @@ class LLM:
         try:
             return schema.model_validate(extract_json(reply))
         except (ValidationError, ValueError, json.JSONDecodeError) as first_error:
+            skill = system.splitlines()[0] if system else ""
+            if not hasattr(self, "repairs"):
+                self.repairs = []
+            self.repairs.append({"skill": skill, "error": str(first_error)[:300], "reply_head": reply[:300]})
             repair = (
                 f"{user}\n\n---\nYour previous reply did not match the required output schema.\n"
-                f"Error: {first_error}\n\nReturn only a corrected JSON object."
+                f"Error: {first_error}\n\nReturn only a corrected JSON object, complete, with every required field."
             )
             reply = self.complete(system, repair, max_tokens=max_tokens)
             return schema.model_validate(extract_json(reply))
@@ -74,6 +81,7 @@ class AnthropicLLM(LLM):
     def __init__(self, model: str, effort: str = "medium"):
         import anthropic  # imported here so tests can run without the SDK configured
 
+        super().__init__()
         self.client = anthropic.Anthropic()  # reads ANTHROPIC_API_KEY
         self.model = model
         self.effort = effort
@@ -105,6 +113,7 @@ class FakeLLM(LLM):
     name = "fake"
 
     def __init__(self, script: dict[str, Any]):
+        super().__init__()
         self.script = script
         self.calls: list[tuple[str, str]] = []
 
