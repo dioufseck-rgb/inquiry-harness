@@ -324,6 +324,10 @@ class ArgumentGraph(BaseModel):
     def standard_for(self, claim: Claim) -> ProofStandard:
         if claim.proof_standard:
             return claim.proof_standard
+        # "the body recommends X" or "the report states X" is a matter of record, whatever the issue's
+        # own standard: it is settled by showing the body said it, not by establishing X causally
+        if claim.target.get("evidence_status", "").strip().lower() in ("recommended", "reported"):
+            return "preponderance"
         issue = self.issue(claim.issue_id) if claim.issue_id else None
         return DEFAULT_STANDARD[issue.question_type if issue else "mixed"]
 

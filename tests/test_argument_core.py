@@ -152,6 +152,24 @@ def test_unusable_evidence_is_not_flagged_orphan_and_load_bearing_names_claim():
     assert f"for {c.id}" in summary(g, ev, lb)
 
 
+def test_recommendation_and_report_claims_are_matters_of_record():
+    g, q, c, n, s = base_graph(question_type="causal")
+    assert g.standard_for(c) == "clear_and_convincing"
+    rec = g.add_claim("The task force recommends against initiation at 60+", issue_id=q.id,
+                      target={"evidence_status": "recommended", "population": "adults 60+"})
+    rep = g.add_claim("The report states a 4.8% reduction", issue_id=q.id, target={"evidence_status": "Reported"})
+    est = g.add_claim("The expansion reduced NO2 by 4.8%", issue_id=q.id, target={"evidence_status": "estimated"})
+    assert g.standard_for(rec) == "preponderance" and g.standard_for(rep) == "preponderance"
+    assert g.standard_for(est) == "clear_and_convincing"
+    rec.proof_standard = "beyond_reasonable_doubt"
+    assert g.standard_for(rec) == "beyond_reasonable_doubt"  # an explicit override still wins
+    e = g.add_evidence("USPSTF 2022: Grade D at 60+", source_id=s.id, credentials=moderate())
+    a = g.add_argument("expert_opinion", [e.id], g.claims[2].id)  # rec, before the override
+    rec.proof_standard = None
+    discharge(g, a.id)
+    assert evaluate(g).status(rec.id) == "in"  # moderate clears preponderance; it would not clear the causal standard
+
+
 def test_an_unsatisfied_answer_is_not_a_discharged_question():
     g, q, c, n, s = base_graph()
     e = g.add_evidence("trial in adults 70+ found more bleeding", source_id=s.id, credentials=strong())

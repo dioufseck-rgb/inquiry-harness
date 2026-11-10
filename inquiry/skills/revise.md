@@ -48,7 +48,17 @@ disposition that changes the inquiry's state, or to say why it does not.
 2. A recommendation and an empirical estimate are different claims.
    "The guideline recommends against initiation" can be established by the
    guideline alone; "the five-year event balance is harm" cannot be
-   established by the guideline. Keep them separately supported.
+   established by the guideline. Keep them separately supported. Give the
+   recommendation claim `evidence_status: recommended` in its target (and
+   a claim about what a report states `reported`): the harness then holds
+   it to the standard for a matter of record, since what is being
+   established is that the body said it. A recommendation or expert
+   verdict that addresses the question's own population and outcome does
+   answer the issue, at the level of a recommendation; leave
+   `answers_issue` true for it and let the conclusion say that this is
+   what the body judged, not a measured balance. Set `answers_issue` false
+   only when the population, outcome or horizon no longer matches the
+   question.
 3. Rejecting a compound or over-specific claim does not establish its
    negation. Recover the supported part.
 4. Do not revise a claim merely because a critic objected. Revise when the
