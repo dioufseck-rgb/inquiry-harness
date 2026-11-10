@@ -253,6 +253,29 @@ def test_counter_attack_reinstates_argument_and_accepts_claim(tmp_path):
     assert respond_event["countered"] and any("not an attack" in d for d in respond_event["dropped"])
 
 
+def test_argue_view_prefers_the_origin_over_its_relay():
+    from inquiry.moves import argue_view, issue_evidence
+    inq = Inquiry(id="x", question="q")
+    g = inq.graph
+    q = g.add_issue("Q?")
+    c = g.add_claim("C", issue_id=q.id)
+    report = g.add_source(url="https://tfl.example/report.pdf", title="One Year Report", kind="primary")
+    relay = g.add_source(url="https://news.example/story", title="Story", kind="derivative", derived_from=report.id)
+    orig = g.add_evidence("report: 4.8% lower", source_id=report.id, bears_on={c.id: "for"})
+    rel = g.add_evidence("BBC: 4.8% lower", source_id=relay.id, bears_on={c.id: "for"})
+    other = g.add_evidence("BBC: minister quoted", source_id=relay.id, bears_on={c.id: "against"})  # not shadowed
+    claim_ids, ids = issue_evidence(g, q.id)
+    assert ids == [orig.id, other.id]
+    assert rel.provenance["unusable"].startswith(f"relay of {report.id}")
+    view = argue_view(inq, q.id)
+    assert f"- {orig.id} " in view and f"- {rel.id} " not in view
+    # an argument built on the relay anyway is flagged
+    from inquiry.argument import evaluate
+    a = g.add_argument("document_record", [rel.id], c.id)
+    ev = evaluate(g)
+    assert any(f.code == "derivative_premise" and f.node_id == a.id for f in ev.flags)
+
+
 def test_hypothesize_exclusive_groups_decide_who_is_a_rival():
     from inquiry.moves import ClaimProposal, HypothesizeOutput, apply_hypothesize
     inq = Inquiry(id="x", question="q")

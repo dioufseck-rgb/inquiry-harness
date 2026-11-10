@@ -564,11 +564,40 @@ class ArgueOutput(BaseModel):
         default_factory=list, description="Evidence bearing on these claims that cannot ground any argument, with why.")
 
 
+def shadowed_by_origin(g: ArgumentGraph, e, claim_ids: set[str]) -> Optional[str]:
+    """
+    If `e` comes from a derivative source whose original has its own evidence
+    bearing on one of `claim_ids`, return the original's source id: the relay
+    adds nothing the original does not say better.
+    """
+    src = g.source(e.source_id) if e.source_id else None
+    if src is None or not src.derived_from:
+        return None
+    mine = set(e.bears_on) & claim_ids
+    if not mine:
+        return None
+    for x in g.evidence:
+        if x.source_id == src.derived_from and set(x.bears_on) & mine:
+            return src.derived_from
+    return None
+
+
 def issue_evidence(g: ArgumentGraph, issue_id: str, include_unassigned: bool = False) -> tuple[set[str], list[str]]:
-    """Claim ids of an issue and the evidence ids recorded as bearing on them."""
+    """
+    Claim ids of an issue and the evidence ids to argue from: items bearing on
+    those claims, minus relays of a source that speaks for itself. A shadowed
+    relay is marked unusable so it is neither offered nor counted as orphan.
+    """
     claim_ids = {c.id for c in g.claims_for_issue(issue_id)}
-    ev_ids = [e.id for e in g.evidence
-              if (set(e.bears_on) & claim_ids) or (include_unassigned and not e.bears_on)]
+    ev_ids = []
+    for e in g.evidence:
+        if not ((set(e.bears_on) & claim_ids) or (include_unassigned and not e.bears_on)):
+            continue
+        orig = shadowed_by_origin(g, e, claim_ids)
+        if orig is not None:
+            e.provenance.setdefault("unusable", f"relay of {orig}, whose own evidence bears on the same claims")
+            continue
+        ev_ids.append(e.id)
     return claim_ids, ev_ids
 
 

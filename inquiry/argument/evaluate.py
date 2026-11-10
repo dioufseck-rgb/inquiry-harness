@@ -331,6 +331,18 @@ def _flags(g: ArgumentGraph, ev: Evaluation) -> list[Flag]:
     for e in g.evidence:
         if e.id not in used and not e.provenance.get("unusable"):
             flags.append(Flag(code="orphan_evidence", node_id=e.id, detail="evidence used in no argument"))
+    for a in g.arguments:
+        if a.is_attack or not a.claim_id:
+            continue
+        for pid in a.premise_ids:
+            e = g.ev(pid)
+            src = g.source(e.source_id) if e is not None and e.source_id else None
+            if src is None or not src.derived_from:
+                continue
+            if any(x.source_id == src.derived_from and a.claim_id in x.bears_on for x in g.evidence):
+                flags.append(Flag(code="derivative_premise", node_id=a.id,
+                                  detail=f"{pid} relays {src.derived_from}, whose own evidence bears on {a.claim_id}"))
+                break
     keys: dict[str, list[str]] = {}
     for s in g.sources:
         keys.setdefault(g.origin_key(s), []).append(s.id)
