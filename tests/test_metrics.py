@@ -108,7 +108,7 @@ def test_accepted_component_does_not_count_as_a_main_answer_or_trigger_shape_jud
     from inquiry.bench import score_shape
     from inquiry.llm import FakeLLM
     inq = small_inquiry()
-    inq.graph.claim("C1").answers_issue = False
+    inq.graph.claim("C1").scope.outcome = "a narrower component outcome"
     ev = evaluate_move(inq)
     assert ev.status("C1") == "in"
     m = metrics(inq, ev)

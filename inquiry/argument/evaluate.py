@@ -321,6 +321,7 @@ def _claim_pass(g: ArgumentGraph, labels: dict[str, Status], strengths: dict[str
 # ---------------------------------------------------------------------------
 
 def evaluate(g: ArgumentGraph, max_iter: int = 10) -> Evaluation:
+    g.refresh_answerhood()
     accepted: set[str] = set()
     strengths = {a.id: argument_strength(g, a) for a in g.arguments}
     applicable: dict[str, bool] = {}

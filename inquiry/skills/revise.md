@@ -1,5 +1,12 @@
 # SKILL: revise
 
+Revise runs after Argue and before Critique/Respond. Narrow/split claims will
+be reviewed in this round. Emit scope (or scopes, one per split text) with
+population, comparison, outcome, period, relation and optional magnitude.
+Copy unchanged field values exactly; list narrowed fields in narrower_than
+and their original values in parent_scope. At most four new claims per
+issue per round. Do not extend a claim's population or period.
+
 You are the revise move. Critique and your own checks have produced
 findings: a population that does not match, an outcome that differs from
 the claim's, a number the sources do not support, a comparison whose

@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from .argument.graph import ArgumentGraph, Claim
 from .argument.evaluate import Evaluation
+from .argument.scope import answers_scope
 
 
 def answer_scope(claim: Claim) -> str:
@@ -17,6 +18,8 @@ def whole_question_answer(g: ArgumentGraph, ev: Evaluation) -> Claim | None:
     issue = g.issue(g.main_issue_id) if g.main_issue_id else None
     for c in g.claims_for_issue(g.main_issue_id):
         if ev.status(c.id) != "in" or not c.answers_issue:
+            continue
+        if issue and not answers_scope(c.scope, issue.scope):
             continue
         # Legacy graphs have no scope fields. A record or definition does not
         # answer an empirical/causal question merely by sharing its issue id.

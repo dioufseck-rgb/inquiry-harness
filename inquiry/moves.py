@@ -33,7 +33,7 @@ from pydantic import BaseModel, Field
 from .argument.evaluate import Evaluation, Settler, evaluate, is_discharged, load_bearing, what_would_settle
 from .argument.graph import (
     STRENGTH_ORDER, Argument, ArgumentGraph, AttackType, CQAnswer, Credentials, EvidenceKind, Issue, ProofStandard,
-    QuestionType, Source, Strength,
+    QuestionType, Source, Strength, Scope,
 )
 from .argument.schemes import SCHEMES
 from .llm import LLM
@@ -231,6 +231,7 @@ class SubIssue(BaseModel):
     answerhood: str = ""
     depends_on: list[int] = Field(default_factory=list, description="Zero-based indexes into sub_issues.")
     search_topic: str = ""
+    scope: Optional[Scope] = None
 
 
 class FrameOutput(BaseModel):
@@ -243,6 +244,7 @@ class FrameOutput(BaseModel):
     standard_override: Optional[ProofStandard] = None
     sub_issues: list[SubIssue] = Field(default_factory=list)
     search_topic: str = ""
+    scope: Optional[Scope] = None
 
 
 def frame_view(inq: Inquiry) -> str:
@@ -281,7 +283,8 @@ def apply_frame(inq: Inquiry, out: FrameOutput) -> dict:
         standard_override=out.standard_override,
     )
     main = g.add_issue(inq.question, question_type=out.question_type, answerhood=out.answerhood,
-                       presuppositions=out.presuppositions, search_topic=out.search_topic)
+                       presuppositions=out.presuppositions, search_topic=out.search_topic,
+                       **({"scope": out.scope} if out.scope else {}))
     g.main_issue_id = main.id
     kept: list[tuple[int, SubIssue]] = []
     dropped: list[str] = []
@@ -297,7 +300,8 @@ def apply_frame(inq: Inquiry, out: FrameOutput) -> dict:
         if reasons:
             frame_specificity.extend(f"sub-issue {i}: {reason}" for reason in reasons)
         index_to_issue[i] = g.add_issue(s.text, question_type=s.question_type, answerhood=sub_answerhood,
-                                       parent_id=main.id, search_topic=s.search_topic)
+                                       parent_id=main.id, search_topic=s.search_topic,
+                                       **({"scope": s.scope} if s.scope else {}))
     for i, s in kept:
         iss = index_to_issue[i]
         iss.depends_on = [index_to_issue[j].id for j in s.depends_on if j in index_to_issue and j != i]
@@ -332,6 +336,7 @@ class ClaimProposal(BaseModel):
     rationale: str = ""
     recommendation_body: str = ""
     target: dict[str, str] = Field(default_factory=dict)
+    scope: Optional[Scope] = None
 
 
 class HypothesizeOutput(BaseModel):
@@ -353,7 +358,7 @@ def hypothesize_view(inq: Inquiry) -> str:
             continue
         answerhood, _ = source_answerhood(inq.question, issue.answerhood)
         lines.append(f"{issue.id} [{'main; ' if issue.id == g.main_issue_id else ''}{issue.question_type}]: {issue.text}\n"
-                     f"Source-reporting answerhood: {answerhood}")
+                     f"Source-reporting answerhood: {answerhood}\nScope: {issue.scope.model_dump_json()}")
     contract = {"max_characters": 250, "max_digits": 8,
                 "protocol_permission": "Only an exact recipe already specified in the issue answerhood is permitted. A request to discuss definitions is not such a recipe.",
                 "unrequested_protocol": ["dose", "enumerated endpoint components", "event counting", "weighting rule", "fixed baseline", "follow-up window"],
@@ -372,7 +377,8 @@ def apply_hypothesize(inq: Inquiry, out: HypothesizeOutput) -> dict:
         if g.issue(p.issue_id) is None:
             dropped.append(f"{p.issue_id}: unknown issue")
             continue
-        reasons = claim_specificity_errors(p.text, g.issue(p.issue_id).answerhood)
+        reasons = claim_specificity_errors(p.text, g.issue(p.issue_id).answerhood,
+                                           scope=p.scope, issue_scope=g.issue(p.issue_id).scope)
         if reasons:
             rejection = {"issue_id": p.issue_id, "text": p.text, "reasons": reasons}
             rejected_specificity.append(rejection)
@@ -404,7 +410,8 @@ def apply_hypothesize(inq: Inquiry, out: HypothesizeOutput) -> dict:
         if existing is not None:
             index_to_id[i] = existing.id
             continue
-        c = g.add_claim(p.text, issue_id=p.issue_id, kind=p.kind, rationale=p.rationale, target=p.target)
+        c = g.add_claim(p.text, issue_id=p.issue_id, kind=p.kind, rationale=p.rationale, target=p.target,
+                        **({"scope": p.scope} if p.scope else {}))
         if p.issue_id != original_issue:
             placed_by_rule.append({"claim_id": c.id, "from_issue": original_issue, "to_issue": p.issue_id,
                                    "body": p.recommendation_body, "population": population, "outcome": outcome})
@@ -833,6 +840,7 @@ class ScopedClaimProposal(BaseModel):
     cq_answers: dict[str, CQAnswerProposal] = Field(default_factory=dict)
     target: dict[str, str] = Field(default_factory=dict)
     note: str = ""
+    scope: Optional[Scope] = None
 
 
 class ArgueOutput(BaseModel):
@@ -900,7 +908,7 @@ def argue_view(inq: Inquiry, issue_id: str) -> str:
     lines.append("Claims (mutually exclusive answers):")
     for c in g.claims_for_issue(issue_id):
         st = f" [{ev.status(c.id)}]" if ev else ""
-        lines.append(f"- {c.id} ({c.kind}){st}: {c.text}")
+        lines.append(f"- {c.id} ({c.kind}){st}: {c.text}\n  scope: {c.scope.model_dump_json()}")
     issue_block = "\n".join(lines)
     required = [cid for cid in sorted(claim_ids) if sum(g.ev(eid).bears_on.get(cid) == "for" for eid in ev_ids) >= 3]
     orphan_block = ("# Evidence bearing on these claims and not yet in any argument\n\n"
@@ -953,7 +961,8 @@ def apply_argue(inq: Inquiry, out: ArgueOutput, allowed_claims: Optional[set[str
                    or (allowed_claims is not None and p.revision_of not in allowed_claims)
                    or p.scheme not in SCHEMES or p.scheme == "attack"
                    or not p.text.strip() or not p.premise_ids or any(eid not in offered for eid in p.premise_ids)
-                   or bool(claim_specificity_errors(p.text, issue.answerhood if issue else "")))
+                   or bool(claim_specificity_errors(p.text, issue.answerhood if issue else "",
+                                                    scope=p.scope, issue_scope=issue.scope if issue else None)))
         if failure:
             dropped.append(f"scoped revision of {p.revision_of}: invalid issue, scope, scheme, specificity or offered premises")
             continue
@@ -966,6 +975,8 @@ def apply_argue(inq: Inquiry, out: ArgueOutput, allowed_claims: Optional[set[str
             claim.created_by_move = "argue"
             claim.answers_issue = p.answers_issue
             claim.target = dict(p.target)
+            claim.scope = p.scope or g.inherited_scope(claim, g.issue(claim.issue_id))
+            g.refresh_answerhood()
             if not p.answers_issue:
                 for rival in g.claims:
                     rival.contrary_ids = [cid for cid in rival.contrary_ids if cid != claim.id]
@@ -1578,6 +1589,8 @@ class RevisionOp(BaseModel):
     role: Literal["evidence", "context", "indirect", "lead"] = "context"
     reason: str = ""
     request: str = Field(default="", description="request: what to retrieve or compute, specific enough to search for.")
+    scope: Optional[Scope] = None
+    scopes: list[Scope] = Field(default_factory=list, description="Split: one scope per revised text.")
 
 
 class ReviseOutput(BaseModel):
@@ -1624,6 +1637,13 @@ def apply_revise(inq: Inquiry, out: ReviseOutput) -> dict:
                     dropped.append(f"{op.op} {op.claim_id}: not a live claim")
                     continue
                 texts = op.texts[:1] if op.op == "narrow" else op.texts
+                proposed_scopes = op.scopes or ([op.scope] * len(texts) if op.scope else [])
+                if proposed_scopes:
+                    from .argument.scope import within
+                    if len(proposed_scopes) != len(texts) or any(
+                            not within(s, c.scope, field) for s in proposed_scopes for field in ("population", "period")):
+                        dropped.append(f"{op.op} {op.claim_id}: invalid narrowing scope")
+                        continue
                 if op.op == "split" and len(texts) < 2:
                     dropped.append(f"split {op.claim_id}: needs two or more parts")
                     continue
@@ -1635,11 +1655,17 @@ def apply_revise(inq: Inquiry, out: ReviseOutput) -> dict:
                 carry = [x for x in op.carry_arguments if g.arg(x.partition("@")[0]) is not None]
                 new = g.supersede_claim(op.claim_id, texts, carry_arguments=carry, kind=op.kind,
                                         target=op.target, reason=op.reason, answers_issue=op.answers_issue)
-                for claim in new:
+                for index, claim in enumerate(new):
                     claim.created_by_move, claim.created_round = "revise", inq.round
+                    proposed = op.scopes[index] if index < len(op.scopes) else op.scope
+                    if proposed:
+                        claim.scope = proposed.model_copy(deep=True)
+                        for field in proposed.narrower_than:
+                            claim.scope.parent_scope[field] = getattr(c.scope, field)
                     for e in g.evidence:
                         if c.id in e.bears_on:
                             e.bears_on[claim.id] = e.bears_on[c.id]  # hints, not inherited arguments
+                g.refresh_answerhood()
                 done["narrowed" if op.op == "narrow" else "split"].append(f"{op.claim_id}->{','.join(x.id for x in new)}")
                 inq.notes.append(f"revise: {op.op} {op.claim_id} -> {', '.join(x.id for x in new)}: {op.reason}")
             elif op.op == "reclassify":

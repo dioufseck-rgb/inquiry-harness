@@ -26,7 +26,9 @@ import re
 from datetime import datetime, timezone
 from typing import Literal, Optional
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
+from typing_extensions import TypedDict
+from .scope import Scope, answers_scope, infer_issue_scope, sub_scope
 
 
 def now_iso() -> str:
@@ -70,6 +72,18 @@ class Issue(BaseModel):
     status: Literal["open", "answered", "dropped"] = "open"
     presuppositions: list[str] = Field(default_factory=list)
     search_topic: str = ""
+    scope: Scope = Field(default_factory=Scope)
+
+
+class ClaimTarget(TypedDict, total=False):
+    population: str
+    intervention: str
+    comparator: str
+    outcome: str
+    horizon: str
+    quantity: str
+    scope: str
+    evidence_status: str
 
 
 class Claim(BaseModel):
@@ -87,7 +101,8 @@ class Claim(BaseModel):
     )
     origin: Origin = "proposer"
     rationale: str = ""
-    target: dict[str, str] = Field(
+    scope: Scope = Field(default_factory=Scope)
+    target: ClaimTarget = Field(
         default_factory=dict,
         description="What the claim is about, where changing it would change the answer: population, intervention, "
                     "comparator, outcome, horizon, quantity, scope, evidence_status.")
@@ -253,6 +268,38 @@ class ArgumentGraph(BaseModel):
     arguments: list[Argument] = Field(default_factory=list)
     main_issue_id: Optional[str] = None
 
+    @model_validator(mode="after")
+    def migrate_scopes(self):
+        for issue in self.issues:
+            if "scope" not in issue.model_fields_set:
+                issue.scope = infer_issue_scope(issue.text)
+        for claim in self.claims:
+            issue = self.issue(claim.issue_id)
+            if issue is None:
+                continue
+            if "scope" not in claim.model_fields_set:
+                claim.scope = self.inherited_scope(claim, issue)
+            claim.answers_issue = answers_scope(claim.scope, issue.scope)
+        return self
+
+    @staticmethod
+    def inherited_scope(claim: Claim, issue: Issue) -> Scope:
+        data = issue.scope.model_dump()
+        for old, new in (("population", "population"), ("outcome", "outcome"),
+                         ("comparator", "comparison"), ("horizon", "period")):
+            if claim.target.get(old):
+                data[new] = claim.target[old]
+        if (not claim.answers_issue or (claim.kind == "deflationary" and issue.question_type != "conceptual")
+                or claim.target.get("evidence_status") in ("reported", "recommended")):
+            data["outcome"] = claim.target.get("outcome") or claim.text
+        return Scope.model_validate(data)
+
+    def refresh_answerhood(self) -> None:
+        for claim in self.claims:
+            issue = self.issue(claim.issue_id)
+            if issue:
+                claim.answers_issue = answers_scope(claim.scope, issue.scope)
+
     # -- lookups ------------------------------------------------------------
 
     def issue(self, iid: str) -> Optional[Issue]:
@@ -388,6 +435,7 @@ class ArgumentGraph(BaseModel):
         return f"{prefix}{len(items) + 1}"
 
     def add_issue(self, text: str, **kw) -> Issue:
+        kw.setdefault("scope", infer_issue_scope(text))
         x = Issue(id=self._next("Q", self.issues), text=text, **kw)
         self.issues.append(x)
         if self.main_issue_id is None:
@@ -396,6 +444,11 @@ class ArgumentGraph(BaseModel):
 
     def add_claim(self, text: str, **kw) -> Claim:
         x = Claim(id=self._next("C", self.claims), text=text, **kw)
+        issue = self.issue(x.issue_id)
+        if issue:
+            if "scope" not in kw:
+                x.scope = self.inherited_scope(x, issue)
+            x.answers_issue = answers_scope(x.scope, issue.scope)
         self.claims.append(x)
         return x
 

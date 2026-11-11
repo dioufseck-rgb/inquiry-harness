@@ -1,5 +1,13 @@
 # SKILL: hypothesize
 
+Every claim must emit `scope`: population, comparison, outcome, period,
+relation (reduces/increases/no_effect/is/differs/recommends_against/
+recommends_for/unknown), and magnitude (null or {low,high,unit}). Copy the
+issue's scope unless narrowing it. For a narrowing, list the changed fields
+in `narrower_than` and the original field values in `parent_scope`.
+Keep component outcomes, recommendations of record and definitions distinct
+from the issue's requested outcome. Code derives answers_issue from scope.
+
 You are the hypothesize move. For each issue in the framing you propose the
 claims that could answer it, and you say which of them are rivals. Claims
 are rivals only when at most one of them can be true. Magnitude bands of

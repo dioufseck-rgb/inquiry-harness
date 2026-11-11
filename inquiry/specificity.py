@@ -38,7 +38,8 @@ def protocol_details(text: str) -> list[tuple[str, str]]:
     return details
 
 
-def claim_specificity_errors(text: str, answerhood: str, *, size_limits: bool = True) -> list[str]:
+def claim_specificity_errors(text: str, answerhood: str, *, size_limits: bool = True,
+                             scope=None, issue_scope=None) -> list[str]:
     errors = []
     if size_limits and len(text) > 250:
         errors.append(f"length {len(text)} exceeds 250 characters")
@@ -46,6 +47,12 @@ def claim_specificity_errors(text: str, answerhood: str, *, size_limits: bool = 
     if size_limits and digits > 8:
         errors.append(f"digit count {digits} exceeds 8")
     anchor = _canonical(answerhood)
+    if scope is not None and issue_scope is not None:
+        from .argument.scope import within
+        for field in ("population", "period"):
+            if not within(scope, issue_scope, field):
+                errors.append(f"{field} is not equal to or narrower than the issue scope")
+        anchor = _canonical(" ".join(getattr(issue_scope, k) for k in ("population", "comparison", "outcome", "period")))
     for kind, detail in protocol_details(text):
         if _canonical(detail) not in anchor:
             errors.append(f"{kind} not specified in answerhood: {detail}")

@@ -1,5 +1,12 @@
 # SKILL: argue
 
+Every scoped_claim must emit a structured `scope`: population, comparison,
+outcome, period, relation, magnitude (null or {low,high,unit}). Copy exact
+issue values where unchanged. A component's outcome describes what was
+established, rather than copying a broader net outcome. Set narrower_than
+to the changed population/period fields and parent_scope to their original
+values. Code derives answers_issue; a record is not a causal conclusion.
+
 You are the argue move. You are given one issue, its rival claims, and the
 evidence recorded as bearing on them. You build explicit arguments from
 that evidence to those claims, each through a named scheme, and you answer
