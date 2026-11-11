@@ -37,6 +37,7 @@ from .argument.graph import (
 )
 from .argument.schemes import SCHEMES
 from .llm import LLM
+from .closure import accepted_components, answer_scope, whole_question_answer
 from .specificity import claim_specificity_errors, source_answerhood
 from .state import (
     Conclusion, Framing, Inquiry, Judgement, PlannedTest, Reflection, StopAssessment,
@@ -1819,8 +1820,15 @@ def reflect(inq: Inquiry, ev: Evaluation) -> Reflection:
     for cid, settlers in main_claim_settlers(inq, ev).items():
         for s in settlers[:3]:
             directives.append(f"{cid} {s.kind}: {s.detail}")
+    answer = whole_question_answer(g, ev)
+    components = accepted_components(g, ev)
+    directive = "; ".join(directives) if directives else "no whole-question answer"
+    if answer:
+        directive = f"main issue answered by {answer.id} at scope {answer_scope(answer)}"
+    elif components:
+        directive = f"components accepted; compose or extend scope: {[c.id for c in components]}; " + directive
     r = Reflection(round=inq.round, established=established, assumed=assumed, load_bearing_node_ids=lb_ids,
-                   directive="; ".join(directives) if directives else "main issue has an accepted claim")
+                   directive=directive)
     inq.reflections.append(r)
     return r
 
@@ -1828,7 +1836,8 @@ def reflect(inq: Inquiry, ev: Evaluation) -> Reflection:
 def stop(inq: Inquiry, ev: Evaluation, rounds_left: int, new_evidence_this_round: int,
          *, max_tokens_run: int = 0) -> StopAssessment:
     g = inq.graph
-    accepted = ev.issues.get(g.main_issue_id, []) if g.main_issue_id else []
+    answer = whole_question_answer(g, ev)
+    components = accepted_components(g, ev)
     undecided = [c.id for c in inq.main_claims() if ev.status(c.id) == "undecided"]
     settlers = main_claim_settlers(inq, ev)
     addressable = [cid for cid in undecided if settlers.get(cid)]
@@ -1837,16 +1846,20 @@ def stop(inq: Inquiry, ev: Evaluation, rounds_left: int, new_evidence_this_round
         decision, reason = "stop", "retrieval failed: no evidence"
     elif max_tokens_run and tokens > max_tokens_run:
         decision, reason = "stop", "token budget exhausted"
-    elif accepted:
-        decision, reason = "stop", f"main issue answered by {', '.join(accepted)}"
+    elif answer:
+        decision, reason = "stop", f"main issue answered by {answer.id} at scope {answer_scope(answer)}"
     elif rounds_left <= 0:
         decision, reason = "stop", "rounds exhausted"
+    elif components:
+        decision, reason = "continue", "compose or extend the accepted components"
     elif not addressable:
         decision, reason = "stop", "no undecided main claim has anything evidence could settle"
     elif inq.round > 0 and new_evidence_this_round == 0:
         decision, reason = "stop", "the last round found no new evidence; planned tests are unobtainable"
     else:
         decision, reason = "continue", f"{len(addressable)} undecided main claim(s) could still be settled by evidence"
+    if not answer and g.evidence and not (max_tokens_run and tokens > max_tokens_run):
+        reason += f"; components accepted: {[c.id for c in components]}; no whole-question answer"
     sa = StopAssessment(round=inq.round, decision=decision, reason=reason, undecided_on_path=undecided,
                         obtainable=[t.id for t in inq.tests if t.status == "planned"])
     inq.stop_assessments.append(sa)

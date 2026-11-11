@@ -20,6 +20,7 @@ from typing import Any, Optional
 
 from .argument.evaluate import Evaluation, is_discharged
 from .state import Inquiry
+from .closure import accepted_components, answer_scope, whole_question_answer
 
 
 def _contains(hay: list[str], needle: str) -> bool:
@@ -77,6 +78,9 @@ def metrics(inq: Inquiry, ev: Evaluation, gold: Optional[dict[str, Any]] = None,
     main_components = {c.id for c in inq.main_claims() if not c.answers_issue}
     accepted_main = any(ev.status(cid) == "in" for cid in main_answers)
     m: dict[str, Any] = {
+        "whole_question_answered": whole_question_answer(g, ev) is not None,
+        "answer_scope": answer_scope(whole_question_answer(g, ev)) if whole_question_answer(g, ev) else "",
+        "components_accepted": len(accepted_components(g, ev)),
         "id": inq.id,
         "rounds": inq.round,
         "sources": len(g.sources),
@@ -145,7 +149,7 @@ def one_line(m: dict[str, Any]) -> str:
             "claims_supported_unargued", "main_supporting_in", "main_component_supporting_in", "undecided_empty", "undecided_supported",
             "attacks", "reopened_cqs", "reopened_then_discharged", "attacks_out", "attacks_discharged", "counters_dropped", "counters_dropped_reasons",
             "counters_inapplicable", "counters_inapplicable_reasons", "accepted_claims", "single_origin_accepts",
-            "absence_assertions"]
+            "absence_assertions", "whole_question_answered", "answer_scope", "components_accepted"]
     parts = [f"{k}={m[k]}" for k in keys if k in m]
     if "gold_sources_total" in m:
         parts.append(f"gold_sources={m['gold_sources_found']}/{m['gold_sources_total']}")
