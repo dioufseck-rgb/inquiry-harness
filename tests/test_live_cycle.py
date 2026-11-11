@@ -114,6 +114,17 @@ def make_scripts(plan_calls: list[str], overrides: dict | None = None):
             "needed_evidence": ["errata restating the 2023 turn figure on the 2024 definition"],
         },
     })
+    # Scripted model replies exercise the same fresh-output scope contract.
+    frame = proposer.script["frame"]
+    main_scope = {"population": "fleet", "comparison": "schedule change vs prior schedule",
+                  "outcome": "turn time", "period": "2023-2024", "relation": "unknown"}
+    frame["scope"] = dict(main_scope)
+    for sub in frame.get("sub_issues", []):
+        sub["scope"] = {**main_scope, "outcome": "turn-time definition"}
+    hypotheses = proposer.script["hypothesize"]
+    if isinstance(hypotheses, dict):
+        for claim in hypotheses.get("claims", []):
+            claim["scope"] = dict(frame["sub_issues"][0]["scope"] if claim["issue_id"] == "Q2" else main_scope)
     return proposer, critic
 
 
@@ -809,8 +820,10 @@ def test_empty_hypothesize_is_retried_then_fatal(tmp_path):
         attempts["n"] += 1
         if attempts["n"] == 1:
             return {"claims": []}
-        return {"claims": [{"issue_id": "Q1", "text": "Turn time fell", "kind": "substantive"},
-                           {"issue_id": "Q1", "text": "No change", "kind": "null"}]}
+        scope = {"population": "fleet", "comparison": "schedule change vs prior schedule",
+                 "outcome": "turn time", "period": "2023-2024", "relation": "unknown"}
+        return {"claims": [{"issue_id": "Q1", "text": "Turn time fell", "kind": "substantive", "scope": scope},
+                           {"issue_id": "Q1", "text": "No change", "kind": "null", "scope": scope}]}
 
     h, store = make_harness(tmp_path, plan_calls, overrides={"hypothesize": flaky})
     inq = h.run(rounds=1)

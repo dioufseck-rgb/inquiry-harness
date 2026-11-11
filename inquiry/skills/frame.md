@@ -69,8 +69,10 @@ Return one JSON object and nothing else:
   "presuppositions": ["string"],
   "answerhood": "string",
   "standard_override": null,
+  "scope": {"population": "question population", "comparison": "question comparison", "outcome": "question outcome", "period": "source-reported follow-up", "relation": "unknown"},
   "sub_issues": [
-    {"text": "string", "question_type": "empirical", "answerhood": "string", "depends_on": [0], "search_topic": "short literature topic"}
+    {"text": "string", "question_type": "empirical", "answerhood": "string", "depends_on": [0], "search_topic": "short literature topic",
+     "scope": {"population": "question population", "comparison": "question comparison", "outcome": "component outcome", "period": "source-reported follow-up", "relation": "unknown"}}
   ]
 }
 ```

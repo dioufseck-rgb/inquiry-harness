@@ -28,7 +28,7 @@ from pathlib import Path
 from statistics import median
 from typing import Literal, Optional
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ValidationInfo, model_validator
 
 from .argument.evaluate import Evaluation, Settler, evaluate, is_discharged, load_bearing, what_would_settle
 from .argument.graph import (
@@ -87,6 +87,7 @@ def _issues_block(inq: Inquiry, ev: Optional[Evaluation] = None, with_claims: bo
             tag += f" (under {iss.parent_id})"
         dep = f" depends on {', '.join(iss.depends_on)}" if iss.depends_on else ""
         lines.append(f"- {iss.id}{tag} [{iss.question_type}]{dep}: {iss.text}")
+        lines.append(f"  scope: {iss.scope.model_dump_json()}")
         if iss.answerhood:
             lines.append(f"  complete answer: {iss.answerhood}")
         if with_claims:
@@ -94,6 +95,7 @@ def _issues_block(inq: Inquiry, ev: Optional[Evaluation] = None, with_claims: bo
                 st = f" [{ev.status(c.id)}]" if ev else ""
                 comp = " (component finding; does not answer the issue as posed)" if not c.answers_issue else ""
                 lines.append(f"  - {c.id} ({c.kind}){st}: {c.text}{comp}")
+                lines.append(f"    scope: {c.scope.model_dump_json()}")
     return "\n".join(lines)
 
 
@@ -225,7 +227,26 @@ def _tests_block(inq: Inquiry) -> str:
 # Frame
 # ---------------------------------------------------------------------------
 
-class SubIssue(BaseModel):
+class ScopeContract(BaseModel):
+    """Legacy/direct proposals may inherit scope; fresh model replies must emit it."""
+
+    @model_validator(mode="after")
+    def require_fresh_scope(self, info: ValidationInfo):
+        if not (info.context or {}).get("fresh_model_output"):
+            return self
+        if hasattr(self, "op") and self.op not in ("narrow", "split"):
+            return self
+        scopes = getattr(self, "scopes", []) or [getattr(self, "scope", None)]
+        required = {"population", "comparison", "outcome", "period", "relation"}
+        for scope in scopes:
+            if scope is None or not required <= scope.model_fields_set:
+                raise ValueError("fresh model output requires explicit scope: population, comparison, outcome, period, relation")
+            if any(not getattr(scope, f).strip() for f in ("population", "outcome", "period")):
+                raise ValueError("fresh scope population, outcome and period must be nonempty")
+        return self
+
+
+class SubIssue(ScopeContract):
     text: str
     question_type: QuestionType = "mixed"
     answerhood: str = ""
@@ -234,7 +255,7 @@ class SubIssue(BaseModel):
     scope: Optional[Scope] = None
 
 
-class FrameOutput(BaseModel):
+class FrameOutput(ScopeContract):
     restatement: str
     question_type: QuestionType = "mixed"
     scope_in: list[str] = Field(default_factory=list)
@@ -329,7 +350,7 @@ def frame(inq: Inquiry, llm: LLM, samples: int = 1) -> dict:
 # Hypothesize
 # ---------------------------------------------------------------------------
 
-class ClaimProposal(BaseModel):
+class ClaimProposal(ScopeContract):
     issue_id: str
     text: str
     kind: Literal["substantive", "null", "deflationary"] = "substantive"
@@ -830,7 +851,7 @@ class ClaimReasonProposal(BaseModel):
     reason: str
 
 
-class ScopedClaimProposal(BaseModel):
+class ScopedClaimProposal(ScopeContract):
     text: str
     revision_of: str
     issue_id: str
@@ -904,6 +925,7 @@ def argue_view(inq: Inquiry, issue_id: str) -> str:
              f"[{iss.question_type}]: {iss.text}"]
     if iss.answerhood:
         lines.append(f"complete answer: {iss.answerhood}")
+    lines.append(f"issue scope: {iss.scope.model_dump_json()}")
     lines.append("")
     lines.append("Claims (mutually exclusive answers):")
     for c in g.claims_for_issue(issue_id):
@@ -1608,7 +1630,7 @@ def respond(inq: Inquiry, llm: LLM, claim_ids: Optional[set[str]] = None) -> dic
 # Revise: review findings become changes to claims and support relations
 # ---------------------------------------------------------------------------
 
-class RevisionOp(BaseModel):
+class RevisionOp(ScopeContract):
     op: Literal["narrow", "split", "reclassify", "withdraw_support", "retain", "request"]
     claim_id: str = Field(default="", description="narrow, split, retain: the claim concerned.")
     texts: list[str] = Field(default_factory=list, description="narrow: one revised text; split: one text per part.")
@@ -1881,7 +1903,7 @@ def compute(inq: Inquiry, llm: LLM) -> Optional[dict]:
 # Evaluate, reflect, stop  (code only)
 # ---------------------------------------------------------------------------
 
-class ComposedClaimProposal(BaseModel):
+class ComposedClaimProposal(ScopeContract):
     text: str
     scope: Scope
     relation: Optional[str] = None

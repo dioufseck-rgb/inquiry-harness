@@ -51,3 +51,19 @@ def test_saved_scope_migration_keeps_energy_components():
     raw = json.loads(Path("experiments/E6-generalisation/energy/inquiry.json").read_text(encoding="utf-8"))
     inq = Inquiry.model_validate(raw)
     assert all(not c.answers_issue for c in inq.main_claims())
+
+
+def test_missing_model_scope_is_repaired_but_legacy_proposals_still_load():
+    import pytest
+    from pydantic import ValidationError
+    from inquiry import moves
+    from inquiry.llm import FakeLLM
+    raw = {"claims": [{"issue_id": "Q1", "text": "Treatment reduces harm"}]}
+    assert moves.HypothesizeOutput.model_validate(raw).claims[0].scope is None
+    with pytest.raises(ValidationError, match="requires explicit scope"):
+        moves.HypothesizeOutput.model_validate(raw, context={"fresh_model_output": True})
+    scope = Scope(population="adults", comparison="treatment vs placebo", outcome="harm", period="follow-up").model_dump()
+    replies = iter([raw, {"claims": [{**raw["claims"][0], "scope": scope}]}])
+    llm = FakeLLM({"hypothesize": lambda _: next(replies)})
+    out = llm.complete_json(moves.skill_text("hypothesize"), "Question", moves.HypothesizeOutput)
+    assert out.claims[0].scope.population == "adults" and len(llm.calls) == 2 and len(llm.repairs) == 1

@@ -37,9 +37,10 @@ def test_frame_removes_unrequested_protocol_but_keeps_source_reporting():
 def test_hypothesize_corrects_specificity_once_then_drops_remaining_failure():
     inq = Inquiry(id="h", question="Did the policy reduce pollution?")
     moves.apply_frame(inq, moves.FrameOutput(restatement=inq.question, answerhood="Direction of pollution change"))
+    scope = inq.graph.issue(inq.graph.main_issue_id).scope.model_dump()
     replies = iter([
-        {"claims": [{"issue_id": "Q1", "text": "The policy reduced pollution"}, {"issue_id": "Q1", "text": "x" * 251}]},
-        {"claims": [{"issue_id": "Q1", "text": "x" * 252}]},
+        {"claims": [{"issue_id": "Q1", "text": "The policy reduced pollution", "scope": scope}, {"issue_id": "Q1", "text": "x" * 251, "scope": scope}]},
+        {"claims": [{"issue_id": "Q1", "text": "x" * 252, "scope": scope}]},
     ])
     llm = FakeLLM({"hypothesize": lambda _: next(replies)})
     result = moves.hypothesize(inq, llm)

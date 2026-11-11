@@ -1,0 +1,794 @@
+{
+  "provider": "openai:gpt-6.1-sol",
+  "fields_filled": true,
+  "output": {
+    "claims": [
+      {
+        "issue_id": "Q1",
+        "text": "In adults 60+, initiating low-dose aspirin for primary prevention reduces net cardiovascular harm versus no aspirin over source-reported follow-up.",
+        "kind": "substantive",
+        "rationale": "Prevented cardiovascular events could outweigh bleeding harms.",
+        "recommendation_body": "",
+        "target": {},
+        "scope": {
+          "population": "adults 60+",
+          "comparison": "",
+          "outcome": "Does initiating low-dose aspirin for primary prevention reduce net cardiovascular harm in adults aged 60 and over?",
+          "period": "source-reported follow-up",
+          "relation": "reduces",
+          "magnitude": null,
+          "narrower_than": [],
+          "parent_scope": {}
+        }
+      },
+      {
+        "issue_id": "Q1",
+        "text": "In adults 60+, initiating low-dose aspirin for primary prevention increases net cardiovascular harm versus no aspirin over source-reported follow-up.",
+        "kind": "substantive",
+        "rationale": "Bleeding harms could outweigh prevented cardiovascular events.",
+        "recommendation_body": "",
+        "target": {},
+        "scope": {
+          "population": "adults 60+",
+          "comparison": "",
+          "outcome": "Does initiating low-dose aspirin for primary prevention reduce net cardiovascular harm in adults aged 60 and over?",
+          "period": "source-reported follow-up",
+          "relation": "increases",
+          "magnitude": null,
+          "narrower_than": [],
+          "parent_scope": {}
+        }
+      },
+      {
+        "issue_id": "Q1",
+        "text": "The USPSTF recommends against initiating low-dose aspirin for primary prevention in adults 60+, judging that it offers no net benefit in reducing net cardiovascular harm.",
+        "kind": "substantive",
+        "rationale": "A recommendation of record can establish the body's benefit\u2013harm verdict without establishing a causal effect.",
+        "recommendation_body": "USPSTF",
+        "target": {
+          "population": "adults 60+",
+          "outcome": "Does initiating low-dose aspirin for primary prevention reduce net cardiovascular harm in adults aged 60 and over?",
+          "evidence_status": "recommended"
+        },
+        "scope": {
+          "population": "adults 60+",
+          "comparison": "",
+          "outcome": "Does initiating low-dose aspirin for primary prevention reduce net cardiovascular harm in adults aged 60 and over?",
+          "period": "source-reported follow-up",
+          "relation": "recommends_against",
+          "magnitude": null,
+          "narrower_than": [],
+          "parent_scope": {}
+        }
+      },
+      {
+        "issue_id": "Q1",
+        "text": "In adults 60+, initiating low-dose aspirin for primary prevention produces no net difference in cardiovascular harm versus no aspirin over source-reported follow-up.",
+        "kind": "null",
+        "rationale": "Cardiovascular benefits and bleeding harms could balance.",
+        "recommendation_body": "",
+        "target": {},
+        "scope": {
+          "population": "adults 60+",
+          "comparison": "",
+          "outcome": "Does initiating low-dose aspirin for primary prevention reduce net cardiovascular harm in adults aged 60 and over?",
+          "period": "source-reported follow-up",
+          "relation": "no_effect",
+          "magnitude": null,
+          "narrower_than": [],
+          "parent_scope": {}
+        }
+      },
+      {
+        "issue_id": "Q1",
+        "text": "For adults 60+, whether aspirin reduces net cardiovascular harm over source-reported follow-up depends on how sources value prevented cardiovascular events against major bleeding; the term has no unique interpretation.",
+        "kind": "deflationary",
+        "rationale": "Different valuations of benefits and harms could change the net-balance answer.",
+        "recommendation_body": "",
+        "target": {},
+        "scope": {
+          "population": "adults 60+",
+          "comparison": "",
+          "outcome": "Does initiating low-dose aspirin for primary prevention reduce net cardiovascular harm in adults aged 60 and over?",
+          "period": "source-reported follow-up",
+          "relation": "unknown",
+          "magnitude": null,
+          "narrower_than": [],
+          "parent_scope": {}
+        }
+      },
+      {
+        "issue_id": "Q2",
+        "text": "In primary-prevention trials enrolling older adults, low-dose aspirin initiation reduces major cardiovascular events versus placebo or no aspirin over source-reported follow-up.",
+        "kind": "substantive",
+        "rationale": "Aspirin's antiplatelet effects could prevent cardiovascular events in older trial populations.",
+        "recommendation_body": "",
+        "target": {},
+        "scope": {
+          "population": "What effect does low-dose aspirin initiation have on major cardiovascular events (MI, ischemic stroke, cardiovascular death) in primary-prevention trials enrolling older adults?",
+          "comparison": "",
+          "outcome": "What effect does low-dose aspirin initiation have on major cardiovascular events (MI, ischemic stroke, cardiovascular death) in primary-prevention trials enrolling older adults?",
+          "period": "source-reported follow-up",
+          "relation": "reduces",
+          "magnitude": null,
+          "narrower_than": [],
+          "parent_scope": {}
+        }
+      },
+      {
+        "issue_id": "Q2",
+        "text": "In primary-prevention trials enrolling older adults, low-dose aspirin initiation has no effect on major cardiovascular events versus placebo or no aspirin over source-reported follow-up.",
+        "kind": "null",
+        "rationale": "Cardiovascular event rates could be unchanged by initiation.",
+        "recommendation_body": "",
+        "target": {},
+        "scope": {
+          "population": "What effect does low-dose aspirin initiation have on major cardiovascular events (MI, ischemic stroke, cardiovascular death) in primary-prevention trials enrolling older adults?",
+          "comparison": "",
+          "outcome": "What effect does low-dose aspirin initiation have on major cardiovascular events (MI, ischemic stroke, cardiovascular death) in primary-prevention trials enrolling older adults?",
+          "period": "source-reported follow-up",
+          "relation": "no_effect",
+          "magnitude": null,
+          "narrower_than": [],
+          "parent_scope": {}
+        }
+      },
+      {
+        "issue_id": "Q3",
+        "text": "In primary-prevention trials enrolling older adults, low-dose aspirin initiation increases major bleeding versus placebo or no aspirin over source-reported follow-up.",
+        "kind": "substantive",
+        "rationale": "Platelet inhibition could increase clinically important bleeding in older adults.",
+        "recommendation_body": "",
+        "target": {},
+        "scope": {
+          "population": "What effect does low-dose aspirin initiation have on major bleeding (gastrointestinal, intracranial, extracranial) in the same population?",
+          "comparison": "",
+          "outcome": "What effect does low-dose aspirin initiation have on major bleeding (gastrointestinal, intracranial, extracranial) in the same population?",
+          "period": "source-reported follow-up",
+          "relation": "increases",
+          "magnitude": null,
+          "narrower_than": [],
+          "parent_scope": {}
+        }
+      },
+      {
+        "issue_id": "Q3",
+        "text": "In primary-prevention trials enrolling older adults, low-dose aspirin initiation has no effect on major bleeding versus placebo or no aspirin over source-reported follow-up.",
+        "kind": "null",
+        "rationale": "Major bleeding rates could be unchanged by initiation.",
+        "recommendation_body": "",
+        "target": {},
+        "scope": {
+          "population": "What effect does low-dose aspirin initiation have on major bleeding (gastrointestinal, intracranial, extracranial) in the same population?",
+          "comparison": "",
+          "outcome": "What effect does low-dose aspirin initiation have on major bleeding (gastrointestinal, intracranial, extracranial) in the same population?",
+          "period": "source-reported follow-up",
+          "relation": "no_effect",
+          "magnitude": null,
+          "narrower_than": [],
+          "parent_scope": {}
+        }
+      },
+      {
+        "issue_id": "Q4",
+        "text": "Over source-reported follow-up, the absolute excess major bleeding caused by aspirin initiation is greater in adults 70+ than in adults 60\u201369 receiving it for primary prevention.",
+        "kind": "substantive",
+        "rationale": "Age-related baseline bleeding risk could produce larger absolute harms.",
+        "recommendation_body": "",
+        "target": {},
+        "scope": {
+          "population": "adults 70+",
+          "comparison": "",
+          "outcome": "Do the effects on cardiovascular events and bleeding differ by age (60-69 vs 70 and over) or by baseline cardiovascular risk?",
+          "period": "source-reported follow-up",
+          "relation": "differs",
+          "magnitude": null,
+          "narrower_than": [],
+          "parent_scope": {}
+        }
+      },
+      {
+        "issue_id": "Q4",
+        "text": "Among adults 70+, aspirin initiation prevents more cardiovascular events in absolute terms at higher baseline cardiovascular risk over source-reported follow-up.",
+        "kind": "substantive",
+        "rationale": "Higher baseline cardiovascular risk could increase absolute benefit even with similar relative effects.",
+        "recommendation_body": "",
+        "target": {},
+        "scope": {
+          "population": "adults 70+",
+          "comparison": "",
+          "outcome": "Do the effects on cardiovascular events and bleeding differ by age (60-69 vs 70 and over) or by baseline cardiovascular risk?",
+          "period": "source-reported follow-up",
+          "relation": "differs",
+          "magnitude": null,
+          "narrower_than": [],
+          "parent_scope": {}
+        }
+      },
+      {
+        "issue_id": "Q4",
+        "text": "Over source-reported follow-up, aspirin's cardiovascular and bleeding effects in adults 70+ do not differ from those in adults 60\u201369 or vary with baseline cardiovascular risk.",
+        "kind": "null",
+        "rationale": "Age and baseline cardiovascular risk might not modify the treatment effects.",
+        "recommendation_body": "",
+        "target": {},
+        "scope": {
+          "population": "adults 70+",
+          "comparison": "",
+          "outcome": "Do the effects on cardiovascular events and bleeding differ by age (60-69 vs 70 and over) or by baseline cardiovascular risk?",
+          "period": "source-reported follow-up",
+          "relation": "no_effect",
+          "magnitude": null,
+          "narrower_than": [],
+          "parent_scope": {}
+        }
+      },
+      {
+        "issue_id": "Q5",
+        "text": "For adults 60+, pooled analyses estimate that bleeding harms outweigh cardiovascular benefits from aspirin initiation over source-reported follow-up under their stated benefit\u2013harm valuations.",
+        "kind": "substantive",
+        "rationale": "Pooled estimates and their valuations could yield an unfavorable net balance.",
+        "recommendation_body": "",
+        "target": {},
+        "scope": {
+          "population": "adults 60+",
+          "comparison": "",
+          "outcome": "How do guideline bodies and pooled analyses weigh the benefit and bleeding results into a net-balance conclusion for adults 60 and over?",
+          "period": "source-reported follow-up",
+          "relation": "is",
+          "magnitude": null,
+          "narrower_than": [],
+          "parent_scope": {}
+        }
+      },
+      {
+        "issue_id": "Q5",
+        "text": "For adults 60+, pooled analyses estimate that cardiovascular benefits outweigh bleeding harms from aspirin initiation over source-reported follow-up under their stated benefit\u2013harm valuations.",
+        "kind": "substantive",
+        "rationale": "Different pooled estimates or valuations could yield a favorable net balance.",
+        "recommendation_body": "",
+        "target": {},
+        "scope": {
+          "population": "adults 60+",
+          "comparison": "",
+          "outcome": "How do guideline bodies and pooled analyses weigh the benefit and bleeding results into a net-balance conclusion for adults 60 and over?",
+          "period": "source-reported follow-up",
+          "relation": "is",
+          "magnitude": null,
+          "narrower_than": [],
+          "parent_scope": {}
+        }
+      },
+      {
+        "issue_id": "Q5",
+        "text": "For adults 60+, pooled analyses estimate no net difference between cardiovascular benefits and bleeding harms from aspirin initiation over source-reported follow-up under their stated benefit\u2013harm valuations.",
+        "kind": "null",
+        "rationale": "A pooled benefit\u2013harm assessment could yield a neutral balance.",
+        "recommendation_body": "",
+        "target": {},
+        "scope": {
+          "population": "adults 60+",
+          "comparison": "",
+          "outcome": "How do guideline bodies and pooled analyses weigh the benefit and bleeding results into a net-balance conclusion for adults 60 and over?",
+          "period": "source-reported follow-up",
+          "relation": "is",
+          "magnitude": null,
+          "narrower_than": [],
+          "parent_scope": {}
+        }
+      }
+    ],
+    "exclusive_groups": [
+      [
+        0,
+        1
+      ]
+    ]
+  },
+  "apply": {
+    "claims": [
+      "C1",
+      "C2",
+      "C3",
+      "C4",
+      "C5",
+      "C6",
+      "C7",
+      "C8",
+      "C9",
+      "C10",
+      "C11",
+      "C12",
+      "C13",
+      "C14",
+      "C15"
+    ],
+    "dropped": [],
+    "exclusive_groups": 1,
+    "placed_by_rule": [],
+    "rejected_specificity": []
+  },
+  "claims": [
+    {
+      "id": "C1",
+      "text": "In adults 60+, initiating low-dose aspirin for primary prevention reduces net cardiovascular harm versus no aspirin over source-reported follow-up.",
+      "issue_id": "Q1",
+      "kind": "substantive",
+      "contrary_ids": [
+        "C2",
+        "C4",
+        "C5"
+      ],
+      "proof_standard": null,
+      "credence": null,
+      "origin": "proposer",
+      "rationale": "Prevented cardiovascular events could outweigh bleeding harms.",
+      "scope": {
+        "population": "adults 60+",
+        "comparison": "",
+        "outcome": "Does initiating low-dose aspirin for primary prevention reduce net cardiovascular harm in adults aged 60 and over?",
+        "period": "source-reported follow-up",
+        "relation": "reduces",
+        "magnitude": null,
+        "narrower_than": [],
+        "parent_scope": {}
+      },
+      "target": {},
+      "superseded_by": null,
+      "revision_of": null,
+      "created_by_move": "",
+      "created_round": 0,
+      "critique_round": 0,
+      "review_note": "",
+      "answers_issue": true
+    },
+    {
+      "id": "C2",
+      "text": "In adults 60+, initiating low-dose aspirin for primary prevention increases net cardiovascular harm versus no aspirin over source-reported follow-up.",
+      "issue_id": "Q1",
+      "kind": "substantive",
+      "contrary_ids": [
+        "C1",
+        "C4",
+        "C5"
+      ],
+      "proof_standard": null,
+      "credence": null,
+      "origin": "proposer",
+      "rationale": "Bleeding harms could outweigh prevented cardiovascular events.",
+      "scope": {
+        "population": "adults 60+",
+        "comparison": "",
+        "outcome": "Does initiating low-dose aspirin for primary prevention reduce net cardiovascular harm in adults aged 60 and over?",
+        "period": "source-reported follow-up",
+        "relation": "increases",
+        "magnitude": null,
+        "narrower_than": [],
+        "parent_scope": {}
+      },
+      "target": {},
+      "superseded_by": null,
+      "revision_of": null,
+      "created_by_move": "",
+      "created_round": 0,
+      "critique_round": 0,
+      "review_note": "",
+      "answers_issue": true
+    },
+    {
+      "id": "C3",
+      "text": "The USPSTF recommends against initiating low-dose aspirin for primary prevention in adults 60+, judging that it offers no net benefit in reducing net cardiovascular harm.",
+      "issue_id": "Q1",
+      "kind": "substantive",
+      "contrary_ids": [
+        "C4",
+        "C5"
+      ],
+      "proof_standard": null,
+      "credence": null,
+      "origin": "proposer",
+      "rationale": "A recommendation of record can establish the body's benefit\u2013harm verdict without establishing a causal effect.",
+      "scope": {
+        "population": "adults 60+",
+        "comparison": "",
+        "outcome": "Does initiating low-dose aspirin for primary prevention reduce net cardiovascular harm in adults aged 60 and over?",
+        "period": "source-reported follow-up",
+        "relation": "recommends_against",
+        "magnitude": null,
+        "narrower_than": [],
+        "parent_scope": {}
+      },
+      "target": {
+        "population": "adults 60+",
+        "outcome": "Does initiating low-dose aspirin for primary prevention reduce net cardiovascular harm in adults aged 60 and over?",
+        "evidence_status": "recommended"
+      },
+      "superseded_by": null,
+      "revision_of": null,
+      "created_by_move": "",
+      "created_round": 0,
+      "critique_round": 0,
+      "review_note": "",
+      "answers_issue": true
+    },
+    {
+      "id": "C4",
+      "text": "In adults 60+, initiating low-dose aspirin for primary prevention produces no net difference in cardiovascular harm versus no aspirin over source-reported follow-up.",
+      "issue_id": "Q1",
+      "kind": "null",
+      "contrary_ids": [
+        "C1",
+        "C2",
+        "C3"
+      ],
+      "proof_standard": null,
+      "credence": null,
+      "origin": "proposer",
+      "rationale": "Cardiovascular benefits and bleeding harms could balance.",
+      "scope": {
+        "population": "adults 60+",
+        "comparison": "",
+        "outcome": "Does initiating low-dose aspirin for primary prevention reduce net cardiovascular harm in adults aged 60 and over?",
+        "period": "source-reported follow-up",
+        "relation": "no_effect",
+        "magnitude": null,
+        "narrower_than": [],
+        "parent_scope": {}
+      },
+      "target": {},
+      "superseded_by": null,
+      "revision_of": null,
+      "created_by_move": "",
+      "created_round": 0,
+      "critique_round": 0,
+      "review_note": "",
+      "answers_issue": true
+    },
+    {
+      "id": "C5",
+      "text": "For adults 60+, whether aspirin reduces net cardiovascular harm over source-reported follow-up depends on how sources value prevented cardiovascular events against major bleeding; the term has no unique interpretation.",
+      "issue_id": "Q1",
+      "kind": "deflationary",
+      "contrary_ids": [
+        "C1",
+        "C2",
+        "C3"
+      ],
+      "proof_standard": null,
+      "credence": null,
+      "origin": "proposer",
+      "rationale": "Different valuations of benefits and harms could change the net-balance answer.",
+      "scope": {
+        "population": "adults 60+",
+        "comparison": "",
+        "outcome": "Does initiating low-dose aspirin for primary prevention reduce net cardiovascular harm in adults aged 60 and over?",
+        "period": "source-reported follow-up",
+        "relation": "unknown",
+        "magnitude": null,
+        "narrower_than": [],
+        "parent_scope": {}
+      },
+      "target": {},
+      "superseded_by": null,
+      "revision_of": null,
+      "created_by_move": "",
+      "created_round": 0,
+      "critique_round": 0,
+      "review_note": "",
+      "answers_issue": true
+    },
+    {
+      "id": "C6",
+      "text": "In primary-prevention trials enrolling older adults, low-dose aspirin initiation reduces major cardiovascular events versus placebo or no aspirin over source-reported follow-up.",
+      "issue_id": "Q2",
+      "kind": "substantive",
+      "contrary_ids": [
+        "C7"
+      ],
+      "proof_standard": null,
+      "credence": null,
+      "origin": "proposer",
+      "rationale": "Aspirin's antiplatelet effects could prevent cardiovascular events in older trial populations.",
+      "scope": {
+        "population": "What effect does low-dose aspirin initiation have on major cardiovascular events (MI, ischemic stroke, cardiovascular death) in primary-prevention trials enrolling older adults?",
+        "comparison": "",
+        "outcome": "What effect does low-dose aspirin initiation have on major cardiovascular events (MI, ischemic stroke, cardiovascular death) in primary-prevention trials enrolling older adults?",
+        "period": "source-reported follow-up",
+        "relation": "reduces",
+        "magnitude": null,
+        "narrower_than": [],
+        "parent_scope": {}
+      },
+      "target": {},
+      "superseded_by": null,
+      "revision_of": null,
+      "created_by_move": "",
+      "created_round": 0,
+      "critique_round": 0,
+      "review_note": "",
+      "answers_issue": true
+    },
+    {
+      "id": "C7",
+      "text": "In primary-prevention trials enrolling older adults, low-dose aspirin initiation has no effect on major cardiovascular events versus placebo or no aspirin over source-reported follow-up.",
+      "issue_id": "Q2",
+      "kind": "null",
+      "contrary_ids": [
+        "C6"
+      ],
+      "proof_standard": null,
+      "credence": null,
+      "origin": "proposer",
+      "rationale": "Cardiovascular event rates could be unchanged by initiation.",
+      "scope": {
+        "population": "What effect does low-dose aspirin initiation have on major cardiovascular events (MI, ischemic stroke, cardiovascular death) in primary-prevention trials enrolling older adults?",
+        "comparison": "",
+        "outcome": "What effect does low-dose aspirin initiation have on major cardiovascular events (MI, ischemic stroke, cardiovascular death) in primary-prevention trials enrolling older adults?",
+        "period": "source-reported follow-up",
+        "relation": "no_effect",
+        "magnitude": null,
+        "narrower_than": [],
+        "parent_scope": {}
+      },
+      "target": {},
+      "superseded_by": null,
+      "revision_of": null,
+      "created_by_move": "",
+      "created_round": 0,
+      "critique_round": 0,
+      "review_note": "",
+      "answers_issue": true
+    },
+    {
+      "id": "C8",
+      "text": "In primary-prevention trials enrolling older adults, low-dose aspirin initiation increases major bleeding versus placebo or no aspirin over source-reported follow-up.",
+      "issue_id": "Q3",
+      "kind": "substantive",
+      "contrary_ids": [
+        "C9"
+      ],
+      "proof_standard": null,
+      "credence": null,
+      "origin": "proposer",
+      "rationale": "Platelet inhibition could increase clinically important bleeding in older adults.",
+      "scope": {
+        "population": "What effect does low-dose aspirin initiation have on major bleeding (gastrointestinal, intracranial, extracranial) in the same population?",
+        "comparison": "",
+        "outcome": "What effect does low-dose aspirin initiation have on major bleeding (gastrointestinal, intracranial, extracranial) in the same population?",
+        "period": "source-reported follow-up",
+        "relation": "increases",
+        "magnitude": null,
+        "narrower_than": [],
+        "parent_scope": {}
+      },
+      "target": {},
+      "superseded_by": null,
+      "revision_of": null,
+      "created_by_move": "",
+      "created_round": 0,
+      "critique_round": 0,
+      "review_note": "",
+      "answers_issue": true
+    },
+    {
+      "id": "C9",
+      "text": "In primary-prevention trials enrolling older adults, low-dose aspirin initiation has no effect on major bleeding versus placebo or no aspirin over source-reported follow-up.",
+      "issue_id": "Q3",
+      "kind": "null",
+      "contrary_ids": [
+        "C8"
+      ],
+      "proof_standard": null,
+      "credence": null,
+      "origin": "proposer",
+      "rationale": "Major bleeding rates could be unchanged by initiation.",
+      "scope": {
+        "population": "What effect does low-dose aspirin initiation have on major bleeding (gastrointestinal, intracranial, extracranial) in the same population?",
+        "comparison": "",
+        "outcome": "What effect does low-dose aspirin initiation have on major bleeding (gastrointestinal, intracranial, extracranial) in the same population?",
+        "period": "source-reported follow-up",
+        "relation": "no_effect",
+        "magnitude": null,
+        "narrower_than": [],
+        "parent_scope": {}
+      },
+      "target": {},
+      "superseded_by": null,
+      "revision_of": null,
+      "created_by_move": "",
+      "created_round": 0,
+      "critique_round": 0,
+      "review_note": "",
+      "answers_issue": true
+    },
+    {
+      "id": "C10",
+      "text": "Over source-reported follow-up, the absolute excess major bleeding caused by aspirin initiation is greater in adults 70+ than in adults 60\u201369 receiving it for primary prevention.",
+      "issue_id": "Q4",
+      "kind": "substantive",
+      "contrary_ids": [
+        "C12"
+      ],
+      "proof_standard": null,
+      "credence": null,
+      "origin": "proposer",
+      "rationale": "Age-related baseline bleeding risk could produce larger absolute harms.",
+      "scope": {
+        "population": "adults 70+",
+        "comparison": "",
+        "outcome": "Do the effects on cardiovascular events and bleeding differ by age (60-69 vs 70 and over) or by baseline cardiovascular risk?",
+        "period": "source-reported follow-up",
+        "relation": "differs",
+        "magnitude": null,
+        "narrower_than": [],
+        "parent_scope": {}
+      },
+      "target": {},
+      "superseded_by": null,
+      "revision_of": null,
+      "created_by_move": "",
+      "created_round": 0,
+      "critique_round": 0,
+      "review_note": "",
+      "answers_issue": true
+    },
+    {
+      "id": "C11",
+      "text": "Among adults 70+, aspirin initiation prevents more cardiovascular events in absolute terms at higher baseline cardiovascular risk over source-reported follow-up.",
+      "issue_id": "Q4",
+      "kind": "substantive",
+      "contrary_ids": [
+        "C12"
+      ],
+      "proof_standard": null,
+      "credence": null,
+      "origin": "proposer",
+      "rationale": "Higher baseline cardiovascular risk could increase absolute benefit even with similar relative effects.",
+      "scope": {
+        "population": "adults 70+",
+        "comparison": "",
+        "outcome": "Do the effects on cardiovascular events and bleeding differ by age (60-69 vs 70 and over) or by baseline cardiovascular risk?",
+        "period": "source-reported follow-up",
+        "relation": "differs",
+        "magnitude": null,
+        "narrower_than": [],
+        "parent_scope": {}
+      },
+      "target": {},
+      "superseded_by": null,
+      "revision_of": null,
+      "created_by_move": "",
+      "created_round": 0,
+      "critique_round": 0,
+      "review_note": "",
+      "answers_issue": true
+    },
+    {
+      "id": "C12",
+      "text": "Over source-reported follow-up, aspirin's cardiovascular and bleeding effects in adults 70+ do not differ from those in adults 60\u201369 or vary with baseline cardiovascular risk.",
+      "issue_id": "Q4",
+      "kind": "null",
+      "contrary_ids": [
+        "C10",
+        "C11"
+      ],
+      "proof_standard": null,
+      "credence": null,
+      "origin": "proposer",
+      "rationale": "Age and baseline cardiovascular risk might not modify the treatment effects.",
+      "scope": {
+        "population": "adults 70+",
+        "comparison": "",
+        "outcome": "Do the effects on cardiovascular events and bleeding differ by age (60-69 vs 70 and over) or by baseline cardiovascular risk?",
+        "period": "source-reported follow-up",
+        "relation": "no_effect",
+        "magnitude": null,
+        "narrower_than": [],
+        "parent_scope": {}
+      },
+      "target": {},
+      "superseded_by": null,
+      "revision_of": null,
+      "created_by_move": "",
+      "created_round": 0,
+      "critique_round": 0,
+      "review_note": "",
+      "answers_issue": true
+    },
+    {
+      "id": "C13",
+      "text": "For adults 60+, pooled analyses estimate that bleeding harms outweigh cardiovascular benefits from aspirin initiation over source-reported follow-up under their stated benefit\u2013harm valuations.",
+      "issue_id": "Q5",
+      "kind": "substantive",
+      "contrary_ids": [
+        "C15"
+      ],
+      "proof_standard": null,
+      "credence": null,
+      "origin": "proposer",
+      "rationale": "Pooled estimates and their valuations could yield an unfavorable net balance.",
+      "scope": {
+        "population": "adults 60+",
+        "comparison": "",
+        "outcome": "How do guideline bodies and pooled analyses weigh the benefit and bleeding results into a net-balance conclusion for adults 60 and over?",
+        "period": "source-reported follow-up",
+        "relation": "is",
+        "magnitude": null,
+        "narrower_than": [],
+        "parent_scope": {}
+      },
+      "target": {},
+      "superseded_by": null,
+      "revision_of": null,
+      "created_by_move": "",
+      "created_round": 0,
+      "critique_round": 0,
+      "review_note": "",
+      "answers_issue": true
+    },
+    {
+      "id": "C14",
+      "text": "For adults 60+, pooled analyses estimate that cardiovascular benefits outweigh bleeding harms from aspirin initiation over source-reported follow-up under their stated benefit\u2013harm valuations.",
+      "issue_id": "Q5",
+      "kind": "substantive",
+      "contrary_ids": [
+        "C15"
+      ],
+      "proof_standard": null,
+      "credence": null,
+      "origin": "proposer",
+      "rationale": "Different pooled estimates or valuations could yield a favorable net balance.",
+      "scope": {
+        "population": "adults 60+",
+        "comparison": "",
+        "outcome": "How do guideline bodies and pooled analyses weigh the benefit and bleeding results into a net-balance conclusion for adults 60 and over?",
+        "period": "source-reported follow-up",
+        "relation": "is",
+        "magnitude": null,
+        "narrower_than": [],
+        "parent_scope": {}
+      },
+      "target": {},
+      "superseded_by": null,
+      "revision_of": null,
+      "created_by_move": "",
+      "created_round": 0,
+      "critique_round": 0,
+      "review_note": "",
+      "answers_issue": true
+    },
+    {
+      "id": "C15",
+      "text": "For adults 60+, pooled analyses estimate no net difference between cardiovascular benefits and bleeding harms from aspirin initiation over source-reported follow-up under their stated benefit\u2013harm valuations.",
+      "issue_id": "Q5",
+      "kind": "null",
+      "contrary_ids": [
+        "C13",
+        "C14"
+      ],
+      "proof_standard": null,
+      "credence": null,
+      "origin": "proposer",
+      "rationale": "A pooled benefit\u2013harm assessment could yield a neutral balance.",
+      "scope": {
+        "population": "adults 60+",
+        "comparison": "",
+        "outcome": "How do guideline bodies and pooled analyses weigh the benefit and bleeding results into a net-balance conclusion for adults 60 and over?",
+        "period": "source-reported follow-up",
+        "relation": "is",
+        "magnitude": null,
+        "narrower_than": [],
+        "parent_scope": {}
+      },
+      "target": {},
+      "superseded_by": null,
+      "revision_of": null,
+      "created_by_move": "",
+      "created_round": 0,
+      "critique_round": 0,
+      "review_note": "",
+      "answers_issue": true
+    }
+  ],
+  "cost_usd": 0.037256
+}

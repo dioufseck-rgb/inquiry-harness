@@ -80,7 +80,9 @@ Return one JSON object and nothing else:
 {
   "claims": [
     {"issue_id": "Q1", "text": "string", "kind": "substantive | null | deflationary", "rationale": "string",
-     "recommendation_body": "", "target": {"population": "", "outcome": "", "evidence_status": ""}}
+     "recommendation_body": "", "target": {"population": "", "outcome": "", "evidence_status": ""},
+     "scope": {"population": "copy issue population", "comparison": "copy issue comparison", "outcome": "copy issue outcome",
+               "period": "copy issue period", "relation": "reduces", "magnitude": null, "narrower_than": [], "parent_scope": {}}}
   ],
   "exclusive_groups": [[0, 1, 2], [5, 6]]
 }

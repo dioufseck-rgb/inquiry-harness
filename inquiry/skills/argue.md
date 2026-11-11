@@ -123,7 +123,9 @@ Return one JSON object and nothing else:
     "text": "A source-scoped finding actually supported by the evidence",
     "revision_of": "C4", "issue_id": "Q1", "answers_issue": false,
     "premise_ids": ["E8"], "scheme": "study_result", "cq_answers": {},
-    "target": {}, "note": "Why this is the supported scope"
+    "target": {}, "note": "Why this is the supported scope",
+    "scope": {"population": "supported population", "comparison": "supported comparison", "outcome": "supported component outcome",
+              "period": "source-reported follow-up", "relation": "is", "magnitude": null, "narrower_than": [], "parent_scope": {}}
   }]
 }
 ```

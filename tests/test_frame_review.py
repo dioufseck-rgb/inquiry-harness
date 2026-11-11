@@ -5,11 +5,17 @@ from test_live_cycle import make_harness
 
 
 def test_frame_samples_choose_modal_type_and_median_tree():
-    outputs = iter([
+    frames = [
         {"restatement": "q", "question_type": "causal", "sub_issues": [{"text": "one"}]},
         {"restatement": "q", "question_type": "causal", "sub_issues": [{"text": "one"}, {"text": "two"}, {"text": "three"}]},
         {"restatement": "q", "question_type": "empirical", "sub_issues": []},
-    ])
+    ]
+    scope = {"population": "population X", "comparison": "X vs alternative", "outcome": "Y", "period": "follow-up", "relation": "unknown"}
+    for frame in frames:
+        frame["scope"] = dict(scope)
+        for sub in frame.get("sub_issues", []):
+            sub["scope"] = dict(scope)
+    outputs = iter(frames)
     llm = FakeLLM({"frame": lambda _: next(outputs)})
     inq = Inquiry(id="f", question="Did X reduce Y?")
     result = moves.frame(inq, llm, samples=3)

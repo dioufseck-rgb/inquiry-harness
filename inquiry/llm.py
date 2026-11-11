@@ -73,7 +73,7 @@ class LLM:
     def complete_json(self, system: str, user: str, schema: Type[T], max_tokens: int = 16000) -> T:
         reply = self.complete(system, user, max_tokens=max_tokens)
         try:
-            return schema.model_validate(extract_json(reply))
+            return schema.model_validate(extract_json(reply), context={"fresh_model_output": True})
         except (ValidationError, ValueError, json.JSONDecodeError) as first_error:
             skill = system.splitlines()[0] if system else ""
             if not hasattr(self, "repairs"):
@@ -84,7 +84,7 @@ class LLM:
                 f"Error: {first_error}\n\nReturn only a corrected JSON object, complete, with every required field."
             )
             reply = self.complete(system, repair, max_tokens=max_tokens)
-            return schema.model_validate(extract_json(reply))
+            return schema.model_validate(extract_json(reply), context={"fresh_model_output": True})
 
 
 class AnthropicLLM(LLM):
