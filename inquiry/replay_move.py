@@ -285,7 +285,7 @@ def argue_diagnostics(inq: Inquiry, evaluation=None) -> dict:
             if answer and answer.status == "answered" and not answer.outcome:
                 details["legacy_answered_empty_outcome"] += 1
         for reason in ev.inapplicable_reasons.get(argument.id, []):
-            if reason.startswith(("open assumption: ", "assumption unresolved: ")):
+            if reason.startswith(("open assumption: ", "assumption unresolved: ", "reopened assumption: ")):
                 reasons["open:" + reason.split(": ", 1)[1]] += 1
             elif reason.startswith(("assumption unsatisfied: ", "exception obtains: ")):
                 reasons["unsatisfied:" + reason.split(": ", 1)[1]] += 1
@@ -340,6 +340,8 @@ def move_metrics(inq: Inquiry, move: str, summary: dict, llm: RecordingLLM,
              "attacks_with_cq": sum(bool(a.attacks.raises_cq) for a in attacks),
              "needs_obtainable": sum(t["tag"] == "obtainable" for t in tags),
              "needs_unobtainable": sum(t["tag"] == "unobtainable" for t in tags), "needs_tags": tags}
+        from .argument.evaluate import reopening_metrics
+        m.update(reopening_metrics(g, ev))
     elif move == "respond":
         responses = [r for p in proposals for r in p.get("responses", [])]
         counters = [g.arg(aid) for aid in summary.get("countered", [])]

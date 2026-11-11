@@ -78,6 +78,7 @@ class Evaluation(BaseModel):
     issues: dict[str, list[str]] = Field(default_factory=dict, description="issue id -> accepted claim ids.")
     flags: list[Flag] = Field(default_factory=list)
     converged: bool = True
+    reopened_cqs: dict[str, list[str]] = Field(default_factory=dict)
 
     def status(self, claim_id: str) -> Status:
         return self.claims[claim_id].status if claim_id in self.claims else "undecided"
@@ -138,7 +139,7 @@ def _all_origins(origins: dict[str, set[str]]) -> set[str]:
 # Applicability
 # ---------------------------------------------------------------------------
 
-def _applicability(g: ArgumentGraph, accepted: set[str]) -> tuple[dict[str, bool], dict[str, list[str]]]:
+def _applicability(g: ArgumentGraph, accepted: set[str], reopened: set[tuple[str, str]] | None = None) -> tuple[dict[str, bool], dict[str, list[str]]]:
     applicable: dict[str, bool] = {}
     reasons: dict[str, list[str]] = {}
     for a in g.arguments:
@@ -148,7 +149,9 @@ def _applicability(g: ArgumentGraph, accepted: set[str]) -> tuple[dict[str, bool
             why.append(f"withdrawn: {a.withdrawn}")
         for q in sch.assumptions():
             st = a.cq.get(q.id)
-            if st is None or st.status == "open":
+            if reopened and (a.id, q.id) in reopened:
+                why.append(f"reopened assumption: {q.id}")
+            elif st is None or st.status == "open":
                 why.append(f"open assumption: {q.id}")
             elif st.status == "answered" and st.outcome == "unsatisfied":
                 why.append(f"assumption unsatisfied: {q.id}")
@@ -185,11 +188,24 @@ def _discharged(g: ArgumentGraph, atk: Argument) -> bool:
     if target is None:
         return False
     ans = target.cq.get(qid)
+    if atk.attacks.basis == "answer_inadequate" and (ans is None or ans.revision <= atk.attacks.challenged_revision
+                                                    or ans.answer_move != "respond"):
+        return False  # the answer being challenged cannot discharge its own challenge
     return ans is not None and ans.satisfied and bool(ans.evidence_ids)
 
 
 def is_discharged(g: ArgumentGraph, atk: Argument) -> bool:
     return atk.is_attack and _discharged(g, atk)
+
+
+def reopening_metrics(g: ArgumentGraph, ev: Evaluation) -> dict:
+    attacks = [a for a in g.arguments if a.is_attack and a.attacks.basis == "answer_inadequate"]
+    historical = {(a.attacks.target_id, a.attacks.raises_cq) for a in attacks if a.attacks.was_reopened}
+    active = {(target, qid) for target, questions in ev.reopened_cqs.items() for qid in questions}
+    discharged = {(a.attacks.target_id, a.attacks.raises_cq) for a in attacks
+                  if a.attacks.was_reopened and is_discharged(g, a)}
+    return {"reopened_cqs": len(historical | active), "reopened_cqs_active": len(active),
+            "reopened_then_discharged": len(discharged)}
 
 
 def _attack_edges(g: ArgumentGraph, applicable: dict[str, bool]) -> dict[str, set[str]]:
@@ -310,18 +326,34 @@ def evaluate(g: ArgumentGraph, max_iter: int = 10) -> Evaluation:
     labels: dict[str, Status] = {}
     details: dict[str, ClaimDetail] = {}
     converged = False
+    reopened: set[tuple[str, str]] = set()
+
+    def reopenings(applicable_, labels_):
+        return {(a.attacks.target_id, a.attacks.raises_cq) for a in g.arguments
+                if a.is_attack and a.attacks.basis == "answer_inadequate" and a.attacks.type == "undercut"
+                and applicable_.get(a.id, False) and labels_.get(a.id) == "in" and not _discharged(g, a)}
+
     for _ in range(max_iter):
-        applicable, reasons = _applicability(g, accepted)
+        # Label attacks before deriving reopenings; then re-evaluate targets.
+        # Include reopenings in convergence so accepted-set stability cannot
+        # prematurely stop a counterattack from restoring its target.
+        attack_applicable, _ = _applicability(g, accepted, reopened)
+        attack_labels = grounded_labelling(_attack_edges(g, attack_applicable))
+        next_reopened = reopenings(attack_applicable, attack_labels)
+        applicable, reasons = _applicability(g, accepted, next_reopened)
         labels = grounded_labelling(_attack_edges(g, applicable))
         details = _claim_pass(g, labels, strengths)
         new_accepted = {cid for cid, d in details.items() if d.status == "in"}
-        if new_accepted == accepted:
+        if new_accepted == accepted and next_reopened == reopened and reopenings(applicable, labels) == next_reopened:
             converged = True
             break
         accepted = new_accepted
+        reopened = next_reopened
 
     ev = Evaluation(applicable=applicable, inapplicable_reasons=reasons, argument_strength=strengths,
-                    labels=labels, claims=details, converged=converged)
+                    labels=labels, claims=details, converged=converged,
+                    reopened_cqs={aid: sorted(qid for target, qid in next_reopened if target == aid)
+                                  for aid in sorted({target for target, _ in next_reopened})} if max_iter else {})
     for iss in g.issues:
         # live claims that still answer the issue as posed; a component finding does not answer it
         ev.issues[iss.id] = [c.id for c in g.claims_for_issue(iss.id) if details[c.id].status == "in" and c.answers_issue]

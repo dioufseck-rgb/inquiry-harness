@@ -9,6 +9,20 @@ for evidence, and goes in `needed_evidence`.
 
 ## Procedure
 
+Walk every answered or defaulted assumption shown in the audit section.
+Judge it against the argument's actual claim, including its stated population,
+outcome, period and comparison. A component/source-scoped finding does not
+assert the broader original claim or automatically answer the main issue.
+When an answer does not establish the condition, use `basis: "answer_inadequate"`
+with an undercut, the exact assumption `cq_id`, and evidence IDs showing the
+mismatch. This reopens that assumption even though the proposer marked it
+satisfied. An exact quoted contradiction in the proposer's own answer can
+also ground this attack: include `answer_quote` and repeat it in `note` with
+the explanation of the contradiction. Do not reopen an honest source-scoped
+answer merely because it does not establish the entire main question.
+Missing evidence alone is an absence concern, not affirmative evidence that
+an answered assumption fails. Keep uncertainty and actual mismatch distinct.
+
 1. Walk every applicable argument's open `exception` questions. For each,
    ask whether something in the evidence lets you raise it. If so, attack:
    - a question that probes a premise becomes an `undermine` on that

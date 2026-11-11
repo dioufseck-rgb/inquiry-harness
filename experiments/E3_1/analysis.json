@@ -1,0 +1,448 @@
+{
+  "experiment": "E3.1",
+  "complete": true,
+  "reference_kind": "agent_provisional; no human adjudication claimed",
+  "against_sol_reference_count": 0,
+  "protected_reference_count": 10,
+  "overlap_rate": null,
+  "overlap_status": "not_estimable: N1 has no same-claim disagreements and zero adjudicated-against-Sol references",
+  "protected_reopening_violations": 0,
+  "attack_increase_pass": false,
+  "pass": false,
+  "summaries": [
+    {
+      "provider": "openai",
+      "n": 3,
+      "prior_E3_applicable_attacks_mean": 2.0,
+      "applicable_attacks_mean": 1,
+      "reopened_mean": 1,
+      "supporting_applicable_before": 17.666666666666668,
+      "supporting_applicable_after": 16.666666666666668
+    },
+    {
+      "provider": "anthropic",
+      "n": 3,
+      "prior_E3_applicable_attacks_mean": 4.333333333333333,
+      "applicable_attacks_mean": 3,
+      "reopened_mean": 0.6666666666666666,
+      "supporting_applicable_before": 17.666666666666668,
+      "supporting_applicable_after": 17
+    }
+  ],
+  "samples": [
+    {
+      "source_sample": 1,
+      "critic": {
+        "provider": "openai",
+        "model": "gpt-6.1-sol",
+        "effort": "medium"
+      },
+      "manifest": "experiments\\E3_1\\sample-001\\sol\\moves.json",
+      "metrics": {
+        "attacks": 1,
+        "attacks_applicable": 1,
+        "attacks_with_cq": 1,
+        "needs_obtainable": 4,
+        "needs_unobtainable": 1,
+        "needs_tags": [
+          {
+            "text": "Retrieve the 2022 USPSTF commissioned aspirin decision-analysis report and supplementary tables: absolute lifetime QALYs and life-years per 1,000 initiating at ages 60\u201369 and 70\u201379, stratified by sex and baseline cardiovascular risk, including utility weights, uncertainty analyses, and treatment-duration assumptions.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "Retrieve the original Japanese Primary Prevention Project report and supplement for adults aged 60\u201385 assigned aspirin 100 mg daily versus no aspirin: cardiovascular component outcomes and major extracranial bleeding over five years, with age-stratified absolute effects and confidence intervals.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "Find randomized daily low-dose aspirin results specifically for ages 60\u201369, reporting cardiovascular benefits and intracranial and major extracranial bleeding over the same follow-up, together with an explicit severity-weighted net endpoint or patient-level overlap information.",
+            "tag": "unobtainable",
+            "tag_basis": "patient-level"
+          },
+          {
+            "text": "Independence note: S1, S4, and S9 concern the same ASPREE randomized cohort; their distinct source-origin labels must not make their overlapping estimates independent corroboration. Likewise, A5 and A17 use exactly the same evidence for substantially overlapping claims.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "Independence note: the S2 and S3 meta-analyses and the S16 USPSTF synthesis reuse underlying primary-prevention trials, including ASPREE and ASCEND. Compare their included-trial lists before treating agreement across these syntheses as independent replication.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          }
+        ],
+        "reopened_cqs": 1,
+        "reopened_cqs_active": 1,
+        "reopened_then_discharged": 0
+      },
+      "error": "",
+      "cost_usd": 0.1533049,
+      "supporting_applicable_before": 21,
+      "supporting_applicable_after": 20,
+      "reopenings": [
+        {
+          "argument_id": "A8",
+          "cq_id": "follows",
+          "claim_id": "C5"
+        }
+      ],
+      "protected_reopened": [],
+      "against_sol_overlap": null,
+      "attack_details": [
+        {
+          "id": "A22",
+          "target": "A8",
+          "cq_id": "follows",
+          "basis": "answer_inadequate",
+          "note": "[follows] The answer establishes an additional bleeding consequence in ASPREE, but C5 asserts the comparison for adults aged 60 and over. E96 identifies ASPREE's eligibility as principally age 70 or older, with limited eligibility from age 65; E109 expressly limits generalizability and cautions that the balance may differ in substantially higher ischemic-stroke-risk groups. E53 concerns combined trial and post-trial follow-up in that selected cohort. The answer therefore does not establish its population-wide consequence premise, particularly for ages 60\u201364. This does not challenge the conditional principle that adding positively weighted excess bleeding makes an otherwise fixed assessment less favorable; it challenges the transport of the empirical excess-bleeding premise to C5's stated population."
+        }
+      ]
+    },
+    {
+      "source_sample": 1,
+      "critic": {
+        "provider": "anthropic",
+        "model": "claude-sonnet-5-5",
+        "effort": "medium"
+      },
+      "manifest": "experiments\\E3_1\\sample-001\\sonnet\\moves.json",
+      "metrics": {
+        "attacks": 3,
+        "attacks_applicable": 3,
+        "attacks_with_cq": 3,
+        "needs_obtainable": 2,
+        "needs_unobtainable": 1,
+        "needs_tags": [
+          {
+            "text": "ASPREE or ARRIVE patient-level data giving a deduplicated first-event union of MI, ischemic stroke, CV death, ICH and major extracranial bleeding at 5 years",
+            "tag": "unobtainable",
+            "tag_basis": "patient-level"
+          },
+          {
+            "text": "Age-stratified (60-69 vs 70+) absolute benefit and bleeding results from the USPSTF decision model, with sensitivity analysis of utility weights",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "Independence check: ASPREE in-trial numbers in S4, S9, S10, S11 and S12 all trace to S1, so they are not independent corroboration",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          }
+        ],
+        "reopened_cqs": 1,
+        "reopened_cqs_active": 1,
+        "reopened_then_discharged": 0
+      },
+      "error": "",
+      "cost_usd": 0.2034455,
+      "supporting_applicable_before": 21,
+      "supporting_applicable_after": 20,
+      "reopenings": [
+        {
+          "argument_id": "A8",
+          "cq_id": "follows",
+          "claim_id": "C5"
+        }
+      ],
+      "protected_reopened": [],
+      "against_sol_overlap": null,
+      "attack_details": [
+        {
+          "id": "A22",
+          "target": "A8",
+          "cq_id": "follows",
+          "basis": "answer_inadequate",
+          "note": "[follows] The answer relies on E53, a combined trial plus post-trial HR 1.43 for upper GI bleeding, which E47 and E59 show is not an effect of initiation: study drug stopped, exposure converged, and cessation effects cannot be separated from legacy effects. The qualitative direction that bleeding makes aspirin less favorable is therefore not established for initiation by this premise."
+        },
+        {
+          "id": "A23",
+          "target": "A1",
+          "cq_id": "consistency",
+          "basis": "presence",
+          "note": "[consistency] A1 claims the result is compatible with benefit and harm, but its weights (hemorrhagic stroke 3x, MI 0.89, extracranial bleeding 0.63) are borrowed from prior estimates that the authors themselves caution about. Other analyses in the graph (E32 for example) use different rules, so the C18 result is rule-dependent, not general."
+        },
+        {
+          "id": "A24",
+          "target": "A9",
+          "cq_id": "definitions",
+          "basis": "presence",
+          "note": "[definitions] E26 includes all-cause mortality and only GI bleeding plus hemorrhagic stroke, while E13 uses weights over extracranial bleeding. These are not like-for-like, so grouping them as comparable net-benefit rules for older adults overstates comparability; neither is restricted to ages 60 and over."
+        }
+      ]
+    },
+    {
+      "source_sample": 2,
+      "critic": {
+        "provider": "openai",
+        "model": "gpt-6.1-sol",
+        "effort": "medium"
+      },
+      "manifest": "experiments\\E3_1\\sample-002\\sol\\moves.json",
+      "metrics": {
+        "attacks": 1,
+        "attacks_applicable": 1,
+        "attacks_with_cq": 1,
+        "needs_obtainable": 4,
+        "needs_unobtainable": 0,
+        "needs_tags": [
+          {
+            "text": "Retrieve the USPSTF 2022 commissioned aspirin decision analysis: tables of absolute lifetime QALY and life-year differences for initiation at ages 60\u201369 and 70\u201379, stratified by sex and baseline cardiovascular risk, together with utility weights, bleeding-risk assumptions, recurrence handling, and uncertainty analyses.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "Retrieve the original Japanese Primary Prevention Project randomized trial report and supplement: aspirin 100 mg daily versus control in adults aged 60\u201385, with aligned five-year absolute myocardial-infarction, ischemic-stroke, cardiovascular-death, intracranial-hemorrhage, and major-extracranial-bleeding results, including age and baseline-risk subgroups.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "Obtain an age-60-and-over benefit\u2013harm analysis using a common regimen and follow-up horizon, explicitly specifying either a deduplicated first-event endpoint or severity-weighted event burden; report component absolute effects separately and account for overlapping fatal, stroke, and bleeding outcomes.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "Independence note: S1, S4, and S9 report the same ASPREE randomized cohort, despite having different source-origin labels. Their overlapping in-trial results must not count as independent corroboration. S2 and S3 also synthesize overlapping primary-prevention trials; compare their included-trial lists before treating pooled treatment-effect estimates as independent.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          }
+        ],
+        "reopened_cqs": 1,
+        "reopened_cqs_active": 1,
+        "reopened_then_discharged": 0
+      },
+      "error": "",
+      "cost_usd": 0.1438399,
+      "supporting_applicable_before": 16,
+      "supporting_applicable_after": 15,
+      "reopenings": [
+        {
+          "argument_id": "A7",
+          "cq_id": "follows",
+          "claim_id": "C5"
+        }
+      ],
+      "protected_reopened": [],
+      "against_sol_overlap": null,
+      "attack_details": [
+        {
+          "id": "A18",
+          "target": "A7",
+          "cq_id": "follows",
+          "basis": "answer_inadequate",
+          "note": "[follows] C5 applies to aspirin initiation in adults aged 60 and over, but the answered assumption establishes an additional adverse consequence only in ASPREE's predominantly age-70-and-older cohort over combined trial and post-trial follow-up. E38 documents the age mismatch; E47 documents converging post-trial aspirin exposure; E59 explicitly states that the extended comparison cannot distinguish cessation effects from legacy effects. This supports a narrower directional finding about including bleeding in the ASPREE assignment comparison, but does not establish the stated population-wide initiation claim. The conceptual observation that positively weighted additional bleeding worsens a balance does not itself establish additional bleeding under the claim's treatment contrast and population."
+        }
+      ]
+    },
+    {
+      "source_sample": 2,
+      "critic": {
+        "provider": "anthropic",
+        "model": "claude-sonnet-5-5",
+        "effort": "medium"
+      },
+      "manifest": "experiments\\E3_1\\sample-002\\sonnet\\moves.json",
+      "metrics": {
+        "attacks": 3,
+        "attacks_applicable": 3,
+        "attacks_with_cq": 3,
+        "needs_obtainable": 3,
+        "needs_unobtainable": 1,
+        "needs_tags": [
+          {
+            "text": "Patient-level or published age-stratified (60-69 vs 70+) ASPREE, ARRIVE and JPPP net outcomes with a deduplicated first-event composite of MI, ischemic stroke, CV death, intracranial bleeding and major extracranial bleeding",
+            "tag": "unobtainable",
+            "tag_basis": "Patient-level"
+          },
+          {
+            "text": "USPSTF commissioned model (Dehmer/Guirguis-Blake evidence report) utilities, weights and sensitivity analyses showing whether the net conclusion reverses under alternative weights",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "JPPP original report (Ikeda 2014) bleeding and age-stratified results for adults aged 60-85",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "Absolute risk difference confidence intervals at a fixed 5-year horizon for ASPREE (Aalen-Johansen)",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          }
+        ],
+        "reopened_cqs": 1,
+        "reopened_cqs_active": 1,
+        "reopened_then_discharged": 0
+      },
+      "error": "",
+      "cost_usd": 0.1894139,
+      "supporting_applicable_before": 16,
+      "supporting_applicable_after": 15,
+      "reopenings": [
+        {
+          "argument_id": "A7",
+          "cq_id": "follows",
+          "claim_id": "C5"
+        }
+      ],
+      "protected_reopened": [],
+      "against_sol_overlap": null,
+      "attack_details": [
+        {
+          "id": "A18",
+          "target": "A7",
+          "cq_id": "follows",
+          "basis": "answer_inadequate",
+          "note": "[follows] A7's answer relies on the HR 1.43 upper GI bleeding result from combined trial plus post-trial follow-up. E47 and E59 show that period compares initial assignment after aspirin exposure converged. It is not an effect of initiating aspirin. The E44 definition does not supply an extracranial-only estimate. The answer supports 'bleeding increased' but not that adding extracranial bleeding makes the net balance less favorable, because no net composite is computed."
+        },
+        {
+          "id": "A19",
+          "target": "A14",
+          "cq_id": "uncertainty",
+          "basis": "presence",
+          "note": "[uncertainty] Already inapplicable. The fatal major hemorrhage HR is 1.10 (0.78-1.55) and the fatal intracranial HR is 1.27 (0.74-2.20). Neither supports an increase in fatal bleeding, so C15 should not be sustained."
+        },
+        {
+          "id": "A20",
+          "target": "A6",
+          "cq_id": "bias",
+          "basis": "presence",
+          "note": "[bias] E158 shows the USPSTF 'no net benefit' conclusion rests on a commissioned lifetime model that assumes no cardiovascular mortality effect, with unspecified utilities. E151 itself says the conclusion is limited to adults without increased bleeding risk. This is model-dependent and does not quantify absolute net effect. The conclusion rests on that assumption, so it should not be read as independent trial confirmation."
+        }
+      ]
+    },
+    {
+      "source_sample": 3,
+      "critic": {
+        "provider": "openai",
+        "model": "gpt-6.1-sol",
+        "effort": "medium"
+      },
+      "manifest": "experiments\\E3_1\\sample-003\\sol\\moves.json",
+      "metrics": {
+        "attacks": 1,
+        "attacks_applicable": 1,
+        "attacks_with_cq": 1,
+        "needs_obtainable": 3,
+        "needs_unobtainable": 1,
+        "needs_tags": [
+          {
+            "text": "Retrieve the USPSTF 2022 aspirin decision-analysis report and supplemental tables: lifetime absolute QALY and life-year differences per 1000 people initiating at ages 60\u201369 and 70\u201379, stratified by baseline cardiovascular risk and sex, with utility weights, uncertainty analyses, and treatment-duration assumptions. E158 supplies directions but not numerical net magnitudes.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "Retrieve the Japanese Primary Prevention Trial original results and supplement for adults aged 60\u201385 assigned 100 mg daily aspirin versus control over five years: absolute myocardial infarction, ischemic stroke, cardiovascular death, intracranial hemorrhage, and major extracranial bleeding results, including age- and risk-specific estimates and uncertainty.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "Retrieve ASPREE and ASCEND patient-level joint cardiovascular\u2013bleeding outcomes or a published severity-weighted benefit\u2013harm analysis using a common population and follow-up horizon. Specify fatal-event inclusion, recurrent-event handling, and overlap rules before combining component effects.",
+            "tag": "unobtainable",
+            "tag_basis": "patient-level"
+          },
+          {
+            "text": "Independence note: S4's reproduced in-trial results, S1's original results, and S9's stroke analysis originate in the same ASPREE randomized cohort; they are not independent trial corroboration. E21 and E22 duplicate the same S2 discussion statement, while E9 and E18 report the same pooled estimates. The S2, S3, S13, and USPSTF syntheses also likely share underlying trials; retrieve their included-study lists before treating them as independent effect evidence.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          }
+        ],
+        "reopened_cqs": 1,
+        "reopened_cqs_active": 1,
+        "reopened_then_discharged": 0
+      },
+      "error": "",
+      "cost_usd": 0.146576,
+      "supporting_applicable_before": 16,
+      "supporting_applicable_after": 15,
+      "reopenings": [
+        {
+          "argument_id": "A6",
+          "cq_id": "directness",
+          "claim_id": "C5"
+        }
+      ],
+      "protected_reopened": [],
+      "against_sol_overlap": null,
+      "attack_details": [
+        {
+          "id": "A17",
+          "target": "A6",
+          "cq_id": "directness",
+          "basis": "answer_inadequate",
+          "note": "[directness] C5 makes a population-level assertion for adults aged 60 and over, rather than reporting a source-scoped ASPREE finding. The directness answer substitutes 'older adults' for that population. E38 reports a median enrollment age of 74 and a predominantly age-70-and-over cohort; E109 expressly limits generalizability to relatively healthy older adults and cautions that the benefit\u2013harm balance may differ in substantially higher ischemic-stroke-risk groups. Thus the answer does not establish transport of the extracranial-harm contribution to the full claimed population, particularly ages 60\u201369. Restrict C5 to the studied population or supply evidence supporting the broader comparison."
+        }
+      ]
+    },
+    {
+      "source_sample": 3,
+      "critic": {
+        "provider": "anthropic",
+        "model": "claude-sonnet-5-5",
+        "effort": "medium"
+      },
+      "manifest": "experiments\\E3_1\\sample-003\\sonnet\\moves.json",
+      "metrics": {
+        "attacks": 3,
+        "attacks_applicable": 3,
+        "attacks_with_cq": 3,
+        "needs_obtainable": 3,
+        "needs_unobtainable": 1,
+        "needs_tags": [
+          {
+            "text": "ASPREE and ARRIVE/JPPP patient-level or published age-stratified (60-69 vs 70+) five-year cumulative incidence of MI, ischemic stroke, CV death, ICH and major extracranial bleeding",
+            "tag": "unobtainable",
+            "tag_basis": "patient-level"
+          },
+          {
+            "text": "USPSTF modeling report: numeric QALY and life-year results by age and baseline CVD risk, including the severity weights and the sensitivity analysis when CV mortality effect is non-null",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "Individual-participant-data meta-analysis (e.g. ATT collaboration or Cochrane) with a deduplicated first-event composite of CV events plus major bleeding, stratified by age",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "Stratified results by 10-year CVD risk and bleeding risk for adults 60-69, to test whether net harm differs from adults 70+",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          }
+        ],
+        "reopened_cqs": 0,
+        "reopened_cqs_active": 0,
+        "reopened_then_discharged": 0
+      },
+      "error": "",
+      "cost_usd": 0.18970389999999998,
+      "supporting_applicable_before": 16,
+      "supporting_applicable_after": 16,
+      "reopenings": [],
+      "protected_reopened": [],
+      "against_sol_overlap": null,
+      "attack_details": [
+        {
+          "id": "A17",
+          "target": "A3",
+          "cq_id": "objectivity",
+          "basis": "presence",
+          "note": "[objectivity] C20 is currently 'in' on one USPSTF commissioned-model summary. E158 itself says utility weights, health-state structure, numerical magnitudes and recurrence handling are not specified, and that the model assumes no cardiovascular mortality effect. That assumption is built into the 'slightly negative' result and is not an observed outcome. This is a single-source, model-dependent claim and should not stand as established."
+        },
+        {
+          "id": "A18",
+          "target": "A16",
+          "cq_id": "basis",
+          "basis": "presence",
+          "note": "[basis] E157 states that bleeding harm rises with age 'more so in adults 60 or older' but gives no numerical age-stratified comparison. E152 only says baseline bleeding risk rises with age. Neither shows an aspirin-attributable excess that rises with age, so the inference from baseline risk to treatment harm is not grounded. The claim is qualitative and depends on a single source (USPSTF)."
+        },
+        {
+          "id": "A19",
+          "target": "A12",
+          "cq_id": "bias",
+          "basis": "presence",
+          "note": "[bias] C28 is scoped to ASPREE, but E110 says there were fewer events than expected and some strokes were not investigated in detail, so ischemic-stroke classification is imprecise. E103 reports an HR of 0.51 in the group aged 85 and older, which hints at heterogeneity. The statement that effects are 'compatible with benefit or harm' downplays that signal."
+        }
+      ]
+    }
+  ]
+}

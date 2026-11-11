@@ -1,0 +1,134 @@
+{
+  "move": "critique",
+  "run_id": "health-aspirin-tonight-openai-t7",
+  "n_requested": 1,
+  "input_sha256": "81b5a3f0275baa4a5a8d818bccc43cb4faf8ca133077077d2879c911177f8451",
+  "preparation": {
+    "projection": "critique",
+    "historical_snapshot": false
+  },
+  "samples": [
+    {
+      "sample": 1,
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "tokens_in": 92233,
+      "tokens_out": 810,
+      "cost_usd": 0.1894139,
+      "api_calls": 1,
+      "seconds": 6.69,
+      "metrics": {
+        "attacks": 3,
+        "attacks_applicable": 3,
+        "attacks_with_cq": 3,
+        "needs_obtainable": 3,
+        "needs_unobtainable": 1,
+        "needs_tags": [
+          {
+            "text": "Patient-level or published age-stratified (60-69 vs 70+) ASPREE, ARRIVE and JPPP net outcomes with a deduplicated first-event composite of MI, ischemic stroke, CV death, intracranial bleeding and major extracranial bleeding",
+            "tag": "unobtainable",
+            "tag_basis": "Patient-level"
+          },
+          {
+            "text": "USPSTF commissioned model (Dehmer/Guirguis-Blake evidence report) utilities, weights and sensitivity analyses showing whether the net conclusion reverses under alternative weights",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "JPPP original report (Ikeda 2014) bleeding and age-stratified results for adults aged 60-85",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "Absolute risk difference confidence intervals at a fixed 5-year horizon for ASPREE (Aalen-Johansen)",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          }
+        ],
+        "reopened_cqs": 1,
+        "reopened_cqs_active": 1,
+        "reopened_then_discharged": 0
+      },
+      "raw_metrics": {},
+      "move_summary": {
+        "attacks": [
+          "A18",
+          "A19",
+          "A20"
+        ],
+        "dropped": [],
+        "absence_unverified": [],
+        "needed_evidence": [
+          "Patient-level or published age-stratified (60-69 vs 70+) ASPREE, ARRIVE and JPPP net outcomes with a deduplicated first-event composite of MI, ischemic stroke, CV death, intracranial bleeding and major extracranial bleeding",
+          "USPSTF commissioned model (Dehmer/Guirguis-Blake evidence report) utilities, weights and sensitivity analyses showing whether the net conclusion reverses under alternative weights",
+          "JPPP original report (Ikeda 2014) bleeding and age-stratified results for adults aged 60-85",
+          "Absolute risk difference confidence intervals at a fixed 5-year horizon for ASPREE (Aalen-Johansen)"
+        ],
+        "reopened_cqs": {
+          "A7": [
+            "follows"
+          ]
+        }
+      },
+      "error": "",
+      "graph": "sample-001\\inquiry.json",
+      "graph_sha256": "960248cdcedd0dc3f073f523d7291e24e613280d19481593b51f682c8abf09cb",
+      "references_valid": true
+    }
+  ],
+  "skill_sha256": "9596c8357ec6c4afe4cba72d1e60abefae5d67a2d2dbe881fcdd6091cdc1dbc2",
+  "provider": "anthropic",
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "aggregate": {
+    "attacks": {
+      "mean": 3,
+      "min": 3,
+      "max": 3,
+      "n": 1
+    },
+    "attacks_applicable": {
+      "mean": 3,
+      "min": 3,
+      "max": 3,
+      "n": 1
+    },
+    "attacks_with_cq": {
+      "mean": 3,
+      "min": 3,
+      "max": 3,
+      "n": 1
+    },
+    "needs_obtainable": {
+      "mean": 3,
+      "min": 3,
+      "max": 3,
+      "n": 1
+    },
+    "needs_unobtainable": {
+      "mean": 1,
+      "min": 1,
+      "max": 1,
+      "n": 1
+    },
+    "reopened_cqs": {
+      "mean": 1,
+      "min": 1,
+      "max": 1,
+      "n": 1
+    },
+    "reopened_cqs_active": {
+      "mean": 1,
+      "min": 1,
+      "max": 1,
+      "n": 1
+    },
+    "reopened_then_discharged": {
+      "mean": 0,
+      "min": 0,
+      "max": 0,
+      "n": 1
+    }
+  }
+}

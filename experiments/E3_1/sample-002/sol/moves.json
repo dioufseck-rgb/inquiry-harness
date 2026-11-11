@@ -1,0 +1,132 @@
+{
+  "move": "critique",
+  "run_id": "health-aspirin-tonight-openai-t7",
+  "n_requested": 1,
+  "input_sha256": "81b5a3f0275baa4a5a8d818bccc43cb4faf8ca133077077d2879c911177f8451",
+  "preparation": {
+    "projection": "critique",
+    "historical_snapshot": false
+  },
+  "samples": [
+    {
+      "sample": 1,
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "tokens_in": 55826,
+      "tokens_out": 707,
+      "cost_usd": 0.1438399,
+      "api_calls": 1,
+      "seconds": 20.72,
+      "metrics": {
+        "attacks": 1,
+        "attacks_applicable": 1,
+        "attacks_with_cq": 1,
+        "needs_obtainable": 4,
+        "needs_unobtainable": 0,
+        "needs_tags": [
+          {
+            "text": "Retrieve the USPSTF 2022 commissioned aspirin decision analysis: tables of absolute lifetime QALY and life-year differences for initiation at ages 60\u201369 and 70\u201379, stratified by sex and baseline cardiovascular risk, together with utility weights, bleeding-risk assumptions, recurrence handling, and uncertainty analyses.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "Retrieve the original Japanese Primary Prevention Project randomized trial report and supplement: aspirin 100 mg daily versus control in adults aged 60\u201385, with aligned five-year absolute myocardial-infarction, ischemic-stroke, cardiovascular-death, intracranial-hemorrhage, and major-extracranial-bleeding results, including age and baseline-risk subgroups.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "Obtain an age-60-and-over benefit\u2013harm analysis using a common regimen and follow-up horizon, explicitly specifying either a deduplicated first-event endpoint or severity-weighted event burden; report component absolute effects separately and account for overlapping fatal, stroke, and bleeding outcomes.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "Independence note: S1, S4, and S9 report the same ASPREE randomized cohort, despite having different source-origin labels. Their overlapping in-trial results must not count as independent corroboration. S2 and S3 also synthesize overlapping primary-prevention trials; compare their included-trial lists before treating pooled treatment-effect estimates as independent.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          }
+        ],
+        "reopened_cqs": 1,
+        "reopened_cqs_active": 1,
+        "reopened_then_discharged": 0
+      },
+      "raw_metrics": {},
+      "move_summary": {
+        "attacks": [
+          "A18"
+        ],
+        "dropped": [],
+        "absence_unverified": [],
+        "needed_evidence": [
+          "Retrieve the USPSTF 2022 commissioned aspirin decision analysis: tables of absolute lifetime QALY and life-year differences for initiation at ages 60\u201369 and 70\u201379, stratified by sex and baseline cardiovascular risk, together with utility weights, bleeding-risk assumptions, recurrence handling, and uncertainty analyses.",
+          "Retrieve the original Japanese Primary Prevention Project randomized trial report and supplement: aspirin 100 mg daily versus control in adults aged 60\u201385, with aligned five-year absolute myocardial-infarction, ischemic-stroke, cardiovascular-death, intracranial-hemorrhage, and major-extracranial-bleeding results, including age and baseline-risk subgroups.",
+          "Obtain an age-60-and-over benefit\u2013harm analysis using a common regimen and follow-up horizon, explicitly specifying either a deduplicated first-event endpoint or severity-weighted event burden; report component absolute effects separately and account for overlapping fatal, stroke, and bleeding outcomes.",
+          "Independence note: S1, S4, and S9 report the same ASPREE randomized cohort, despite having different source-origin labels. Their overlapping in-trial results must not count as independent corroboration. S2 and S3 also synthesize overlapping primary-prevention trials; compare their included-trial lists before treating pooled treatment-effect estimates as independent."
+        ],
+        "reopened_cqs": {
+          "A7": [
+            "follows"
+          ]
+        }
+      },
+      "error": "",
+      "graph": "sample-001\\inquiry.json",
+      "graph_sha256": "fcecedeedd567ba7e9d44e1507d4f81400cc9881603c6a5b85a7c33668fabce2",
+      "references_valid": true
+    }
+  ],
+  "skill_sha256": "9596c8357ec6c4afe4cba72d1e60abefae5d67a2d2dbe881fcdd6091cdc1dbc2",
+  "provider": "openai",
+  "model": "gpt-6.1-sol",
+  "effort": "medium",
+  "aggregate": {
+    "attacks": {
+      "mean": 1,
+      "min": 1,
+      "max": 1,
+      "n": 1
+    },
+    "attacks_applicable": {
+      "mean": 1,
+      "min": 1,
+      "max": 1,
+      "n": 1
+    },
+    "attacks_with_cq": {
+      "mean": 1,
+      "min": 1,
+      "max": 1,
+      "n": 1
+    },
+    "needs_obtainable": {
+      "mean": 4,
+      "min": 4,
+      "max": 4,
+      "n": 1
+    },
+    "needs_unobtainable": {
+      "mean": 0,
+      "min": 0,
+      "max": 0,
+      "n": 1
+    },
+    "reopened_cqs": {
+      "mean": 1,
+      "min": 1,
+      "max": 1,
+      "n": 1
+    },
+    "reopened_cqs_active": {
+      "mean": 1,
+      "min": 1,
+      "max": 1,
+      "n": 1
+    },
+    "reopened_then_discharged": {
+      "mean": 0,
+      "min": 0,
+      "max": 0,
+      "n": 1
+    }
+  }
+}

@@ -196,6 +196,8 @@ class CQAnswer(BaseModel):
     outcome: CQOutcome = ""
     answer: str = ""
     evidence_ids: list[str] = Field(default_factory=list)
+    revision: int = 0
+    answer_move: str = ""
 
     @property
     def satisfied(self) -> bool:
@@ -206,6 +208,10 @@ class Attack(BaseModel):
     target_id: str
     type: AttackType
     note: str = ""
+    basis: Literal["presence", "absence", "answer_inadequate"] = "presence"
+    challenged_revision: int = -1
+    answer_quote: str = ""
+    was_reopened: bool = False
     raises_cq: str = Field(
         default="",
         description="For an undercut: the critical question of the target it raises. Answering that question "
@@ -471,12 +477,13 @@ class ArgumentGraph(BaseModel):
         return x
 
     def answer_cq(self, argument_id: str, cq_id: str, answer: str, evidence_ids: list[str] | None = None,
-                  defaulted: bool = False, outcome: CQOutcome = "") -> None:
+                  defaulted: bool = False, outcome: CQOutcome = "", answer_move: str = "") -> None:
         a = self.arg(argument_id)
         if a is None:
             raise KeyError(argument_id)
+        revision = a.cq[cq_id].revision + 1 if cq_id in a.cq else 1
         a.cq[cq_id] = CQAnswer(status="defaulted" if defaulted else "answered", outcome=outcome,
-                               answer=answer, evidence_ids=evidence_ids or [])
+                               answer=answer, evidence_ids=evidence_ids or [], revision=revision, answer_move=answer_move)
 
     # -- integrity ------------------------------------------------------------------
 

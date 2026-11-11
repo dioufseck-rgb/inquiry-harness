@@ -103,6 +103,8 @@ def metrics(inq: Inquiry, ev: Evaluation, gold: Optional[dict[str, Any]] = None,
         "calls": len(inq.llm_usage),
         "stop_reason": inq.stop_assessments[-1].reason if inq.stop_assessments else "",
     }
+    from .argument.evaluate import reopening_metrics
+    m.update(reopening_metrics(g, ev))
     if gold:
         src_hay = [s.title for s in g.sources] + [s.url for s in g.sources]
         ev_hay = [e.text for e in g.evidence] + [e.quote for e in g.evidence]
@@ -126,7 +128,7 @@ def one_line(m: dict[str, Any]) -> str:
     keys = ["provider_proposer", "model_proposer", "effort_proposer", "provider_critic", "model_critic", "effort_critic",
             "tokens_in", "tokens_out", "calls", "sources", "origins", "duplicate_sources", "evidence", "orphans", "supporting_args", "supporting_in",
             "claims_supported_unargued", "main_supporting_in", "main_component_supporting_in", "undecided_empty", "undecided_supported",
-            "attacks", "attacks_out", "attacks_discharged", "counters_dropped", "counters_dropped_reasons",
+            "attacks", "reopened_cqs", "reopened_then_discharged", "attacks_out", "attacks_discharged", "counters_dropped", "counters_dropped_reasons",
             "counters_inapplicable", "counters_inapplicable_reasons", "accepted_claims", "single_origin_accepts",
             "absence_assertions"]
     parts = [f"{k}={m[k]}" for k in keys if k in m]

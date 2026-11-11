@@ -1111,10 +1111,11 @@ class AttackProposal(BaseModel):
     type: AttackType
     premise_ids: list[str] = Field(default_factory=list)
     cq_id: str = ""
-    basis: Literal["presence", "absence"] = Field(
+    basis: Literal["presence", "absence", "answer_inadequate"] = Field(
         default="presence",
         description="presence: grounded in what a source says. absence: grounded in what a source does not say.")
     note: str = ""
+    answer_quote: str = ""
 
 
 class CritiqueOutput(BaseModel):
@@ -1146,9 +1147,21 @@ def _sources_behind(g: ArgumentGraph, target_id: str) -> list[Source]:
 def critique_view(inq: Inquiry) -> str:
     g = inq.graph
     ev = inq.evaluation
+    audit = ["# Audit answered assumptions against each actual conclusion"]
+    for a in g.arguments:
+        if a.is_attack or a.withdrawn or (ev and not ev.applicable.get(a.id, False)):
+            continue
+        claim = g.claim(a.claim_id)
+        audit.append(f"{a.id} -> {claim.id}: {claim.text}\nanswers_issue={claim.answers_issue}; revision_of={claim.revision_of}")
+        for q in SCHEMES[a.scheme].assumptions():
+            ans = a.cq.get(q.id)
+            if ans and (ans.satisfied or ans.status == "defaulted"):
+                audit.append(f"  {q.id} [{ans.status}/{ans.outcome or 'legacy satisfied'}], revision {ans.revision}: {q.text}\n"
+                             f"  answer: {ans.answer}\n  evidence_ids: {', '.join(ans.evidence_ids) or '(none)'}")
     return "\n\n".join([
         _framing_block(inq), _issues_block(inq, ev), _sources_block(g), _evidence_block(g, mark_unused=True),
         _arguments_block(g, ev, show_exceptions=True),
+        "\n".join(audit),
     ])
 
 
@@ -1161,11 +1174,24 @@ def apply_critique(inq: Inquiry, out: CritiqueOutput) -> dict:
     for p in out.attacks:
         premises = [x for x in p.premise_ids if g.ev(x) is not None or g.claim(x) is not None]
         premises = [x for x in premises if x != p.target_id]
-        if not premises:
+        target = g.arg(p.target_id)
+        quote_ground = ""
+        if p.basis == "answer_inadequate":
+            valid = {q.id for q in SCHEMES[target.scheme].assumptions()} if target and not target.is_attack else set()
+            answer = target.cq.get(p.cq_id) if target else None
+            if (p.type != "undercut" or p.cq_id not in valid or answer is None
+                    or not (answer.satisfied or answer.status == "defaulted")):
+                dropped.append(f"answer_inadequate on {p.target_id}: needs a satisfied/defaulted assumption of a supporting argument")
+                continue
+            quote_ground = p.answer_quote.strip() or (answer.answer.strip() if answer.answer.strip() in p.note else "")
+            if not (quote_ground and quote_ground in answer.answer and quote_ground in p.note and len(p.note) > len(quote_ground) + 15):
+                quote_ground = ""
+        if not premises and not quote_ground:
             dropped.append(f"{p.type} on {p.target_id}: no grounds (bare denial)")
             continue
         if any(a.is_attack and a.attacks.target_id == p.target_id and a.attacks.type == p.type
-               and set(a.premise_ids) == set(premises) for a in g.arguments):
+               and a.attacks.basis == p.basis and a.attacks.raises_cq == p.cq_id
+               and set(a.premise_ids) == set(premises) and not is_discharged(g, a) for a in g.arguments):
             continue
         note = p.note if not p.cq_id else f"[{p.cq_id}] {p.note}"
         if p.basis == "absence":
@@ -1185,9 +1211,22 @@ def apply_critique(inq: Inquiry, out: CritiqueOutput) -> dict:
         target = g.node(p.target_id)
         if p.cq_id and isinstance(target, Argument) and p.cq_id in {q.id for q in SCHEMES[target.scheme].critical_questions}:
             a.attacks.raises_cq = p.cq_id
+        a.attacks.basis = p.basis
+        if p.basis == "answer_inadequate":
+            a.attacks.challenged_revision = target.cq[p.cq_id].revision
+            a.attacks.answer_quote = quote_ground
+            if not premises:
+                a.cq["grounds"] = CQAnswer(status="answered", outcome="satisfied", answer=f"Quoted proposer contradiction: {quote_ground}")
         added.append(a.id)
     needed = [q.strip() for q in out.needed_evidence if q.strip()] + needed_extra
-    return {"attacks": added, "dropped": dropped, "absence_unverified": absence_unverified, "needed_evidence": needed}
+    evaluated = evaluate(g)
+    for aid in added:
+        attack = g.arg(aid)
+        if (attack.attacks.basis == "answer_inadequate" and evaluated.labels.get(aid) == "in"
+                and attack.attacks.raises_cq in evaluated.reopened_cqs.get(attack.attacks.target_id, [])):
+            attack.attacks.was_reopened = True
+    return {"attacks": added, "dropped": dropped, "absence_unverified": absence_unverified, "needed_evidence": needed,
+            "reopened_cqs": evaluated.reopened_cqs}
 
 
 def critique(inq: Inquiry, llm: LLM) -> dict:
@@ -1387,7 +1426,7 @@ def apply_respond(inq: Inquiry, out: RespondOutput, allowed_attacks: set[str] | 
                     continue
                 if not ans.evidence_ids or any(g.ev(x) is None for x in ans.evidence_ids):
                     continue  # an answer without evidence in the graph discharges nothing
-                g.answer_cq(target.id, qid, ans.answer, list(ans.evidence_ids), outcome=ans.outcome)
+                g.answer_cq(target.id, qid, ans.answer, list(ans.evidence_ids), outcome=ans.outcome, answer_move="respond")
                 written.append(qid)
             if written:
                 attempts.append({"attack_id": atk.id, "cq_ids": written, "checked_evidence_ids": sorted({eid for ans in r.cq_answers.values() for eid in ans.evidence_ids if g.ev(eid)}),
@@ -1443,7 +1482,7 @@ def apply_respond(inq: Inquiry, out: RespondOutput, allowed_attacks: set[str] | 
                     ev_ids = [x for x in ans.evidence_ids if g.ev(x) is not None]
                     if ans.answer or ev_ids:
                         g.answer_cq(target.id, qid, ans.answer, ev_ids, defaulted=ans.defaulted and not ev_ids,
-                                    outcome="" if ans.defaulted and not ev_ids else ans.outcome)
+                                    outcome="" if ans.defaulted and not ev_ids else ans.outcome, answer_move="respond")
     reasons: dict[str, int] = {}
     for d in counter_drops:
         reasons[d["reason"]] = reasons.get(d["reason"], 0) + 1
@@ -1746,6 +1785,11 @@ def compute(inq: Inquiry, llm: LLM) -> Optional[dict]:
 
 def evaluate_move(inq: Inquiry) -> Evaluation:
     ev = evaluate(inq.graph)
+    for argument in inq.graph.arguments:
+        if (argument.is_attack and argument.attacks.basis == "answer_inadequate"
+                and ev.labels.get(argument.id) == "in"
+                and argument.attacks.raises_cq in ev.reopened_cqs.get(argument.attacks.target_id, [])):
+            argument.attacks.was_reopened = True
     inq.evaluation = ev
     return ev
 
