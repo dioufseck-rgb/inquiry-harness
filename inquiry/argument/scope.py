@@ -50,15 +50,16 @@ def within(a: Scope, b: Scope, field: str) -> bool:
         return True
     if not left or not right:
         return False
-    # Explicit declarations are bound to the parent value, not a global license.
-    if field in a.narrower_than and canonical(a.parent_scope.get(field, "")) == right:
-        return True
     if field == "population":
         ar, br = age_range(a.population), age_range(b.population)
         if ar and br:
             # Match the non-age qualifiers too: ages alone cannot establish geography.
             strip = lambda x: re.sub(r"\d+|\+|\b(?:adults?|people|participants?|patients?)\b", "", canonical(x)).strip()
             return br[0] <= ar[0] <= ar[1] <= br[1] and (not strip(b.population) or strip(b.population) in strip(a.population))
+    # Explicit declarations cannot override a contradictory numeric age range.
+    # They are bound to one parent value rather than a global license.
+    if field in a.narrower_than and canonical(a.parent_scope.get(field, "")) == right:
+        return True
     return right in left
 
 

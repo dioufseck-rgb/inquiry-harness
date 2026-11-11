@@ -76,7 +76,7 @@ def metrics(inq: Inquiry, ev: Evaluation, gold: Optional[dict[str, Any]] = None,
     main_answers = {c.id for c in inq.main_claims() if c.answers_issue}
     main_supported = sum(a.claim_id in main_answers and ev.labels.get(a.id) == "in" for a in supporting)
     main_components = {c.id for c in inq.main_claims() if not c.answers_issue}
-    accepted_main = any(ev.status(cid) == "in" for cid in main_answers)
+    accepted_main = whole_question_answer(g, ev) is not None
     m: dict[str, Any] = {
         "whole_question_answered": whole_question_answer(g, ev) is not None,
         "answer_scope": answer_scope(whole_question_answer(g, ev)) if whole_question_answer(g, ev) else "",

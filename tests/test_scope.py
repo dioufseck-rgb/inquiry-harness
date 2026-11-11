@@ -13,6 +13,9 @@ def test_scope_equality_narrowing_and_direction():
     assert answers_scope(wide, wide) and not answers_scope(narrow, wide)
     assert not sub_scope(narrow.model_copy(update={"outcome": "bleeding"}), wide)
     assert not sub_scope(narrow, wide.model_copy(update={"relation": "reduces"}))
+    false_narrowing = wide.model_copy(update={"population": "adults 50+", "narrower_than": ["population"],
+                                              "parent_scope": {"population": wide.population}})
+    assert not sub_scope(false_narrowing, wide)
     assert not sub_scope(narrow.model_copy(update={"population": "other country adults 70+"}),
                          wide.model_copy(update={"population": "UK adults 60+"}))
 

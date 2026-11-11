@@ -957,6 +957,10 @@ def apply_argue(inq: Inquiry, out: ArgueOutput, allowed_claims: Optional[set[str
     for p in out.scoped_claims:
         old = g.claim(p.revision_of)
         issue = g.issue(p.issue_id)
+        if p.scope and issue:
+            p.scope = p.scope.model_copy(deep=True)
+            for field in p.scope.narrower_than:
+                p.scope.parent_scope[field] = getattr(issue.scope, field)
         failure = (not old or not old.live or not issue or old.issue_id != p.issue_id
                    or (allowed_claims is not None and p.revision_of not in allowed_claims)
                    or p.scheme not in SCHEMES or p.scheme == "attack"
@@ -973,6 +977,7 @@ def apply_argue(inq: Inquiry, out: ArgueOutput, allowed_claims: Optional[set[str
                                 reason="Argue: evidence supports a narrower claim", answers_issue=False)
         for claim, p in zip(new, group):
             claim.created_by_move = "argue"
+            claim.created_round = inq.round
             claim.answers_issue = p.answers_issue
             claim.target = dict(p.target)
             claim.scope = p.scope or g.inherited_scope(claim, g.issue(claim.issue_id))
@@ -1671,6 +1676,9 @@ def apply_revise(inq: Inquiry, out: ReviseOutput) -> dict:
                 proposed_scopes = op.scopes or ([op.scope] * len(texts) if op.scope else [])
                 if proposed_scopes:
                     from .argument.scope import within
+                    for s in proposed_scopes:
+                        for field in s.narrower_than:
+                            s.parent_scope[field] = getattr(c.scope, field)
                     if len(proposed_scopes) != len(texts) or any(
                             not within(s, c.scope, field) for s in proposed_scopes for field in ("population", "period")):
                         dropped.append(f"{op.op} {op.claim_id}: invalid narrowing scope")
