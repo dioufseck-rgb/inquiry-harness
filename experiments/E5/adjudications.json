@@ -1,0 +1,16 @@
+{
+  "reviewed_by": "Codex manual comparison of original E5 extraction texts with the frozen gold",
+  "policy": "Gold labels are unchanged. These overrides credit semantically equivalent abbreviations, pronouns and a fact split across two evidence items. Missing numbers or Grade D are not inferred.",
+  "matches": {
+    "original/sol/1": {"G10": ["E153", "E154"]},
+    "original/sonnet/1": {"G1": ["E152"], "G5": ["E154"]},
+    "original/sonnet/2": {"G5": ["E154"]},
+    "original/sonnet/3": {"G5": ["E154"]}
+  },
+  "rationale": {
+    "original/sol/1/G10": "The 60–69 and 70–79 lifetime model findings are explicitly extracted as two separate items.",
+    "original/sonnet/1/G1": "The sentence states initiation at 60+, then says recommends against it (Grade D); the pronoun has an explicit antecedent.",
+    "original/sonnet/*/G5": "CV mortality abbreviates cardiovascular mortality; each item explicitly says no significant effect.",
+    "not_credited": "Sol omits Grade D in all original samples. Sonnet sample 3 does not retain the ischemic-stroke lower CI bound required by G4."
+  }
+}

@@ -1,0 +1,247 @@
+{
+  "move": "appraise",
+  "run_id": "health-aspirin-tonight-openai-t7",
+  "n_requested": 3,
+  "input_sha256": "3de6faf50d170c63880a919ebccb98bec0f703aadad96978e9006ae8338820e1",
+  "preparation": {
+    "projection": "appraise",
+    "historical_snapshot": false,
+    "issue_map": {
+      "Q1": "Q1",
+      "Q2": "Q2",
+      "Q3": "Q3",
+      "Q4": "Q4"
+    },
+    "issues_imported": [],
+    "claim_map": {
+      "C1": "C1",
+      "C2": "C2",
+      "C3": "C3",
+      "C4": "C4",
+      "C5": "C5",
+      "C6": "C6",
+      "C7": "C7",
+      "C8": "C8",
+      "C9": "C9",
+      "C10": "C10",
+      "C11": "C11",
+      "C12": "C12",
+      "C13": "C13",
+      "C14": "C14",
+      "C15": "C15",
+      "C16": "C16",
+      "C17": "C17"
+    },
+    "stale_bearings_cleared": 549,
+    "requires_evidence_map": false,
+    "stance_policy": "selected source is reappraised; other stale hints are cleared",
+    "removed_evidence": [
+      "E151",
+      "E152",
+      "E153",
+      "E154",
+      "E155",
+      "E156",
+      "E157",
+      "E158",
+      "E159"
+    ]
+  },
+  "samples": [
+    {
+      "sample": 1,
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "tokens_in": 20658,
+      "tokens_out": 3968,
+      "cost_usd": 0.081615,
+      "api_calls": 1,
+      "seconds": 22.51,
+      "metrics": {
+        "evidence": 13,
+        "for": 22,
+        "against": 8,
+        "neutral": 2,
+        "quote_verified": 1.0,
+        "quotes_verified": 13,
+        "gold_facts_found": 1,
+        "gold_facts": [
+          "grade D"
+        ]
+      },
+      "raw_metrics": {},
+      "move_summary": {
+        "source": "S16",
+        "kind": "secondary",
+        "group": "title:aspirinusetopreventcardiovasculardisease",
+        "evidence": [
+          "E152",
+          "E153",
+          "E154",
+          "E155",
+          "E156",
+          "E157",
+          "E158",
+          "E159",
+          "E160",
+          "E161",
+          "E162",
+          "E163",
+          "E164"
+        ],
+        "rejected_quotes": []
+      },
+      "error": "",
+      "graph": "sample-001\\inquiry.json",
+      "graph_sha256": "62d474a23540d698b3dcbec63d80931575e323519e3c584a936c5350be3a8539",
+      "references_valid": true
+    },
+    {
+      "sample": 2,
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "tokens_in": 20658,
+      "tokens_out": 4251,
+      "cost_usd": 0.0814738,
+      "api_calls": 1,
+      "seconds": 23.72,
+      "metrics": {
+        "evidence": 14,
+        "for": 20,
+        "against": 11,
+        "neutral": 3,
+        "quote_verified": 1.0,
+        "quotes_verified": 14,
+        "gold_facts_found": 1,
+        "gold_facts": [
+          "grade D"
+        ]
+      },
+      "raw_metrics": {},
+      "move_summary": {
+        "source": "S16",
+        "kind": "secondary",
+        "group": "title:aspirinusetopreventcardiovasculardisease",
+        "evidence": [
+          "E152",
+          "E153",
+          "E154",
+          "E155",
+          "E156",
+          "E157",
+          "E158",
+          "E159",
+          "E160",
+          "E161",
+          "E162",
+          "E163",
+          "E164",
+          "E165"
+        ],
+        "rejected_quotes": []
+      },
+      "error": "",
+      "graph": "sample-002\\inquiry.json",
+      "graph_sha256": "fb28a4ff9f588da3ce6c2569abe7cc6fde75b2fe1e364ab485cf25ecb9f859f7",
+      "references_valid": true
+    },
+    {
+      "sample": 3,
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "tokens_in": 20658,
+      "tokens_out": 3601,
+      "cost_usd": 0.07497380000000001,
+      "api_calls": 1,
+      "seconds": 19.97,
+      "metrics": {
+        "evidence": 12,
+        "for": 18,
+        "against": 10,
+        "neutral": 3,
+        "quote_verified": 1.0,
+        "quotes_verified": 12,
+        "gold_facts_found": 1,
+        "gold_facts": [
+          "grade D"
+        ]
+      },
+      "raw_metrics": {},
+      "move_summary": {
+        "source": "S16",
+        "kind": "secondary",
+        "group": "title:aspirinusetopreventcardiovasculardisease",
+        "evidence": [
+          "E152",
+          "E153",
+          "E154",
+          "E155",
+          "E156",
+          "E157",
+          "E158",
+          "E159",
+          "E160",
+          "E161",
+          "E162",
+          "E163"
+        ],
+        "rejected_quotes": []
+      },
+      "error": "",
+      "graph": "sample-003\\inquiry.json",
+      "graph_sha256": "6c7f7f33347bd90515051269752257dc1e975d4b6d32c69aab9495cdb1ce96eb",
+      "references_valid": true
+    }
+  ],
+  "skill_sha256": "cc6b3a423b8932514af286761c77cb64c527d0c28b710d3c1c87bdd2f664e29f",
+  "provider": "anthropic",
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "aggregate": {
+    "against": {
+      "mean": 9.666666666666666,
+      "min": 8,
+      "max": 11,
+      "n": 3
+    },
+    "evidence": {
+      "mean": 13,
+      "min": 12,
+      "max": 14,
+      "n": 3
+    },
+    "for": {
+      "mean": 20,
+      "min": 18,
+      "max": 22,
+      "n": 3
+    },
+    "gold_facts_found": {
+      "mean": 1,
+      "min": 1,
+      "max": 1,
+      "n": 3
+    },
+    "neutral": {
+      "mean": 2.6666666666666665,
+      "min": 2,
+      "max": 3,
+      "n": 3
+    },
+    "quote_verified": {
+      "mean": 1.0,
+      "min": 1.0,
+      "max": 1.0,
+      "n": 3
+    },
+    "quotes_verified": {
+      "mean": 13,
+      "min": 12,
+      "max": 14,
+      "n": 3
+    }
+  }
+}

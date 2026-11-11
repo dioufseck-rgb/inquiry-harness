@@ -1,0 +1,18 @@
+{
+  "reviewed_by": "Codex manual annotation of the local USPSTF recommendation text before E5 outputs",
+  "source": "runs/bench/health-aspirin-tonight-openai-t7/sources/S16.txt",
+  "claims_from": "experiments/E2/h1-claims",
+  "policy": "Directions mean partial relevance, not full population transport or entailment. No-net-benefit and nonsignificance are not causal equivalence. Missing direction hints are reported separately, never silently counted as neutral agreement.",
+  "items": [
+    {"id":"G1", "text":"USPSTF recommends against initiating low-dose aspirin for primary prevention at age 60 or older; recommendation Grade D.", "grade_d_required":true, "match_all":["(?:USPSTF|task force)","(?:against initiat|not (?:to )?(?:initiat|start)|do not (?:initiat|start))","60","grade\\s*D"], "directions":{"C1":"against","C2":"neutral","C3":"neutral"}},
+    {"id":"G2", "text":"Moderate-certainty assessment: initiation at 60 or older has no net benefit.", "grade_d_required":false, "match_all":["no net benefit","60","moderate"], "directions":{"C1":"against","C2":"neutral","C3":"neutral"}},
+    {"id":"G3", "text":"Pooled nonfatal myocardial infarction OR 0.88, 95% CI 0.80–0.96; not restricted to adults 60+.", "grade_d_required":false, "match_all":["myocardial|\\bMI\\b","0\\.88","0\\.80","0\\.96"], "directions":{"C9":"for","C12":"against"}},
+    {"id":"G4", "text":"Pooled nonfatal ischemic stroke OR 0.88, CI 0.78–1.00, P=.046; not restricted to adults 60+.", "grade_d_required":false, "match_all":["isch(?:a)?emic stroke","0\\.88","0\\.78","1\\.00"], "directions":{"C10":"for","C12":"against"}},
+    {"id":"G5", "text":"No statistically significant cardiovascular mortality effect; this is not evidence of true zero.", "grade_d_required":false, "match_all":["cardiovascular mortality|CVD mortality","not.{0,65}(?:statistically significant|significant)|no.{0,65}(?:significant|clear|established)"], "directions":{"C11":"neutral","C12":"neutral"}},
+    {"id":"G6", "text":"Major GI bleeding increased: OR 1.58, CI 1.38–1.80; fatal/nonfatal composition and exact extracranial endpoint remain to check.", "grade_d_required":false, "match_all":["gastrointestinal|\\bGI\\b","1\\.58","1\\.38","1\\.80"], "directions":{"C14":"for","C17":"against","C5":"for"}},
+    {"id":"G7", "text":"Intracranial bleeding increased: OR 1.31, CI 1.11–1.54.", "grade_d_required":false, "match_all":["intracranial","1\\.31","1\\.11","1\\.54"], "directions":{"C13":"for","C17":"against"}},
+    {"id":"G8", "text":"Fatal hemorrhagic stroke did not significantly increase; fatal GI bleeding remains uncertain because of sparse/inconsistent reports.", "grade_d_required":false, "match_all":["fatal","(?:hemorrhagic|haemorrhagic|gastrointestinal)","uncertain|not.{0,65}significant|no.{0,65}significant"], "directions":{"C15":"neutral","C17":"neutral"}},
+    {"id":"G9", "text":"Relative bleeding effects show no clear age interaction, while absolute bleeding harm increases with age, particularly 60+.", "grade_d_required":false, "match_all":["absolute","bleeding","age|older"], "directions":{"C16":"for","C17":"neutral"}},
+    {"id":"G10", "text":"Lifetime model at 60–69 gives QALYs slightly negative to positive and generally negative life-years; at 70–79 both are negative across essentially all modelled risks.", "grade_d_required":false, "match_all":["60.{0,6}69","70.{0,6}79","quality.adjusted|QALY","life.year","negative|loss"], "directions":{"C1":"neutral","C2":"neutral","C3":"neutral","C4":"for","C6":"for"}}
+  ]
+}

@@ -1,0 +1,4177 @@
+{
+  "gold_sha256": "2fd26c279325e024029b58ec91348efbda33dac3ff77217491acfb88b1d24c1e",
+  "cells": [
+    {
+      "version": "guarded",
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "manifest": "experiments\\E5\\guarded\\sol\\moves.json",
+      "samples": [
+        {
+          "sample": 1,
+          "provider": "openai",
+          "model": "gpt-6.1-sol",
+          "effort": "medium",
+          "tokens_in": 12339,
+          "tokens_out": 3802,
+          "cost_usd": 0.068866,
+          "error": "",
+          "evidence": 19,
+          "quote_verified": 1.0,
+          "grade_d_found": true,
+          "gold_facts_found": 9,
+          "direction_agreement_observed": 0.9411764705882353,
+          "direction_pairs_observed": 17,
+          "direction_pairs_total": 26,
+          "direction_pairs_correct": 16,
+          "fact_matches": [
+            {
+              "gold_id": "G1",
+              "evidence_ids": [
+                "E152"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G2",
+              "evidence_ids": [
+                "E153"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G3",
+              "evidence_ids": [
+                "E159"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G4",
+              "evidence_ids": [
+                "E160"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G5",
+              "evidence_ids": [
+                "E161"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G6",
+              "evidence_ids": [
+                "E164"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G7",
+              "evidence_ids": [
+                "E165"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G8",
+              "evidence_ids": [
+                "E167",
+                "E168"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G9",
+              "evidence_ids": [
+                "E166"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G10",
+              "evidence_ids": [],
+              "manually_adjudicated": false
+            }
+          ],
+          "directions": [
+            {
+              "gold_id": "G1",
+              "claim_id": "C1",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G1",
+              "claim_id": "C2",
+              "expected": "neutral",
+              "actual": [],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G1",
+              "claim_id": "C3",
+              "expected": "neutral",
+              "actual": [],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G2",
+              "claim_id": "C1",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G2",
+              "claim_id": "C2",
+              "expected": "neutral",
+              "actual": [
+                "neutral"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G2",
+              "claim_id": "C3",
+              "expected": "neutral",
+              "actual": [
+                "neutral"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G3",
+              "claim_id": "C9",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G3",
+              "claim_id": "C12",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G4",
+              "claim_id": "C10",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G4",
+              "claim_id": "C12",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G5",
+              "claim_id": "C11",
+              "expected": "neutral",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G5",
+              "claim_id": "C12",
+              "expected": "neutral",
+              "actual": [
+                "neutral"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G6",
+              "claim_id": "C14",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G6",
+              "claim_id": "C17",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G6",
+              "claim_id": "C5",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G7",
+              "claim_id": "C13",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G7",
+              "claim_id": "C17",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G8",
+              "claim_id": "C15",
+              "expected": "neutral",
+              "actual": [
+                "neutral"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G8",
+              "claim_id": "C17",
+              "expected": "neutral",
+              "actual": [],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G9",
+              "claim_id": "C16",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G9",
+              "claim_id": "C17",
+              "expected": "neutral",
+              "actual": [],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C1",
+              "expected": "neutral",
+              "actual": [],
+              "fact_found": false,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C2",
+              "expected": "neutral",
+              "actual": [],
+              "fact_found": false,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C3",
+              "expected": "neutral",
+              "actual": [],
+              "fact_found": false,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C4",
+              "expected": "for",
+              "actual": [],
+              "fact_found": false,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C6",
+              "expected": "for",
+              "actual": [],
+              "fact_found": false,
+              "agree": false
+            }
+          ],
+          "pass": true
+        },
+        {
+          "sample": 2,
+          "provider": "openai",
+          "model": "gpt-6.1-sol",
+          "effort": "medium",
+          "tokens_in": 12339,
+          "tokens_out": 3991,
+          "cost_usd": 0.0411496,
+          "error": "",
+          "evidence": 20,
+          "quote_verified": 1.0,
+          "grade_d_found": true,
+          "gold_facts_found": 9,
+          "direction_agreement_observed": 0.875,
+          "direction_pairs_observed": 16,
+          "direction_pairs_total": 26,
+          "direction_pairs_correct": 14,
+          "fact_matches": [
+            {
+              "gold_id": "G1",
+              "evidence_ids": [
+                "E152"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G2",
+              "evidence_ids": [
+                "E153"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G3",
+              "evidence_ids": [
+                "E159"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G4",
+              "evidence_ids": [
+                "E160"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G5",
+              "evidence_ids": [
+                "E161"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G6",
+              "evidence_ids": [
+                "E164"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G7",
+              "evidence_ids": [
+                "E165"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G8",
+              "evidence_ids": [
+                "E166",
+                "E167"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G9",
+              "evidence_ids": [
+                "E168"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G10",
+              "evidence_ids": [],
+              "manually_adjudicated": false
+            }
+          ],
+          "directions": [
+            {
+              "gold_id": "G1",
+              "claim_id": "C1",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G1",
+              "claim_id": "C2",
+              "expected": "neutral",
+              "actual": [],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G1",
+              "claim_id": "C3",
+              "expected": "neutral",
+              "actual": [],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G2",
+              "claim_id": "C1",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G2",
+              "claim_id": "C2",
+              "expected": "neutral",
+              "actual": [],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G2",
+              "claim_id": "C3",
+              "expected": "neutral",
+              "actual": [],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G3",
+              "claim_id": "C9",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G3",
+              "claim_id": "C12",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G4",
+              "claim_id": "C10",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G4",
+              "claim_id": "C12",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G5",
+              "claim_id": "C11",
+              "expected": "neutral",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G5",
+              "claim_id": "C12",
+              "expected": "neutral",
+              "actual": [
+                "neutral"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G6",
+              "claim_id": "C14",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G6",
+              "claim_id": "C17",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G6",
+              "claim_id": "C5",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G7",
+              "claim_id": "C13",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G7",
+              "claim_id": "C17",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G8",
+              "claim_id": "C15",
+              "expected": "neutral",
+              "actual": [
+                "neutral"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G8",
+              "claim_id": "C17",
+              "expected": "neutral",
+              "actual": [],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G9",
+              "claim_id": "C16",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G9",
+              "claim_id": "C17",
+              "expected": "neutral",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C1",
+              "expected": "neutral",
+              "actual": [],
+              "fact_found": false,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C2",
+              "expected": "neutral",
+              "actual": [],
+              "fact_found": false,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C3",
+              "expected": "neutral",
+              "actual": [],
+              "fact_found": false,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C4",
+              "expected": "for",
+              "actual": [],
+              "fact_found": false,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C6",
+              "expected": "for",
+              "actual": [],
+              "fact_found": false,
+              "agree": false
+            }
+          ],
+          "pass": true
+        },
+        {
+          "sample": 3,
+          "provider": "openai",
+          "model": "gpt-6.1-sol",
+          "effort": "medium",
+          "tokens_in": 12339,
+          "tokens_out": 4049,
+          "cost_usd": 0.0417296,
+          "error": "",
+          "evidence": 20,
+          "quote_verified": 1.0,
+          "grade_d_found": true,
+          "gold_facts_found": 9,
+          "direction_agreement_observed": 0.9375,
+          "direction_pairs_observed": 16,
+          "direction_pairs_total": 26,
+          "direction_pairs_correct": 15,
+          "fact_matches": [
+            {
+              "gold_id": "G1",
+              "evidence_ids": [
+                "E152"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G2",
+              "evidence_ids": [
+                "E153"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G3",
+              "evidence_ids": [
+                "E155"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G4",
+              "evidence_ids": [
+                "E156"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G5",
+              "evidence_ids": [
+                "E157"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G6",
+              "evidence_ids": [
+                "E160"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G7",
+              "evidence_ids": [
+                "E161"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G8",
+              "evidence_ids": [
+                "E162",
+                "E163"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G9",
+              "evidence_ids": [
+                "E164"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G10",
+              "evidence_ids": [],
+              "manually_adjudicated": false
+            }
+          ],
+          "directions": [
+            {
+              "gold_id": "G1",
+              "claim_id": "C1",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G1",
+              "claim_id": "C2",
+              "expected": "neutral",
+              "actual": [],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G1",
+              "claim_id": "C3",
+              "expected": "neutral",
+              "actual": [],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G2",
+              "claim_id": "C1",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G2",
+              "claim_id": "C2",
+              "expected": "neutral",
+              "actual": [],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G2",
+              "claim_id": "C3",
+              "expected": "neutral",
+              "actual": [
+                "neutral"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G3",
+              "claim_id": "C9",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G3",
+              "claim_id": "C12",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G4",
+              "claim_id": "C10",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G4",
+              "claim_id": "C12",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G5",
+              "claim_id": "C11",
+              "expected": "neutral",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G5",
+              "claim_id": "C12",
+              "expected": "neutral",
+              "actual": [
+                "neutral"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G6",
+              "claim_id": "C14",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G6",
+              "claim_id": "C17",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G6",
+              "claim_id": "C5",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G7",
+              "claim_id": "C13",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G7",
+              "claim_id": "C17",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G8",
+              "claim_id": "C15",
+              "expected": "neutral",
+              "actual": [
+                "neutral"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G8",
+              "claim_id": "C17",
+              "expected": "neutral",
+              "actual": [],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G9",
+              "claim_id": "C16",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G9",
+              "claim_id": "C17",
+              "expected": "neutral",
+              "actual": [],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C1",
+              "expected": "neutral",
+              "actual": [],
+              "fact_found": false,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C2",
+              "expected": "neutral",
+              "actual": [],
+              "fact_found": false,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C3",
+              "expected": "neutral",
+              "actual": [],
+              "fact_found": false,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C4",
+              "expected": "for",
+              "actual": [],
+              "fact_found": false,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C6",
+              "expected": "for",
+              "actual": [],
+              "fact_found": false,
+              "agree": false
+            }
+          ],
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "version": "guarded",
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "manifest": "experiments\\E5\\guarded\\sonnet\\moves.json",
+      "samples": [
+        {
+          "sample": 1,
+          "provider": "anthropic",
+          "model": "claude-sonnet-5-5",
+          "effort": "medium",
+          "tokens_in": 20658,
+          "tokens_out": 3968,
+          "cost_usd": 0.081615,
+          "error": "",
+          "evidence": 13,
+          "quote_verified": 1.0,
+          "grade_d_found": true,
+          "gold_facts_found": 10,
+          "direction_agreement_observed": 0.5833333333333334,
+          "direction_pairs_observed": 24,
+          "direction_pairs_total": 26,
+          "direction_pairs_correct": 14,
+          "fact_matches": [
+            {
+              "gold_id": "G1",
+              "evidence_ids": [
+                "E152"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G2",
+              "evidence_ids": [
+                "E153"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G3",
+              "evidence_ids": [
+                "E154"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G4",
+              "evidence_ids": [
+                "E155"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G5",
+              "evidence_ids": [
+                "E156"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G6",
+              "evidence_ids": [
+                "E158"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G7",
+              "evidence_ids": [
+                "E159"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G8",
+              "evidence_ids": [
+                "E159",
+                "E160"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G9",
+              "evidence_ids": [
+                "E161"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G10",
+              "evidence_ids": [
+                "E162"
+              ],
+              "manually_adjudicated": false
+            }
+          ],
+          "directions": [
+            {
+              "gold_id": "G1",
+              "claim_id": "C1",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G1",
+              "claim_id": "C2",
+              "expected": "neutral",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G1",
+              "claim_id": "C3",
+              "expected": "neutral",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G2",
+              "claim_id": "C1",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G2",
+              "claim_id": "C2",
+              "expected": "neutral",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G2",
+              "claim_id": "C3",
+              "expected": "neutral",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G3",
+              "claim_id": "C9",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G3",
+              "claim_id": "C12",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G4",
+              "claim_id": "C10",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G4",
+              "claim_id": "C12",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G5",
+              "claim_id": "C11",
+              "expected": "neutral",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G5",
+              "claim_id": "C12",
+              "expected": "neutral",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G6",
+              "claim_id": "C14",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G6",
+              "claim_id": "C17",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G6",
+              "claim_id": "C5",
+              "expected": "for",
+              "actual": [],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G7",
+              "claim_id": "C13",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G7",
+              "claim_id": "C17",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G8",
+              "claim_id": "C15",
+              "expected": "neutral",
+              "actual": [
+                "neutral"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G8",
+              "claim_id": "C17",
+              "expected": "neutral",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G9",
+              "claim_id": "C16",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G9",
+              "claim_id": "C17",
+              "expected": "neutral",
+              "actual": [],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C1",
+              "expected": "neutral",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C2",
+              "expected": "neutral",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C3",
+              "expected": "neutral",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C4",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C6",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            }
+          ],
+          "pass": true
+        },
+        {
+          "sample": 2,
+          "provider": "anthropic",
+          "model": "claude-sonnet-5-5",
+          "effort": "medium",
+          "tokens_in": 20658,
+          "tokens_out": 4251,
+          "cost_usd": 0.0814738,
+          "error": "",
+          "evidence": 14,
+          "quote_verified": 1.0,
+          "grade_d_found": true,
+          "gold_facts_found": 10,
+          "direction_agreement_observed": 0.6,
+          "direction_pairs_observed": 25,
+          "direction_pairs_total": 26,
+          "direction_pairs_correct": 15,
+          "fact_matches": [
+            {
+              "gold_id": "G1",
+              "evidence_ids": [
+                "E152"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G2",
+              "evidence_ids": [
+                "E153"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G3",
+              "evidence_ids": [
+                "E156"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G4",
+              "evidence_ids": [
+                "E157"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G5",
+              "evidence_ids": [
+                "E158"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G6",
+              "evidence_ids": [
+                "E160"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G7",
+              "evidence_ids": [
+                "E161"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G8",
+              "evidence_ids": [
+                "E161",
+                "E162"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G9",
+              "evidence_ids": [
+                "E163"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G10",
+              "evidence_ids": [
+                "E154"
+              ],
+              "manually_adjudicated": false
+            }
+          ],
+          "directions": [
+            {
+              "gold_id": "G1",
+              "claim_id": "C1",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G1",
+              "claim_id": "C2",
+              "expected": "neutral",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G1",
+              "claim_id": "C3",
+              "expected": "neutral",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G2",
+              "claim_id": "C1",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G2",
+              "claim_id": "C2",
+              "expected": "neutral",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G2",
+              "claim_id": "C3",
+              "expected": "neutral",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G3",
+              "claim_id": "C9",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G3",
+              "claim_id": "C12",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G4",
+              "claim_id": "C10",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G4",
+              "claim_id": "C12",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G5",
+              "claim_id": "C11",
+              "expected": "neutral",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G5",
+              "claim_id": "C12",
+              "expected": "neutral",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G6",
+              "claim_id": "C14",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G6",
+              "claim_id": "C17",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G6",
+              "claim_id": "C5",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G7",
+              "claim_id": "C13",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G7",
+              "claim_id": "C17",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G8",
+              "claim_id": "C15",
+              "expected": "neutral",
+              "actual": [
+                "neutral"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G8",
+              "claim_id": "C17",
+              "expected": "neutral",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G9",
+              "claim_id": "C16",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G9",
+              "claim_id": "C17",
+              "expected": "neutral",
+              "actual": [],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C1",
+              "expected": "neutral",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C2",
+              "expected": "neutral",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C3",
+              "expected": "neutral",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C4",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C6",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            }
+          ],
+          "pass": true
+        },
+        {
+          "sample": 3,
+          "provider": "anthropic",
+          "model": "claude-sonnet-5-5",
+          "effort": "medium",
+          "tokens_in": 20658,
+          "tokens_out": 3601,
+          "cost_usd": 0.07497380000000001,
+          "error": "",
+          "evidence": 12,
+          "quote_verified": 1.0,
+          "grade_d_found": true,
+          "gold_facts_found": 10,
+          "direction_agreement_observed": 0.6,
+          "direction_pairs_observed": 25,
+          "direction_pairs_total": 26,
+          "direction_pairs_correct": 15,
+          "fact_matches": [
+            {
+              "gold_id": "G1",
+              "evidence_ids": [
+                "E152"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G2",
+              "evidence_ids": [
+                "E152",
+                "E153"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G3",
+              "evidence_ids": [
+                "E155"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G4",
+              "evidence_ids": [
+                "E156"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G5",
+              "evidence_ids": [
+                "E157"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G6",
+              "evidence_ids": [
+                "E158"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G7",
+              "evidence_ids": [
+                "E159"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G8",
+              "evidence_ids": [
+                "E159",
+                "E160"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G9",
+              "evidence_ids": [
+                "E161",
+                "E162"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G10",
+              "evidence_ids": [
+                "E154"
+              ],
+              "manually_adjudicated": false
+            }
+          ],
+          "directions": [
+            {
+              "gold_id": "G1",
+              "claim_id": "C1",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G1",
+              "claim_id": "C2",
+              "expected": "neutral",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G1",
+              "claim_id": "C3",
+              "expected": "neutral",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G2",
+              "claim_id": "C1",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G2",
+              "claim_id": "C2",
+              "expected": "neutral",
+              "actual": [
+                "for",
+                "neutral"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G2",
+              "claim_id": "C3",
+              "expected": "neutral",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G3",
+              "claim_id": "C9",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G3",
+              "claim_id": "C12",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G4",
+              "claim_id": "C10",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G4",
+              "claim_id": "C12",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G5",
+              "claim_id": "C11",
+              "expected": "neutral",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G5",
+              "claim_id": "C12",
+              "expected": "neutral",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G6",
+              "claim_id": "C14",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G6",
+              "claim_id": "C17",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G6",
+              "claim_id": "C5",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G7",
+              "claim_id": "C13",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G7",
+              "claim_id": "C17",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G8",
+              "claim_id": "C15",
+              "expected": "neutral",
+              "actual": [
+                "neutral"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G8",
+              "claim_id": "C17",
+              "expected": "neutral",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G9",
+              "claim_id": "C16",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G9",
+              "claim_id": "C17",
+              "expected": "neutral",
+              "actual": [],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C1",
+              "expected": "neutral",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C2",
+              "expected": "neutral",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C3",
+              "expected": "neutral",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C4",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C6",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            }
+          ],
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "version": "original",
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "manifest": "experiments\\E5\\original\\sol\\moves.json",
+      "samples": [
+        {
+          "sample": 1,
+          "provider": "openai",
+          "model": "gpt-6.1-sol",
+          "effort": "medium",
+          "tokens_in": 12246,
+          "tokens_out": 2107,
+          "cost_usd": 0.0516835,
+          "error": "",
+          "evidence": 7,
+          "quote_verified": 1.0,
+          "grade_d_found": false,
+          "gold_facts_found": 9,
+          "direction_agreement_observed": 0.7272727272727273,
+          "direction_pairs_observed": 22,
+          "direction_pairs_total": 26,
+          "direction_pairs_correct": 16,
+          "fact_matches": [
+            {
+              "gold_id": "G1",
+              "evidence_ids": [],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G2",
+              "evidence_ids": [
+                "E152"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G3",
+              "evidence_ids": [
+                "E155"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G4",
+              "evidence_ids": [
+                "E155"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G5",
+              "evidence_ids": [
+                "E155"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G6",
+              "evidence_ids": [
+                "E156"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G7",
+              "evidence_ids": [
+                "E156"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G8",
+              "evidence_ids": [
+                "E156"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G9",
+              "evidence_ids": [
+                "E157"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G10",
+              "evidence_ids": [
+                "E153",
+                "E154"
+              ],
+              "manually_adjudicated": true
+            }
+          ],
+          "directions": [
+            {
+              "gold_id": "G1",
+              "claim_id": "C1",
+              "expected": "against",
+              "actual": [],
+              "fact_found": false,
+              "agree": false
+            },
+            {
+              "gold_id": "G1",
+              "claim_id": "C2",
+              "expected": "neutral",
+              "actual": [],
+              "fact_found": false,
+              "agree": false
+            },
+            {
+              "gold_id": "G1",
+              "claim_id": "C3",
+              "expected": "neutral",
+              "actual": [],
+              "fact_found": false,
+              "agree": false
+            },
+            {
+              "gold_id": "G2",
+              "claim_id": "C1",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G2",
+              "claim_id": "C2",
+              "expected": "neutral",
+              "actual": [
+                "neutral"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G2",
+              "claim_id": "C3",
+              "expected": "neutral",
+              "actual": [
+                "neutral"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G3",
+              "claim_id": "C9",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G3",
+              "claim_id": "C12",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G4",
+              "claim_id": "C10",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G4",
+              "claim_id": "C12",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G5",
+              "claim_id": "C11",
+              "expected": "neutral",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G5",
+              "claim_id": "C12",
+              "expected": "neutral",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G6",
+              "claim_id": "C14",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G6",
+              "claim_id": "C17",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G6",
+              "claim_id": "C5",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G7",
+              "claim_id": "C13",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G7",
+              "claim_id": "C17",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G8",
+              "claim_id": "C15",
+              "expected": "neutral",
+              "actual": [
+                "neutral"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G8",
+              "claim_id": "C17",
+              "expected": "neutral",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G9",
+              "claim_id": "C16",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G9",
+              "claim_id": "C17",
+              "expected": "neutral",
+              "actual": [],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C1",
+              "expected": "neutral",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C2",
+              "expected": "neutral",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C3",
+              "expected": "neutral",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C4",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C6",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            }
+          ],
+          "pass": false
+        },
+        {
+          "sample": 2,
+          "provider": "openai",
+          "model": "gpt-6.1-sol",
+          "effort": "medium",
+          "tokens_in": 12246,
+          "tokens_out": 1867,
+          "cost_usd": 0.0199003,
+          "error": "",
+          "evidence": 6,
+          "quote_verified": 1.0,
+          "grade_d_found": false,
+          "gold_facts_found": 9,
+          "direction_agreement_observed": 0.7272727272727273,
+          "direction_pairs_observed": 22,
+          "direction_pairs_total": 26,
+          "direction_pairs_correct": 16,
+          "fact_matches": [
+            {
+              "gold_id": "G1",
+              "evidence_ids": [],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G2",
+              "evidence_ids": [
+                "E152"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G3",
+              "evidence_ids": [
+                "E154"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G4",
+              "evidence_ids": [
+                "E154"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G5",
+              "evidence_ids": [
+                "E154"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G6",
+              "evidence_ids": [
+                "E155"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G7",
+              "evidence_ids": [
+                "E155"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G8",
+              "evidence_ids": [
+                "E155"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G9",
+              "evidence_ids": [
+                "E156"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G10",
+              "evidence_ids": [
+                "E153"
+              ],
+              "manually_adjudicated": false
+            }
+          ],
+          "directions": [
+            {
+              "gold_id": "G1",
+              "claim_id": "C1",
+              "expected": "against",
+              "actual": [],
+              "fact_found": false,
+              "agree": false
+            },
+            {
+              "gold_id": "G1",
+              "claim_id": "C2",
+              "expected": "neutral",
+              "actual": [],
+              "fact_found": false,
+              "agree": false
+            },
+            {
+              "gold_id": "G1",
+              "claim_id": "C3",
+              "expected": "neutral",
+              "actual": [],
+              "fact_found": false,
+              "agree": false
+            },
+            {
+              "gold_id": "G2",
+              "claim_id": "C1",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G2",
+              "claim_id": "C2",
+              "expected": "neutral",
+              "actual": [
+                "neutral"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G2",
+              "claim_id": "C3",
+              "expected": "neutral",
+              "actual": [
+                "neutral"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G3",
+              "claim_id": "C9",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G3",
+              "claim_id": "C12",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G4",
+              "claim_id": "C10",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G4",
+              "claim_id": "C12",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G5",
+              "claim_id": "C11",
+              "expected": "neutral",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G5",
+              "claim_id": "C12",
+              "expected": "neutral",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G6",
+              "claim_id": "C14",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G6",
+              "claim_id": "C17",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G6",
+              "claim_id": "C5",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G7",
+              "claim_id": "C13",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G7",
+              "claim_id": "C17",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G8",
+              "claim_id": "C15",
+              "expected": "neutral",
+              "actual": [
+                "neutral"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G8",
+              "claim_id": "C17",
+              "expected": "neutral",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G9",
+              "claim_id": "C16",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G9",
+              "claim_id": "C17",
+              "expected": "neutral",
+              "actual": [],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C1",
+              "expected": "neutral",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C2",
+              "expected": "neutral",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C3",
+              "expected": "neutral",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C4",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C6",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            }
+          ],
+          "pass": false
+        },
+        {
+          "sample": 3,
+          "provider": "openai",
+          "model": "gpt-6.1-sol",
+          "effort": "medium",
+          "tokens_in": 12246,
+          "tokens_out": 1803,
+          "cost_usd": 0.019260299999999998,
+          "error": "",
+          "evidence": 6,
+          "quote_verified": 1.0,
+          "grade_d_found": false,
+          "gold_facts_found": 9,
+          "direction_agreement_observed": 0.6956521739130435,
+          "direction_pairs_observed": 23,
+          "direction_pairs_total": 26,
+          "direction_pairs_correct": 16,
+          "fact_matches": [
+            {
+              "gold_id": "G1",
+              "evidence_ids": [],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G2",
+              "evidence_ids": [
+                "E152"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G3",
+              "evidence_ids": [
+                "E155"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G4",
+              "evidence_ids": [
+                "E155"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G5",
+              "evidence_ids": [
+                "E155"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G6",
+              "evidence_ids": [
+                "E156"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G7",
+              "evidence_ids": [
+                "E156"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G8",
+              "evidence_ids": [
+                "E157"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G9",
+              "evidence_ids": [
+                "E157"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G10",
+              "evidence_ids": [
+                "E154"
+              ],
+              "manually_adjudicated": false
+            }
+          ],
+          "directions": [
+            {
+              "gold_id": "G1",
+              "claim_id": "C1",
+              "expected": "against",
+              "actual": [],
+              "fact_found": false,
+              "agree": false
+            },
+            {
+              "gold_id": "G1",
+              "claim_id": "C2",
+              "expected": "neutral",
+              "actual": [],
+              "fact_found": false,
+              "agree": false
+            },
+            {
+              "gold_id": "G1",
+              "claim_id": "C3",
+              "expected": "neutral",
+              "actual": [],
+              "fact_found": false,
+              "agree": false
+            },
+            {
+              "gold_id": "G2",
+              "claim_id": "C1",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G2",
+              "claim_id": "C2",
+              "expected": "neutral",
+              "actual": [
+                "neutral"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G2",
+              "claim_id": "C3",
+              "expected": "neutral",
+              "actual": [
+                "neutral"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G3",
+              "claim_id": "C9",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G3",
+              "claim_id": "C12",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G4",
+              "claim_id": "C10",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G4",
+              "claim_id": "C12",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G5",
+              "claim_id": "C11",
+              "expected": "neutral",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G5",
+              "claim_id": "C12",
+              "expected": "neutral",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G6",
+              "claim_id": "C14",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G6",
+              "claim_id": "C17",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G6",
+              "claim_id": "C5",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G7",
+              "claim_id": "C13",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G7",
+              "claim_id": "C17",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G8",
+              "claim_id": "C15",
+              "expected": "neutral",
+              "actual": [
+                "neutral"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G8",
+              "claim_id": "C17",
+              "expected": "neutral",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G9",
+              "claim_id": "C16",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G9",
+              "claim_id": "C17",
+              "expected": "neutral",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C1",
+              "expected": "neutral",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C2",
+              "expected": "neutral",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C3",
+              "expected": "neutral",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C4",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C6",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            }
+          ],
+          "pass": false
+        }
+      ],
+      "pass": false
+    },
+    {
+      "version": "original",
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "manifest": "experiments\\E5\\original\\sonnet\\moves.json",
+      "samples": [
+        {
+          "sample": 1,
+          "provider": "anthropic",
+          "model": "claude-sonnet-5-5",
+          "effort": "medium",
+          "tokens_in": 20502,
+          "tokens_out": 2346,
+          "cost_usd": 0.065005,
+          "error": "",
+          "evidence": 6,
+          "quote_verified": 0.6666666666666666,
+          "grade_d_found": true,
+          "gold_facts_found": 10,
+          "direction_agreement_observed": 0.625,
+          "direction_pairs_observed": 24,
+          "direction_pairs_total": 26,
+          "direction_pairs_correct": 15,
+          "fact_matches": [
+            {
+              "gold_id": "G1",
+              "evidence_ids": [
+                "E152"
+              ],
+              "manually_adjudicated": true
+            },
+            {
+              "gold_id": "G2",
+              "evidence_ids": [
+                "E152"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G3",
+              "evidence_ids": [
+                "E154"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G4",
+              "evidence_ids": [
+                "E154"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G5",
+              "evidence_ids": [
+                "E154"
+              ],
+              "manually_adjudicated": true
+            },
+            {
+              "gold_id": "G6",
+              "evidence_ids": [
+                "E155"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G7",
+              "evidence_ids": [
+                "E155"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G8",
+              "evidence_ids": [
+                "E155"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G9",
+              "evidence_ids": [
+                "E156"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G10",
+              "evidence_ids": [
+                "E153"
+              ],
+              "manually_adjudicated": false
+            }
+          ],
+          "directions": [
+            {
+              "gold_id": "G1",
+              "claim_id": "C1",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G1",
+              "claim_id": "C2",
+              "expected": "neutral",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G1",
+              "claim_id": "C3",
+              "expected": "neutral",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G2",
+              "claim_id": "C1",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G2",
+              "claim_id": "C2",
+              "expected": "neutral",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G2",
+              "claim_id": "C3",
+              "expected": "neutral",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G3",
+              "claim_id": "C9",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G3",
+              "claim_id": "C12",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G4",
+              "claim_id": "C10",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G4",
+              "claim_id": "C12",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G5",
+              "claim_id": "C11",
+              "expected": "neutral",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G5",
+              "claim_id": "C12",
+              "expected": "neutral",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G6",
+              "claim_id": "C14",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G6",
+              "claim_id": "C17",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G6",
+              "claim_id": "C5",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G7",
+              "claim_id": "C13",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G7",
+              "claim_id": "C17",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G8",
+              "claim_id": "C15",
+              "expected": "neutral",
+              "actual": [
+                "neutral"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G8",
+              "claim_id": "C17",
+              "expected": "neutral",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G9",
+              "claim_id": "C16",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G9",
+              "claim_id": "C17",
+              "expected": "neutral",
+              "actual": [],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C1",
+              "expected": "neutral",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C2",
+              "expected": "neutral",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C3",
+              "expected": "neutral",
+              "actual": [],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C4",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C6",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            }
+          ],
+          "pass": false
+        },
+        {
+          "sample": 2,
+          "provider": "anthropic",
+          "model": "claude-sonnet-5-5",
+          "effort": "medium",
+          "tokens_in": 20502,
+          "tokens_out": 2359,
+          "cost_usd": 0.0625382,
+          "error": "",
+          "evidence": 6,
+          "quote_verified": 0.5,
+          "grade_d_found": true,
+          "gold_facts_found": 10,
+          "direction_agreement_observed": 0.64,
+          "direction_pairs_observed": 25,
+          "direction_pairs_total": 26,
+          "direction_pairs_correct": 16,
+          "fact_matches": [
+            {
+              "gold_id": "G1",
+              "evidence_ids": [
+                "E152"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G2",
+              "evidence_ids": [
+                "E152"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G3",
+              "evidence_ids": [
+                "E154"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G4",
+              "evidence_ids": [
+                "E154"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G5",
+              "evidence_ids": [
+                "E154"
+              ],
+              "manually_adjudicated": true
+            },
+            {
+              "gold_id": "G6",
+              "evidence_ids": [
+                "E155"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G7",
+              "evidence_ids": [
+                "E155"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G8",
+              "evidence_ids": [
+                "E155"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G9",
+              "evidence_ids": [
+                "E156"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G10",
+              "evidence_ids": [
+                "E153"
+              ],
+              "manually_adjudicated": false
+            }
+          ],
+          "directions": [
+            {
+              "gold_id": "G1",
+              "claim_id": "C1",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G1",
+              "claim_id": "C2",
+              "expected": "neutral",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G1",
+              "claim_id": "C3",
+              "expected": "neutral",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G2",
+              "claim_id": "C1",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G2",
+              "claim_id": "C2",
+              "expected": "neutral",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G2",
+              "claim_id": "C3",
+              "expected": "neutral",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G3",
+              "claim_id": "C9",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G3",
+              "claim_id": "C12",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G4",
+              "claim_id": "C10",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G4",
+              "claim_id": "C12",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G5",
+              "claim_id": "C11",
+              "expected": "neutral",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G5",
+              "claim_id": "C12",
+              "expected": "neutral",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G6",
+              "claim_id": "C14",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G6",
+              "claim_id": "C17",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G6",
+              "claim_id": "C5",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G7",
+              "claim_id": "C13",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G7",
+              "claim_id": "C17",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G8",
+              "claim_id": "C15",
+              "expected": "neutral",
+              "actual": [
+                "neutral"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G8",
+              "claim_id": "C17",
+              "expected": "neutral",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G9",
+              "claim_id": "C16",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G9",
+              "claim_id": "C17",
+              "expected": "neutral",
+              "actual": [],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C1",
+              "expected": "neutral",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C2",
+              "expected": "neutral",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C3",
+              "expected": "neutral",
+              "actual": [
+                "neutral"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C4",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C6",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            }
+          ],
+          "pass": false
+        },
+        {
+          "sample": 3,
+          "provider": "anthropic",
+          "model": "claude-sonnet-5-5",
+          "effort": "medium",
+          "tokens_in": 20502,
+          "tokens_out": 2567,
+          "cost_usd": 0.0646182,
+          "error": "",
+          "evidence": 6,
+          "quote_verified": 0.6666666666666666,
+          "grade_d_found": true,
+          "gold_facts_found": 9,
+          "direction_agreement_observed": 0.5454545454545454,
+          "direction_pairs_observed": 22,
+          "direction_pairs_total": 26,
+          "direction_pairs_correct": 12,
+          "fact_matches": [
+            {
+              "gold_id": "G1",
+              "evidence_ids": [
+                "E152"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G2",
+              "evidence_ids": [
+                "E152"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G3",
+              "evidence_ids": [
+                "E154"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G4",
+              "evidence_ids": [],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G5",
+              "evidence_ids": [
+                "E154"
+              ],
+              "manually_adjudicated": true
+            },
+            {
+              "gold_id": "G6",
+              "evidence_ids": [
+                "E155"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G7",
+              "evidence_ids": [
+                "E155"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G8",
+              "evidence_ids": [
+                "E155"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G9",
+              "evidence_ids": [
+                "E156"
+              ],
+              "manually_adjudicated": false
+            },
+            {
+              "gold_id": "G10",
+              "evidence_ids": [
+                "E153"
+              ],
+              "manually_adjudicated": false
+            }
+          ],
+          "directions": [
+            {
+              "gold_id": "G1",
+              "claim_id": "C1",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G1",
+              "claim_id": "C2",
+              "expected": "neutral",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G1",
+              "claim_id": "C3",
+              "expected": "neutral",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G2",
+              "claim_id": "C1",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G2",
+              "claim_id": "C2",
+              "expected": "neutral",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G2",
+              "claim_id": "C3",
+              "expected": "neutral",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G3",
+              "claim_id": "C9",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G3",
+              "claim_id": "C12",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G4",
+              "claim_id": "C10",
+              "expected": "for",
+              "actual": [],
+              "fact_found": false,
+              "agree": false
+            },
+            {
+              "gold_id": "G4",
+              "claim_id": "C12",
+              "expected": "against",
+              "actual": [],
+              "fact_found": false,
+              "agree": false
+            },
+            {
+              "gold_id": "G5",
+              "claim_id": "C11",
+              "expected": "neutral",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G5",
+              "claim_id": "C12",
+              "expected": "neutral",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G6",
+              "claim_id": "C14",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G6",
+              "claim_id": "C17",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G6",
+              "claim_id": "C5",
+              "expected": "for",
+              "actual": [],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G7",
+              "claim_id": "C13",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G7",
+              "claim_id": "C17",
+              "expected": "against",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G8",
+              "claim_id": "C15",
+              "expected": "neutral",
+              "actual": [
+                "neutral"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G8",
+              "claim_id": "C17",
+              "expected": "neutral",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G9",
+              "claim_id": "C16",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G9",
+              "claim_id": "C17",
+              "expected": "neutral",
+              "actual": [],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C1",
+              "expected": "neutral",
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C2",
+              "expected": "neutral",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C3",
+              "expected": "neutral",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": false
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C4",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            },
+            {
+              "gold_id": "G10",
+              "claim_id": "C6",
+              "expected": "for",
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
+            }
+          ],
+          "pass": false
+        }
+      ],
+      "pass": false
+    }
+  ],
+  "direction_method": "Fixed regex fact matches plus separately recorded manual adjudications of semantic equivalence; frozen gold labels are unchanged. Exact comparison of explicitly reported hints, with missing facts/hints visible in coverage.",
+  "pass": true
+}

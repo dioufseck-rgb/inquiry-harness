@@ -22,9 +22,15 @@ the credentials of each item of evidence you extract from it.
 3. Extract evidence. Each item is one proposition the source establishes,
    stated in your words, with a short verbatim quote (under 300 characters)
    and a location (section, page, table, paragraph) so a critic can check
-   the passage. Extract only what bears on the claims in the view. Three to
-   six items is usual; zero is correct when the source says nothing to the
-   point.
+   the passage. Each quote must be one contiguous passage: do not join
+   fragments, insert ellipses or paraphrase inside quotation marks. The code
+   checks source membership, requests one correction and drops remaining
+   failures. Split propositions needing different passages into separate items.
+   Extract as many distinct relevant propositions as the source establishes;
+   zero is correct when it says nothing to the point. For a body's relevant
+   decision or recommendation, preserve the action, target population and
+   explicit grade, class or rating as a record of that body's verdict. Keep
+   that verdict distinct from a causal effect or a proof of true zero.
 4. Give each item Schum's three credentials, each `weak`, `moderate` or
    `strong`:
    - `relevance`: how directly it bears on the claim it is used for.

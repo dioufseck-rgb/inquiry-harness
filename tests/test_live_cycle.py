@@ -351,7 +351,7 @@ def test_targeted_read_extracts_a_named_table_from_a_held_document(tmp_path):
     def script(user):
         calls.append(user)
         if "Find and extract" in user and "Table 7" in user.split("# Source to appraise")[-1]:
-            return {"kind": "primary", "evidence": [{"text": "Table 7: outer London mean 104 min", "location": "Table 7, p. 61",
+            return {"kind": "primary", "evidence": [{"text": "Table 7: outer London monthly roadside NO2", "quote": "Table 7 Outer London roadside NO2 by month", "location": "Table 7, p. 61",
                                                      "bears_on": {"C1": "for"}}]}
         return {"kind": "primary", "evidence": []}
 
@@ -653,7 +653,7 @@ def test_primary_sources_are_read_to_the_end_and_others_sampled():
             kind = "unknown" if "part 3 of 3" not in user else "primary"  # settled only by the last part
         else:
             kind = "derivative"
-        return {"kind": kind, "evidence": [{"text": f"fact {len(calls)} with 10 min", "bears_on": {"C1": "for"}}]}
+        return {"kind": kind, "evidence": [{"text": f"fact {len(calls)} with 10 min", "quote": "FRONTMATTER" if "FRONTMATTER" in user else "xxxxxxxxxx", "bears_on": {"C1": "for"}}]}
 
     llm = FakeLLM({"appraise": script})
     inq = Inquiry(id="x", question="q")

@@ -660,7 +660,20 @@ def _origin_group(g: ArgumentGraph, src: Source, derived_from: str) -> str:
     return g.origin_key(src)
 
 
-def apply_appraise(inq: Inquiry, src: Source, out: AppraiseOutput, first: bool = True) -> dict:
+def source_quote_errors(quote: str, text: str) -> list[str]:
+    normal = lambda s: " ".join(s.casefold().split())
+    errors = []
+    if not quote.strip():
+        errors.append("missing verbatim quote")
+    elif normal(quote) not in normal(text):
+        errors.append("quote is not a contiguous passage in the supplied source")
+    if len(" ".join(quote.split())) > 300:
+        errors.append("quote exceeds 300 characters")
+    return errors
+
+
+def apply_appraise(inq: Inquiry, src: Source, out: AppraiseOutput, first: bool = True,
+                   source_text: str | None = None) -> dict:
     g = inq.graph
     if first:
         src.kind = out.kind
@@ -676,7 +689,11 @@ def apply_appraise(inq: Inquiry, src: Source, out: AppraiseOutput, first: bool =
     group = _origin_group(g, src, out.derived_from) if first else g.origin_key(src)
     known = {c.id for c in g.claims}
     added: list[str] = []
+    rejected = []
     for p in out.evidence:
+        if source_text is not None and (errors := source_quote_errors(p.quote, source_text)):
+            rejected.append({"text": p.text, "quote": p.quote, "reasons": errors})
+            continue
         e = g.add_evidence(
             p.text, kind=p.kind, source_id=src.id, quote=_clip(p.quote, 300), location=p.location,
             credentials=Credentials(relevance=p.relevance, credibility=p.credibility, force=p.force,
@@ -684,7 +701,7 @@ def apply_appraise(inq: Inquiry, src: Source, out: AppraiseOutput, first: bool =
             bears_on={k: v for k, v in p.bears_on.items() if k in known},
         )
         added.append(e.id)
-    return {"source": src.id, "kind": src.kind, "group": group, "evidence": added}
+    return {"source": src.id, "kind": src.kind, "group": group, "evidence": added, "rejected_quotes": rejected}
 
 
 def _chunks(text: str, window: int, overlap: int) -> list[str]:
@@ -701,10 +718,37 @@ def _chunks(text: str, window: int, overlap: int) -> list[str]:
 
 def appraise(inq: Inquiry, llm: LLM, src: Source, text: str, test: Optional[PlannedTest] = None,
              part: tuple[int, int] = (1, 1), locate: str = "") -> dict:
-    out = llm.complete_json(skill_text("appraise"), appraise_view(inq, src, text, test, part, locate), AppraiseOutput)
+    view = appraise_view(inq, src, text, test, part, locate)
+    out = llm.complete_json(skill_text("appraise"), view, AppraiseOutput)
+    keep, rejected = [], []
+    for p in out.evidence:
+        errors = source_quote_errors(p.quote, text)
+        if errors:
+            rejected.append({"text": p.text, "quote": p.quote, "reasons": errors, "attempt": 1})
+        else:
+            keep.append(p)
+    if rejected:
+        repair = view + "\n\n# Rejected quotations (only correction attempt)\n" + json.dumps(rejected, ensure_ascii=False)
+        repair += ("\nReturn replacement evidence only for these items, with one contiguous verbatim quote of at most "
+                   "300 characters each. Do not splice passages or insert ellipses. Split propositions into separate items "
+                   "when they require separate passages. Do not repeat accepted evidence.")
+        fixed = llm.complete_json(skill_text("appraise"), repair, AppraiseOutput)
+        seen = {(p.text, p.quote) for p in keep}
+        for p in fixed.evidence:
+            errors = source_quote_errors(p.quote, text)
+            if errors:
+                rejected.append({"text": p.text, "quote": p.quote, "reasons": errors, "attempt": 2})
+            elif (p.text, p.quote) not in seen:
+                keep.append(p)
+                seen.add((p.text, p.quote))
+    else:
+        keep = out.evidence
+    out = out.model_copy(update={"evidence": keep})
     # a located re-read must not reclassify a source already appraised
     first = part[0] == 1 and not (locate and any(e.source_id == src.id for e in inq.graph.evidence))
-    return apply_appraise(inq, src, out, first=first)
+    result = apply_appraise(inq, src, out, first=first, source_text=text)
+    result["rejected_quotes"] = rejected
+    return result
 
 
 def appraise_full(inq: Inquiry, llm: LLM, src: Source, text: str, test: Optional[PlannedTest] = None,
@@ -721,7 +765,8 @@ def appraise_full(inq: Inquiry, llm: LLM, src: Source, text: str, test: Optional
     then never marked as read in full, whatever was appraised.
     """
     parts = _chunks(text, window, overlap)
-    total: dict = {"source": src.id, "evidence": [], "parts": 0, "of": len(parts), "text_complete": text_complete}
+    total: dict = {"source": src.id, "evidence": [], "parts": 0, "of": len(parts), "text_complete": text_complete,
+                   "rejected_quotes": []}
     if locate:
         # a targeted read: only the windows that mention the location, all of them
         wanted = [i for i, ch in enumerate(parts) if locate.lower() in ch.lower()]
@@ -731,6 +776,7 @@ def appraise_full(inq: Inquiry, llm: LLM, src: Source, text: str, test: Optional
     for n, i in enumerate(indices):
         res = appraise(inq, llm, src, parts[i], test, part=(i + 1, len(parts)), locate=locate)
         total["evidence"].extend(res["evidence"])
+        total["rejected_quotes"].extend(res["rejected_quotes"])
         total["parts"] += 1
         if n == 0:
             total["group"] = res["group"]
