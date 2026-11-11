@@ -1,4 +1,5 @@
 """C3: one Hypothesize replay per provider on the same saved aspirin frame."""
+import argparse
 import json
 from pathlib import Path
 
@@ -8,7 +9,7 @@ from inquiry.state import Inquiry
 from experiments.tonight3 import make_llm
 
 
-def main():
+def prepare():
     root = Path("experiments/C3")
     root.mkdir(exist_ok=True)
     paths = ["E6/sonnet", "E6/sol", "E6-generalisation/energy", "E6-generalisation/genai"]
@@ -23,6 +24,18 @@ def main():
                          if c.get("answers_issue", True) != migrated.graph.claim(c["id"]).answers_issue]
     (root / "legacy-answerhood-audit.json").write_text(json.dumps(audit, indent=2), encoding="utf-8")
     saved = Inquiry.model_validate_json(Path("experiments/E6/sonnet/inquiry.json").read_text(encoding="utf-8"))
+    frame, _ = reconstruct_pre_move(saved, "hypothesize")
+    requests = [{"provider": spec, "system": moves.skill_text("hypothesize"), "user": moves.hypothesize_view(frame)}
+                for spec in ("anthropic:claude-sonnet-5-5", "openai:gpt-6.1-sol")]
+    (root / "requests.json").write_text(json.dumps(requests, indent=2), encoding="utf-8")
+    return root, saved
+
+
+def main(prepare_only=False):
+    root, saved = prepare()
+    if prepare_only:
+        print(json.dumps({"prepared": str(root), "api_calls": 0}))
+        return
     for name, spec in (("sonnet", "anthropic:claude-sonnet-5-5"), ("sol", "openai:gpt-6.1-sol")):
         destination = root / f"{name}.json"
         if destination.exists():
@@ -41,4 +54,6 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--prepare-only", action="store_true", help="Write exact requests and audit locally; no API clients or requests.")
+    main(parser.parse_args().prepare_only)

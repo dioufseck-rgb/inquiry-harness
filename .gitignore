@@ -15,3 +15,8 @@ experiments/E6/**/run/
 experiments/E6/**/*-responses.json
 experiments/E6-generalisation/**/run/
 experiments/E6-generalisation/**/*-responses.json
+experiments/C3/*-responses.json
+experiments/E7/**/run/
+experiments/E7/**/*-responses.json
+experiments/E7-energy/**/run/
+experiments/E7-energy/**/*-responses.json

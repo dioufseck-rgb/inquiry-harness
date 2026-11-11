@@ -42,7 +42,11 @@ def run(args):
     # limit rather than an inherited token cap from an earlier campaign.
     os.environ["INQUIRY_MAX_TOKENS_RUN"] = "0"
     pricing = json.loads(Path("experiments/pricing.json").read_text(encoding="utf-8"))["models"]
-    budget = ExperimentBudget(Path("runs/tonight-2/budget.json"), {"anthropic": 36, "openai": 10}, {"anthropic": 20})
+    if getattr(args, "budget_campaign", "tonight-2") == "tonight-3":
+        from experiments.tonight3 import budget as tonight3_budget
+        budget = tonight3_budget()
+    else:
+        budget = ExperimentBudget(Path("runs/tonight-2/budget.json"), {"anthropic": 36, "openai": 10}, {"anthropic": 20})
     def llm(spec):
         provider, model = spec.split(":", 1)
         if spec not in pricing or provider not in ("anthropic", "openai"):
@@ -93,7 +97,9 @@ def run(args):
     m["packet_path"] = str(args.packet)
     m["packet_sha256"] = fingerprint(packet)
     m["config"] = {"rounds": 2, "frame_samples": 1, "review_frame": False, "live_retrieval": False,
-                   "proposer": args.proposer, "critic": args.critic, "effort": "medium"}
+                   "proposer": args.proposer, "critic": args.critic, "effort": "medium",
+                   "budget_campaign": getattr(args, "budget_campaign", "tonight-2"), "budget_ledger": str(budget.path),
+                   "budget_limits": budget.limits, "capped_compose_pass": 1}
     m["implementation_commit"] = subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()
     m["runner_sha256"] = fingerprint(Path(__file__).read_text(encoding="utf-8"))
     m["cost_by_provider"] = {provider: sum(c["cost_usd"] or 0 for handle in (proposer, critic)
@@ -104,18 +110,29 @@ def run(args):
     m["ledger_valid"] = store.verify_ledger()
     m["search_queries"] = len(search.calls)
     m["fetched_urls"] = fetcher.calls
-    m["accepted_main_claims"] = [{"id": c.id, "text": c.text, "target": c.target, "scope": c.answers_issue} for c in inq.main_claims()
-                                 if c.answers_issue and ev.status(c.id) == "in"]
+    from inquiry.closure import whole_question_answer
+    answer = whole_question_answer(inq.graph, ev)
+    m["accepted_main_claims"] = [{"id": c.id, "text": c.text, "target": c.target, "scope": c.scope.model_dump(),
+                                  "answers_issue": c.answers_issue} for c in inq.main_claims()
+                                 if (c.answers_issue or c == answer) and ev.status(c.id) == "in"]
     m["accepted_components"] = [{"id": c.id, "text": c.text, "issue_id": c.issue_id} for c in inq.graph.live_claims()
-                                if ev.status(c.id) == "in" and (not c.answers_issue or c.issue_id != inq.graph.main_issue_id)]
+                                if c != answer and ev.status(c.id) == "in" and (not c.answers_issue or c.issue_id != inq.graph.main_issue_id)]
     m["main_load_bearing"] = {c.id: [x.model_dump() for x in load_bearing(inq.graph, c.id)] for c in inq.main_claims() if c.answers_issue}
+    m["composition_details"] = [{"claim_id": a.claim_id, "argument_id": a.id, "premise_claim_ids": a.premise_ids,
+                                  "scope": inq.graph.claim(a.claim_id).scope.model_dump(),
+                                  "status": ev.status(a.claim_id), "applicable": ev.applicable[a.id],
+                                  "critique_round": inq.graph.claim(a.claim_id).critique_round,
+                                  "cq": {qid: ans.model_dump() for qid, ans in a.cq.items()},
+                                  "attacks": [attack.id for attack in inq.graph.attacks_on(a.id)]}
+                                 for a in inq.graph.arguments if a.scheme == "composition"]
+    m["cannot_compose"] = [note for note in inq.notes if note.startswith("cannot_compose ")]
     m["single_origin_flag_missing"] = []
     from inquiry.argument.evaluate import argument_origins
     flagged = {f.node_id for f in ev.flags if f.code == "single_origin"}
     for c in inq.graph.live_claims():
         if ev.status(c.id) != "in":
             continue
-        origins = set().union(*(argument_origins(inq.graph, inq.graph.arg(aid)) for aid in ev.claims[c.id].pro_ids))
+        origins = set().union(*(argument_origins(inq.graph, inq.graph.arg(aid), labels=ev.labels) for aid in ev.claims[c.id].pro_ids))
         if len(origins) <= 1 and c.id not in flagged:
             m["single_origin_flag_missing"].append(c.id)
     m["pass"] = (not error and m["references_valid"] and m["ledger_valid"] and not m["claims_supported_unargued"]
@@ -136,4 +153,5 @@ if __name__ == "__main__":
     p.add_argument("--proposer", required=True)
     p.add_argument("--critic", required=True)
     p.add_argument("--out", type=Path, required=True)
+    p.add_argument("--budget-campaign", choices=("tonight-2", "tonight-3"), default="tonight-2")
     run(p.parse_args())

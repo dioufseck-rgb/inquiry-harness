@@ -1,0 +1,264 @@
+{
+  "E6/sonnet": [
+    {
+      "claim_id": "C12",
+      "stored": true,
+      "derived": false,
+      "scope": {
+        "population": "adults 70+",
+        "comparison": "",
+        "outcome": "Trials report no significant interaction of aspirin effects with age or baseline cardiovascular risk.",
+        "period": "source-reported follow-up",
+        "relation": "unknown",
+        "magnitude": null,
+        "narrower_than": [],
+        "parent_scope": {}
+      }
+    },
+    {
+      "claim_id": "C13",
+      "stored": true,
+      "derived": false,
+      "scope": {
+        "population": "adults 60 and over",
+        "comparison": "",
+        "outcome": "net cardiovascular benefit of aspirin primary prevention",
+        "period": "source-reported follow-up",
+        "relation": "unknown",
+        "magnitude": null,
+        "narrower_than": [],
+        "parent_scope": {}
+      }
+    },
+    {
+      "claim_id": "C14",
+      "stored": true,
+      "derived": false,
+      "scope": {
+        "population": "adults 60 and over",
+        "comparison": "",
+        "outcome": "net cardiovascular benefit of aspirin primary prevention",
+        "period": "source-reported follow-up",
+        "relation": "unknown",
+        "magnitude": null,
+        "narrower_than": [],
+        "parent_scope": {}
+      }
+    },
+    {
+      "claim_id": "C19",
+      "stored": true,
+      "derived": false,
+      "scope": {
+        "population": "adults 60+ without CVD",
+        "comparison": "placebo or no aspirin",
+        "outcome": "net balance",
+        "period": "trial follow-up",
+        "relation": "unknown",
+        "magnitude": null,
+        "narrower_than": [],
+        "parent_scope": {}
+      }
+    },
+    {
+      "claim_id": "C21",
+      "stored": true,
+      "derived": false,
+      "scope": {
+        "population": "adults 70+ (ASPREE) and pooled all-age trials",
+        "comparison": "placebo",
+        "outcome": "major haemorrhage; GI and intracranial bleeding",
+        "period": "median 4.7 years (ASPREE)",
+        "relation": "unknown",
+        "magnitude": null,
+        "narrower_than": [],
+        "parent_scope": {}
+      }
+    },
+    {
+      "claim_id": "C22",
+      "stored": true,
+      "derived": false,
+      "scope": {
+        "population": "adults 60+ without CVD, 60-69 vs 70+",
+        "comparison": "placebo",
+        "outcome": "absolute bleeding harm, modelled net balance",
+        "period": "lifetime model / trial follow-up",
+        "relation": "unknown",
+        "magnitude": null,
+        "narrower_than": [],
+        "parent_scope": {}
+      }
+    },
+    {
+      "claim_id": "C27",
+      "stored": true,
+      "derived": false,
+      "scope": {
+        "population": "adults 60+ without CVD",
+        "comparison": "no aspirin",
+        "outcome": "net benefit judgement",
+        "period": "not stated",
+        "relation": "unknown",
+        "magnitude": null,
+        "narrower_than": [],
+        "parent_scope": {}
+      }
+    }
+  ],
+  "E6/sol": [
+    {
+      "claim_id": "C4",
+      "stored": true,
+      "derived": false,
+      "scope": {
+        "population": "adults 60+",
+        "comparison": "",
+        "outcome": "For adults aged 60 and older, aspirin's net balance varies with baseline cardiovascular risk, bleeding risk, and the clinical importance assigned to different outcomes; a single population-wide verdict obscures these differences.",
+        "period": "source-reported follow-up",
+        "relation": "unknown",
+        "magnitude": null,
+        "narrower_than": [],
+        "parent_scope": {}
+      }
+    },
+    {
+      "claim_id": "C25",
+      "stored": true,
+      "derived": false,
+      "scope": {
+        "population": "adults aged 60 or older without symptoms or known cardiovascular disease who are not at increased bleeding risk",
+        "comparison": "no aspirin initiation",
+        "outcome": "USPSTF net-benefit assessment and recommendation",
+        "period": "preventive-use horizon considered in the USPSTF assessment",
+        "relation": "unknown",
+        "magnitude": null,
+        "narrower_than": [],
+        "parent_scope": {}
+      }
+    }
+  ],
+  "E6-generalisation/energy": [],
+  "E6-generalisation/genai": [
+    {
+      "claim_id": "C5",
+      "stored": true,
+      "derived": false,
+      "scope": {
+        "population": "Is it established that about 95% of enterprise generative-AI pilots deliver no measurable return?",
+        "comparison": "",
+        "outcome": "\u201cNo measurable return\u201d conflates unmeasured benefits, absent financial impact, and negative returns; these interpretations yield different answers about enterprise generative-AI pilots.",
+        "period": "source-reported follow-up",
+        "relation": "unknown",
+        "magnitude": null,
+        "narrower_than": [],
+        "parent_scope": {}
+      }
+    },
+    {
+      "claim_id": "C9",
+      "stored": true,
+      "derived": false,
+      "scope": {
+        "population": "What research or reports originated the roughly 95% claim, and what did they actually report?",
+        "comparison": "",
+        "outcome": "The originating material shifts between organizations, investments, and pilots, so its roughly 95% statements do not identify a single consistent denominator.",
+        "period": "source-reported follow-up",
+        "relation": "unknown",
+        "magnitude": null,
+        "narrower_than": [],
+        "parent_scope": {}
+      }
+    },
+    {
+      "claim_id": "C14",
+      "stored": true,
+      "derived": false,
+      "scope": {
+        "population": "Which enterprises and projects did the originating research study, and how were returns and the reported proportion measured?",
+        "comparison": "",
+        "outcome": "The originating research's reported proportion combines enterprise projects at different stages and observation periods, so it is not a common-period pilot return rate.",
+        "period": "source-reported follow-up",
+        "relation": "unknown",
+        "magnitude": null,
+        "narrower_than": [],
+        "parent_scope": {}
+      }
+    },
+    {
+      "claim_id": "C18",
+      "stored": true,
+      "derived": false,
+      "scope": {
+        "population": "What proportions of enterprise generative-AI pilots with and without measurable returns are reported in other empirical studies?",
+        "comparison": "",
+        "outcome": "Other studies report organization-level, production-use, or broader AI outcomes rather than comparable enterprise generative-AI pilot return rates.",
+        "period": "source-reported follow-up",
+        "relation": "unknown",
+        "magnitude": null,
+        "narrower_than": [],
+        "parent_scope": {}
+      }
+    },
+    {
+      "claim_id": "C22",
+      "stored": true,
+      "derived": false,
+      "scope": {
+        "population": "What research or reports originated the roughly 95% claim, and what did they actually report?",
+        "comparison": "",
+        "outcome": "NANDA's report says 5% of integrated AI pilots extract millions in value, while the vast majority have no measurable P&L impact.",
+        "period": "source-reported follow-up",
+        "relation": "unknown",
+        "magnitude": null,
+        "narrower_than": [],
+        "parent_scope": {}
+      }
+    },
+    {
+      "claim_id": "C23",
+      "stored": true,
+      "derived": false,
+      "scope": {
+        "population": "Which enterprises and projects did the originating research study, and how were returns and the reported proportion measured?",
+        "comparison": "",
+        "outcome": "The report states that ROI impact was measured six months post-pilot and adjusted for department size; the supplied methodology passages do not identify the pilot denominator or calculation behind the headline proportion.",
+        "period": "source-reported follow-up",
+        "relation": "unknown",
+        "magnitude": null,
+        "narrower_than": [],
+        "parent_scope": {}
+      }
+    },
+    {
+      "claim_id": "C24",
+      "stored": true,
+      "derived": false,
+      "scope": {
+        "population": "Which enterprises and projects did the originating research study, and how were returns and the reported proportion measured?",
+        "comparison": "",
+        "outcome": "The report separates evaluation, pilot and production stages; its differing implementation timelines do not establish that the headline return proportion pools unequal follow-up periods.",
+        "period": "source-reported follow-up",
+        "relation": "unknown",
+        "magnitude": null,
+        "narrower_than": [],
+        "parent_scope": {}
+      }
+    },
+    {
+      "claim_id": "C25",
+      "stored": true,
+      "derived": false,
+      "scope": {
+        "population": "enterprise generative-AI pilots generally",
+        "comparison": "not applicable",
+        "outcome": "whether a general 95% no-measurable-return rate is established",
+        "period": "not established for the headline proportion",
+        "relation": "unknown",
+        "magnitude": null,
+        "narrower_than": [],
+        "parent_scope": {}
+      }
+    }
+  ]
+}
