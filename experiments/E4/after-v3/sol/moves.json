@@ -1,0 +1,304 @@
+{
+  "move": "respond",
+  "run_id": "health-aspirin-tonight-openai-t7",
+  "n_requested": 3,
+  "input_sha256": "c2afcf03266a826c1cecc7a65f6d1eda068172a8b88dab2164c916dfd6a64d9e",
+  "preparation": {
+    "projection": "respond",
+    "historical_snapshot": false,
+    "dispositions_reset": true
+  },
+  "samples": [
+    {
+      "sample": 1,
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "tokens_in": 44702,
+      "tokens_out": 864,
+      "cost_usd": 0.1203935,
+      "api_calls": 1,
+      "seconds": 23.89,
+      "metrics": {
+        "concede": 0,
+        "discharge": 1,
+        "counter": 3,
+        "counters_applicable": 3,
+        "concessions_justified": 0,
+        "rejected_concessions": 0,
+        "discharge_attempts": 1
+      },
+      "raw_metrics": {},
+      "move_summary": {
+        "conceded": [],
+        "countered": [
+          "A28",
+          "A29",
+          "A30"
+        ],
+        "discharged": [
+          "A24"
+        ],
+        "dropped": [],
+        "counter_drops": [],
+        "rejected_concessions": [],
+        "concessions_justified": [],
+        "discharge_attempts": [
+          {
+            "attack_id": "A24",
+            "cq_ids": [
+              "consistency"
+            ],
+            "checked_evidence_ids": [
+              "E101",
+              "E142",
+              "E143",
+              "E153"
+            ],
+            "attempt": "This answers consistency without establishing transportability: E6 and E23 remain reasons to call the stroke outcome the review's endpoint, and E14 prevents treating these estimates as age-specific daily low-dose effects.",
+            "round": 2
+          }
+        ],
+        "standing": 4,
+        "new": 4,
+        "counters_dropped": 0,
+        "counters_dropped_reasons": {},
+        "dispositions": {
+          "A23": "counter",
+          "A24": "discharge",
+          "A25": "counter",
+          "A27": "counter"
+        }
+      },
+      "error": "",
+      "graph": "sample-001\\inquiry.json",
+      "graph_sha256": "4cd880f4a989f2f58d4fbc498b1547f3417235d700c36fe5f4efe770c9a56d31",
+      "references_valid": true
+    },
+    {
+      "sample": 2,
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "tokens_in": 44702,
+      "tokens_out": 1049,
+      "cost_usd": 0.0149659,
+      "api_calls": 1,
+      "seconds": 28.45,
+      "metrics": {
+        "concede": 1,
+        "discharge": 1,
+        "counter": 2,
+        "counters_applicable": 2,
+        "concessions_justified": 1,
+        "rejected_concessions": 0,
+        "discharge_attempts": 2
+      },
+      "raw_metrics": {},
+      "move_summary": {
+        "conceded": [
+          "A25"
+        ],
+        "countered": [
+          "A28",
+          "A29"
+        ],
+        "discharged": [
+          "A24"
+        ],
+        "dropped": [],
+        "counter_drops": [],
+        "rejected_concessions": [],
+        "concessions_justified": [
+          "A25"
+        ],
+        "discharge_attempts": [
+          {
+            "attack_id": "A24",
+            "cq_ids": [
+              "consistency"
+            ],
+            "checked_evidence_ids": [
+              "E101",
+              "E142",
+              "E143",
+              "E153"
+            ],
+            "attempt": "This answers the consistency objection, not the acknowledged directness limitations. E6 and E23 still require describing the stroke result as the review's endpoint; the pooled results must not be transported as age-specific daily low-dose effects.",
+            "round": 2
+          },
+          {
+            "attack_id": "A25",
+            "cq_id": "consistency",
+            "checked_evidence_ids": [
+              "E28",
+              "E34",
+              "E49",
+              "E153",
+              "E155"
+            ],
+            "attempt": "Checked the pooled nonfatal-MI result and heterogeneity, ASPREE's in-trial MI estimate, and the additional low-dose synthesis for evidence explaining the between-trial variation or establishing an older-adult effect.",
+            "no_answer_reason": "E153 corroborates an average nonfatal-MI benefit, but does not explain the substantial heterogeneity in E34. E49 uses fatal or nonfatal MI and remains imprecise, while E155 supplies no numerical age interactions capable of excluding material age differences. The other listed stroke, bleeding, mortality, and net-benefit evidence does not resolve the MI heterogeneity or identify its drivers.",
+            "round": 2
+          }
+        ],
+        "standing": 4,
+        "new": 4,
+        "counters_dropped": 0,
+        "counters_dropped_reasons": {},
+        "dispositions": {
+          "A23": "counter",
+          "A24": "discharge",
+          "A25": "concede",
+          "A27": "counter"
+        }
+      },
+      "error": "",
+      "graph": "sample-002\\inquiry.json",
+      "graph_sha256": "ff315fe6a03618645f2497e388a54476fe3104a234c1b9550b67d749c96548fc",
+      "references_valid": true
+    },
+    {
+      "sample": 3,
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "tokens_in": 44702,
+      "tokens_out": 912,
+      "cost_usd": 0.013595900000000001,
+      "api_calls": 1,
+      "seconds": 23.23,
+      "metrics": {
+        "concede": 1,
+        "discharge": 1,
+        "counter": 2,
+        "counters_applicable": 2,
+        "concessions_justified": 1,
+        "rejected_concessions": 0,
+        "discharge_attempts": 2
+      },
+      "raw_metrics": {},
+      "move_summary": {
+        "conceded": [
+          "A25"
+        ],
+        "countered": [
+          "A28",
+          "A29"
+        ],
+        "discharged": [
+          "A24"
+        ],
+        "dropped": [],
+        "counter_drops": [],
+        "rejected_concessions": [],
+        "concessions_justified": [
+          "A25"
+        ],
+        "discharge_attempts": [
+          {
+            "attack_id": "A24",
+            "cq_ids": [
+              "consistency"
+            ],
+            "checked_evidence_ids": [
+              "E101",
+              "E142",
+              "E143",
+              "E153"
+            ],
+            "attempt": "This answers the alleged inconsistency, not the separate applicability and classification limitations: E6 and E23 still prevent interpreting the review's stroke endpoint as uniformly ischemic, and C29 does not establish an age-specific daily low-dose effect.",
+            "round": 2
+          },
+          {
+            "attack_id": "A25",
+            "cq_id": "consistency",
+            "checked_evidence_ids": [
+              "E28",
+              "E34",
+              "E49",
+              "E26",
+              "E27",
+              "E29",
+              "E30",
+              "E31",
+              "E32",
+              "E33",
+              "E35",
+              "E36",
+              "E37",
+              "E153",
+              "E129",
+              "E155"
+            ],
+            "attempt": "Checked the pooled nonfatal-MI result and heterogeneity, ASPREE's older-adult MI estimate, the other listed stroke-review evidence, and the additional low-dose and diabetic-population syntheses for an explanation or resolution of between-trial differences.",
+            "no_answer_reason": "E153 corroborates an average MI benefit and E49 is statistically compatible with that benefit, but neither resolves the substantial heterogeneity in E34. The other listed evidence supplies no age-specific nonfatal-MI analysis or sufficiently detailed interaction analysis establishing whether younger trials drive the pooled estimate; E155's qualitative absence of detected age interactions does not settle that question.",
+            "round": 2
+          }
+        ],
+        "standing": 4,
+        "new": 4,
+        "counters_dropped": 0,
+        "counters_dropped_reasons": {},
+        "dispositions": {
+          "A23": "counter",
+          "A24": "discharge",
+          "A25": "concede",
+          "A27": "counter"
+        }
+      },
+      "error": "",
+      "graph": "sample-003\\inquiry.json",
+      "graph_sha256": "a94748577fbd8c7c30a36f795d8b078b37febab13012bd434655cc361533a01e",
+      "references_valid": true
+    }
+  ],
+  "skill_sha256": "adde32ceabfa20e7a58cb2d9fcbeeac589485bbcd2b7c1c2c900a86ebc35e5da",
+  "provider": "openai",
+  "model": "gpt-6.1-sol",
+  "effort": "medium",
+  "aggregate": {
+    "concede": {
+      "mean": 0.6666666666666666,
+      "min": 0,
+      "max": 1,
+      "n": 3
+    },
+    "concessions_justified": {
+      "mean": 0.6666666666666666,
+      "min": 0,
+      "max": 1,
+      "n": 3
+    },
+    "counter": {
+      "mean": 2.3333333333333335,
+      "min": 2,
+      "max": 3,
+      "n": 3
+    },
+    "counters_applicable": {
+      "mean": 2.3333333333333335,
+      "min": 2,
+      "max": 3,
+      "n": 3
+    },
+    "discharge": {
+      "mean": 1,
+      "min": 1,
+      "max": 1,
+      "n": 3
+    },
+    "discharge_attempts": {
+      "mean": 1.6666666666666667,
+      "min": 1,
+      "max": 2,
+      "n": 3
+    },
+    "rejected_concessions": {
+      "mean": 0,
+      "min": 0,
+      "max": 0,
+      "n": 3
+    }
+  }
+}

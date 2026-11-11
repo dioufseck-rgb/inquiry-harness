@@ -39,6 +39,14 @@ def appraise_script(user: str) -> dict:
 
 
 def make_scripts(plan_calls: list[str], overrides: dict | None = None):
+    def respond_script(user: str) -> dict:
+        import re
+        return {"responses": [{"attack_id": aid, "action": "concede", "note": "need the errata",
+                               "cq_id": "definitions", "discharge_attempt": "Checked both the table and its inconsistent definitions.",
+                               "checked_evidence_ids": ["E1", "E2"],
+                               "no_answer_reason": "Neither item provides the reconciliation between the two definitions."}
+                              for aid in re.findall(r"^## (A\d+):", user, re.M)]}
+
     def plan_script(user: str) -> dict:
         plan_calls.append(user)
         return {"tests": [{
@@ -82,7 +90,7 @@ def make_scripts(plan_calls: list[str], overrides: dict | None = None):
             "scheme": "document_record", "claim_id": "C3", "premise_ids": ["E1"],  # not this issue's claim
         }],
             "unusable": [{"evidence_id": "E2", "reason": "grounds an objection, not a claim"}]},
-        "respond": {"responses": [{"attack_id": "A2", "action": "concede", "note": "need the errata"}]},
+        "respond": respond_script,
         "revise": {"operations": []},
         "compute": {"computations": []},
         "conclude": {
@@ -166,10 +174,13 @@ def test_counter_diagnostics_separate_rejections_from_inapplicability(tmp_path):
     from inquiry import moves
     from inquiry.metrics import metrics
 
-    h, store = make_harness(tmp_path, [], overrides={"respond": {"responses": [
+    replies = iter([{"responses": [
         {"attack_id": "A2", "action": "counter", "premise_ids": ["E999"]},
         {"attack_id": "A1", "action": "counter", "premise_ids": ["E1"]},
-    ]}})
+    ]}, {"responses": [{"attack_id": "A2", "action": "concede", "cq_id": "definitions",
+        "discharge_attempt": "Checked both source items for the definitions needed.", "checked_evidence_ids": ["E1", "E2"],
+        "no_answer_reason": "Neither item provides a common-definition comparison."}]}])
+    h, store = make_harness(tmp_path, [], overrides={"respond": lambda _: next(replies)})
     inq = h.run(rounds=1)
     m = metrics(inq, inq.evaluation)
     assert m["counters_dropped"] == 2
@@ -686,9 +697,13 @@ def test_primary_sources_are_read_to_the_end_and_others_sampled():
     for q in ("authentic", "accuracy", "reading"):
         g.answer_cq(a.id, q, "ok")
     atk = g.add_attack(a.id, "undercut", premise_ids=[g.evidence[0].id], origin="critic")
+    atk.attacks.raises_cq = "definitions"
     ev = evaluate_move(inq)
     assert [x.id for x in standing_attacks(inq, ev)] == [atk.id]
-    llm2 = FakeLLM({"respond": {"responses": [{"attack_id": atk.id, "action": "concede", "note": "fair"}]}})
+    llm2 = FakeLLM({"respond": {"responses": [{"attack_id": atk.id, "action": "concede", "note": "fair",
+        "cq_id": "definitions", "discharge_attempt": "Checked the original report for the definitions needed.",
+        "checked_evidence_ids": [g.evidence[0].id],
+        "no_answer_reason": "The listed evidence does not reconcile the competing definitions."}]}})
     first = respond(inq, llm2)
     assert first["conceded"] == [atk.id] and atk.note.count(CONCEDED_MARK) == 1
     second = respond(inq, llm2)

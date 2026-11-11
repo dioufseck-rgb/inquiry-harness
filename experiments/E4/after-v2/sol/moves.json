@@ -1,0 +1,313 @@
+{
+  "move": "respond",
+  "run_id": "health-aspirin-tonight-openai-t7",
+  "n_requested": 3,
+  "input_sha256": "c2afcf03266a826c1cecc7a65f6d1eda068172a8b88dab2164c916dfd6a64d9e",
+  "preparation": {
+    "projection": "respond",
+    "historical_snapshot": false,
+    "dispositions_reset": true
+  },
+  "samples": [
+    {
+      "sample": 1,
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "tokens_in": 44715,
+      "tokens_out": 866,
+      "cost_usd": 0.120446,
+      "api_calls": 1,
+      "seconds": 20.88,
+      "metrics": {
+        "concede": 1,
+        "discharge": 1,
+        "counter": 2,
+        "counters_applicable": 2,
+        "concessions_justified": 1,
+        "rejected_concessions": 0,
+        "discharge_attempts": 2
+      },
+      "raw_metrics": {},
+      "move_summary": {
+        "conceded": [
+          "A25"
+        ],
+        "countered": [
+          "A28",
+          "A29"
+        ],
+        "discharged": [
+          "A24"
+        ],
+        "dropped": [],
+        "counter_drops": [],
+        "rejected_concessions": [],
+        "concessions_justified": [
+          "A25"
+        ],
+        "discharge_attempts": [
+          {
+            "attack_id": "A24",
+            "cq_ids": [
+              "consistency"
+            ],
+            "checked_evidence_ids": [
+              "E101",
+              "E142",
+              "E143",
+              "E153"
+            ],
+            "attempt": "Dose, age, follow-up, and stroke-classification limitations remain important restrictions on application, but C29 does not assert an exclusively age-60-plus daily-low-dose effect or a uniformly classified ischemic-stroke endpoint.",
+            "round": 2
+          },
+          {
+            "attack_id": "A25",
+            "cq_id": "consistency",
+            "checked_evidence_ids": [
+              "E28",
+              "E34",
+              "E49",
+              "E153",
+              "E155",
+              "E129"
+            ],
+            "attempt": "Checked the pooled nonfatal-MI result and heterogeneity, the older-adult trial estimate, the other MI synthesis, and the available age-interaction summary for an explanation of variation across trials.",
+            "no_answer_reason": "E34 documents substantial heterogeneity without explaining it. E49 concerns fatal or nonfatal MI and has a wide interval, E153 supports an average nonfatal-MI reduction, and E155 supplies no precise age-interaction estimates. E129 reports an uncertain result in diabetic populations. Neither these items nor the remaining listed evidence resolves whether age, population, regimen, or other trial differences explain the heterogeneity.",
+            "round": 2
+          }
+        ],
+        "standing": 4,
+        "new": 4,
+        "counters_dropped": 0,
+        "counters_dropped_reasons": {},
+        "dispositions": {
+          "A23": "counter",
+          "A24": "discharge",
+          "A25": "concede",
+          "A27": "counter"
+        }
+      },
+      "error": "",
+      "graph": "sample-001\\inquiry.json",
+      "graph_sha256": "ad96bf834169cf9dd1d8747dc500fe593624d741aae8a003dbb0b36455895431",
+      "references_valid": true
+    },
+    {
+      "sample": 2,
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "tokens_in": 44715,
+      "tokens_out": 873,
+      "cost_usd": 0.0132072,
+      "api_calls": 1,
+      "seconds": 21.23,
+      "metrics": {
+        "concede": 1,
+        "discharge": 1,
+        "counter": 2,
+        "counters_applicable": 2,
+        "concessions_justified": 1,
+        "rejected_concessions": 0,
+        "discharge_attempts": 2
+      },
+      "raw_metrics": {},
+      "move_summary": {
+        "conceded": [
+          "A25"
+        ],
+        "countered": [
+          "A28",
+          "A29"
+        ],
+        "discharged": [
+          "A24"
+        ],
+        "dropped": [],
+        "counter_drops": [],
+        "rejected_concessions": [],
+        "concessions_justified": [
+          "A25"
+        ],
+        "discharge_attempts": [
+          {
+            "attack_id": "A24",
+            "cq_ids": [
+              "consistency"
+            ],
+            "checked_evidence_ids": [
+              "E101",
+              "E142",
+              "E143",
+              "E153"
+            ],
+            "attempt": "This answers the raised consistency question without claiming an age-60-plus daily-dose effect; the dose, duration, and stroke-classification limitations remain explicit restrictions on application.",
+            "round": 2
+          },
+          {
+            "attack_id": "A25",
+            "cq_id": "consistency",
+            "checked_evidence_ids": [
+              "E28",
+              "E34",
+              "E49",
+              "E153",
+              "E155",
+              "E129"
+            ],
+            "attempt": "Checked the pooled nonfatal-MI result and heterogeneity, the older-adult trial estimate, and the additional low-dose synthesis and age-interaction summary for evidence explaining or resolving the between-trial variation.",
+            "no_answer_reason": "E34 reports substantial heterogeneity without an explanation, and E49 concerns fatal or nonfatal MI rather than exactly the pooled nonfatal endpoint. E153 supports an average low-dose benefit but does not resolve heterogeneity; E155 provides no sufficiently precise age interactions, and E129 concerns a restricted diabetic population. The remaining listed evidence does not supply an aligned age-specific analysis explaining the variation.",
+            "round": 2
+          }
+        ],
+        "standing": 4,
+        "new": 4,
+        "counters_dropped": 0,
+        "counters_dropped_reasons": {},
+        "dispositions": {
+          "A23": "counter",
+          "A24": "discharge",
+          "A25": "concede",
+          "A27": "counter"
+        }
+      },
+      "error": "",
+      "graph": "sample-002\\inquiry.json",
+      "graph_sha256": "f08b5c1894a10a4392f42930cd990e3993ebdf49c4d7251c2d7c5fa2eee3db20",
+      "references_valid": true
+    },
+    {
+      "sample": 3,
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "tokens_in": 44715,
+      "tokens_out": 877,
+      "cost_usd": 0.0132472,
+      "api_calls": 1,
+      "seconds": 21.39,
+      "metrics": {
+        "concede": 1,
+        "discharge": 1,
+        "counter": 2,
+        "counters_applicable": 2,
+        "concessions_justified": 1,
+        "rejected_concessions": 0,
+        "discharge_attempts": 2
+      },
+      "raw_metrics": {},
+      "move_summary": {
+        "conceded": [
+          "A25"
+        ],
+        "countered": [
+          "A28",
+          "A29"
+        ],
+        "discharged": [
+          "A24"
+        ],
+        "dropped": [],
+        "counter_drops": [],
+        "rejected_concessions": [],
+        "concessions_justified": [
+          "A25"
+        ],
+        "discharge_attempts": [
+          {
+            "attack_id": "A24",
+            "cq_ids": [
+              "consistency"
+            ],
+            "checked_evidence_ids": [
+              "E101",
+              "E142",
+              "E143",
+              "E153"
+            ],
+            "attempt": "This answers the alleged inconsistency, not the transportability problem: E6 and E23 remain limitations on interpreting the review's stroke endpoint, and C29 must not be presented as an age-specific daily-low-dose estimate.",
+            "round": 2
+          },
+          {
+            "attack_id": "A25",
+            "cq_id": "consistency",
+            "checked_evidence_ids": [
+              "E28",
+              "E34",
+              "E49",
+              "E153",
+              "E155",
+              "E129"
+            ],
+            "attempt": "Checked the pooled nonfatal-MI result and heterogeneity, the older-adult MI estimate, other pooled MI evidence, and the synthesis of age interactions for evidence explaining the between-trial variation.",
+            "no_answer_reason": "E153 corroborates an average MI benefit and E155 reports no statistically established age interaction, but neither explains the substantial heterogeneity in E34. E49 concerns fatal or nonfatal MI rather than precisely the pooled nonfatal endpoint, and E129 concerns diabetic populations; neither supplies a harmonized age-specific analysis resolving the variation. The remaining listed evidence does not provide that analysis.",
+            "round": 2
+          }
+        ],
+        "standing": 4,
+        "new": 4,
+        "counters_dropped": 0,
+        "counters_dropped_reasons": {},
+        "dispositions": {
+          "A23": "counter",
+          "A24": "discharge",
+          "A25": "concede",
+          "A27": "counter"
+        }
+      },
+      "error": "",
+      "graph": "sample-003\\inquiry.json",
+      "graph_sha256": "08df5bc33674bd694f74000e5414eb3a2f8213cf88298f29dc7d18f585a41da6",
+      "references_valid": true
+    }
+  ],
+  "skill_sha256": "adde32ceabfa20e7a58cb2d9fcbeeac589485bbcd2b7c1c2c900a86ebc35e5da",
+  "provider": "openai",
+  "model": "gpt-6.1-sol",
+  "effort": "medium",
+  "aggregate": {
+    "concede": {
+      "mean": 1,
+      "min": 1,
+      "max": 1,
+      "n": 3
+    },
+    "concessions_justified": {
+      "mean": 1,
+      "min": 1,
+      "max": 1,
+      "n": 3
+    },
+    "counter": {
+      "mean": 2,
+      "min": 2,
+      "max": 2,
+      "n": 3
+    },
+    "counters_applicable": {
+      "mean": 2,
+      "min": 2,
+      "max": 2,
+      "n": 3
+    },
+    "discharge": {
+      "mean": 1,
+      "min": 1,
+      "max": 1,
+      "n": 3
+    },
+    "discharge_attempts": {
+      "mean": 2,
+      "min": 2,
+      "max": 2,
+      "n": 3
+    },
+    "rejected_concessions": {
+      "mean": 0,
+      "min": 0,
+      "max": 0,
+      "n": 3
+    }
+  }
+}

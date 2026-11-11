@@ -1,0 +1,176 @@
+{
+  "move": "respond",
+  "run_id": "health-aspirin-tonight-openai-t7",
+  "n_requested": 3,
+  "input_sha256": "f788232c790b296ffc3e1cf1200caadd38d9762864ca431579666a03c000ff56",
+  "preparation": {
+    "projection": "respond",
+    "historical_snapshot": false,
+    "dispositions_reset": true
+  },
+  "samples": [
+    {
+      "sample": 1,
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "tokens_in": 45686,
+      "tokens_out": 1154,
+      "cost_usd": 0.1257535,
+      "api_calls": 1,
+      "seconds": 24.27,
+      "metrics": {
+        "concede": 2,
+        "discharge": 3,
+        "counter": 0,
+        "counters_applicable": 0,
+        "concessions_justified": 0
+      },
+      "raw_metrics": {},
+      "move_summary": {
+        "conceded": [
+          "A24",
+          "A25"
+        ],
+        "countered": [],
+        "discharged": [
+          "A22",
+          "A23",
+          "A26"
+        ],
+        "dropped": [
+          "discharge A27: no critical question answered with evidence in the graph"
+        ],
+        "counters_dropped": 0,
+        "counters_dropped_reasons": {},
+        "counter_drops": [],
+        "standing": 6,
+        "new": 6
+      },
+      "error": "",
+      "graph": "sample-001\\inquiry.json",
+      "graph_sha256": "f3ab724d32580ab90366a28c143b15002d9cb24fe23f07014cf9044aac58b08b",
+      "references_valid": true
+    },
+    {
+      "sample": 2,
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "tokens_in": 45686,
+      "tokens_out": 1021,
+      "cost_usd": 0.014784299999999998,
+      "api_calls": 1,
+      "seconds": 22.28,
+      "metrics": {
+        "concede": 3,
+        "discharge": 3,
+        "counter": 0,
+        "counters_applicable": 0,
+        "concessions_justified": 0
+      },
+      "raw_metrics": {},
+      "move_summary": {
+        "conceded": [
+          "A24",
+          "A25",
+          "A27"
+        ],
+        "countered": [],
+        "discharged": [
+          "A22",
+          "A23",
+          "A26"
+        ],
+        "dropped": [],
+        "counters_dropped": 0,
+        "counters_dropped_reasons": {},
+        "counter_drops": [],
+        "standing": 6,
+        "new": 6
+      },
+      "error": "",
+      "graph": "sample-002\\inquiry.json",
+      "graph_sha256": "4addc3be502acfecfd1804a90d5fc5bb708dd06a3ec5b3ad11eb2607fea15ce6",
+      "references_valid": true
+    },
+    {
+      "sample": 3,
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "tokens_in": 45686,
+      "tokens_out": 991,
+      "cost_usd": 0.014484299999999999,
+      "api_calls": 1,
+      "seconds": 24.23,
+      "metrics": {
+        "concede": 4,
+        "discharge": 2,
+        "counter": 0,
+        "counters_applicable": 0,
+        "concessions_justified": 0
+      },
+      "raw_metrics": {},
+      "move_summary": {
+        "conceded": [
+          "A24",
+          "A25",
+          "A26",
+          "A27"
+        ],
+        "countered": [],
+        "discharged": [
+          "A22",
+          "A23"
+        ],
+        "dropped": [],
+        "counters_dropped": 0,
+        "counters_dropped_reasons": {},
+        "counter_drops": [],
+        "standing": 6,
+        "new": 6
+      },
+      "error": "",
+      "graph": "sample-003\\inquiry.json",
+      "graph_sha256": "f8fecdf693d04ead0ab3c2f53f7b43cc4da257c0bd501bf694af62c17c00f80b",
+      "references_valid": true
+    }
+  ],
+  "skill_sha256": "50976331818926c389c191baf3918ffae139ea3b43b5efa621ba20d0973757f5",
+  "provider": "openai",
+  "model": "gpt-6.1-sol",
+  "effort": "medium",
+  "aggregate": {
+    "concede": {
+      "mean": 3,
+      "min": 2,
+      "max": 4,
+      "n": 3
+    },
+    "concessions_justified": {
+      "mean": 0,
+      "min": 0,
+      "max": 0,
+      "n": 3
+    },
+    "counter": {
+      "mean": 0,
+      "min": 0,
+      "max": 0,
+      "n": 3
+    },
+    "counters_applicable": {
+      "mean": 0,
+      "min": 0,
+      "max": 0,
+      "n": 3
+    },
+    "discharge": {
+      "mean": 2.6666666666666665,
+      "min": 2,
+      "max": 3,
+      "n": 3
+    }
+  }
+}

@@ -24,6 +24,9 @@ discharge, counter, or concede.
    says the estimate has no external control, and another item from the
    same report describes the control belt; the critic says the definition
    changed, and an errata reconciles the two.
+   An attack with no valid named CQ cannot be discharged by writing an
+   unrelated CQ answer. The view identifies these cases: use a grounded
+   counter if the criticism does not apply, or justify a concession.
 3. **Counter** when the critic's own grounds are the problem rather than
    your argument: the item the critic cites is misread, superseded, about a
    different period, or from a source already undermined. A counter is an
@@ -31,9 +34,16 @@ discharge, counter, or concede.
    the attacked argument's own premises unless they really do answer the
    point; a counter grounded on nothing new is a bare denial and will be
    discarded.
-4. **Concede** when the evidence does not answer the concern. Say in `note`
-   what would. A concession costs nothing now and keeps the record honest;
-   the next round's plan will see it.
+4. **Concede** only after attempting discharge against the listed evidence.
+   Name the valid raised critical question in `cq_id` (allowed IDs are shown
+   per attack), record what you checked in `discharge_attempt` and
+   `checked_evidence_ids`, and explain in `no_answer_reason` why those items
+   and the other listed evidence do not answer it. Say in `note` what would.
+   A concern being reasonable is not enough to concede: look for evidence
+   that addresses it, and distinguish an answer already in the packet from
+   new information that would have to be obtained. The code rejects missing
+   or invalid justifications and requests one correction. It records the
+   discharge attempt before accepting a concession.
 5. Never respond by restating the attacked argument, by asserting that the
    critic is wrong, or by citing an evidence id that does not say what you
    need. The critic reads your responses next round and will undercut a
@@ -51,7 +61,11 @@ Return one JSON object and nothing else:
      "note": "E22 gives the definition used in both years"},
     {"attack_id": "A8", "action": "counter", "premise_ids": ["E30"],
      "note": "why E30 shows the critic's grounds do not hold"},
-    {"attack_id": "A9", "action": "concede", "note": "what would answer it"}
+    {"attack_id": "A9", "action": "concede", "cq_id": "definitions",
+     "discharge_attempt": "Checked the original and comparison definitions for an exact reconciliation.",
+     "checked_evidence_ids": ["E3", "E7"],
+     "no_answer_reason": "Both definitions are listed, but no item supplies the crosswalk needed to compare them.",
+     "note": "A reconciled series would answer this question."}
   ]
 }
 ```

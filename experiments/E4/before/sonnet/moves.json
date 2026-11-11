@@ -1,0 +1,174 @@
+{
+  "move": "respond",
+  "run_id": "health-aspirin-tonight-openai-t7",
+  "n_requested": 3,
+  "input_sha256": "f788232c790b296ffc3e1cf1200caadd38d9762864ca431579666a03c000ff56",
+  "preparation": {
+    "projection": "respond",
+    "historical_snapshot": false,
+    "dispositions_reset": true
+  },
+  "samples": [
+    {
+      "sample": 1,
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "tokens_in": 75939,
+      "tokens_out": 1082,
+      "cost_usd": 0.1631805,
+      "api_calls": 1,
+      "seconds": 9.44,
+      "metrics": {
+        "concede": 5,
+        "discharge": 1,
+        "counter": 0,
+        "counters_applicable": 0,
+        "concessions_justified": 0
+      },
+      "raw_metrics": {},
+      "move_summary": {
+        "conceded": [
+          "A22",
+          "A23",
+          "A24",
+          "A25",
+          "A27"
+        ],
+        "countered": [],
+        "discharged": [
+          "A26"
+        ],
+        "dropped": [],
+        "counters_dropped": 0,
+        "counters_dropped_reasons": {},
+        "counter_drops": [],
+        "standing": 6,
+        "new": 6
+      },
+      "error": "",
+      "graph": "sample-001\\inquiry.json",
+      "graph_sha256": "dfeb83ebddd36fcfd665fcc01ad46b4957716465ab53e547f37ef9f8b0d43e6a",
+      "references_valid": true
+    },
+    {
+      "sample": 2,
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "tokens_in": 75939,
+      "tokens_out": 984,
+      "cost_usd": 0.1598845,
+      "api_calls": 1,
+      "seconds": 8.89,
+      "metrics": {
+        "concede": 5,
+        "discharge": 1,
+        "counter": 0,
+        "counters_applicable": 0,
+        "concessions_justified": 0
+      },
+      "raw_metrics": {},
+      "move_summary": {
+        "conceded": [
+          "A22",
+          "A23",
+          "A24",
+          "A25",
+          "A27"
+        ],
+        "countered": [],
+        "discharged": [
+          "A26"
+        ],
+        "dropped": [],
+        "counters_dropped": 0,
+        "counters_dropped_reasons": {},
+        "counter_drops": [],
+        "standing": 6,
+        "new": 6
+      },
+      "error": "",
+      "graph": "sample-002\\inquiry.json",
+      "graph_sha256": "dc84df9dddcf5fe770c32239c1e6ee846319cbe1adb83afb3b83b00faaa8e847",
+      "references_valid": true
+    },
+    {
+      "sample": 3,
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "tokens_in": 75939,
+      "tokens_out": 907,
+      "cost_usd": 0.1591145,
+      "api_calls": 1,
+      "seconds": 7.23,
+      "metrics": {
+        "concede": 6,
+        "discharge": 0,
+        "counter": 0,
+        "counters_applicable": 0,
+        "concessions_justified": 0
+      },
+      "raw_metrics": {},
+      "move_summary": {
+        "conceded": [
+          "A22",
+          "A23",
+          "A24",
+          "A25",
+          "A26",
+          "A27"
+        ],
+        "countered": [],
+        "discharged": [],
+        "dropped": [],
+        "counters_dropped": 0,
+        "counters_dropped_reasons": {},
+        "counter_drops": [],
+        "standing": 6,
+        "new": 6
+      },
+      "error": "",
+      "graph": "sample-003\\inquiry.json",
+      "graph_sha256": "10c80124a3b93aae363c24cb0773d1ada2d38d94f72cdaebdc7b02e0ee08d24c",
+      "references_valid": true
+    }
+  ],
+  "skill_sha256": "50976331818926c389c191baf3918ffae139ea3b43b5efa621ba20d0973757f5",
+  "provider": "anthropic",
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "aggregate": {
+    "concede": {
+      "mean": 5.333333333333333,
+      "min": 5,
+      "max": 6,
+      "n": 3
+    },
+    "concessions_justified": {
+      "mean": 0,
+      "min": 0,
+      "max": 0,
+      "n": 3
+    },
+    "counter": {
+      "mean": 0,
+      "min": 0,
+      "max": 0,
+      "n": 3
+    },
+    "counters_applicable": {
+      "mean": 0,
+      "min": 0,
+      "max": 0,
+      "n": 3
+    },
+    "discharge": {
+      "mean": 0.6666666666666666,
+      "min": 0,
+      "max": 1,
+      "n": 3
+    }
+  }
+}

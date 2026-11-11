@@ -289,10 +289,11 @@ def move_metrics(inq: Inquiry, move: str, summary: dict, llm: RecordingLLM,
     elif move == "respond":
         responses = [r for p in proposals for r in p.get("responses", [])]
         counters = [g.arg(aid) for aid in summary.get("countered", [])]
-        m = {"concede": len(summary.get("conceded", [])), "discharge": len(summary.get("discharged", [])),
+        m = {"concede": len(summary.get("conceded", [])), "discharge": len(set(summary.get("discharged", []))),
              "counter": len(counters), "counters_applicable": sum(ev.applicable.get(a.id, False) for a in counters if a),
-             "concessions_justified": sum(r.get("action") == "concede" and bool(r.get("cq_id"))
-                 and bool(r.get("discharge_attempt")) and len(r.get("note", "")) >= 20 for r in responses)}
+             "concessions_justified": len(summary.get("concessions_justified", [])),
+             "rejected_concessions": len(summary.get("rejected_concessions", [])),
+             "discharge_attempts": len(summary.get("discharge_attempts", []))}
     else:
         evidence = [e for e in g.evidence if e.source_id == source_id]
         normal = lambda s: " ".join(s.casefold().split())
