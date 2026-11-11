@@ -1,6 +1,5 @@
 {
-  "status": "awaiting_explicit_payload_approval",
-  "api_calls": 0,
+  "status": "aspirin_completed_energy_authorized",
   "prepared_from_commit": "b2bcb4b3b903c87a7bc61e6d7f678799c834de1e",
   "budget_limits_usd": {
     "anthropic": 12,
@@ -267,5 +266,30 @@
       ],
       "transmitted_data": "Question/frame, cached source-text appraisal chunks, evidence, scopes, arguments, critiques and evolving inquiry state. No environment variables or API keys in model prompts."
     }
-  ]
+  ],
+  "authorization": {
+    "user_reply": "Approve C3, aspirin E7, and optional Energy",
+    "date": "2026-11-11",
+    "payloads": "saved frames, cached source texts, evolving inquiry graphs",
+    "providers": [
+      "anthropic:claude-sonnet-5-5",
+      "openai:gpt-6.1-sol"
+    ],
+    "optional_energy": true
+  },
+  "api_calls_at_preparation": 0,
+  "aspirin_results": {
+    "sonnet": {
+      "metrics_path": "experiments/E7/sonnet/metrics.json",
+      "whole_question_answered": false,
+      "composed_claims": 0,
+      "error": null
+    },
+    "sol": {
+      "metrics_path": "experiments/E7/sol/metrics.json",
+      "whole_question_answered": false,
+      "composed_claims": 0,
+      "error": null
+    }
+  }
 }

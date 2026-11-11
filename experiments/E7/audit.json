@@ -1,0 +1,68 @@
+{
+  "runs": [
+    {
+      "name": "sonnet",
+      "status": "recorded",
+      "checks": {
+        "references": true,
+        "ledger": true,
+        "final_state_anchor": true,
+        "packet_matches_plan": true,
+        "packet_manifest_intact": true,
+        "usage_count": true,
+        "costs_reconcile": true,
+        "new_move_order": true,
+        "capped_pass_at_most_one": true,
+        "closure_matches_graph": true,
+        "no_live_retrieval": true,
+        "no_opus": true,
+        "scope_fields_nonempty": true
+      },
+      "all_integrity_checks_pass": true,
+      "rounds": 2,
+      "error": null,
+      "composed_claims": 0,
+      "composition_accepted": 0,
+      "whole_question_answered": false
+    },
+    {
+      "name": "sol",
+      "status": "recorded",
+      "checks": {
+        "references": true,
+        "ledger": true,
+        "final_state_anchor": true,
+        "packet_matches_plan": true,
+        "packet_manifest_intact": true,
+        "usage_count": true,
+        "costs_reconcile": true,
+        "new_move_order": true,
+        "capped_pass_at_most_one": true,
+        "closure_matches_graph": true,
+        "no_live_retrieval": true,
+        "no_opus": true,
+        "scope_fields_nonempty": true
+      },
+      "all_integrity_checks_pass": true,
+      "rounds": 2,
+      "error": null,
+      "composed_claims": 0,
+      "composition_accepted": 0,
+      "whole_question_answered": false
+    },
+    {
+      "name": "energy",
+      "status": "not complete"
+    }
+  ],
+  "budget": {
+    "totals_reconcile": true,
+    "within_caps": true,
+    "pending_calls": 0
+  },
+  "spent": {
+    "anthropic": 1.3877730000000001,
+    "openai": 1.8174228000000001
+  },
+  "calls": 76
+}
