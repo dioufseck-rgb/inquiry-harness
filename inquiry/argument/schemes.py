@@ -346,6 +346,24 @@ _register(Scheme(
 ))
 
 
+_register(Scheme(
+    name="composition", title="Composition of component findings",
+    description="Accepted component findings support a parent finding at their shared scope.",
+    premises=["Accepted claims on sub-issues or narrower-scope claims on the parent issue"],
+    conclusion="A claim on the parent issue at the scope the premises share",
+    default_strength="moderate",
+    critical_questions=[
+        _cq("same_scope", "Do the components share population, comparison and period? (checked by code)", "assumption", "inference", ["Scientific Explanation"]),
+        _cq("commensurable", "Are the components in comparable units, or converted with a stated rule?", "assumption", "inference", ["Scientific Explanation"]),
+        _cq("direction", "Does the balance of components yield the stated relation?", "assumption", "inference", ["Scientific Explanation"]),
+        _cq("complete", "Is a component that could dominate the balance omitted?", "exception", "inference", ["Scientific Explanation"]),
+        _cq("no_double_count", "Does any outcome appear in more than one component?", "exception", "inference", ["Scientific Explanation"]),
+    ],
+    sep=["Scientific Explanation"],
+    stance="A composed claim is accepted only at the scope its components share; it never extends past them.",
+))
+
+
 def scheme(name: str) -> Scheme:
     return SCHEMES[name]
 

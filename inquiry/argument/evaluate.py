@@ -40,6 +40,7 @@ from .graph import (
     STRENGTH_ORDER, Argument, ArgumentGraph, Claim, ProofStandard, Status, Strength,
 )
 from .schemes import SCHEMES
+from .scope import canonical, sub_scope
 
 _LEVEL = {1: "weak", 2: "moderate", 3: "strong"}
 
@@ -90,8 +91,13 @@ class Evaluation(BaseModel):
 # Strength
 # ---------------------------------------------------------------------------
 
-def argument_strength(g: ArgumentGraph, a: Argument) -> Strength:
+def argument_strength(g: ArgumentGraph, a: Argument, details: dict[str, ClaimDetail] | None = None) -> Strength:
     base = STRENGTH_ORDER[a.strength_override or SCHEMES[a.scheme].default_strength]
+    if a.scheme == "composition" and details and a.premise_ids:
+        base = min((details[pid].pro_strength if pid in details else 0) for pid in a.premise_ids)
+        base = max(1, base)
+        if a.strength_override:
+            base = min(base, STRENGTH_ORDER[a.strength_override])
     for pid in a.premise_ids:
         e = g.ev(pid)
         if e is not None:
@@ -103,16 +109,22 @@ def argument_strength(g: ArgumentGraph, a: Argument) -> Strength:
     return _LEVEL[base]  # type: ignore[return-value]
 
 
-def argument_origins(g: ArgumentGraph, a: Argument) -> set[str]:
+def argument_origins(g: ArgumentGraph, a: Argument, _seen: set[str] | None = None,
+                     labels: dict[str, Status] | None = None) -> set[str]:
     """
     Origins of the evidence an argument rests on. A derivative source that
     does not name its origin contributes none: it repeats something, and we
     do not know what, so it cannot corroborate anything.
     """
     out: set[str] = set()
+    seen = (_seen or set()) | {a.id}
     for pid in a.premise_ids:
         e = g.ev(pid)
         if e is None:
+            if a.scheme == "composition" and g.claim(pid):
+                for support in g.arguments_for(pid):
+                    if support.id not in seen and not support.withdrawn and (labels is None or labels.get(support.id) == "in"):
+                        out.update(argument_origins(g, support, seen, labels))
             continue
         o = g.evidence_origin(e)
         if o is not None:
@@ -290,9 +302,12 @@ def _claim_pass(g: ArgumentGraph, labels: dict[str, Status], strengths: dict[str
             con.extend(in_support(other))
         pro_s = max((STRENGTH_ORDER[strengths[a.id]] for a in pro), default=0)
         con_s = max((STRENGTH_ORDER[strengths[a.id]] for a in con), default=0)
-        corroborated = _corroborated({a.id: argument_origins(g, a) for a in pro})
+        corroborated = _corroborated({a.id: argument_origins(g, a, labels=labels) for a in pro})
         if corroborated and pro_s:
             pro_s = min(3, pro_s + 1)
+        if pro and all(a.scheme == "composition" for a in pro):
+            # Recombining the same findings cannot amplify their strength.
+            pro_s = max(STRENGTH_ORDER[strengths[a.id]] for a in pro)
         standard = g.standard_for(c)
         met = _meets(standard, pro_s, con_s, len(pro))
         details[c.id] = ClaimDetail(
@@ -320,8 +335,35 @@ def _claim_pass(g: ArgumentGraph, labels: dict[str, Status], strengths: dict[str
 # Main entry
 # ---------------------------------------------------------------------------
 
+def check_composition_scope(g: ArgumentGraph, a: Argument) -> bool:
+    """Project different outcomes onto the conclusion, then forbid extrapolation.
+
+    Sub-scope alone would permit 70+ premises to license 60+. Composition
+    instead requires equality on the dimensions shared by the components.
+    """
+    conclusion = g.claim(a.claim_id)
+    components = [g.claim(pid) for pid in a.premise_ids]
+    valid = conclusion is not None and len(components) >= 2 and all(components)
+    if valid:
+        for c in components:
+            projected = c.scope.model_copy(update={"outcome": conclusion.scope.outcome,
+                                                   "relation": conclusion.scope.relation})
+            valid = valid and sub_scope(projected, conclusion.scope) and all(
+                canonical(getattr(c.scope, field)) == canonical(getattr(conclusion.scope, field))
+                for field in ("population", "period", "comparison"))
+    outcome = "satisfied" if valid else "unsatisfied"
+    answer = "Components share the conclusion's population, comparison and period" if valid else "Components do not share the conclusion's scope; extrapolation is not licensed"
+    previous = a.cq.get("same_scope")
+    if previous is None or previous.outcome != outcome or previous.answer_move != "evaluate":
+        g.answer_cq(a.id, "same_scope", answer, outcome=outcome, answer_move="evaluate")
+    return bool(valid)
+
+
 def evaluate(g: ArgumentGraph, max_iter: int = 10) -> Evaluation:
     g.refresh_answerhood()
+    for a in g.arguments:
+        if a.scheme == "composition":
+            check_composition_scope(g, a)
     accepted: set[str] = set()
     strengths = {a.id: argument_strength(g, a) for a in g.arguments}
     applicable: dict[str, bool] = {}
@@ -337,6 +379,8 @@ def evaluate(g: ArgumentGraph, max_iter: int = 10) -> Evaluation:
                 and applicable_.get(a.id, False) and labels_.get(a.id) == "in" and not _discharged(g, a)}
 
     for _ in range(max_iter):
+        prior_strengths = strengths
+        strengths = {a.id: argument_strength(g, a, details) for a in g.arguments}
         # Label attacks before deriving reopenings; then re-evaluate targets.
         # Include reopenings in convergence so accepted-set stability cannot
         # prematurely stop a counterattack from restoring its target.
@@ -347,7 +391,8 @@ def evaluate(g: ArgumentGraph, max_iter: int = 10) -> Evaluation:
         labels = grounded_labelling(_attack_edges(g, applicable))
         details = _claim_pass(g, labels, strengths)
         new_accepted = {cid for cid, d in details.items() if d.status == "in"}
-        if new_accepted == accepted and next_reopened == reopened and reopenings(applicable, labels) == next_reopened:
+        if (new_accepted == accepted and strengths == prior_strengths and next_reopened == reopened
+                and reopenings(applicable, labels) == next_reopened):
             converged = True
             break
         accepted = new_accepted
