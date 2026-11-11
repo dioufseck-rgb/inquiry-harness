@@ -1,0 +1,250 @@
+{
+  "move": "critique",
+  "run_id": "health-aspirin-tonight-openai-t7",
+  "n_requested": 3,
+  "input_sha256": "ee706f903271d3b42d06952326b0db9f8df7daab5d542052024ae07cfa1dfc8a",
+  "preparation": {
+    "projection": "critique",
+    "historical_snapshot": false
+  },
+  "samples": [
+    {
+      "sample": 1,
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "tokens_in": 86450,
+      "tokens_out": 814,
+      "cost_usd": 0.17849020000000002,
+      "api_calls": 1,
+      "seconds": 8.22,
+      "metrics": {
+        "attacks": 3,
+        "attacks_applicable": 3,
+        "attacks_with_cq": 3,
+        "needs_obtainable": 3,
+        "needs_unobtainable": 1,
+        "needs_tags": [
+          {
+            "text": "Age-stratified (60\u201369 vs \u226570) individual-participant or subgroup results for MI, ischemic stroke, intracranial and extracranial bleeding from ASPREE, ARRIVE, JPPP and ASCEND",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "Patient-level ASPREE first-event composite of MACE plus major hemorrhage, deduplicated, with absolute five-year risk difference",
+            "tag": "unobtainable",
+            "tag_basis": "Patient-level"
+          },
+          {
+            "text": "Sensitivity of net benefit to severity weights (e.g., equal weights versus the 3x hemorrhagic-stroke weight) in older adults",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "Independent corroboration of ASPREE bleeding findings (S1, S4, S9 and S10\u2013S12 all trace to one trial)",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          }
+        ]
+      },
+      "raw_metrics": {},
+      "move_summary": {
+        "attacks": [
+          "A22",
+          "A23",
+          "A24"
+        ],
+        "dropped": [],
+        "absence_unverified": [],
+        "needed_evidence": [
+          "Age-stratified (60\u201369 vs \u226570) individual-participant or subgroup results for MI, ischemic stroke, intracranial and extracranial bleeding from ASPREE, ARRIVE, JPPP and ASCEND",
+          "Patient-level ASPREE first-event composite of MACE plus major hemorrhage, deduplicated, with absolute five-year risk difference",
+          "Sensitivity of net benefit to severity weights (e.g., equal weights versus the 3x hemorrhagic-stroke weight) in older adults",
+          "Independent corroboration of ASPREE bleeding findings (S1, S4, S9 and S10\u2013S12 all trace to one trial)"
+        ]
+      },
+      "error": "",
+      "graph": "sample-001\\inquiry.json",
+      "graph_sha256": "3a317f6b232d0b35e63a5fffe68410f72da8a4ec549f4b35741fa41a1097d095",
+      "references_valid": true
+    },
+    {
+      "sample": 2,
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "tokens_in": 86450,
+      "tokens_out": 1473,
+      "cost_usd": 0.1850802,
+      "api_calls": 1,
+      "seconds": 12.61,
+      "metrics": {
+        "attacks": 6,
+        "attacks_applicable": 6,
+        "attacks_with_cq": 5,
+        "needs_obtainable": 5,
+        "needs_unobtainable": 1,
+        "needs_tags": [
+          {
+            "text": "ASPREE and ASCEND patient-level or age-stratified results for ages 60\u201369 on MI, ischemic stroke, intracranial hemorrhage and major extracranial bleeding, with five-year absolute risks",
+            "tag": "unobtainable",
+            "tag_basis": "patient-level"
+          },
+          {
+            "text": "A deduplicated first-event composite (CV events plus major bleeding) for adults 60 and over, e.g. from ASPREE data on request (E62)",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "Sensitivity of net clinical benefit to alternative severity weights, including equal weights and QALY weights",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "JPPP age 60\u201385 bleeding and cardiovascular outcome results, and ARRIVE results restricted to age 60 and over",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "USPSTF modeling report with numeric QALY and life-year estimates by age and risk",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "Note on independence: E49 and E55 reproduce S1 and are not independent corroboration, and the S9 relays (S11, S12) repeat S9; ASPREE therefore supplies one trial's evidence, not several",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          }
+        ]
+      },
+      "raw_metrics": {},
+      "move_summary": {
+        "attacks": [
+          "A22",
+          "A23",
+          "A24",
+          "A25",
+          "A26",
+          "A27"
+        ],
+        "dropped": [],
+        "absence_unverified": [],
+        "needed_evidence": [
+          "ASPREE and ASCEND patient-level or age-stratified results for ages 60\u201369 on MI, ischemic stroke, intracranial hemorrhage and major extracranial bleeding, with five-year absolute risks",
+          "A deduplicated first-event composite (CV events plus major bleeding) for adults 60 and over, e.g. from ASPREE data on request (E62)",
+          "Sensitivity of net clinical benefit to alternative severity weights, including equal weights and QALY weights",
+          "JPPP age 60\u201385 bleeding and cardiovascular outcome results, and ARRIVE results restricted to age 60 and over",
+          "USPSTF modeling report with numeric QALY and life-year estimates by age and risk",
+          "Note on independence: E49 and E55 reproduce S1 and are not independent corroboration, and the S9 relays (S11, S12) repeat S9; ASPREE therefore supplies one trial's evidence, not several"
+        ]
+      },
+      "error": "",
+      "graph": "sample-002\\inquiry.json",
+      "graph_sha256": "b98d0d236d2adaf07635cf18a93ffbe8c77605be2d4ef1024ca20f15f98d516a",
+      "references_valid": true
+    },
+    {
+      "sample": 3,
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "tokens_in": 86450,
+      "tokens_out": 1029,
+      "cost_usd": 0.1806402,
+      "api_calls": 1,
+      "seconds": 8.83,
+      "metrics": {
+        "attacks": 4,
+        "attacks_applicable": 4,
+        "attacks_with_cq": 3,
+        "needs_obtainable": 4,
+        "needs_unobtainable": 1,
+        "needs_tags": [
+          {
+            "text": "ASPREE and ARRIVE/JPPP age-stratified results for ages 60-69 on first MI, ischemic stroke, CV death and major bleeding",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "Patient-level or deduplicated first-event composite of MACE plus major hemorrhage over a fixed 5 years in adults aged 60+",
+            "tag": "unobtainable",
+            "tag_basis": "Patient-level"
+          },
+          {
+            "text": "Sensitivity analysis of net benefit under alternative severity weights, including equal weights and QALY weights",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "JPPP bleeding outcomes and results for adults aged 60-85",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "Independent confirmation that ASPREE and ASCEND estimates repeated in S4, S6, S8, S10-S12 and S15 are not counted as separate sources (S4 reproduces S1; S10 relays S1; S11 and S12 relay S9; S6 and S8 relay S5; S15 relays S14)",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          }
+        ]
+      },
+      "raw_metrics": {},
+      "move_summary": {
+        "attacks": [
+          "A22",
+          "A23",
+          "A24",
+          "A25"
+        ],
+        "dropped": [],
+        "absence_unverified": [],
+        "needed_evidence": [
+          "ASPREE and ARRIVE/JPPP age-stratified results for ages 60-69 on first MI, ischemic stroke, CV death and major bleeding",
+          "Patient-level or deduplicated first-event composite of MACE plus major hemorrhage over a fixed 5 years in adults aged 60+",
+          "Sensitivity analysis of net benefit under alternative severity weights, including equal weights and QALY weights",
+          "JPPP bleeding outcomes and results for adults aged 60-85",
+          "Independent confirmation that ASPREE and ASCEND estimates repeated in S4, S6, S8, S10-S12 and S15 are not counted as separate sources (S4 reproduces S1; S10 relays S1; S11 and S12 relay S9; S6 and S8 relay S5; S15 relays S14)"
+        ]
+      },
+      "error": "",
+      "graph": "sample-003\\inquiry.json",
+      "graph_sha256": "d728a8d4602517ae828ed2ffb53b38c82da663cc9d19d0a000c0372dc249407d",
+      "references_valid": true
+    }
+  ],
+  "skill_sha256": "7caf3b149b8f4a4a48b455945c260ab3d856511b6890daabf4d9dc667d229d77",
+  "provider": "anthropic",
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "aggregate": {
+    "attacks": {
+      "mean": 4.333333333333333,
+      "min": 3,
+      "max": 6,
+      "n": 3
+    },
+    "attacks_applicable": {
+      "mean": 4.333333333333333,
+      "min": 3,
+      "max": 6,
+      "n": 3
+    },
+    "attacks_with_cq": {
+      "mean": 3.6666666666666665,
+      "min": 3,
+      "max": 5,
+      "n": 3
+    },
+    "needs_obtainable": {
+      "mean": 4,
+      "min": 3,
+      "max": 5,
+      "n": 3
+    },
+    "needs_unobtainable": {
+      "mean": 1,
+      "min": 1,
+      "max": 1,
+      "n": 3
+    }
+  }
+}

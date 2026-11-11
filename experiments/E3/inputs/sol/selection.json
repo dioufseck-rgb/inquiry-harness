@@ -1,0 +1,46 @@
+{
+  "source": "experiments\\E2\\after\\h1-claims\\sol\\sample-001\\inquiry.json",
+  "claims": "h1-claims",
+  "provider": "openai",
+  "model": "gpt-6.1-sol",
+  "effort": "medium",
+  "metrics": {
+    "supporting_args": 21,
+    "applicable_args": 21,
+    "claims_supported_unargued": 0,
+    "eligible_claims": [
+      "C18",
+      "C21",
+      "C22",
+      "C23",
+      "C25",
+      "C26",
+      "C27",
+      "C29",
+      "C31",
+      "C33",
+      "C34",
+      "C37",
+      "C5"
+    ],
+    "unusable_share": 0.0,
+    "unusable_items": 0,
+    "offered_evidence": 133,
+    "scoped_claims_proposed": 20,
+    "scoped_claims_added": 20,
+    "claims_with_reason": 3,
+    "ignored_unusable": 0,
+    "input_eligible_claims": [
+      "C10",
+      "C13",
+      "C14",
+      "C4",
+      "C5",
+      "C6",
+      "C8",
+      "C9"
+    ]
+  },
+  "graph_sha256": "3e9954187aacd69a92f83a97e0839083ccac3e7542c121bfc99da52143a60e69",
+  "criterion": "zero gaps, below-cap unusable, then most applicable arguments, most supporting arguments, claim-set name, sample number"
+}

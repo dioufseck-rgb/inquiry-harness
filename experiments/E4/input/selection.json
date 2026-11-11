@@ -1,0 +1,56 @@
+{
+  "source": "experiments\\E3\\runs\\sol\\sonnet\\sample-002\\inquiry.json",
+  "critic": {
+    "provider": "anthropic",
+    "model": "claude-sonnet-5-5",
+    "effort": "medium"
+  },
+  "metrics": {
+    "attacks": 6,
+    "attacks_applicable": 6,
+    "attacks_with_cq": 5,
+    "needs_obtainable": 4,
+    "needs_unobtainable": 1,
+    "needs_tags": [
+      {
+        "text": "ASPREE and ASCEND patient-level or age-stratified results for ages 60\u201369 on MI, ischemic stroke, intracranial hemorrhage and major extracranial bleeding, with five-year absolute risks",
+        "tag": "obtainable",
+        "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+        "native_tag": "unobtainable"
+      },
+      {
+        "text": "A deduplicated first-event composite (CV events plus major bleeding) for adults 60 and over, e.g. from ASPREE data on request (E62)",
+        "tag": "unobtainable",
+        "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+        "native_tag": "obtainable"
+      },
+      {
+        "text": "Sensitivity of net clinical benefit to alternative severity weights, including equal weights and QALY weights",
+        "tag": "obtainable",
+        "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+        "native_tag": "obtainable"
+      },
+      {
+        "text": "JPPP age 60\u201385 bleeding and cardiovascular outcome results, and ARRIVE results restricted to age 60 and over",
+        "tag": "obtainable",
+        "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+        "native_tag": "obtainable"
+      },
+      {
+        "text": "USPSTF modeling report with numeric QALY and life-year estimates by age and risk",
+        "tag": "obtainable",
+        "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+        "native_tag": "obtainable"
+      },
+      {
+        "text": "Note on independence: E49 and E55 reproduce S1 and are not independent corroboration, and the S9 relays (S11, S12) repeat S9; ASPREE therefore supplies one trial's evidence, not several",
+        "tag": "not_request",
+        "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+        "native_tag": "obtainable"
+      }
+    ],
+    "not_requests": 1
+  },
+  "graph_sha256": "b98d0d236d2adaf07635cf18a93ffbe8c77605be2d4ef1024ca20f15f98d516a",
+  "criterion": "most attacks, then most applicable attacks, manifest path, sample number"
+}

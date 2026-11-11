@@ -1,0 +1,253 @@
+{
+  "move": "critique",
+  "run_id": "health-aspirin-tonight-openai-t7",
+  "n_requested": 3,
+  "input_sha256": "b999a077a5c71bf919d37d749d99b0ff057e6520f778828a80e7301dfb5488b2",
+  "preparation": {
+    "projection": "critique",
+    "historical_snapshot": false
+  },
+  "samples": [
+    {
+      "sample": 1,
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "tokens_in": 52143,
+      "tokens_out": 1134,
+      "cost_usd": 0.141696,
+      "api_calls": 1,
+      "seconds": 26.09,
+      "metrics": {
+        "attacks": 3,
+        "attacks_applicable": 3,
+        "attacks_with_cq": 3,
+        "needs_obtainable": 5,
+        "needs_unobtainable": 0,
+        "needs_tags": [
+          {
+            "text": "ASPREE 2023 stroke and intracranial bleeding secondary analysis: five-year intracranial-bleeding absolute risk difference and confidence interval, accounting for competing death; determine whether its lower confidence bound exceeds 0.5 per 1,000.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "Low-dose aspirin primary prevention randomized trials or individual-participant meta-analysis: intracranial bleeding absolute effects separately for ages 60\u201369 and 70+, with aligned five-year follow-up and age interaction estimates.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "USPSTF 2022 aspirin recommendation summary table documenting the Grade D recommendation at age 60+, and ACC/AHA 2019 primary prevention guideline aspirin recommendation table documenting age thresholds, bleeding-risk exclusions, and recommendation classes. The currently accepted C21 includes these recommendations, but A16 supplies their proposed evidentiary basis rather than the recommendation records.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "USPSTF 2022 commissioned aspirin decision analysis: numerical lifetime QALY and life-year results for initiation at ages 60\u201369 by cardiovascular and bleeding risk, including parameter uncertainty and sensitivity analyses testing whether positive subgroup estimates are robust.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "Independence note: E98, E105, and E106 are presentations of the same ASPREE analysis, not independent replications. S1, the reproduced in-trial results in S4, and S9 also share the ASPREE randomized cohort. USPSTF trial syntheses and the meta-analyses may reuse those trials; check trial-level overlap before counting independent corroboration.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          }
+        ]
+      },
+      "raw_metrics": {},
+      "move_summary": {
+        "attacks": [
+          "A17",
+          "A18",
+          "A19"
+        ],
+        "dropped": [],
+        "absence_unverified": [],
+        "needed_evidence": [
+          "ASPREE 2023 stroke and intracranial bleeding secondary analysis: five-year intracranial-bleeding absolute risk difference and confidence interval, accounting for competing death; determine whether its lower confidence bound exceeds 0.5 per 1,000.",
+          "Low-dose aspirin primary prevention randomized trials or individual-participant meta-analysis: intracranial bleeding absolute effects separately for ages 60\u201369 and 70+, with aligned five-year follow-up and age interaction estimates.",
+          "USPSTF 2022 aspirin recommendation summary table documenting the Grade D recommendation at age 60+, and ACC/AHA 2019 primary prevention guideline aspirin recommendation table documenting age thresholds, bleeding-risk exclusions, and recommendation classes. The currently accepted C21 includes these recommendations, but A16 supplies their proposed evidentiary basis rather than the recommendation records.",
+          "USPSTF 2022 commissioned aspirin decision analysis: numerical lifetime QALY and life-year results for initiation at ages 60\u201369 by cardiovascular and bleeding risk, including parameter uncertainty and sensitivity analyses testing whether positive subgroup estimates are robust.",
+          "Independence note: E98, E105, and E106 are presentations of the same ASPREE analysis, not independent replications. S1, the reproduced in-trial results in S4, and S9 also share the ASPREE randomized cohort. USPSTF trial syntheses and the meta-analyses may reuse those trials; check trial-level overlap before counting independent corroboration."
+        ]
+      },
+      "error": "",
+      "graph": "sample-001\\inquiry.json",
+      "graph_sha256": "48529a55e8ee7b3b3df4aaab6d71e78622f86372d57c4f2a4acee29926edff1a",
+      "references_valid": true
+    },
+    {
+      "sample": 2,
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "tokens_in": 52143,
+      "tokens_out": 1312,
+      "cost_usd": 0.01834,
+      "api_calls": 1,
+      "seconds": 35.47,
+      "metrics": {
+        "attacks": 3,
+        "attacks_applicable": 3,
+        "attacks_with_cq": 3,
+        "needs_obtainable": 5,
+        "needs_unobtainable": 0,
+        "needs_tags": [
+          {
+            "text": "ASPREE 2023 JAMA Network Open secondary analysis, intracranial bleeding Table and Figure 3: obtain participant-age-specific absolute effects and confidence intervals, and a five-year cumulative-risk difference, to test whether the excess is at least 0.5 per 1,000 rather than merely greater than zero.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "USPSTF 2022 commissioned aspirin decision analysis: extract numerical lifetime QALY and life-year differences, uncertainty and sensitivity analyses for initiation at ages 60\u201369 by cardiovascular risk and bleeding risk; determine whether any positive subgroup result is robust.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "USPSTF 2022 recommendation summary table and ACC/AHA 2019 primary-prevention guideline aspirin recommendation table: obtain the exact Grade D statement, age thresholds, bleeding-risk exclusions, and recommendation classes needed to support all parts of C21.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "Independence note: E98, E105 and E106 are presentations of the same ASPREE secondary analysis, not independent replications. S1, the reproduced in-trial results in S4, and S9 also trace to the same randomized ASPREE cohort.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "Independence note: A11 and A16 draw on the same USPSTF recommendation document. Its trial synthesis and commissioned model should not be counted as independent empirical confirmation of subgroup net effects; the model incorporates trial-derived inputs.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          }
+        ]
+      },
+      "raw_metrics": {},
+      "move_summary": {
+        "attacks": [
+          "A17",
+          "A18",
+          "A19"
+        ],
+        "dropped": [],
+        "absence_unverified": [],
+        "needed_evidence": [
+          "ASPREE 2023 JAMA Network Open secondary analysis, intracranial bleeding Table and Figure 3: obtain participant-age-specific absolute effects and confidence intervals, and a five-year cumulative-risk difference, to test whether the excess is at least 0.5 per 1,000 rather than merely greater than zero.",
+          "USPSTF 2022 commissioned aspirin decision analysis: extract numerical lifetime QALY and life-year differences, uncertainty and sensitivity analyses for initiation at ages 60\u201369 by cardiovascular risk and bleeding risk; determine whether any positive subgroup result is robust.",
+          "USPSTF 2022 recommendation summary table and ACC/AHA 2019 primary-prevention guideline aspirin recommendation table: obtain the exact Grade D statement, age thresholds, bleeding-risk exclusions, and recommendation classes needed to support all parts of C21.",
+          "Independence note: E98, E105 and E106 are presentations of the same ASPREE secondary analysis, not independent replications. S1, the reproduced in-trial results in S4, and S9 also trace to the same randomized ASPREE cohort.",
+          "Independence note: A11 and A16 draw on the same USPSTF recommendation document. Its trial synthesis and commissioned model should not be counted as independent empirical confirmation of subgroup net effects; the model incorporates trial-derived inputs."
+        ]
+      },
+      "error": "",
+      "graph": "sample-002\\inquiry.json",
+      "graph_sha256": "ad55193401c288460a6e674add3d7fcf2e3704ba4cd6880b707465ee6e3e373f",
+      "references_valid": true
+    },
+    {
+      "sample": 3,
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "tokens_in": 52143,
+      "tokens_out": 1302,
+      "cost_usd": 0.01824,
+      "api_calls": 1,
+      "seconds": 32.16,
+      "metrics": {
+        "attacks": 4,
+        "attacks_applicable": 4,
+        "attacks_with_cq": 4,
+        "needs_obtainable": 6,
+        "needs_unobtainable": 0,
+        "needs_tags": [
+          {
+            "text": "ASPREE 2023 intracranial bleeding analysis, five-year absolute risk difference confidence interval: determine whether the lower confidence bound exceeds 0.5 additional events per 1,000, rather than merely excluding zero.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "Individual-participant or randomized age-stratified low-dose aspirin results for ages 60\u201369: intracranial bleeding absolute risks and confidence intervals over five years, with matched placebo risks.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "USPSTF 2022 aspirin decision analysis: age-60\u201369 subgroup QALY and life-year tables by baseline cardiovascular and bleeding risk, including probabilistic uncertainty and sensitivity analyses for slightly positive QALY estimates.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "Read the complete USPSTF 2022 recommendation statement, particularly the recommendation summary and other-organizations section, to verify Grade D and the exact ACC/AHA recommendation; obtain the ACC/AHA 2019 primary prevention guideline aspirin recommendation table directly.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "Independence note: E98, E105 and E106 are overlapping presentations of the same ASPREE secondary analysis, not independent confirmations. S1, S4 and S9 also trace to the same randomized ASPREE cohort; S4 explicitly reproduces S1 in-trial estimates.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "Independence note: S2, S3 and the pooled findings summarized in S16 may reuse many of the same underlying randomized trials. Compare their included-trial lists before treating their pooled estimates as independent corroboration.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          }
+        ]
+      },
+      "raw_metrics": {},
+      "move_summary": {
+        "attacks": [
+          "A17",
+          "A18",
+          "A19",
+          "A20"
+        ],
+        "dropped": [],
+        "absence_unverified": [],
+        "needed_evidence": [
+          "ASPREE 2023 intracranial bleeding analysis, five-year absolute risk difference confidence interval: determine whether the lower confidence bound exceeds 0.5 additional events per 1,000, rather than merely excluding zero.",
+          "Individual-participant or randomized age-stratified low-dose aspirin results for ages 60\u201369: intracranial bleeding absolute risks and confidence intervals over five years, with matched placebo risks.",
+          "USPSTF 2022 aspirin decision analysis: age-60\u201369 subgroup QALY and life-year tables by baseline cardiovascular and bleeding risk, including probabilistic uncertainty and sensitivity analyses for slightly positive QALY estimates.",
+          "Read the complete USPSTF 2022 recommendation statement, particularly the recommendation summary and other-organizations section, to verify Grade D and the exact ACC/AHA recommendation; obtain the ACC/AHA 2019 primary prevention guideline aspirin recommendation table directly.",
+          "Independence note: E98, E105 and E106 are overlapping presentations of the same ASPREE secondary analysis, not independent confirmations. S1, S4 and S9 also trace to the same randomized ASPREE cohort; S4 explicitly reproduces S1 in-trial estimates.",
+          "Independence note: S2, S3 and the pooled findings summarized in S16 may reuse many of the same underlying randomized trials. Compare their included-trial lists before treating their pooled estimates as independent corroboration."
+        ]
+      },
+      "error": "",
+      "graph": "sample-003\\inquiry.json",
+      "graph_sha256": "86c78b5a16a53f96675dc534bc936cd79ff2399e067ea54c85414059ed61e7f5",
+      "references_valid": true
+    }
+  ],
+  "skill_sha256": "7caf3b149b8f4a4a48b455945c260ab3d856511b6890daabf4d9dc667d229d77",
+  "provider": "openai",
+  "model": "gpt-6.1-sol",
+  "effort": "medium",
+  "aggregate": {
+    "attacks": {
+      "mean": 3.3333333333333335,
+      "min": 3,
+      "max": 4,
+      "n": 3
+    },
+    "attacks_applicable": {
+      "mean": 3.3333333333333335,
+      "min": 3,
+      "max": 4,
+      "n": 3
+    },
+    "attacks_with_cq": {
+      "mean": 3.3333333333333335,
+      "min": 3,
+      "max": 4,
+      "n": 3
+    },
+    "needs_obtainable": {
+      "mean": 5.333333333333333,
+      "min": 5,
+      "max": 6,
+      "n": 3
+    },
+    "needs_unobtainable": {
+      "mean": 0,
+      "min": 0,
+      "max": 0,
+      "n": 3
+    }
+  }
+}

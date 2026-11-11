@@ -1,0 +1,255 @@
+{
+  "move": "critique",
+  "run_id": "health-aspirin-tonight-openai-t7",
+  "n_requested": 3,
+  "input_sha256": "ee706f903271d3b42d06952326b0db9f8df7daab5d542052024ae07cfa1dfc8a",
+  "preparation": {
+    "projection": "critique",
+    "historical_snapshot": false
+  },
+  "samples": [
+    {
+      "sample": 1,
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "tokens_in": 52136,
+      "tokens_out": 1006,
+      "cost_usd": 0.1403985,
+      "api_calls": 1,
+      "seconds": 26.23,
+      "metrics": {
+        "attacks": 2,
+        "attacks_applicable": 2,
+        "attacks_with_cq": 1,
+        "needs_obtainable": 4,
+        "needs_unobtainable": 1,
+        "needs_tags": [
+          {
+            "text": "Read S3, 'Aspirin for primary prevention of stroke in individuals without cardiovascular disease\u2014A meta-analysis,' Table 2, its footnotes, and the net-clinical-effect calculation: determine whether all-cause mortality actually enters the reported 0.09-per-1,000-person-years estimate and how nonfatal hemorrhagic strokes are handled across benefit and harm terms.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "Retrieve the USPSTF 2022 commissioned aspirin decision-analysis report and supplemental tables: lifetime absolute myocardial infarction, ischemic stroke, gastrointestinal bleeding, intracranial hemorrhage, life-year, and QALY differences per 1,000 initiators, separately for ages 60\u201369 and 70\u201379 and each modeled cardiovascular-risk level; obtain utility weights and sensitivity analyses.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "Retrieve the original Japanese Primary Prevention Trial results and supplement for adults aged 60\u201385 receiving aspirin 100 mg daily versus no aspirin over five years: cardiovascular component counts, major extracranial and intracranial bleeding counts, age-specific absolute effects, and any combined benefit\u2013harm endpoint with overlap handling.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "Obtain ASPREE randomized-period major extracranial bleeding estimates separately from intracranial bleeding, aligned with cardiovascular component estimates over the same horizon; obtain patient-level overlap or an explicitly weighted additive endpoint to quantify net harm without double-counting.",
+            "tag": "unobtainable",
+            "tag_basis": "patient-level"
+          },
+          {
+            "text": "Independence note: S1, S4, and S9 concern the same ASPREE randomized cohort, and S4 explicitly reproduces some S1 in-trial estimates. Their distinct source-origin labels must not be treated as independent trial corroboration. S2 and S3 are also potentially overlapping trial syntheses, not independent participant populations.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          }
+        ]
+      },
+      "raw_metrics": {},
+      "move_summary": {
+        "attacks": [
+          "A22",
+          "A23"
+        ],
+        "dropped": [],
+        "absence_unverified": [],
+        "needed_evidence": [
+          "Read S3, 'Aspirin for primary prevention of stroke in individuals without cardiovascular disease\u2014A meta-analysis,' Table 2, its footnotes, and the net-clinical-effect calculation: determine whether all-cause mortality actually enters the reported 0.09-per-1,000-person-years estimate and how nonfatal hemorrhagic strokes are handled across benefit and harm terms.",
+          "Retrieve the USPSTF 2022 commissioned aspirin decision-analysis report and supplemental tables: lifetime absolute myocardial infarction, ischemic stroke, gastrointestinal bleeding, intracranial hemorrhage, life-year, and QALY differences per 1,000 initiators, separately for ages 60\u201369 and 70\u201379 and each modeled cardiovascular-risk level; obtain utility weights and sensitivity analyses.",
+          "Retrieve the original Japanese Primary Prevention Trial results and supplement for adults aged 60\u201385 receiving aspirin 100 mg daily versus no aspirin over five years: cardiovascular component counts, major extracranial and intracranial bleeding counts, age-specific absolute effects, and any combined benefit\u2013harm endpoint with overlap handling.",
+          "Obtain ASPREE randomized-period major extracranial bleeding estimates separately from intracranial bleeding, aligned with cardiovascular component estimates over the same horizon; obtain patient-level overlap or an explicitly weighted additive endpoint to quantify net harm without double-counting.",
+          "Independence note: S1, S4, and S9 concern the same ASPREE randomized cohort, and S4 explicitly reproduces some S1 in-trial estimates. Their distinct source-origin labels must not be treated as independent trial corroboration. S2 and S3 are also potentially overlapping trial syntheses, not independent participant populations."
+        ]
+      },
+      "error": "",
+      "graph": "sample-001\\inquiry.json",
+      "graph_sha256": "b64ff1dcd48113c2444e7df23886887c9e6e52eb8a13d26b8a56bb008fea16fb",
+      "references_valid": true
+    },
+    {
+      "sample": 2,
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "tokens_in": 52136,
+      "tokens_out": 1053,
+      "cost_usd": 0.0157493,
+      "api_calls": 1,
+      "seconds": 26.72,
+      "metrics": {
+        "attacks": 2,
+        "attacks_applicable": 2,
+        "attacks_with_cq": 2,
+        "needs_obtainable": 6,
+        "needs_unobtainable": 0,
+        "needs_tags": [
+          {
+            "text": "Read S3's complete net-clinical-effect methods, Table 2 and its calculation notes: reconcile whether all-cause mortality actually enters the reported 0.09-per-1,000-person-years estimate, and whether nonfatal stroke and hemorrhagic stroke overlap.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "Retrieve the USPSTF 2022 commissioned aspirin decision-analysis report and numerical results tables: lifetime incremental QALYs and life-years per 1,000 for initiation at ages 60\u201369 and 70\u201379, stratified by sex and baseline cardiovascular risk, with utility weights and sensitivity analyses.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "Retrieve the original Japanese Primary Prevention Trial report and supplement: 100 mg daily aspirin versus control in adults aged 60\u201385, absolute myocardial infarction, ischemic stroke, cardiovascular death, intracranial bleeding and major extracranial bleeding outcomes over the same follow-up, including age and baseline-risk interactions.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "Obtain an age-specific benefit\u2013harm analysis using aligned cardiovascular and bleeding endpoints and either explicit severity weights or a deduplicated joint endpoint. For ASPREE, request participant-level overlap and event timing if a joint first-event risk is used; do not infer that risk by subtracting marginal endpoint counts.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "Independence note: S1, S4 and S9 concern the same ASPREE randomization; their results must not be counted as independent trials. A5 and A17 also use exactly the same premises for substantially overlapping claims.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "Independence note: S2 and S3 are separate reviews, but their pooled treatment-effect estimates draw on overlapping underlying trials. Independence of their descriptions of analytic rules does not make their cardiovascular or bleeding estimates independent corroboration.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          }
+        ]
+      },
+      "raw_metrics": {},
+      "move_summary": {
+        "attacks": [
+          "A22",
+          "A23"
+        ],
+        "dropped": [],
+        "absence_unverified": [],
+        "needed_evidence": [
+          "Read S3's complete net-clinical-effect methods, Table 2 and its calculation notes: reconcile whether all-cause mortality actually enters the reported 0.09-per-1,000-person-years estimate, and whether nonfatal stroke and hemorrhagic stroke overlap.",
+          "Retrieve the USPSTF 2022 commissioned aspirin decision-analysis report and numerical results tables: lifetime incremental QALYs and life-years per 1,000 for initiation at ages 60\u201369 and 70\u201379, stratified by sex and baseline cardiovascular risk, with utility weights and sensitivity analyses.",
+          "Retrieve the original Japanese Primary Prevention Trial report and supplement: 100 mg daily aspirin versus control in adults aged 60\u201385, absolute myocardial infarction, ischemic stroke, cardiovascular death, intracranial bleeding and major extracranial bleeding outcomes over the same follow-up, including age and baseline-risk interactions.",
+          "Obtain an age-specific benefit\u2013harm analysis using aligned cardiovascular and bleeding endpoints and either explicit severity weights or a deduplicated joint endpoint. For ASPREE, request participant-level overlap and event timing if a joint first-event risk is used; do not infer that risk by subtracting marginal endpoint counts.",
+          "Independence note: S1, S4 and S9 concern the same ASPREE randomization; their results must not be counted as independent trials. A5 and A17 also use exactly the same premises for substantially overlapping claims.",
+          "Independence note: S2 and S3 are separate reviews, but their pooled treatment-effect estimates draw on overlapping underlying trials. Independence of their descriptions of analytic rules does not make their cardiovascular or bleeding estimates independent corroboration."
+        ]
+      },
+      "error": "",
+      "graph": "sample-002\\inquiry.json",
+      "graph_sha256": "ea4966b483705adb0e8a68e366a70b0c0b71483b6907bf158255d5831a55b16b",
+      "references_valid": true
+    },
+    {
+      "sample": 3,
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "tokens_in": 52136,
+      "tokens_out": 1085,
+      "cost_usd": 0.016069299999999998,
+      "api_calls": 1,
+      "seconds": 27.3,
+      "metrics": {
+        "attacks": 2,
+        "attacks_applicable": 2,
+        "attacks_with_cq": 0,
+        "needs_obtainable": 6,
+        "needs_unobtainable": 0,
+        "needs_tags": [
+          {
+            "text": "Read S3, 'Aspirin for primary prevention of stroke in individuals without cardiovascular disease\u2014A meta-analysis,' Results 'Net clinical effect,' Table 2 and its calculation note: reconcile the mortality-inclusive methods definition with the displayed net-benefit calculation and determine whether hemorrhagic stroke is counted within both nonfatal stroke and bleeding.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "Retrieve the USPSTF 2022 aspirin decision-analysis report and supplementary age-by-risk tables: absolute lifetime QALYs and life-years per 1,000 for initiation at ages 60\u201369 and 70\u201379, including utility weights, treatment duration, uncertainty, and sensitivity to the assumed cardiovascular-mortality effect.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "Retrieve the original Japanese Primary Prevention Trial report and supplement: aligned five-year absolute MI, ischemic-stroke, cardiovascular-death, intracranial-bleeding and major-extracranial-bleeding results for participants aged 60\u201369 and 70\u201385 receiving 100 mg daily versus control.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "Retrieve ASPREE participant-level or published joint-outcome analyses for the randomized treatment period: deduplicated cardiovascular-and-major-bleeding first-event risks, or a prespecified severity-weighted event burden, with absolute differences and uncertainty over a common horizon.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "Independence note: S1, S4 and S9 concern the same ASPREE randomized cohort; their distinct source-title origins must not be counted as independent trial replication. A5 and A17 use exactly the same evidence for overlapping claims C22 and C33.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "Independence note: S2, S3, S13 and the USPSTF synthesis reuse underlying primary-prevention trials. Their pooled treatment estimates require a trial-overlap map before being treated as independent corroboration; separate documents remain legitimate evidence of their respective endpoint definitions.",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          }
+        ]
+      },
+      "raw_metrics": {},
+      "move_summary": {
+        "attacks": [
+          "A22",
+          "A23"
+        ],
+        "dropped": [],
+        "absence_unverified": [],
+        "needed_evidence": [
+          "Read S3, 'Aspirin for primary prevention of stroke in individuals without cardiovascular disease\u2014A meta-analysis,' Results 'Net clinical effect,' Table 2 and its calculation note: reconcile the mortality-inclusive methods definition with the displayed net-benefit calculation and determine whether hemorrhagic stroke is counted within both nonfatal stroke and bleeding.",
+          "Retrieve the USPSTF 2022 aspirin decision-analysis report and supplementary age-by-risk tables: absolute lifetime QALYs and life-years per 1,000 for initiation at ages 60\u201369 and 70\u201379, including utility weights, treatment duration, uncertainty, and sensitivity to the assumed cardiovascular-mortality effect.",
+          "Retrieve the original Japanese Primary Prevention Trial report and supplement: aligned five-year absolute MI, ischemic-stroke, cardiovascular-death, intracranial-bleeding and major-extracranial-bleeding results for participants aged 60\u201369 and 70\u201385 receiving 100 mg daily versus control.",
+          "Retrieve ASPREE participant-level or published joint-outcome analyses for the randomized treatment period: deduplicated cardiovascular-and-major-bleeding first-event risks, or a prespecified severity-weighted event burden, with absolute differences and uncertainty over a common horizon.",
+          "Independence note: S1, S4 and S9 concern the same ASPREE randomized cohort; their distinct source-title origins must not be counted as independent trial replication. A5 and A17 use exactly the same evidence for overlapping claims C22 and C33.",
+          "Independence note: S2, S3, S13 and the USPSTF synthesis reuse underlying primary-prevention trials. Their pooled treatment estimates require a trial-overlap map before being treated as independent corroboration; separate documents remain legitimate evidence of their respective endpoint definitions."
+        ]
+      },
+      "error": "",
+      "graph": "sample-003\\inquiry.json",
+      "graph_sha256": "4b986c1c0f7335849701fdca2491611ea479288fb1dab36b906330f353c45c54",
+      "references_valid": true
+    }
+  ],
+  "skill_sha256": "7caf3b149b8f4a4a48b455945c260ab3d856511b6890daabf4d9dc667d229d77",
+  "provider": "openai",
+  "model": "gpt-6.1-sol",
+  "effort": "medium",
+  "aggregate": {
+    "attacks": {
+      "mean": 2,
+      "min": 2,
+      "max": 2,
+      "n": 3
+    },
+    "attacks_applicable": {
+      "mean": 2,
+      "min": 2,
+      "max": 2,
+      "n": 3
+    },
+    "attacks_with_cq": {
+      "mean": 1,
+      "min": 0,
+      "max": 2,
+      "n": 3
+    },
+    "needs_obtainable": {
+      "mean": 5.333333333333333,
+      "min": 4,
+      "max": 6,
+      "n": 3
+    },
+    "needs_unobtainable": {
+      "mean": 0.3333333333333333,
+      "min": 0,
+      "max": 1,
+      "n": 3
+    }
+  }
+}

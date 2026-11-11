@@ -1,0 +1,247 @@
+{
+  "move": "critique",
+  "run_id": "health-aspirin-tonight-openai-t7",
+  "n_requested": 3,
+  "input_sha256": "b999a077a5c71bf919d37d749d99b0ff057e6520f778828a80e7301dfb5488b2",
+  "preparation": {
+    "projection": "critique",
+    "historical_snapshot": false
+  },
+  "samples": [
+    {
+      "sample": 1,
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "tokens_in": 86378,
+      "tokens_out": 894,
+      "cost_usd": 0.182367,
+      "api_calls": 1,
+      "seconds": 7.36,
+      "metrics": {
+        "attacks": 3,
+        "attacks_applicable": 3,
+        "attacks_with_cq": 3,
+        "needs_obtainable": 3,
+        "needs_unobtainable": 1,
+        "needs_tags": [
+          {
+            "text": "Age-stratified (60-69 vs 70+) intracranial hemorrhage and major extracranial bleeding absolute risk differences from the Antithrombotic Trialists' or an individual-participant-data pooled analysis",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "ARRIVE and JPPP intracranial hemorrhage counts in adults 60 and over",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "ASPREE patient-level data on a deduplicated first-event composite of MI, ischemic stroke, CV death and major hemorrhage with 5-year Aalen-Johansen risks",
+            "tag": "unobtainable",
+            "tag_basis": "patient-level"
+          },
+          {
+            "text": "USPSTF 2022 evidence review (Guirguis-Blake, JAMA) quantifying events per 1,000 by age band; ACC/AHA 2019 primary prevention guideline text for C21",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          }
+        ]
+      },
+      "raw_metrics": {},
+      "move_summary": {
+        "attacks": [
+          "A17",
+          "A18",
+          "A19"
+        ],
+        "dropped": [],
+        "absence_unverified": [],
+        "needed_evidence": [
+          "Age-stratified (60-69 vs 70+) intracranial hemorrhage and major extracranial bleeding absolute risk differences from the Antithrombotic Trialists' or an individual-participant-data pooled analysis",
+          "ARRIVE and JPPP intracranial hemorrhage counts in adults 60 and over",
+          "ASPREE patient-level data on a deduplicated first-event composite of MI, ischemic stroke, CV death and major hemorrhage with 5-year Aalen-Johansen risks",
+          "USPSTF 2022 evidence review (Guirguis-Blake, JAMA) quantifying events per 1,000 by age band; ACC/AHA 2019 primary prevention guideline text for C21"
+        ]
+      },
+      "error": "",
+      "graph": "sample-001\\inquiry.json",
+      "graph_sha256": "2ddcc4c054e81a292308e613b2ddfadc54f74f993923936b42c9c16af82a3b07",
+      "references_valid": true
+    },
+    {
+      "sample": 2,
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "tokens_in": 86378,
+      "tokens_out": 858,
+      "cost_usd": 0.1787862,
+      "api_calls": 1,
+      "seconds": 7.34,
+      "metrics": {
+        "attacks": 3,
+        "attacks_applicable": 3,
+        "attacks_with_cq": 3,
+        "needs_obtainable": 4,
+        "needs_unobtainable": 1,
+        "needs_tags": [
+          {
+            "text": "USPSTF 2022 recommendation summary page showing the Grade D label and the age-specific recommendation text",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "ACC/AHA 2019 primary prevention guideline text on aspirin in adults over 70 or at increased bleeding risk",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "ASPREE age-stratified (65-69 vs 70+) five-year absolute MI, ischemic stroke, and major bleeding risks",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "Patient-level or IPD meta-analysis (e.g. Antithrombotic Trialists) with age and baseline-risk strata, giving deduplicated first-event net composite",
+            "tag": "unobtainable",
+            "tag_basis": "Patient-level"
+          },
+          {
+            "text": "ASPREE all-cause mortality and cancer death results (HR 1.14) from the 2018 NEJM/JNCI reports to ground C12",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          }
+        ]
+      },
+      "raw_metrics": {},
+      "move_summary": {
+        "attacks": [
+          "A17",
+          "A18",
+          "A19"
+        ],
+        "dropped": [],
+        "absence_unverified": [],
+        "needed_evidence": [
+          "USPSTF 2022 recommendation summary page showing the Grade D label and the age-specific recommendation text",
+          "ACC/AHA 2019 primary prevention guideline text on aspirin in adults over 70 or at increased bleeding risk",
+          "ASPREE age-stratified (65-69 vs 70+) five-year absolute MI, ischemic stroke, and major bleeding risks",
+          "Patient-level or IPD meta-analysis (e.g. Antithrombotic Trialists) with age and baseline-risk strata, giving deduplicated first-event net composite",
+          "ASPREE all-cause mortality and cancer death results (HR 1.14) from the 2018 NEJM/JNCI reports to ground C12"
+        ]
+      },
+      "error": "",
+      "graph": "sample-002\\inquiry.json",
+      "graph_sha256": "03754b24a4a19c3f72f7799049b6c345eb42d03f9d6e2d806e3151b6683754a9",
+      "references_valid": true
+    },
+    {
+      "sample": 3,
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "tokens_in": 86378,
+      "tokens_out": 1221,
+      "cost_usd": 0.1824162,
+      "api_calls": 1,
+      "seconds": 9.55,
+      "metrics": {
+        "attacks": 4,
+        "attacks_applicable": 4,
+        "attacks_with_cq": 3,
+        "needs_obtainable": 5,
+        "needs_unobtainable": 1,
+        "needs_tags": [
+          {
+            "text": "USPSTF 2022 full text for the Grade D label, and the ACC/AHA 2019 primary prevention guideline for the over-70 and bleeding-risk statements (needed for C21)",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "ASPREE, ARRIVE, ASCEND and JPPP age-stratified (60-69 vs 70+) five-year absolute event counts for MI, ischemic stroke, CV death, intracranial and major extracranial bleeding",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "JPPP (Ikeda 2014) primary results, to cover the 60-85 Japanese population with a bleeding outcome",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "Patient-level or individual-participant-data meta-analysis giving a deduplicated first-event composite of MACE plus major bleeding at 5 years in adults 60+",
+            "tag": "unobtainable",
+            "tag_basis": "Patient-level"
+          },
+          {
+            "text": "Absolute five-year major extracranial bleeding excess by age band from ASPREE or Antithrombotic Trialists' Collaboration data",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          },
+          {
+            "text": "Sensitivity analysis of net benefit under different severity weights, such as the CV-death-weighted model, to test C5, C18 and C19",
+            "tag": "obtainable",
+            "tag_basis": "public document/search request; heuristic tag for review"
+          }
+        ]
+      },
+      "raw_metrics": {},
+      "move_summary": {
+        "attacks": [
+          "A17",
+          "A18",
+          "A19",
+          "A20"
+        ],
+        "dropped": [],
+        "absence_unverified": [],
+        "needed_evidence": [
+          "USPSTF 2022 full text for the Grade D label, and the ACC/AHA 2019 primary prevention guideline for the over-70 and bleeding-risk statements (needed for C21)",
+          "ASPREE, ARRIVE, ASCEND and JPPP age-stratified (60-69 vs 70+) five-year absolute event counts for MI, ischemic stroke, CV death, intracranial and major extracranial bleeding",
+          "JPPP (Ikeda 2014) primary results, to cover the 60-85 Japanese population with a bleeding outcome",
+          "Patient-level or individual-participant-data meta-analysis giving a deduplicated first-event composite of MACE plus major bleeding at 5 years in adults 60+",
+          "Absolute five-year major extracranial bleeding excess by age band from ASPREE or Antithrombotic Trialists' Collaboration data",
+          "Sensitivity analysis of net benefit under different severity weights, such as the CV-death-weighted model, to test C5, C18 and C19"
+        ]
+      },
+      "error": "",
+      "graph": "sample-003\\inquiry.json",
+      "graph_sha256": "cbc7b338f544c9c442532889367fb7b5e48669fa8d8639843605130e761bdbdd",
+      "references_valid": true
+    }
+  ],
+  "skill_sha256": "7caf3b149b8f4a4a48b455945c260ab3d856511b6890daabf4d9dc667d229d77",
+  "provider": "anthropic",
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "aggregate": {
+    "attacks": {
+      "mean": 3.3333333333333335,
+      "min": 3,
+      "max": 4,
+      "n": 3
+    },
+    "attacks_applicable": {
+      "mean": 3.3333333333333335,
+      "min": 3,
+      "max": 4,
+      "n": 3
+    },
+    "attacks_with_cq": {
+      "mean": 3,
+      "min": 3,
+      "max": 3,
+      "n": 3
+    },
+    "needs_obtainable": {
+      "mean": 4,
+      "min": 3,
+      "max": 5,
+      "n": 3
+    },
+    "needs_unobtainable": {
+      "mean": 1,
+      "min": 1,
+      "max": 1,
+      "n": 3
+    }
+  }
+}

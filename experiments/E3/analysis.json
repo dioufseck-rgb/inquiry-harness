@@ -1,0 +1,959 @@
+{
+  "pass": false,
+  "needs_review": {
+    "reviewed_by": "Codex manual review of all need texts in all 12 E3 samples",
+    "policy": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+    "cells": {
+      "sonnet/sol": {
+        "1": [
+          "obtainable",
+          "obtainable",
+          "obtainable",
+          "obtainable",
+          "not_request"
+        ],
+        "2": [
+          "obtainable",
+          "obtainable",
+          "obtainable",
+          "not_request",
+          "not_request"
+        ],
+        "3": [
+          "obtainable",
+          "obtainable",
+          "obtainable",
+          "obtainable",
+          "not_request",
+          "not_request"
+        ]
+      },
+      "sonnet/sonnet": {
+        "1": [
+          "obtainable",
+          "obtainable",
+          "unobtainable",
+          "obtainable"
+        ],
+        "2": [
+          "obtainable",
+          "obtainable",
+          "obtainable",
+          "unobtainable",
+          "obtainable"
+        ],
+        "3": [
+          "obtainable",
+          "obtainable",
+          "obtainable",
+          "unobtainable",
+          "obtainable",
+          "obtainable"
+        ]
+      },
+      "sol/sol": {
+        "1": [
+          "obtainable",
+          "obtainable",
+          "obtainable",
+          "unobtainable",
+          "not_request"
+        ],
+        "2": [
+          "obtainable",
+          "obtainable",
+          "obtainable",
+          "unobtainable",
+          "not_request",
+          "not_request"
+        ],
+        "3": [
+          "obtainable",
+          "obtainable",
+          "obtainable",
+          "unobtainable",
+          "not_request",
+          "not_request"
+        ]
+      },
+      "sol/sonnet": {
+        "1": [
+          "obtainable",
+          "unobtainable",
+          "obtainable",
+          "obtainable"
+        ],
+        "2": [
+          "obtainable",
+          "unobtainable",
+          "obtainable",
+          "obtainable",
+          "obtainable",
+          "not_request"
+        ],
+        "3": [
+          "obtainable",
+          "unobtainable",
+          "obtainable",
+          "obtainable",
+          "not_request"
+        ]
+      }
+    }
+  },
+  "cells": [
+    {
+      "input": "sol",
+      "proposer": {
+        "provider": "openai",
+        "model": "gpt-6.1-sol",
+        "effort": "medium"
+      },
+      "critic": {
+        "provider": "openai",
+        "model": "gpt-6.1-sol",
+        "effort": "medium"
+      },
+      "manifest": "experiments\\E3\\runs\\sol\\sol\\moves.json",
+      "n": 3,
+      "aggregate": {
+        "attacks": {
+          "mean": 2,
+          "min": 2,
+          "max": 2,
+          "n": 3
+        },
+        "attacks_applicable": {
+          "mean": 2,
+          "min": 2,
+          "max": 2,
+          "n": 3
+        },
+        "attacks_with_cq": {
+          "mean": 1,
+          "min": 0,
+          "max": 2,
+          "n": 3
+        },
+        "needs_obtainable": {
+          "mean": 3,
+          "min": 3,
+          "max": 3,
+          "n": 3
+        },
+        "needs_unobtainable": {
+          "mean": 1,
+          "min": 1,
+          "max": 1,
+          "n": 3
+        },
+        "not_requests": {
+          "mean": 1.6666666666666667,
+          "min": 1,
+          "max": 2,
+          "n": 3
+        }
+      },
+      "native_aggregate": {
+        "attacks": {
+          "mean": 2,
+          "min": 2,
+          "max": 2,
+          "n": 3
+        },
+        "attacks_applicable": {
+          "mean": 2,
+          "min": 2,
+          "max": 2,
+          "n": 3
+        },
+        "attacks_with_cq": {
+          "mean": 1,
+          "min": 0,
+          "max": 2,
+          "n": 3
+        },
+        "needs_obtainable": {
+          "mean": 5.333333333333333,
+          "min": 4,
+          "max": 6,
+          "n": 3
+        },
+        "needs_unobtainable": {
+          "mean": 0.3333333333333333,
+          "min": 0,
+          "max": 1,
+          "n": 3
+        }
+      },
+      "pass": false,
+      "needs": [
+        {
+          "sample": 1,
+          "text": "Read S3, 'Aspirin for primary prevention of stroke in individuals without cardiovascular disease\u2014A meta-analysis,' Table 2, its footnotes, and the net-clinical-effect calculation: determine whether all-cause mortality actually enters the reported 0.09-per-1,000-person-years estimate and how nonfatal hemorrhagic strokes are handled across benefit and harm terms.",
+          "tag": "obtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 1,
+          "text": "Retrieve the USPSTF 2022 commissioned aspirin decision-analysis report and supplemental tables: lifetime absolute myocardial infarction, ischemic stroke, gastrointestinal bleeding, intracranial hemorrhage, life-year, and QALY differences per 1,000 initiators, separately for ages 60\u201369 and 70\u201379 and each modeled cardiovascular-risk level; obtain utility weights and sensitivity analyses.",
+          "tag": "obtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 1,
+          "text": "Retrieve the original Japanese Primary Prevention Trial results and supplement for adults aged 60\u201385 receiving aspirin 100 mg daily versus no aspirin over five years: cardiovascular component counts, major extracranial and intracranial bleeding counts, age-specific absolute effects, and any combined benefit\u2013harm endpoint with overlap handling.",
+          "tag": "obtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 1,
+          "text": "Obtain ASPREE randomized-period major extracranial bleeding estimates separately from intracranial bleeding, aligned with cardiovascular component estimates over the same horizon; obtain patient-level overlap or an explicitly weighted additive endpoint to quantify net harm without double-counting.",
+          "tag": "unobtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "unobtainable"
+        },
+        {
+          "sample": 1,
+          "text": "Independence note: S1, S4, and S9 concern the same ASPREE randomized cohort, and S4 explicitly reproduces some S1 in-trial estimates. Their distinct source-origin labels must not be treated as independent trial corroboration. S2 and S3 are also potentially overlapping trial syntheses, not independent participant populations.",
+          "tag": "not_request",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 2,
+          "text": "Read S3's complete net-clinical-effect methods, Table 2 and its calculation notes: reconcile whether all-cause mortality actually enters the reported 0.09-per-1,000-person-years estimate, and whether nonfatal stroke and hemorrhagic stroke overlap.",
+          "tag": "obtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 2,
+          "text": "Retrieve the USPSTF 2022 commissioned aspirin decision-analysis report and numerical results tables: lifetime incremental QALYs and life-years per 1,000 for initiation at ages 60\u201369 and 70\u201379, stratified by sex and baseline cardiovascular risk, with utility weights and sensitivity analyses.",
+          "tag": "obtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 2,
+          "text": "Retrieve the original Japanese Primary Prevention Trial report and supplement: 100 mg daily aspirin versus control in adults aged 60\u201385, absolute myocardial infarction, ischemic stroke, cardiovascular death, intracranial bleeding and major extracranial bleeding outcomes over the same follow-up, including age and baseline-risk interactions.",
+          "tag": "obtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 2,
+          "text": "Obtain an age-specific benefit\u2013harm analysis using aligned cardiovascular and bleeding endpoints and either explicit severity weights or a deduplicated joint endpoint. For ASPREE, request participant-level overlap and event timing if a joint first-event risk is used; do not infer that risk by subtracting marginal endpoint counts.",
+          "tag": "unobtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 2,
+          "text": "Independence note: S1, S4 and S9 concern the same ASPREE randomization; their results must not be counted as independent trials. A5 and A17 also use exactly the same premises for substantially overlapping claims.",
+          "tag": "not_request",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 2,
+          "text": "Independence note: S2 and S3 are separate reviews, but their pooled treatment-effect estimates draw on overlapping underlying trials. Independence of their descriptions of analytic rules does not make their cardiovascular or bleeding estimates independent corroboration.",
+          "tag": "not_request",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 3,
+          "text": "Read S3, 'Aspirin for primary prevention of stroke in individuals without cardiovascular disease\u2014A meta-analysis,' Results 'Net clinical effect,' Table 2 and its calculation note: reconcile the mortality-inclusive methods definition with the displayed net-benefit calculation and determine whether hemorrhagic stroke is counted within both nonfatal stroke and bleeding.",
+          "tag": "obtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 3,
+          "text": "Retrieve the USPSTF 2022 aspirin decision-analysis report and supplementary age-by-risk tables: absolute lifetime QALYs and life-years per 1,000 for initiation at ages 60\u201369 and 70\u201379, including utility weights, treatment duration, uncertainty, and sensitivity to the assumed cardiovascular-mortality effect.",
+          "tag": "obtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 3,
+          "text": "Retrieve the original Japanese Primary Prevention Trial report and supplement: aligned five-year absolute MI, ischemic-stroke, cardiovascular-death, intracranial-bleeding and major-extracranial-bleeding results for participants aged 60\u201369 and 70\u201385 receiving 100 mg daily versus control.",
+          "tag": "obtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 3,
+          "text": "Retrieve ASPREE participant-level or published joint-outcome analyses for the randomized treatment period: deduplicated cardiovascular-and-major-bleeding first-event risks, or a prespecified severity-weighted event burden, with absolute differences and uncertainty over a common horizon.",
+          "tag": "unobtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 3,
+          "text": "Independence note: S1, S4 and S9 concern the same ASPREE randomized cohort; their distinct source-title origins must not be counted as independent trial replication. A5 and A17 use exactly the same evidence for overlapping claims C22 and C33.",
+          "tag": "not_request",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 3,
+          "text": "Independence note: S2, S3, S13 and the USPSTF synthesis reuse underlying primary-prevention trials. Their pooled treatment estimates require a trial-overlap map before being treated as independent corroboration; separate documents remain legitimate evidence of their respective endpoint definitions.",
+          "tag": "not_request",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        }
+      ],
+      "cost_usd": 0.1722171
+    },
+    {
+      "input": "sol",
+      "proposer": {
+        "provider": "openai",
+        "model": "gpt-6.1-sol",
+        "effort": "medium"
+      },
+      "critic": {
+        "provider": "anthropic",
+        "model": "claude-sonnet-5-5",
+        "effort": "medium"
+      },
+      "manifest": "experiments\\E3\\runs\\sol\\sonnet\\moves.json",
+      "n": 3,
+      "aggregate": {
+        "attacks": {
+          "mean": 4.333333333333333,
+          "min": 3,
+          "max": 6,
+          "n": 3
+        },
+        "attacks_applicable": {
+          "mean": 4.333333333333333,
+          "min": 3,
+          "max": 6,
+          "n": 3
+        },
+        "attacks_with_cq": {
+          "mean": 3.6666666666666665,
+          "min": 3,
+          "max": 5,
+          "n": 3
+        },
+        "needs_obtainable": {
+          "mean": 3.3333333333333335,
+          "min": 3,
+          "max": 4,
+          "n": 3
+        },
+        "needs_unobtainable": {
+          "mean": 1,
+          "min": 1,
+          "max": 1,
+          "n": 3
+        },
+        "not_requests": {
+          "mean": 0.6666666666666666,
+          "min": 0,
+          "max": 1,
+          "n": 3
+        }
+      },
+      "native_aggregate": {
+        "attacks": {
+          "mean": 4.333333333333333,
+          "min": 3,
+          "max": 6,
+          "n": 3
+        },
+        "attacks_applicable": {
+          "mean": 4.333333333333333,
+          "min": 3,
+          "max": 6,
+          "n": 3
+        },
+        "attacks_with_cq": {
+          "mean": 3.6666666666666665,
+          "min": 3,
+          "max": 5,
+          "n": 3
+        },
+        "needs_obtainable": {
+          "mean": 4,
+          "min": 3,
+          "max": 5,
+          "n": 3
+        },
+        "needs_unobtainable": {
+          "mean": 1,
+          "min": 1,
+          "max": 1,
+          "n": 3
+        }
+      },
+      "pass": false,
+      "needs": [
+        {
+          "sample": 1,
+          "text": "Age-stratified (60\u201369 vs \u226570) individual-participant or subgroup results for MI, ischemic stroke, intracranial and extracranial bleeding from ASPREE, ARRIVE, JPPP and ASCEND",
+          "tag": "obtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 1,
+          "text": "Patient-level ASPREE first-event composite of MACE plus major hemorrhage, deduplicated, with absolute five-year risk difference",
+          "tag": "unobtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "unobtainable"
+        },
+        {
+          "sample": 1,
+          "text": "Sensitivity of net benefit to severity weights (e.g., equal weights versus the 3x hemorrhagic-stroke weight) in older adults",
+          "tag": "obtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 1,
+          "text": "Independent corroboration of ASPREE bleeding findings (S1, S4, S9 and S10\u2013S12 all trace to one trial)",
+          "tag": "obtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 2,
+          "text": "ASPREE and ASCEND patient-level or age-stratified results for ages 60\u201369 on MI, ischemic stroke, intracranial hemorrhage and major extracranial bleeding, with five-year absolute risks",
+          "tag": "obtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "unobtainable"
+        },
+        {
+          "sample": 2,
+          "text": "A deduplicated first-event composite (CV events plus major bleeding) for adults 60 and over, e.g. from ASPREE data on request (E62)",
+          "tag": "unobtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 2,
+          "text": "Sensitivity of net clinical benefit to alternative severity weights, including equal weights and QALY weights",
+          "tag": "obtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 2,
+          "text": "JPPP age 60\u201385 bleeding and cardiovascular outcome results, and ARRIVE results restricted to age 60 and over",
+          "tag": "obtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 2,
+          "text": "USPSTF modeling report with numeric QALY and life-year estimates by age and risk",
+          "tag": "obtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 2,
+          "text": "Note on independence: E49 and E55 reproduce S1 and are not independent corroboration, and the S9 relays (S11, S12) repeat S9; ASPREE therefore supplies one trial's evidence, not several",
+          "tag": "not_request",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 3,
+          "text": "ASPREE and ARRIVE/JPPP age-stratified results for ages 60-69 on first MI, ischemic stroke, CV death and major bleeding",
+          "tag": "obtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 3,
+          "text": "Patient-level or deduplicated first-event composite of MACE plus major hemorrhage over a fixed 5 years in adults aged 60+",
+          "tag": "unobtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "unobtainable"
+        },
+        {
+          "sample": 3,
+          "text": "Sensitivity analysis of net benefit under alternative severity weights, including equal weights and QALY weights",
+          "tag": "obtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 3,
+          "text": "JPPP bleeding outcomes and results for adults aged 60-85",
+          "tag": "obtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 3,
+          "text": "Independent confirmation that ASPREE and ASCEND estimates repeated in S4, S6, S8, S10-S12 and S15 are not counted as separate sources (S4 reproduces S1; S10 relays S1; S11 and S12 relay S9; S6 and S8 relay S5; S15 relays S14)",
+          "tag": "not_request",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        }
+      ],
+      "cost_usd": 0.5442106
+    },
+    {
+      "input": "sonnet",
+      "proposer": {
+        "provider": "anthropic",
+        "model": "claude-sonnet-5-5",
+        "effort": "medium"
+      },
+      "critic": {
+        "provider": "openai",
+        "model": "gpt-6.1-sol",
+        "effort": "medium"
+      },
+      "manifest": "experiments\\E3\\runs\\sonnet\\sol\\moves.json",
+      "n": 3,
+      "aggregate": {
+        "attacks": {
+          "mean": 3.3333333333333335,
+          "min": 3,
+          "max": 4,
+          "n": 3
+        },
+        "attacks_applicable": {
+          "mean": 3.3333333333333335,
+          "min": 3,
+          "max": 4,
+          "n": 3
+        },
+        "attacks_with_cq": {
+          "mean": 3.3333333333333335,
+          "min": 3,
+          "max": 4,
+          "n": 3
+        },
+        "needs_obtainable": {
+          "mean": 3.6666666666666665,
+          "min": 3,
+          "max": 4,
+          "n": 3
+        },
+        "needs_unobtainable": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
+        "not_requests": {
+          "mean": 1.6666666666666667,
+          "min": 1,
+          "max": 2,
+          "n": 3
+        }
+      },
+      "native_aggregate": {
+        "attacks": {
+          "mean": 3.3333333333333335,
+          "min": 3,
+          "max": 4,
+          "n": 3
+        },
+        "attacks_applicable": {
+          "mean": 3.3333333333333335,
+          "min": 3,
+          "max": 4,
+          "n": 3
+        },
+        "attacks_with_cq": {
+          "mean": 3.3333333333333335,
+          "min": 3,
+          "max": 4,
+          "n": 3
+        },
+        "needs_obtainable": {
+          "mean": 5.333333333333333,
+          "min": 5,
+          "max": 6,
+          "n": 3
+        },
+        "needs_unobtainable": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        }
+      },
+      "pass": false,
+      "needs": [
+        {
+          "sample": 1,
+          "text": "ASPREE 2023 stroke and intracranial bleeding secondary analysis: five-year intracranial-bleeding absolute risk difference and confidence interval, accounting for competing death; determine whether its lower confidence bound exceeds 0.5 per 1,000.",
+          "tag": "obtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 1,
+          "text": "Low-dose aspirin primary prevention randomized trials or individual-participant meta-analysis: intracranial bleeding absolute effects separately for ages 60\u201369 and 70+, with aligned five-year follow-up and age interaction estimates.",
+          "tag": "obtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 1,
+          "text": "USPSTF 2022 aspirin recommendation summary table documenting the Grade D recommendation at age 60+, and ACC/AHA 2019 primary prevention guideline aspirin recommendation table documenting age thresholds, bleeding-risk exclusions, and recommendation classes. The currently accepted C21 includes these recommendations, but A16 supplies their proposed evidentiary basis rather than the recommendation records.",
+          "tag": "obtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 1,
+          "text": "USPSTF 2022 commissioned aspirin decision analysis: numerical lifetime QALY and life-year results for initiation at ages 60\u201369 by cardiovascular and bleeding risk, including parameter uncertainty and sensitivity analyses testing whether positive subgroup estimates are robust.",
+          "tag": "obtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 1,
+          "text": "Independence note: E98, E105, and E106 are presentations of the same ASPREE analysis, not independent replications. S1, the reproduced in-trial results in S4, and S9 also share the ASPREE randomized cohort. USPSTF trial syntheses and the meta-analyses may reuse those trials; check trial-level overlap before counting independent corroboration.",
+          "tag": "not_request",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 2,
+          "text": "ASPREE 2023 JAMA Network Open secondary analysis, intracranial bleeding Table and Figure 3: obtain participant-age-specific absolute effects and confidence intervals, and a five-year cumulative-risk difference, to test whether the excess is at least 0.5 per 1,000 rather than merely greater than zero.",
+          "tag": "obtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 2,
+          "text": "USPSTF 2022 commissioned aspirin decision analysis: extract numerical lifetime QALY and life-year differences, uncertainty and sensitivity analyses for initiation at ages 60\u201369 by cardiovascular risk and bleeding risk; determine whether any positive subgroup result is robust.",
+          "tag": "obtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 2,
+          "text": "USPSTF 2022 recommendation summary table and ACC/AHA 2019 primary-prevention guideline aspirin recommendation table: obtain the exact Grade D statement, age thresholds, bleeding-risk exclusions, and recommendation classes needed to support all parts of C21.",
+          "tag": "obtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 2,
+          "text": "Independence note: E98, E105 and E106 are presentations of the same ASPREE secondary analysis, not independent replications. S1, the reproduced in-trial results in S4, and S9 also trace to the same randomized ASPREE cohort.",
+          "tag": "not_request",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 2,
+          "text": "Independence note: A11 and A16 draw on the same USPSTF recommendation document. Its trial synthesis and commissioned model should not be counted as independent empirical confirmation of subgroup net effects; the model incorporates trial-derived inputs.",
+          "tag": "not_request",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 3,
+          "text": "ASPREE 2023 intracranial bleeding analysis, five-year absolute risk difference confidence interval: determine whether the lower confidence bound exceeds 0.5 additional events per 1,000, rather than merely excluding zero.",
+          "tag": "obtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 3,
+          "text": "Individual-participant or randomized age-stratified low-dose aspirin results for ages 60\u201369: intracranial bleeding absolute risks and confidence intervals over five years, with matched placebo risks.",
+          "tag": "obtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 3,
+          "text": "USPSTF 2022 aspirin decision analysis: age-60\u201369 subgroup QALY and life-year tables by baseline cardiovascular and bleeding risk, including probabilistic uncertainty and sensitivity analyses for slightly positive QALY estimates.",
+          "tag": "obtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 3,
+          "text": "Read the complete USPSTF 2022 recommendation statement, particularly the recommendation summary and other-organizations section, to verify Grade D and the exact ACC/AHA recommendation; obtain the ACC/AHA 2019 primary prevention guideline aspirin recommendation table directly.",
+          "tag": "obtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 3,
+          "text": "Independence note: E98, E105 and E106 are overlapping presentations of the same ASPREE secondary analysis, not independent confirmations. S1, S4 and S9 also trace to the same randomized ASPREE cohort; S4 explicitly reproduces S1 in-trial estimates.",
+          "tag": "not_request",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 3,
+          "text": "Independence note: S2, S3 and the pooled findings summarized in S16 may reuse many of the same underlying randomized trials. Compare their included-trial lists before treating their pooled estimates as independent corroboration.",
+          "tag": "not_request",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        }
+      ],
+      "cost_usd": 0.178276
+    },
+    {
+      "input": "sonnet",
+      "proposer": {
+        "provider": "anthropic",
+        "model": "claude-sonnet-5-5",
+        "effort": "medium"
+      },
+      "critic": {
+        "provider": "anthropic",
+        "model": "claude-sonnet-5-5",
+        "effort": "medium"
+      },
+      "manifest": "experiments\\E3\\runs\\sonnet\\sonnet\\moves.json",
+      "n": 3,
+      "aggregate": {
+        "attacks": {
+          "mean": 3.3333333333333335,
+          "min": 3,
+          "max": 4,
+          "n": 3
+        },
+        "attacks_applicable": {
+          "mean": 3.3333333333333335,
+          "min": 3,
+          "max": 4,
+          "n": 3
+        },
+        "attacks_with_cq": {
+          "mean": 3,
+          "min": 3,
+          "max": 3,
+          "n": 3
+        },
+        "needs_obtainable": {
+          "mean": 4,
+          "min": 3,
+          "max": 5,
+          "n": 3
+        },
+        "needs_unobtainable": {
+          "mean": 1,
+          "min": 1,
+          "max": 1,
+          "n": 3
+        },
+        "not_requests": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        }
+      },
+      "native_aggregate": {
+        "attacks": {
+          "mean": 3.3333333333333335,
+          "min": 3,
+          "max": 4,
+          "n": 3
+        },
+        "attacks_applicable": {
+          "mean": 3.3333333333333335,
+          "min": 3,
+          "max": 4,
+          "n": 3
+        },
+        "attacks_with_cq": {
+          "mean": 3,
+          "min": 3,
+          "max": 3,
+          "n": 3
+        },
+        "needs_obtainable": {
+          "mean": 4,
+          "min": 3,
+          "max": 5,
+          "n": 3
+        },
+        "needs_unobtainable": {
+          "mean": 1,
+          "min": 1,
+          "max": 1,
+          "n": 3
+        }
+      },
+      "pass": false,
+      "needs": [
+        {
+          "sample": 1,
+          "text": "Age-stratified (60-69 vs 70+) intracranial hemorrhage and major extracranial bleeding absolute risk differences from the Antithrombotic Trialists' or an individual-participant-data pooled analysis",
+          "tag": "obtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 1,
+          "text": "ARRIVE and JPPP intracranial hemorrhage counts in adults 60 and over",
+          "tag": "obtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 1,
+          "text": "ASPREE patient-level data on a deduplicated first-event composite of MI, ischemic stroke, CV death and major hemorrhage with 5-year Aalen-Johansen risks",
+          "tag": "unobtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "unobtainable"
+        },
+        {
+          "sample": 1,
+          "text": "USPSTF 2022 evidence review (Guirguis-Blake, JAMA) quantifying events per 1,000 by age band; ACC/AHA 2019 primary prevention guideline text for C21",
+          "tag": "obtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 2,
+          "text": "USPSTF 2022 recommendation summary page showing the Grade D label and the age-specific recommendation text",
+          "tag": "obtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 2,
+          "text": "ACC/AHA 2019 primary prevention guideline text on aspirin in adults over 70 or at increased bleeding risk",
+          "tag": "obtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 2,
+          "text": "ASPREE age-stratified (65-69 vs 70+) five-year absolute MI, ischemic stroke, and major bleeding risks",
+          "tag": "obtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 2,
+          "text": "Patient-level or IPD meta-analysis (e.g. Antithrombotic Trialists) with age and baseline-risk strata, giving deduplicated first-event net composite",
+          "tag": "unobtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "unobtainable"
+        },
+        {
+          "sample": 2,
+          "text": "ASPREE all-cause mortality and cancer death results (HR 1.14) from the 2018 NEJM/JNCI reports to ground C12",
+          "tag": "obtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 3,
+          "text": "USPSTF 2022 full text for the Grade D label, and the ACC/AHA 2019 primary prevention guideline for the over-70 and bleeding-risk statements (needed for C21)",
+          "tag": "obtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 3,
+          "text": "ASPREE, ARRIVE, ASCEND and JPPP age-stratified (60-69 vs 70+) five-year absolute event counts for MI, ischemic stroke, CV death, intracranial and major extracranial bleeding",
+          "tag": "obtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 3,
+          "text": "JPPP (Ikeda 2014) primary results, to cover the 60-85 Japanese population with a bleeding outcome",
+          "tag": "obtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 3,
+          "text": "Patient-level or individual-participant-data meta-analysis giving a deduplicated first-event composite of MACE plus major bleeding at 5 years in adults 60+",
+          "tag": "unobtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "unobtainable"
+        },
+        {
+          "sample": 3,
+          "text": "Absolute five-year major extracranial bleeding excess by age band from ASPREE or Antithrombotic Trialists' Collaboration data",
+          "tag": "obtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "sample": 3,
+          "text": "Sensitivity analysis of net benefit under different severity weights, such as the CV-death-weighted model, to test C5, C18 and C19",
+          "tag": "obtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        }
+      ],
+      "cost_usd": 0.5435694
+    }
+  ],
+  "e4_selection": {
+    "source": "experiments\\E3\\runs\\sol\\sonnet\\sample-002\\inquiry.json",
+    "critic": {
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium"
+    },
+    "metrics": {
+      "attacks": 6,
+      "attacks_applicable": 6,
+      "attacks_with_cq": 5,
+      "needs_obtainable": 4,
+      "needs_unobtainable": 1,
+      "needs_tags": [
+        {
+          "text": "ASPREE and ASCEND patient-level or age-stratified results for ages 60\u201369 on MI, ischemic stroke, intracranial hemorrhage and major extracranial bleeding, with five-year absolute risks",
+          "tag": "obtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "unobtainable"
+        },
+        {
+          "text": "A deduplicated first-event composite (CV events plus major bleeding) for adults 60 and over, e.g. from ASPREE data on request (E62)",
+          "tag": "unobtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "text": "Sensitivity of net clinical benefit to alternative severity weights, including equal weights and QALY weights",
+          "tag": "obtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "text": "JPPP age 60\u201385 bleeding and cardiovascular outcome results, and ARRIVE results restricted to age 60 and over",
+          "tag": "obtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "text": "USPSTF modeling report with numeric QALY and life-year estimates by age and risk",
+          "tag": "obtainable",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        },
+        {
+          "text": "Note on independence: E49 and E55 reproduce S1 and are not independent corroboration, and the S9 relays (S11, S12) repeat S9; ASPREE therefore supplies one trial's evidence, not several",
+          "tag": "not_request",
+          "tag_basis": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+          "native_tag": "obtainable"
+        }
+      ],
+      "not_requests": 1
+    },
+    "graph_sha256": "b98d0d236d2adaf07635cf18a93ffbe8c77605be2d4ef1024ca20f15f98d516a",
+    "criterion": "most attacks, then most applicable attacks, manifest path, sample number"
+  }
+}

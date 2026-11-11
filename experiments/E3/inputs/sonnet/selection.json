@@ -1,0 +1,41 @@
+{
+  "source": "experiments\\E2\\after\\claude-claims\\sonnet\\sample-001\\inquiry.json",
+  "claims": "claude-claims",
+  "provider": "anthropic",
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "metrics": {
+    "supporting_args": 16,
+    "applicable_args": 3,
+    "claims_supported_unargued": 0,
+    "eligible_claims": [
+      "C1",
+      "C10",
+      "C15",
+      "C18",
+      "C3",
+      "C4",
+      "C6",
+      "C9"
+    ],
+    "unusable_share": 0.08270676691729323,
+    "unusable_items": 11,
+    "offered_evidence": 133,
+    "scoped_claims_proposed": 1,
+    "scoped_claims_added": 0,
+    "claims_with_reason": 2,
+    "ignored_unusable": 1,
+    "input_eligible_claims": [
+      "C1",
+      "C10",
+      "C15",
+      "C18",
+      "C3",
+      "C4",
+      "C6",
+      "C9"
+    ]
+  },
+  "graph_sha256": "e643e415b734e1cd9a93eed645ed706b2c5bdcf1cf190945d1da63e84767b0de",
+  "criterion": "zero gaps, below-cap unusable, then most applicable arguments, most supporting arguments, claim-set name, sample number"
+}

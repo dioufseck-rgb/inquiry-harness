@@ -1,0 +1,26 @@
+{
+  "reviewed_by": "Codex manual review of all need texts in all 12 E3 samples",
+  "policy": "Obtainable means a public document/table lookup or literature search, not a guarantee that the requested estimate is published. Unobtainable means a custom joint endpoint or participant-level overlap requires underlying data/author access. A published subgroup/IPD-analysis alternative is treated as a public-document route. Independence annotations that request no new evidence are excluded as not_request.",
+  "cells": {
+    "sonnet/sol": {
+      "1": ["obtainable","obtainable","obtainable","obtainable","not_request"],
+      "2": ["obtainable","obtainable","obtainable","not_request","not_request"],
+      "3": ["obtainable","obtainable","obtainable","obtainable","not_request","not_request"]
+    },
+    "sonnet/sonnet": {
+      "1": ["obtainable","obtainable","unobtainable","obtainable"],
+      "2": ["obtainable","obtainable","obtainable","unobtainable","obtainable"],
+      "3": ["obtainable","obtainable","obtainable","unobtainable","obtainable","obtainable"]
+    },
+    "sol/sol": {
+      "1": ["obtainable","obtainable","obtainable","unobtainable","not_request"],
+      "2": ["obtainable","obtainable","obtainable","unobtainable","not_request","not_request"],
+      "3": ["obtainable","obtainable","obtainable","unobtainable","not_request","not_request"]
+    },
+    "sol/sonnet": {
+      "1": ["obtainable","unobtainable","obtainable","obtainable"],
+      "2": ["obtainable","unobtainable","obtainable","obtainable","obtainable","not_request"],
+      "3": ["obtainable","unobtainable","obtainable","obtainable","not_request"]
+    }
+  }
+}
