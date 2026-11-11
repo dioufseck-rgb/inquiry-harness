@@ -42,6 +42,20 @@ def shape_match(inq: Inquiry, ev: Evaluation, shape: str) -> Optional[bool]:
     return None
 
 
+def argument_split_metrics(inq: Inquiry, ev: Evaluation, scoped_claim_ids: set[str] | None = None) -> dict:
+    """Track Argue-created revisions across rounds; other revisions are not relabelled."""
+    g = inq.graph
+    scoped = {c.id for c in g.claims if c.created_by_move == "argue"} | (scoped_claim_ids or set())
+    arguments = [a for a in g.arguments if not a.is_attack and not a.withdrawn]
+    original = [a for a in arguments if a.claim_id not in scoped]
+    narrowed = [a for a in arguments if a.claim_id in scoped]
+    main_answers = {c.id for c in inq.main_claims() if c.answers_issue}
+    return {"supporting_original": len(original), "supporting_scoped": len(narrowed),
+            "applicable_original": sum(ev.applicable.get(a.id, False) for a in original),
+            "applicable_scoped": sum(ev.applicable.get(a.id, False) for a in narrowed),
+            "main_supporting_in_original": sum(a.claim_id in main_answers and ev.labels.get(a.id) == "in" for a in original)}
+
+
 def metrics(inq: Inquiry, ev: Evaluation, gold: Optional[dict[str, Any]] = None,
             expected: Optional[dict[str, Any]] = None) -> dict[str, Any]:
     g = inq.graph
@@ -105,6 +119,7 @@ def metrics(inq: Inquiry, ev: Evaluation, gold: Optional[dict[str, Any]] = None,
     }
     from .argument.evaluate import reopening_metrics
     m.update(reopening_metrics(g, ev))
+    m.update(argument_split_metrics(inq, ev))
     if gold:
         src_hay = [s.title for s in g.sources] + [s.url for s in g.sources]
         ev_hay = [e.text for e in g.evidence] + [e.quote for e in g.evidence]
@@ -127,6 +142,7 @@ def metrics(inq: Inquiry, ev: Evaluation, gold: Optional[dict[str, Any]] = None,
 def one_line(m: dict[str, Any]) -> str:
     keys = ["provider_proposer", "model_proposer", "effort_proposer", "provider_critic", "model_critic", "effort_critic",
             "tokens_in", "tokens_out", "calls", "sources", "origins", "duplicate_sources", "evidence", "orphans", "supporting_args", "supporting_in",
+            "supporting_original", "supporting_scoped", "applicable_original", "applicable_scoped", "main_supporting_in_original",
             "claims_supported_unargued", "main_supporting_in", "main_component_supporting_in", "undecided_empty", "undecided_supported",
             "attacks", "reopened_cqs", "reopened_then_discharged", "attacks_out", "attacks_discharged", "counters_dropped", "counters_dropped_reasons",
             "counters_inapplicable", "counters_inapplicable_reasons", "accepted_claims", "single_origin_accepts",

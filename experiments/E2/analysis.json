@@ -50,6 +50,18 @@
           "max": 19,
           "n": 3
         },
+        "applicable_original": {
+          "mean": 1,
+          "min": 1,
+          "max": 1,
+          "n": 3
+        },
+        "applicable_scoped": {
+          "mean": 17.333333333333332,
+          "min": 17,
+          "max": 18,
+          "n": 3
+        },
         "claims_supported_unargued": {
           "mean": 0,
           "min": 0,
@@ -63,6 +75,12 @@
           "n": 3
         },
         "ignored_unusable": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
+        "main_supporting_in_original": {
           "mean": 0,
           "min": 0,
           "max": 0,
@@ -90,6 +108,18 @@
           "mean": 21,
           "min": 19,
           "max": 22,
+          "n": 3
+        },
+        "supporting_original": {
+          "mean": 3.6666666666666665,
+          "min": 2,
+          "max": 5,
+          "n": 3
+        },
+        "supporting_scoped": {
+          "mean": 17.333333333333332,
+          "min": 17,
+          "max": 18,
           "n": 3
         },
         "unusable_items": {
@@ -181,7 +211,12 @@
             },
             "cq_outcome_details": {
               "answered_unresolved": 1
-            }
+            },
+            "supporting_original": 2,
+            "supporting_scoped": 17,
+            "applicable_original": 1,
+            "applicable_scoped": 17,
+            "main_supporting_in_original": 0
           },
           "raw_metrics": {},
           "move_summary": {
@@ -504,7 +539,12 @@
             },
             "cq_outcome_details": {
               "answered_unresolved": 1
-            }
+            },
+            "supporting_original": 4,
+            "supporting_scoped": 18,
+            "applicable_original": 1,
+            "applicable_scoped": 18,
+            "main_supporting_in_original": 0
           },
           "raw_metrics": {},
           "move_summary": {
@@ -836,7 +876,12 @@
             },
             "cq_outcome_details": {
               "answered_unresolved": 1
-            }
+            },
+            "supporting_original": 5,
+            "supporting_scoped": 17,
+            "applicable_original": 1,
+            "applicable_scoped": 17,
+            "main_supporting_in_original": 0
           },
           "raw_metrics": {},
           "move_summary": {
@@ -1109,6 +1154,18 @@
           "max": 3,
           "n": 3
         },
+        "applicable_original": {
+          "mean": 2.6666666666666665,
+          "min": 2,
+          "max": 3,
+          "n": 3
+        },
+        "applicable_scoped": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
         "claims_supported_unargued": {
           "mean": 0,
           "min": 0,
@@ -1125,6 +1182,12 @@
           "mean": 0.3333333333333333,
           "min": 0,
           "max": 1,
+          "n": 3
+        },
+        "main_supporting_in_original": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
           "n": 3
         },
         "offered_evidence": {
@@ -1149,6 +1212,18 @@
           "mean": 15.666666666666666,
           "min": 15,
           "max": 16,
+          "n": 3
+        },
+        "supporting_original": {
+          "mean": 15.666666666666666,
+          "min": 15,
+          "max": 16,
+          "n": 3
+        },
+        "supporting_scoped": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
           "n": 3
         },
         "unusable_items": {
@@ -1237,7 +1312,12 @@
             },
             "cq_outcome_details": {
               "answered_unresolved": 5
-            }
+            },
+            "supporting_original": 16,
+            "supporting_scoped": 0,
+            "applicable_original": 3,
+            "applicable_scoped": 0,
+            "main_supporting_in_original": 0
           },
           "raw_metrics": {},
           "move_summary": {
@@ -1559,7 +1639,12 @@
             },
             "cq_outcome_details": {
               "answered_unresolved": 9
-            }
+            },
+            "supporting_original": 15,
+            "supporting_scoped": 0,
+            "applicable_original": 3,
+            "applicable_scoped": 0,
+            "main_supporting_in_original": 0
           },
           "raw_metrics": {},
           "move_summary": {
@@ -1867,7 +1952,12 @@
             },
             "cq_outcome_details": {
               "answered_unresolved": 9
-            }
+            },
+            "supporting_original": 16,
+            "supporting_scoped": 0,
+            "applicable_original": 2,
+            "applicable_scoped": 0,
+            "main_supporting_in_original": 0
           },
           "raw_metrics": {},
           "move_summary": {
@@ -2132,6 +2222,18 @@
           "max": 21,
           "n": 3
         },
+        "applicable_original": {
+          "mean": 1,
+          "min": 1,
+          "max": 1,
+          "n": 3
+        },
+        "applicable_scoped": {
+          "mean": 16.666666666666668,
+          "min": 15,
+          "max": 20,
+          "n": 3
+        },
         "claims_supported_unargued": {
           "mean": 0,
           "min": 0,
@@ -2145,6 +2247,12 @@
           "n": 3
         },
         "ignored_unusable": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
+        "main_supporting_in_original": {
           "mean": 0,
           "min": 0,
           "max": 0,
@@ -2172,6 +2280,18 @@
           "mean": 18,
           "min": 16,
           "max": 21,
+          "n": 3
+        },
+        "supporting_original": {
+          "mean": 1.3333333333333333,
+          "min": 1,
+          "max": 2,
+          "n": 3
+        },
+        "supporting_scoped": {
+          "mean": 16.666666666666668,
+          "min": 15,
+          "max": 20,
           "n": 3
         },
         "unusable_items": {
@@ -2255,7 +2375,12 @@
                 "open": 55
               }
             },
-            "cq_outcome_details": {}
+            "cq_outcome_details": {},
+            "supporting_original": 1,
+            "supporting_scoped": 20,
+            "applicable_original": 1,
+            "applicable_scoped": 20,
+            "main_supporting_in_original": 0
           },
           "raw_metrics": {},
           "move_summary": {
@@ -2562,7 +2687,12 @@
                 "open": 44
               }
             },
-            "cq_outcome_details": {}
+            "cq_outcome_details": {},
+            "supporting_original": 2,
+            "supporting_scoped": 15,
+            "applicable_original": 1,
+            "applicable_scoped": 15,
+            "main_supporting_in_original": 0
           },
           "raw_metrics": {},
           "move_summary": {
@@ -2860,7 +2990,12 @@
                 "open": 42
               }
             },
-            "cq_outcome_details": {}
+            "cq_outcome_details": {},
+            "supporting_original": 1,
+            "supporting_scoped": 15,
+            "applicable_original": 1,
+            "applicable_scoped": 15,
+            "main_supporting_in_original": 0
           },
           "raw_metrics": {},
           "move_summary": {
@@ -3108,6 +3243,18 @@
           "max": 2,
           "n": 3
         },
+        "applicable_original": {
+          "mean": 2,
+          "min": 2,
+          "max": 2,
+          "n": 3
+        },
+        "applicable_scoped": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
         "claims_supported_unargued": {
           "mean": 0,
           "min": 0,
@@ -3124,6 +3271,12 @@
           "mean": 0,
           "min": 0,
           "max": 0,
+          "n": 3
+        },
+        "main_supporting_in_original": {
+          "mean": 0.6666666666666666,
+          "min": 0,
+          "max": 1,
           "n": 3
         },
         "offered_evidence": {
@@ -3148,6 +3301,18 @@
           "mean": 10,
           "min": 9,
           "max": 11,
+          "n": 3
+        },
+        "supporting_original": {
+          "mean": 10,
+          "min": 9,
+          "max": 11,
+          "n": 3
+        },
+        "supporting_scoped": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
           "n": 3
         },
         "unusable_items": {
@@ -3237,7 +3402,12 @@
             },
             "cq_outcome_details": {
               "answered_unresolved": 5
-            }
+            },
+            "supporting_original": 10,
+            "supporting_scoped": 0,
+            "applicable_original": 2,
+            "applicable_scoped": 0,
+            "main_supporting_in_original": 1
           },
           "raw_metrics": {},
           "move_summary": {
@@ -3513,7 +3683,12 @@
             },
             "cq_outcome_details": {
               "answered_unresolved": 7
-            }
+            },
+            "supporting_original": 11,
+            "supporting_scoped": 0,
+            "applicable_original": 2,
+            "applicable_scoped": 0,
+            "main_supporting_in_original": 0
           },
           "raw_metrics": {},
           "move_summary": {
@@ -3787,7 +3962,12 @@
             },
             "cq_outcome_details": {
               "answered_unresolved": 6
-            }
+            },
+            "supporting_original": 9,
+            "supporting_scoped": 0,
+            "applicable_original": 2,
+            "applicable_scoped": 0,
+            "main_supporting_in_original": 1
           },
           "raw_metrics": {},
           "move_summary": {
@@ -4007,6 +4187,18 @@
           "max": 15,
           "n": 3
         },
+        "applicable_original": {
+          "mean": 0.6666666666666666,
+          "min": 0,
+          "max": 1,
+          "n": 3
+        },
+        "applicable_scoped": {
+          "mean": 12,
+          "min": 10,
+          "max": 15,
+          "n": 3
+        },
         "claims_supported_unargued": {
           "mean": 0,
           "min": 0,
@@ -4020,6 +4212,12 @@
           "n": 3
         },
         "ignored_unusable": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
+        "main_supporting_in_original": {
           "mean": 0,
           "min": 0,
           "max": 0,
@@ -4047,6 +4245,18 @@
           "mean": 15,
           "min": 12,
           "max": 17,
+          "n": 3
+        },
+        "supporting_original": {
+          "mean": 3,
+          "min": 1,
+          "max": 7,
+          "n": 3
+        },
+        "supporting_scoped": {
+          "mean": 12,
+          "min": 10,
+          "max": 15,
           "n": 3
         },
         "unusable_items": {
@@ -4125,7 +4335,12 @@
                 "open": 46
               }
             },
-            "cq_outcome_details": {}
+            "cq_outcome_details": {},
+            "supporting_original": 7,
+            "supporting_scoped": 10,
+            "applicable_original": 1,
+            "applicable_scoped": 10,
+            "main_supporting_in_original": 0
           },
           "raw_metrics": {},
           "move_summary": {
@@ -4433,7 +4648,12 @@
                 "open": 30
               }
             },
-            "cq_outcome_details": {}
+            "cq_outcome_details": {},
+            "supporting_original": 1,
+            "supporting_scoped": 11,
+            "applicable_original": 1,
+            "applicable_scoped": 11,
+            "main_supporting_in_original": 0
           },
           "raw_metrics": {},
           "move_summary": {
@@ -4714,7 +4934,12 @@
                 "open": 41
               }
             },
-            "cq_outcome_details": {}
+            "cq_outcome_details": {},
+            "supporting_original": 1,
+            "supporting_scoped": 15,
+            "applicable_original": 0,
+            "applicable_scoped": 15,
+            "main_supporting_in_original": 0
           },
           "raw_metrics": {},
           "move_summary": {
@@ -4966,6 +5191,18 @@
           "max": 3,
           "n": 3
         },
+        "applicable_original": {
+          "mean": 2.3333333333333335,
+          "min": 1,
+          "max": 3,
+          "n": 3
+        },
+        "applicable_scoped": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
         "claims_supported_unargued": {
           "mean": 0,
           "min": 0,
@@ -4982,6 +5219,12 @@
           "mean": 0,
           "min": 0,
           "max": 0,
+          "n": 3
+        },
+        "main_supporting_in_original": {
+          "mean": 0.3333333333333333,
+          "min": 0,
+          "max": 1,
           "n": 3
         },
         "offered_evidence": {
@@ -5006,6 +5249,18 @@
           "mean": 12,
           "min": 11,
           "max": 13,
+          "n": 3
+        },
+        "supporting_original": {
+          "mean": 12,
+          "min": 11,
+          "max": 13,
+          "n": 3
+        },
+        "supporting_scoped": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
           "n": 3
         },
         "unusable_items": {
@@ -5091,7 +5346,12 @@
             },
             "cq_outcome_details": {
               "answered_unresolved": 4
-            }
+            },
+            "supporting_original": 12,
+            "supporting_scoped": 0,
+            "applicable_original": 3,
+            "applicable_scoped": 0,
+            "main_supporting_in_original": 0
           },
           "raw_metrics": {},
           "move_summary": {
@@ -5382,7 +5642,12 @@
             },
             "cq_outcome_details": {
               "answered_unresolved": 2
-            }
+            },
+            "supporting_original": 13,
+            "supporting_scoped": 0,
+            "applicable_original": 3,
+            "applicable_scoped": 0,
+            "main_supporting_in_original": 1
           },
           "raw_metrics": {},
           "move_summary": {
@@ -5685,7 +5950,12 @@
             },
             "cq_outcome_details": {
               "answered_unresolved": 6
-            }
+            },
+            "supporting_original": 11,
+            "supporting_scoped": 0,
+            "applicable_original": 1,
+            "applicable_scoped": 0,
+            "main_supporting_in_original": 0
           },
           "raw_metrics": {},
           "move_summary": {
@@ -5934,10 +6204,28 @@
           "max": 1,
           "n": 3
         },
+        "applicable_original": {
+          "mean": 1,
+          "min": 1,
+          "max": 1,
+          "n": 3
+        },
+        "applicable_scoped": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
         "claims_supported_unargued": {
           "mean": 8,
           "min": 8,
           "max": 8,
+          "n": 3
+        },
+        "main_supporting_in_original": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
           "n": 3
         },
         "offered_evidence": {
@@ -5956,6 +6244,18 @@
           "mean": 1,
           "min": 1,
           "max": 1,
+          "n": 3
+        },
+        "supporting_original": {
+          "mean": 1,
+          "min": 1,
+          "max": 1,
+          "n": 3
+        },
+        "supporting_scoped": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
           "n": 3
         },
         "unusable_items": {
@@ -6021,7 +6321,12 @@
                 "open": 3
               }
             },
-            "cq_outcome_details": {}
+            "cq_outcome_details": {},
+            "supporting_original": 1,
+            "supporting_scoped": 0,
+            "applicable_original": 1,
+            "applicable_scoped": 0,
+            "main_supporting_in_original": 0
           },
           "raw_metrics": {},
           "move_summary": {
@@ -6303,7 +6608,12 @@
                 "open": 3
               }
             },
-            "cq_outcome_details": {}
+            "cq_outcome_details": {},
+            "supporting_original": 1,
+            "supporting_scoped": 0,
+            "applicable_original": 1,
+            "applicable_scoped": 0,
+            "main_supporting_in_original": 0
           },
           "raw_metrics": {},
           "move_summary": {
@@ -6585,7 +6895,12 @@
                 "open": 3
               }
             },
-            "cq_outcome_details": {}
+            "cq_outcome_details": {},
+            "supporting_original": 1,
+            "supporting_scoped": 0,
+            "applicable_original": 1,
+            "applicable_scoped": 0,
+            "main_supporting_in_original": 0
           },
           "raw_metrics": {},
           "move_summary": {
@@ -6838,10 +7153,28 @@
           "max": 7,
           "n": 3
         },
+        "applicable_original": {
+          "mean": 4.333333333333333,
+          "min": 2,
+          "max": 7,
+          "n": 3
+        },
+        "applicable_scoped": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
         "claims_supported_unargued": {
           "mean": 1.6666666666666667,
           "min": 1,
           "max": 3,
+          "n": 3
+        },
+        "main_supporting_in_original": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
           "n": 3
         },
         "offered_evidence": {
@@ -6860,6 +7193,18 @@
           "mean": 20.666666666666668,
           "min": 19,
           "max": 24,
+          "n": 3
+        },
+        "supporting_original": {
+          "mean": 20.666666666666668,
+          "min": 19,
+          "max": 24,
+          "n": 3
+        },
+        "supporting_scoped": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
           "n": 3
         },
         "unusable_items": {
@@ -6939,7 +7284,12 @@
             },
             "cq_outcome_details": {
               "answered_unresolved": 13
-            }
+            },
+            "supporting_original": 19,
+            "supporting_scoped": 0,
+            "applicable_original": 4,
+            "applicable_scoped": 0,
+            "main_supporting_in_original": 0
           },
           "raw_metrics": {},
           "move_summary": {
@@ -7251,7 +7601,12 @@
             },
             "cq_outcome_details": {
               "answered_unresolved": 24
-            }
+            },
+            "supporting_original": 24,
+            "supporting_scoped": 0,
+            "applicable_original": 2,
+            "applicable_scoped": 0,
+            "main_supporting_in_original": 0
           },
           "raw_metrics": {},
           "move_summary": {
@@ -7530,7 +7885,12 @@
             },
             "cq_outcome_details": {
               "answered_unresolved": 14
-            }
+            },
+            "supporting_original": 19,
+            "supporting_scoped": 0,
+            "applicable_original": 7,
+            "applicable_scoped": 0,
+            "main_supporting_in_original": 0
           },
           "raw_metrics": {},
           "move_summary": {
@@ -7734,10 +8094,28 @@
           "max": 18,
           "n": 3
         },
+        "applicable_original": {
+          "mean": 12.333333333333334,
+          "min": 6,
+          "max": 18,
+          "n": 3
+        },
+        "applicable_scoped": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
         "claims_supported_unargued": {
           "mean": 4.666666666666667,
           "min": 4,
           "max": 5,
+          "n": 3
+        },
+        "main_supporting_in_original": {
+          "mean": 5.333333333333333,
+          "min": 2,
+          "max": 8,
           "n": 3
         },
         "offered_evidence": {
@@ -7756,6 +8134,18 @@
           "mean": 12.333333333333334,
           "min": 6,
           "max": 18,
+          "n": 3
+        },
+        "supporting_original": {
+          "mean": 12.333333333333334,
+          "min": 6,
+          "max": 18,
+          "n": 3
+        },
+        "supporting_scoped": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
           "n": 3
         },
         "unusable_items": {
@@ -7821,7 +8211,12 @@
                 "open": 29
               }
             },
-            "cq_outcome_details": {}
+            "cq_outcome_details": {},
+            "supporting_original": 13,
+            "supporting_scoped": 0,
+            "applicable_original": 13,
+            "applicable_scoped": 0,
+            "main_supporting_in_original": 6
           },
           "raw_metrics": {},
           "move_summary": {
@@ -8019,7 +8414,12 @@
                 "open": 39
               }
             },
-            "cq_outcome_details": {}
+            "cq_outcome_details": {},
+            "supporting_original": 18,
+            "supporting_scoped": 0,
+            "applicable_original": 18,
+            "applicable_scoped": 0,
+            "main_supporting_in_original": 8
           },
           "raw_metrics": {},
           "move_summary": {
@@ -8222,7 +8622,12 @@
                 "open": 13
               }
             },
-            "cq_outcome_details": {}
+            "cq_outcome_details": {},
+            "supporting_original": 6,
+            "supporting_scoped": 0,
+            "applicable_original": 6,
+            "applicable_scoped": 0,
+            "main_supporting_in_original": 2
           },
           "raw_metrics": {},
           "move_summary": {
@@ -8388,9 +8793,27 @@
           "max": 10,
           "n": 3
         },
+        "applicable_original": {
+          "mean": 7,
+          "min": 4,
+          "max": 10,
+          "n": 3
+        },
+        "applicable_scoped": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
         "claims_supported_unargued": {
           "mean": 1,
           "min": 1,
+          "max": 1,
+          "n": 3
+        },
+        "main_supporting_in_original": {
+          "mean": 0.6666666666666666,
+          "min": 0,
           "max": 1,
           "n": 3
         },
@@ -8410,6 +8833,18 @@
           "mean": 15.666666666666666,
           "min": 14,
           "max": 17,
+          "n": 3
+        },
+        "supporting_original": {
+          "mean": 15.666666666666666,
+          "min": 14,
+          "max": 17,
+          "n": 3
+        },
+        "supporting_scoped": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
           "n": 3
         },
         "unusable_items": {
@@ -8486,7 +8921,12 @@
             },
             "cq_outcome_details": {
               "answered_unresolved": 11
-            }
+            },
+            "supporting_original": 14,
+            "supporting_scoped": 0,
+            "applicable_original": 4,
+            "applicable_scoped": 0,
+            "main_supporting_in_original": 1
           },
           "raw_metrics": {},
           "move_summary": {
@@ -8691,7 +9131,12 @@
             },
             "cq_outcome_details": {
               "answered_unresolved": 7
-            }
+            },
+            "supporting_original": 16,
+            "supporting_scoped": 0,
+            "applicable_original": 7,
+            "applicable_scoped": 0,
+            "main_supporting_in_original": 0
           },
           "raw_metrics": {},
           "move_summary": {
@@ -8855,7 +9300,12 @@
                 "open": 46
               }
             },
-            "cq_outcome_details": {}
+            "cq_outcome_details": {},
+            "supporting_original": 17,
+            "supporting_scoped": 0,
+            "applicable_original": 10,
+            "applicable_scoped": 0,
+            "main_supporting_in_original": 1
           },
           "raw_metrics": {},
           "move_summary": {
@@ -9036,10 +9486,28 @@
           "max": 5,
           "n": 3
         },
+        "applicable_original": {
+          "mean": 3.6666666666666665,
+          "min": 2,
+          "max": 5,
+          "n": 3
+        },
+        "applicable_scoped": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
         "claims_supported_unargued": {
           "mean": 5,
           "min": 5,
           "max": 5,
+          "n": 3
+        },
+        "main_supporting_in_original": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
           "n": 3
         },
         "offered_evidence": {
@@ -9058,6 +9526,18 @@
           "mean": 3.6666666666666665,
           "min": 2,
           "max": 5,
+          "n": 3
+        },
+        "supporting_original": {
+          "mean": 3.6666666666666665,
+          "min": 2,
+          "max": 5,
+          "n": 3
+        },
+        "supporting_scoped": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
           "n": 3
         },
         "unusable_items": {
@@ -9121,7 +9601,12 @@
                 "open": 4
               }
             },
-            "cq_outcome_details": {}
+            "cq_outcome_details": {},
+            "supporting_original": 2,
+            "supporting_scoped": 0,
+            "applicable_original": 2,
+            "applicable_scoped": 0,
+            "main_supporting_in_original": 0
           },
           "raw_metrics": {},
           "move_summary": {
@@ -9317,7 +9802,12 @@
                 "open": 11
               }
             },
-            "cq_outcome_details": {}
+            "cq_outcome_details": {},
+            "supporting_original": 5,
+            "supporting_scoped": 0,
+            "applicable_original": 5,
+            "applicable_scoped": 0,
+            "main_supporting_in_original": 0
           },
           "raw_metrics": {},
           "move_summary": {
@@ -9516,7 +10006,12 @@
                 "open": 4
               }
             },
-            "cq_outcome_details": {}
+            "cq_outcome_details": {},
+            "supporting_original": 4,
+            "supporting_scoped": 0,
+            "applicable_original": 4,
+            "applicable_scoped": 0,
+            "main_supporting_in_original": 0
           },
           "raw_metrics": {},
           "move_summary": {
@@ -9687,10 +10182,28 @@
           "max": 5,
           "n": 3
         },
+        "applicable_original": {
+          "mean": 3.6666666666666665,
+          "min": 2,
+          "max": 5,
+          "n": 3
+        },
+        "applicable_scoped": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
         "claims_supported_unargued": {
           "mean": 0.3333333333333333,
           "min": 0,
           "max": 1,
+          "n": 3
+        },
+        "main_supporting_in_original": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
           "n": 3
         },
         "offered_evidence": {
@@ -9709,6 +10222,18 @@
           "mean": 16.333333333333332,
           "min": 14,
           "max": 18,
+          "n": 3
+        },
+        "supporting_original": {
+          "mean": 16.333333333333332,
+          "min": 14,
+          "max": 18,
+          "n": 3
+        },
+        "supporting_scoped": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
           "n": 3
         },
         "unusable_items": {
@@ -9780,7 +10305,12 @@
             },
             "cq_outcome_details": {
               "answered_unresolved": 2
-            }
+            },
+            "supporting_original": 14,
+            "supporting_scoped": 0,
+            "applicable_original": 5,
+            "applicable_scoped": 0,
+            "main_supporting_in_original": 0
           },
           "raw_metrics": {},
           "move_summary": {
@@ -9983,7 +10513,12 @@
             },
             "cq_outcome_details": {
               "answered_unresolved": 7
-            }
+            },
+            "supporting_original": 18,
+            "supporting_scoped": 0,
+            "applicable_original": 4,
+            "applicable_scoped": 0,
+            "main_supporting_in_original": 0
           },
           "raw_metrics": {},
           "move_summary": {
@@ -10192,7 +10727,12 @@
             },
             "cq_outcome_details": {
               "answered_unresolved": 11
-            }
+            },
+            "supporting_original": 17,
+            "supporting_scoped": 0,
+            "applicable_original": 2,
+            "applicable_scoped": 0,
+            "main_supporting_in_original": 0
           },
           "raw_metrics": {},
           "move_summary": {
@@ -10439,6 +10979,7 @@
     }
   ],
   "metrics_extensions": [
-    "N1: inapplicable reasons and CQ outcomes; native numeric totals unchanged"
+    "N1: inapplicable reasons and CQ outcomes; native numeric totals unchanged",
+    "N3: original/scoped counts recovered from saved Argue summaries"
   ]
 }

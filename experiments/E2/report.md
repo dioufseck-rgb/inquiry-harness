@@ -26,3 +26,24 @@ H1's raw E1 gate remains failed. Its E2 claim set is the median-length final-can
 The unusable denominator is the fixed input set of offered evidence; H2 records ignored excess entries separately. A lower unusable share partly reflects the enforced cap, not necessarily better model judgment. Applicable arguments are reported separately from mere argument count.
 
 All before/after graph-and-framing fingerprints match: True. Empty bookkeeping fields added to the schema are excluded from this comparison.
+
+## N3: original claims versus Argue-created scoped claims
+
+Zero model calls. Counts retain the existing active-support totals and split them using the recorded Argue scoped-claim IDs. A revision made by another move is not automatically labelled Argue-scoped. New graphs persist created_by_move=argue across rounds, so a scoped claim does not become original in round two.
+
+| Version | Claims | Provider:model (medium) | Support total | Original | Scoped | Applicable total | Original applicable | Scoped applicable | Main original IN |
+|---|---|---|---:|---:|---:|---:|---:|---:|---:|
+| after | claude-claims | openai:gpt-6.1-sol | 21.00 | 3.67 | 17.33 | 18.33 | 1.00 | 17.33 | 0.00 |
+| after | claude-claims | anthropic:claude-sonnet-5-5 | 15.67 | 15.67 | 0.00 | 2.67 | 2.67 | 0.00 | 0.00 |
+| after | h1-claims | openai:gpt-6.1-sol | 18.00 | 1.33 | 16.67 | 17.67 | 1.00 | 16.67 | 0.00 |
+| after | h1-claims | anthropic:claude-sonnet-5-5 | 10.00 | 10.00 | 0.00 | 2.00 | 2.00 | 0.00 | 0.67 |
+| after | own-claims | openai:gpt-6.1-sol | 15.00 | 3.00 | 12.00 | 12.67 | 0.67 | 12.00 | 0.00 |
+| after | own-claims | anthropic:claude-sonnet-5-5 | 12.00 | 12.00 | 0.00 | 2.33 | 2.33 | 0.00 | 0.33 |
+| before | claude-claims | openai:gpt-6.1-sol | 1.00 | 1.00 | 0.00 | 1.00 | 1.00 | 0.00 | 0.00 |
+| before | claude-claims | anthropic:claude-sonnet-5-5 | 20.67 | 20.67 | 0.00 | 4.33 | 4.33 | 0.00 | 0.00 |
+| before | h1-claims | openai:gpt-6.1-sol | 12.33 | 12.33 | 0.00 | 12.33 | 12.33 | 0.00 | 5.33 |
+| before | h1-claims | anthropic:claude-sonnet-5-5 | 15.67 | 15.67 | 0.00 | 7.00 | 7.00 | 0.00 | 0.67 |
+| before | own-claims | openai:gpt-6.1-sol | 3.67 | 3.67 | 0.00 | 3.67 | 3.67 | 0.00 | 0.00 |
+| before | own-claims | anthropic:claude-sonnet-5-5 | 16.33 | 16.33 | 0.00 | 3.67 | 3.67 | 0.00 | 0.00 |
+
+Sol's H1 after-H2 gain is predominantly support for claims it narrowed itself; those are often honest component/source findings, as N1's provisional review shows, but are not coverage of the original main question. Sonnet mostly builds arguments for the original claims and leaves population/outcome mismatches explicit. The counts must remain separate: high applicable_scoped cannot establish that a composed main answer exists.

@@ -333,6 +333,8 @@ def move_metrics(inq: Inquiry, move: str, summary: dict, llm: RecordingLLM,
              "ignored_unusable": len(summary.get("ignored_unusable", [])),
              "input_eligible_claims": summary.get("input_eligible_claims", sorted(set(eligible)))}
         m.update(argue_diagnostics(inq, ev))
+        from .metrics import argument_split_metrics
+        m.update(argument_split_metrics(inq, ev, set(summary.get("scoped_claims", []))))
     elif move == "critique":
         attacks = [a for a in g.arguments if a.is_attack]
         tags = [need_tag(t) for t in summary.get("needed_evidence", [])]

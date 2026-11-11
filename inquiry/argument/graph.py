@@ -93,6 +93,7 @@ class Claim(BaseModel):
                     "comparator, outcome, horizon, quantity, scope, evidence_status.")
     superseded_by: Optional[str] = Field(default=None, description="Set when a revision replaced this claim.")
     revision_of: Optional[str] = Field(default=None, description="The claim this one narrowed or split from.")
+    created_by_move: str = Field(default="", description="Persisted move provenance; Argue scoped claims are tagged argue.")
     review_note: str = Field(default="", description="Why a criticism did or did not change this claim.")
     answers_issue: bool = Field(
         default=True,
@@ -310,6 +311,7 @@ class ArgumentGraph(BaseModel):
             c = self.add_claim(t, issue_id=old.issue_id, kind=kind or old.kind, origin=old.origin,
                                rationale=f"revision of {old.id}: {reason}" if reason else f"revision of {old.id}",
                                target=dict(target or {}), revision_of=old.id, answers_issue=answers_issue)
+            c.created_by_move = old.created_by_move
             new.append(c)
         rivals = [self.claim(o) for o in old.contrary_ids if self.claim(o) is not None and self.claim(o).live]
         for c in new:

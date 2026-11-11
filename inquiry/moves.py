@@ -962,6 +962,7 @@ def apply_argue(inq: Inquiry, out: ArgueOutput, allowed_claims: Optional[set[str
         new = g.supersede_claim(old_id, [p.text for p in group], kind="substantive",
                                 reason="Argue: evidence supports a narrower claim", answers_issue=False)
         for claim, p in zip(new, group):
+            claim.created_by_move = "argue"
             claim.answers_issue = p.answers_issue
             claim.target = dict(p.target)
             if not p.answers_issue:

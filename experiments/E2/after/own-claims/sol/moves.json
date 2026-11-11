@@ -70,7 +70,12 @@
             "open": 46
           }
         },
-        "cq_outcome_details": {}
+        "cq_outcome_details": {},
+        "supporting_original": 7,
+        "supporting_scoped": 10,
+        "applicable_original": 1,
+        "applicable_scoped": 10,
+        "main_supporting_in_original": 0
       },
       "raw_metrics": {},
       "move_summary": {
@@ -378,7 +383,12 @@
             "open": 30
           }
         },
-        "cq_outcome_details": {}
+        "cq_outcome_details": {},
+        "supporting_original": 1,
+        "supporting_scoped": 11,
+        "applicable_original": 1,
+        "applicable_scoped": 11,
+        "main_supporting_in_original": 0
       },
       "raw_metrics": {},
       "move_summary": {
@@ -659,7 +669,12 @@
             "open": 41
           }
         },
-        "cq_outcome_details": {}
+        "cq_outcome_details": {},
+        "supporting_original": 1,
+        "supporting_scoped": 15,
+        "applicable_original": 0,
+        "applicable_scoped": 15,
+        "main_supporting_in_original": 0
       },
       "raw_metrics": {},
       "move_summary": {
@@ -903,6 +918,18 @@
       "max": 15,
       "n": 3
     },
+    "applicable_original": {
+      "mean": 0.6666666666666666,
+      "min": 0,
+      "max": 1,
+      "n": 3
+    },
+    "applicable_scoped": {
+      "mean": 12,
+      "min": 10,
+      "max": 15,
+      "n": 3
+    },
     "claims_supported_unargued": {
       "mean": 0,
       "min": 0,
@@ -916,6 +943,12 @@
       "n": 3
     },
     "ignored_unusable": {
+      "mean": 0,
+      "min": 0,
+      "max": 0,
+      "n": 3
+    },
+    "main_supporting_in_original": {
       "mean": 0,
       "min": 0,
       "max": 0,
@@ -945,6 +978,18 @@
       "max": 17,
       "n": 3
     },
+    "supporting_original": {
+      "mean": 3,
+      "min": 1,
+      "max": 7,
+      "n": 3
+    },
+    "supporting_scoped": {
+      "mean": 12,
+      "min": 10,
+      "max": 15,
+      "n": 3
+    },
     "unusable_items": {
       "mean": 0.3333333333333333,
       "min": 0,
@@ -967,6 +1012,10 @@
         "cq_outcome_details"
       ],
       "method": "Read-only rescore of saved graphs; native totals, costs and graph hashes unchanged"
+    },
+    "N3": {
+      "provenance": "Saved move_summary.scoped_claims, not revision_of alone; raw graphs unchanged",
+      "model_calls": 0
     }
   }
 }

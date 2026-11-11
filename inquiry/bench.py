@@ -119,7 +119,8 @@ def run_question(q: dict[str, Any], root: Path, rounds: int, tag: str, **harness
 
 
 def table(rows: list[dict[str, Any]]) -> str:
-    cols = ["id", "sources", "origins", "evidence", "supporting_in", "attacks", "attacks_out",
+    cols = ["id", "sources", "origins", "evidence", "supporting_in", "supporting_original", "supporting_scoped",
+            "applicable_original", "applicable_scoped", "main_supporting_in_original", "attacks", "attacks_out",
             "attacks_discharged", "accepted_claims", "single_origin_accepts", "absence_assertions",
             "gold_sources", "gold_facts", "shape_match", "seconds"]
     out = []
