@@ -1,0 +1,47 @@
+{
+  "projection": "argue",
+  "historical_snapshot": false,
+  "issue_map": {
+    "Q1": "Q1",
+    "Q2": "Q5",
+    "Q3": "Q6",
+    "Q4": "Q7",
+    "Q5": "Q8",
+    "Q6": "Q9",
+    "Q7": "Q10"
+  },
+  "issues_imported": [
+    "Q5",
+    "Q6",
+    "Q7",
+    "Q8",
+    "Q9",
+    "Q10"
+  ],
+  "claim_map": {
+    "C1": "C1",
+    "C2": "C2",
+    "C3": "C3",
+    "C4": "C4",
+    "C5": "C5",
+    "C6": "C6",
+    "C7": "C7",
+    "C8": "C8",
+    "C9": "C9",
+    "C10": "C10",
+    "C11": "C11",
+    "C12": "C12",
+    "C13": "C13",
+    "C14": "C14",
+    "C15": "C15",
+    "C16": "C16",
+    "C17": "C17",
+    "C18": "C18",
+    "C19": "C19",
+    "C20": "C20",
+    "C21": "C21",
+    "C22": "C22"
+  },
+  "stale_bearings_cleared": 549,
+  "requires_evidence_map": true
+}
