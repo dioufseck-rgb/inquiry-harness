@@ -41,7 +41,7 @@ def score_shape(inq: Inquiry, ev, expected: dict[str, Any], judge: LLM) -> dict[
     """Keep the deterministic score and use one semantic call on a false match."""
     regex = shape_match(inq, ev, expected.get("shape", ""))
     result = {"shape_match_regex": regex, "shape_match_judge": None, "shape_match": regex}
-    accepted = [c.text for c in inq.main_claims() if c.live and ev.status(c.id) == "in"]
+    accepted = [c.text for c in inq.main_claims() if c.live and c.answers_issue and ev.status(c.id) == "in"]
     if not inq.graph.evidence:
         result["shape_match"] = False
         return result

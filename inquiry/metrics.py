@@ -29,7 +29,7 @@ def _contains(hay: list[str], needle: str) -> bool:
 
 def shape_match(inq: Inquiry, ev: Evaluation, shape: str) -> Optional[bool]:
     g = inq.graph
-    main = inq.main_claims()
+    main = [c for c in inq.main_claims() if c.answers_issue]
     accepted = [c for c in main if ev.status(c.id) == "in"]
     if shape == "undecided":
         return not accepted
@@ -45,7 +45,7 @@ def shape_match(inq: Inquiry, ev: Evaluation, shape: str) -> Optional[bool]:
 def metrics(inq: Inquiry, ev: Evaluation, gold: Optional[dict[str, Any]] = None,
             expected: Optional[dict[str, Any]] = None) -> dict[str, Any]:
     g = inq.graph
-    supporting = [a for a in g.arguments if not a.is_attack]
+    supporting = [a for a in g.arguments if not a.is_attack and not a.withdrawn]
     attacks = [a for a in g.arguments if a.is_attack]
     counters = [a for a in attacks if a.origin == "proposer" and g.arg(a.attacks.target_id)
                 and g.arg(a.attacks.target_id).is_attack]
@@ -54,6 +54,16 @@ def metrics(inq: Inquiry, ev: Evaluation, gold: Optional[dict[str, Any]] = None,
         counter_reasons[d["reason"]] = counter_reasons.get(d["reason"], 0) + 1
     inapplicable = {a.id: ev.inapplicable_reasons.get(a.id, []) for a in counters if not ev.applicable.get(a.id, False)}
     flags = [f.code for f in ev.flags]
+    from .moves import issue_evidence
+    eligible = set()
+    for issue in g.issues:
+        claims, ids = issue_evidence(g, issue.id, include_unassigned=issue.id == g.main_issue_id, mark_shadowed=False)
+        eligible.update(cid for cid in claims if sum(g.ev(eid).bears_on.get(cid) == "for" for eid in ids) >= 3)
+    argued = {a.claim_id for a in supporting}
+    main_answers = {c.id for c in inq.main_claims() if c.answers_issue}
+    main_supported = sum(a.claim_id in main_answers and ev.labels.get(a.id) == "in" for a in supporting)
+    main_components = {c.id for c in inq.main_claims() if not c.answers_issue}
+    accepted_main = any(ev.status(cid) == "in" for cid in main_answers)
     m: dict[str, Any] = {
         "id": inq.id,
         "rounds": inq.round,
@@ -64,6 +74,12 @@ def metrics(inq: Inquiry, ev: Evaluation, gold: Optional[dict[str, Any]] = None,
         "orphans": flags.count("orphan_evidence"),
         "supporting_args": len(supporting),
         "supporting_in": sum(1 for a in supporting if ev.labels.get(a.id) == "in"),
+        "claims_supported_unargued": len(eligible - argued),
+        "coverage_eligible_claims": sorted(eligible),
+        "main_supporting_in": main_supported,
+        "main_component_supporting_in": sum(a.claim_id in main_components and ev.labels.get(a.id) == "in" for a in supporting),
+        "undecided_empty": not accepted_main and main_supported == 0,
+        "undecided_supported": not accepted_main and main_supported > 0,
         "attacks": len(attacks),
         "attacks_out": sum(1 for a in attacks if ev.labels.get(a.id) == "out"),
         "attacks_discharged": sum(1 for a in attacks if is_discharged(g, a)),
@@ -81,7 +97,8 @@ def metrics(inq: Inquiry, ev: Evaluation, gold: Optional[dict[str, Any]] = None,
         "model_critic": inq.llm_config.get("critic", {}).get("model", ""),
         "effort_proposer": inq.llm_config.get("proposer", {}).get("effort", ""),
         "effort_critic": inq.llm_config.get("critic", {}).get("effort", ""),
-        "tokens_in": sum(u["input_tokens"] for u in inq.llm_usage),
+        "tokens_in": sum(u["input_tokens"] + u.get("cache_read_input_tokens", 0)
+                         + u.get("cache_creation_input_tokens", 0) for u in inq.llm_usage),
         "tokens_out": sum(u["output_tokens"] for u in inq.llm_usage),
         "calls": len(inq.llm_usage),
         "stop_reason": inq.stop_assessments[-1].reason if inq.stop_assessments else "",
@@ -108,6 +125,7 @@ def metrics(inq: Inquiry, ev: Evaluation, gold: Optional[dict[str, Any]] = None,
 def one_line(m: dict[str, Any]) -> str:
     keys = ["provider_proposer", "model_proposer", "effort_proposer", "provider_critic", "model_critic", "effort_critic",
             "tokens_in", "tokens_out", "calls", "sources", "origins", "duplicate_sources", "evidence", "orphans", "supporting_args", "supporting_in",
+            "claims_supported_unargued", "main_supporting_in", "main_component_supporting_in", "undecided_empty", "undecided_supported",
             "attacks", "attacks_out", "attacks_discharged", "counters_dropped", "counters_dropped_reasons",
             "counters_inapplicable", "counters_inapplicable_reasons", "accepted_claims", "single_origin_accepts",
             "absence_assertions"]

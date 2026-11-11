@@ -79,3 +79,56 @@ def test_questions_file_parses_and_has_the_regression_question():
     assert sum(q["split"] == "regression" for q in qs) == 1
     for q in qs:
         assert q["gold"]["sources"] and q["gold"]["facts"] and q["expected"]["shape"]
+
+
+def test_undecided_empty_and_supported_distinguish_live_main_support():
+    inq = Inquiry(id="support", question="Did treatment change the outcome?")
+    g = inq.graph
+    q = g.add_issue(inq.question, question_type="causal")
+    c = g.add_claim("Treatment reduced the outcome", issue_id=q.id)
+    for _ in range(3):
+        g.add_evidence("A reported comparison", bears_on={c.id: "for"})
+    m = metrics(inq, evaluate_move(inq))
+    assert m["undecided_empty"] and not m["undecided_supported"] and m["claims_supported_unargued"] == 1
+    a = g.add_argument("study_result", ["E1"], c.id)
+    from inquiry.argument.schemes import SCHEMES
+    for cq in SCHEMES[a.scheme].assumptions():
+        g.answer_cq(a.id, cq.id, "Checked", ["E1"])
+    ev = evaluate_move(inq)
+    assert ev.status(c.id) == "undecided"  # moderate support does not clear the causal standard
+    m = metrics(inq, ev)
+    assert m["undecided_supported"] and not m["undecided_empty"] and m["main_supporting_in"] == 1
+    assert m["claims_supported_unargued"] == 0 and "undecided_supported=True" in one_line(m)
+    a.withdrawn = "No longer supports this claim"
+    m = metrics(inq, evaluate_move(inq))
+    assert m["undecided_empty"] and m["claims_supported_unargued"] == 1
+
+
+def test_accepted_component_does_not_count_as_a_main_answer_or_trigger_shape_judge():
+    from inquiry.bench import score_shape
+    from inquiry.llm import FakeLLM
+    inq = small_inquiry()
+    inq.graph.claim("C1").answers_issue = False
+    ev = evaluate_move(inq)
+    assert ev.status("C1") == "in"
+    m = metrics(inq, ev)
+    assert m["undecided_empty"] and not m["undecided_supported"]
+    assert m["main_component_supporting_in"] == 1 and not m["main_supporting_in"]
+    judge = FakeLLM({})
+    score = score_shape(inq, ev, {"shape": "accepted:12%"}, judge)
+    assert score["shape_match"] is False and not judge.calls
+
+
+def test_coverage_uses_offered_evidence_without_mutating_shadow_metadata():
+    inq = Inquiry(id="coverage", question="q")
+    g = inq.graph
+    q = g.add_issue("q")
+    c = g.add_claim("c", issue_id=q.id)
+    original = g.add_source(url="https://original.example", kind="primary")
+    relay = g.add_source(url="https://relay.example", kind="derivative", derived_from=original.id)
+    g.add_evidence("Original", source_id=original.id, bears_on={c.id: "for"})
+    g.add_evidence("Repeated", source_id=relay.id, bears_on={c.id: "for"})
+    g.add_evidence("Context", role="context", bears_on={c.id: "for"})
+    before = g.model_dump()
+    m = metrics(inq, evaluate_move(inq))
+    assert not m["coverage_eligible_claims"] and g.model_dump() == before

@@ -860,7 +860,8 @@ def shadowed_by_origin(g: ArgumentGraph, e, claim_ids: set[str]) -> Optional[str
     return None
 
 
-def issue_evidence(g: ArgumentGraph, issue_id: str, include_unassigned: bool = False) -> tuple[set[str], list[str]]:
+def issue_evidence(g: ArgumentGraph, issue_id: str, include_unassigned: bool = False,
+                   *, mark_shadowed: bool = True) -> tuple[set[str], list[str]]:
     """
     Claim ids of an issue and the evidence ids to argue from: items bearing on
     those claims, minus relays of a source that speaks for itself. A shadowed
@@ -875,7 +876,8 @@ def issue_evidence(g: ArgumentGraph, issue_id: str, include_unassigned: bool = F
             continue
         orig = shadowed_by_origin(g, e, claim_ids)
         if orig is not None:
-            e.provenance.setdefault("unusable", f"relay of {orig}, whose own evidence bears on the same claims")
+            if mark_shadowed:
+                e.provenance.setdefault("unusable", f"relay of {orig}, whose own evidence bears on the same claims")
             continue
         ev_ids.append(e.id)
     return claim_ids, ev_ids
