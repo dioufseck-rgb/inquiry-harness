@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from .argument.graph import ArgumentGraph, Claim
 from .argument.evaluate import Evaluation
-from .argument.scope import answers_scope
+from .argument.scope import answers_scope, sub_scope
 
 
 def answer_scope(claim: Claim) -> str:
@@ -17,16 +17,22 @@ def answer_scope(claim: Claim) -> str:
 def whole_question_answer(g: ArgumentGraph, ev: Evaluation) -> Claim | None:
     issue = g.issue(g.main_issue_id) if g.main_issue_id else None
     for c in g.claims_for_issue(g.main_issue_id):
-        if ev.status(c.id) != "in" or not c.answers_issue:
+        if ev.status(c.id) != "in":
             continue
-        if issue and not answers_scope(c.scope, issue.scope):
-            continue
-        # Legacy graphs have no scope fields. A record or definition does not
-        # answer an empirical/causal question merely by sharing its issue id.
-        if issue and issue.question_type != "conceptual" and (
-                c.kind == "deflationary" or c.target.get("evidence_status") in ("recommended", "reported")):
-            continue
-        return c
+        composition = any(a.scheme == "composition" and not a.withdrawn and ev.labels.get(a.id) == "in"
+                          for a in g.arguments_for(c.id))
+        if composition and c.critique_round <= 0:
+            continue  # no unreviewed composition closes a question
+        if issue and answers_scope(c.scope, issue.scope) and c.answers_issue:
+            if issue.question_type != "conceptual" and (c.kind == "deflationary" or c.target.get("evidence_status") in ("recommended", "reported")):
+                continue
+            return c
+    # A reviewed composition may close at its stated narrower scope, with a gap.
+    for c in g.claims_for_issue(g.main_issue_id):
+        if (issue and ev.status(c.id) == "in" and c.critique_round > 0 and sub_scope(c.scope, issue.scope)
+                and any(a.scheme == "composition" and not a.withdrawn and ev.labels.get(a.id) == "in"
+                        for a in g.arguments_for(c.id))):
+            return c
     return None
 
 

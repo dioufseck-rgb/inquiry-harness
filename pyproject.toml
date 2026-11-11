@@ -23,7 +23,7 @@ inquiry = "inquiry.live:main"
 include = ["inquiry*"]
 
 [tool.setuptools.package-data]
-inquiry = ["skills/*.md"]
+inquiry = ["skills/*.md", "CURRICULUM.md"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

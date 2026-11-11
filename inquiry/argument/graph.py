@@ -110,6 +110,7 @@ class Claim(BaseModel):
     revision_of: Optional[str] = Field(default=None, description="The claim this one narrowed or split from.")
     created_by_move: str = Field(default="", description="Persisted move provenance; Argue scoped claims are tagged argue.")
     created_round: int = 0
+    critique_round: int = 0
     review_note: str = Field(default="", description="Why a criticism did or did not change this claim.")
     answers_issue: bool = Field(
         default=True,

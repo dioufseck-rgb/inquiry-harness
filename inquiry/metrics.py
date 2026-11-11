@@ -81,6 +81,9 @@ def metrics(inq: Inquiry, ev: Evaluation, gold: Optional[dict[str, Any]] = None,
         "whole_question_answered": whole_question_answer(g, ev) is not None,
         "answer_scope": answer_scope(whole_question_answer(g, ev)) if whole_question_answer(g, ev) else "",
         "components_accepted": len(accepted_components(g, ev)),
+        "composed_claims": sum(c.created_by_move == "compose" for c in g.claims),
+        "composition_accepted": sum(c.live and ev.status(c.id) == "in" and any(
+            a.scheme == "composition" and ev.labels.get(a.id) == "in" for a in g.arguments_for(c.id)) for c in g.claims),
         "id": inq.id,
         "rounds": inq.round,
         "sources": len(g.sources),
@@ -149,7 +152,7 @@ def one_line(m: dict[str, Any]) -> str:
             "claims_supported_unargued", "main_supporting_in", "main_component_supporting_in", "undecided_empty", "undecided_supported",
             "attacks", "reopened_cqs", "reopened_then_discharged", "attacks_out", "attacks_discharged", "counters_dropped", "counters_dropped_reasons",
             "counters_inapplicable", "counters_inapplicable_reasons", "accepted_claims", "single_origin_accepts",
-            "absence_assertions", "whole_question_answered", "answer_scope", "components_accepted"]
+            "absence_assertions", "whole_question_answered", "answer_scope", "components_accepted", "composed_claims", "composition_accepted"]
     parts = [f"{k}={m[k]}" for k in keys if k in m]
     if "gold_sources_total" in m:
         parts.append(f"gold_sources={m['gold_sources_found']}/{m['gold_sources_total']}")

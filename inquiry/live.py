@@ -502,6 +502,21 @@ class Harness:
                 "accepted": {k: v for k, v in ev.issues.items() if v},
                 "flags": [f.code for f in ev.flags if f.code != "inapplicable_argument"],
             })
+            composed = moves.compose(inq, self.proposer)
+            if composed is not None:
+                self._record("compose", composed)
+                ev = moves.evaluate_move(inq)
+                if rounds_left <= 0 and composed["composed_claims"]:
+                    focus = set(composed["composed_claims"])
+                    crit_composed = moves.critique(inq, self.critic, claim_ids=focus)
+                    self._record("critique_composed", crit_composed)
+                    for query in crit_composed["needed_evidence"]:
+                        inq.notes.append(f"critic needs: {query}")
+                    moves.evaluate_move(inq)
+                    self._record("respond_composed", moves.respond(inq, self.proposer, claim_ids=focus))
+                    ev = moves.evaluate_move(inq)
+                    self._record("evaluate_composed", {"claim_ids": sorted(focus),
+                                                       "accepted": [cid for cid in focus if ev.status(cid) == "in"]})
             r = moves.reflect(inq, ev)
             self._record("reflect", {"established": r.established, "assumed": r.assumed,
                                      "load_bearing": r.load_bearing_node_ids, "directive": r.directive})

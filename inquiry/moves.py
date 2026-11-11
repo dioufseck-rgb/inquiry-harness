@@ -33,7 +33,7 @@ from pydantic import BaseModel, Field
 from .argument.evaluate import Evaluation, Settler, evaluate, is_discharged, load_bearing, what_would_settle
 from .argument.graph import (
     STRENGTH_ORDER, Argument, ArgumentGraph, AttackType, CQAnswer, Credentials, EvidenceKind, Issue, ProofStandard,
-    QuestionType, Source, Strength, Scope,
+    QuestionType, Source, Strength, Scope, DEFAULT_STANDARD,
 )
 from .argument.schemes import SCHEMES
 from .llm import LLM
@@ -1178,7 +1178,25 @@ def _sources_behind(g: ArgumentGraph, target_id: str) -> list[Source]:
     return out
 
 
-def critique_view(inq: Inquiry) -> str:
+def critique_view(inq: Inquiry, claim_ids: Optional[set[str]] = None) -> str:
+    if claim_ids is not None:
+        g = inq.graph
+        conclusions, premises, arguments = set(claim_ids), set(), set()
+        while True:
+            supports = [a for a in g.arguments if not a.is_attack and a.claim_id in conclusions]
+            arguments.update(a.id for a in supports)
+            premises.update(pid for a in supports for pid in a.premise_ids)
+            expanded = conclusions | {pid for pid in premises if g.claim(pid)}
+            if expanded == conclusions:
+                break
+            conclusions = expanded
+        focused = inq.model_copy(update={"graph": g.model_copy(update={
+            "claims": [c for c in g.claims if c.id in conclusions],
+            "arguments": [a for a in g.arguments if a.id in arguments],
+            "evidence": [e for e in g.evidence if e.id in premises],
+        })})
+        targets = set(claim_ids) | {a.id for a in g.arguments if a.claim_id in claim_ids and not a.is_attack}
+        return critique_view(focused) + "\n\n# Capped composition review\nAllowed attack targets only: " + json.dumps(sorted(targets))
     g = inq.graph
     ev = inq.evaluation
     audit = ["# Audit answered assumptions against each actual conclusion"]
@@ -1263,9 +1281,19 @@ def apply_critique(inq: Inquiry, out: CritiqueOutput) -> dict:
             "reopened_cqs": evaluated.reopened_cqs}
 
 
-def critique(inq: Inquiry, llm: LLM) -> dict:
-    out = llm.complete_json(skill_text("critique"), critique_view(inq), CritiqueOutput)
-    return apply_critique(inq, out)
+def critique(inq: Inquiry, llm: LLM, claim_ids: Optional[set[str]] = None) -> dict:
+    out = llm.complete_json(skill_text("critique"), critique_view(inq, claim_ids), CritiqueOutput)
+    filtered = []
+    if claim_ids is not None:
+        targets = claim_ids | {a.id for a in inq.graph.arguments if a.claim_id in claim_ids and not a.is_attack}
+        filtered = [f"out-of-scope capped review target: {p.target_id}" for p in out.attacks if p.target_id not in targets]
+        out.attacks = [p for p in out.attacks if p.target_id in targets]
+    result = apply_critique(inq, out)
+    result["dropped"].extend(filtered)
+    for a in inq.graph.arguments:
+        if a.scheme == "composition" and a.claim_id and (claim_ids is None or a.claim_id in claim_ids):
+            inq.graph.claim(a.claim_id).critique_round = inq.round
+    return result
 
 
 # ---------------------------------------------------------------------------
@@ -1528,9 +1556,12 @@ def apply_respond(inq: Inquiry, out: RespondOutput, allowed_attacks: set[str] | 
             "discharge_attempts": attempts, "dispositions": dispositions}
 
 
-def respond(inq: Inquiry, llm: LLM) -> dict:
+def respond(inq: Inquiry, llm: LLM, claim_ids: Optional[set[str]] = None) -> dict:
     ev = inq.evaluation or evaluate_move(inq)
     attacks = standing_attacks(inq, ev)
+    if claim_ids is not None:
+        targets = claim_ids | {a.id for a in inq.graph.arguments if a.claim_id in claim_ids and not a.is_attack}
+        attacks = [a for a in attacks if a.attacks.target_id in targets]
     new = [a for a in attacks if CONCEDED_MARK not in a.note]
     if not new:
         return {"conceded": [], "countered": [], "discharged": [], "dropped": [], "standing": len(attacks), "new": 0,
@@ -1842,6 +1873,100 @@ def compute(inq: Inquiry, llm: LLM) -> Optional[dict]:
 # Evaluate, reflect, stop  (code only)
 # ---------------------------------------------------------------------------
 
+class ComposedClaimProposal(BaseModel):
+    text: str
+    scope: Scope
+    relation: Optional[str] = None
+    premise_claim_ids: list[str]
+    cq: dict[str, CQAnswerProposal] = Field(default_factory=dict)
+    note: str = ""
+
+
+class CannotCompose(BaseModel):
+    component_ids: list[str]
+    why: str
+
+
+class ComposeOutput(BaseModel):
+    composed_claims: list[ComposedClaimProposal] = Field(default_factory=list, max_length=4)
+    cannot_compose: list[CannotCompose] = Field(default_factory=list)
+
+
+def composition_candidates(inq: Inquiry, ev: Evaluation) -> list:
+    g = inq.graph
+    descendants = {g.main_issue_id}
+    while True:
+        expanded = descendants | {i.id for i in g.issues if i.parent_id in descendants and i.status != "dropped"}
+        if expanded == descendants:
+            break
+        descendants = expanded
+    return [c for c in g.live_claims() if c.issue_id in descendants and ev.status(c.id) == "in"
+            and (c.issue_id != g.main_issue_id or not c.answers_issue)
+            and not any(a.scheme == "composition" for a in g.arguments_for(c.id))]
+
+
+def compose_view(inq: Inquiry) -> str:
+    from .argument.evaluate import argument_origins
+    g, ev = inq.graph, inq.evaluation or evaluate_move(inq)
+    main = g.issue(g.main_issue_id)
+    return json.dumps({
+        "main_issue": {"id": main.id, "text": main.text, "scope": main.scope.model_dump(),
+                       "standard": next((g.standard_for(c) for c in inq.main_claims()), DEFAULT_STANDARD[main.question_type])},
+        "accepted_components": [{"id": c.id, "text": c.text, "issue_id": c.issue_id,
+            "scope": c.scope.model_dump(), "pro_strength": ev.claims[c.id].pro_strength,
+            "origins": sorted(set().union(*(argument_origins(g, g.arg(aid), labels=ev.labels)
+                                           for aid in ev.claims[c.id].pro_ids)))} for c in composition_candidates(inq, ev)],
+        "live_main_claims": [{"id": c.id, "text": c.text, "scope": c.scope.model_dump(),
+                              "status": ev.status(c.id)} for c in inq.main_claims()],
+    }, ensure_ascii=False, indent=2)
+
+
+def apply_compose(inq: Inquiry, out: ComposeOutput) -> dict:
+    from .argument.scope import sub_scope
+    from .argument.evaluate import check_composition_scope
+    g, ev = inq.graph, inq.evaluation or evaluate_move(inq)
+    main = g.issue(g.main_issue_id)
+    eligible = {c.id for c in composition_candidates(inq, ev)}
+    result = {"composed_claims": [], "arguments": [], "cannot_compose": [], "dropped": []}
+    for p in out.composed_claims:
+        ids = list(dict.fromkeys(p.premise_claim_ids))
+        if (len(ids) < 2 or not set(ids) <= eligible or not p.text.strip()
+                or not sub_scope(p.scope, main.scope)):
+            result["dropped"].append("composition needs two accepted components and a scope within the main issue")
+            continue
+        if p.relation and p.relation != p.scope.relation:
+            result["dropped"].append("composition relation conflicts with scope.relation")
+            continue
+        existing = next((a for a in g.arguments if a.scheme == "composition" and not a.withdrawn
+                         and set(a.premise_ids) == set(ids) and g.claim(a.claim_id).text == p.text
+                         and g.claim(a.claim_id).scope == p.scope), None)
+        if existing:
+            continue
+        c = g.add_claim(p.text, issue_id=main.id, scope=p.scope, created_by_move="compose", created_round=inq.round)
+        a = g.add_argument("composition", ids, c.id, note=p.note, round=inq.round)
+        for qid, ans in p.cq.items():
+            if qid in ("commensurable", "direction") and ans.answer.strip():
+                known = [pid for pid in ans.evidence_ids if g.ev(pid) or g.claim(pid)]
+                g.answer_cq(a.id, qid, ans.answer, known, defaulted=ans.defaulted,
+                            outcome=ans.outcome, answer_move="compose")
+        check_composition_scope(g, a)
+        result["composed_claims"].append(c.id)
+        result["arguments"].append(a.id)
+    for p in out.cannot_compose:
+        if set(p.component_ids) <= eligible and p.why.strip():
+            result["cannot_compose"].append(p.model_dump())
+            inq.notes.append(f"cannot_compose {p.component_ids}: {p.why}")
+    return result
+
+
+def compose(inq: Inquiry, llm: LLM) -> Optional[dict]:
+    ev = inq.evaluation or evaluate_move(inq)
+    if whole_question_answer(inq.graph, ev) or len(composition_candidates(inq, ev)) < 2:
+        return None
+    system = skill_text("compose") + "\n\n" + (Path(__file__).parent / "CURRICULUM.md").read_text(encoding="utf-8")
+    out = llm.complete_json(system, compose_view(inq), ComposeOutput)
+    return apply_compose(inq, out)
+
 def evaluate_move(inq: Inquiry) -> Evaluation:
     ev = evaluate(inq.graph)
     for argument in inq.graph.arguments:
@@ -1953,6 +2078,11 @@ def conclude_view(inq: Inquiry) -> str:
         lb_lines.append("(none)")
     parts.append("\n".join(lb_lines))
     parts.append(_settlers_block(inq, ev))
+    answer = whole_question_answer(g, ev)
+    if answer:
+        parts.append(f"# Accepted answer at its stated scope\n{answer.id}: {answer.text}\nScope: {answer_scope(answer)}")
+        if not answer.answers_issue:
+            parts.append("The finding is narrower than the issue. State the finding at its accepted scope and name the untested/unsupported population or period gap. Do not assert that evidence does not exist.")
     revised = [c for c in g.claims if not c.live]
     if revised:
         parts.append("# Claims revised on review (write from the revised claims, never the originals)\n\n" + "\n".join(
@@ -1996,6 +2126,16 @@ def absence_assertions(text: str) -> list[str]:
 def apply_conclude(inq: Inquiry, out: ConcludeOutput) -> dict:
     ev = inq.evaluation or evaluate_move(inq)
     g = inq.graph
+    answer = whole_question_answer(g, ev)
+    if answer and not answer.answers_issue:
+        from .argument.scope import age_range
+        main = g.issue(g.main_issue_id)
+        broad, narrow = age_range(main.scope.population), age_range(answer.scope.population)
+        gap = f"The requested scope ({main.scope.summary()}) remains untested outside the accepted scope."
+        if broad and narrow and broad[0] < narrow[0]:
+            gap += f" The age {broad[0]}–{narrow[0] - 1} gap is untested."
+        out = out.model_copy(update={"answer": f"Accepted at scope {answer_scope(answer)}: {answer.text}\n\n{gap}\n\n{out.answer}",
+                                     "unresolved": [*out.unresolved, gap]})
     judgements: list[Judgement] = []
     capped: list[str] = []
     for j in out.judgements:

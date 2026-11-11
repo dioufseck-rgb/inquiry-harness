@@ -14,7 +14,7 @@ from .argument.evaluate import Evaluation
 from .argument.graph import ArgumentGraph, QuestionType, now_iso  # noqa: F401  (now_iso re-exported)
 
 Phase = Literal["new", "framed", "hypothesized", "inquiring", "concluded"]
-Move = Literal["frame", "hypothesize", "plan", "gather", "argue", "critique", "evaluate", "reflect", "stop", "conclude"]
+Move = Literal["frame", "hypothesize", "plan", "gather", "argue", "revise", "coverage_check", "critique", "respond", "evaluate", "compose", "reflect", "stop", "conclude"]
 
 
 class Framing(BaseModel):
