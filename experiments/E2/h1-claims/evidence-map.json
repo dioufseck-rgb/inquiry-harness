@@ -1,0 +1,2073 @@
+{
+  "claims_sha256": "922608a13a85c68ddaa855cfdcec5e5cd8363cf4f15ac4b456647b0318957aac",
+  "claims": [
+    {
+      "id": "C1",
+      "issue_id": "Q1",
+      "text": "Initiating low-dose aspirin for primary prevention reduces net cardiovascular harm in adults aged 60 and over."
+    },
+    {
+      "id": "C2",
+      "issue_id": "Q1",
+      "text": "Initiating low-dose aspirin for primary prevention increases net cardiovascular harm in adults aged 60 and over."
+    },
+    {
+      "id": "C3",
+      "issue_id": "Q1",
+      "text": "Initiating low-dose aspirin for primary prevention has no net effect on cardiovascular harm in adults aged 60 and over."
+    },
+    {
+      "id": "C4",
+      "issue_id": "Q1",
+      "text": "For adults aged 60 and over, whether initiating aspirin reduces net cardiovascular harm depends on how sources define and value cardiovascular events and bleeding complications."
+    },
+    {
+      "id": "C5",
+      "issue_id": "Q2",
+      "text": "For adults aged 60 and over, interpreting net cardiovascular harm to include major extracranial bleeding makes aspirin initiation less favorable than an interpretation restricted to cardiovascular outcomes."
+    },
+    {
+      "id": "C6",
+      "issue_id": "Q2",
+      "text": "For adults aged 60 and over, severity-sensitive interpretations of net cardiovascular harm can give a different balance for aspirin initiation than comparisons that do not distinguish outcome severity."
+    },
+    {
+      "id": "C7",
+      "issue_id": "Q2",
+      "text": "For adults aged 60 and over, differences in outcome inclusion and severity valuation do not change the net cardiovascular harm conclusion for aspirin initiation."
+    },
+    {
+      "id": "C8",
+      "issue_id": "Q2",
+      "text": "Net cardiovascular harm has no single accepted definition for aspirin primary prevention in adults aged 60 and over; sources use distinct outcomes and severity valuations."
+    },
+    {
+      "id": "C9",
+      "issue_id": "Q3",
+      "text": "Initiating low-dose aspirin reduces first myocardial infarction in adults aged 60 and older without established cardiovascular disease."
+    },
+    {
+      "id": "C10",
+      "issue_id": "Q3",
+      "text": "Initiating low-dose aspirin reduces ischemic stroke in adults aged 60 and older without established cardiovascular disease."
+    },
+    {
+      "id": "C11",
+      "issue_id": "Q3",
+      "text": "Initiating low-dose aspirin reduces cardiovascular death in adults aged 60 and older without established cardiovascular disease."
+    },
+    {
+      "id": "C12",
+      "issue_id": "Q3",
+      "text": "Initiating low-dose aspirin has no effect on first myocardial infarction, ischemic stroke, or cardiovascular death in adults aged 60 and older without established cardiovascular disease."
+    },
+    {
+      "id": "C13",
+      "issue_id": "Q4",
+      "text": "Initiating low-dose aspirin increases intracranial hemorrhage in adults aged 60 and older without established cardiovascular disease."
+    },
+    {
+      "id": "C14",
+      "issue_id": "Q4",
+      "text": "Initiating low-dose aspirin increases nonfatal major extracranial bleeding in adults aged 60 and older without established cardiovascular disease."
+    },
+    {
+      "id": "C15",
+      "issue_id": "Q4",
+      "text": "Initiating low-dose aspirin increases fatal bleeding in adults aged 60 and older without established cardiovascular disease."
+    },
+    {
+      "id": "C16",
+      "issue_id": "Q4",
+      "text": "Among adults aged 60 and older without established cardiovascular disease, aspirin initiation causes a larger absolute excess of major bleeding at older ages and higher baseline bleeding risk."
+    },
+    {
+      "id": "C17",
+      "issue_id": "Q4",
+      "text": "Initiating low-dose aspirin does not increase intracranial hemorrhage or major extracranial bleeding in adults aged 60 and older without established cardiovascular disease."
+    }
+  ],
+  "reviewed": true,
+  "reviewed_by": "Codex manual review of all 160 evidence texts and the 17 H1 claims",
+  "policy": "Partial directional relevance, not entailment. No ordinal reuse. Nonsignificance is not equivalence; component evidence alone does not determine a net endpoint.",
+  "directions": {
+    "E1": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral",
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral",
+      "C13": "neutral",
+      "C14": "neutral",
+      "C15": "neutral",
+      "C16": "neutral",
+      "C17": "neutral"
+    },
+    "E2": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "for",
+      "C8": "for"
+    },
+    "E3": {
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral"
+    },
+    "E4": {
+      "C17": "against",
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral"
+    },
+    "E5": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "for",
+      "C8": "for"
+    },
+    "E6": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral"
+    },
+    "E7": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral",
+      "C13": "neutral",
+      "C14": "neutral",
+      "C15": "neutral",
+      "C16": "neutral",
+      "C17": "neutral"
+    },
+    "E8": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral"
+    },
+    "E9": {
+      "C9": "for",
+      "C10": "for",
+      "C12": "against"
+    },
+    "E10": {
+      "C17": "against",
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral"
+    },
+    "E11": {
+      "C1": "for",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral"
+    },
+    "E12": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral"
+    },
+    "E13": {
+      "C4": "for",
+      "C8": "for",
+      "C6": "for",
+      "C7": "neutral"
+    },
+    "E14": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral",
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral",
+      "C13": "neutral",
+      "C14": "neutral",
+      "C15": "neutral",
+      "C16": "neutral",
+      "C17": "neutral"
+    },
+    "E15": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral",
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral",
+      "C13": "neutral",
+      "C14": "neutral",
+      "C15": "neutral",
+      "C16": "neutral",
+      "C17": "neutral"
+    },
+    "E16": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral"
+    },
+    "E17": {
+      "C1": "for",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral"
+    },
+    "E18": {
+      "C9": "for",
+      "C10": "for",
+      "C12": "against"
+    },
+    "E19": {
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral"
+    },
+    "E20": {
+      "C14": "for",
+      "C17": "against",
+      "C5": "for",
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral"
+    },
+    "E21": {
+      "C4": "for",
+      "C6": "for",
+      "C7": "neutral"
+    },
+    "E22": {
+      "C4": "for",
+      "C6": "for",
+      "C7": "neutral"
+    },
+    "E23": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral"
+    },
+    "E24": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral"
+    },
+    "E25": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral",
+      "C13": "neutral",
+      "C14": "neutral",
+      "C15": "neutral",
+      "C16": "neutral",
+      "C17": "neutral"
+    },
+    "E26": {
+      "C4": "for",
+      "C8": "for",
+      "C6": "for",
+      "C7": "neutral"
+    },
+    "E27": {
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral"
+    },
+    "E28": {
+      "C9": "for",
+      "C12": "against"
+    },
+    "E29": {
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral"
+    },
+    "E30": {
+      "C13": "for",
+      "C17": "against",
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral"
+    },
+    "E31": {
+      "C14": "for",
+      "C17": "against",
+      "C5": "for",
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral"
+    },
+    "E32": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral"
+    },
+    "E33": {
+      "C13": "for",
+      "C17": "against",
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral"
+    },
+    "E34": {
+      "C9": "for",
+      "C12": "against"
+    },
+    "E35": {
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral"
+    },
+    "E36": {
+      "C14": "for",
+      "C17": "against",
+      "C5": "for",
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral"
+    },
+    "E37": {
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral"
+    },
+    "E38": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral",
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral",
+      "C13": "neutral",
+      "C14": "neutral",
+      "C15": "neutral",
+      "C16": "neutral",
+      "C17": "neutral"
+    },
+    "E39": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral"
+    },
+    "E40": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "for",
+      "C8": "for"
+    },
+    "E41": {
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral"
+    },
+    "E42": {
+      "C17": "against",
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral"
+    },
+    "E43": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "for",
+      "C8": "for"
+    },
+    "E44": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "for",
+      "C8": "for",
+      "C13": "neutral",
+      "C14": "neutral",
+      "C15": "neutral",
+      "C16": "neutral",
+      "C17": "neutral"
+    },
+    "E45": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral"
+    },
+    "E46": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral"
+    },
+    "E47": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral"
+    },
+    "E48": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "for",
+      "C8": "for"
+    },
+    "E49": {
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral"
+    },
+    "E50": {
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral"
+    },
+    "E51": {
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral"
+    },
+    "E52": {
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral"
+    },
+    "E53": {
+      "C14": "for",
+      "C17": "against",
+      "C5": "for",
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral"
+    },
+    "E54": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral",
+      "C13": "neutral",
+      "C14": "neutral",
+      "C15": "neutral",
+      "C16": "neutral",
+      "C17": "neutral"
+    },
+    "E55": {
+      "C13": "for",
+      "C17": "against",
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral"
+    },
+    "E56": {
+      "C17": "against",
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral"
+    },
+    "E57": {
+      "C15": "neutral"
+    },
+    "E58": {
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral"
+    },
+    "E59": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral"
+    },
+    "E60": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral"
+    },
+    "E61": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral"
+    },
+    "E62": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral"
+    },
+    "E63": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral",
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral",
+      "C13": "neutral",
+      "C14": "neutral",
+      "C15": "neutral",
+      "C16": "neutral",
+      "C17": "neutral"
+    },
+    "E64": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "for",
+      "C8": "for"
+    },
+    "E65": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral"
+    },
+    "E66": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "for",
+      "C8": "for",
+      "C13": "neutral",
+      "C14": "neutral",
+      "C15": "neutral",
+      "C16": "neutral",
+      "C17": "neutral"
+    },
+    "E67": {
+      "C14": "for",
+      "C17": "against",
+      "C5": "for",
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral"
+    },
+    "E68": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral",
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral",
+      "C13": "neutral",
+      "C14": "neutral",
+      "C15": "neutral",
+      "C16": "neutral",
+      "C17": "neutral"
+    },
+    "E69": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "for",
+      "C8": "for"
+    },
+    "E70": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral"
+    },
+    "E71": {
+      "C17": "against",
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral"
+    },
+    "E72": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "for",
+      "C7": "neutral"
+    },
+    "E73": {
+      "C16": "neutral",
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral"
+    },
+    "E74": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral",
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral",
+      "C13": "neutral",
+      "C14": "neutral",
+      "C15": "neutral",
+      "C16": "neutral",
+      "C17": "neutral"
+    },
+    "E75": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral",
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral",
+      "C13": "neutral",
+      "C14": "neutral",
+      "C15": "neutral",
+      "C16": "neutral",
+      "C17": "neutral"
+    },
+    "E76": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral",
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral",
+      "C13": "neutral",
+      "C14": "neutral",
+      "C15": "neutral",
+      "C16": "neutral",
+      "C17": "neutral"
+    },
+    "E77": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral"
+    },
+    "E78": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral",
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral",
+      "C13": "neutral",
+      "C14": "neutral",
+      "C15": "neutral",
+      "C16": "neutral",
+      "C17": "neutral"
+    },
+    "E79": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral",
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral",
+      "C13": "neutral",
+      "C14": "neutral",
+      "C15": "neutral",
+      "C16": "neutral",
+      "C17": "neutral"
+    },
+    "E80": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "for",
+      "C8": "for"
+    },
+    "E81": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "for",
+      "C8": "for",
+      "C13": "neutral",
+      "C14": "neutral",
+      "C15": "neutral",
+      "C16": "neutral",
+      "C17": "neutral"
+    },
+    "E82": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral"
+    },
+    "E83": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral"
+    },
+    "E84": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral",
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral",
+      "C13": "neutral",
+      "C14": "neutral",
+      "C15": "neutral",
+      "C16": "neutral",
+      "C17": "neutral"
+    },
+    "E85": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral",
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral",
+      "C13": "neutral",
+      "C14": "neutral",
+      "C15": "neutral",
+      "C16": "neutral",
+      "C17": "neutral"
+    },
+    "E86": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral",
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral",
+      "C13": "neutral",
+      "C14": "neutral",
+      "C15": "neutral",
+      "C16": "neutral",
+      "C17": "neutral"
+    },
+    "E87": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral",
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral",
+      "C13": "neutral",
+      "C14": "neutral",
+      "C15": "neutral",
+      "C16": "neutral",
+      "C17": "neutral"
+    },
+    "E88": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral"
+    },
+    "E89": {
+      "C17": "against",
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral"
+    },
+    "E90": {
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral"
+    },
+    "E91": {
+      "C13": "neutral",
+      "C14": "neutral",
+      "C15": "neutral",
+      "C17": "neutral"
+    },
+    "E92": {
+      "C14": "for",
+      "C5": "for"
+    },
+    "E93": {
+      "C9": "for",
+      "C12": "against"
+    },
+    "E94": {
+      "C13": "for",
+      "C17": "against",
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral"
+    },
+    "E95": {
+      "C14": "for",
+      "C17": "against",
+      "C5": "for",
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral"
+    },
+    "E96": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral",
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral",
+      "C13": "neutral",
+      "C14": "neutral",
+      "C15": "neutral",
+      "C16": "neutral",
+      "C17": "neutral"
+    },
+    "E97": {
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral"
+    },
+    "E98": {
+      "C13": "for",
+      "C17": "against",
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral"
+    },
+    "E99": {
+      "C13": "neutral",
+      "C14": "neutral",
+      "C15": "neutral",
+      "C17": "neutral"
+    },
+    "E100": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral",
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral",
+      "C13": "neutral",
+      "C14": "neutral",
+      "C15": "neutral",
+      "C16": "neutral",
+      "C17": "neutral"
+    },
+    "E101": {
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral"
+    },
+    "E102": {
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral"
+    },
+    "E103": {
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral",
+      "C16": "neutral"
+    },
+    "E104": {
+      "C13": "neutral",
+      "C14": "neutral",
+      "C15": "neutral",
+      "C16": "neutral",
+      "C17": "neutral"
+    },
+    "E105": {
+      "C13": "for",
+      "C17": "against",
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C15": "neutral"
+    },
+    "E106": {
+      "C13": "for",
+      "C17": "against",
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral"
+    },
+    "E107": {
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral",
+      "C16": "neutral"
+    },
+    "E108": {
+      "C4": "for",
+      "C6": "for",
+      "C7": "neutral"
+    },
+    "E109": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral",
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral",
+      "C13": "neutral",
+      "C14": "neutral",
+      "C15": "neutral",
+      "C16": "neutral",
+      "C17": "neutral"
+    },
+    "E110": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral",
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral",
+      "C13": "neutral",
+      "C14": "neutral",
+      "C15": "neutral",
+      "C16": "neutral",
+      "C17": "neutral"
+    },
+    "E111": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral",
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral",
+      "C13": "neutral",
+      "C14": "neutral",
+      "C15": "neutral",
+      "C16": "neutral",
+      "C17": "neutral"
+    },
+    "E112": {
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral"
+    },
+    "E113": {
+      "C13": "for",
+      "C17": "against",
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral"
+    },
+    "E114": {
+      "C14": "for",
+      "C17": "against",
+      "C5": "for",
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral"
+    },
+    "E115": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral",
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral",
+      "C13": "neutral",
+      "C14": "neutral",
+      "C15": "neutral",
+      "C16": "neutral",
+      "C17": "neutral"
+    },
+    "E116": {
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral"
+    },
+    "E117": {
+      "C13": "for",
+      "C17": "against",
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral"
+    },
+    "E118": {
+      "C13": "for",
+      "C17": "against",
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral"
+    },
+    "E119": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral",
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral",
+      "C13": "neutral",
+      "C14": "neutral",
+      "C15": "neutral",
+      "C16": "neutral",
+      "C17": "neutral"
+    },
+    "E120": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral",
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral",
+      "C13": "neutral",
+      "C14": "neutral",
+      "C15": "neutral",
+      "C16": "neutral",
+      "C17": "neutral"
+    },
+    "E121": {
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral"
+    },
+    "E122": {
+      "C13": "for",
+      "C17": "against",
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral"
+    },
+    "E123": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral",
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral",
+      "C13": "neutral",
+      "C14": "neutral",
+      "C15": "neutral",
+      "C16": "neutral",
+      "C17": "neutral"
+    },
+    "E124": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral",
+      "C17": "against"
+    },
+    "E125": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral",
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral",
+      "C13": "neutral",
+      "C14": "neutral",
+      "C15": "neutral",
+      "C16": "neutral",
+      "C17": "neutral"
+    },
+    "E126": {
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral"
+    },
+    "E127": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "for",
+      "C8": "for",
+      "C13": "neutral",
+      "C14": "neutral",
+      "C15": "neutral",
+      "C16": "neutral",
+      "C17": "neutral"
+    },
+    "E128": {
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral",
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral"
+    },
+    "E129": {
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral"
+    },
+    "E130": {
+      "C10": "for",
+      "C12": "against",
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral"
+    },
+    "E131": {
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral"
+    },
+    "E132": {
+      "C17": "against",
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral"
+    },
+    "E133": {
+      "C13": "neutral",
+      "C14": "neutral",
+      "C15": "neutral",
+      "C17": "neutral"
+    },
+    "E134": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral"
+    },
+    "E135": {
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral",
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral"
+    },
+    "E136": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral",
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral",
+      "C13": "neutral",
+      "C14": "neutral",
+      "C15": "neutral",
+      "C16": "neutral",
+      "C17": "neutral"
+    },
+    "E137": {
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral"
+    },
+    "E138": {
+      "C10": "for",
+      "C12": "against",
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral"
+    },
+    "E139": {
+      "C17": "against",
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral"
+    },
+    "E140": {
+      "C13": "neutral",
+      "C14": "neutral",
+      "C15": "neutral",
+      "C16": "neutral",
+      "C17": "neutral"
+    },
+    "E141": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral",
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral",
+      "C13": "neutral",
+      "C14": "neutral",
+      "C15": "neutral",
+      "C16": "neutral",
+      "C17": "neutral"
+    },
+    "E142": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "for",
+      "C8": "for"
+    },
+    "E143": {
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral"
+    },
+    "E144": {
+      "C13": "neutral",
+      "C14": "neutral",
+      "C15": "neutral",
+      "C17": "neutral"
+    },
+    "E145": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral",
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral",
+      "C13": "neutral",
+      "C14": "neutral",
+      "C15": "neutral",
+      "C16": "neutral",
+      "C17": "neutral"
+    },
+    "E146": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral",
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral",
+      "C13": "neutral",
+      "C14": "neutral",
+      "C15": "neutral",
+      "C16": "neutral",
+      "C17": "neutral"
+    },
+    "E147": {
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral",
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral",
+      "C13": "neutral",
+      "C14": "neutral",
+      "C15": "neutral",
+      "C16": "neutral",
+      "C17": "neutral"
+    },
+    "E148": {
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral"
+    },
+    "E149": {
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral"
+    },
+    "E150": {
+      "C13": "neutral",
+      "C14": "neutral",
+      "C15": "neutral",
+      "C17": "neutral"
+    },
+    "E151": {
+      "C1": "against",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "for"
+    },
+    "E152": {
+      "C16": "for"
+    },
+    "E153": {
+      "C9": "for",
+      "C10": "for",
+      "C12": "against",
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral",
+      "C4": "neutral"
+    },
+    "E154": {
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral"
+    },
+    "E155": {
+      "C9": "neutral",
+      "C10": "neutral",
+      "C11": "neutral",
+      "C12": "neutral",
+      "C16": "neutral"
+    },
+    "E156": {
+      "C13": "for",
+      "C14": "for",
+      "C17": "against",
+      "C5": "for",
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral"
+    },
+    "E157": {
+      "C16": "for"
+    },
+    "E158": {
+      "C4": "for",
+      "C8": "for",
+      "C6": "for",
+      "C7": "neutral",
+      "C1": "neutral",
+      "C2": "neutral",
+      "C3": "neutral"
+    },
+    "E159": {
+      "C13": "neutral",
+      "C14": "neutral",
+      "C15": "neutral",
+      "C16": "neutral",
+      "C17": "neutral"
+    },
+    "E160": {
+      "C4": "for",
+      "C6": "for",
+      "C7": "neutral"
+    }
+  },
+  "rationale": {
+    "E1": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Internal-validity/transport context. Scope and selection limitations remain for CQs."
+    ],
+    "E2": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Sources use different definitions/severity valuations or identify their importance; does not establish a sign reversal.",
+      "Distinct observed outcome constructions support definitional plurality, not a universal claim that no standard exists."
+    ],
+    "E3": [
+      "Nonsignificant, composite, heterogeneous or indirect estimates do not establish a component effect or true zero."
+    ],
+    "E4": [
+      "A bleeding excess weighs against the no-increase conjunction; no assumption of target-population equivalence.",
+      "Bleeding is one side of the net balance; it alone cannot establish total net harm, benefit or equivalence."
+    ],
+    "E5": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Sources use different definitions/severity valuations or identify their importance; does not establish a sign reversal.",
+      "Distinct observed outcome constructions support definitional plurality, not a universal claim that no standard exists."
+    ],
+    "E6": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction."
+    ],
+    "E7": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Bleeding definition, mechanism, selection or precision context."
+    ],
+    "E8": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction."
+    ],
+    "E9": [
+      "MI reduction; pooled age/regimen differences and instrument uncertainty remain explicit.",
+      "Stroke reduction; mixed/all-stroke endpoints are only partial support for ischemic stroke.",
+      "Detected component reductions weigh against an unqualified no-effect conjunction; transport is not certified."
+    ],
+    "E10": [
+      "A bleeding excess weighs against the no-increase conjunction; no assumption of target-population equivalence.",
+      "Bleeding is one side of the net balance; it alone cannot establish total net harm, benefit or equivalence."
+    ],
+    "E11": [
+      "Positive weighted net-benefit point estimate; CI spans harm and the target population is not directly isolated.",
+      "Mixed, near-null, partial or model-dependent balances do not establish exact zero or a uniform net direction at 60+."
+    ],
+    "E12": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction."
+    ],
+    "E13": [
+      "Sources use different definitions/severity valuations or identify their importance; does not establish a sign reversal.",
+      "Distinct observed outcome constructions support definitional plurality, not a universal claim that no standard exists.",
+      "Severity weighting or severity differences can alter the numeric balance; no demonstrated reversal is assumed.",
+      "No comparative robustness result establishes invariance or a particular reversal under alternative values."
+    ],
+    "E14": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Internal-validity/transport context. Scope and selection limitations remain for CQs."
+    ],
+    "E15": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Internal-validity/transport context. Scope and selection limitations remain for CQs."
+    ],
+    "E16": [
+      "Mixed, near-null, partial or model-dependent balances do not establish exact zero or a uniform net direction at 60+."
+    ],
+    "E17": [
+      "Positive weighted net-benefit point estimate; CI spans harm and the target population is not directly isolated.",
+      "Mixed, near-null, partial or model-dependent balances do not establish exact zero or a uniform net direction at 60+."
+    ],
+    "E18": [
+      "MI reduction; pooled age/regimen differences and instrument uncertainty remain explicit.",
+      "Stroke reduction; mixed/all-stroke endpoints are only partial support for ischemic stroke.",
+      "Detected component reductions weigh against an unqualified no-effect conjunction; transport is not certified."
+    ],
+    "E19": [
+      "Nonsignificant, composite, heterogeneous or indirect estimates do not establish a component effect or true zero."
+    ],
+    "E20": [
+      "Major extracranial/GI excess partially supports nonfatal extracranial harm; fatal composition and exact endpoint need checking.",
+      "A bleeding excess weighs against the no-increase conjunction; no assumption of target-population equivalence.",
+      "Including an additional excess harm makes the balance less favorable, conditional on the source's endpoint and population.",
+      "Bleeding is one side of the net balance; it alone cannot establish total net harm, benefit or equivalence."
+    ],
+    "E21": [
+      "Sources use different definitions/severity valuations or identify their importance; does not establish a sign reversal.",
+      "Severity weighting or severity differences can alter the numeric balance; no demonstrated reversal is assumed.",
+      "No comparative robustness result establishes invariance or a particular reversal under alternative values."
+    ],
+    "E22": [
+      "Sources use different definitions/severity valuations or identify their importance; does not establish a sign reversal.",
+      "Severity weighting or severity differences can alter the numeric balance; no demonstrated reversal is assumed.",
+      "No comparative robustness result establishes invariance or a particular reversal under alternative values."
+    ],
+    "E23": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction."
+    ],
+    "E24": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction."
+    ],
+    "E25": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Bleeding definition, mechanism, selection or precision context."
+    ],
+    "E26": [
+      "Sources use different definitions/severity valuations or identify their importance; does not establish a sign reversal.",
+      "Distinct observed outcome constructions support definitional plurality, not a universal claim that no standard exists.",
+      "Severity weighting or severity differences can alter the numeric balance; no demonstrated reversal is assumed.",
+      "No comparative robustness result establishes invariance or a particular reversal under alternative values."
+    ],
+    "E27": [
+      "Nonsignificant, composite, heterogeneous or indirect estimates do not establish a component effect or true zero."
+    ],
+    "E28": [
+      "MI reduction; pooled age/regimen differences and instrument uncertainty remain explicit.",
+      "Detected component reductions weigh against an unqualified no-effect conjunction; transport is not certified."
+    ],
+    "E29": [
+      "Nonsignificant, composite, heterogeneous or indirect estimates do not establish a component effect or true zero."
+    ],
+    "E30": [
+      "Intracranial/hemorrhagic-stroke excess; subtype, precision and transport limitations remain.",
+      "A bleeding excess weighs against the no-increase conjunction; no assumption of target-population equivalence.",
+      "Bleeding is one side of the net balance; it alone cannot establish total net harm, benefit or equivalence."
+    ],
+    "E31": [
+      "Major extracranial/GI excess partially supports nonfatal extracranial harm; fatal composition and exact endpoint need checking.",
+      "A bleeding excess weighs against the no-increase conjunction; no assumption of target-population equivalence.",
+      "Including an additional excess harm makes the balance less favorable, conditional on the source's endpoint and population.",
+      "Bleeding is one side of the net balance; it alone cannot establish total net harm, benefit or equivalence."
+    ],
+    "E32": [
+      "Mixed, near-null, partial or model-dependent balances do not establish exact zero or a uniform net direction at 60+."
+    ],
+    "E33": [
+      "Intracranial/hemorrhagic-stroke excess; subtype, precision and transport limitations remain.",
+      "A bleeding excess weighs against the no-increase conjunction; no assumption of target-population equivalence.",
+      "Bleeding is one side of the net balance; it alone cannot establish total net harm, benefit or equivalence."
+    ],
+    "E34": [
+      "MI reduction; pooled age/regimen differences and instrument uncertainty remain explicit.",
+      "Detected component reductions weigh against an unqualified no-effect conjunction; transport is not certified."
+    ],
+    "E35": [
+      "Nonsignificant, composite, heterogeneous or indirect estimates do not establish a component effect or true zero."
+    ],
+    "E36": [
+      "Major extracranial/GI excess partially supports nonfatal extracranial harm; fatal composition and exact endpoint need checking.",
+      "A bleeding excess weighs against the no-increase conjunction; no assumption of target-population equivalence.",
+      "Including an additional excess harm makes the balance less favorable, conditional on the source's endpoint and population.",
+      "Bleeding is one side of the net balance; it alone cannot establish total net harm, benefit or equivalence."
+    ],
+    "E37": [
+      "Nonsignificant, composite, heterogeneous or indirect estimates do not establish a component effect or true zero."
+    ],
+    "E38": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Internal-validity/transport context. Scope and selection limitations remain for CQs."
+    ],
+    "E39": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction."
+    ],
+    "E40": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Sources use different definitions/severity valuations or identify their importance; does not establish a sign reversal.",
+      "Distinct observed outcome constructions support definitional plurality, not a universal claim that no standard exists."
+    ],
+    "E41": [
+      "Nonsignificant, composite, heterogeneous or indirect estimates do not establish a component effect or true zero."
+    ],
+    "E42": [
+      "A bleeding excess weighs against the no-increase conjunction; no assumption of target-population equivalence.",
+      "Bleeding is one side of the net balance; it alone cannot establish total net harm, benefit or equivalence."
+    ],
+    "E43": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Sources use different definitions/severity valuations or identify their importance; does not establish a sign reversal.",
+      "Distinct observed outcome constructions support definitional plurality, not a universal claim that no standard exists."
+    ],
+    "E44": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Sources use different definitions/severity valuations or identify their importance; does not establish a sign reversal.",
+      "Distinct observed outcome constructions support definitional plurality, not a universal claim that no standard exists.",
+      "Bleeding definition, mechanism, selection or precision context."
+    ],
+    "E45": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction."
+    ],
+    "E46": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction."
+    ],
+    "E47": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction."
+    ],
+    "E48": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Sources use different definitions/severity valuations or identify their importance; does not establish a sign reversal.",
+      "Distinct observed outcome constructions support definitional plurality, not a universal claim that no standard exists."
+    ],
+    "E49": [
+      "Nonsignificant, composite, heterogeneous or indirect estimates do not establish a component effect or true zero."
+    ],
+    "E50": [
+      "Nonsignificant, composite, heterogeneous or indirect estimates do not establish a component effect or true zero."
+    ],
+    "E51": [
+      "Nonsignificant, composite, heterogeneous or indirect estimates do not establish a component effect or true zero."
+    ],
+    "E52": [
+      "Nonsignificant, composite, heterogeneous or indirect estimates do not establish a component effect or true zero."
+    ],
+    "E53": [
+      "Major extracranial/GI excess partially supports nonfatal extracranial harm; fatal composition and exact endpoint need checking.",
+      "A bleeding excess weighs against the no-increase conjunction; no assumption of target-population equivalence.",
+      "Including an additional excess harm makes the balance less favorable, conditional on the source's endpoint and population.",
+      "Bleeding is one side of the net balance; it alone cannot establish total net harm, benefit or equivalence."
+    ],
+    "E54": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Bleeding definition, mechanism, selection or precision context."
+    ],
+    "E55": [
+      "Intracranial/hemorrhagic-stroke excess; subtype, precision and transport limitations remain.",
+      "A bleeding excess weighs against the no-increase conjunction; no assumption of target-population equivalence.",
+      "Bleeding is one side of the net balance; it alone cannot establish total net harm, benefit or equivalence."
+    ],
+    "E56": [
+      "A bleeding excess weighs against the no-increase conjunction; no assumption of target-population equivalence.",
+      "Bleeding is one side of the net balance; it alone cannot establish total net harm, benefit or equivalence."
+    ],
+    "E57": [
+      "Fatal-bleeding estimates are imprecise; neither an increase nor a true-zero effect is established."
+    ],
+    "E58": [
+      "Nonsignificant, composite, heterogeneous or indirect estimates do not establish a component effect or true zero."
+    ],
+    "E59": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction."
+    ],
+    "E60": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction."
+    ],
+    "E61": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction."
+    ],
+    "E62": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction."
+    ],
+    "E63": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Internal-validity/transport context. Scope and selection limitations remain for CQs."
+    ],
+    "E64": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Sources use different definitions/severity valuations or identify their importance; does not establish a sign reversal.",
+      "Distinct observed outcome constructions support definitional plurality, not a universal claim that no standard exists."
+    ],
+    "E65": [
+      "A cardiovascular benefit alone does not determine the net balance with harms and valuation."
+    ],
+    "E66": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Sources use different definitions/severity valuations or identify their importance; does not establish a sign reversal.",
+      "Distinct observed outcome constructions support definitional plurality, not a universal claim that no standard exists.",
+      "Bleeding definition, mechanism, selection or precision context."
+    ],
+    "E67": [
+      "Major extracranial/GI excess partially supports nonfatal extracranial harm; fatal composition and exact endpoint need checking.",
+      "A bleeding excess weighs against the no-increase conjunction; no assumption of target-population equivalence.",
+      "Including an additional excess harm makes the balance less favorable, conditional on the source's endpoint and population.",
+      "Bleeding is one side of the net balance; it alone cannot establish total net harm, benefit or equivalence."
+    ],
+    "E68": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Internal-validity/transport context. Scope and selection limitations remain for CQs."
+    ],
+    "E69": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Sources use different definitions/severity valuations or identify their importance; does not establish a sign reversal.",
+      "Distinct observed outcome constructions support definitional plurality, not a universal claim that no standard exists."
+    ],
+    "E70": [
+      "A cardiovascular benefit alone does not determine the net balance with harms and valuation."
+    ],
+    "E71": [
+      "A bleeding excess weighs against the no-increase conjunction; no assumption of target-population equivalence.",
+      "Bleeding is one side of the net balance; it alone cannot establish total net harm, benefit or equivalence."
+    ],
+    "E72": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Sources use different definitions/severity valuations or identify their importance; does not establish a sign reversal.",
+      "No comparative robustness result establishes invariance or a particular reversal under alternative values."
+    ],
+    "E73": [
+      "Subgroup or transport context does not quantify the complete age-and-baseline-risk absolute-excess claim.",
+      "Mixed, near-null, partial or model-dependent balances do not establish exact zero or a uniform net direction at 60+."
+    ],
+    "E74": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Internal-validity/transport context. Scope and selection limitations remain for CQs."
+    ],
+    "E75": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Internal-validity/transport context. Scope and selection limitations remain for CQs."
+    ],
+    "E76": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Internal-validity/transport context. Scope and selection limitations remain for CQs.",
+      "Bleeding definition, mechanism, selection or precision context.",
+      "Subgroup or transport context does not quantify the complete age-and-baseline-risk absolute-excess claim."
+    ],
+    "E77": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction."
+    ],
+    "E78": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Internal-validity/transport context. Scope and selection limitations remain for CQs."
+    ],
+    "E79": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Internal-validity/transport context. Scope and selection limitations remain for CQs."
+    ],
+    "E80": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Sources use different definitions/severity valuations or identify their importance; does not establish a sign reversal.",
+      "Distinct observed outcome constructions support definitional plurality, not a universal claim that no standard exists."
+    ],
+    "E81": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Sources use different definitions/severity valuations or identify their importance; does not establish a sign reversal.",
+      "Distinct observed outcome constructions support definitional plurality, not a universal claim that no standard exists.",
+      "Bleeding definition, mechanism, selection or precision context."
+    ],
+    "E82": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction."
+    ],
+    "E83": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction."
+    ],
+    "E84": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Internal-validity/transport context. Scope and selection limitations remain for CQs."
+    ],
+    "E85": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Internal-validity/transport context. Scope and selection limitations remain for CQs."
+    ],
+    "E86": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Internal-validity/transport context. Scope and selection limitations remain for CQs.",
+      "Bleeding definition, mechanism, selection or precision context.",
+      "Subgroup or transport context does not quantify the complete age-and-baseline-risk absolute-excess claim."
+    ],
+    "E87": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Internal-validity/transport context. Scope and selection limitations remain for CQs."
+    ],
+    "E88": [
+      "A cardiovascular benefit alone does not determine the net balance with harms and valuation."
+    ],
+    "E89": [
+      "A bleeding excess weighs against the no-increase conjunction; no assumption of target-population equivalence.",
+      "Bleeding is one side of the net balance; it alone cannot establish total net harm, benefit or equivalence."
+    ],
+    "E90": [
+      "Nonsignificant, composite, heterogeneous or indirect estimates do not establish a component effect or true zero."
+    ],
+    "E91": [
+      "Imprecise subtype estimates or mostly mild/unclassified GI bleeding cannot establish the full claimed major/fatal effects."
+    ],
+    "E92": [
+      "Major extracranial/GI excess partially supports nonfatal extracranial harm; fatal composition and exact endpoint need checking.",
+      "Including an additional excess harm makes the balance less favorable, conditional on the source's endpoint and population."
+    ],
+    "E93": [
+      "MI reduction; pooled age/regimen differences and instrument uncertainty remain explicit.",
+      "Detected component reductions weigh against an unqualified no-effect conjunction; transport is not certified."
+    ],
+    "E94": [
+      "Intracranial/hemorrhagic-stroke excess; subtype, precision and transport limitations remain.",
+      "A bleeding excess weighs against the no-increase conjunction; no assumption of target-population equivalence.",
+      "Bleeding is one side of the net balance; it alone cannot establish total net harm, benefit or equivalence."
+    ],
+    "E95": [
+      "Major extracranial/GI excess partially supports nonfatal extracranial harm; fatal composition and exact endpoint need checking.",
+      "A bleeding excess weighs against the no-increase conjunction; no assumption of target-population equivalence.",
+      "Including an additional excess harm makes the balance less favorable, conditional on the source's endpoint and population.",
+      "Bleeding is one side of the net balance; it alone cannot establish total net harm, benefit or equivalence."
+    ],
+    "E96": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Internal-validity/transport context. Scope and selection limitations remain for CQs."
+    ],
+    "E97": [
+      "Nonsignificant, composite, heterogeneous or indirect estimates do not establish a component effect or true zero."
+    ],
+    "E98": [
+      "Intracranial/hemorrhagic-stroke excess; subtype, precision and transport limitations remain.",
+      "A bleeding excess weighs against the no-increase conjunction; no assumption of target-population equivalence.",
+      "Bleeding is one side of the net balance; it alone cannot establish total net harm, benefit or equivalence."
+    ],
+    "E99": [
+      "Imprecise subtype estimates or mostly mild/unclassified GI bleeding cannot establish the full claimed major/fatal effects."
+    ],
+    "E100": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Internal-validity/transport context. Scope and selection limitations remain for CQs."
+    ],
+    "E101": [
+      "Nonsignificant, composite, heterogeneous or indirect estimates do not establish a component effect or true zero."
+    ],
+    "E102": [
+      "Nonsignificant, composite, heterogeneous or indirect estimates do not establish a component effect or true zero."
+    ],
+    "E103": [
+      "Nonsignificant, composite, heterogeneous or indirect estimates do not establish a component effect or true zero.",
+      "Subgroup or transport context does not quantify the complete age-and-baseline-risk absolute-excess claim."
+    ],
+    "E104": [
+      "Bleeding definition, mechanism, selection or precision context.",
+      "Fatal-bleeding estimates are imprecise; neither an increase nor a true-zero effect is established."
+    ],
+    "E105": [
+      "Intracranial/hemorrhagic-stroke excess; subtype, precision and transport limitations remain.",
+      "A bleeding excess weighs against the no-increase conjunction; no assumption of target-population equivalence.",
+      "Bleeding is one side of the net balance; it alone cannot establish total net harm, benefit or equivalence.",
+      "Fatal-bleeding estimates are imprecise; neither an increase nor a true-zero effect is established."
+    ],
+    "E106": [
+      "Intracranial/hemorrhagic-stroke excess; subtype, precision and transport limitations remain.",
+      "A bleeding excess weighs against the no-increase conjunction; no assumption of target-population equivalence.",
+      "Bleeding is one side of the net balance; it alone cannot establish total net harm, benefit or equivalence.",
+      "Mixed, near-null, partial or model-dependent balances do not establish exact zero or a uniform net direction at 60+."
+    ],
+    "E107": [
+      "Nonsignificant, composite, heterogeneous or indirect estimates do not establish a component effect or true zero.",
+      "Subgroup or transport context does not quantify the complete age-and-baseline-risk absolute-excess claim."
+    ],
+    "E108": [
+      "Sources use different definitions/severity valuations or identify their importance; does not establish a sign reversal.",
+      "Severity weighting or severity differences can alter the numeric balance; no demonstrated reversal is assumed.",
+      "No comparative robustness result establishes invariance or a particular reversal under alternative values."
+    ],
+    "E109": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Internal-validity/transport context. Scope and selection limitations remain for CQs.",
+      "Subgroup or transport context does not quantify the complete age-and-baseline-risk absolute-excess claim."
+    ],
+    "E110": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Internal-validity/transport context. Scope and selection limitations remain for CQs."
+    ],
+    "E111": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Internal-validity/transport context. Scope and selection limitations remain for CQs."
+    ],
+    "E112": [
+      "Nonsignificant, composite, heterogeneous or indirect estimates do not establish a component effect or true zero."
+    ],
+    "E113": [
+      "Intracranial/hemorrhagic-stroke excess; subtype, precision and transport limitations remain.",
+      "A bleeding excess weighs against the no-increase conjunction; no assumption of target-population equivalence.",
+      "Bleeding is one side of the net balance; it alone cannot establish total net harm, benefit or equivalence."
+    ],
+    "E114": [
+      "Major extracranial/GI excess partially supports nonfatal extracranial harm; fatal composition and exact endpoint need checking.",
+      "A bleeding excess weighs against the no-increase conjunction; no assumption of target-population equivalence.",
+      "Including an additional excess harm makes the balance less favorable, conditional on the source's endpoint and population.",
+      "Bleeding is one side of the net balance; it alone cannot establish total net harm, benefit or equivalence."
+    ],
+    "E115": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Internal-validity/transport context. Scope and selection limitations remain for CQs."
+    ],
+    "E116": [
+      "Nonsignificant, composite, heterogeneous or indirect estimates do not establish a component effect or true zero."
+    ],
+    "E117": [
+      "Intracranial/hemorrhagic-stroke excess; subtype, precision and transport limitations remain.",
+      "A bleeding excess weighs against the no-increase conjunction; no assumption of target-population equivalence.",
+      "Bleeding is one side of the net balance; it alone cannot establish total net harm, benefit or equivalence."
+    ],
+    "E118": [
+      "Intracranial/hemorrhagic-stroke excess; subtype, precision and transport limitations remain.",
+      "A bleeding excess weighs against the no-increase conjunction; no assumption of target-population equivalence.",
+      "Bleeding is one side of the net balance; it alone cannot establish total net harm, benefit or equivalence.",
+      "Mixed, near-null, partial or model-dependent balances do not establish exact zero or a uniform net direction at 60+."
+    ],
+    "E119": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Internal-validity/transport context. Scope and selection limitations remain for CQs.",
+      "Subgroup or transport context does not quantify the complete age-and-baseline-risk absolute-excess claim."
+    ],
+    "E120": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Internal-validity/transport context. Scope and selection limitations remain for CQs."
+    ],
+    "E121": [
+      "Nonsignificant, composite, heterogeneous or indirect estimates do not establish a component effect or true zero."
+    ],
+    "E122": [
+      "Intracranial/hemorrhagic-stroke excess; subtype, precision and transport limitations remain.",
+      "A bleeding excess weighs against the no-increase conjunction; no assumption of target-population equivalence.",
+      "Bleeding is one side of the net balance; it alone cannot establish total net harm, benefit or equivalence."
+    ],
+    "E123": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Internal-validity/transport context. Scope and selection limitations remain for CQs."
+    ],
+    "E124": [
+      "A cardiovascular benefit alone does not determine the net balance with harms and valuation.",
+      "A bleeding excess weighs against the no-increase conjunction; no assumption of target-population equivalence.",
+      "Bleeding is one side of the net balance; it alone cannot establish total net harm, benefit or equivalence.",
+      "Mixed, near-null, partial or model-dependent balances do not establish exact zero or a uniform net direction at 60+."
+    ],
+    "E125": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Internal-validity/transport context. Scope and selection limitations remain for CQs.",
+      "Subgroup or transport context does not quantify the complete age-and-baseline-risk absolute-excess claim."
+    ],
+    "E126": [
+      "Nonsignificant, composite, heterogeneous or indirect estimates do not establish a component effect or true zero."
+    ],
+    "E127": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Sources use different definitions/severity valuations or identify their importance; does not establish a sign reversal.",
+      "Distinct observed outcome constructions support definitional plurality, not a universal claim that no standard exists.",
+      "Bleeding definition, mechanism, selection or precision context."
+    ],
+    "E128": [
+      "Nonsignificant, composite, heterogeneous or indirect estimates do not establish a component effect or true zero.",
+      "A cardiovascular benefit alone does not determine the net balance with harms and valuation."
+    ],
+    "E129": [
+      "Nonsignificant, composite, heterogeneous or indirect estimates do not establish a component effect or true zero."
+    ],
+    "E130": [
+      "Stroke reduction; mixed/all-stroke endpoints are only partial support for ischemic stroke.",
+      "Detected component reductions weigh against an unqualified no-effect conjunction; transport is not certified.",
+      "A cardiovascular benefit alone does not determine the net balance with harms and valuation."
+    ],
+    "E131": [
+      "Nonsignificant, composite, heterogeneous or indirect estimates do not establish a component effect or true zero."
+    ],
+    "E132": [
+      "A bleeding excess weighs against the no-increase conjunction; no assumption of target-population equivalence.",
+      "Bleeding is one side of the net balance; it alone cannot establish total net harm, benefit or equivalence."
+    ],
+    "E133": [
+      "Imprecise subtype estimates or mostly mild/unclassified GI bleeding cannot establish the full claimed major/fatal effects."
+    ],
+    "E134": [
+      "Mixed, near-null, partial or model-dependent balances do not establish exact zero or a uniform net direction at 60+."
+    ],
+    "E135": [
+      "Nonsignificant, composite, heterogeneous or indirect estimates do not establish a component effect or true zero.",
+      "A cardiovascular benefit alone does not determine the net balance with harms and valuation."
+    ],
+    "E136": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Internal-validity/transport context. Scope and selection limitations remain for CQs.",
+      "Subgroup or transport context does not quantify the complete age-and-baseline-risk absolute-excess claim."
+    ],
+    "E137": [
+      "Nonsignificant, composite, heterogeneous or indirect estimates do not establish a component effect or true zero."
+    ],
+    "E138": [
+      "Stroke reduction; mixed/all-stroke endpoints are only partial support for ischemic stroke.",
+      "Detected component reductions weigh against an unqualified no-effect conjunction; transport is not certified.",
+      "A cardiovascular benefit alone does not determine the net balance with harms and valuation."
+    ],
+    "E139": [
+      "A bleeding excess weighs against the no-increase conjunction; no assumption of target-population equivalence.",
+      "Bleeding is one side of the net balance; it alone cannot establish total net harm, benefit or equivalence."
+    ],
+    "E140": [
+      "Bleeding definition, mechanism, selection or precision context.",
+      "Imprecise subtype estimates or mostly mild/unclassified GI bleeding cannot establish the full claimed major/fatal effects."
+    ],
+    "E141": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Internal-validity/transport context. Scope and selection limitations remain for CQs."
+    ],
+    "E142": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Sources use different definitions/severity valuations or identify their importance; does not establish a sign reversal.",
+      "Distinct observed outcome constructions support definitional plurality, not a universal claim that no standard exists."
+    ],
+    "E143": [
+      "Nonsignificant, composite, heterogeneous or indirect estimates do not establish a component effect or true zero."
+    ],
+    "E144": [
+      "Imprecise subtype estimates or mostly mild/unclassified GI bleeding cannot establish the full claimed major/fatal effects."
+    ],
+    "E145": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Internal-validity/transport context. Scope and selection limitations remain for CQs.",
+      "Subgroup or transport context does not quantify the complete age-and-baseline-risk absolute-excess claim."
+    ],
+    "E146": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Internal-validity/transport context. Scope and selection limitations remain for CQs."
+    ],
+    "E147": [
+      "Design, population, follow-up or endpoint context; no standalone net-effect direction.",
+      "Internal-validity/transport context. Scope and selection limitations remain for CQs.",
+      "Bleeding definition, mechanism, selection or precision context.",
+      "Subgroup or transport context does not quantify the complete age-and-baseline-risk absolute-excess claim."
+    ],
+    "E148": [
+      "Nonsignificant, composite, heterogeneous or indirect estimates do not establish a component effect or true zero."
+    ],
+    "E149": [
+      "Nonsignificant, composite, heterogeneous or indirect estimates do not establish a component effect or true zero."
+    ],
+    "E150": [
+      "Imprecise subtype estimates or mostly mild/unclassified GI bleeding cannot establish the full claimed major/fatal effects."
+    ],
+    "E151": [
+      "Mixed, near-null, partial or model-dependent balances do not establish exact zero or a uniform net direction at 60+.",
+      "The USPSTF no-net-benefit assessment weighs against unqualified net benefit, without asserting that it means net harm or equivalence.",
+      "The guideline/model distinguishes endpoint and age/risk balances, supporting qualification of the net answer."
+    ],
+    "E152": [
+      "Age-related absolute bleeding incidence and harm; baseline-risk treatment interaction is not established."
+    ],
+    "E153": [
+      "MI reduction; pooled age/regimen differences and instrument uncertainty remain explicit.",
+      "Stroke reduction; mixed/all-stroke endpoints are only partial support for ischemic stroke.",
+      "Detected component reductions weigh against an unqualified no-effect conjunction; transport is not certified.",
+      "A cardiovascular benefit alone does not determine the net balance with harms and valuation."
+    ],
+    "E154": [
+      "Nonsignificant, composite, heterogeneous or indirect estimates do not establish a component effect or true zero."
+    ],
+    "E155": [
+      "Nonsignificant, composite, heterogeneous or indirect estimates do not establish a component effect or true zero.",
+      "Subgroup or transport context does not quantify the complete age-and-baseline-risk absolute-excess claim."
+    ],
+    "E156": [
+      "Intracranial/hemorrhagic-stroke excess; subtype, precision and transport limitations remain.",
+      "Major extracranial/GI excess partially supports nonfatal extracranial harm; fatal composition and exact endpoint need checking.",
+      "A bleeding excess weighs against the no-increase conjunction; no assumption of target-population equivalence.",
+      "Including an additional excess harm makes the balance less favorable, conditional on the source's endpoint and population.",
+      "Bleeding is one side of the net balance; it alone cannot establish total net harm, benefit or equivalence."
+    ],
+    "E157": [
+      "Age-related absolute bleeding incidence and harm; baseline-risk treatment interaction is not established."
+    ],
+    "E158": [
+      "Sources use different definitions/severity valuations or identify their importance; does not establish a sign reversal.",
+      "Distinct observed outcome constructions support definitional plurality, not a universal claim that no standard exists.",
+      "Severity weighting or severity differences can alter the numeric balance; no demonstrated reversal is assumed.",
+      "No comparative robustness result establishes invariance or a particular reversal under alternative values.",
+      "Mixed, near-null, partial or model-dependent balances do not establish exact zero or a uniform net direction at 60+.",
+      "The guideline/model distinguishes endpoint and age/risk balances, supporting qualification of the net answer."
+    ],
+    "E159": [
+      "Bleeding definition, mechanism, selection or precision context."
+    ],
+    "E160": [
+      "Sources use different definitions/severity valuations or identify their importance; does not establish a sign reversal.",
+      "Severity weighting or severity differences can alter the numeric balance; no demonstrated reversal is assumed.",
+      "No comparative robustness result establishes invariance or a particular reversal under alternative values."
+    ]
+  }
+}

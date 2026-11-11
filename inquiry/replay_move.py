@@ -268,12 +268,17 @@ def move_metrics(inq: Inquiry, move: str, summary: dict, llm: RecordingLLM,
                 if sum(g.ev(eid).bears_on.get(cid) == "for" for eid in ids) >= 3:
                     eligible.append(cid)
         supported = {a.claim_id for a in supporting}
+        offered = set(summary.get("input_offered_evidence", offered))
         unusable = set(summary.get("unusable", [])) & offered
         m = {"supporting_args": len(supporting), "applicable_args": sum(ev.applicable.get(a.id, False) for a in supporting),
              "claims_supported_unargued": len(set(eligible) - supported), "eligible_claims": sorted(set(eligible)),
              "unusable_share": len(unusable) / len(offered) if offered else 0,
              "unusable_items": len(unusable), "offered_evidence": len(offered),
-             "scoped_claims_proposed": sum(len(p.get("scoped_claims", [])) for p in proposals)}
+             "scoped_claims_proposed": sum(len(p.get("scoped_claims", [])) for p in proposals),
+             "scoped_claims_added": len(summary.get("scoped_claims", [])),
+             "claims_with_reason": len(summary.get("claim_reasons", {})),
+             "ignored_unusable": len(summary.get("ignored_unusable", [])),
+             "input_eligible_claims": summary.get("input_eligible_claims", sorted(set(eligible)))}
     elif move == "critique":
         attacks = [a for a in g.arguments if a.is_attack]
         tags = [need_tag(t) for t in summary.get("needed_evidence", [])]

@@ -1,0 +1,9 @@
+{
+  "source": "experiments\\E1\\after-v5\\aspirin\\sol\\sample-002\\inquiry.json",
+  "graph_sha256": "8a0dea60e09dce5adc5bae572bbda260314e224ff3d302f8d747b2a2b2636535",
+  "provider": "openai",
+  "model": "gpt-6.1-sol",
+  "effort": "medium",
+  "e1_gate": false,
+  "criterion": "median raw average length, then sample number, final-candidate Sol aspirin samples; chosen before E2(c)"
+}

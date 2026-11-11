@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import re
 import json
+import math
 from collections import Counter
 from pathlib import Path
 from statistics import median
@@ -770,10 +771,29 @@ class UnusableProposal(BaseModel):
     reason: str
 
 
+class ClaimReasonProposal(BaseModel):
+    claim_id: str
+    reason: str
+
+
+class ScopedClaimProposal(BaseModel):
+    text: str
+    revision_of: str
+    issue_id: str
+    answers_issue: bool
+    premise_ids: list[str]
+    scheme: str
+    cq_answers: dict[str, CQAnswerProposal] = Field(default_factory=dict)
+    target: dict[str, str] = Field(default_factory=dict)
+    note: str = ""
+
+
 class ArgueOutput(BaseModel):
     arguments: list[ArgumentProposal] = Field(default_factory=list)
     unusable: list[UnusableProposal] = Field(
         default_factory=list, description="Evidence bearing on these claims that cannot ground any argument, with why.")
+    claim_reasons: list[ClaimReasonProposal] = Field(default_factory=list)
+    scoped_claims: list[ScopedClaimProposal] = Field(default_factory=list)
 
 
 def shadowed_by_origin(g: ArgumentGraph, e, claim_ids: set[str]) -> Optional[str]:
@@ -833,9 +853,14 @@ def argue_view(inq: Inquiry, issue_id: str) -> str:
         st = f" [{ev.status(c.id)}]" if ev else ""
         lines.append(f"- {c.id} ({c.kind}){st}: {c.text}")
     issue_block = "\n".join(lines)
+    required = [cid for cid in sorted(claim_ids) if sum(g.ev(eid).bears_on.get(cid) == "for" for eid in ev_ids) >= 3]
     orphan_block = ("# Evidence bearing on these claims and not yet in any argument\n\n"
                     + ("\n".join(f"- {e}" for e in orphans) if orphans else "(none)")
-                    + "\n\nEvery item above must end up as a premise of an argument below, or in `unusable` with a reason.")
+                    + "\n\nPrefer arguments, including honestly weak/inapplicable ones, over per-item unusable lists. "
+                    "If evidence supports a narrower proposition, return scoped_claims with its argument in this reply.\n"
+                    + json.dumps({"claims_requiring_argument_or_claim_reason": required,
+                                  "unusable_limit": _unusable_limit(len(ev_ids)), "offered_evidence": len(ev_ids),
+                                  "scope_rule": "A narrower population/outcome/report finding that does not answer the original issue must set answers_issue=false."}))
     args_for_issue = [a for a in g.arguments if a.claim_id in claim_ids]
     sub = g.model_copy(update={"arguments": args_for_issue})
     return "\n\n".join([
@@ -844,26 +869,71 @@ def argue_view(inq: Inquiry, issue_id: str) -> str:
     ])
 
 
-def apply_argue(inq: Inquiry, out: ArgueOutput, allowed_claims: Optional[set[str]] = None) -> dict:
+def _unusable_limit(n: int) -> int:
+    # The experiment gate is strictly below 30%, including at exact multiples.
+    return max(0, math.ceil(n * .3) - 1)
+
+
+def argue_coverage(inq: Inquiry, claim_ids: set[str], ev_ids: list[str]) -> list[str]:
+    g = inq.graph
+    supported = {a.claim_id for a in g.arguments if not a.is_attack and not a.withdrawn}
+    return sorted(cid for cid in claim_ids if g.claim(cid) and g.claim(cid).live
+                  and sum(g.ev(eid).bears_on.get(cid) == "for" for eid in ev_ids) >= 3
+                  and cid not in supported and not inq.claim_reasons.get(cid))
+
+
+def apply_argue(inq: Inquiry, out: ArgueOutput, allowed_claims: Optional[set[str]] = None,
+                allowed_evidence: Optional[set[str]] = None, global_evidence: Optional[set[str]] = None) -> dict:
     g = inq.graph
     added: list[str] = []
     merged: list[str] = []
     dropped: list[str] = []
     still_open: dict[str, list[str]] = {}
     unusable: list[str] = []
-    for u in out.unusable:
-        e = g.ev(u.evidence_id)
-        if e is not None and u.reason.strip():
-            e.provenance["unusable"] = u.reason.strip()
-            unusable.append(e.id)
-    for p in out.arguments:
+    ignored_unusable: list[str] = []
+    scoped: list[str] = []
+    reasons: dict[str, str] = {}
+    offered = allowed_evidence if allowed_evidence is not None else {e.id for e in g.evidence if e.role not in ("context", "lead")}
+    global_offered = global_evidence if global_evidence is not None else offered
+    proposals = list(out.arguments)
+    groups: dict[str, list[ScopedClaimProposal]] = {}
+    for p in out.scoped_claims:
+        old = g.claim(p.revision_of)
+        issue = g.issue(p.issue_id)
+        failure = (not old or not old.live or not issue or old.issue_id != p.issue_id
+                   or (allowed_claims is not None and p.revision_of not in allowed_claims)
+                   or p.scheme not in SCHEMES or p.scheme == "attack"
+                   or not p.text.strip() or not p.premise_ids or any(eid not in offered for eid in p.premise_ids)
+                   or bool(claim_specificity_errors(p.text, issue.answerhood if issue else "")))
+        if failure:
+            dropped.append(f"scoped revision of {p.revision_of}: invalid issue, scope, scheme, specificity or offered premises")
+            continue
+        groups.setdefault(p.revision_of, []).append(p)
+    # A replacement is only installed together with its valid argument proposal.
+    for old_id, group in groups.items():
+        new = g.supersede_claim(old_id, [p.text for p in group], kind="substantive",
+                                reason="Argue: evidence supports a narrower claim", answers_issue=False)
+        for claim, p in zip(new, group):
+            claim.answers_issue = p.answers_issue
+            claim.target = dict(p.target)
+            if not p.answers_issue:
+                for rival in g.claims:
+                    rival.contrary_ids = [cid for cid in rival.contrary_ids if cid != claim.id]
+                claim.contrary_ids = []  # a component finding does not contradict a whole-issue answer
+            for eid in p.premise_ids:
+                g.ev(eid).bears_on[claim.id] = "for"  # explicit support in the scoped argument, not copied old hints
+            scoped.append(claim.id)
+            proposals.append(ArgumentProposal(claim_id=claim.id, scheme=p.scheme, premise_ids=p.premise_ids,
+                                              cq_answers=p.cq_answers, note=p.note))
+    permitted = None if allowed_claims is None else allowed_claims | set(scoped)
+    for p in proposals:
         if p.scheme not in SCHEMES or p.scheme == "attack":
             dropped.append(f"unknown scheme {p.scheme!r}")
             continue
         if g.claim(p.claim_id) is None:
             dropped.append(f"unknown claim {p.claim_id!r}")
             continue
-        if allowed_claims is not None and p.claim_id not in allowed_claims:
+        if permitted is not None and p.claim_id not in permitted:
             dropped.append(f"{p.claim_id} is not a claim of the issue under argument")
             continue
         premises = [x for x in p.premise_ids if g.ev(x) is not None or g.claim(x) is not None]
@@ -871,7 +941,10 @@ def apply_argue(inq: Inquiry, out: ArgueOutput, allowed_claims: Optional[set[str
         if not premises:
             dropped.append(f"{p.scheme} → {p.claim_id}: no known premises")
             continue
-        existing = next((a for a in g.arguments if not a.is_attack and a.scheme == p.scheme
+        if not g.claim(p.claim_id).live:
+            dropped.append(f"{p.claim_id} was superseded; use its scoped revision")
+            continue
+        existing = next((a for a in g.arguments if not a.is_attack and not a.withdrawn and a.scheme == p.scheme
                          and a.claim_id == p.claim_id and set(a.premise_ids) == set(premises)), None)
         if existing is None:
             a = g.add_argument(p.scheme, premises, p.claim_id, note=p.note, round=inq.round)
@@ -895,30 +968,89 @@ def apply_argue(inq: Inquiry, out: ArgueOutput, allowed_claims: Optional[set[str
         failed = [q.id for q in sch.assumptions() if a.cq[q.id].status == "answered" and a.cq[q.id].outcome == "unsatisfied"]
         if open_ or failed:
             still_open[a.id] = open_ + [f"{q} (unsatisfied)" for q in failed]
-    # an item that is a premise somewhere is usable by definition
-    in_use = {p for a in g.arguments for p in a.premise_ids}
-    for eid in list(unusable):
-        if eid in in_use:
+    in_use = {p for a in g.arguments if not a.withdrawn for p in a.premise_ids}
+    for eid in in_use:
+        if g.ev(eid):
             g.ev(eid).provenance.pop("unusable", None)
-            unusable.remove(eid)
+    issue_used = {eid for eid in offered if g.ev(eid).provenance.get("unusable")}
+    globally_used = {eid for eid in global_offered if g.ev(eid).provenance.get("unusable")}
+    for eid in sorted(issue_used)[_unusable_limit(len(offered)):]:
+        # A previous issue can share these items; it cannot consume this
+        # issue's entire allowance before this issue gets a chance to argue.
+        g.ev(eid).provenance.pop("unusable", None)
+        issue_used.remove(eid)
+        globally_used.discard(eid)
+        ignored_unusable.append(eid)
+    for u in out.unusable:
+        e = g.ev(u.evidence_id)
+        if e is None or e.id not in offered or not u.reason.strip() or e.id in in_use:
+            continue
+        if ((e.id not in issue_used and len(issue_used) >= _unusable_limit(len(offered)))
+                or (e.id not in globally_used and len(globally_used) >= _unusable_limit(len(global_offered)))):
+            ignored_unusable.append(e.id)
+            continue
+        e.provenance["unusable"] = u.reason.strip()
+        issue_used.add(e.id)
+        globally_used.add(e.id)
+        unusable.append(e.id)
+    supported = {a.claim_id for a in g.arguments if not a.is_attack and not a.withdrawn}
+    for cid in supported:
+        inq.claim_reasons.pop(cid, None)
+    for p in out.claim_reasons:
+        c = g.claim(p.claim_id)
+        reason = p.reason.strip()
+        if (c and c.live and p.claim_id not in supported and (permitted is None or c.id in permitted)
+                and 8 <= len(reason) <= 500 and "\n" not in reason
+                and len(re.split(r"[.!?]\s+(?=[A-Z])", reason)) == 1):
+            inq.claim_reasons[c.id] = reasons[c.id] = reason
+        elif p.claim_id not in supported:
+            dropped.append(f"invalid claim_reason for {p.claim_id}")
     return {"arguments": added, "merged": merged, "dropped": dropped, "unusable": unusable,
+            "ignored_unusable": ignored_unusable, "scoped_claims": scoped, "claim_reasons": reasons,
             "still_inapplicable": still_open}
 
 
 def argue(inq: Inquiry, llm: LLM) -> dict:
     """One call per issue that has evidence bearing on it; results are merged into one summary."""
     g = inq.graph
-    total = {"arguments": [], "merged": [], "dropped": [], "unusable": [], "still_inapplicable": {}, "issues": []}
+    total = {"arguments": [], "merged": [], "dropped": [], "unusable": [], "ignored_unusable": [],
+             "scoped_claims": [], "claim_reasons": {}, "still_inapplicable": {}, "issues": [], "coverage_retries": []}
+    all_offered = set()
+    for issue in g.issues:
+        all_offered.update(issue_evidence(g, issue.id, include_unassigned=issue.id == g.main_issue_id)[1])
+    total["input_offered_evidence"] = sorted(all_offered)
+    total["input_eligible_claims"] = sorted(c.id for c in g.claims if c.live and sum(
+        g.ev(eid).bears_on.get(c.id) == "for" for eid in all_offered) >= 3)
     for iss in g.issues:
         claim_ids, ev_ids = issue_evidence(g, iss.id, include_unassigned=(iss.id == g.main_issue_id))
         if not claim_ids or not ev_ids:
             continue
-        out = llm.complete_json(skill_text("argue"), argue_view(inq, iss.id), ArgueOutput)
-        part = apply_argue(inq, out, allowed_claims=claim_ids)
-        for k in ("arguments", "merged", "dropped", "unusable"):
-            total[k].extend(part[k])
-        total["still_inapplicable"].update(part["still_inapplicable"])
+        for cid in claim_ids:
+            inq.claim_reasons.pop(cid, None)
+        for attempt in range(2):
+            view = argue_view(inq, iss.id)
+            if attempt:
+                view += "\n\n# Required coverage correction (only retry)\n" + json.dumps({
+                    "claims_missing_argument_or_reason": gaps, "ignored_over_cap_unusable": part["ignored_unusable"],
+                    "instruction": "Build arguments, propose supported narrower revisions with arguments, or give one-sentence claim_reasons. Do not repeat per-item rejection lists."})
+            out = llm.complete_json(skill_text("argue"), view, ArgueOutput)
+            issue_scoped = {cid for cid in total["scoped_claims"] if g.claim(cid).issue_id == iss.id}
+            part = apply_argue(inq, out, allowed_claims=claim_ids | issue_scoped,
+                               allowed_evidence=set(ev_ids), global_evidence=all_offered)
+            for k in ("arguments", "merged", "dropped", "unusable", "ignored_unusable", "scoped_claims"):
+                total[k].extend(part[k])
+            total["still_inapplicable"].update(part["still_inapplicable"])
+            total["claim_reasons"].update(part["claim_reasons"])
+            gaps = argue_coverage(inq, claim_ids | set(total["scoped_claims"]), ev_ids)
+            if not gaps and not part["ignored_unusable"]:
+                break
+            if not attempt:
+                total["coverage_retries"].append(iss.id)
+        if gaps:
+            raise ValueError(f"Argue coverage unresolved after one retry on {iss.id}: {', '.join(gaps)}")
         total["issues"].append(iss.id)
+    total["unusable"] = sorted({eid for eid in total["unusable"] if g.ev(eid).provenance.get("unusable")})
+    total["claim_reasons"] = {cid: reason for cid, reason in inq.claim_reasons.items() if g.claim(cid) and g.claim(cid).live}
     return total
 
 

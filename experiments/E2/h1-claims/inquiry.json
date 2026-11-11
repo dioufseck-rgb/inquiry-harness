@@ -1,0 +1,633 @@
+{
+  "id": "health-aspirin-tonight-openai-t7",
+  "question": "Does initiating low-dose aspirin for primary prevention reduce net cardiovascular harm in adults aged 60 and over?",
+  "created_at": "2026-11-10T05:14:23+00:00",
+  "phase": "hypothesized",
+  "round": 2,
+  "framing": {
+    "restatement": "In adults aged 60 years and older without established cardiovascular disease, does starting low-dose aspirin, compared with not starting it, reduce cardiovascular events enough to outweigh treatment-related harms?",
+    "question_type": "causal",
+    "scope_in": [
+      "Initiation of low-dose aspirin, generally 75–100 mg daily, versus no initiation or placebo.",
+      "Adults aged 60 years and older without established cardiovascular disease.",
+      "Prevention of first myocardial infarction, ischemic stroke, and cardiovascular death.",
+      "Treatment-related harms, particularly intracranial hemorrhage and major extracranial bleeding.",
+      "Absolute and relative effects over specified follow-up periods, including differences by age, baseline cardiovascular risk, and bleeding risk.",
+      "Net effects under explicit outcome definitions and benefit–harm weighting."
+    ],
+    "scope_out": [
+      "Secondary prevention in people with established cardiovascular disease.",
+      "Whether people already taking aspirin should discontinue it.",
+      "Higher-dose aspirin or aspirin prescribed for other indications.",
+      "Cancer prevention as a separate reason to initiate aspirin.",
+      "Individual prescribing decisions without information about the person's cardiovascular and bleeding risks."
+    ],
+    "presuppositions": [
+      "Primary prevention denotes treatment in people without established cardiovascular disease.",
+      "Low-dose aspirin initiation and the comparison strategy can be specified sufficiently to distinguish their effects.",
+      "Net cardiovascular harm can be operationalized using an explicit set of cardiovascular outcomes and treatment-related harms.",
+      "A follow-up period and a method for comparing outcomes of different severity can be specified; different choices may yield different net effects.",
+      "Adults aged 60 and older may have heterogeneous effects, so a single conclusion may require qualification by age and baseline risk."
+    ],
+    "answerhood": "A complete answer would state whether initiation increases, decreases, or does not clearly change net harm, and quantify the absolute magnitude over a specified time horizon. It would report cardiovascular benefits and bleeding harms separately, then combine them using an explicit endpoint or severity-weighting rule, avoiding double-counting overlapping outcomes. Comparisons would hold the target population, aspirin regimen, follow-up duration, and outcome definitions constant, with age- and risk-specific results where they materially change the conclusion.",
+    "standard_override": null
+  },
+  "graph": {
+    "issues": [
+      {
+        "id": "Q1",
+        "text": "Does initiating low-dose aspirin for primary prevention reduce net cardiovascular harm in adults aged 60 and over?",
+        "answerhood": "A complete answer would state whether initiation increases, decreases, or does not clearly change net harm, and quantify the absolute magnitude over a specified time horizon. It would report cardiovascular benefits and bleeding harms separately, then combine them using an explicit endpoint or severity-weighting rule, avoiding double-counting overlapping outcomes. Comparisons would hold the target population, aspirin regimen, follow-up duration, and outcome definitions constant, with age- and risk-specific results where they materially change the conclusion.",
+        "question_type": "causal",
+        "parent_id": null,
+        "depends_on": [],
+        "status": "open",
+        "presuppositions": [
+          "Primary prevention denotes treatment in people without established cardiovascular disease.",
+          "Low-dose aspirin initiation and the comparison strategy can be specified sufficiently to distinguish their effects.",
+          "Net cardiovascular harm can be operationalized using an explicit set of cardiovascular outcomes and treatment-related harms.",
+          "A follow-up period and a method for comparing outcomes of different severity can be specified; different choices may yield different net effects.",
+          "Adults aged 60 and older may have heterogeneous effects, so a single conclusion may require qualification by age and baseline risk."
+        ],
+        "search_topic": "aspirin primary prevention older adults"
+      },
+      {
+        "id": "Q2",
+        "text": "Which outcomes and severity weights define net cardiovascular harm when comparing aspirin's preventive effects with its bleeding complications?",
+        "answerhood": "Specify the cardiovascular events and treatment-related harms included, how fatal and nonfatal events are distinguished, how overlapping events are counted, and whether net effects use an unweighted composite or explicit severity weights; identify any materially different interpretations.",
+        "question_type": "conceptual",
+        "parent_id": "Q1",
+        "depends_on": [],
+        "status": "open",
+        "presuppositions": [],
+        "search_topic": "aspirin primary prevention net clinical benefit"
+      },
+      {
+        "id": "Q3",
+        "text": "What effect does initiating low-dose aspirin have on first myocardial infarction, ischemic stroke, and cardiovascular death in adults aged 60 and older without established cardiovascular disease?",
+        "answerhood": "Give the direction and absolute and relative magnitude of effects on each cardiovascular outcome versus no initiation, over specified follow-up periods in comparable populations, including material variation by age and baseline cardiovascular risk.",
+        "question_type": "causal",
+        "parent_id": "Q1",
+        "depends_on": [],
+        "status": "open",
+        "presuppositions": [],
+        "search_topic": "aspirin primary prevention cardiovascular outcomes older adults"
+      },
+      {
+        "id": "Q4",
+        "text": "What effect does initiating low-dose aspirin have on intracranial hemorrhage and major extracranial bleeding in adults aged 60 and older without established cardiovascular disease?",
+        "answerhood": "Give the direction and absolute and relative magnitude of effects on major bleeding outcomes versus no initiation, distinguishing fatal and nonfatal events over follow-up periods aligned with the cardiovascular benefit estimates, including material variation by age and baseline bleeding risk.",
+        "question_type": "causal",
+        "parent_id": "Q1",
+        "depends_on": [],
+        "status": "open",
+        "presuppositions": [],
+        "search_topic": "aspirin primary prevention bleeding older adults"
+      }
+    ],
+    "claims": [
+      {
+        "id": "C1",
+        "text": "Initiating low-dose aspirin for primary prevention reduces net cardiovascular harm in adults aged 60 and over.",
+        "issue_id": "Q1",
+        "kind": "substantive",
+        "contrary_ids": [
+          "C2",
+          "C3",
+          "C4"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "Prevention of ischemic events could outweigh aspirin-related bleeding.",
+        "target": {},
+        "superseded_by": null,
+        "revision_of": null,
+        "review_note": "",
+        "answers_issue": true
+      },
+      {
+        "id": "C2",
+        "text": "Initiating low-dose aspirin for primary prevention increases net cardiovascular harm in adults aged 60 and over.",
+        "issue_id": "Q1",
+        "kind": "substantive",
+        "contrary_ids": [
+          "C1",
+          "C3",
+          "C4"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "Bleeding complications could outweigh prevention of ischemic events.",
+        "target": {},
+        "superseded_by": null,
+        "revision_of": null,
+        "review_note": "",
+        "answers_issue": true
+      },
+      {
+        "id": "C3",
+        "text": "Initiating low-dose aspirin for primary prevention has no net effect on cardiovascular harm in adults aged 60 and over.",
+        "issue_id": "Q1",
+        "kind": "null",
+        "contrary_ids": [
+          "C1",
+          "C2"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "Preventive benefits and bleeding harms could offset each other.",
+        "target": {},
+        "superseded_by": null,
+        "revision_of": null,
+        "review_note": "",
+        "answers_issue": true
+      },
+      {
+        "id": "C4",
+        "text": "For adults aged 60 and over, whether initiating aspirin reduces net cardiovascular harm depends on how sources define and value cardiovascular events and bleeding complications.",
+        "issue_id": "Q1",
+        "kind": "deflationary",
+        "contrary_ids": [
+          "C1",
+          "C2"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "Different interpretations of net harm could yield different answers.",
+        "target": {},
+        "superseded_by": null,
+        "revision_of": null,
+        "review_note": "",
+        "answers_issue": true
+      },
+      {
+        "id": "C5",
+        "text": "For adults aged 60 and over, interpreting net cardiovascular harm to include major extracranial bleeding makes aspirin initiation less favorable than an interpretation restricted to cardiovascular outcomes.",
+        "issue_id": "Q2",
+        "kind": "substantive",
+        "contrary_ids": [
+          "C7",
+          "C8"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "Sources may differ in whether important noncardiovascular bleeding contributes to net harm.",
+        "target": {},
+        "superseded_by": null,
+        "revision_of": null,
+        "review_note": "",
+        "answers_issue": true
+      },
+      {
+        "id": "C6",
+        "text": "For adults aged 60 and over, severity-sensitive interpretations of net cardiovascular harm can give a different balance for aspirin initiation than comparisons that do not distinguish outcome severity.",
+        "issue_id": "Q2",
+        "kind": "substantive",
+        "contrary_ids": [
+          "C7",
+          "C8"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "Fatality and lasting disability may alter how sources interpret the benefit-harm balance.",
+        "target": {},
+        "superseded_by": null,
+        "revision_of": null,
+        "review_note": "",
+        "answers_issue": true
+      },
+      {
+        "id": "C7",
+        "text": "For adults aged 60 and over, differences in outcome inclusion and severity valuation do not change the net cardiovascular harm conclusion for aspirin initiation.",
+        "issue_id": "Q2",
+        "kind": "null",
+        "contrary_ids": [
+          "C5",
+          "C6"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "The conclusion could remain unchanged across interpretations used by sources.",
+        "target": {},
+        "superseded_by": null,
+        "revision_of": null,
+        "review_note": "",
+        "answers_issue": true
+      },
+      {
+        "id": "C8",
+        "text": "Net cardiovascular harm has no single accepted definition for aspirin primary prevention in adults aged 60 and over; sources use distinct outcomes and severity valuations.",
+        "issue_id": "Q2",
+        "kind": "deflationary",
+        "contrary_ids": [
+          "C5",
+          "C6"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "The question may presuppose a standardized construct where several conventions coexist.",
+        "target": {},
+        "superseded_by": null,
+        "revision_of": null,
+        "review_note": "",
+        "answers_issue": true
+      },
+      {
+        "id": "C9",
+        "text": "Initiating low-dose aspirin reduces first myocardial infarction in adults aged 60 and older without established cardiovascular disease.",
+        "issue_id": "Q3",
+        "kind": "substantive",
+        "contrary_ids": [
+          "C12"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "Aspirin's antiplatelet action could prevent first coronary events.",
+        "target": {},
+        "superseded_by": null,
+        "revision_of": null,
+        "review_note": "",
+        "answers_issue": true
+      },
+      {
+        "id": "C10",
+        "text": "Initiating low-dose aspirin reduces ischemic stroke in adults aged 60 and older without established cardiovascular disease.",
+        "issue_id": "Q3",
+        "kind": "substantive",
+        "contrary_ids": [
+          "C12"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "Prevention of thrombotic events could extend to ischemic stroke.",
+        "target": {},
+        "superseded_by": null,
+        "revision_of": null,
+        "review_note": "",
+        "answers_issue": true
+      },
+      {
+        "id": "C11",
+        "text": "Initiating low-dose aspirin reduces cardiovascular death in adults aged 60 and older without established cardiovascular disease.",
+        "issue_id": "Q3",
+        "kind": "substantive",
+        "contrary_ids": [
+          "C12"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "Preventing ischemic events could translate into lower cardiovascular mortality.",
+        "target": {},
+        "superseded_by": null,
+        "revision_of": null,
+        "review_note": "",
+        "answers_issue": true
+      },
+      {
+        "id": "C12",
+        "text": "Initiating low-dose aspirin has no effect on first myocardial infarction, ischemic stroke, or cardiovascular death in adults aged 60 and older without established cardiovascular disease.",
+        "issue_id": "Q3",
+        "kind": "null",
+        "contrary_ids": [
+          "C10",
+          "C11",
+          "C9"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "Antiplatelet treatment may not improve these outcomes in this primary-prevention population.",
+        "target": {},
+        "superseded_by": null,
+        "revision_of": null,
+        "review_note": "",
+        "answers_issue": true
+      },
+      {
+        "id": "C13",
+        "text": "Initiating low-dose aspirin increases intracranial hemorrhage in adults aged 60 and older without established cardiovascular disease.",
+        "issue_id": "Q4",
+        "kind": "substantive",
+        "contrary_ids": [
+          "C17"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "Platelet inhibition could increase intracranial bleeding.",
+        "target": {},
+        "superseded_by": null,
+        "revision_of": null,
+        "review_note": "",
+        "answers_issue": true
+      },
+      {
+        "id": "C14",
+        "text": "Initiating low-dose aspirin increases nonfatal major extracranial bleeding in adults aged 60 and older without established cardiovascular disease.",
+        "issue_id": "Q4",
+        "kind": "substantive",
+        "contrary_ids": [
+          "C17"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "Impaired hemostasis could increase serious extracranial bleeding that is survived.",
+        "target": {},
+        "superseded_by": null,
+        "revision_of": null,
+        "review_note": "",
+        "answers_issue": true
+      },
+      {
+        "id": "C15",
+        "text": "Initiating low-dose aspirin increases fatal bleeding in adults aged 60 and older without established cardiovascular disease.",
+        "issue_id": "Q4",
+        "kind": "substantive",
+        "contrary_ids": [
+          "C17"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "The bleeding hazard could include fatal events rather than only nonfatal complications.",
+        "target": {},
+        "superseded_by": null,
+        "revision_of": null,
+        "review_note": "",
+        "answers_issue": true
+      },
+      {
+        "id": "C16",
+        "text": "Among adults aged 60 and older without established cardiovascular disease, aspirin initiation causes a larger absolute excess of major bleeding at older ages and higher baseline bleeding risk.",
+        "issue_id": "Q4",
+        "kind": "substantive",
+        "contrary_ids": [
+          "C17"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "Higher underlying bleeding rates could produce greater absolute harm from initiation.",
+        "target": {},
+        "superseded_by": null,
+        "revision_of": null,
+        "review_note": "",
+        "answers_issue": true
+      },
+      {
+        "id": "C17",
+        "text": "Initiating low-dose aspirin does not increase intracranial hemorrhage or major extracranial bleeding in adults aged 60 and older without established cardiovascular disease.",
+        "issue_id": "Q4",
+        "kind": "null",
+        "contrary_ids": [
+          "C13",
+          "C14",
+          "C15",
+          "C16"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "Initiation might not add bleeding harm in this population.",
+        "target": {},
+        "superseded_by": null,
+        "revision_of": null,
+        "review_note": "",
+        "answers_issue": true
+      }
+    ],
+    "evidence": [],
+    "sources": [],
+    "arguments": [],
+    "main_issue_id": "Q1"
+  },
+  "tests": [],
+  "reflections": [],
+  "stop_assessments": [],
+  "conclusion": null,
+  "evaluation": {
+    "applicable": {},
+    "inapplicable_reasons": {},
+    "argument_strength": {},
+    "labels": {},
+    "claims": {
+      "C1": {
+        "standard": "clear_and_convincing",
+        "status": "undecided",
+        "pro_ids": [],
+        "con_ids": [],
+        "pro_strength": 0,
+        "con_strength": 0,
+        "corroborated": false,
+        "met": false
+      },
+      "C2": {
+        "standard": "clear_and_convincing",
+        "status": "undecided",
+        "pro_ids": [],
+        "con_ids": [],
+        "pro_strength": 0,
+        "con_strength": 0,
+        "corroborated": false,
+        "met": false
+      },
+      "C3": {
+        "standard": "clear_and_convincing",
+        "status": "undecided",
+        "pro_ids": [],
+        "con_ids": [],
+        "pro_strength": 0,
+        "con_strength": 0,
+        "corroborated": false,
+        "met": false
+      },
+      "C4": {
+        "standard": "clear_and_convincing",
+        "status": "undecided",
+        "pro_ids": [],
+        "con_ids": [],
+        "pro_strength": 0,
+        "con_strength": 0,
+        "corroborated": false,
+        "met": false
+      },
+      "C5": {
+        "standard": "preponderance",
+        "status": "undecided",
+        "pro_ids": [],
+        "con_ids": [],
+        "pro_strength": 0,
+        "con_strength": 0,
+        "corroborated": false,
+        "met": false
+      },
+      "C6": {
+        "standard": "preponderance",
+        "status": "undecided",
+        "pro_ids": [],
+        "con_ids": [],
+        "pro_strength": 0,
+        "con_strength": 0,
+        "corroborated": false,
+        "met": false
+      },
+      "C7": {
+        "standard": "preponderance",
+        "status": "undecided",
+        "pro_ids": [],
+        "con_ids": [],
+        "pro_strength": 0,
+        "con_strength": 0,
+        "corroborated": false,
+        "met": false
+      },
+      "C8": {
+        "standard": "preponderance",
+        "status": "undecided",
+        "pro_ids": [],
+        "con_ids": [],
+        "pro_strength": 0,
+        "con_strength": 0,
+        "corroborated": false,
+        "met": false
+      },
+      "C9": {
+        "standard": "clear_and_convincing",
+        "status": "undecided",
+        "pro_ids": [],
+        "con_ids": [],
+        "pro_strength": 0,
+        "con_strength": 0,
+        "corroborated": false,
+        "met": false
+      },
+      "C10": {
+        "standard": "clear_and_convincing",
+        "status": "undecided",
+        "pro_ids": [],
+        "con_ids": [],
+        "pro_strength": 0,
+        "con_strength": 0,
+        "corroborated": false,
+        "met": false
+      },
+      "C11": {
+        "standard": "clear_and_convincing",
+        "status": "undecided",
+        "pro_ids": [],
+        "con_ids": [],
+        "pro_strength": 0,
+        "con_strength": 0,
+        "corroborated": false,
+        "met": false
+      },
+      "C12": {
+        "standard": "clear_and_convincing",
+        "status": "undecided",
+        "pro_ids": [],
+        "con_ids": [],
+        "pro_strength": 0,
+        "con_strength": 0,
+        "corroborated": false,
+        "met": false
+      },
+      "C13": {
+        "standard": "clear_and_convincing",
+        "status": "undecided",
+        "pro_ids": [],
+        "con_ids": [],
+        "pro_strength": 0,
+        "con_strength": 0,
+        "corroborated": false,
+        "met": false
+      },
+      "C14": {
+        "standard": "clear_and_convincing",
+        "status": "undecided",
+        "pro_ids": [],
+        "con_ids": [],
+        "pro_strength": 0,
+        "con_strength": 0,
+        "corroborated": false,
+        "met": false
+      },
+      "C15": {
+        "standard": "clear_and_convincing",
+        "status": "undecided",
+        "pro_ids": [],
+        "con_ids": [],
+        "pro_strength": 0,
+        "con_strength": 0,
+        "corroborated": false,
+        "met": false
+      },
+      "C16": {
+        "standard": "clear_and_convincing",
+        "status": "undecided",
+        "pro_ids": [],
+        "con_ids": [],
+        "pro_strength": 0,
+        "con_strength": 0,
+        "corroborated": false,
+        "met": false
+      },
+      "C17": {
+        "standard": "clear_and_convincing",
+        "status": "undecided",
+        "pro_ids": [],
+        "con_ids": [],
+        "pro_strength": 0,
+        "con_strength": 0,
+        "corroborated": false,
+        "met": false
+      }
+    },
+    "issues": {
+      "Q1": [],
+      "Q2": [],
+      "Q3": [],
+      "Q4": []
+    },
+    "flags": [
+      {
+        "code": "main_issue_unresolved",
+        "node_id": "Q1",
+        "detail": "no accepted claim answers the main issue"
+      }
+    ],
+    "converged": true
+  },
+  "notes": [],
+  "llm_usage": [
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 1443,
+      "output_tokens": 1627,
+      "cached_input_tokens": 1440
+    }
+  ],
+  "llm_config": {
+    "replay": {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "effort": "medium"
+    }
+  },
+  "counter_drops": [],
+  "candidates": [],
+  "recall_done": false,
+  "literature_requests_done": []
+}

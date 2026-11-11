@@ -7,15 +7,25 @@ the scheme's critical questions where the evidence lets you. An argument is
 not a summary of why a claim seems right; it is a set of premise ids, a
 scheme, a claim id, and answers to that scheme's questions.
 
-Coverage is a requirement, not a preference. The view lists the evidence
-bearing on these claims that no argument yet uses. Every item on that list
-must leave this move either as a premise of an argument or in `unusable`
-with a one-sentence reason (it bears on the claim only loosely, it is a
-derivative restatement of an item already used, its quote does not support
-its text). An item that bears against a claim is grounds for an argument
-for a contrary claim. Weak evidence makes a weak argument; that is fine,
-the evaluation will weigh it. Evidence left in neither place is a failure
-of this move.
+Coverage is a requirement. Every claim with at least three `for` evidence
+items must receive an argument or a one-sentence `claim_reasons` entry.
+The view gives the required claim IDs and a strict per-item `unusable` limit
+below 30% of offered evidence. Excess unusable entries are ignored and cause
+one correction request. Do not replace argument construction with long lists
+of evidence that does not establish every clause of an over-specific claim.
+A weak or inapplicable argument is better than omission: the evaluator marks
+its limitations. An omitted argument is invisible. Never invent support or
+mark a contradicted assumption satisfied to meet coverage.
+
+When the evidence supports a narrower claim, propose it in `scoped_claims`
+with its revision_of, issue_id, answers_issue, premise_ids, scheme and CQ
+answers in this same reply. Keep its text within 250 characters and 8 digits;
+do not add unrequested doses, endpoint recipes or follow-up windows. Use
+answers_issue=false when a population, outcome or source-report finding no
+longer answers the original issue. A scoped claim is installed only together
+with its argument. Do not turn a nonsignificant estimate into a true-zero
+claim. The target field may identify a genuinely reported finding with
+evidence_status="reported"; this does not make it an answer to a causal issue.
 
 ## Procedure
 
@@ -56,15 +66,14 @@ of this move.
    outcome, the population is not the claim's, the record uses another
    definition. An unsatisfied assumption makes the argument inapplicable,
    and that is the correct result; do not write a satisfied-sounding answer
-   to a question whose honest outcome is unsatisfied, and do not build an
-   argument whose directness or design question you already know fails.
-   Build it instead for the narrower claim the evidence does support, if
-   such a claim exists, or leave the evidence for the revise move to
-   narrow the claim. `unresolved` means the evidence does not settle it. Look for the answer in the other items
+   to a question whose honest outcome is unsatisfied. Keep an explicitly
+   inapplicable argument visible when that is the honest result, or propose
+   the narrower claim and its argument now. Do not wait for Revise to do so.
+   `unresolved` means the evidence does not settle it. Look for the answer in the other items
    from the same source before defaulting: a report's method section, its
    definitions, its stated coverage. An assumption left open makes the
    argument inapplicable: it then counts for nothing. If you have no
-   evidence for an assumption but it is reasonable in context, you may set
+   evidence for an assumption but it is reasonable in context, set
    `defaulted: true` with the reason; a defaulted assumption costs the
    argument one level of strength, so default only when no item in the view
    answers it. Do not default an assumption the evidence contradicts.
@@ -101,7 +110,14 @@ Return one JSON object and nothing else:
   ],
   "unusable": [
     {"evidence_id": "E7", "reason": "restates E1 from a press release; same origin, adds nothing"}
-  ]
+  ],
+  "claim_reasons": [{"claim_id": "C3", "reason": "No listed item establishes the claimed joint outcome, even as a weak line of support."}],
+  "scoped_claims": [{
+    "text": "A source-scoped finding actually supported by the evidence",
+    "revision_of": "C4", "issue_id": "Q1", "answers_issue": false,
+    "premise_ids": ["E8"], "scheme": "study_result", "cq_answers": {},
+    "target": {}, "note": "Why this is the supported scope"
+  }]
 }
 ```
 

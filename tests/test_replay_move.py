@@ -33,7 +33,8 @@ def test_argue_replay_ulez_zero_pre_arguments_and_fixed_output(tmp_path):
     assert final.graph.arguments  # the saved input was not modified
     cid = pre.main_claims()[0].id
     eid = pre.graph.evidence[0].id
-    proposal = {"arguments": [{"scheme": "document_record", "claim_id": cid, "premise_ids": [eid],
+    proposal = {"claim_reasons": [{"claim_id": c.id, "reason": "The fixed test proposal leaves this claim without an argument."} for c in pre.graph.claims if c.id != cid],
+                "arguments": [{"scheme": "document_record", "claim_id": cid, "premise_ids": [eid],
                                "cq_answers": {qid: {"answer": "record", "evidence_ids": [eid]}
                                               for qid in ("authentic", "accuracy", "reading")}}]}
     result = run_samples(pre, "argue", lambda: FakeLLM({"argue": proposal}), tmp_path / "probe", preparation=preparation)

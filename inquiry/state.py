@@ -105,6 +105,7 @@ class Inquiry(BaseModel):
     llm_usage: list[dict] = Field(default_factory=list)
     llm_config: dict[str, dict] = Field(default_factory=dict)
     counter_drops: list[dict] = Field(default_factory=list)
+    claim_reasons: dict[str, str] = Field(default_factory=dict, description="Argue's claim-level reasons for not constructing an argument.")
     candidates: list[SourceCandidate] = Field(default_factory=list)
     recall_done: bool = False
     literature_requests_done: list[str] = Field(default_factory=list)
