@@ -1,0 +1,203 @@
+{
+  "reviewer": "Codex agent; not Mamadou",
+  "status": "provisional_agent_review",
+  "human_review_completed": false,
+  "authorization": "User: i will be asleep. i need tou to move forward",
+  "conclusion": "No same-claim comparisons exist; the ten lineage contrasts do not establish self-certification. All ten selected Sol CQ answers are provisionally appropriate at their narrower stated scope. This is not approval of every other assumption or of the argument scheme.",
+  "against_sol_reference": [],
+  "for_sol_reference": [
+    {
+      "sample": 2,
+      "argument_id": "A1",
+      "claim_id": "C18",
+      "cq_id": "reading",
+      "graph_sha256": "619a1acc562c8a54c47ee736582a1396d3debfcbe56660bc8249c169d410579a"
+    },
+    {
+      "sample": 2,
+      "argument_id": "A2",
+      "claim_id": "C19",
+      "cq_id": "reading",
+      "graph_sha256": "619a1acc562c8a54c47ee736582a1396d3debfcbe56660bc8249c169d410579a"
+    },
+    {
+      "sample": 1,
+      "argument_id": "A13",
+      "claim_id": "C29",
+      "cq_id": "directness",
+      "graph_sha256": "3e9954187aacd69a92f83a97e0839083ccac3e7542c121bfc99da52143a60e69"
+    },
+    {
+      "sample": 1,
+      "argument_id": "A14",
+      "claim_id": "C30",
+      "cq_id": "directness",
+      "graph_sha256": "3e9954187aacd69a92f83a97e0839083ccac3e7542c121bfc99da52143a60e69"
+    },
+    {
+      "sample": 2,
+      "argument_id": "A11",
+      "claim_id": "C27",
+      "cq_id": "directness",
+      "graph_sha256": "619a1acc562c8a54c47ee736582a1396d3debfcbe56660bc8249c169d410579a"
+    },
+    {
+      "sample": 2,
+      "argument_id": "A12",
+      "claim_id": "C28",
+      "cq_id": "directness",
+      "graph_sha256": "619a1acc562c8a54c47ee736582a1396d3debfcbe56660bc8249c169d410579a"
+    },
+    {
+      "sample": 3,
+      "argument_id": "A11",
+      "claim_id": "C27",
+      "cq_id": "directness",
+      "graph_sha256": "1600eb15211713a32e8ec95bab0feb73071db877fad71191c3d2bfd22f193ad2"
+    },
+    {
+      "sample": 1,
+      "argument_id": "A17",
+      "claim_id": "C33",
+      "cq_id": "directness",
+      "graph_sha256": "3e9954187aacd69a92f83a97e0839083ccac3e7542c121bfc99da52143a60e69"
+    },
+    {
+      "sample": 1,
+      "argument_id": "A18",
+      "claim_id": "C34",
+      "cq_id": "directness",
+      "graph_sha256": "3e9954187aacd69a92f83a97e0839083ccac3e7542c121bfc99da52143a60e69"
+    },
+    {
+      "sample": 1,
+      "argument_id": "A19",
+      "claim_id": "C35",
+      "cq_id": "directness",
+      "graph_sha256": "3e9954187aacd69a92f83a97e0839083ccac3e7542c121bfc99da52143a60e69"
+    }
+  ],
+  "overlap_rate_status": "not_estimable: zero adjudicated-against-Sol same-claim disagreements",
+  "cases": [
+    {
+      "case_id": "956070130515c711",
+      "adjudication": "both_scope_appropriate",
+      "note": "E13 states the unequal-weighted event-rate rule that Sol describes. Sonnet evaluates whether different definitions establish dependence of the net answer, a stronger interpretive proposition. The satisfied record reading and unresolved broad inference can both be appropriate.",
+      "sol_reference": {
+        "sample": 2,
+        "argument_id": "A1",
+        "claim_id": "C18",
+        "cq_id": "reading",
+        "graph_sha256": "619a1acc562c8a54c47ee736582a1396d3debfcbe56660bc8249c169d410579a"
+      }
+    },
+    {
+      "case_id": "5765d1e64a883c40",
+      "adjudication": "both_scope_appropriate",
+      "note": "E26 states a mortality-inclusive subtraction rule, matching the scoped description of the review definition. This does not establish a net-effect sign under alternative definitions. The possible inconsistency between the methods definition and the displayed calculation deserves a separate accuracy/consistency audit, not an automatic reversal of this reading CQ.",
+      "sol_reference": {
+        "sample": 2,
+        "argument_id": "A2",
+        "claim_id": "C19",
+        "cq_id": "reading",
+        "graph_sha256": "619a1acc562c8a54c47ee736582a1396d3debfcbe56660bc8249c169d410579a"
+      }
+    },
+    {
+      "case_id": "9874abd13352cdb2",
+      "adjudication": "both_scope_appropriate",
+      "note": "E9/E18 support the reported pooled MI and stroke results. Sol explicitly retains the mixed populations and review endpoints; Sonnet tests transport to all adults sixty and over on low-dose initiation. That transport is not established by these premises.",
+      "sol_reference": {
+        "sample": 1,
+        "argument_id": "A13",
+        "claim_id": "C29",
+        "cq_id": "directness",
+        "graph_sha256": "3e9954187aacd69a92f83a97e0839083ccac3e7542c121bfc99da52143a60e69"
+      }
+    },
+    {
+      "case_id": "6f8a2b0660c2e280",
+      "adjudication": "both_scope_appropriate",
+      "note": "E28/E34 support the mixed-age nonfatal-MI estimate that Sol actually states. They do not directly establish the original all-first-MI claim restricted to adults sixty and over. Heterogeneity remains a separate question.",
+      "sol_reference": {
+        "sample": 1,
+        "argument_id": "A14",
+        "claim_id": "C30",
+        "cq_id": "directness",
+        "graph_sha256": "3e9954187aacd69a92f83a97e0839083ccac3e7542c121bfc99da52143a60e69"
+      }
+    },
+    {
+      "case_id": "35c565499cc41b04",
+      "adjudication": "both_scope_appropriate",
+      "note": "The Sol conclusion expressly says S2 reports pooled findings, not an age-restricted effect. E14 documents the transport limitation that Sonnet identifies for the broader original claim. Both directness checks can be correct for their different conclusions.",
+      "sol_reference": {
+        "sample": 2,
+        "argument_id": "A11",
+        "claim_id": "C27",
+        "cq_id": "directness",
+        "graph_sha256": "619a1acc562c8a54c47ee736582a1396d3debfcbe56660bc8249c169d410579a"
+      }
+    },
+    {
+      "case_id": "5ecee7589224f580",
+      "adjudication": "both_scope_appropriate",
+      "note": "Sol explicitly limits its proposition to nonfatal MI in mixed-age S3 trial populations. Sonnet checks an all-first-MI older-adult initiation claim. The narrower population/outcome description avoids that particular directness failure without answering the original issue.",
+      "sol_reference": {
+        "sample": 2,
+        "argument_id": "A12",
+        "claim_id": "C28",
+        "cq_id": "directness",
+        "graph_sha256": "619a1acc562c8a54c47ee736582a1396d3debfcbe56660bc8249c169d410579a"
+      }
+    },
+    {
+      "case_id": "73d5a26759fed851",
+      "adjudication": "both_scope_appropriate",
+      "note": "E9/E18 support what the mixed-age review reports under its stroke classification. Sol does not generalize it to all older adults. Sonnet correctly identifies mixed ages and nonspecific stroke endpoints as obstacles for its broader original causal claim. The uncertainty CQ needs its own audit.",
+      "sol_reference": {
+        "sample": 3,
+        "argument_id": "A11",
+        "claim_id": "C27",
+        "cq_id": "directness",
+        "graph_sha256": "1600eb15211713a32e8ec95bab0feb73071db877fad71191c3d2bfd22f193ad2"
+      }
+    },
+    {
+      "case_id": "ef41a47325dcc1f1",
+      "adjudication": "both_scope_appropriate",
+      "note": "E96/E100/E105 align the Sol claim with the actual ASPREE cohort, intracranial endpoint and variable follow-up. They do not directly cover the entire age-sixty-plus population in the Sonnet conclusion. The scope difference explains these directness outcomes.",
+      "sol_reference": {
+        "sample": 1,
+        "argument_id": "A17",
+        "claim_id": "C33",
+        "cq_id": "directness",
+        "graph_sha256": "3e9954187aacd69a92f83a97e0839083ccac3e7542c121bfc99da52143a60e69"
+      }
+    },
+    {
+      "case_id": "e657e746a031dbcc",
+      "adjudication": "both_scope_appropriate",
+      "note": "E63/E66/E67/E75 establish the actual diabetic ASCEND population and broad major-bleeding endpoint, retained in the scoped claim. They cannot identify nonfatal extracranial effects in all adults sixty and over as required by the original Sonnet claim.",
+      "sol_reference": {
+        "sample": 1,
+        "argument_id": "A18",
+        "claim_id": "C34",
+        "cq_id": "directness",
+        "graph_sha256": "3e9954187aacd69a92f83a97e0839083ccac3e7542c121bfc99da52143a60e69"
+      }
+    },
+    {
+      "case_id": "4c09e1cbfa13ce3b",
+      "adjudication": "both_scope_appropriate",
+      "note": "E156 supports the scoped pooled major-GI finding, explicitly including fatal events. The original claim instead requires nonfatal major extracranial bleeding at age sixty and over; the premise does not isolate that population/outcome. Both directness judgments can be appropriate.",
+      "sol_reference": {
+        "sample": 1,
+        "argument_id": "A19",
+        "claim_id": "C35",
+        "cq_id": "directness",
+        "graph_sha256": "3e9954187aacd69a92f83a97e0839083ccac3e7542c121bfc99da52143a60e69"
+      }
+    }
+  ]
+}

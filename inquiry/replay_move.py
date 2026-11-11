@@ -6,6 +6,7 @@ remain unless the requested projection removes them. No retrieval is performed.
 from __future__ import annotations
 
 import argparse
+from collections import Counter
 from contextlib import contextmanager
 import hashlib
 import json
@@ -245,6 +246,58 @@ def need_tag(text: str) -> dict:
             "tag_basis": blocked[0] if blocked else "public document/search request; heuristic tag for review"}
 
 
+CQ_OUTCOMES = ("satisfied", "unsatisfied", "defaulted", "open")
+
+
+def cq_outcome_bucket(answer) -> str:
+    """Four reporting buckets; raw status/outcome remain in the graph.
+
+    An answered-but-unresolved check is still epistemically open. Older
+    answered checks with an empty outcome mean satisfied, as in evaluation.
+    """
+    if answer is None or answer.status == "open":
+        return "open"
+    if answer.status == "defaulted":
+        return "defaulted"
+    if answer.outcome == "unsatisfied":
+        return "unsatisfied"
+    return "satisfied" if answer.satisfied else "open"
+
+
+def argue_diagnostics(inq: Inquiry, evaluation=None) -> dict:
+    """Read-only diagnostics for active supporting arguments, not attacks."""
+    from .argument.evaluate import evaluate
+    from .argument.schemes import SCHEMES
+    ev = evaluation if evaluation is not None else evaluate(inq.graph)
+    outcomes = Counter({key: 0 for key in CQ_OUTCOMES})
+    by_kind = {kind: Counter({key: 0 for key in CQ_OUTCOMES}) for kind in ("assumption", "exception")}
+    details, reasons = Counter(), Counter()
+    for argument in inq.graph.arguments:
+        if argument.is_attack or argument.withdrawn:
+            continue
+        for question in SCHEMES[argument.scheme].critical_questions:
+            answer = argument.cq.get(question.id)
+            bucket = cq_outcome_bucket(answer)
+            outcomes[bucket] += 1
+            by_kind[question.kind][bucket] += 1
+            if answer and answer.status == "answered" and answer.outcome == "unresolved":
+                details["answered_unresolved"] += 1
+            if answer and answer.status == "answered" and not answer.outcome:
+                details["legacy_answered_empty_outcome"] += 1
+        for reason in ev.inapplicable_reasons.get(argument.id, []):
+            if reason.startswith(("open assumption: ", "assumption unresolved: ")):
+                reasons["open:" + reason.split(": ", 1)[1]] += 1
+            elif reason.startswith(("assumption unsatisfied: ", "exception obtains: ")):
+                reasons["unsatisfied:" + reason.split(": ", 1)[1]] += 1
+            elif reason.startswith("premise claim not accepted: "):
+                reasons["premise_claim_not_accepted"] += 1
+            else:
+                reasons["other:" + reason] += 1
+    return {"inapplicable_reasons": dict(sorted(reasons.items())), "cq_outcomes": dict(outcomes),
+            "cq_outcomes_by_kind": {kind: dict(counts) for kind, counts in by_kind.items()},
+            "cq_outcome_details": dict(sorted(details.items()))}
+
+
 def move_metrics(inq: Inquiry, move: str, summary: dict, llm: RecordingLLM,
                  *, source_id: str | None = None, source_text: str = "", gold_facts: list[str] | None = None) -> tuple[dict, dict]:
     g, proposals = inq.graph, _proposals(llm)
@@ -279,6 +332,7 @@ def move_metrics(inq: Inquiry, move: str, summary: dict, llm: RecordingLLM,
              "claims_with_reason": len(summary.get("claim_reasons", {})),
              "ignored_unusable": len(summary.get("ignored_unusable", [])),
              "input_eligible_claims": summary.get("input_eligible_claims", sorted(set(eligible)))}
+        m.update(argue_diagnostics(inq, ev))
     elif move == "critique":
         attacks = [a for a in g.arguments if a.is_attack]
         tags = [need_tag(t) for t in summary.get("needed_evidence", [])]

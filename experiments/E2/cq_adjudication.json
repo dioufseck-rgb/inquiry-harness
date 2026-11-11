@@ -1,0 +1,1581 @@
+{
+  "item": "N1",
+  "status": "awaiting_mamadou",
+  "matched_disagreements_available": 0,
+  "diagnostic_contrasts_available": 18,
+  "instructions": [
+    "Fill adjudication and note for each case, leaving factual records unchanged.",
+    "No same-claim argument matches exist in these six graphs. Lineage-linked contrasts are not same-claim disagreements.",
+    "Judge each CQ answer against that provider's stated conclusion and premises; both answers may be appropriate at different scopes.",
+    "Use sol_inadequate, sonnet_overstrict, both_scope_appropriate, neither, or not_comparable, with an explanation in note.",
+    "The user subsequently authorized autonomous continuation while asleep; a separate, explicitly agent-authored provisional review is used for execution. This file remains blank for later human review."
+  ],
+  "selection": "Matched disagreements first; then explicitly labelled source-overlapping, same-index lineage contrasts. Prefer main-issue study_result/directness, other main-issue questions, study_result/directness, and applicability differences.",
+  "catalogue_note": "study_result uses directness for population/setting/intervention/outcome alignment; there are no separate population or outcome CQ IDs.",
+  "cases": [
+    {
+      "case_id": "956070130515c711",
+      "comparison_kind": "lineage_contrast_different_claims",
+      "comparable_as_same_claim": false,
+      "argument": {
+        "scheme": "document_record",
+        "sol": {
+          "provider": "openai",
+          "model": "gpt-6.1-sol",
+          "effort": "medium",
+          "sample": 2,
+          "argument_id": "A1",
+          "premise_ids": [
+            "E12",
+            "E13",
+            "E21",
+            "E8"
+          ],
+          "claim_id": "C18",
+          "claim_text": "One primary-prevention meta-analysis defined net benefit using mortality-weighted event-rate differences, assigning different weights to myocardial infarction, ischemic stroke, hemorrhagic stroke and major extracranial bleeding.",
+          "root_claim_id": "C4",
+          "revision_of": "C4",
+          "issue_id": "Q1",
+          "main_issue": true,
+          "answers_issue": false,
+          "graph": "experiments\\E2\\after\\h1-claims\\sol\\sample-002\\inquiry.json",
+          "graph_sha256": "619a1acc562c8a54c47ee736582a1396d3debfcbe56660bc8249c169d410579a"
+        },
+        "sonnet": {
+          "provider": "anthropic",
+          "model": "claude-sonnet-5-5",
+          "effort": "medium",
+          "sample": 2,
+          "argument_id": "A1",
+          "premise_ids": [
+            "E13",
+            "E158",
+            "E21",
+            "E26",
+            "E40",
+            "E48",
+            "E64",
+            "E80",
+            "E81"
+          ],
+          "claim_id": "C4",
+          "claim_text": "For adults aged 60 and over, whether initiating aspirin reduces net cardiovascular harm depends on how sources define and value cardiovascular events and bleeding complications.",
+          "root_claim_id": "C4",
+          "revision_of": null,
+          "issue_id": "Q1",
+          "main_issue": true,
+          "answers_issue": true,
+          "graph": "experiments\\E2\\after\\h1-claims\\sonnet\\sample-002\\inquiry.json",
+          "graph_sha256": "23093464215fe59126a0cf2c9cd923f4753b6a4808446e105a96502a6cf1e289"
+        }
+      },
+      "cq_id": "reading",
+      "cq_kind": "assumption",
+      "cq_text": "Does R state A, or does A require an interpretation of R that could be contested?",
+      "sol_answer": {
+        "status": "answered",
+        "outcome": "satisfied",
+        "bucket": "satisfied",
+        "answer": "The formula uses ischemic stroke as reference and unequal weights for the other outcomes, rather than a deduplicated first-event composite.",
+        "evidence_ids": [
+          "E13"
+        ],
+        "argument_applicable": true,
+        "inapplicable_reasons": []
+      },
+      "sonnet_answer": {
+        "status": "answered",
+        "outcome": "unresolved",
+        "bucket": "open",
+        "answer": "The records state that sources use different composites and weights. ASPREE MACE excludes bleeding, ASCEND includes TIA, one meta-analysis weights hemorrhagic stroke 3x ischemic stroke, and the USPSTF model uses lifetime QALYs. No record demonstrates that the sign of the net effect reverses under alternative definitions or weights, so the claim's dependence is inferred from heterogeneity of definitions, not shown directly.",
+        "evidence_ids": [
+          "E13",
+          "E21",
+          "E26",
+          "E158",
+          "E40",
+          "E64",
+          "E80"
+        ],
+        "argument_applicable": false,
+        "inapplicable_reasons": [
+          "assumption unresolved: reading"
+        ]
+      },
+      "evidence_ids": [
+        "E12",
+        "E13",
+        "E158",
+        "E21",
+        "E26",
+        "E40",
+        "E48",
+        "E64",
+        "E8",
+        "E80",
+        "E81"
+      ],
+      "evidence": [
+        {
+          "id": "E12",
+          "text": "The analysis converts aggregate events into annualized incidence rates and derives absolute differences from those rates; these calculations are not five-year cumulative risks for a patient-level first-occurrence composite.",
+          "quote": "Events prevented/caused per 10,000 patients per year were calculated by dividing 10,000 by the NNT or NNH.",
+          "source_id": "S2",
+          "source_title": "Aspirin for primary prevention of cardiovascular disease: a meta-analysis with a particular focus on subgroups.",
+          "location": "Methods, statistical calculations immediately before Results"
+        },
+        {
+          "id": "E13",
+          "text": "The mortality-adjusted net clinical benefit is a weighted sum of incidence-rate differences for ischemic stroke, myocardial infarction, hemorrhagic stroke, and major extracranial bleeding. It uses ischemic stroke as the reference, rather than equal event weights, and is neither a first-person-event composite nor a QALY endpoint.",
+          "quote": "Weights were thus w1 = 0.89 for MI, w2 = 3.23 for hemorrhagic stroke, and w3 = 0.63 for major extracranial bleeding",
+          "source_id": "S2",
+          "source_title": "Aspirin for primary prevention of cardiovascular disease: a meta-analysis with a particular focus on subgroups.",
+          "location": "Methods, mortality-adjusted net clinical benefit calculation"
+        },
+        {
+          "id": "E158",
+          "text": "The commissioned model combined nonfatal cardiovascular benefits and gastrointestinal and intracranial bleeding harms into lifetime QALYs and life-years, assuming no cardiovascular mortality effect. For initiation at ages 60–69, QALY gains ranged from slightly negative to slightly positive by cardiovascular risk and life-year gains were generally negative; at ages 70–79, both measures were negative at essentially all modeled risks up to 20% ten-year cardiovascular risk. These lifetime modeled endpoints do not determine the specified five-year, equally weighted first-event composite.",
+          "quote": "Initiation of aspirin use in persons aged 60 to 69 years results in quality-adjusted life-years gained that range from slightly negative to slightly positive depending on CVD risk level, and life-years gained are generally negative.",
+          "source_id": "S16",
+          "source_title": "Aspirin Use to Prevent Cardiovascular Disease ...",
+          "location": "Estimate of Magnitude of Net Benefit, first through third paragraphs"
+        },
+        {
+          "id": "E21",
+          "text": "The authors explicitly weighted hemorrhagic stroke three times as severely as ischemic stroke using prior mortality estimates. This illustrates a severity-weighted benefit–harm endpoint, but not a QALY health-state model or a demonstrated reversal of the treatment conclusion under alternative weights.",
+          "quote": "Based on previous estimates [ 31 , 32 ], we weighted hemorrhagic stroke threefold worse than IS.",
+          "source_id": "S2",
+          "source_title": "Aspirin for primary prevention of cardiovascular disease: a meta-analysis with a particular focus on subgroups.",
+          "location": "Discussion, paragraph on mortality-adjusted net clinical benefit"
+        },
+        {
+          "id": "E26",
+          "text": "The study calculates net benefit by subtracting bleeding risk differences from mortality and nonfatal cardiovascular benefits, rather than reporting the requested patient-level first-occurrence composite.",
+          "quote": "Net-benefit was calculated as the risk difference between the benefits of all-cause mortality and non-fatal events (myocardial infarction and stroke), minus the harm of increasing major gastrointestinal bleeding and hemorrhagic stroke.",
+          "source_id": "S3",
+          "source_title": "Aspirin for primary prevention of stroke in individuals without cardiovascular disease-A meta-analysis.",
+          "location": "Methods, Data synthesis and analysis"
+        },
+        {
+          "id": "E40",
+          "text": "The reported MACE endpoint counts first events but excludes bleeding and uses coronary heart disease death rather than the broader cardiovascular-death component specified in the target composite.",
+          "quote": "incident MACE [a composite of the first occurrence of non-fatal myocardial infarction (MI), fatal and non-fatal ischaemic stroke, and coronary heart disease death]",
+          "source_id": "S4",
+          "source_title": "Aspirin, cardiovascular events, and major bleeding in older ...",
+          "location": "Outcomes, opening sentence"
+        },
+        {
+          "id": "E48",
+          "text": "The reported first-event MACE endpoint excludes bleeding and is narrower than the requested net-outcome composite. Its ischemic-stroke category includes uncertain-type stroke and ischemic stroke with hemorrhagic transformation; vascular death comprises coronary heart disease death and fatal ischemic stroke. These definitions require reconciliation before combining cardiovascular and bleeding endpoints.",
+          "quote": "Major adverse cardiovascular event (MACE) is a composite of coronary heart disease death, non-fatal myocardial infarction, or fatal or non-fatal ischaemic stroke.",
+          "source_id": "S4",
+          "source_title": "Aspirin, cardiovascular events, and major bleeding in older ...",
+          "location": "Table 2, title and footnotes a–c"
+        },
+        {
+          "id": "E64",
+          "text": "The efficacy endpoint was a first serious vascular event that included transient ischemic attack and excluded confirmed intracranial hemorrhage, rather than the requested combined cardiovascular-and-bleeding endpoint.",
+          "quote": "The primary efficacy outcome was the first serious vascular event (i.e., myocardial infarction, stroke or transient ischemic attack, or death from any vascular cause, excluding any confirmed intracranial hemorrhage).",
+          "source_id": "S5",
+          "source_title": "Effects of Aspirin for Primary Prevention in Persons with ...",
+          "location": "Abstract, Methods"
+        },
+        {
+          "id": "E8",
+          "text": "The review pooled relative effects over a mean follow-up of 6.4 years and calculated annual absolute effects by dividing event incidence by mean follow-up; these are not directly measured five-year cumulative risks.",
+          "quote": "event incidence rates were divided by their respective mean follow-up periods and multiplied by 100 to obtain the incidence rate per 100 patient years.",
+          "source_id": "S2",
+          "source_title": "Aspirin for primary prevention of cardiovascular disease: a meta-analysis with a particular focus on subgroups.",
+          "location": "Methods — Data synthesis and analysis"
+        },
+        {
+          "id": "E80",
+          "text": "The revised efficacy endpoint includes transient ischemic attacks and excludes confirmed intracranial hemorrhage, so it is not the requested composite of cardiovascular events and major bleeding.",
+          "quote": "serious vascular events (SVE: defined as non-fatal MI, non-fatal stroke, or vascular death, excluding confirmed intracranial hemorrhage but including TIA)",
+          "source_id": "S7",
+          "source_title": "ASCEND: A Study of Cardiovascular Events iN Diabetes",
+          "location": "Sample size and predicted number of events — Increase in study duration"
+        },
+        {
+          "id": "E81",
+          "text": "The major-bleeding safety endpoint includes all confirmed intracranial hemorrhage, sight-threatening eye bleeding, and other bleeding requiring hospitalization or transfusion or causing death or disability. Its scope is therefore not identical to the specified intracranial-plus-major-extracranial endpoint.",
+          "quote": "sight-threatening eye bleeding, or any other serious bleeding episode (i.e. requiring hospitalization or transfusion, or fatal or disabling)",
+          "source_id": "S7",
+          "source_title": "ASCEND: A Study of Cardiovascular Events iN Diabetes",
+          "location": "Planned comparisons of outcome — key safety outcome"
+        }
+      ],
+      "adjudication": "",
+      "note": ""
+    },
+    {
+      "case_id": "5765d1e64a883c40",
+      "comparison_kind": "lineage_contrast_different_claims",
+      "comparable_as_same_claim": false,
+      "argument": {
+        "scheme": "document_record",
+        "sol": {
+          "provider": "openai",
+          "model": "gpt-6.1-sol",
+          "effort": "medium",
+          "sample": 2,
+          "argument_id": "A2",
+          "premise_ids": [
+            "E26"
+          ],
+          "claim_id": "C19",
+          "claim_text": "A separate primary-prevention review defined net benefit by subtracting major gastrointestinal bleeding and hemorrhagic-stroke risk differences from mortality and nonfatal cardiovascular benefits.",
+          "root_claim_id": "C4",
+          "revision_of": "C4",
+          "issue_id": "Q1",
+          "main_issue": true,
+          "answers_issue": false,
+          "graph": "experiments\\E2\\after\\h1-claims\\sol\\sample-002\\inquiry.json",
+          "graph_sha256": "619a1acc562c8a54c47ee736582a1396d3debfcbe56660bc8249c169d410579a"
+        },
+        "sonnet": {
+          "provider": "anthropic",
+          "model": "claude-sonnet-5-5",
+          "effort": "medium",
+          "sample": 2,
+          "argument_id": "A1",
+          "premise_ids": [
+            "E13",
+            "E158",
+            "E21",
+            "E26",
+            "E40",
+            "E48",
+            "E64",
+            "E80",
+            "E81"
+          ],
+          "claim_id": "C4",
+          "claim_text": "For adults aged 60 and over, whether initiating aspirin reduces net cardiovascular harm depends on how sources define and value cardiovascular events and bleeding complications.",
+          "root_claim_id": "C4",
+          "revision_of": null,
+          "issue_id": "Q1",
+          "main_issue": true,
+          "answers_issue": true,
+          "graph": "experiments\\E2\\after\\h1-claims\\sonnet\\sample-002\\inquiry.json",
+          "graph_sha256": "23093464215fe59126a0cf2c9cd923f4753b6a4808446e105a96502a6cf1e289"
+        }
+      },
+      "cq_id": "reading",
+      "cq_kind": "assumption",
+      "cq_text": "Does R state A, or does A require an interpretation of R that could be contested?",
+      "sol_answer": {
+        "status": "answered",
+        "outcome": "satisfied",
+        "bucket": "satisfied",
+        "answer": "The passage explicitly states the subtraction rule and included outcomes.",
+        "evidence_ids": [
+          "E26"
+        ],
+        "argument_applicable": true,
+        "inapplicable_reasons": []
+      },
+      "sonnet_answer": {
+        "status": "answered",
+        "outcome": "unresolved",
+        "bucket": "open",
+        "answer": "The records state that sources use different composites and weights. ASPREE MACE excludes bleeding, ASCEND includes TIA, one meta-analysis weights hemorrhagic stroke 3x ischemic stroke, and the USPSTF model uses lifetime QALYs. No record demonstrates that the sign of the net effect reverses under alternative definitions or weights, so the claim's dependence is inferred from heterogeneity of definitions, not shown directly.",
+        "evidence_ids": [
+          "E13",
+          "E21",
+          "E26",
+          "E158",
+          "E40",
+          "E64",
+          "E80"
+        ],
+        "argument_applicable": false,
+        "inapplicable_reasons": [
+          "assumption unresolved: reading"
+        ]
+      },
+      "evidence_ids": [
+        "E13",
+        "E158",
+        "E21",
+        "E26",
+        "E40",
+        "E48",
+        "E64",
+        "E80",
+        "E81"
+      ],
+      "evidence": [
+        {
+          "id": "E13",
+          "text": "The mortality-adjusted net clinical benefit is a weighted sum of incidence-rate differences for ischemic stroke, myocardial infarction, hemorrhagic stroke, and major extracranial bleeding. It uses ischemic stroke as the reference, rather than equal event weights, and is neither a first-person-event composite nor a QALY endpoint.",
+          "quote": "Weights were thus w1 = 0.89 for MI, w2 = 3.23 for hemorrhagic stroke, and w3 = 0.63 for major extracranial bleeding",
+          "source_id": "S2",
+          "source_title": "Aspirin for primary prevention of cardiovascular disease: a meta-analysis with a particular focus on subgroups.",
+          "location": "Methods, mortality-adjusted net clinical benefit calculation"
+        },
+        {
+          "id": "E158",
+          "text": "The commissioned model combined nonfatal cardiovascular benefits and gastrointestinal and intracranial bleeding harms into lifetime QALYs and life-years, assuming no cardiovascular mortality effect. For initiation at ages 60–69, QALY gains ranged from slightly negative to slightly positive by cardiovascular risk and life-year gains were generally negative; at ages 70–79, both measures were negative at essentially all modeled risks up to 20% ten-year cardiovascular risk. These lifetime modeled endpoints do not determine the specified five-year, equally weighted first-event composite.",
+          "quote": "Initiation of aspirin use in persons aged 60 to 69 years results in quality-adjusted life-years gained that range from slightly negative to slightly positive depending on CVD risk level, and life-years gained are generally negative.",
+          "source_id": "S16",
+          "source_title": "Aspirin Use to Prevent Cardiovascular Disease ...",
+          "location": "Estimate of Magnitude of Net Benefit, first through third paragraphs"
+        },
+        {
+          "id": "E21",
+          "text": "The authors explicitly weighted hemorrhagic stroke three times as severely as ischemic stroke using prior mortality estimates. This illustrates a severity-weighted benefit–harm endpoint, but not a QALY health-state model or a demonstrated reversal of the treatment conclusion under alternative weights.",
+          "quote": "Based on previous estimates [ 31 , 32 ], we weighted hemorrhagic stroke threefold worse than IS.",
+          "source_id": "S2",
+          "source_title": "Aspirin for primary prevention of cardiovascular disease: a meta-analysis with a particular focus on subgroups.",
+          "location": "Discussion, paragraph on mortality-adjusted net clinical benefit"
+        },
+        {
+          "id": "E26",
+          "text": "The study calculates net benefit by subtracting bleeding risk differences from mortality and nonfatal cardiovascular benefits, rather than reporting the requested patient-level first-occurrence composite.",
+          "quote": "Net-benefit was calculated as the risk difference between the benefits of all-cause mortality and non-fatal events (myocardial infarction and stroke), minus the harm of increasing major gastrointestinal bleeding and hemorrhagic stroke.",
+          "source_id": "S3",
+          "source_title": "Aspirin for primary prevention of stroke in individuals without cardiovascular disease-A meta-analysis.",
+          "location": "Methods, Data synthesis and analysis"
+        },
+        {
+          "id": "E40",
+          "text": "The reported MACE endpoint counts first events but excludes bleeding and uses coronary heart disease death rather than the broader cardiovascular-death component specified in the target composite.",
+          "quote": "incident MACE [a composite of the first occurrence of non-fatal myocardial infarction (MI), fatal and non-fatal ischaemic stroke, and coronary heart disease death]",
+          "source_id": "S4",
+          "source_title": "Aspirin, cardiovascular events, and major bleeding in older ...",
+          "location": "Outcomes, opening sentence"
+        },
+        {
+          "id": "E48",
+          "text": "The reported first-event MACE endpoint excludes bleeding and is narrower than the requested net-outcome composite. Its ischemic-stroke category includes uncertain-type stroke and ischemic stroke with hemorrhagic transformation; vascular death comprises coronary heart disease death and fatal ischemic stroke. These definitions require reconciliation before combining cardiovascular and bleeding endpoints.",
+          "quote": "Major adverse cardiovascular event (MACE) is a composite of coronary heart disease death, non-fatal myocardial infarction, or fatal or non-fatal ischaemic stroke.",
+          "source_id": "S4",
+          "source_title": "Aspirin, cardiovascular events, and major bleeding in older ...",
+          "location": "Table 2, title and footnotes a–c"
+        },
+        {
+          "id": "E64",
+          "text": "The efficacy endpoint was a first serious vascular event that included transient ischemic attack and excluded confirmed intracranial hemorrhage, rather than the requested combined cardiovascular-and-bleeding endpoint.",
+          "quote": "The primary efficacy outcome was the first serious vascular event (i.e., myocardial infarction, stroke or transient ischemic attack, or death from any vascular cause, excluding any confirmed intracranial hemorrhage).",
+          "source_id": "S5",
+          "source_title": "Effects of Aspirin for Primary Prevention in Persons with ...",
+          "location": "Abstract, Methods"
+        },
+        {
+          "id": "E80",
+          "text": "The revised efficacy endpoint includes transient ischemic attacks and excludes confirmed intracranial hemorrhage, so it is not the requested composite of cardiovascular events and major bleeding.",
+          "quote": "serious vascular events (SVE: defined as non-fatal MI, non-fatal stroke, or vascular death, excluding confirmed intracranial hemorrhage but including TIA)",
+          "source_id": "S7",
+          "source_title": "ASCEND: A Study of Cardiovascular Events iN Diabetes",
+          "location": "Sample size and predicted number of events — Increase in study duration"
+        },
+        {
+          "id": "E81",
+          "text": "The major-bleeding safety endpoint includes all confirmed intracranial hemorrhage, sight-threatening eye bleeding, and other bleeding requiring hospitalization or transfusion or causing death or disability. Its scope is therefore not identical to the specified intracranial-plus-major-extracranial endpoint.",
+          "quote": "sight-threatening eye bleeding, or any other serious bleeding episode (i.e. requiring hospitalization or transfusion, or fatal or disabling)",
+          "source_id": "S7",
+          "source_title": "ASCEND: A Study of Cardiovascular Events iN Diabetes",
+          "location": "Planned comparisons of outcome — key safety outcome"
+        }
+      ],
+      "adjudication": "",
+      "note": ""
+    },
+    {
+      "case_id": "9874abd13352cdb2",
+      "comparison_kind": "lineage_contrast_different_claims",
+      "comparable_as_same_claim": false,
+      "argument": {
+        "scheme": "study_result",
+        "sol": {
+          "provider": "openai",
+          "model": "gpt-6.1-sol",
+          "effort": "medium",
+          "sample": 1,
+          "argument_id": "A13",
+          "premise_ids": [
+            "E14",
+            "E18",
+            "E9"
+          ],
+          "claim_id": "C29",
+          "claim_text": "In the mixed-population primary-prevention meta-analysis, aspirin reduced myocardial infarction (RR .86) and the review's ischemic-stroke endpoint (RR .90).",
+          "root_claim_id": "C9",
+          "revision_of": "C9",
+          "issue_id": "Q3",
+          "main_issue": false,
+          "answers_issue": false,
+          "graph": "experiments\\E2\\after\\h1-claims\\sol\\sample-001\\inquiry.json",
+          "graph_sha256": "3e9954187aacd69a92f83a97e0839083ccac3e7542c121bfc99da52143a60e69"
+        },
+        "sonnet": {
+          "provider": "anthropic",
+          "model": "claude-sonnet-5-5",
+          "effort": "medium",
+          "sample": 1,
+          "argument_id": "A6",
+          "premise_ids": [
+            "E153",
+            "E18",
+            "E28",
+            "E34",
+            "E9"
+          ],
+          "claim_id": "C9",
+          "claim_text": "Initiating low-dose aspirin reduces first myocardial infarction in adults aged 60 and older without established cardiovascular disease.",
+          "root_claim_id": "C9",
+          "revision_of": null,
+          "issue_id": "Q3",
+          "main_issue": false,
+          "answers_issue": true,
+          "graph": "experiments\\E2\\after\\h1-claims\\sonnet\\sample-001\\inquiry.json",
+          "graph_sha256": "7d68456ee8a20520a426e28c62fd20d8b342b09168ef09628e19195582c07e95"
+        }
+      },
+      "cq_id": "directness",
+      "cq_kind": "assumption",
+      "cq_text": "Do the study's population, setting, intervention and outcome match the claim's, or is the result being carried across to a different place, period, site type or measure?",
+      "sol_answer": {
+        "status": "answered",
+        "outcome": "satisfied",
+        "bucket": "satisfied",
+        "answer": "The claim is restricted to the review's mixed populations, treatment schedules, and reported endpoints; it does not assert an age-specific daily low-dose effect.",
+        "evidence_ids": [
+          "E9",
+          "E14",
+          "E18"
+        ],
+        "argument_applicable": true,
+        "inapplicable_reasons": []
+      },
+      "sonnet_answer": {
+        "status": "answered",
+        "outcome": "unsatisfied",
+        "bucket": "unsatisfied",
+        "answer": "Pooled populations have mean age about 62, include adults younger than 60, higher doses, alternate-day regimens and varied follow-up. They are not restricted to adults 60 and older on 75-100 mg daily. Direct match is partial at best.",
+        "evidence_ids": [
+          "E14",
+          "E28",
+          "E153"
+        ],
+        "argument_applicable": false,
+        "inapplicable_reasons": [
+          "assumption unsatisfied: directness"
+        ]
+      },
+      "evidence_ids": [
+        "E14",
+        "E153",
+        "E18",
+        "E28",
+        "E34",
+        "E9"
+      ],
+      "evidence": [
+        {
+          "id": "E14",
+          "text": "The pooled trial population and treatment schedules do not uniformly match adults aged at least 60 receiving 75–100 mg daily for five years: the mean age was 62, follow-up ranged from 3.6 to 10.3 years, and regimens included higher doses and alternate-day treatment.",
+          "quote": "The dosage of aspirin ranged from 75 to 500 mg once daily. Two trials evaluated the effect of aspirin (325 mg and 100 mg) given on alternate days",
+          "source_id": "S2",
+          "source_title": "Aspirin for primary prevention of cardiovascular disease: a meta-analysis with a particular focus on subgroups.",
+          "location": "Results, Description of studies"
+        },
+        {
+          "id": "E153",
+          "text": "Across low-dose aspirin trials, pooled estimates favored aspirin for nonfatal myocardial infarction (11 trials; 134,470 participants; Peto OR 0.88, 95% CI 0.80–0.96) and nonfatal ischemic stroke (5 trials; 54,947 participants; OR 0.88, 95% CI 0.78–1.00). These are not estimates restricted to ages 60–69, do not supply five-year absolute effects, and do not establish results for an exclusively daily 75–100 mg regimen.",
+          "quote": "low-dose aspirin use was associated with a statistically significant decreased risk of nonfatal myocardial infarction (Peto odds ratio [OR], 0.88 [95% CI, 0.80-0.96]).",
+          "source_id": "S16",
+          "source_title": "Aspirin Use to Prevent Cardiovascular Disease ...",
+          "location": "Benefits of Preventive Medication, paragraph beginning 'A pooled analysis of 11 trials'"
+        },
+        {
+          "id": "E18",
+          "text": "Across the pooled trials, aspirin reduced myocardial infarction (RR 0.86, 95% CI 0.77–0.95) and ischemic stroke (RR 0.90, 95% CI 0.82–0.99). Table 3 reports annual absolute reductions of 0.041 and 0.022 percentage points, respectively, rather than five-year cumulative risk reductions in adults aged 60 and older.",
+          "quote": "of MI by 14% (RR 0.86; 95% CI, 0.77–0.95;",
+          "source_id": "S2",
+          "source_title": "Aspirin for primary prevention of cardiovascular disease: a meta-analysis with a particular focus on subgroups.",
+          "location": "Efficacy and safety outcomes, first paragraph; Table 3, myocardial infarction and ischemic stroke rows"
+        },
+        {
+          "id": "E28",
+          "text": "Across the included primary-prevention trials, aspirin reduced nonfatal myocardial infarction, with a pooled odds ratio of 0.80 (95% CI, 0.69–0.94).",
+          "quote": "Aspirin was associated with a reduction in non-fatal myocardial infarction (odds ratio, 0.80; 95% CI, 0.69 to 0.94)",
+          "source_id": "S3",
+          "source_title": "Aspirin for primary prevention of stroke in individuals without cardiovascular disease-A meta-analysis.",
+          "location": "Abstract, Summary of review results"
+        },
+        {
+          "id": "E34",
+          "text": "Across eleven trials, nonfatal myocardial infarction occurred in 1.25% of aspirin recipients and 1.48% of controls; the pooled odds ratio was 0.80 (95% CI, 0.69–0.94), with substantial heterogeneity.",
+          "quote": "Aspirin use for primary cardiovascular prevention was associated with a significant decrease in non-fatal myocardial infarction (odds ratio, 0.80; 95% CI, 0.69 to 0.94)",
+          "source_id": "S3",
+          "source_title": "Aspirin for primary prevention of stroke in individuals without cardiovascular disease-A meta-analysis.",
+          "location": "Results, Non-fatal myocardial infarction; Figure 3"
+        },
+        {
+          "id": "E9",
+          "text": "Across the pooled primary-prevention trials, aspirin reduced myocardial infarction and the review's ischemic-stroke endpoint, while the cardiovascular-mortality estimate remained compatible with benefit or harm.",
+          "quote": "myocardial infarction by 14% (RR 0.86; 95% CI, 0.77–0.95), and ischemic stroke by 10% (RR 0.90; 95% CI, 0.82–0.99)",
+          "source_id": "S2",
+          "source_title": "Aspirin for primary prevention of cardiovascular disease: a meta-analysis with a particular focus on subgroups.",
+          "location": "Abstract — Results; cardiovascular mortality reported immediately before this passage as RR 0.99, 95% CI 0.90–1.08"
+        }
+      ],
+      "adjudication": "",
+      "note": ""
+    },
+    {
+      "case_id": "6f8a2b0660c2e280",
+      "comparison_kind": "lineage_contrast_different_claims",
+      "comparable_as_same_claim": false,
+      "argument": {
+        "scheme": "study_result",
+        "sol": {
+          "provider": "openai",
+          "model": "gpt-6.1-sol",
+          "effort": "medium",
+          "sample": 1,
+          "argument_id": "A14",
+          "premise_ids": [
+            "E28",
+            "E34"
+          ],
+          "claim_id": "C30",
+          "claim_text": "In the stroke-prevention meta-analysis's mixed-age trials, aspirin reduced nonfatal myocardial infarction (OR .80, CI .69–.94).",
+          "root_claim_id": "C9",
+          "revision_of": "C9",
+          "issue_id": "Q3",
+          "main_issue": false,
+          "answers_issue": false,
+          "graph": "experiments\\E2\\after\\h1-claims\\sol\\sample-001\\inquiry.json",
+          "graph_sha256": "3e9954187aacd69a92f83a97e0839083ccac3e7542c121bfc99da52143a60e69"
+        },
+        "sonnet": {
+          "provider": "anthropic",
+          "model": "claude-sonnet-5-5",
+          "effort": "medium",
+          "sample": 1,
+          "argument_id": "A6",
+          "premise_ids": [
+            "E153",
+            "E18",
+            "E28",
+            "E34",
+            "E9"
+          ],
+          "claim_id": "C9",
+          "claim_text": "Initiating low-dose aspirin reduces first myocardial infarction in adults aged 60 and older without established cardiovascular disease.",
+          "root_claim_id": "C9",
+          "revision_of": null,
+          "issue_id": "Q3",
+          "main_issue": false,
+          "answers_issue": true,
+          "graph": "experiments\\E2\\after\\h1-claims\\sonnet\\sample-001\\inquiry.json",
+          "graph_sha256": "7d68456ee8a20520a426e28c62fd20d8b342b09168ef09628e19195582c07e95"
+        }
+      },
+      "cq_id": "directness",
+      "cq_kind": "assumption",
+      "cq_text": "Do the study's population, setting, intervention and outcome match the claim's, or is the result being carried across to a different place, period, site type or measure?",
+      "sol_answer": {
+        "status": "answered",
+        "outcome": "satisfied",
+        "bucket": "satisfied",
+        "answer": "The scoped claim matches the review's mixed-age population and nonfatal-infarction endpoint, without asserting a uniform regimen or follow-up period.",
+        "evidence_ids": [
+          "E28",
+          "E34"
+        ],
+        "argument_applicable": true,
+        "inapplicable_reasons": []
+      },
+      "sonnet_answer": {
+        "status": "answered",
+        "outcome": "unsatisfied",
+        "bucket": "unsatisfied",
+        "answer": "Pooled populations have mean age about 62, include adults younger than 60, higher doses, alternate-day regimens and varied follow-up. They are not restricted to adults 60 and older on 75-100 mg daily. Direct match is partial at best.",
+        "evidence_ids": [
+          "E14",
+          "E28",
+          "E153"
+        ],
+        "argument_applicable": false,
+        "inapplicable_reasons": [
+          "assumption unsatisfied: directness"
+        ]
+      },
+      "evidence_ids": [
+        "E14",
+        "E153",
+        "E18",
+        "E28",
+        "E34",
+        "E9"
+      ],
+      "evidence": [
+        {
+          "id": "E14",
+          "text": "The pooled trial population and treatment schedules do not uniformly match adults aged at least 60 receiving 75–100 mg daily for five years: the mean age was 62, follow-up ranged from 3.6 to 10.3 years, and regimens included higher doses and alternate-day treatment.",
+          "quote": "The dosage of aspirin ranged from 75 to 500 mg once daily. Two trials evaluated the effect of aspirin (325 mg and 100 mg) given on alternate days",
+          "source_id": "S2",
+          "source_title": "Aspirin for primary prevention of cardiovascular disease: a meta-analysis with a particular focus on subgroups.",
+          "location": "Results, Description of studies"
+        },
+        {
+          "id": "E153",
+          "text": "Across low-dose aspirin trials, pooled estimates favored aspirin for nonfatal myocardial infarction (11 trials; 134,470 participants; Peto OR 0.88, 95% CI 0.80–0.96) and nonfatal ischemic stroke (5 trials; 54,947 participants; OR 0.88, 95% CI 0.78–1.00). These are not estimates restricted to ages 60–69, do not supply five-year absolute effects, and do not establish results for an exclusively daily 75–100 mg regimen.",
+          "quote": "low-dose aspirin use was associated with a statistically significant decreased risk of nonfatal myocardial infarction (Peto odds ratio [OR], 0.88 [95% CI, 0.80-0.96]).",
+          "source_id": "S16",
+          "source_title": "Aspirin Use to Prevent Cardiovascular Disease ...",
+          "location": "Benefits of Preventive Medication, paragraph beginning 'A pooled analysis of 11 trials'"
+        },
+        {
+          "id": "E18",
+          "text": "Across the pooled trials, aspirin reduced myocardial infarction (RR 0.86, 95% CI 0.77–0.95) and ischemic stroke (RR 0.90, 95% CI 0.82–0.99). Table 3 reports annual absolute reductions of 0.041 and 0.022 percentage points, respectively, rather than five-year cumulative risk reductions in adults aged 60 and older.",
+          "quote": "of MI by 14% (RR 0.86; 95% CI, 0.77–0.95;",
+          "source_id": "S2",
+          "source_title": "Aspirin for primary prevention of cardiovascular disease: a meta-analysis with a particular focus on subgroups.",
+          "location": "Efficacy and safety outcomes, first paragraph; Table 3, myocardial infarction and ischemic stroke rows"
+        },
+        {
+          "id": "E28",
+          "text": "Across the included primary-prevention trials, aspirin reduced nonfatal myocardial infarction, with a pooled odds ratio of 0.80 (95% CI, 0.69–0.94).",
+          "quote": "Aspirin was associated with a reduction in non-fatal myocardial infarction (odds ratio, 0.80; 95% CI, 0.69 to 0.94)",
+          "source_id": "S3",
+          "source_title": "Aspirin for primary prevention of stroke in individuals without cardiovascular disease-A meta-analysis.",
+          "location": "Abstract, Summary of review results"
+        },
+        {
+          "id": "E34",
+          "text": "Across eleven trials, nonfatal myocardial infarction occurred in 1.25% of aspirin recipients and 1.48% of controls; the pooled odds ratio was 0.80 (95% CI, 0.69–0.94), with substantial heterogeneity.",
+          "quote": "Aspirin use for primary cardiovascular prevention was associated with a significant decrease in non-fatal myocardial infarction (odds ratio, 0.80; 95% CI, 0.69 to 0.94)",
+          "source_id": "S3",
+          "source_title": "Aspirin for primary prevention of stroke in individuals without cardiovascular disease-A meta-analysis.",
+          "location": "Results, Non-fatal myocardial infarction; Figure 3"
+        },
+        {
+          "id": "E9",
+          "text": "Across the pooled primary-prevention trials, aspirin reduced myocardial infarction and the review's ischemic-stroke endpoint, while the cardiovascular-mortality estimate remained compatible with benefit or harm.",
+          "quote": "myocardial infarction by 14% (RR 0.86; 95% CI, 0.77–0.95), and ischemic stroke by 10% (RR 0.90; 95% CI, 0.82–0.99)",
+          "source_id": "S2",
+          "source_title": "Aspirin for primary prevention of cardiovascular disease: a meta-analysis with a particular focus on subgroups.",
+          "location": "Abstract — Results; cardiovascular mortality reported immediately before this passage as RR 0.99, 95% CI 0.90–1.08"
+        }
+      ],
+      "adjudication": "",
+      "note": ""
+    },
+    {
+      "case_id": "35c565499cc41b04",
+      "comparison_kind": "lineage_contrast_different_claims",
+      "comparable_as_same_claim": false,
+      "argument": {
+        "scheme": "study_result",
+        "sol": {
+          "provider": "openai",
+          "model": "gpt-6.1-sol",
+          "effort": "medium",
+          "sample": 2,
+          "argument_id": "A11",
+          "premise_ids": [
+            "E14",
+            "E18",
+            "E9"
+          ],
+          "claim_id": "C27",
+          "claim_text": "S2 reports lower myocardial-infarction and ischemic-stroke risks with aspirin across pooled primary-prevention trials, not specifically in adults aged at least sixty.",
+          "root_claim_id": "C9",
+          "revision_of": "C9",
+          "issue_id": "Q3",
+          "main_issue": false,
+          "answers_issue": false,
+          "graph": "experiments\\E2\\after\\h1-claims\\sol\\sample-002\\inquiry.json",
+          "graph_sha256": "619a1acc562c8a54c47ee736582a1396d3debfcbe56660bc8249c169d410579a"
+        },
+        "sonnet": {
+          "provider": "anthropic",
+          "model": "claude-sonnet-5-5",
+          "effort": "medium",
+          "sample": 2,
+          "argument_id": "A5",
+          "premise_ids": [
+            "E153",
+            "E18",
+            "E28",
+            "E34",
+            "E9"
+          ],
+          "claim_id": "C9",
+          "claim_text": "Initiating low-dose aspirin reduces first myocardial infarction in adults aged 60 and older without established cardiovascular disease.",
+          "root_claim_id": "C9",
+          "revision_of": null,
+          "issue_id": "Q3",
+          "main_issue": false,
+          "answers_issue": true,
+          "graph": "experiments\\E2\\after\\h1-claims\\sonnet\\sample-002\\inquiry.json",
+          "graph_sha256": "23093464215fe59126a0cf2c9cd923f4753b6a4808446e105a96502a6cf1e289"
+        }
+      },
+      "cq_id": "directness",
+      "cq_kind": "assumption",
+      "cq_text": "Do the study's population, setting, intervention and outcome match the claim's, or is the result being carried across to a different place, period, site type or measure?",
+      "sol_answer": {
+        "status": "answered",
+        "outcome": "satisfied",
+        "bucket": "satisfied",
+        "answer": "The scoped claim expressly retains the mixed populations, regimens, and trial durations rather than transporting results to the target age group.",
+        "evidence_ids": [
+          "E14"
+        ],
+        "argument_applicable": true,
+        "inapplicable_reasons": []
+      },
+      "sonnet_answer": {
+        "status": "answered",
+        "outcome": "unsatisfied",
+        "bucket": "unsatisfied",
+        "answer": "Pooled populations are mixed-age (mean about 62, including people under 60), doses up to 500 mg and alternate-day regimens, and follow-up of 3.6 to 10 years. They are not restricted to adults aged 60 and over on 75-100 mg daily. The ASPREE in-trial MI HR of 0.93 (0.76-1.15) in the older population is not significant.",
+        "evidence_ids": [
+          "E14",
+          "E28",
+          "E49"
+        ],
+        "argument_applicable": false,
+        "inapplicable_reasons": [
+          "assumption unsatisfied: directness"
+        ]
+      },
+      "evidence_ids": [
+        "E14",
+        "E153",
+        "E18",
+        "E28",
+        "E34",
+        "E49",
+        "E9"
+      ],
+      "evidence": [
+        {
+          "id": "E14",
+          "text": "The pooled trial population and treatment schedules do not uniformly match adults aged at least 60 receiving 75–100 mg daily for five years: the mean age was 62, follow-up ranged from 3.6 to 10.3 years, and regimens included higher doses and alternate-day treatment.",
+          "quote": "The dosage of aspirin ranged from 75 to 500 mg once daily. Two trials evaluated the effect of aspirin (325 mg and 100 mg) given on alternate days",
+          "source_id": "S2",
+          "source_title": "Aspirin for primary prevention of cardiovascular disease: a meta-analysis with a particular focus on subgroups.",
+          "location": "Results, Description of studies"
+        },
+        {
+          "id": "E153",
+          "text": "Across low-dose aspirin trials, pooled estimates favored aspirin for nonfatal myocardial infarction (11 trials; 134,470 participants; Peto OR 0.88, 95% CI 0.80–0.96) and nonfatal ischemic stroke (5 trials; 54,947 participants; OR 0.88, 95% CI 0.78–1.00). These are not estimates restricted to ages 60–69, do not supply five-year absolute effects, and do not establish results for an exclusively daily 75–100 mg regimen.",
+          "quote": "low-dose aspirin use was associated with a statistically significant decreased risk of nonfatal myocardial infarction (Peto odds ratio [OR], 0.88 [95% CI, 0.80-0.96]).",
+          "source_id": "S16",
+          "source_title": "Aspirin Use to Prevent Cardiovascular Disease ...",
+          "location": "Benefits of Preventive Medication, paragraph beginning 'A pooled analysis of 11 trials'"
+        },
+        {
+          "id": "E18",
+          "text": "Across the pooled trials, aspirin reduced myocardial infarction (RR 0.86, 95% CI 0.77–0.95) and ischemic stroke (RR 0.90, 95% CI 0.82–0.99). Table 3 reports annual absolute reductions of 0.041 and 0.022 percentage points, respectively, rather than five-year cumulative risk reductions in adults aged 60 and older.",
+          "quote": "of MI by 14% (RR 0.86; 95% CI, 0.77–0.95;",
+          "source_id": "S2",
+          "source_title": "Aspirin for primary prevention of cardiovascular disease: a meta-analysis with a particular focus on subgroups.",
+          "location": "Efficacy and safety outcomes, first paragraph; Table 3, myocardial infarction and ischemic stroke rows"
+        },
+        {
+          "id": "E28",
+          "text": "Across the included primary-prevention trials, aspirin reduced nonfatal myocardial infarction, with a pooled odds ratio of 0.80 (95% CI, 0.69–0.94).",
+          "quote": "Aspirin was associated with a reduction in non-fatal myocardial infarction (odds ratio, 0.80; 95% CI, 0.69 to 0.94)",
+          "source_id": "S3",
+          "source_title": "Aspirin for primary prevention of stroke in individuals without cardiovascular disease-A meta-analysis.",
+          "location": "Abstract, Summary of review results"
+        },
+        {
+          "id": "E34",
+          "text": "Across eleven trials, nonfatal myocardial infarction occurred in 1.25% of aspirin recipients and 1.48% of controls; the pooled odds ratio was 0.80 (95% CI, 0.69–0.94), with substantial heterogeneity.",
+          "quote": "Aspirin use for primary cardiovascular prevention was associated with a significant decrease in non-fatal myocardial infarction (odds ratio, 0.80; 95% CI, 0.69 to 0.94)",
+          "source_id": "S3",
+          "source_title": "Aspirin for primary prevention of stroke in individuals without cardiovascular disease-A meta-analysis.",
+          "location": "Results, Non-fatal myocardial infarction; Figure 3"
+        },
+        {
+          "id": "E49",
+          "text": "The reproduced in-trial estimates were compatible with both cardiovascular benefit and no benefit: the hazard ratio was 0.93 (95% CI 0.76–1.15) for fatal or nonfatal myocardial infarction and 0.89 (0.71–1.11) for fatal or nonfatal ischemic stroke. These are not five-year absolute-risk estimates and do not establish the claimed narrow effect ranges.",
+          "quote": "Fatal or non-fatal myocardial infarction .93 (.76, 1.15)",
+          "source_id": "S4",
+          "source_title": "Aspirin, cardiovascular events, and major bleeding in older ...",
+          "location": "Table 2, in-trial column, myocardial infarction and ischemic stroke rows; footnote d"
+        },
+        {
+          "id": "E9",
+          "text": "Across the pooled primary-prevention trials, aspirin reduced myocardial infarction and the review's ischemic-stroke endpoint, while the cardiovascular-mortality estimate remained compatible with benefit or harm.",
+          "quote": "myocardial infarction by 14% (RR 0.86; 95% CI, 0.77–0.95), and ischemic stroke by 10% (RR 0.90; 95% CI, 0.82–0.99)",
+          "source_id": "S2",
+          "source_title": "Aspirin for primary prevention of cardiovascular disease: a meta-analysis with a particular focus on subgroups.",
+          "location": "Abstract — Results; cardiovascular mortality reported immediately before this passage as RR 0.99, 95% CI 0.90–1.08"
+        }
+      ],
+      "adjudication": "",
+      "note": ""
+    },
+    {
+      "case_id": "5ecee7589224f580",
+      "comparison_kind": "lineage_contrast_different_claims",
+      "comparable_as_same_claim": false,
+      "argument": {
+        "scheme": "study_result",
+        "sol": {
+          "provider": "openai",
+          "model": "gpt-6.1-sol",
+          "effort": "medium",
+          "sample": 2,
+          "argument_id": "A12",
+          "premise_ids": [
+            "E28",
+            "E34"
+          ],
+          "claim_id": "C28",
+          "claim_text": "S3 reports reduced nonfatal myocardial infarction with aspirin across mixed-age primary-prevention trials with differing regimens and follow-up.",
+          "root_claim_id": "C9",
+          "revision_of": "C9",
+          "issue_id": "Q3",
+          "main_issue": false,
+          "answers_issue": false,
+          "graph": "experiments\\E2\\after\\h1-claims\\sol\\sample-002\\inquiry.json",
+          "graph_sha256": "619a1acc562c8a54c47ee736582a1396d3debfcbe56660bc8249c169d410579a"
+        },
+        "sonnet": {
+          "provider": "anthropic",
+          "model": "claude-sonnet-5-5",
+          "effort": "medium",
+          "sample": 2,
+          "argument_id": "A5",
+          "premise_ids": [
+            "E153",
+            "E18",
+            "E28",
+            "E34",
+            "E9"
+          ],
+          "claim_id": "C9",
+          "claim_text": "Initiating low-dose aspirin reduces first myocardial infarction in adults aged 60 and older without established cardiovascular disease.",
+          "root_claim_id": "C9",
+          "revision_of": null,
+          "issue_id": "Q3",
+          "main_issue": false,
+          "answers_issue": true,
+          "graph": "experiments\\E2\\after\\h1-claims\\sonnet\\sample-002\\inquiry.json",
+          "graph_sha256": "23093464215fe59126a0cf2c9cd923f4753b6a4808446e105a96502a6cf1e289"
+        }
+      },
+      "cq_id": "directness",
+      "cq_kind": "assumption",
+      "cq_text": "Do the study's population, setting, intervention and outcome match the claim's, or is the result being carried across to a different place, period, site type or measure?",
+      "sol_answer": {
+        "status": "answered",
+        "outcome": "satisfied",
+        "bucket": "satisfied",
+        "answer": "The claim is restricted to nonfatal MI in the review's mixed-age trial populations and does not assert an all-first-MI effect in older adults.",
+        "evidence_ids": [
+          "E34"
+        ],
+        "argument_applicable": true,
+        "inapplicable_reasons": []
+      },
+      "sonnet_answer": {
+        "status": "answered",
+        "outcome": "unsatisfied",
+        "bucket": "unsatisfied",
+        "answer": "Pooled populations are mixed-age (mean about 62, including people under 60), doses up to 500 mg and alternate-day regimens, and follow-up of 3.6 to 10 years. They are not restricted to adults aged 60 and over on 75-100 mg daily. The ASPREE in-trial MI HR of 0.93 (0.76-1.15) in the older population is not significant.",
+        "evidence_ids": [
+          "E14",
+          "E28",
+          "E49"
+        ],
+        "argument_applicable": false,
+        "inapplicable_reasons": [
+          "assumption unsatisfied: directness"
+        ]
+      },
+      "evidence_ids": [
+        "E14",
+        "E153",
+        "E18",
+        "E28",
+        "E34",
+        "E49",
+        "E9"
+      ],
+      "evidence": [
+        {
+          "id": "E14",
+          "text": "The pooled trial population and treatment schedules do not uniformly match adults aged at least 60 receiving 75–100 mg daily for five years: the mean age was 62, follow-up ranged from 3.6 to 10.3 years, and regimens included higher doses and alternate-day treatment.",
+          "quote": "The dosage of aspirin ranged from 75 to 500 mg once daily. Two trials evaluated the effect of aspirin (325 mg and 100 mg) given on alternate days",
+          "source_id": "S2",
+          "source_title": "Aspirin for primary prevention of cardiovascular disease: a meta-analysis with a particular focus on subgroups.",
+          "location": "Results, Description of studies"
+        },
+        {
+          "id": "E153",
+          "text": "Across low-dose aspirin trials, pooled estimates favored aspirin for nonfatal myocardial infarction (11 trials; 134,470 participants; Peto OR 0.88, 95% CI 0.80–0.96) and nonfatal ischemic stroke (5 trials; 54,947 participants; OR 0.88, 95% CI 0.78–1.00). These are not estimates restricted to ages 60–69, do not supply five-year absolute effects, and do not establish results for an exclusively daily 75–100 mg regimen.",
+          "quote": "low-dose aspirin use was associated with a statistically significant decreased risk of nonfatal myocardial infarction (Peto odds ratio [OR], 0.88 [95% CI, 0.80-0.96]).",
+          "source_id": "S16",
+          "source_title": "Aspirin Use to Prevent Cardiovascular Disease ...",
+          "location": "Benefits of Preventive Medication, paragraph beginning 'A pooled analysis of 11 trials'"
+        },
+        {
+          "id": "E18",
+          "text": "Across the pooled trials, aspirin reduced myocardial infarction (RR 0.86, 95% CI 0.77–0.95) and ischemic stroke (RR 0.90, 95% CI 0.82–0.99). Table 3 reports annual absolute reductions of 0.041 and 0.022 percentage points, respectively, rather than five-year cumulative risk reductions in adults aged 60 and older.",
+          "quote": "of MI by 14% (RR 0.86; 95% CI, 0.77–0.95;",
+          "source_id": "S2",
+          "source_title": "Aspirin for primary prevention of cardiovascular disease: a meta-analysis with a particular focus on subgroups.",
+          "location": "Efficacy and safety outcomes, first paragraph; Table 3, myocardial infarction and ischemic stroke rows"
+        },
+        {
+          "id": "E28",
+          "text": "Across the included primary-prevention trials, aspirin reduced nonfatal myocardial infarction, with a pooled odds ratio of 0.80 (95% CI, 0.69–0.94).",
+          "quote": "Aspirin was associated with a reduction in non-fatal myocardial infarction (odds ratio, 0.80; 95% CI, 0.69 to 0.94)",
+          "source_id": "S3",
+          "source_title": "Aspirin for primary prevention of stroke in individuals without cardiovascular disease-A meta-analysis.",
+          "location": "Abstract, Summary of review results"
+        },
+        {
+          "id": "E34",
+          "text": "Across eleven trials, nonfatal myocardial infarction occurred in 1.25% of aspirin recipients and 1.48% of controls; the pooled odds ratio was 0.80 (95% CI, 0.69–0.94), with substantial heterogeneity.",
+          "quote": "Aspirin use for primary cardiovascular prevention was associated with a significant decrease in non-fatal myocardial infarction (odds ratio, 0.80; 95% CI, 0.69 to 0.94)",
+          "source_id": "S3",
+          "source_title": "Aspirin for primary prevention of stroke in individuals without cardiovascular disease-A meta-analysis.",
+          "location": "Results, Non-fatal myocardial infarction; Figure 3"
+        },
+        {
+          "id": "E49",
+          "text": "The reproduced in-trial estimates were compatible with both cardiovascular benefit and no benefit: the hazard ratio was 0.93 (95% CI 0.76–1.15) for fatal or nonfatal myocardial infarction and 0.89 (0.71–1.11) for fatal or nonfatal ischemic stroke. These are not five-year absolute-risk estimates and do not establish the claimed narrow effect ranges.",
+          "quote": "Fatal or non-fatal myocardial infarction .93 (.76, 1.15)",
+          "source_id": "S4",
+          "source_title": "Aspirin, cardiovascular events, and major bleeding in older ...",
+          "location": "Table 2, in-trial column, myocardial infarction and ischemic stroke rows; footnote d"
+        },
+        {
+          "id": "E9",
+          "text": "Across the pooled primary-prevention trials, aspirin reduced myocardial infarction and the review's ischemic-stroke endpoint, while the cardiovascular-mortality estimate remained compatible with benefit or harm.",
+          "quote": "myocardial infarction by 14% (RR 0.86; 95% CI, 0.77–0.95), and ischemic stroke by 10% (RR 0.90; 95% CI, 0.82–0.99)",
+          "source_id": "S2",
+          "source_title": "Aspirin for primary prevention of cardiovascular disease: a meta-analysis with a particular focus on subgroups.",
+          "location": "Abstract — Results; cardiovascular mortality reported immediately before this passage as RR 0.99, 95% CI 0.90–1.08"
+        }
+      ],
+      "adjudication": "",
+      "note": ""
+    },
+    {
+      "case_id": "73d5a26759fed851",
+      "comparison_kind": "lineage_contrast_different_claims",
+      "comparable_as_same_claim": false,
+      "argument": {
+        "scheme": "study_result",
+        "sol": {
+          "provider": "openai",
+          "model": "gpt-6.1-sol",
+          "effort": "medium",
+          "sample": 3,
+          "argument_id": "A11",
+          "premise_ids": [
+            "E14",
+            "E18",
+            "E9"
+          ],
+          "claim_id": "C27",
+          "claim_text": "The mixed-age primary-prevention meta-analysis reported reduced ischemic stroke with aspirin: RR 0.90, with confidence limits narrowly excluding no reduction.",
+          "root_claim_id": "C10",
+          "revision_of": "C10",
+          "issue_id": "Q3",
+          "main_issue": false,
+          "answers_issue": false,
+          "graph": "experiments\\E2\\after\\h1-claims\\sol\\sample-003\\inquiry.json",
+          "graph_sha256": "1600eb15211713a32e8ec95bab0feb73071db877fad71191c3d2bfd22f193ad2"
+        },
+        "sonnet": {
+          "provider": "anthropic",
+          "model": "claude-sonnet-5-5",
+          "effort": "medium",
+          "sample": 3,
+          "argument_id": "A6",
+          "premise_ids": [
+            "E130",
+            "E138",
+            "E153",
+            "E18",
+            "E9"
+          ],
+          "claim_id": "C10",
+          "claim_text": "Initiating low-dose aspirin reduces ischemic stroke in adults aged 60 and older without established cardiovascular disease.",
+          "root_claim_id": "C10",
+          "revision_of": null,
+          "issue_id": "Q3",
+          "main_issue": false,
+          "answers_issue": true,
+          "graph": "experiments\\E2\\after\\h1-claims\\sonnet\\sample-003\\inquiry.json",
+          "graph_sha256": "97f254157c31ca5a1a1c18eb83f1c729d2c2439741803408247c90ea39f41250"
+        }
+      },
+      "cq_id": "directness",
+      "cq_kind": "assumption",
+      "cq_text": "Do the study's population, setting, intervention and outcome match the claim's, or is the result being carried across to a different place, period, site type or measure?",
+      "sol_answer": {
+        "status": "answered",
+        "outcome": "satisfied",
+        "bucket": "satisfied",
+        "answer": "The claim is explicitly scoped to the mixed-age meta-analysis and its ischemic-stroke classification, rather than the entire older-adult population.",
+        "evidence_ids": [
+          "E9",
+          "E14"
+        ],
+        "argument_applicable": true,
+        "inapplicable_reasons": []
+      },
+      "sonnet_answer": {
+        "status": "answered",
+        "outcome": "unsatisfied",
+        "bucket": "unsatisfied",
+        "answer": "Populations are mixed-age, doses and follow-up are heterogeneous, and some stroke endpoints are not specific to ischemic stroke. Diabetes-only pooled data add a further mismatch.",
+        "evidence_ids": [
+          "E14",
+          "E138",
+          "E153"
+        ],
+        "argument_applicable": false,
+        "inapplicable_reasons": [
+          "assumption unsatisfied: directness",
+          "assumption unresolved: uncertainty"
+        ]
+      },
+      "evidence_ids": [
+        "E130",
+        "E138",
+        "E14",
+        "E153",
+        "E18",
+        "E9"
+      ],
+      "evidence": [
+        {
+          "id": "E130",
+          "text": "Across seven trials in diabetic populations, aspirin reduced the reported stroke endpoint, with pooled RR 0.84, 95% CI 0.73–0.97.",
+          "quote": "there was a reduction in the risk of stroke with aspirin use (seven studies, RR = 0.84, 95% CI = 0.73–0.97",
+          "source_id": "S13",
+          "source_title": "Low-Dose Aspirin for the Primary Prevention of Cardiovascular Disease in Diabetic Individuals: A Meta-Analysis of Randomized Control Trials and Trial Sequential Analysis.",
+          "location": "Section 3.2, Efficacy and Safety End Point"
+        },
+        {
+          "id": "E138",
+          "text": "Pooled stroke risk in diabetic participants was lower with aspirin: RR 0.84 (95% CI 0.73–0.97), with anticipated risks of 36 versus 31 per 1,000. This row reports stroke rather than specifically ischemic stroke and is not restricted to adults aged 60 or older.",
+          "quote": "Stroke 7 (22,922) 36 per 1000 31 per 1000 (27 to 35)",
+          "source_id": "S13",
+          "source_title": "Low-Dose Aspirin for the Primary Prevention of Cardiovascular Disease in Diabetic Individuals: A Meta-Analysis of Randomized Control Trials and Trial Sequential Analysis.",
+          "location": "Table 2, Stroke row"
+        },
+        {
+          "id": "E14",
+          "text": "The pooled trial population and treatment schedules do not uniformly match adults aged at least 60 receiving 75–100 mg daily for five years: the mean age was 62, follow-up ranged from 3.6 to 10.3 years, and regimens included higher doses and alternate-day treatment.",
+          "quote": "The dosage of aspirin ranged from 75 to 500 mg once daily. Two trials evaluated the effect of aspirin (325 mg and 100 mg) given on alternate days",
+          "source_id": "S2",
+          "source_title": "Aspirin for primary prevention of cardiovascular disease: a meta-analysis with a particular focus on subgroups.",
+          "location": "Results, Description of studies"
+        },
+        {
+          "id": "E153",
+          "text": "Across low-dose aspirin trials, pooled estimates favored aspirin for nonfatal myocardial infarction (11 trials; 134,470 participants; Peto OR 0.88, 95% CI 0.80–0.96) and nonfatal ischemic stroke (5 trials; 54,947 participants; OR 0.88, 95% CI 0.78–1.00). These are not estimates restricted to ages 60–69, do not supply five-year absolute effects, and do not establish results for an exclusively daily 75–100 mg regimen.",
+          "quote": "low-dose aspirin use was associated with a statistically significant decreased risk of nonfatal myocardial infarction (Peto odds ratio [OR], 0.88 [95% CI, 0.80-0.96]).",
+          "source_id": "S16",
+          "source_title": "Aspirin Use to Prevent Cardiovascular Disease ...",
+          "location": "Benefits of Preventive Medication, paragraph beginning 'A pooled analysis of 11 trials'"
+        },
+        {
+          "id": "E18",
+          "text": "Across the pooled trials, aspirin reduced myocardial infarction (RR 0.86, 95% CI 0.77–0.95) and ischemic stroke (RR 0.90, 95% CI 0.82–0.99). Table 3 reports annual absolute reductions of 0.041 and 0.022 percentage points, respectively, rather than five-year cumulative risk reductions in adults aged 60 and older.",
+          "quote": "of MI by 14% (RR 0.86; 95% CI, 0.77–0.95;",
+          "source_id": "S2",
+          "source_title": "Aspirin for primary prevention of cardiovascular disease: a meta-analysis with a particular focus on subgroups.",
+          "location": "Efficacy and safety outcomes, first paragraph; Table 3, myocardial infarction and ischemic stroke rows"
+        },
+        {
+          "id": "E9",
+          "text": "Across the pooled primary-prevention trials, aspirin reduced myocardial infarction and the review's ischemic-stroke endpoint, while the cardiovascular-mortality estimate remained compatible with benefit or harm.",
+          "quote": "myocardial infarction by 14% (RR 0.86; 95% CI, 0.77–0.95), and ischemic stroke by 10% (RR 0.90; 95% CI, 0.82–0.99)",
+          "source_id": "S2",
+          "source_title": "Aspirin for primary prevention of cardiovascular disease: a meta-analysis with a particular focus on subgroups.",
+          "location": "Abstract — Results; cardiovascular mortality reported immediately before this passage as RR 0.99, 95% CI 0.90–1.08"
+        }
+      ],
+      "adjudication": "",
+      "note": ""
+    },
+    {
+      "case_id": "ef41a47325dcc1f1",
+      "comparison_kind": "lineage_contrast_different_claims",
+      "comparable_as_same_claim": false,
+      "argument": {
+        "scheme": "study_result",
+        "sol": {
+          "provider": "openai",
+          "model": "gpt-6.1-sol",
+          "effort": "medium",
+          "sample": 1,
+          "argument_id": "A17",
+          "premise_ids": [
+            "E100",
+            "E105",
+            "E96"
+          ],
+          "claim_id": "C33",
+          "claim_text": "In ASPREE's predominantly older cohort, aspirin increased intracranial bleeding (HR 1.38), with a crude excess of about 3.1 per thousand over median 4.7 years.",
+          "root_claim_id": "C13",
+          "revision_of": "C13",
+          "issue_id": "Q4",
+          "main_issue": false,
+          "answers_issue": false,
+          "graph": "experiments\\E2\\after\\h1-claims\\sol\\sample-001\\inquiry.json",
+          "graph_sha256": "3e9954187aacd69a92f83a97e0839083ccac3e7542c121bfc99da52143a60e69"
+        },
+        "sonnet": {
+          "provider": "anthropic",
+          "model": "claude-sonnet-5-5",
+          "effort": "medium",
+          "sample": 1,
+          "argument_id": "A9",
+          "premise_ids": [
+            "E105",
+            "E106",
+            "E98"
+          ],
+          "claim_id": "C13",
+          "claim_text": "Initiating low-dose aspirin increases intracranial hemorrhage in adults aged 60 and older without established cardiovascular disease.",
+          "root_claim_id": "C13",
+          "revision_of": null,
+          "issue_id": "Q4",
+          "main_issue": false,
+          "answers_issue": true,
+          "graph": "experiments\\E2\\after\\h1-claims\\sonnet\\sample-001\\inquiry.json",
+          "graph_sha256": "7d68456ee8a20520a426e28c62fd20d8b342b09168ef09628e19195582c07e95"
+        }
+      },
+      "cq_id": "directness",
+      "cq_kind": "assumption",
+      "cq_text": "Do the study's population, setting, intervention and outcome match the claim's, or is the result being carried across to a different place, period, site type or measure?",
+      "sol_answer": {
+        "status": "answered",
+        "outcome": "satisfied",
+        "bucket": "satisfied",
+        "answer": "The claim is restricted to ASPREE's predominantly older primary-prevention cohort, its intracranial endpoint, and its actual variable follow-up.",
+        "evidence_ids": [
+          "E96",
+          "E100",
+          "E105"
+        ],
+        "argument_applicable": true,
+        "inapplicable_reasons": []
+      },
+      "sonnet_answer": {
+        "status": "answered",
+        "outcome": "unsatisfied",
+        "bucket": "unsatisfied",
+        "answer": "Population is mainly aged 70 and over (median 74), mostly White, so it does not directly cover ages 60-69. Intervention (100 mg aspirin) and outcome (intracranial bleeding) match.",
+        "evidence_ids": [
+          "E96",
+          "E109",
+          "E38"
+        ],
+        "argument_applicable": false,
+        "inapplicable_reasons": [
+          "assumption unsatisfied: directness"
+        ]
+      },
+      "evidence_ids": [
+        "E100",
+        "E105",
+        "E106",
+        "E109",
+        "E38",
+        "E96",
+        "E98"
+      ],
+      "evidence": [
+        {
+          "id": "E100",
+          "text": "Participants were randomized to 100 mg aspirin daily or placebo, with 9525 and 9589 participants respectively; median follow-up was 4.7 years, not a fixed five-year observation period. Analyses used intention-to-treat time-to-first-event models and accounted for competing risks. The reported event rates must not be interpreted as five-year cumulative risks.",
+          "quote": "Cox proportional hazards regression models were used in intention-to-treat analyses to evaluate the effect of aspirin on time to the first ischemic stroke, intracranial bleeding, and intracranial bleeding subtypes.",
+          "source_id": "S9",
+          "source_title": "Low-Dose Aspirin and the Risk of Stroke and Intracerebral Bleeding in Healthy Older People: Secondary Analysis of a Randomized Clinical Trial.",
+          "location": "Procedures; Statistical Analysis; Results, opening paragraph"
+        },
+        {
+          "id": "E105",
+          "text": "First intracranial bleeding, including hemorrhagic stroke, occurred in 108/9525 aspirin recipients versus 79/9589 placebo recipients: approximately 1.13% versus 0.82%, a crude excess of 3.1 per 1000 over median 4.7-year follow-up. HR was 1.38 (95% CI 1.03–1.84). Fatal cases numbered 29 versus 23, HR 1.27 (95% CI 0.74–2.20). Intracranial bleeding required hospitalization, prolonged hospitalization, surgery, or death. These are not reported five-year risks, and the hemorrhagic-stroke and fatal subsets must not be added again to the total.",
+          "quote": "All intracranial bleeding, including hemorrhagic stroke 187 (2.2) 79 (1.8) 108 (2.5) 1.38 (1.03-1.84) .03",
+          "source_id": "S9",
+          "source_title": "Low-Dose Aspirin and the Risk of Stroke and Intracerebral Bleeding in Healthy Older People: Secondary Analysis of a Randomized Clinical Trial.",
+          "location": "Table, All intracranial bleeding and Fatal rows; Outcomes; Total Intracranial Bleeding"
+        },
+        {
+          "id": "E106",
+          "text": "The authors express the absolute stroke–bleeding trade-off as 2.5 fewer ischemic strokes and 3.5 additional intracranial hemorrhages per 1,000 people taking aspirin 100 mg daily over five years. This passage does not identify these figures as five-year survival estimates or provide uncertainty intervals, and they do not establish the requested full first-occurrence cardiovascular–bleeding composite.",
+          "quote": "Among 1000 individuals taking 100 mg/d of low-dose aspirin over 5 years, there were 2.5 fewer ischemic strokes at the expense of 3.5 cases of intracranial hemorrhage",
+          "source_id": "S9",
+          "source_title": "Low-Dose Aspirin and the Risk of Stroke and Intracerebral Bleeding in Healthy Older People: Secondary Analysis of a Randomized Clinical Trial.",
+          "location": "Overall Stroke Prevention, paragraph following Figure 4"
+        },
+        {
+          "id": "E109",
+          "text": "The investigators restrict generalizability primarily to relatively healthy older adults, predominantly White, with routine access to blood-pressure and lipid management; they caution that the benefit–harm balance may differ in substantially higher ischemic-stroke-risk subgroups.",
+          "quote": "Results are mainly generalizable to a White population",
+          "source_id": "S9",
+          "source_title": "Low-Dose Aspirin and the Risk of Stroke and Intracerebral Bleeding in Healthy Older People: Secondary Analysis of a Randomized Clinical Trial.",
+          "location": "Strengths and Limitations"
+        },
+        {
+          "id": "E38",
+          "text": "ASPREE randomized 19,114 adults without prior cardiovascular events to 100 mg daily aspirin or placebo; participants were predominantly aged 70 or older, and median randomized-treatment follow-up was 4.7 years rather than a fixed five-year horizon.",
+          "quote": "The median enrolment age of the cohort was 74 years [interquartile range (IQR) 72–78 ].",
+          "source_id": "S4",
+          "source_title": "Aspirin, cardiovascular events, and major bleeding in older ...",
+          "location": "Methods, first paragraph"
+        },
+        {
+          "id": "E96",
+          "text": "ASPREE compared 100 mg daily enteric-coated aspirin with placebo in adults without overt cardiovascular disease, principally aged 70 or older, with eligibility from age 65 for US Black or Hispanic participants; median follow-up was 4.7 years, not a fixed five-year assessment.",
+          "quote": "Participants were older adults free of symptomatic cardiovascular disease. Recruitment took place between 2010 and 2014, and participants were followed up for a median (IQR) of 4.7 (3.6-5.7) years.",
+          "source_id": "S9",
+          "source_title": "Low-Dose Aspirin and the Risk of Stroke and Intracerebral Bleeding in Healthy Older People: Secondary Analysis of a Randomized Clinical Trial.",
+          "location": "Abstract, Design, Setting, and Participants; Methods, Participants and Study Design"
+        },
+        {
+          "id": "E98",
+          "text": "Intracranial bleeding occurred in 108 of 9525 aspirin participants (1.1%) versus 79 of 9589 placebo participants (0.8%), with HR 1.38 (95% CI 1.03–1.84). The crude difference is approximately 3.1 additional affected participants per 1000 during trial follow-up, not a five-year survival-based risk difference.",
+          "quote": "a statistically significant increase in intracranial bleeding was observed among individuals assigned to aspirin (108 individuals [1.1%]) compared with those receiving placebo (79 individuals [0.8%]; HR, 1.38; 95% CI, 1.03-1.84).",
+          "source_id": "S9",
+          "source_title": "Low-Dose Aspirin and the Risk of Stroke and Intracerebral Bleeding in Healthy Older People: Secondary Analysis of a Randomized Clinical Trial.",
+          "location": "Abstract, Results"
+        }
+      ],
+      "adjudication": "",
+      "note": ""
+    },
+    {
+      "case_id": "e657e746a031dbcc",
+      "comparison_kind": "lineage_contrast_different_claims",
+      "comparable_as_same_claim": false,
+      "argument": {
+        "scheme": "study_result",
+        "sol": {
+          "provider": "openai",
+          "model": "gpt-6.1-sol",
+          "effort": "medium",
+          "sample": 1,
+          "argument_id": "A18",
+          "premise_ids": [
+            "E63",
+            "E66",
+            "E67",
+            "E75",
+            "E78",
+            "E79"
+          ],
+          "claim_id": "C34",
+          "claim_text": "In ASCEND participants with diabetes, aspirin assignment increased major bleeding; most excess bleeding was gastrointestinal or otherwise extracranial.",
+          "root_claim_id": "C14",
+          "revision_of": "C14",
+          "issue_id": "Q4",
+          "main_issue": false,
+          "answers_issue": false,
+          "graph": "experiments\\E2\\after\\h1-claims\\sol\\sample-001\\inquiry.json",
+          "graph_sha256": "3e9954187aacd69a92f83a97e0839083ccac3e7542c121bfc99da52143a60e69"
+        },
+        "sonnet": {
+          "provider": "anthropic",
+          "model": "claude-sonnet-5-5",
+          "effort": "medium",
+          "sample": 1,
+          "argument_id": "A10",
+          "premise_ids": [
+            "E156",
+            "E36",
+            "E53",
+            "E67"
+          ],
+          "claim_id": "C14",
+          "claim_text": "Initiating low-dose aspirin increases nonfatal major extracranial bleeding in adults aged 60 and older without established cardiovascular disease.",
+          "root_claim_id": "C14",
+          "revision_of": null,
+          "issue_id": "Q4",
+          "main_issue": false,
+          "answers_issue": true,
+          "graph": "experiments\\E2\\after\\h1-claims\\sonnet\\sample-001\\inquiry.json",
+          "graph_sha256": "7d68456ee8a20520a426e28c62fd20d8b342b09168ef09628e19195582c07e95"
+        }
+      },
+      "cq_id": "directness",
+      "cq_kind": "assumption",
+      "cq_text": "Do the study's population, setting, intervention and outcome match the claim's, or is the result being carried across to a different place, period, site type or measure?",
+      "sol_answer": {
+        "status": "answered",
+        "outcome": "satisfied",
+        "bucket": "satisfied",
+        "answer": "The claim is restricted to the actual diabetic trial population, broad major-bleeding endpoint, and treatment assignment rather than exclusively aspirin-naive initiation.",
+        "evidence_ids": [
+          "E63",
+          "E66",
+          "E75"
+        ],
+        "argument_applicable": true,
+        "inapplicable_reasons": []
+      },
+      "sonnet_answer": {
+        "status": "answered",
+        "outcome": "unsatisfied",
+        "bucket": "unsatisfied",
+        "answer": "Major GI bleeding is only a subset of extracranial bleeding. Populations are not restricted to ages 60 and over, and fatal and nonfatal events are not separated. The ASCEND major bleeding endpoint includes intracranial and eye bleeding. Direction matches, but the match is partial.",
+        "evidence_ids": [
+          "E36",
+          "E66",
+          "E54"
+        ],
+        "argument_applicable": false,
+        "inapplicable_reasons": [
+          "assumption unsatisfied: directness"
+        ]
+      },
+      "evidence_ids": [
+        "E156",
+        "E36",
+        "E53",
+        "E54",
+        "E63",
+        "E66",
+        "E67",
+        "E75",
+        "E78",
+        "E79"
+      ],
+      "evidence": [
+        {
+          "id": "E156",
+          "text": "Low-dose aspirin increased major gastrointestinal bleeding in 10 pooled trials (119,130 participants; Peto OR 1.58, 95% CI 1.38–1.80) and intracranial bleeding in 11 trials (134,470 participants; OR 1.31, 95% CI 1.11–1.54). Major gastrointestinal bleeding required transfusion or hospital admission or caused death; it is only a subset of major extracranial bleeding. No five-year age-specific absolute increases or separate fatal-event counts are provided.",
+          "quote": "aspirin use was associated with a 58% increase in major gastrointestinal bleeding (Peto OR, 1.58 [95% CI, 1.38-1.80]).",
+          "source_id": "S16",
+          "source_title": "Aspirin Use to Prevent Cardiovascular Disease ...",
+          "location": "Harms of Preventive Medication, first and second paragraphs"
+        },
+        {
+          "id": "E36",
+          "text": "Across eleven trials, major gastrointestinal bleeding occurred in 0.87% of aspirin recipients and 0.52% of controls; the pooled odds ratio was 1.83 (95% CI, 1.43–2.35), with substantial heterogeneity.",
+          "quote": "Aspirin use for primary cardiovascular prevention was associated with a significant increase in major gastrointestinal bleeding (odds ratio, 1.83; 95% CI, 1.43 to 2.35)",
+          "source_id": "S3",
+          "source_title": "Aspirin for primary prevention of stroke in individuals without cardiovascular disease-A meta-analysis.",
+          "location": "Results, Major gastrointestinal bleeding; Supplementary Figure V"
+        },
+        {
+          "id": "E53",
+          "text": "Over combined trial and post-trial follow-up, prior aspirin assignment increased major hemorrhage (HR 1.24, 95% CI 1.10–1.39) and upper gastrointestinal bleeding (HR 1.43, 1.13–1.81). Restricted mean time lost to major hemorrhage was 32 days greater with aspirin. These results support bleeding harm but do not separately establish five-year intracranial and major extracranial absolute risks.",
+          "quote": "higher rates of major haemorrhage were observed in those randomized to aspirin compared with placebo (HR 1.24, 95% CI 1.10, 1.39)",
+          "source_id": "S4",
+          "source_title": "Aspirin, cardiovascular events, and major bleeding in older ...",
+          "location": "Major haemorrhagic events section, paragraph preceding Table 3"
+        },
+        {
+          "id": "E54",
+          "text": "The major-haemorrhage endpoint combines intracranial bleeding with extracranial bleeding meeting specified severity criteria; it is not an extracranial-only endpoint.",
+          "quote": "Major haemorrhage is a composite of haemorrhagic stroke, intracranial bleeding, or extracranial bleeding that resulted in transfusion, prolonged hospitalization, surgery, or death.",
+          "source_id": "S4",
+          "source_title": "Aspirin, cardiovascular events, and major bleeding in older ...",
+          "location": "Table 3, footnote a"
+        },
+        {
+          "id": "E63",
+          "text": "ASCEND randomized adults with diabetes and no evident cardiovascular disease to aspirin 100 mg daily or placebo; the supplied abstract does not identify an age-60-and-over subgroup.",
+          "quote": "We randomly assigned adults who had diabetes but no evident cardiovascular disease to receive aspirin at a dose of 100 mg daily or matching placebo.",
+          "source_id": "S5",
+          "source_title": "Effects of Aspirin for Primary Prevention in Persons with ...",
+          "location": "Abstract, Methods"
+        },
+        {
+          "id": "E66",
+          "text": "The safety endpoint included first intracranial hemorrhage, sight-threatening eye bleeding, gastrointestinal bleeding, or other serious bleeding; it therefore does not directly isolate the requested major extracranial bleeding definition.",
+          "quote": "The primary safety outcome was the first major bleeding event (i.e., intracranial hemorrhage, sight-threatening bleeding event in the eye, gastrointestinal bleeding, or other serious bleeding).",
+          "source_id": "S5",
+          "source_title": "Effects of Aspirin for Primary Prevention in Persons with ...",
+          "location": "Abstract, Methods"
+        },
+        {
+          "id": "E67",
+          "text": "Over the trial's mean 7.4-year follow-up, major bleeding occurred in 4.1% of aspirin recipients versus 3.2% of placebo recipients, approximately 9 additional affected participants per 1,000 using rounded percentages; the reported rate ratio was 1.29 (95% CI 1.09–1.52), with most excess bleeding gastrointestinal or other extracranial.",
+          "quote": "major bleeding events occurred in 314 participants (4.1%) in the aspirin group, as compared with 245 (3.2%) in the placebo group (rate ratio, 1.29; 95% CI, 1.09 to 1.52; P=0.003), with most of the excess being gastrointestinal bleeding and other extracranial bleeding.",
+          "source_id": "S5",
+          "source_title": "Effects of Aspirin for Primary Prevention in Persons with ...",
+          "location": "Abstract, Results"
+        },
+        {
+          "id": "E75",
+          "text": "Eligibility began at age 40 and excluded diagnosed occlusive arterial disease, so the trial population is relevant to primary prevention but is not restricted to adults aged 60 and older.",
+          "quote": "Men or women aged at least 40 years at the time of invitation for screening were eligible",
+          "source_id": "S7",
+          "source_title": "ASCEND: A Study of Cardiovascular Events iN Diabetes",
+          "location": "Methods, Eligibility, opening sentence and criterion ii"
+        },
+        {
+          "id": "E78",
+          "text": "ASCEND used a centrally randomized, blinded comparison of aspirin 100 mg daily against matching placebo, with a separate factorial allocation to omega-3 supplementation.",
+          "quote": "Eligible patients were randomized in a 2 × 2 factorial blinded design between aspirin 100 mg daily and matching placebo",
+          "source_id": "S7",
+          "source_title": "ASCEND: A Study of Cardiovascular Events iN Diabetes",
+          "location": "Randomization"
+        },
+        {
+          "id": "E79",
+          "text": "Cardiovascular events and serious bleeds were investigated through general practitioners and adjudicated using prespecified criteria by clinicians blinded to treatment allocation; registry linkage supplemented follow-up.",
+          "quote": "All such information is reviewed by coordinating center clinicians, blind to treatment allocation, and events are adjudicated according to pre-specified criteria.",
+          "source_id": "S7",
+          "source_title": "ASCEND: A Study of Cardiovascular Events iN Diabetes",
+          "location": "Post-randomization follow-up"
+        }
+      ],
+      "adjudication": "",
+      "note": ""
+    },
+    {
+      "case_id": "4c09e1cbfa13ce3b",
+      "comparison_kind": "lineage_contrast_different_claims",
+      "comparable_as_same_claim": false,
+      "argument": {
+        "scheme": "study_result",
+        "sol": {
+          "provider": "openai",
+          "model": "gpt-6.1-sol",
+          "effort": "medium",
+          "sample": 1,
+          "argument_id": "A19",
+          "premise_ids": [
+            "E156"
+          ],
+          "claim_id": "C35",
+          "claim_text": "The USPSTF pooled low-dose aspirin trials found increased major gastrointestinal bleeding, including events requiring admission or transfusion or causing death.",
+          "root_claim_id": "C14",
+          "revision_of": "C14",
+          "issue_id": "Q4",
+          "main_issue": false,
+          "answers_issue": false,
+          "graph": "experiments\\E2\\after\\h1-claims\\sol\\sample-001\\inquiry.json",
+          "graph_sha256": "3e9954187aacd69a92f83a97e0839083ccac3e7542c121bfc99da52143a60e69"
+        },
+        "sonnet": {
+          "provider": "anthropic",
+          "model": "claude-sonnet-5-5",
+          "effort": "medium",
+          "sample": 1,
+          "argument_id": "A10",
+          "premise_ids": [
+            "E156",
+            "E36",
+            "E53",
+            "E67"
+          ],
+          "claim_id": "C14",
+          "claim_text": "Initiating low-dose aspirin increases nonfatal major extracranial bleeding in adults aged 60 and older without established cardiovascular disease.",
+          "root_claim_id": "C14",
+          "revision_of": null,
+          "issue_id": "Q4",
+          "main_issue": false,
+          "answers_issue": true,
+          "graph": "experiments\\E2\\after\\h1-claims\\sonnet\\sample-001\\inquiry.json",
+          "graph_sha256": "7d68456ee8a20520a426e28c62fd20d8b342b09168ef09628e19195582c07e95"
+        }
+      },
+      "cq_id": "directness",
+      "cq_kind": "assumption",
+      "cq_text": "Do the study's population, setting, intervention and outcome match the claim's, or is the result being carried across to a different place, period, site type or measure?",
+      "sol_answer": {
+        "status": "answered",
+        "outcome": "satisfied",
+        "bucket": "satisfied",
+        "answer": "The claim identifies the pooled trial finding and its gastrointestinal endpoint without extending it to all extracranial bleeding, nonfatal events alone, or an age-restricted population.",
+        "evidence_ids": [
+          "E156"
+        ],
+        "argument_applicable": true,
+        "inapplicable_reasons": []
+      },
+      "sonnet_answer": {
+        "status": "answered",
+        "outcome": "unsatisfied",
+        "bucket": "unsatisfied",
+        "answer": "Major GI bleeding is only a subset of extracranial bleeding. Populations are not restricted to ages 60 and over, and fatal and nonfatal events are not separated. The ASCEND major bleeding endpoint includes intracranial and eye bleeding. Direction matches, but the match is partial.",
+        "evidence_ids": [
+          "E36",
+          "E66",
+          "E54"
+        ],
+        "argument_applicable": false,
+        "inapplicable_reasons": [
+          "assumption unsatisfied: directness"
+        ]
+      },
+      "evidence_ids": [
+        "E156",
+        "E36",
+        "E53",
+        "E54",
+        "E66",
+        "E67"
+      ],
+      "evidence": [
+        {
+          "id": "E156",
+          "text": "Low-dose aspirin increased major gastrointestinal bleeding in 10 pooled trials (119,130 participants; Peto OR 1.58, 95% CI 1.38–1.80) and intracranial bleeding in 11 trials (134,470 participants; OR 1.31, 95% CI 1.11–1.54). Major gastrointestinal bleeding required transfusion or hospital admission or caused death; it is only a subset of major extracranial bleeding. No five-year age-specific absolute increases or separate fatal-event counts are provided.",
+          "quote": "aspirin use was associated with a 58% increase in major gastrointestinal bleeding (Peto OR, 1.58 [95% CI, 1.38-1.80]).",
+          "source_id": "S16",
+          "source_title": "Aspirin Use to Prevent Cardiovascular Disease ...",
+          "location": "Harms of Preventive Medication, first and second paragraphs"
+        },
+        {
+          "id": "E36",
+          "text": "Across eleven trials, major gastrointestinal bleeding occurred in 0.87% of aspirin recipients and 0.52% of controls; the pooled odds ratio was 1.83 (95% CI, 1.43–2.35), with substantial heterogeneity.",
+          "quote": "Aspirin use for primary cardiovascular prevention was associated with a significant increase in major gastrointestinal bleeding (odds ratio, 1.83; 95% CI, 1.43 to 2.35)",
+          "source_id": "S3",
+          "source_title": "Aspirin for primary prevention of stroke in individuals without cardiovascular disease-A meta-analysis.",
+          "location": "Results, Major gastrointestinal bleeding; Supplementary Figure V"
+        },
+        {
+          "id": "E53",
+          "text": "Over combined trial and post-trial follow-up, prior aspirin assignment increased major hemorrhage (HR 1.24, 95% CI 1.10–1.39) and upper gastrointestinal bleeding (HR 1.43, 1.13–1.81). Restricted mean time lost to major hemorrhage was 32 days greater with aspirin. These results support bleeding harm but do not separately establish five-year intracranial and major extracranial absolute risks.",
+          "quote": "higher rates of major haemorrhage were observed in those randomized to aspirin compared with placebo (HR 1.24, 95% CI 1.10, 1.39)",
+          "source_id": "S4",
+          "source_title": "Aspirin, cardiovascular events, and major bleeding in older ...",
+          "location": "Major haemorrhagic events section, paragraph preceding Table 3"
+        },
+        {
+          "id": "E54",
+          "text": "The major-haemorrhage endpoint combines intracranial bleeding with extracranial bleeding meeting specified severity criteria; it is not an extracranial-only endpoint.",
+          "quote": "Major haemorrhage is a composite of haemorrhagic stroke, intracranial bleeding, or extracranial bleeding that resulted in transfusion, prolonged hospitalization, surgery, or death.",
+          "source_id": "S4",
+          "source_title": "Aspirin, cardiovascular events, and major bleeding in older ...",
+          "location": "Table 3, footnote a"
+        },
+        {
+          "id": "E66",
+          "text": "The safety endpoint included first intracranial hemorrhage, sight-threatening eye bleeding, gastrointestinal bleeding, or other serious bleeding; it therefore does not directly isolate the requested major extracranial bleeding definition.",
+          "quote": "The primary safety outcome was the first major bleeding event (i.e., intracranial hemorrhage, sight-threatening bleeding event in the eye, gastrointestinal bleeding, or other serious bleeding).",
+          "source_id": "S5",
+          "source_title": "Effects of Aspirin for Primary Prevention in Persons with ...",
+          "location": "Abstract, Methods"
+        },
+        {
+          "id": "E67",
+          "text": "Over the trial's mean 7.4-year follow-up, major bleeding occurred in 4.1% of aspirin recipients versus 3.2% of placebo recipients, approximately 9 additional affected participants per 1,000 using rounded percentages; the reported rate ratio was 1.29 (95% CI 1.09–1.52), with most excess bleeding gastrointestinal or other extracranial.",
+          "quote": "major bleeding events occurred in 314 participants (4.1%) in the aspirin group, as compared with 245 (3.2%) in the placebo group (rate ratio, 1.29; 95% CI, 1.09 to 1.52; P=0.003), with most of the excess being gastrointestinal bleeding and other extracranial bleeding.",
+          "source_id": "S5",
+          "source_title": "Effects of Aspirin for Primary Prevention in Persons with ...",
+          "location": "Abstract, Results"
+        }
+      ],
+      "adjudication": "",
+      "note": ""
+    }
+  ]
+}

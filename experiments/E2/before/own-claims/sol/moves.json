@@ -33,7 +33,29 @@
         "unusable_share": 0.9185185185185185,
         "unusable_items": 124,
         "offered_evidence": 135,
-        "scoped_claims_proposed": 0
+        "scoped_claims_proposed": 0,
+        "inapplicable_reasons": {},
+        "cq_outcomes": {
+          "satisfied": 5,
+          "unsatisfied": 0,
+          "defaulted": 1,
+          "open": 4
+        },
+        "cq_outcomes_by_kind": {
+          "assumption": {
+            "satisfied": 5,
+            "unsatisfied": 0,
+            "defaulted": 1,
+            "open": 0
+          },
+          "exception": {
+            "satisfied": 0,
+            "unsatisfied": 0,
+            "defaulted": 0,
+            "open": 4
+          }
+        },
+        "cq_outcome_details": {}
       },
       "raw_metrics": {},
       "move_summary": {
@@ -207,7 +229,29 @@
         "unusable_share": 0.9185185185185185,
         "unusable_items": 124,
         "offered_evidence": 135,
-        "scoped_claims_proposed": 0
+        "scoped_claims_proposed": 0,
+        "inapplicable_reasons": {},
+        "cq_outcomes": {
+          "satisfied": 16,
+          "unsatisfied": 0,
+          "defaulted": 0,
+          "open": 11
+        },
+        "cq_outcomes_by_kind": {
+          "assumption": {
+            "satisfied": 16,
+            "unsatisfied": 0,
+            "defaulted": 0,
+            "open": 0
+          },
+          "exception": {
+            "satisfied": 0,
+            "unsatisfied": 0,
+            "defaulted": 0,
+            "open": 11
+          }
+        },
+        "cq_outcome_details": {}
       },
       "raw_metrics": {},
       "move_summary": {
@@ -384,7 +428,29 @@
         "unusable_share": 0.9185185185185185,
         "unusable_items": 124,
         "offered_evidence": 135,
-        "scoped_claims_proposed": 0
+        "scoped_claims_proposed": 0,
+        "inapplicable_reasons": {},
+        "cq_outcomes": {
+          "satisfied": 4,
+          "unsatisfied": 0,
+          "defaulted": 4,
+          "open": 4
+        },
+        "cq_outcomes_by_kind": {
+          "assumption": {
+            "satisfied": 4,
+            "unsatisfied": 0,
+            "defaulted": 4,
+            "open": 0
+          },
+          "exception": {
+            "satisfied": 0,
+            "unsatisfied": 0,
+            "defaulted": 0,
+            "open": 4
+          }
+        },
+        "cq_outcome_details": {}
       },
       "raw_metrics": {},
       "move_summary": {
@@ -582,6 +648,17 @@
       "min": 0.9185185185185185,
       "max": 0.9185185185185185,
       "n": 3
+    }
+  },
+  "metrics_extensions": {
+    "N1": {
+      "fields": [
+        "inapplicable_reasons",
+        "cq_outcomes",
+        "cq_outcomes_by_kind",
+        "cq_outcome_details"
+      ],
+      "method": "Read-only rescore of saved graphs; native totals, costs and graph hashes unchanged"
     }
   }
 }
