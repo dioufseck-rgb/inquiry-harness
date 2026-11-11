@@ -2,7 +2,7 @@
   "id": "sol",
   "question": "Can PJM serve projected data-centre load growth in Northern Virginia through 2030 without new dispatchable generation?\n",
   "created_at": "2026-11-11T19:57:01+00:00",
-  "phase": "inquiring",
+  "phase": "concluded",
   "round": 2,
   "framing": {
     "restatement": "Can PJM serve projected data-centre load growth in Northern Virginia through 2030 without new dispatchable generation?",
@@ -455,7 +455,7 @@
         "created_by_move": "argue",
         "created_round": 1,
         "critique_round": 0,
-        "review_note": "Single origin does not invalidate an explicitly attributed conditional result from that origin's model. The claim does not present the LOLE estimate as independently corroborated or as a local no-new-dispatchable finding.",
+        "review_note": "Single origin is not a defect for attribution of Synapse's own conditional simulation result. A2 and A22 are one line of support, not independent corroboration; the claim does not establish deployment feasibility or local delivery.",
         "answers_issue": false
       },
       {
@@ -496,7 +496,7 @@
         "created_by_move": "argue",
         "created_round": 1,
         "critique_round": 0,
-        "review_note": "The claim reports Synapse's own conditional scenario result. One origin suffices for that attribution, without establishing that every alternative portfolio fails.",
+        "review_note": "The claim explicitly attributes the scenario-specific modeled result to Synapse. A single originating study suffices for that attribution, not for an unconditional prediction or a no-new-dispatchable conclusion.",
         "answers_issue": false
       },
       {
@@ -531,7 +531,7 @@
         "created_by_move": "argue",
         "created_round": 1,
         "critique_round": 0,
-        "review_note": "The study's own assumptions and build table establish its scenario boundary. Independent corroboration is not necessary to report that both scenarios include new gas.",
+        "review_note": "The study's own assumptions and build table directly establish its scenario boundary. Independent replication is not required to establish that both scenarios include new gas.",
         "answers_issue": false
       },
       {
@@ -566,7 +566,7 @@
         "created_by_move": "argue",
         "created_round": 1,
         "critique_round": 0,
-        "review_note": "PJM's own methods documentation directly establishes these model limitations. The claim does not infer a particular local bottleneck from them.",
+        "review_note": "PJM's own methods documentation directly establishes these model exclusions. The single-origin flag does not undermine this documentary limitation claim.",
         "answers_issue": false
       },
       {
@@ -607,7 +607,7 @@
         "created_by_move": "argue",
         "created_round": 1,
         "critique_round": 0,
-        "review_note": "Dominion is positioned to report its served-market baseline. The claim already preserves the geographic limitation and does not treat this single-origin baseline as a Northern Virginia growth forecast.",
+        "review_note": "This is a bounded attribution of Dominion's reported baseline, not an independently verified Northern Virginia measurement. The geographic limitation is already explicit.",
         "answers_issue": false
       },
       {
@@ -642,7 +642,7 @@
         "created_by_move": "argue",
         "created_round": 1,
         "critique_round": 0,
-        "review_note": "Dominion's documentation is direct evidence of its contractual classifications and reported typical timing, not a guarantee of project completion.",
+        "review_note": "Dominion's documentation is direct evidence of its own contractual classifications and reported typical timing. The claim does not guarantee individual project completion.",
         "answers_issue": false
       },
       {
@@ -677,7 +677,7 @@
         "created_by_move": "argue",
         "created_round": 1,
         "critique_round": 0,
-        "review_note": "PJM's report directly establishes its own forecast rules and stated revision direction. The claim makes no independently validated Northern Virginia forecast comparison.",
+        "review_note": "PJM's report directly documents its own forecast rules and stated revision direction. Single origin is sufficient for this methodological attribution.",
         "answers_issue": false
       },
       {
@@ -712,7 +712,7 @@
         "created_by_move": "argue",
         "created_round": 1,
         "critique_round": 0,
-        "review_note": "The study's appendix directly documents its chosen forecast transformations and load-shape assumption. Single origin is sufficient to establish what the study assumes.",
+        "review_note": "The claim reports the study's own input transformations and load-shape assumption, not their predictive accuracy. The study is the appropriate documentary origin.",
         "answers_issue": false
       },
       {
@@ -751,7 +751,7 @@
         "created_by_move": "argue",
         "created_round": 1,
         "critique_round": 0,
-        "review_note": "The claim attributes a conditional point forecast to Modo rather than asserting an assured retirement total or net capacity balance. The single-origin limitation does not require further narrowing.",
+        "review_note": "The claim is explicitly Modo's conditional retirement projection, not an assured retirement total or a net reliable-capacity balance. Lack of independent corroboration does not defeat that limited attribution.",
         "answers_issue": false
       },
       {
@@ -783,12 +783,12 @@
         "target": {
           "evidence_status": "reported"
         },
-        "superseded_by": null,
+        "superseded_by": "C32",
         "revision_of": "C9",
         "created_by_move": "argue",
         "created_round": 1,
         "critique_round": 0,
-        "review_note": "The claim expressly describes Synapse's scenario assumptions, not verified resource commitments. The originating report is appropriate evidence of those assumptions.",
+        "review_note": "Argue: evidence supports a narrower claim",
         "answers_issue": false
       },
       {
@@ -818,12 +818,12 @@
         "target": {
           "evidence_status": "reported"
         },
-        "superseded_by": null,
+        "superseded_by": "C31",
         "revision_of": "C9",
         "created_by_move": "argue",
         "created_round": 1,
         "critique_round": 0,
-        "review_note": "The claim reports construction eligibility and advancement assumptions from the model documentation, without equating them to completed projects.",
+        "review_note": "Argue: evidence supports a narrower claim",
         "answers_issue": false
       },
       {
@@ -859,12 +859,12 @@
         "target": {
           "evidence_status": "reported"
         },
-        "superseded_by": null,
+        "superseded_by": "C34",
         "revision_of": "C9",
         "created_by_move": "argue",
         "created_round": 1,
         "critique_round": 0,
-        "review_note": "The claim already limits the number to Synapse's reported modeled internal transfer increment and disclaims a Northern Virginia firm import margin. Single origin does not defeat that limited attribution.",
+        "review_note": "A19 correctly identifies an unsupported implication of through-2030 availability from placement under Q3. Retain A13 only for attribution of the modeled increment, explicitly restricted to Advanced Policy and its conditional upgrade eligibility. No support is carried for an in-service date or local firm transfer capability.",
         "answers_issue": false
       },
       {
@@ -936,7 +936,7 @@
         "created_by_move": "argue",
         "created_round": 1,
         "critique_round": 0,
-        "review_note": "The study's own permissions and selected-resource results establish that its scenarios allow and include new gas. This documentary boundary finding does not require independent modeling.",
+        "review_note": "The study's resource permissions and selected gas builds directly establish that its portfolios are not PJM-wide no-new-dispatchable tests. This boundary finding does not require an independent forecast.",
         "answers_issue": false
       },
       {
@@ -968,12 +968,12 @@
         "target": {
           "evidence_status": "reported"
         },
-        "superseded_by": null,
+        "superseded_by": "C33",
         "revision_of": "C9",
         "created_by_move": "argue",
         "created_round": 1,
         "critique_round": 0,
-        "review_note": "PJM's methods documentation directly establishes its capacity-accounting and administrative ties assumptions. The claim already distinguishes these from verified local import capability.",
+        "review_note": "Argue: evidence supports a narrower claim",
         "answers_issue": false
       },
       {
@@ -1051,12 +1051,12 @@
         "target": {
           "evidence_status": "reported"
         },
-        "superseded_by": null,
+        "superseded_by": "C35",
         "revision_of": "C26",
         "created_by_move": "argue",
         "created_round": 2,
         "critique_round": 0,
-        "review_note": "",
+        "review_note": "The uncertainty finding is material to predictive robustness, but not to whether the report states these results. Carry A23 solely for the explicitly attributed report statement and documented scope; withdraw any inference that its excerpts establish robust threshold failures.",
         "answers_issue": false
       },
       {
@@ -1097,7 +1097,7 @@
         "created_by_move": "argue",
         "created_round": 2,
         "critique_round": 0,
-        "review_note": "",
+        "review_note": "The claim attributes the regional figure to Synapse's account of PJM's forecast and explicitly excludes a Northern Virginia allocation. The passages remain one source line, not independent corroboration.",
         "answers_issue": false
       },
       {
@@ -1134,7 +1134,7 @@
         "created_by_move": "argue",
         "created_round": 2,
         "critique_round": 0,
-        "review_note": "",
+        "review_note": "Modo is the direct source for the geographic attribution in its own forecast. The claim already discloses the absent quantified local share and undefined boundary.",
         "answers_issue": false
       },
       {
@@ -1169,6 +1169,205 @@
         "superseded_by": null,
         "revision_of": "C7",
         "created_by_move": "argue",
+        "created_round": 2,
+        "critique_round": 0,
+        "review_note": "The study directly records its imposed no-additions counterfactual. Single origin is sufficient to establish that scenario definition, without validating it as expected demand.",
+        "answers_issue": false
+      },
+      {
+        "id": "C31",
+        "text": "PJM procedures make proposed resource service dates conditional on studies and construction; early service can require a delivery-year-specific assessment of deliverable output.",
+        "issue_id": "Q3",
+        "kind": "substantive",
+        "contrary_ids": [],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "revision of C21: Argue: evidence supports a narrower claim",
+        "scope": {
+          "population": "PJM generation interconnection and implementation procedures",
+          "comparison": "Proposed or early service versus satisfaction of study and construction conditions",
+          "outcome": "Reported procedural conditions on service dates and interim deliverability",
+          "period": "Provisions in the supplied PJM Manuals 14H and 14C",
+          "relation": "is",
+          "magnitude": null,
+          "narrower_than": [
+            "population",
+            "period"
+          ],
+          "parent_scope": {
+            "population": "PJM resources and power transfers relevant to Northern Virginia",
+            "period": "Through 2030"
+          }
+        },
+        "target": {
+          "evidence_status": "reported"
+        },
+        "superseded_by": null,
+        "revision_of": "C21",
+        "created_by_move": "argue",
+        "created_round": 2,
+        "critique_round": 0,
+        "review_note": "PJM's manuals are direct evidence of PJM's procedural conditions. The claim does not infer actual completion rates or project-specific delays from those rules.",
+        "answers_issue": false
+      },
+      {
+        "id": "C32",
+        "text": "PJM's demand-response provisions allow on-site generators to reduce load; labeling a resource demand response does not establish that it uses no generation.",
+        "issue_id": "Q3",
+        "kind": "substantive",
+        "contrary_ids": [],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "revision of C20: Argue: evidence supports a narrower claim",
+        "scope": {
+          "population": "Demand-response participation provisions in PJM Manual 14H",
+          "comparison": "Demand-response classification versus exclusion of on-site generation",
+          "outcome": "Reported eligibility of on-site generation used to reduce load as demand response",
+          "period": "Provisions in the supplied PJM Manual 14H",
+          "relation": "is",
+          "magnitude": null,
+          "narrower_than": [
+            "population",
+            "period"
+          ],
+          "parent_scope": {
+            "population": "PJM resources and power transfers relevant to Northern Virginia",
+            "period": "Through 2030"
+          }
+        },
+        "target": {
+          "evidence_status": "reported"
+        },
+        "superseded_by": null,
+        "revision_of": "C20",
+        "created_by_move": "argue",
+        "created_round": 2,
+        "critique_round": 0,
+        "review_note": "PJM's explicit on-site-generator provision establishes the classification caveat. Independent corroboration is unnecessary, and the claim does not assert that a particular portfolio uses new on-site generation.",
+        "answers_issue": false
+      },
+      {
+        "id": "C33",
+        "text": "PJM procedures can condition external long-term firm transmission service on affected-system studies and upgrade milestones, with real-time limits before required upgrades are complete.",
+        "issue_id": "Q3",
+        "kind": "substantive",
+        "contrary_ids": [],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "revision of C25: Argue: evidence supports a narrower claim",
+        "scope": {
+          "population": "External long-term firm transmission-service requests affecting PJM",
+          "comparison": "Requested service versus service permitted under affected-system requirements",
+          "outcome": "Reported study, upgrade-milestone and interim-limit conditions on service",
+          "period": "Provisions in the supplied PJM Manual 14H",
+          "relation": "is",
+          "magnitude": null,
+          "narrower_than": [
+            "population",
+            "period"
+          ],
+          "parent_scope": {
+            "population": "PJM resources and power transfers relevant to Northern Virginia",
+            "period": "Through 2030"
+          }
+        },
+        "target": {
+          "evidence_status": "reported"
+        },
+        "superseded_by": null,
+        "revision_of": "C25",
+        "created_by_move": "argue",
+        "created_round": 2,
+        "critique_round": 0,
+        "review_note": "PJM's manual directly establishes the conditional service procedures. The claim identifies neither an actual constrained transfer nor a quantified import margin, so the single-origin flag supplies no material objection to its stated scope.",
+        "answers_issue": false
+      },
+      {
+        "id": "C34",
+        "text": "Synapse reports a modeled 3,345 MW increase in internal PJM transfer capacity in its Advanced Policy portfolio, which permits economic advanced-transmission additions starting in 2028. The supplied excerpts do not establish availability by 2030 or a Northern Virginia firm import margin.",
+        "issue_id": "Q3",
+        "kind": "substantive",
+        "contrary_ids": [],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "revision of C22: A19 correctly identifies an unsupported implication of through-2030 availability from placement under Q3. Retain A13 only for attribution of the modeled increment, explicitly restricted to Advanced Policy and its conditional upgrade eligibility. No support is carried for an in-service date or local firm transfer capability.",
+        "scope": {
+          "population": "Internal PJM transfers in Synapse's modeled Advanced Policy advanced transmission portfolio",
+          "comparison": "Modeled advanced transmission upgrades versus the portfolio without those upgrades",
+          "outcome": "Reported increase in intra-regional transfer capacity",
+          "period": "Synapse modeled upgrade horizon; completion timing not established in the supplied excerpt",
+          "relation": "increases",
+          "magnitude": {
+            "low": 3345.0,
+            "high": 3345.0,
+            "unit": "MW of intra-regional transfer capacity"
+          },
+          "narrower_than": [
+            "population"
+          ],
+          "parent_scope": {
+            "population": "Internal PJM transfers in Synapse's modeled advanced transmission portfolio"
+          }
+        },
+        "target": {
+          "population": "Internal PJM transfers in Synapse's modeled Advanced Policy advanced transmission portfolio",
+          "intervention": "Advanced transmission additions eligible starting in 2028 if modeled as economic",
+          "comparator": "The portfolio without those upgrades",
+          "outcome": "Source-reported modeled increase in intra-regional transfer capacity",
+          "horizon": "Synapse modeled upgrade horizon; completion timing not established in the supplied excerpt",
+          "quantity": "3,345 MW",
+          "scope": "Attributed regional modeling result, not established through-2030 availability or Northern Virginia firm deliverability",
+          "evidence_status": "reported"
+        },
+        "superseded_by": null,
+        "revision_of": "C22",
+        "created_by_move": "revise",
+        "created_round": 2,
+        "critique_round": 0,
+        "review_note": "",
+        "answers_issue": false
+      },
+      {
+        "id": "C35",
+        "text": "The Pennsylvania PUC report states that its PJM-wide Reference and High Load and Low Supply scenarios miss the 0.1-days-per-year LOLE criterion throughout 2027–2030. The supplied excerpts do not establish uncertainty bounds or robustness of those modeled threshold failures, and the results do not establish Northern Virginia deliverability.",
+        "issue_id": "Q1",
+        "kind": "substantive",
+        "contrary_ids": [],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "revision of C27: The uncertainty finding is material to predictive robustness, but not to whether the report states these results. Carry A23 solely for the explicitly attributed report statement and documented scope; withdraw any inference that its excerpts establish robust threshold failures.",
+        "scope": {
+          "population": "PJM-wide Reference and High Load and Low Supply modeled scenarios in the Pennsylvania PUC report",
+          "comparison": "Source-specific load, flexibility and resource-development assumptions",
+          "outcome": "The report's statement that both scenarios exceed the regional adequacy criterion",
+          "period": "2027–2030",
+          "relation": "is",
+          "magnitude": null,
+          "narrower_than": [
+            "outcome"
+          ],
+          "parent_scope": {
+            "outcome": "Source-reported regional LOLE exceeding the PJM resource-adequacy criterion"
+          }
+        },
+        "target": {
+          "population": "PJM-wide Reference and High Load and Low Supply modeled scenarios in the Pennsylvania PUC report",
+          "intervention": "Source-specific load, flexibility and resource-development assumptions",
+          "comparator": "PJM resource-adequacy criterion of LOLE 0.1 days per year",
+          "outcome": "The report's statement that both scenarios exceed the regional adequacy criterion",
+          "horizon": "2027–2030",
+          "quantity": "Reported threshold exceedance; robustness not established",
+          "scope": "Matter-of-record attribution, not an independently established prediction or local deliverability finding",
+          "evidence_status": "reported"
+        },
+        "superseded_by": null,
+        "revision_of": "C27",
+        "created_by_move": "revise",
         "created_round": 2,
         "critique_round": 0,
         "review_note": "",
@@ -1384,7 +1583,8 @@
           "C2": "neutral",
           "C9": "neutral",
           "C22": "for",
-          "C26": "neutral"
+          "C26": "neutral",
+          "C34": "for"
         },
         "role": "evidence"
       },
@@ -2029,7 +2229,8 @@
         "bears_on": {
           "C1": "neutral",
           "C9": "neutral",
-          "C22": "for"
+          "C22": "for",
+          "C34": "for"
         },
         "role": "evidence"
       },
@@ -5307,7 +5508,8 @@
           "C2": "for",
           "C3": "for",
           "C26": "for",
-          "C27": "for"
+          "C27": "for",
+          "C35": "for"
         },
         "role": "evidence"
       },
@@ -5754,7 +5956,8 @@
           "C1": "neutral",
           "C2": "neutral",
           "C26": "neutral",
-          "C27": "for"
+          "C27": "for",
+          "C35": "for"
         },
         "role": "evidence"
       },
@@ -5802,7 +6005,8 @@
           "C2": "neutral",
           "C3": "neutral",
           "C26": "neutral",
-          "C27": "for"
+          "C27": "for",
+          "C35": "for"
         },
         "role": "evidence"
       },
@@ -5850,7 +6054,8 @@
           "C2": "neutral",
           "C3": "neutral",
           "C26": "neutral",
-          "C27": "for"
+          "C27": "for",
+          "C35": "for"
         },
         "role": "evidence"
       },
@@ -6101,7 +6306,8 @@
           "C2": "neutral",
           "C3": "neutral",
           "C26": "neutral",
-          "C27": "for"
+          "C27": "for",
+          "C35": "for"
         },
         "role": "evidence"
       },
@@ -6126,7 +6332,8 @@
           "C2": "neutral",
           "C3": "neutral",
           "C26": "neutral",
-          "C27": "for"
+          "C27": "for",
+          "C35": "for"
         },
         "role": "evidence"
       },
@@ -6690,7 +6897,8 @@
           "C8": "neutral",
           "C9": "neutral",
           "C26": "neutral",
-          "C27": "for"
+          "C27": "for",
+          "C35": "for"
         },
         "role": "evidence"
       },
@@ -6716,7 +6924,8 @@
           "C8": "neutral",
           "C9": "neutral",
           "C26": "neutral",
-          "C27": "for"
+          "C27": "for",
+          "C35": "for"
         },
         "role": "evidence"
       },
@@ -7372,7 +7581,8 @@
         "bears_on": {
           "C21": "neutral",
           "C1": "neutral",
-          "C2": "neutral"
+          "C2": "neutral",
+          "C31": "for"
         },
         "role": "evidence"
       },
@@ -7395,7 +7605,8 @@
         "bears_on": {
           "C22": "neutral",
           "C1": "neutral",
-          "C2": "neutral"
+          "C2": "neutral",
+          "C34": "neutral"
         },
         "role": "evidence"
       },
@@ -7789,7 +8000,8 @@
         "bears_on": {
           "C21": "neutral",
           "C1": "neutral",
-          "C2": "neutral"
+          "C2": "neutral",
+          "C31": "for"
         },
         "role": "evidence"
       },
@@ -7833,7 +8045,8 @@
         "provenance": {},
         "bears_on": {
           "C1": "neutral",
-          "C21": "neutral"
+          "C21": "neutral",
+          "C31": "for"
         },
         "role": "evidence"
       },
@@ -8429,7 +8642,8 @@
         "origin": "proposer",
         "provenance": {},
         "bears_on": {
-          "C20": "neutral"
+          "C20": "neutral",
+          "C32": "for"
         },
         "role": "evidence"
       },
@@ -8535,7 +8749,8 @@
         "origin": "proposer",
         "provenance": {},
         "bears_on": {
-          "C21": "neutral"
+          "C21": "neutral",
+          "C31": "for"
         },
         "role": "evidence"
       },
@@ -8577,7 +8792,8 @@
         "origin": "proposer",
         "provenance": {},
         "bears_on": {
-          "C25": "neutral"
+          "C25": "neutral",
+          "C33": "for"
         },
         "role": "evidence"
       },
@@ -8598,7 +8814,8 @@
         "origin": "proposer",
         "provenance": {},
         "bears_on": {
-          "C25": "neutral"
+          "C25": "neutral",
+          "C33": "for"
         },
         "role": "evidence"
       },
@@ -8619,7 +8836,8 @@
         "origin": "proposer",
         "provenance": {},
         "bears_on": {
-          "C25": "neutral"
+          "C25": "neutral",
+          "C33": "for"
         },
         "role": "evidence"
       },
@@ -8912,7 +9130,8 @@
         "bears_on": {
           "C21": "neutral",
           "C1": "neutral",
-          "C2": "neutral"
+          "C2": "neutral",
+          "C31": "for"
         },
         "role": "evidence"
       },
@@ -8956,7 +9175,8 @@
         "origin": "proposer",
         "provenance": {},
         "bears_on": {
-          "C21": "neutral"
+          "C21": "neutral",
+          "C31": "for"
         },
         "role": "evidence"
       },
@@ -10331,7 +10551,7 @@
         "origin": "proposer",
         "note": "These are different scenario assumptions, not committed Northern Virginia flexibility or an established no-new-dispatchable result.",
         "round": 1,
-        "withdrawn": ""
+        "withdrawn": "claim C20 revised to C32; not carried over: Argue: evidence supports a narrower claim"
       },
       {
         "id": "A12",
@@ -10397,7 +10617,7 @@
         "origin": "proposer",
         "note": "Eligibility and assumed advancement are not quantities selected or guaranteed to enter service.",
         "round": 1,
-        "withdrawn": ""
+        "withdrawn": "claim C21 revised to C31; not carried over: Argue: evidence supports a narrower claim"
       },
       {
         "id": "A13",
@@ -10406,7 +10626,7 @@
           "E36",
           "E9"
         ],
-        "claim_id": "C22",
+        "claim_id": "C34",
         "attacks": null,
         "cq": {
           "design": {
@@ -10497,18 +10717,18 @@
           "design": {
             "status": "answered",
             "outcome": "satisfied",
-            "answer": "PJM uses marginal expected-unserved-energy reduction relative to perfect capacity. E3 judges this approach appropriate for marginal reliability contributions.",
+            "answer": "PJM assesses marginal reliability contribution using expected-unserved-energy reduction relative to perfect capacity. E3 finds this approach appropriate for resource-class marginal reliability contributions. That supports the limited accreditation claim, not a local load-serving conclusion.",
             "evidence_ids": [
               "E154",
               "E263"
             ],
-            "revision": 1,
+            "revision": 2,
             "answer_move": ""
           },
           "directness": {
             "status": "answered",
             "outcome": "satisfied",
-            "answer": "The claim is limited to class accreditation in the reported near-term PJM portfolios, not deployment quantities or local deliverability.",
+            "answer": "The reported ratings cover the solar, wind, storage and demand-resource classes and near-term delivery years named in the claim. No extension to installed quantities or Northern Virginia deliverability is required.",
             "evidence_ids": [
               "E149",
               "E151",
@@ -10516,25 +10736,26 @@
               "E155",
               "E157"
             ],
-            "revision": 1,
+            "revision": 2,
             "answer_move": ""
           },
           "uncertainty": {
             "status": "answered",
             "outcome": "satisfied",
-            "answer": "The ratings vary by portfolio and delivery year. For this limited source-reported finding, the tabulated ratings establish partial rather than full credit without implying invariant future performance.",
+            "answer": "The excerpts provide portfolio- and year-specific point ratings rather than uncertainty intervals. For the limited claim that PJM reports partial accreditation, these are treated as conditional modeled ratings, not precise forecasts of realized performance.",
             "evidence_ids": [
               "E149",
               "E151",
-              "E152"
+              "E152",
+              "E157"
             ],
-            "revision": 1,
+            "revision": 2,
             "answer_move": ""
           },
           "reported": {
             "status": "answered",
             "outcome": "satisfied",
-            "answer": "PJM directly reports sub-nameplate class ratings for these resource types and explains winter-duration constraints on storage.",
+            "answer": "PJM directly reports sub-nameplate ratings for solar, wind, storage and demand resources, and explains energy and event-duration constraints affecting storage.",
             "evidence_ids": [
               "E149",
               "E151",
@@ -10542,7 +10763,7 @@
               "E155",
               "E157"
             ],
-            "revision": 1,
+            "revision": 2,
             "answer_move": ""
           },
           "bias": {
@@ -10706,7 +10927,7 @@
         "origin": "proposer",
         "note": "Preserves the distinction between regional modeling assumptions, external capacity trades and local deliverability.",
         "round": 1,
-        "withdrawn": ""
+        "withdrawn": "claim C25 revised to C33; not carried over: Argue: evidence supports a narrower claim"
       },
       {
         "id": "A17",
@@ -11019,7 +11240,7 @@
           "E242",
           "E243"
         ],
-        "claim_id": "C27",
+        "claim_id": "C35",
         "attacks": null,
         "cq": {
           "design": {
@@ -11298,6 +11519,298 @@
         "strength_override": null,
         "origin": "proposer",
         "note": "The scenario's reliability result cannot establish that anticipated growth is zero or that the projected growth can be served.",
+        "round": 2,
+        "withdrawn": ""
+      },
+      {
+        "id": "A27",
+        "scheme": "document_record",
+        "premise_ids": [
+          "E271",
+          "E292",
+          "E294",
+          "E329",
+          "E347",
+          "E349"
+        ],
+        "claim_id": "C31",
+        "attacks": null,
+        "cq": {
+          "authentic": {
+            "status": "answered",
+            "outcome": "satisfied",
+            "answer": "The excerpts identify PJM's interconnection and project-implementation manuals and their applicable sections.",
+            "evidence_ids": [
+              "E271",
+              "E292",
+              "E294",
+              "E329",
+              "E347",
+              "E349"
+            ],
+            "revision": 1,
+            "answer_move": ""
+          },
+          "accuracy": {
+            "status": "answered",
+            "outcome": "satisfied",
+            "answer": "These manuals directly establish procedural conditions on service dates and early deliverability. They are adequate evidence of those conditions, but not of actual project completion rates.",
+            "evidence_ids": [
+              "E271",
+              "E292",
+              "E294",
+              "E329",
+              "E347",
+              "E349"
+            ],
+            "revision": 1,
+            "answer_move": ""
+          },
+          "reading": {
+            "status": "answered",
+            "outcome": "satisfied",
+            "answer": "Proposed service dates depend on studies and construction. Interim studies determine whether all or only part of output is deliverable and apply only to the studied delivery year. Necessary studies and required upgrades impose additional readiness conditions.",
+            "evidence_ids": [
+              "E271",
+              "E292",
+              "E294",
+              "E329",
+              "E347",
+              "E349"
+            ],
+            "revision": 1,
+            "answer_move": ""
+          },
+          "definitions": {
+            "status": "open",
+            "outcome": "",
+            "answer": "",
+            "evidence_ids": [],
+            "revision": 0,
+            "answer_move": ""
+          },
+          "currency": {
+            "status": "open",
+            "outcome": "",
+            "answer": "",
+            "evidence_ids": [],
+            "revision": 0,
+            "answer_move": ""
+          }
+        },
+        "strength_override": null,
+        "origin": "proposer",
+        "note": "This qualifies how Synapse's queue-stage assumptions should be interpreted. It does not show that any particular project misses its assumed date or quantify resources available by 2030.",
+        "round": 2,
+        "withdrawn": ""
+      },
+      {
+        "id": "A28",
+        "scheme": "document_record",
+        "premise_ids": [
+          "E324"
+        ],
+        "claim_id": "C32",
+        "attacks": null,
+        "cq": {
+          "authentic": {
+            "status": "answered",
+            "outcome": "satisfied",
+            "answer": "The excerpt is identified as PJM Manual 14H's provision concerning on-site generators participating as demand response.",
+            "evidence_ids": [
+              "E324"
+            ],
+            "revision": 1,
+            "answer_move": ""
+          },
+          "accuracy": {
+            "status": "answered",
+            "outcome": "satisfied",
+            "answer": "PJM's own procedural provision is adequate to establish that this participation category exists, without establishing its use in any particular modeled portfolio.",
+            "evidence_ids": [
+              "E324"
+            ],
+            "revision": 1,
+            "answer_move": ""
+          },
+          "reading": {
+            "status": "answered",
+            "outcome": "satisfied",
+            "answer": "The provision explicitly refers to an on-site generator used to reduce load and participating in wholesale markets as a demand-response resource.",
+            "evidence_ids": [
+              "E324"
+            ],
+            "revision": 1,
+            "answer_move": ""
+          },
+          "definitions": {
+            "status": "open",
+            "outcome": "",
+            "answer": "",
+            "evidence_ids": [],
+            "revision": 0,
+            "answer_move": ""
+          },
+          "currency": {
+            "status": "open",
+            "outcome": "",
+            "answer": "",
+            "evidence_ids": [],
+            "revision": 0,
+            "answer_move": ""
+          }
+        },
+        "strength_override": null,
+        "origin": "proposer",
+        "note": "The definition cautions against automatically classifying all demand response as generation-free. It does not establish that Synapse assumes new on-site generators.",
+        "round": 2,
+        "withdrawn": ""
+      },
+      {
+        "id": "A29",
+        "scheme": "document_record",
+        "premise_ids": [
+          "E331",
+          "E332",
+          "E333"
+        ],
+        "claim_id": "C33",
+        "attacks": null,
+        "cq": {
+          "authentic": {
+            "status": "answered",
+            "outcome": "satisfied",
+            "answer": "The excerpts identify PJM Manual 14H's affected-system provisions for requests originating outside PJM.",
+            "evidence_ids": [
+              "E331",
+              "E332",
+              "E333"
+            ],
+            "revision": 1,
+            "answer_move": ""
+          },
+          "accuracy": {
+            "status": "answered",
+            "outcome": "satisfied",
+            "answer": "The manual directly records the applicable study, milestone and interim-limit procedures. It does not measure available transfers.",
+            "evidence_ids": [
+              "E331",
+              "E332",
+              "E333"
+            ],
+            "revision": 1,
+            "answer_move": ""
+          },
+          "reading": {
+            "status": "answered",
+            "outcome": "satisfied",
+            "answer": "PJM determines whether affected-system studies are required, links permissible service to upgrade milestones where upgrades are needed, and determines necessary real-time limits pending completion.",
+            "evidence_ids": [
+              "E331",
+              "E332",
+              "E333"
+            ],
+            "revision": 1,
+            "answer_move": ""
+          },
+          "definitions": {
+            "status": "open",
+            "outcome": "",
+            "answer": "",
+            "evidence_ids": [],
+            "revision": 0,
+            "answer_move": ""
+          },
+          "currency": {
+            "status": "open",
+            "outcome": "",
+            "answer": "",
+            "evidence_ids": [],
+            "revision": 0,
+            "answer_move": ""
+          }
+        },
+        "strength_override": null,
+        "origin": "proposer",
+        "note": "This supplies a procedural reason not to equate a service request with unrestricted import availability. It identifies no actual constrained transfer or Northern Virginia import margin.",
+        "round": 2,
+        "withdrawn": ""
+      },
+      {
+        "id": "A30",
+        "scheme": "attack",
+        "premise_ids": [
+          "E31",
+          "E33",
+          "E21"
+        ],
+        "claim_id": null,
+        "attacks": {
+          "target_id": "A2",
+          "type": "undercut",
+          "note": "",
+          "basis": "presence",
+          "challenged_revision": -1,
+          "answer_quote": "",
+          "was_reopened": false,
+          "raises_cq": "directness"
+        },
+        "cq": {
+          "grounds": {
+            "status": "answered",
+            "outcome": "",
+            "answer": "premises supplied",
+            "evidence_ids": [
+              "E31",
+              "E33",
+              "E21"
+            ],
+            "revision": 0,
+            "answer_move": ""
+          }
+        },
+        "strength_override": null,
+        "origin": "critic",
+        "note": "[directness] The directness answer says the claim is restricted to the Advanced Policy portfolio including new gas. But C11 is placed under the issue as evidence on serving load without new dispatchable generation, and E33 shows 9 GW of new gas in both scenarios. The 0.04 LOLE therefore cannot support a no-new-dispatchable conclusion. The audit answer is adequate only for the narrow attribution.",
+        "round": 2,
+        "withdrawn": ""
+      },
+      {
+        "id": "A31",
+        "scheme": "attack",
+        "premise_ids": [
+          "E205",
+          "E216",
+          "E247"
+        ],
+        "claim_id": null,
+        "attacks": {
+          "target_id": "A23",
+          "type": "undercut",
+          "note": "",
+          "basis": "presence",
+          "challenged_revision": -1,
+          "answer_quote": "",
+          "was_reopened": false,
+          "raises_cq": "uncertainty"
+        },
+        "cq": {
+          "grounds": {
+            "status": "answered",
+            "outcome": "",
+            "answer": "premises supplied",
+            "evidence_ids": [
+              "E205",
+              "E216",
+              "E247"
+            ],
+            "revision": 0,
+            "answer_move": ""
+          }
+        },
+        "strength_override": null,
+        "origin": "critic",
+        "note": "[uncertainty] The scenario results are PJM-wide. The model aggregates to three regions and excludes transmission outages. High Load and Low Supply changes supply assumptions as well as load (E247), so the threshold failures cannot be attributed to demand growth alone. The uncertainty question stays unresolved, so C35 should remain undecided. (conceded by proposer: C35 should remain undecided on robustness, while retaining its explicit qualification that these are source-reported regional results, not local deliverability findings or demand-only causal effects. Source-specific uncertainty estimates or sensitivity tests demonstrating stable threshold failures, together with reconciliation of the supply assumptions, would answer the concern.)",
         "round": 2,
         "withdrawn": ""
       }
@@ -11740,6 +12253,90 @@
       ],
       "framing_drift": null,
       "directive": "components accepted; compose or extend scope: ['C11', 'C12', 'C13', 'C14', 'C15', 'C16', 'C17', 'C18', 'C19', 'C20', 'C21', 'C23', 'C24', 'C25']; no whole-question answer"
+    },
+    {
+      "round": 2,
+      "established": [
+        "C11: Synapse reports that its Advanced Policy portfolio meets PJM's regional adequacy criterion in 2030, with LOLE of 0.04 days per year; the portfolio includes new gas.",
+        "C12: Synapse reports that its Status Quo portfolio fails PJM's regional adequacy criterion in 2030, with LOLE of 1.6 days per year, despite including new gas.",
+        "C13: Synapse's Status Quo and Advanced Policy scenarios both include new PJM gas generation through 2030; neither is a PJM-wide no-new-dispatchable-generation test.",
+        "C14: PJM's adequacy model excludes internal transmission constraints and substitutes an administrative ties benefit for explicit neighboring-system modeling; it does not establish Northern Virginia deliverability.",
+        "C15: Dominion reports a data-centre coincident peak of 4 GW in its served market in 2025, not a separately identified Northern Virginia baseline.",
+        "C16: Dominion treats construction authorizations as firm load and engineering authorizations as non-firm; energization typically follows equipment ordering by about three years.",
+        "C17: PJM says its firm/non-firm project distinction lowered near-term large-load adjustments versus its prior forecast; near-term projects require firm commitments and longer-term non-firm projects are derated.",
+        "C18: The Pennsylvania adequacy study uses PJM peak adjustments for Reference data-centre load; its High Load case halves utility forecasts and smooths timing. Energy conversion assumes a flat load shape.",
+        "C19: Modo projects 9.7 GW of PJM thermal retirements by 2030; this is not a net reliable-capacity balance.",
+        "C23: PJM reports partial reliability credit for solar, wind, storage and demand resources in its near-term portfolios; nameplate additions are not equivalent firm-capacity additions.",
+        "C24: The Pennsylvania resource-adequacy study permits and selects new gas generation, so its resource expansion is not a PJM-wide no-new-dispatchable scenario.",
+        "C28: Synapse reports that PJM's forecast attributes 30 GW, or 94 percent, of regional peak-demand growth through 2030 to data centres; it does not allocate that growth to Northern Virginia.",
+        "C29: Modo assigns most of its projected final-year load increment to Dominion, labeled Northern Virginia, but provides no quantified local share or defined geographic boundary.",
+        "C30: The Pennsylvania study's No New Data Centers case excludes additions anywhere in PJM from 2027 onward; its flat demand is an imposed counterfactual, not a forecast of no expected local growth.",
+        "C31: PJM procedures make proposed resource service dates conditional on studies and construction; early service can require a delivery-year-specific assessment of deliverable output.",
+        "C32: PJM's demand-response provisions allow on-site generators to reduce load; labeling a resource demand response does not establish that it uses no generation.",
+        "C33: PJM procedures can condition external long-term firm transmission service on affected-system studies and upgrade milestones, with real-time limits before required upgrades are complete."
+      ],
+      "assumed": [
+        "A4:authentic defaulted — The attributed methods passage and table are accepted as authentic excerpts of the named report absent contrary evidence.",
+        "A5:authentic defaulted — The attributed passages are accepted as authentic excerpts of PJM's methods documentation absent contrary evidence.",
+        "A10:uncertainty defaulted — No forecast interval is supplied. For the limited claim about what Modo projects, treat the stated value as a conditional point forecast rather than an assured retirement total.",
+        "A13:uncertainty defaulted — No sensitivity range is supplied. For attribution of this modeled result only, treat it as conditional on the report's upgrade assumptions.",
+        "C11 rests on one origin",
+        "C12 rests on one origin",
+        "C13 rests on one origin",
+        "C14 rests on one origin",
+        "C15 rests on one origin",
+        "C16 rests on one origin",
+        "C17 rests on one origin",
+        "C18 rests on one origin",
+        "C19 rests on one origin",
+        "C24 rests on one origin",
+        "C28 rests on one origin",
+        "C29 rests on one origin",
+        "C30 rests on one origin",
+        "C31 rests on one origin",
+        "C32 rests on one origin",
+        "C33 rests on one origin"
+      ],
+      "load_bearing_node_ids": [
+        "E1",
+        "E18",
+        "E19",
+        "E23",
+        "E24",
+        "E25",
+        "E30",
+        "E31",
+        "E33",
+        "E37",
+        "E38",
+        "E42",
+        "E21",
+        "E27",
+        "E40",
+        "E49",
+        "E52",
+        "E200",
+        "E244",
+        "A3",
+        "A3:design",
+        "A3:directness",
+        "A3:uncertainty",
+        "A3:reported",
+        "A21",
+        "A21:grounds",
+        "A4",
+        "A4:authentic",
+        "A4:accuracy",
+        "A4:reading",
+        "E125",
+        "E126",
+        "A5",
+        "A5:authentic",
+        "A5:accuracy",
+        "A5:reading"
+      ],
+      "framing_drift": null,
+      "directive": "components accepted; compose or extend scope: ['C11', 'C12', 'C13', 'C14', 'C15', 'C16', 'C17', 'C18', 'C19', 'C23', 'C24', 'C28', 'C29', 'C30', 'C31', 'C32', 'C33']; no whole-question answer"
     }
   ],
   "stop_assessments": [
@@ -11758,9 +12355,133 @@
         "T6",
         "T7"
       ]
+    },
+    {
+      "round": 2,
+      "decision": "stop",
+      "reason": "rounds exhausted; components accepted: ['C11', 'C12', 'C13', 'C14', 'C15', 'C16', 'C17', 'C18', 'C19', 'C23', 'C24', 'C28', 'C29', 'C30', 'C31', 'C32', 'C33']; no whole-question answer",
+      "undecided_on_path": [
+        "C35"
+      ],
+      "obtainable": [
+        "T3",
+        "T4",
+        "T5",
+        "T6",
+        "T7",
+        "T8",
+        "T9",
+        "T10",
+        "T11",
+        "T12",
+        "T13",
+        "T14",
+        "T15"
+      ]
     }
   ],
-  "conclusion": null,
+  "conclusion": {
+    "round": 2,
+    "answer": "The evidence gathered does not settle whether PJM can serve Northern Virginia’s projected data-centre growth through 2030 without new dispatchable generation. It points toward adequacy risk under limited-deployment assumptions, rather than an assured yes: Synapse’s Status Quo portfolio fails the regional reliability criterion even with new gas, while its Advanced Policy portfolio meets it but also includes new gas [C11–C13]. Neither result establishes that new dispatchable generation is indispensable, and PJM-wide adequacy does not establish delivery capability into Northern Virginia [C14]. A conditional yes or no therefore requires a source-defined no-new-dispatchable scenario paired with local deliverability results.",
+    "judgements": [
+      {
+        "text": "Synapse’s Advanced Policy portfolio meets the source-reported 0.1-days-per-year loss-of-load-expectation criterion in 2030 at 0.04 days per year, conditional on its adopted demand forecast, accelerated resource deployment, 17% peak reduction from distributed resources and demand response, timely offshore-wind and RRI entry, and economic transmission additions [C11].",
+        "confidence": "moderate",
+        "rests_on": "E42 supplies the modeled result; E18 supplies the criterion; E1, E23–E25 and E30 supply load-bearing scenario assumptions.",
+        "claim_ids": [
+          "C11"
+        ]
+      },
+      {
+        "text": "Synapse’s Status Quo portfolio fails the same regional criterion at 1.6 LOLE days per year in 2030, conditional on limited advanced-energy deployment and approximately 8 GW of demand response [C12].",
+        "confidence": "moderate",
+        "rests_on": "E40 supplies the result, E18 the criterion, and E21 and E27 the deployment and demand-response assumptions.",
+        "claim_ids": [
+          "C12"
+        ]
+      },
+      {
+        "text": "The retrieved Synapse and Pennsylvania study portfolios cannot establish a PJM-wide no-new-dispatchable outcome because both studies permit and select new gas, including 9 GW through 2030 in each Synapse portfolio [C13, C24].",
+        "confidence": "moderate",
+        "rests_on": "E31 and E33 document Synapse’s gas assumptions and builds; E206 and E241 document the Pennsylvania study’s gas selections and permissions.",
+        "claim_ids": [
+          "C13",
+          "C24"
+        ]
+      },
+      {
+        "text": "PJM’s adequacy model alone cannot establish Northern Virginia deliverability because it omits internal transmission constraints and represents neighboring-system support through an administrative ties benefit rather than explicit neighboring-system modeling [C14].",
+        "confidence": "moderate",
+        "rests_on": "E125 and E126 explicitly document these modeling limitations.",
+        "claim_ids": [
+          "C14"
+        ]
+      },
+      {
+        "text": "The accepted load figures are broader than Northern Virginia: Dominion reports a 4 GW coincident data-centre peak in its served market in 2025, while Synapse attributes 30 GW of PJM-wide peak growth through 2030 to data centres without a local allocation [C15, C28].",
+        "confidence": "moderate",
+        "rests_on": "E93 supplies Dominion’s baseline; E10–E12 supply the regional forecast attribution.",
+        "claim_ids": [
+          "C15",
+          "C28"
+        ]
+      },
+      {
+        "text": "Load timing remains conditional on project firmness and energization: Dominion distinguishes firm construction authorizations from non-firm engineering authorizations and reports roughly three years from equipment ordering to energization, while PJM’s revised firmness rules lowered near-term large-load adjustments [C16, C17].",
+        "confidence": "moderate",
+        "rests_on": "E98–E100 document Dominion’s classifications and typical timing; E82–E84 document PJM’s forecast rules and revision direction.",
+        "claim_ids": [
+          "C16",
+          "C17"
+        ]
+      },
+      {
+        "text": "Modo’s projected 9.7 GW of thermal retirements and PJM’s partial reliability accreditation for renewables, storage and demand resources do not establish the net reliable-capacity balance through 2030 [C19, C23].",
+        "confidence": "moderate",
+        "rests_on": "E68 supplies the conditional retirement projection; E149, E151, E152, E155 and E157 supply resource-class accreditation rather than a complete portfolio balance.",
+        "claim_ids": [
+          "C19",
+          "C23"
+        ]
+      },
+      {
+        "text": "Resource service dates and external firm transmission requests should not be treated as assured available capability because PJM conditions them on studies, construction, upgrade milestones and, where applicable, delivery-year-specific limits [C31, C33].",
+        "confidence": "moderate",
+        "rests_on": "E271, E292, E294 and E349 establish resource timing and deliverability conditions; E331–E333 establish external-service conditions.",
+        "claim_ids": [
+          "C31",
+          "C33"
+        ]
+      },
+      {
+        "text": "Demand-response classification does not establish generation-free load flexibility because PJM permits on-site generators to participate by reducing grid load [C32].",
+        "confidence": "moderate",
+        "rests_on": "E324 explicitly documents the on-site-generator participation provision.",
+        "claim_ids": [
+          "C32"
+        ]
+      }
+    ],
+    "what_would_change_this": [
+      "A through-2030 assessment explicitly excluding the source-defined category of new dispatchable generation, while identifying the treatment of already-planned projects, nuclear restarts and uprates, storage, imports and on-site generation, would directly test the main question.",
+      "That assessment showing compliance with the regional 0.1-days-per-year LOLE criterion and applicable Northern Virginia deliverability requirements would support a conditional yes; demonstrated failures under specified resource and project-timing assumptions would support a conditional no for those scenarios.",
+      "A geographically reconciled annual Northern Virginia data-centre forecast, including firm/non-firm splits, energization schedules and operating load shapes, would resolve the load boundary left open by C15–C18, C28 and C29.",
+      "Northern Virginia transfer-limit and contingency results, verified import availability, and dated upgrade schedules would establish whether regional resources can reach the load; dated outputs and a local transfer assessment would also resolve whether any of the modeled 3,345 MW internal transfer increment is available and relevant by 2030 [C14, C34].",
+      "Observed departures from Synapse’s adopted demand, accelerated project advancement, 17% peak-reduction assumption, offshore-wind/RRI timing or transmission assumptions would require reassessing the applicability of its accepted Advanced Policy result [C11]; changes to Status Quo deployment and demand-response assumptions would likewise require reassessing C12.",
+      "Pennsylvania study sampling, convergence and sensitivity results demonstrating stable threshold failures, together with reconciliation of its supply assumptions, would address the unresolved robustness concern for C35."
+    ],
+    "unresolved": [
+      "The main service question has no accepted whole-question claim: neither feasibility nor impossibility without new dispatchable generation is established, including under timely versus delayed critical-project scenarios.",
+      "A quantified Northern Virginia-only growth trajectory and comparable forecast scenarios through 2030 were not retrieved in this inquiry; Dominion-market and PJM-wide quantities cannot substitute for that local series [C15, C18, C28, C29].",
+      "The net reliable-resource and transfer balance without new dispatchable generation remains undecided: retirement projections and partial resource accreditation do not settle whether aggregate capability increases, decreases or stays unchanged [C10, C19, C23].",
+      "The geographic exclusion boundary and treatment of storage, imports, already-planned generation, nuclear restarts/uprates and generation-backed demand response remain to be specified for a directly applicable scenario [C13, C24, C32].",
+      "Northern Virginia CETL and contingency results, emergency and peak import margins, 500 kV and other upgrade in-service dates, and contracted local data-centre flexibility were not retrieved in this inquiry.",
+      "Availability by 2030 and the Northern Virginia contribution of Synapse’s modeled 3,345 MW internal transfer increment remain undecided [C34].",
+      "The robustness of the Pennsylvania study’s reported 2027–2030 regional criterion failures remains undecided, including uncertainty around the threshold and reconciliation of differing supply-assumption passages [C35].",
+      "Critic requests for an integrated local no-new-dispatchable counterfactual remain evidence gaps, not demonstrated local bottlenecks or demonstrated project delays."
+    ],
+    "flags": []
+  },
   "evaluation": {
     "applicable": {
       "A1": false,
@@ -11773,12 +12494,12 @@
       "A8": true,
       "A9": true,
       "A10": true,
-      "A11": true,
-      "A12": true,
+      "A11": false,
+      "A12": false,
       "A13": true,
       "A14": true,
       "A15": true,
-      "A16": true,
+      "A16": false,
       "A17": true,
       "A18": true,
       "A19": true,
@@ -11788,13 +12509,27 @@
       "A23": false,
       "A24": true,
       "A25": true,
-      "A26": true
+      "A26": true,
+      "A27": true,
+      "A28": true,
+      "A29": true,
+      "A30": true,
+      "A31": true
     },
     "inapplicable_reasons": {
       "A1": [
         "withdrawn: claim C26 revised to C27; not carried over: Argue: evidence supports a narrower claim",
         "assumption unsatisfied: assertion",
         "assumption unresolved: basis"
+      ],
+      "A11": [
+        "withdrawn: claim C20 revised to C32; not carried over: Argue: evidence supports a narrower claim"
+      ],
+      "A12": [
+        "withdrawn: claim C21 revised to C31; not carried over: Argue: evidence supports a narrower claim"
+      ],
+      "A16": [
+        "withdrawn: claim C25 revised to C33; not carried over: Argue: evidence supports a narrower claim"
       ],
       "A23": [
         "assumption unresolved: uncertainty"
@@ -11826,7 +12561,12 @@
       "A23": "moderate",
       "A24": "weak",
       "A25": "moderate",
-      "A26": "moderate"
+      "A26": "moderate",
+      "A27": "moderate",
+      "A28": "moderate",
+      "A29": "weak",
+      "A30": "moderate",
+      "A31": "moderate"
     },
     "labels": {
       "A2": "in",
@@ -11838,12 +12578,9 @@
       "A8": "in",
       "A9": "in",
       "A10": "in",
-      "A11": "in",
-      "A12": "in",
       "A13": "out",
       "A14": "in",
       "A15": "in",
-      "A16": "in",
       "A17": "out",
       "A18": "out",
       "A19": "in",
@@ -11852,7 +12589,12 @@
       "A22": "in",
       "A24": "in",
       "A25": "in",
-      "A26": "in"
+      "A26": "in",
+      "A27": "in",
+      "A28": "in",
+      "A29": "in",
+      "A30": "in",
+      "A31": "in"
     },
     "claims": {
       "C1": {
@@ -12104,33 +12846,17 @@
       },
       "C20": {
         "standard": "preponderance",
-        "status": "in",
-        "pro_ids": [
-          "A11"
-        ],
+        "status": "undecided",
+        "pro_ids": [],
         "con_ids": [],
-        "pro_strength": 2,
+        "pro_strength": 0,
         "con_strength": 0,
         "corroborated": false,
-        "met": true,
-        "label": "accepted",
-        "label_reason": "surviving support meets the proof standard"
+        "met": false,
+        "label": "defeated",
+        "label_reason": "all constructed support is out, withdrawn or inapplicable"
       },
       "C21": {
-        "standard": "preponderance",
-        "status": "in",
-        "pro_ids": [
-          "A12"
-        ],
-        "con_ids": [],
-        "pro_strength": 2,
-        "con_strength": 0,
-        "corroborated": false,
-        "met": true,
-        "label": "accepted",
-        "label_reason": "surviving support meets the proof standard"
-      },
-      "C22": {
         "standard": "preponderance",
         "status": "undecided",
         "pro_ids": [],
@@ -12141,6 +12867,18 @@
         "met": false,
         "label": "defeated",
         "label_reason": "all constructed support is out, withdrawn or inapplicable"
+      },
+      "C22": {
+        "standard": "preponderance",
+        "status": "undecided",
+        "pro_ids": [],
+        "con_ids": [],
+        "pro_strength": 0,
+        "con_strength": 0,
+        "corroborated": false,
+        "met": false,
+        "label": "unsupported",
+        "label_reason": "evidence bears on the claim but no supporting argument was built"
       },
       "C23": {
         "standard": "preponderance",
@@ -12172,17 +12910,15 @@
       },
       "C25": {
         "standard": "preponderance",
-        "status": "in",
-        "pro_ids": [
-          "A16"
-        ],
+        "status": "undecided",
+        "pro_ids": [],
         "con_ids": [],
-        "pro_strength": 2,
+        "pro_strength": 0,
         "con_strength": 0,
         "corroborated": false,
-        "met": true,
-        "label": "accepted",
-        "label_reason": "surviving support meets the proof standard"
+        "met": false,
+        "label": "defeated",
+        "label_reason": "all constructed support is out, withdrawn or inapplicable"
       },
       "C26": {
         "standard": "preponderance",
@@ -12205,8 +12941,8 @@
         "con_strength": 0,
         "corroborated": false,
         "met": false,
-        "label": "defeated",
-        "label_reason": "all constructed support is out, withdrawn or inapplicable"
+        "label": "unsupported",
+        "label_reason": "evidence bears on the claim but no supporting argument was built"
       },
       "C28": {
         "standard": "preponderance",
@@ -12249,6 +12985,72 @@
         "met": true,
         "label": "accepted",
         "label_reason": "surviving support meets the proof standard"
+      },
+      "C31": {
+        "standard": "preponderance",
+        "status": "in",
+        "pro_ids": [
+          "A27"
+        ],
+        "con_ids": [],
+        "pro_strength": 2,
+        "con_strength": 0,
+        "corroborated": false,
+        "met": true,
+        "label": "accepted",
+        "label_reason": "surviving support meets the proof standard"
+      },
+      "C32": {
+        "standard": "preponderance",
+        "status": "in",
+        "pro_ids": [
+          "A28"
+        ],
+        "con_ids": [],
+        "pro_strength": 2,
+        "con_strength": 0,
+        "corroborated": false,
+        "met": true,
+        "label": "accepted",
+        "label_reason": "surviving support meets the proof standard"
+      },
+      "C33": {
+        "standard": "preponderance",
+        "status": "in",
+        "pro_ids": [
+          "A29"
+        ],
+        "con_ids": [],
+        "pro_strength": 1,
+        "con_strength": 0,
+        "corroborated": false,
+        "met": true,
+        "label": "accepted",
+        "label_reason": "surviving support meets the proof standard"
+      },
+      "C34": {
+        "standard": "preponderance",
+        "status": "undecided",
+        "pro_ids": [],
+        "con_ids": [],
+        "pro_strength": 0,
+        "con_strength": 0,
+        "corroborated": false,
+        "met": false,
+        "label": "defeated",
+        "label_reason": "all constructed support is out, withdrawn or inapplicable"
+      },
+      "C35": {
+        "standard": "preponderance",
+        "status": "undecided",
+        "pro_ids": [],
+        "con_ids": [],
+        "pro_strength": 0,
+        "con_strength": 0,
+        "corroborated": false,
+        "met": false,
+        "label": "defeated",
+        "label_reason": "all constructed support is out, withdrawn or inapplicable"
       }
     },
     "issues": {
@@ -12261,6 +13063,21 @@
         "code": "inapplicable_argument",
         "node_id": "A1",
         "detail": "withdrawn: claim C26 revised to C27; not carried over: Argue: evidence supports a narrower claim; assumption unsatisfied: assertion; assumption unresolved: basis"
+      },
+      {
+        "code": "inapplicable_argument",
+        "node_id": "A11",
+        "detail": "withdrawn: claim C20 revised to C32; not carried over: Argue: evidence supports a narrower claim"
+      },
+      {
+        "code": "inapplicable_argument",
+        "node_id": "A12",
+        "detail": "withdrawn: claim C21 revised to C31; not carried over: Argue: evidence supports a narrower claim"
+      },
+      {
+        "code": "inapplicable_argument",
+        "node_id": "A16",
+        "detail": "withdrawn: claim C25 revised to C33; not carried over: Argue: evidence supports a narrower claim"
       },
       {
         "code": "inapplicable_argument",
@@ -13134,11 +13951,6 @@
       },
       {
         "code": "orphan_evidence",
-        "node_id": "E247",
-        "detail": "evidence used in no argument"
-      },
-      {
-        "code": "orphan_evidence",
         "node_id": "E248",
         "detail": "evidence used in no argument"
       },
@@ -13249,11 +14061,6 @@
       },
       {
         "code": "orphan_evidence",
-        "node_id": "E271",
-        "detail": "evidence used in no argument"
-      },
-      {
-        "code": "orphan_evidence",
         "node_id": "E272",
         "detail": "evidence used in no argument"
       },
@@ -13354,17 +14161,7 @@
       },
       {
         "code": "orphan_evidence",
-        "node_id": "E292",
-        "detail": "evidence used in no argument"
-      },
-      {
-        "code": "orphan_evidence",
         "node_id": "E293",
-        "detail": "evidence used in no argument"
-      },
-      {
-        "code": "orphan_evidence",
-        "node_id": "E294",
         "detail": "evidence used in no argument"
       },
       {
@@ -13514,11 +14311,6 @@
       },
       {
         "code": "orphan_evidence",
-        "node_id": "E324",
-        "detail": "evidence used in no argument"
-      },
-      {
-        "code": "orphan_evidence",
         "node_id": "E325",
         "detail": "evidence used in no argument"
       },
@@ -13539,27 +14331,7 @@
       },
       {
         "code": "orphan_evidence",
-        "node_id": "E329",
-        "detail": "evidence used in no argument"
-      },
-      {
-        "code": "orphan_evidence",
         "node_id": "E330",
-        "detail": "evidence used in no argument"
-      },
-      {
-        "code": "orphan_evidence",
-        "node_id": "E331",
-        "detail": "evidence used in no argument"
-      },
-      {
-        "code": "orphan_evidence",
-        "node_id": "E332",
-        "detail": "evidence used in no argument"
-      },
-      {
-        "code": "orphan_evidence",
-        "node_id": "E333",
         "detail": "evidence used in no argument"
       },
       {
@@ -13629,17 +14401,7 @@
       },
       {
         "code": "orphan_evidence",
-        "node_id": "E347",
-        "detail": "evidence used in no argument"
-      },
-      {
-        "code": "orphan_evidence",
         "node_id": "E348",
-        "detail": "evidence used in no argument"
-      },
-      {
-        "code": "orphan_evidence",
-        "node_id": "E349",
         "detail": "evidence used in no argument"
       },
       {
@@ -13774,22 +14536,7 @@
       },
       {
         "code": "single_origin",
-        "node_id": "C20",
-        "detail": "accepted on evidence from one origin"
-      },
-      {
-        "code": "single_origin",
-        "node_id": "C21",
-        "detail": "accepted on evidence from one origin"
-      },
-      {
-        "code": "single_origin",
         "node_id": "C24",
-        "detail": "accepted on evidence from one origin"
-      },
-      {
-        "code": "single_origin",
-        "node_id": "C25",
         "detail": "accepted on evidence from one origin"
       },
       {
@@ -13805,6 +14552,21 @@
       {
         "code": "single_origin",
         "node_id": "C30",
+        "detail": "accepted on evidence from one origin"
+      },
+      {
+        "code": "single_origin",
+        "node_id": "C31",
+        "detail": "accepted on evidence from one origin"
+      },
+      {
+        "code": "single_origin",
+        "node_id": "C32",
+        "detail": "accepted on evidence from one origin"
+      },
+      {
+        "code": "single_origin",
+        "node_id": "C33",
         "detail": "accepted on evidence from one origin"
       },
       {
@@ -13833,7 +14595,21 @@
     "cannot_compose ['C14', 'C25']: These findings document limitations in PJM modeling and capacity accounting, but have different populations, comparisons and periods. Neither provides verified Northern Virginia transmission or import capability. They therefore cannot establish either ability or inability to serve the projected local load; an explicit local deliverability analysis is missing.",
     "cannot_compose ['C15', 'C16', 'C17', 'C18']: The baseline, project-firmness rules and forecast assumptions concern different geographic populations, forecast comparisons and, for C15, a different period. They do not supply a common Northern Virginia load-growth trajectory through 2030. A geographic reconciliation and quantified conversion from project commitments and forecast assumptions to coincident local demand are missing, as is a corresponding deliverable-resource balance.",
     "cannot_compose ['C19', 'C20', 'C21', 'C23']: Thermal retirements, assumed demand-side peak reductions, project eligibility and partial reliability accreditation are not interchangeable quantities. They concern different portfolios and periods and cannot be netted into reliable capacity without a shared scenario, accredited contributions, deployment timing and overlap accounting. No such balance establishes Northern Virginia service without new dispatchable generation.",
-    "cannot_compose ['C13', 'C24']: Both findings identify studies that include new gas, but their populations and comparisons differ. Together they identify an untested counterfactual, not an answer to it. A no-new-dispatchable resource-adequacy and local-deliverability test is needed; inclusion or selection of gas does not by itself establish that gas is indispensable or that service without it is feasible."
+    "cannot_compose ['C13', 'C24']: Both findings identify studies that include new gas, but their populations and comparisons differ. Together they identify an untested counterfactual, not an answer to it. A no-new-dispatchable resource-adequacy and local-deliverability test is needed; inclusion or selection of gas does not by itself establish that gas is indispensable or that service without it is feasible.",
+    "revise: narrow C22 -> C34: A19 correctly identifies an unsupported implication of through-2030 availability from placement under Q3. Retain A13 only for attribution of the modeled increment, explicitly restricted to Advanced Policy and its conditional upgrade eligibility. No support is carried for an in-service date or local firm transfer capability.",
+    "critic needs: Retrieve Synapse's dated Advanced Policy transmission-build outputs identifying which upgrades comprise the 3,345 MW increment and their modeled in-service years. Separately retrieve an applicable Northern Virginia transfer-limit or contingency assessment showing any local contribution. Timing and local capability are not established in the supplied excerpts; do not count the increment as available by 2030 pending those records.",
+    "revise: narrow C27 -> C35: The uncertainty finding is material to predictive robustness, but not to whether the report states these results. Carry A23 solely for the explicitly attributed report statement and documented scope; withdraw any inference that its excerpts establish robust threshold failures.",
+    "critic needs: Retrieve the Pennsylvania PUC adequacy report's SERVM sampling and convergence documentation and annual 2027–2030 LOLE results for Reference and High Load and Low Supply, including any reported intervals and sensitivity tests around the 0.1-day criterion. These details are not retrieved in the supplied excerpts; it is not established that the full report omits them.",
+    "critic needs: Synapse or PJM scenario run with PJM-wide new gas and other new dispatchable capacity excluded, reporting 2030 LOLE",
+    "critic needs: PJM Dominion/Northern Virginia LDA CETL and deliverability study for 2028-2030 with the associated RTEP upgrade in-service dates",
+    "critic needs: Dominion or PJM annual Northern Virginia data-centre load trajectory through 2030 by firm and non-firm status",
+    "critic needs: Quantified import capability into Dominion under emergency and peak conditions, beyond the administrative 1.5% CBOT assumption",
+    "cannot_compose ['C11', 'C12', 'C13', 'C24']: The reported portfolios allow and include new gas generation. Their adequacy results therefore do not establish ability or inability to serve the projected load without new dispatchable generation. C11 and C12 also concern different populations and comparisons. A modeled no-new-dispatchable counterfactual, or an explicit supported bridge to that counterfactual, is missing.",
+    "cannot_compose ['C11', 'C12', 'C14']: Regional LOLE results do not establish Northern Virginia deliverability. C14 identifies omitted internal transmission constraints and simplified import modeling, but supplies no quantified local deliverability assessment. These components have different populations and comparisons, and cannot establish the main issue's local service outcome.",
+    "cannot_compose ['C15', 'C16', 'C17', 'C18', 'C28', 'C29', 'C30']: The load findings concern different geographic populations, forecast comparisons and periods. They provide no common quantified Northern Virginia growth trajectory through 2030: Dominion's baseline is not separately local, regional growth is not locally allocated, and Modo's geographic attribution lacks a quantified local share. Firmness rules and imposed scenario boundaries cannot supply the missing local forecast or establish capacity to serve it.",
+    "cannot_compose ['C19', 'C23']: Projected thermal retirements and partial resource-class accreditation do not constitute a net reliable-capacity balance. Their populations, comparisons and periods differ, and thermal GW cannot be balanced against qualitative accreditation findings without quantities and a supported conversion to dependable capacity. Additions, retained resources, imports, demand flexibility and load requirements could determine the balance but are not quantified here.",
+    "cannot_compose ['C31', 'C33']: These procedural findings concern different populations and comparisons: generation interconnection and external transmission service. Conditional service rules do not quantify resources or imports actually deliverable to Northern Virginia by 2030. A project-specific assessment of completion, permitted output and local delivery is missing; the procedures establish neither service feasibility nor infeasibility.",
+    "cannot_compose ['C23', 'C32']: Partial demand-resource accreditation and eligibility of on-site generation do not establish a qualifying no-new-dispatchable supply contribution. The populations, comparisons and periods differ, and no quantified portfolio identifies which demand-response resources avoid new dispatchable generation. Treating all demand response as generation-free would invent the missing classification and capacity bridge."
   ],
   "llm_usage": [
     {
@@ -15565,6 +16341,56 @@
       "cached_input_tokens": 1833,
       "cache_write_input_tokens": 12085,
       "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 19632,
+      "output_tokens": 2944,
+      "cached_input_tokens": 1833,
+      "cache_write_input_tokens": 17796,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 75491,
+      "output_tokens": 2207,
+      "cached_input_tokens": 1582,
+      "cache_write_input_tokens": 73906,
+      "role": "proposer"
+    },
+    {
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "input_tokens": 137892,
+      "output_tokens": 558,
+      "cache_creation_input_tokens": 1659,
+      "role": "critic"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 68252,
+      "output_tokens": 403,
+      "cache_write_input_tokens": 68249,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5486,
+      "output_tokens": 649,
+      "cache_write_input_tokens": 5483,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 79728,
+      "output_tokens": 1861,
+      "cache_write_input_tokens": 79725,
+      "role": "proposer"
     }
   ],
   "llm_config": {
@@ -15580,11 +16406,14 @@
     }
   },
   "counter_drops": [],
-  "claim_reasons": {},
+  "claim_reasons": {
+    "C10": "No supplied item establishes an unchanged aggregate reliable resource and transfer balance through 2030; retirement rules, changing class ratings and interconnection procedures do not determine that net balance."
+  },
   "response_dispositions": {
     "A17": "counter",
     "A18": "counter",
-    "A19": "concede"
+    "A19": "concede",
+    "A31": "concede"
   },
   "discharge_attempts": [
     {
@@ -15602,6 +16431,31 @@
       "attempt": "Checked the reported transfer increment, technology definition, and modeled construction eligibility for evidence of completion by 2030 or allocation to Northern Virginia; also checked the other transmission evidence for an applicable timing or deliverability assessment.",
       "no_answer_reason": "E36 reports only an aggregate modeled internal transfer increment, and E30 supplies an earliest eligibility year conditional on economics, not completion dates. E9 defines technologies, E60 identifies a deliverability measure without local values, and E172 and E178 concern later-horizon interchange scenarios. E205 supplies modeling topology rather than a project schedule. Neither these items nor the remaining evidence establishes that the 3,345 MW is available by 2030 or deliverable to Northern Virginia.",
       "round": 1
+    },
+    {
+      "attack_id": "A31",
+      "cq_id": "uncertainty",
+      "checked_evidence_ids": [
+        "E181",
+        "E182",
+        "E184",
+        "E201",
+        "E205",
+        "E216",
+        "E217",
+        "E218",
+        "E237",
+        "E242",
+        "E243",
+        "E244",
+        "E247",
+        "E250",
+        "E252",
+        "E38"
+      ],
+      "attempt": "Checked the reported LOLE estimates and criterion, model scope, scenario definitions, supply-development sensitivities, and project-timing assumptions for uncertainty bounds or evidence that the threshold failures are robust; also checked the uncertainty analysis reported for the separate Synapse study.",
+      "no_answer_reason": "The report supplies conditional point estimates and scenario assumptions, but the listed evidence provides no uncertainty bounds or robustness analysis establishing that the modeled failures remain above the criterion under relevant uncertainty. E201 and E247 also leave conflicting descriptions of the through-2030 supply assumptions unresolved. E38 describes uncertainty modeling in a different study and cannot establish uncertainty for these results. The remaining evidence documents inputs, resource contributions, or modeling limitations rather than answering this uncertainty question.",
+      "round": 2
     }
   ],
   "candidates": [],

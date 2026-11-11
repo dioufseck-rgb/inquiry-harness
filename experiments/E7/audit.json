@@ -70,16 +70,16 @@
         "closure_matches_graph": true,
         "no_live_retrieval": true,
         "no_opus": true,
-        "scope_fields_nonempty": true
+        "scope_fields_nonempty": true,
+        "continuation_skips_appraisal": true,
+        "continuation_no_retrieval": true,
+        "continuation_stays_in_round_two": true
       },
       "all_integrity_checks_pass": true,
       "rounds": 2,
-      "rounds_completed": 1,
-      "phase": "inquiring",
-      "error": {
-        "type": "BudgetExceeded",
-        "message": "openai budget would exceed $8.00; no request sent"
-      },
+      "rounds_completed": 2,
+      "phase": "concluded",
+      "error": null,
       "composed_claims": 0,
       "composition_accepted": 0,
       "whole_question_answered": false
@@ -91,8 +91,8 @@
     "pending_calls": 0
   },
   "spent": {
-    "anthropic": 1.6086605,
-    "openai": 7.6427878999999965
+    "anthropic": 1.894172,
+    "openai": 8.336696899999994
   },
-  "calls": 291
+  "calls": 297
 }

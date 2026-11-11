@@ -1,5 +1,5 @@
 {
-  "status": "energy_checkpoint_continuation_authorized",
+  "status": "completed_after_energy_continuation",
   "prepared_from_commit": "b2bcb4b3b903c87a7bc61e6d7f678799c834de1e",
   "budget_limits_usd": {
     "anthropic": 12,
@@ -295,24 +295,24 @@
   "energy_result": {
     "metrics_path": "experiments/E7-energy/sol/metrics.json",
     "rounds_entered": 2,
-    "rounds_completed": 1,
+    "rounds_completed": 2,
     "whole_question_answered": false,
     "composed_claims": 0,
-    "error": {
-      "type": "BudgetExceeded",
-      "message": "openai budget would exceed $8.00; no request sent"
-    }
+    "error": null,
+    "budget_stop_archive": "experiments/E7-energy/sol/budget-stop",
+    "additional_api_calls": 6,
+    "additional_cost_usd": 0.9794205
   },
   "final_validation": {
-    "tests_passed": 166,
+    "tests_passed": 168,
     "all_integrity_checks_pass": true,
     "spent_usd": {
-      "anthropic": 1.6086605,
-      "openai": 7.6427878999999965
+      "anthropic": 1.894172,
+      "openai": 8.336696899999994
     },
-    "api_calls": 291,
+    "api_calls": 297,
     "pending_calls": 0,
-    "within_caps": true,
+    "within_revised_guards": true,
     "opus_used": false,
     "live_retrieval": false,
     "held_out_questions": 0

@@ -11,7 +11,7 @@
   "origins": 13,
   "duplicate_sources": 1,
   "evidence": 365,
-  "orphans": 291,
+  "orphans": 280,
   "supporting_args": 20,
   "supporting_in": 18,
   "claims_supported_unargued": 0,
@@ -21,21 +21,21 @@
     "C16",
     "C17",
     "C18",
-    "C20",
     "C23",
-    "C25",
-    "C27",
     "C28",
     "C29",
-    "C30"
+    "C30",
+    "C31",
+    "C33",
+    "C35"
   ],
   "main_supporting_in": 0,
   "main_component_supporting_in": 5,
   "undecided_empty": true,
   "undecided_supported": false,
-  "attacks": 5,
+  "attacks": 7,
   "attacks_out": 2,
-  "attacks_discharged": 0,
+  "attacks_discharged": 1,
   "counters_dropped": 0,
   "counters_dropped_reasons": {},
   "counters_inapplicable": 0,
@@ -47,14 +47,14 @@
     "C12": "in",
     "C13": "in",
     "C14": "in",
-    "C27": "undecided"
+    "C35": "undecided"
   },
   "main_labels": {
     "C11": "accepted",
     "C12": "accepted",
     "C13": "accepted",
     "C14": "accepted",
-    "C27": "defeated"
+    "C35": "defeated"
   },
   "absence_assertions": 0,
   "provider_proposer": "openai",
@@ -63,17 +63,17 @@
   "model_critic": "claude-sonnet-5-5",
   "effort_proposer": "medium",
   "effort_critic": "medium",
-  "tokens_in": 1889757,
-  "tokens_out": 141411,
-  "calls": 215,
-  "stop_reason": "compose or extend the accepted components; components accepted: ['C11', 'C12', 'C13', 'C14', 'C15', 'C16', 'C17', 'C18', 'C19', 'C20', 'C21', 'C23', 'C24', 'C25']; no whole-question answer",
+  "tokens_in": 2277897,
+  "tokens_out": 150033,
+  "calls": 221,
+  "stop_reason": "rounds exhausted; components accepted: ['C11', 'C12', 'C13', 'C14', 'C15', 'C16', 'C17', 'C18', 'C19', 'C23', 'C24', 'C28', 'C29', 'C30', 'C31', 'C32', 'C33']; no whole-question answer",
   "reopened_cqs": 0,
   "reopened_cqs_active": 0,
   "reopened_then_discharged": 0,
-  "supporting_original": 0,
-  "supporting_scoped": 20,
-  "applicable_original": 0,
-  "applicable_scoped": 19,
+  "supporting_original": 2,
+  "supporting_scoped": 18,
+  "applicable_original": 1,
+  "applicable_scoped": 18,
   "main_supporting_in_original": 0,
   "gold_sources_found": 1,
   "gold_sources_total": 5,
@@ -90,11 +90,8 @@
   ],
   "shape_expected": "undecided",
   "shape_match": false,
-  "error": {
-    "type": "BudgetExceeded",
-    "message": "openai budget would exceed $8.00; no request sent"
-  },
-  "seconds": 2495.84,
+  "error": null,
+  "seconds": 3032.34,
   "packet_sources": 16,
   "packet_path": "runs\\bench\\energy-pjm-tonight-openai-t7",
   "packet_sha256": "d19b04be7a0eae6f6eb94b76d93d31ce63aa32971577fe91cd0aa8e78ccb11be",
@@ -110,18 +107,18 @@
     "budget_ledger": "runs\\tonight-3\\budget.json",
     "budget_limits": {
       "anthropic": 12,
-      "openai": 8
+      "openai": 12
     },
     "capped_compose_pass": 1
   },
-  "implementation_commit": "01bc1007fe5bfe0c6943f266f1124b94d0a25237",
+  "implementation_commit": "731159f29807de4120a70bc6fb6ab8f0714ab0fc",
   "runner_sha256": "b27682a18df200145cec45f2d51a58e20a06a745bf872515f7f26d5183e484c4",
   "cost_by_provider": {
-    "anthropic": 0.2208875,
-    "openai": 5.8253651
+    "anthropic": 0.5063989999999999,
+    "openai": 6.5192741
   },
-  "cost_usd": 6.0462526,
-  "api_calls": 215,
+  "cost_usd": 7.0256731,
+  "api_calls": 221,
   "references_valid": true,
   "ledger_valid": true,
   "search_queries": 12,
@@ -195,16 +192,6 @@
       "issue_id": "Q3"
     },
     {
-      "id": "C20",
-      "text": "Synapse assumes about 31 GW of peak reduction from DERs and flexibility in Advanced Policy in 2030, versus about 8 GW of demand response in Status Quo.",
-      "issue_id": "Q3"
-    },
-    {
-      "id": "C21",
-      "text": "Synapse makes under-construction resources and most engineering-stage resources eligible by 2030 if economic; Advanced Policy doubles historical active-project advancement rates.",
-      "issue_id": "Q3"
-    },
-    {
       "id": "C23",
       "text": "PJM reports partial reliability credit for solar, wind, storage and demand resources in its near-term portfolios; nameplate additions are not equivalent firm-capacity additions.",
       "issue_id": "Q3"
@@ -212,11 +199,6 @@
     {
       "id": "C24",
       "text": "The Pennsylvania resource-adequacy study permits and selects new gas generation, so its resource expansion is not a PJM-wide no-new-dispatchable scenario.",
-      "issue_id": "Q3"
-    },
-    {
-      "id": "C25",
-      "text": "PJM's planning study includes demand resources and assumed external firm capacity trades; its ties benefit is an administrative assumption, not verified Northern Virginia import capability.",
       "issue_id": "Q3"
     },
     {
@@ -233,6 +215,21 @@
       "id": "C30",
       "text": "The Pennsylvania study's No New Data Centers case excludes additions anywhere in PJM from 2027 onward; its flat demand is an imposed counterfactual, not a forecast of no expected local growth.",
       "issue_id": "Q2"
+    },
+    {
+      "id": "C31",
+      "text": "PJM procedures make proposed resource service dates conditional on studies and construction; early service can require a delivery-year-specific assessment of deliverable output.",
+      "issue_id": "Q3"
+    },
+    {
+      "id": "C32",
+      "text": "PJM's demand-response provisions allow on-site generators to reduce load; labeling a resource demand response does not establish that it uses no generation.",
+      "issue_id": "Q3"
+    },
+    {
+      "id": "C33",
+      "text": "PJM procedures can condition external long-term firm transmission service on affected-system studies and upgrade milestones, with real-time limits before required upgrades are complete.",
+      "issue_id": "Q3"
     }
   ],
   "main_load_bearing": {},
@@ -242,8 +239,43 @@
     "cannot_compose ['C14', 'C25']: These findings document limitations in PJM modeling and capacity accounting, but have different populations, comparisons and periods. Neither provides verified Northern Virginia transmission or import capability. They therefore cannot establish either ability or inability to serve the projected local load; an explicit local deliverability analysis is missing.",
     "cannot_compose ['C15', 'C16', 'C17', 'C18']: The baseline, project-firmness rules and forecast assumptions concern different geographic populations, forecast comparisons and, for C15, a different period. They do not supply a common Northern Virginia load-growth trajectory through 2030. A geographic reconciliation and quantified conversion from project commitments and forecast assumptions to coincident local demand are missing, as is a corresponding deliverable-resource balance.",
     "cannot_compose ['C19', 'C20', 'C21', 'C23']: Thermal retirements, assumed demand-side peak reductions, project eligibility and partial reliability accreditation are not interchangeable quantities. They concern different portfolios and periods and cannot be netted into reliable capacity without a shared scenario, accredited contributions, deployment timing and overlap accounting. No such balance establishes Northern Virginia service without new dispatchable generation.",
-    "cannot_compose ['C13', 'C24']: Both findings identify studies that include new gas, but their populations and comparisons differ. Together they identify an untested counterfactual, not an answer to it. A no-new-dispatchable resource-adequacy and local-deliverability test is needed; inclusion or selection of gas does not by itself establish that gas is indispensable or that service without it is feasible."
+    "cannot_compose ['C13', 'C24']: Both findings identify studies that include new gas, but their populations and comparisons differ. Together they identify an untested counterfactual, not an answer to it. A no-new-dispatchable resource-adequacy and local-deliverability test is needed; inclusion or selection of gas does not by itself establish that gas is indispensable or that service without it is feasible.",
+    "cannot_compose ['C11', 'C12', 'C13', 'C24']: The reported portfolios allow and include new gas generation. Their adequacy results therefore do not establish ability or inability to serve the projected load without new dispatchable generation. C11 and C12 also concern different populations and comparisons. A modeled no-new-dispatchable counterfactual, or an explicit supported bridge to that counterfactual, is missing.",
+    "cannot_compose ['C11', 'C12', 'C14']: Regional LOLE results do not establish Northern Virginia deliverability. C14 identifies omitted internal transmission constraints and simplified import modeling, but supplies no quantified local deliverability assessment. These components have different populations and comparisons, and cannot establish the main issue's local service outcome.",
+    "cannot_compose ['C15', 'C16', 'C17', 'C18', 'C28', 'C29', 'C30']: The load findings concern different geographic populations, forecast comparisons and periods. They provide no common quantified Northern Virginia growth trajectory through 2030: Dominion's baseline is not separately local, regional growth is not locally allocated, and Modo's geographic attribution lacks a quantified local share. Firmness rules and imposed scenario boundaries cannot supply the missing local forecast or establish capacity to serve it.",
+    "cannot_compose ['C19', 'C23']: Projected thermal retirements and partial resource-class accreditation do not constitute a net reliable-capacity balance. Their populations, comparisons and periods differ, and thermal GW cannot be balanced against qualitative accreditation findings without quantities and a supported conversion to dependable capacity. Additions, retained resources, imports, demand flexibility and load requirements could determine the balance but are not quantified here.",
+    "cannot_compose ['C31', 'C33']: These procedural findings concern different populations and comparisons: generation interconnection and external transmission service. Conditional service rules do not quantify resources or imports actually deliverable to Northern Virginia by 2030. A project-specific assessment of completion, permitted output and local delivery is missing; the procedures establish neither service feasibility nor infeasibility.",
+    "cannot_compose ['C23', 'C32']: Partial demand-resource accreditation and eligibility of on-site generation do not establish a qualifying no-new-dispatchable supply contribution. The populations, comparisons and periods differ, and no quantified portfolio identifies which demand-response resources avoid new dispatchable generation. Treating all demand response as generation-free would invent the missing classification and capacity bridge."
   ],
   "single_origin_flag_missing": [],
-  "pass": false
+  "pass": false,
+  "shape_match_regex": false,
+  "shape_match_judge": null,
+  "continuations": [
+    {
+      "user_authorization": "cap is flexible",
+      "budget_limits": {
+        "anthropic": 12,
+        "openai": 12
+      },
+      "checkpoint": "experiments\\E7-energy\\sol\\budget-stop",
+      "completed_argue_issues": [
+        "Q1",
+        "Q2"
+      ],
+      "remaining_argue_issues": [
+        "Q3"
+      ],
+      "prior_error": {
+        "type": "BudgetExceeded",
+        "message": "openai budget would exceed $8.00; no request sent"
+      },
+      "implementation_commit": "731159f29807de4120a70bc6fb6ab8f0714ab0fc",
+      "runner_sha256": "0ea89821713a30f0e25207e7320114187cc3a917abaf770459e035734c342036",
+      "seconds": 536.5,
+      "additional_api_calls": 6,
+      "additional_search_queries": 0,
+      "additional_fetches": 0
+    }
+  ]
 }

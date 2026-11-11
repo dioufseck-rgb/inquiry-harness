@@ -58,11 +58,16 @@ def render():
     manifest_path = Path("experiments/E7/manifest.json")
     manifest = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.exists() else {}
     approved = bool(manifest.get("authorization"))
+    budget_description = "Shared TONIGHT-3 caps include C3: $12 Anthropic and $8 OpenAI."
+    if manifest.get("budget_extension"):
+        budget_description = ("Initial TONIGHT-3 budget targets, including C3, were $12 Anthropic and $8 OpenAI. "
+                              "The user later made the cap flexible to finish the saved Energy checkpoint; "
+                              "its continuation uses $12 Anthropic / $12 OpenAI guards and preserves shared accounting.")
     scope_results = {name: json.loads(path.read_text(encoding="utf-8")) for name in ("sonnet", "sol")
                      if (path := Path("experiments/C3") / f"{name}.json").exists()}
     lines = ["# E7: whole-question closure on the fixed aspirin packet", "",
              ("Status: authorized; fixed-packet runs in progress." if approved else "Status: awaiting explicit approval for external model payloads.") if pending else "Status: both fixed-packet runs recorded.", "",
-             "The planned runs use `runs/bench/health-aspirin-20261110-0209`, two rounds, at most one final composition review, opposite-provider critics and medium effort. Shared TONIGHT-3 caps include C3: $12 Anthropic and $8 OpenAI. No live retrieval, held-out question or Opus call is configured. Pricing uses the existing local snapshot, so costs are estimates.", "",
+             "The planned runs use `runs/bench/health-aspirin-20261110-0209`, two rounds, at most one final composition review, opposite-provider critics and medium effort. " + budget_description + " No live retrieval, held-out question or Opus call is configured. Pricing uses the existing local snapshot, so costs are estimates.", "",
              "Predictions, recorded before calls: neither provider stops in round one; bleeding, mortality and nonfatal-event components are accepted; a main-issue composition at ASPREE's community-dwelling 70+ population and approximately five-year follow-up survives review. Expected direction is net harm, with code-satisfied same_scope, an answered commensurable CQ, and an explicit untested 60–69 gap. Expected whole_question_answered=true and absence_assertions=0. These predictions are not acceptance criteria enforced on model replies.", "",
              "E6 costs and native metrics remain historical. The accepted-answer and whole-question rows apply the new closure rule to the saved graph; they do not claim an E6 rerun.", "",
              "| Metric | " + " | ".join(name for name, _ in runs) + " |", "|---|" + "---|" * len(runs)]
@@ -128,14 +133,22 @@ def render():
         if m["error"]:
             lines += ["", "This optional run is incomplete. The shared OpenAI preflight refused the next request during round-two Argue because its reservation would exceed the $8 cap; no rejected request was sent. Round two reached Gather and Compute and partially applied Argue, but did not complete Revise, Critique, Respond, Compose or Conclude. The first-round missing-link explanations are retained; a completed two-round negative result is not claimed.",
                       "", "Last stop assessment (continue): " + m["stop_reason"]]
-            lines += ["", "The partial graph labels the main scope untested; the pre-run prediction specified unsupported. This difference is retained."]
         else:
             lines += ["", "Stop: " + m["stop_reason"]]
+        if m["main_issue_scope_label"] != "unsupported":
+            lines += ["", f"The recorded requested-scope label is {m['main_issue_scope_label']}; the pre-run prediction specified unsupported. This difference is retained."]
+        if m.get("continuations"):
+            continuation = m["continuations"][-1]
+            lines += ["", f"The earlier budget-stop snapshot is preserved at `{continuation['checkpoint']}`. "
+                      f"After the user's 'cap is flexible' instruction, the same round-two checkpoint continued from Q3 Argue, "
+                      f"retaining Q1/Q2's applied replies. Additional API requests: {continuation['additional_api_calls']}; "
+                      f"additional searches/fetches: {continuation['additional_search_queries']}/{continuation['additional_fetches']}. "
+                      "No Frame, Plan, Gather or Compute was replayed, and no third round was run."]
         lines += ["", "Composition attempts: " + (" ".join(m.get("cannot_compose", [])) or "no cannot_compose explanation recorded")]
         chain = [c for c in inq.graph.live_claims() if inq.evaluation.status(c.id) == "in"
                  and any(word in c.text.casefold() for word in ("gas", "lole", "northern virginia"))]
         if chain:
-            lines += ["", "Accepted component chain retained in the partial graph:", "",
+            lines += ["", "Accepted component chain retained in the saved graph:", "",
                       "| Component | Finding | Supporting route |", "|---|---|---|"]
             for claim in chain:
                 supports = [a for a in inq.graph.arguments_for(claim.id) if inq.evaluation.labels.get(a.id) == "in"]

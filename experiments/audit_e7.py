@@ -47,6 +47,13 @@ def audit():
                   "no_live_retrieval": not m["config"]["live_retrieval"],
                   "no_opus": all("opus" not in m["config"][role].casefold() for role in ("proposer", "critic")),
                   "scope_fields_nonempty": all(c.scope.population and c.scope.outcome and c.scope.period for c in inq.graph.claims)}
+        if m.get("continuations"):
+            continuations = m["continuations"]
+            resume_index = max(i for i, event in enumerate(events) if event["move"] == "budget_resume")
+            resumed_moves = {event["move"] for event in events[resume_index + 1:]}
+            checks["continuation_skips_appraisal"] = not resumed_moves & {"frame", "hypothesize", "plan", "gather", "compute"}
+            checks["continuation_no_retrieval"] = all(c["additional_search_queries"] == c["additional_fetches"] == 0 for c in continuations)
+            checks["continuation_stays_in_round_two"] = all(event["round"] == 2 for event in events[resume_index:])
         results.append({"name": plan["name"], "status": "recorded", "checks": checks,
                         "all_integrity_checks_pass": all(checks.values()), "rounds": inq.round,
                         "rounds_completed": len({s.round for s in inq.stop_assessments if s.round > 0}),
