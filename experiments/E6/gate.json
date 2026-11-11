@@ -1,11 +1,11 @@
 {
-  "status": "not_run",
-  "e1_pass": false,
+  "status": "completed",
+  "e1_pass": true,
   "e2_pass": true,
-  "full_run_allowed": false,
-  "reason": "E1 raw specificity gate failed on one Sonnet aspirin sample; both E1 and E2 are required.",
-  "sonnet_full_run": "not_run",
-  "sol_full_run": "not_run",
+  "full_run_allowed": true,
+  "reason": "N4 guard-based E1 rule and E2 pass; N2/E3.1 recorded and N3 committed; explicit user steering authorizes provisional agent review. E3.1 unmet count criterion remains reported.",
+  "sonnet_full_run": "completed_fail",
+  "sol_full_run": "completed_fail",
   "opus_full_run": "not_run",
   "opus_condition": "Sonnet must first pass its E6 full run",
   "anthropic_opus_reserve_usd": 20,
@@ -18,5 +18,26 @@
     "undecided_empty",
     "undecided_supported"
   ],
-  "validation": "125 local tests passed, including empty, supported, withdrawn and component-only main-answer cases"
+  "validation": "139 local tests passed before N4; both full runs completed without API or structural errors",
+  "e1_pass_basis": "retained claims under guard, per TONIGHT-2 N4",
+  "e1_raw_fail_rate": 0.08333333333333333,
+  "n1_review_recorded": true,
+  "review_kind": "agent_provisional_user_authorized",
+  "human_review_completed": false,
+  "human_review_file_preserved_blank": true,
+  "autonomous_override": "i will be asleep. i need tou to move forward",
+  "n2_committed": true,
+  "n2_commit": "d03690c",
+  "E3_1_recorded": true,
+  "E3_1_pass": false,
+  "E3_1_overlap_rate": null,
+  "n3_committed": true,
+  "n3_commit": "20a225a",
+  "operational_budget_usd": {
+    "anthropic": 16,
+    "openai": 10
+  },
+  "protected_opus_reserve_usd": 20,
+  "budget_ledger": "runs/tonight-2/budget.json",
+  "fixed_packet": "runs/bench/health-aspirin-20261110-0209"
 }

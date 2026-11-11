@@ -1,0 +1,188 @@
+{
+  "id": "sonnet",
+  "rounds": 2,
+  "sources": 5,
+  "origins": 5,
+  "duplicate_sources": 0,
+  "evidence": 50,
+  "orphans": 16,
+  "supporting_args": 15,
+  "supporting_in": 6,
+  "claims_supported_unargued": 0,
+  "coverage_eligible_claims": [
+    "C11",
+    "C13",
+    "C23"
+  ],
+  "main_supporting_in": 0,
+  "main_component_supporting_in": 0,
+  "undecided_empty": true,
+  "undecided_supported": false,
+  "attacks": 3,
+  "attacks_out": 0,
+  "attacks_discharged": 0,
+  "counters_dropped": 0,
+  "counters_dropped_reasons": {},
+  "counters_inapplicable": 0,
+  "counters_inapplicable_reasons": {},
+  "accepted_claims": 2,
+  "single_origin_accepts": 2,
+  "main_status": {
+    "C2": "undecided",
+    "C4": "undecided",
+    "C24": "undecided",
+    "C27": "undecided"
+  },
+  "absence_assertions": 1,
+  "provider_proposer": "anthropic",
+  "provider_critic": "openai",
+  "model_proposer": "claude-sonnet-5-5",
+  "model_critic": "gpt-6.1-sol",
+  "effort_proposer": "medium",
+  "effort_critic": "medium",
+  "tokens_in": 459887,
+  "tokens_out": 51034,
+  "calls": 36,
+  "stop_reason": "rounds exhausted",
+  "reopened_cqs": 3,
+  "reopened_cqs_active": 3,
+  "reopened_then_discharged": 0,
+  "supporting_original": 13,
+  "supporting_scoped": 2,
+  "applicable_original": 4,
+  "applicable_scoped": 2,
+  "main_supporting_in_original": 0,
+  "gold_sources_found": 1,
+  "gold_sources_total": 5,
+  "gold_sources_missing": [
+    "ASPREE",
+    "ARRIVE",
+    "ASCEND",
+    "JAMA"
+  ],
+  "gold_facts_found": 3,
+  "gold_facts_total": 3,
+  "gold_facts_missing": [],
+  "shape_expected": "accepted:grade D|recommends? against|not recommend|no net benefit|increases net.*harm|net harm|increased major h(a|e)morrhage|should not be initiated",
+  "shape_match": false,
+  "shape_match_regex": false,
+  "shape_match_judge": null,
+  "error": null,
+  "seconds": 400.36,
+  "packet_sources": 5,
+  "packet_path": "runs\\bench\\health-aspirin-20261110-0209",
+  "packet_sha256": "83e5c3df57f9321be05aea565026f5b8f9b73b61fb375b2d55e6a4abf0f74801",
+  "config": {
+    "rounds": 2,
+    "frame_samples": 1,
+    "review_frame": false,
+    "live_retrieval": false,
+    "proposer": "anthropic:claude-sonnet-5-5",
+    "critic": "openai:gpt-6.1-sol",
+    "effort": "medium"
+  },
+  "implementation_commit": "20a225acaa311f833eaab2a637b80ed242549d52",
+  "runner_sha256": "52ef1729a69cdcf3697b73268488a90ab82ee95940959742115b12de9018b5c4",
+  "cost_by_provider": {
+    "anthropic": 1.2433867,
+    "openai": 0.1252173
+  },
+  "cost_usd": 1.3686040000000002,
+  "api_calls": 36,
+  "references_valid": true,
+  "ledger_valid": true,
+  "search_queries": 7,
+  "fetched_urls": [
+    "https://digitalcommons.library.tmc.edu/uthmed_docs/372/",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC7936068/",
+    "https://www.healthpartners.com/knowledgeexchange/display/document-rn11758",
+    "https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/aspirin-to-prevent-cardiovascular-disease-preventive-medication",
+    "https://www.aafp.org/afp/2019/0601/p670"
+  ],
+  "accepted_main_claims": [],
+  "accepted_components": [
+    {
+      "id": "C13",
+      "text": "USPSTF recommends against initiating low-dose aspirin for primary prevention in adults 60 and over, judging harms to outweigh or equal benefits.",
+      "issue_id": "Q5"
+    },
+    {
+      "id": "C17",
+      "text": "As cited by the USPSTF, ACC/AHA advises against routine low-dose aspirin for primary prevention in adults over 70 and in adults at increased bleeding risk.",
+      "issue_id": "Q5"
+    }
+  ],
+  "main_load_bearing": {
+    "C2": [
+      {
+        "node_id": "E31",
+        "kind": "evidence",
+        "detail": "The USPSTF microsimulation found that initiating aspirin at 60-69 gives QALYs fr",
+        "effect": "out",
+        "claim_id": "C2"
+      },
+      {
+        "node_id": "A16",
+        "kind": "argument",
+        "detail": "attack -> A1",
+        "effect": "out",
+        "claim_id": "C2"
+      },
+      {
+        "node_id": "A16:grounds",
+        "kind": "cq_answer",
+        "detail": "Are the grounds for the attack themselves evidenced?",
+        "effect": "out",
+        "claim_id": "C2"
+      }
+    ],
+    "C4": [
+      {
+        "node_id": "E31",
+        "kind": "evidence",
+        "detail": "The USPSTF microsimulation found that initiating aspirin at 60-69 gives QALYs fr",
+        "effect": "out",
+        "claim_id": "C4"
+      },
+      {
+        "node_id": "A16",
+        "kind": "argument",
+        "detail": "attack -> A1",
+        "effect": "out",
+        "claim_id": "C4"
+      },
+      {
+        "node_id": "A16:grounds",
+        "kind": "cq_answer",
+        "detail": "Are the grounds for the attack themselves evidenced?",
+        "effect": "out",
+        "claim_id": "C4"
+      }
+    ],
+    "C27": [
+      {
+        "node_id": "E31",
+        "kind": "evidence",
+        "detail": "The USPSTF microsimulation found that initiating aspirin at 60-69 gives QALYs fr",
+        "effect": "in",
+        "claim_id": "C27"
+      },
+      {
+        "node_id": "A16",
+        "kind": "argument",
+        "detail": "attack -> A1",
+        "effect": "in",
+        "claim_id": "C27"
+      },
+      {
+        "node_id": "A16:grounds",
+        "kind": "cq_answer",
+        "detail": "Are the grounds for the attack themselves evidenced?",
+        "effect": "in",
+        "claim_id": "C27"
+      }
+    ]
+  },
+  "single_origin_flag_missing": [],
+  "pass": false
+}

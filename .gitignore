@@ -11,3 +11,7 @@ experiments/**/mapping-template.json
 experiments/_baseline/
 experiments/budget.json
 experiments/budget.lock
+experiments/E6/**/run/
+experiments/E6/**/*-responses.json
+experiments/E6-generalisation/**/run/
+experiments/E6-generalisation/**/*-responses.json
