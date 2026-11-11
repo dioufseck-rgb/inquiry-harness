@@ -54,8 +54,18 @@ class LLM:
 
     def _usage(self, response: Any) -> None:
         usage = response.usage
-        self.usage.append({"provider": self.provider, "model": self.model,
-                           "input_tokens": usage.input_tokens, "output_tokens": usage.output_tokens})
+        entry = {"provider": self.provider, "model": self.model,
+                 "input_tokens": usage.input_tokens, "output_tokens": usage.output_tokens}
+        for field in ("cache_creation_input_tokens", "cache_read_input_tokens"):
+            value = getattr(usage, field, 0) or 0
+            if value:
+                entry[field] = value
+        details = getattr(usage, "input_tokens_details", None)
+        for source, target in (("cached_tokens", "cached_input_tokens"), ("cache_write_tokens", "cache_write_input_tokens")):
+            value = getattr(details, source, 0) or 0
+            if value:
+                entry[target] = value
+        self.usage.append(entry)
 
     def complete(self, system: str, user: str, max_tokens: int = 16000) -> str:  # pragma: no cover
         raise NotImplementedError

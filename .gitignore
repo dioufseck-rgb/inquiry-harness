@@ -5,3 +5,9 @@ runs/
 .env
 *.egg-info/
 .claude/
+experiments/**/sample-*/
+experiments/**/pre-move.json
+experiments/**/mapping-template.json
+experiments/_baseline/
+experiments/budget.json
+experiments/budget.lock

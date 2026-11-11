@@ -1,0 +1,23 @@
+{
+  "as_of": "2026-11-10",
+  "currency": "USD",
+  "units": "per million tokens; standard non-batch API estimates",
+  "models": {
+    "openai:gpt-6.1-sol": {
+      "input": 2.0, "cached_input": 0.1, "cache_write": 2.5, "output": 10.0,
+      "input_includes_cache": true, "long_above_tokens": 272000,
+      "long": {"input": 4.0, "cached_input": 0.2, "cache_write": 5.0, "output": 15.0},
+      "source": "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
+    },
+    "anthropic:claude-sonnet-5-5": {
+      "input": 2.0, "cached_input": 0.1, "cache_write": 2.5, "output": 10.0,
+      "input_includes_cache": false,
+      "source": "https://platform.claude.com/docs/en/models/sonnet-5-5/overview"
+    },
+    "anthropic:claude-opus-5-5": {
+      "input": 4.0, "cached_input": 0.2, "cache_write": 5.0, "output": 20.0,
+      "input_includes_cache": false,
+      "source": "https://platform.claude.com/docs/en/models/opus-5-5/overview"
+    }
+  }
+}
