@@ -1098,7 +1098,7 @@ def apply_argue(inq: Inquiry, out: ArgueOutput, allowed_claims: Optional[set[str
             "still_inapplicable": still_open}
 
 
-def argue(inq: Inquiry, llm: LLM) -> dict:
+def argue(inq: Inquiry, llm: LLM, *, issue_ids: Optional[set[str]] = None) -> dict:
     """One call per issue that has evidence bearing on it; results are merged into one summary."""
     g = inq.graph
     total = {"arguments": [], "merged": [], "dropped": [], "unusable": [], "ignored_unusable": [],
@@ -1110,6 +1110,8 @@ def argue(inq: Inquiry, llm: LLM) -> dict:
     total["input_eligible_claims"] = sorted(c.id for c in g.claims if c.live and sum(
         g.ev(eid).bears_on.get(c.id) == "for" for eid in all_offered) >= 3)
     for iss in g.issues:
+        if issue_ids is not None and iss.id not in issue_ids:
+            continue
         claim_ids, ev_ids = issue_evidence(g, iss.id, include_unassigned=(iss.id == g.main_issue_id))
         if not claim_ids or not ev_ids:
             continue

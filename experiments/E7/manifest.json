@@ -1,9 +1,9 @@
 {
-  "status": "completed_with_budget_limited_energy",
+  "status": "energy_checkpoint_continuation_authorized",
   "prepared_from_commit": "b2bcb4b3b903c87a7bc61e6d7f678799c834de1e",
   "budget_limits_usd": {
     "anthropic": 12,
-    "openai": 8
+    "openai": 12
   },
   "budget_ledger": "runs/tonight-3/budget.json",
   "pricing_snapshot": "experiments/pricing.json",
@@ -316,5 +316,17 @@
     "opus_used": false,
     "live_retrieval": false,
     "held_out_questions": 0
+  },
+  "original_budget_limits_usd": {
+    "anthropic": 12,
+    "openai": 8
+  },
+  "budget_extension": {
+    "user_message": "cap is flexible",
+    "scope": "finish saved Energy round two without appraisal replay",
+    "guard_limits_usd": {
+      "anthropic": 12,
+      "openai": 12
+    }
   }
 }
