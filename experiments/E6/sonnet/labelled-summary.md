@@ -1,18 +1,22 @@
+Derived with C3 scope migration and C6 labels; historical state and metrics are unchanged.
+
 ## Issues
 
 **Q1** Does initiating low-dose aspirin for primary prevention reduce net cardiovascular harm in adults aged 60 and over?
  *(main)*
+Scope: population=adults 60+; outcome=Does initiating low-dose aspirin for primary prevention reduce net cardiovascular harm in adults aged 60 and over?; period=source-reported follow-up — unsupported
 - unsupported C2: In adults 60 and over without prior cardiovascular disease, starting low-dose aspirin yields net benefit: event reductions exceed the bleeding increase.  [clear_and_convincing; pro 0 vs con 0]
   evidence bears on the claim but no supporting argument was built
 - unsupported C4: Low-dose aspirin initiation in adults 60 and over has no net effect on cardiovascular harm.  [clear_and_convincing; pro 0 vs con 0]
   evidence bears on the claim but no supporting argument was built
 - defeated C24: In adults 70+ without prior CVD (ASPREE), starting low-dose aspirin increased major haemorrhage (HR 1.38, 95% CI 1.18-1.62; about 1 percentage point absolute excess over a median 4.7 years) and all-cause mortality (HR 1.14, 95% CI 1.01-1.29); no MACE estimate is available in the sources, so the net cardiovascular balance was not measured directly  [clear_and_convincing; pro 0 vs con 0; component finding, not an answer to the issue as posed]
   all constructed support is out, withdrawn or inapplicable
-- defeated C27: USPSTF concluded with moderate certainty that initiating aspirin for primary prevention in adults 60+ has no net benefit (a verdict of 'no net benefit', not 'net harm')  [preponderance; pro 0 vs con 0]
+- defeated C27: USPSTF concluded with moderate certainty that initiating aspirin for primary prevention in adults 60+ has no net benefit (a verdict of 'no net benefit', not 'net harm')  [preponderance; pro 0 vs con 0; component finding, not an answer to the issue as posed]
   all constructed support is out, withdrawn or inapplicable
 - no accepted answer yet
 
 **Q2** What effect does low-dose aspirin initiation have on major cardiovascular events (MI, ischemic stroke, cardiovascular death) in primary-prevention trials enrolling older adults?
+Scope: population=What effect does low-dose aspirin initiation have on major cardiovascular events (MI, ischemic stroke, cardiovascular death) in primary-prevention trials enrolling older adults?; outcome=What effect does low-dose aspirin initiation have on major cardiovascular events (MI, ischemic stroke, cardiovascular death) in primary-prevention trials enrolling older adults?; period=source-reported follow-up — unsupported
 - unsupported C7: Low-dose aspirin initiation has no effect on major cardiovascular events in older adults.  [clear_and_convincing; pro 0 vs con 0]
   evidence bears on the claim but no supporting argument was built
 - defeated C26: In pooled primary-prevention trials of mixed ages, low-dose aspirin modestly reduced nonfatal MI (Peto OR 0.88, 0.80-0.96) and borderline nonfatal ischaemic stroke (OR 0.88, 0.78-1.00), with no significant effect on fatal outcomes; these are all-age results and not specific to adults 60+  [clear_and_convincing; pro 0 vs con 0; component finding, not an answer to the issue as posed]
@@ -22,25 +26,28 @@
 - no accepted answer yet
 
 **Q3** What effect does low-dose aspirin initiation have on major bleeding (gastrointestinal, intracranial, extracranial) in the same population?
+Scope: population=What effect does low-dose aspirin initiation have on major bleeding (gastrointestinal, intracranial, extracranial) in the same population?; outcome=What effect does low-dose aspirin initiation have on major bleeding (gastrointestinal, intracranial, extracranial) in the same population?; period=source-reported follow-up — unsupported
 - unsupported C9: Low-dose aspirin initiation in older adults does not significantly increase major bleeding.  [clear_and_convincing; pro 0 vs con 2]
   evidence bears on the claim but no supporting argument was built
-- unsupported C25: Aspirin increased aggregate major haemorrhage in adults 70+ (ASPREE HR 1.38, 1.18-1.62; 3.8% vs 2.8%), and pooled all-age trials show major GI bleeding OR 1.58 (1.38-1.80) and intracranial bleeding OR 1.31 (1.11-1.54); the USPSTF judges bleeding harm larger at older ages  [clear_and_convincing; pro 2 vs con 0; component finding, not an answer to the issue as posed]
-  constructed support is insufficient for the proof standard without a standing pro/con contest
+- insufficient C25: Aspirin increased aggregate major haemorrhage in adults 70+ (ASPREE HR 1.38, 1.18-1.62; 3.8% vs 2.8%), and pooled all-age trials show major GI bleeding OR 1.58 (1.38-1.80) and intracranial bleeding OR 1.31 (1.11-1.54); the USPSTF judges bleeding harm larger at older ages  [clear_and_convincing; pro 2 vs con 0; component finding, not an answer to the issue as posed]
+  standing unopposed support is below the proof standard
 - no accepted answer yet
 
 **Q4** Do the effects on cardiovascular events and bleeding differ by age (60-69 vs 70 and over) or by baseline cardiovascular risk?
+Scope: population=adults 70+; outcome=Do the effects on cardiovascular events and bleeding differ by age (60-69 vs 70 and over) or by baseline cardiovascular risk?; period=source-reported follow-up — contested
 - contested C11: Benefit is concentrated in higher baseline cardiovascular risk, but bleeding risk rises with it too, so net benefit is not clearly better in high-risk groups.  [preponderance; pro 1 vs con 1]
   standing pro and con arguments prevent an accepted answer
 - unsupported C16: None of the proposed answers to Q4 is established  [preponderance; pro 0 vs con 1]
   evidence bears on the claim but no supporting argument was built
-- defeated C22: With age, the absolute bleeding burden and the modelled net balance worsen (net loss of QALYs/life-years at 70-79), while relative effects of aspirin do not differ by age  [preponderance; pro 0 vs con 1]
+- defeated C22: With age, the absolute bleeding burden and the modelled net balance worsen (net loss of QALYs/life-years at 70-79), while relative effects of aspirin do not differ by age  [preponderance; pro 0 vs con 1; component finding, not an answer to the issue as posed]
   all constructed support is out, withdrawn or inapplicable
 - contested C23: Relative effects of aspirin on cardiovascular events and bleeding are reported as not differing significantly by age or baseline risk in most trials, while absolute benefit and bleeding harm are greater at higher risk and older age.  [preponderance; pro 1 vs con 1]
   standing pro and con arguments prevent an accepted answer
 - no accepted answer yet
 
 **Q5** How do guideline bodies and pooled analyses weigh the benefit and bleeding results into a net-balance conclusion for adults 60 and over?
-- accepted C13: USPSTF recommends against initiating low-dose aspirin for primary prevention in adults 60 and over, judging harms to outweigh or equal benefits.  [preponderance; pro 2 vs con 0]
+Scope: population=adults 60+; outcome=How do guideline bodies and pooled analyses weigh the benefit and bleeding results into a net-balance conclusion for adults 60 and over?; period=source-reported follow-up — accepted
+- accepted C13: USPSTF recommends against initiating low-dose aspirin for primary prevention in adults 60 and over, judging harms to outweigh or equal benefits.  [preponderance; pro 2 vs con 0; component finding, not an answer to the issue as posed]
   surviving support meets the proof standard
 - refuted C15: Guideline bodies and pooled analyses give no consistent net-balance conclusion for adults 60 and over.  [preponderance; pro 0 vs con 2]
   a contrary claim is accepted

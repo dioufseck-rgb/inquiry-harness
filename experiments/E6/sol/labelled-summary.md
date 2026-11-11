@@ -1,17 +1,22 @@
+Derived with C3 scope migration and C6 labels; historical state and metrics are unchanged.
+
 ## Issues
 
 **Q1** Does initiating low-dose aspirin for primary prevention reduce net cardiovascular harm in adults aged 60 and over?
  *(main)*
+Scope: population=adults 60+; outcome=Does initiating low-dose aspirin for primary prevention reduce net cardiovascular harm in adults aged 60 and over?; period=source-reported follow-up — unsupported
 - unsupported C1: Initiating low-dose aspirin produces a net reduction in cardiovascular harm in adults aged 60 and older, with cardiovascular benefits outweighing bleeding harms and any mortality effects.  [clear_and_convincing; pro 0 vs con 0]
   evidence bears on the claim but no supporting argument was built
 - defeated C2: Initiating low-dose aspirin produces a net increase in harm in adults aged 60 and older, with bleeding harms and any adverse mortality effects outweighing cardiovascular benefits.  [clear_and_convincing; pro 0 vs con 0]
   all constructed support is out, withdrawn or inapplicable
 - accepted C18: USPSTF modeling reports slightly negative to slightly positive lifetime quality-adjusted gains for initiation in the sixties, but losses in quality-adjusted and unadjusted life-years in the seventies across nearly all modeled risks.  [preponderance; pro 2 vs con 0; component finding, not an answer to the issue as posed]
   surviving support meets the proof standard
-- accepted C25: The USPSTF concludes with moderate certainty that initiating low-dose aspirin for primary cardiovascular prevention in adults aged 60 or older has no net benefit and recommends against initiation. This is the body's benefit–harm assessment, not a measured finding of exactly zero effect or uniform net harm.  [preponderance; pro 2 vs con 0]
+- accepted C25: The USPSTF concludes with moderate certainty that initiating low-dose aspirin for primary cardiovascular prevention in adults aged 60 or older has no net benefit and recommends against initiation. This is the body's benefit–harm assessment, not a measured finding of exactly zero effect or uniform net harm.  [preponderance; pro 2 vs con 0; component finding, not an answer to the issue as posed]
   surviving support meets the proof standard
+- no accepted answer yet
 
 **Q2** Which populations aged 60 and older, low-dose aspirin regimens, comparator treatments, follow-up periods, and clinical outcomes have been studied in primary-prevention trials and their reported age subgroups?
+Scope: population=adults 60+; outcome=Which populations aged 60 and older, low-dose aspirin regimens, comparator treatments, follow-up periods, and clinical outcomes have been studied in primary-prevention trials and their reported age subgroups?; period=source-reported follow-up — accepted
 - accepted C5: Primary-prevention trials include community-dwelling adults aged 70 and older without established cardiovascular disease, providing direct evidence for older adults.  [preponderance; pro 2 vs con 0]
   surviving support meets the proof standard
 - accepted C7: Primary-prevention trials involving adults aged 60 and older compare low-dose aspirin with placebo over multiple years and report cardiovascular events, mortality, and bleeding outcomes.  [preponderance; pro 2 vs con 0]
@@ -22,6 +27,7 @@
   surviving support meets the proof standard
 
 **Q3** What effect does initiating low-dose aspirin have on cardiovascular events and mortality in adults aged 60 and older without established cardiovascular disease?
+Scope: population=adults 60+; outcome=What effect does initiating low-dose aspirin have on cardiovascular events and mortality in adults aged 60 and older without established cardiovascular disease?; period=source-reported follow-up — unsupported
 - unsupported C10: Initiating low-dose aspirin leaves cardiovascular and all-cause mortality materially unchanged in adults aged 60 and older without established cardiovascular disease.  [clear_and_convincing; pro 0 vs con 0]
   evidence bears on the claim but no supporting argument was built
 - unsupported C12: Initiating low-dose aspirin has no effect on cardiovascular events or mortality in adults aged 60 and older without established cardiovascular disease.  [clear_and_convincing; pro 0 vs con 0]
@@ -33,12 +39,13 @@
 - no accepted answer yet
 
 **Q4** What effect does initiating low-dose aspirin have on major bleeding and other clinically important treatment-related harms in adults aged 60 and older?
+Scope: population=adults 60+; outcome=What effect does initiating low-dose aspirin have on major bleeding and other clinically important treatment-related harms in adults aged 60 and older?; period=source-reported follow-up — accepted
 - refuted C16: Initiating low-dose aspirin does not increase major bleeding or other clinically important treatment-related harms in adults aged 60 and older.  [clear_and_convincing; pro 0 vs con 3]
   a contrary claim is accepted
 - accepted C22: In ASPREE's healthy older population, aspirin increased major hemorrhage: 3.8% versus 2.8%, HR 1.38, over trial follow-up.  [clear_and_convincing; pro 3 vs con 0]
   surviving support meets the proof standard
-- unsupported C23: Absolute aspirin-related bleeding harm increases with age, particularly from age 60 onward, despite no apparent age difference in relative bleeding risk.  [clear_and_convincing; pro 2 vs con 0]
-  constructed support is insufficient for the proof standard without a standing pro/con contest
+- insufficient C23: Absolute aspirin-related bleeding harm increases with age, particularly from age 60 onward, despite no apparent age difference in relative bleeding risk.  [clear_and_convincing; pro 2 vs con 0]
+  standing unopposed support is below the proof standard
 - accepted C24: The USPSTF review found uncertainty about increased fatal gastrointestinal bleeding and no statistically significant increase in fatal hemorrhagic stroke.  [preponderance; pro 2 vs con 0; component finding, not an answer to the issue as posed]
   surviving support meets the proof standard
 

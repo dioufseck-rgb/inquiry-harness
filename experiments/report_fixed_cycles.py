@@ -84,9 +84,9 @@ def render(paths, report_path, title):
     interpretation = Path("experiments/E6-generalisation/interpretation.md" if "generalisation" in str(report_path) else "experiments/E6/interpretation.md")
     if interpretation.exists():
         lines += ["", interpretation.read_text(encoding="utf-8").strip(), ""]
-    lines += ["", "## Six status labels (N5)", "",
+    lines += ["", "## Seven status labels (C6)", "",
               "Labels are derived from the saved evaluation without changing its compatible in/out/undecided proof statuses. Accepted means the proof standard is met; refuted means a contrary is accepted; defeated means every constructed supporting argument is out, withdrawn or inapplicable; contested requires standing pro and con support; unsupported means evidence without an argument; untested means no bearing evidence or constructed support.", "",
-              "The six requested labels omit one case: standing, unopposed support that is too weak to meet the proof standard. That case is labelled unsupported with an explicit insufficient-support reason, and never earns a contested shape match. An expected undecided verdict now requires an actual contested main answer. Each run includes claim-labels.json and labelled-summary.md; native metrics and state from earlier runs remain unchanged."]
+              "Insufficient means standing, unopposed support below the proof standard; unsupported means evidence without an argument. Insufficient support never earns a contested shape match. An expected undecided verdict requires an actual contested main answer. Each run includes claim-labels.json and labelled-summary.md; native metrics and state from earlier runs remain unchanged."]
     lines += ["", "## Review authority and limits", "",
               "The user's instruction to continue while asleep authorized separate provisional agent adjudication for N1. No Mamadou hand review is claimed; his blank file is preserved. N1 contains no same-claim cross-provider pairs, and E3.1's ≥70% against-Sol overlap has no valid denominator. E3.1's attack-count criterion was unmet and remains reported. N4's stated preconditions require that result recorded, not a fabricated pass.", "",
               "A passing per-run result requires zero supported-but-unargued claims, a nonempty accepted/supported main issue, no missing single-origin flags, no absence assertions and at least one reopened CQ discharged in Respond. Failure is retained. Costs are API-usage estimates; local raw replies, state snapshots and hash-chained ledgers remain alongside the compact metrics.", ""]
@@ -100,8 +100,23 @@ def render(paths, report_path, title):
 if __name__ == "__main__":
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--generalisation", action="store_true")
+    p.add_argument("--labels-only", action="store_true", help="Refresh only derived labels for all four saved E6 graphs.")
     args = p.parse_args()
-    if args.generalisation:
+    if args.labels_only:
+        for folder in ("E6/sonnet", "E6/sol", "E6-generalisation/energy", "E6-generalisation/genai"):
+            path = Path("experiments") / folder
+            inq = Inquiry.model_validate_json((path / "inquiry.json").read_text(encoding="utf-8"))
+            labels = {c.id: {"label": claim_status_label(inq.graph, inq.evaluation, c.id)[0],
+                            "reason": claim_status_label(inq.graph, inq.evaluation, c.id)[1],
+                            "status": inq.evaluation.status(c.id), "text": c.text,
+                            "issue_id": c.issue_id, "answers_issue": c.answers_issue} for c in inq.graph.live_claims()}
+            for cid, label in labels.items():
+                inq.evaluation.claims[cid].label = label["label"]
+                inq.evaluation.claims[cid].label_reason = label["reason"]
+            (path / "claim-labels.json").write_text(json.dumps(labels, indent=2), encoding="utf-8")
+            (path / "labelled-summary.md").write_text("Derived with C3 scope migration and C6 labels; historical state and metrics are unchanged.\n\n" + summary(inq.graph, inq.evaluation).rstrip() + "\n", encoding="utf-8")
+            print(json.dumps({"folder": folder, "insufficient": [cid for cid, label in labels.items() if label["label"] == "insufficient"]}))
+    elif args.generalisation:
         render([("Energy: Sol proposer", "experiments/E6-generalisation/energy"), ("GenAI: Sol proposer", "experiments/E6-generalisation/genai")],
                "bench/results/E6-generalisation.md", "E6 generalisation: fixed energy and GenAI packets")
     else:

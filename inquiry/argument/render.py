@@ -10,7 +10,7 @@ Renderers for the argument graph.
 
 from __future__ import annotations
 
-from .evaluate import Evaluation, LoadBearing, claim_status_label
+from .evaluate import Evaluation, LoadBearing, claim_status_label, issue_scope_label
 from .graph import ArgumentGraph
 from .schemes import SCHEMES
 
@@ -122,11 +122,17 @@ def wigmore(g: ArgumentGraph, ev: Evaluation | None = None) -> str:
 def summary(g: ArgumentGraph, ev: Evaluation, lb: list[LoadBearing] | None = None) -> str:
     lines = ["## Issues", ""]
     for iss in g.issues:
-        accepted = ev.issues.get(iss.id, [])
+        accepted = [cid for cid in ev.issues.get(iss.id, []) if g.claim(cid) and g.claim(cid).live and g.claim(cid).answers_issue]
         head = f"**{iss.id}** {iss.text}"
         if iss.id == g.main_issue_id:
             head += " *(main)*"
         lines.append(head)
+        lines.append(f"Scope: {iss.scope.summary()} — {issue_scope_label(g, ev, iss.id)}")
+        if iss.id == g.main_issue_id:
+            from ..closure import whole_question_answer, answer_scope
+            answer = whole_question_answer(g, ev)
+            if answer and not answer.answers_issue:
+                lines.append(f"Accepted composed answer {answer.id} at scope {answer_scope(answer)}; the wider scope remains {issue_scope_label(g, ev, iss.id)}.")
         for c in g.claims_for_issue(iss.id):
             d = ev.claims[c.id]
             lines.append(

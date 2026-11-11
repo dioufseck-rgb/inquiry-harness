@@ -45,7 +45,7 @@
     "status": "in",
     "text": "USPSTF recommends against initiating low-dose aspirin for primary prevention in adults 60 and over, judging harms to outweigh or equal benefits.",
     "issue_id": "Q5",
-    "answers_issue": true
+    "answers_issue": false
   },
   "C15": {
     "label": "refuted",
@@ -77,7 +77,7 @@
     "status": "out",
     "text": "With age, the absolute bleeding burden and the modelled net balance worsen (net loss of QALYs/life-years at 70-79), while relative effects of aspirin do not differ by age",
     "issue_id": "Q4",
-    "answers_issue": true
+    "answers_issue": false
   },
   "C23": {
     "label": "contested",
@@ -96,8 +96,8 @@
     "answers_issue": false
   },
   "C25": {
-    "label": "unsupported",
-    "reason": "constructed support is insufficient for the proof standard without a standing pro/con contest",
+    "label": "insufficient",
+    "reason": "standing unopposed support is below the proof standard",
     "status": "undecided",
     "text": "Aspirin increased aggregate major haemorrhage in adults 70+ (ASPREE HR 1.38, 1.18-1.62; 3.8% vs 2.8%), and pooled all-age trials show major GI bleeding OR 1.58 (1.38-1.80) and intracranial bleeding OR 1.31 (1.11-1.54); the USPSTF judges bleeding harm larger at older ages",
     "issue_id": "Q3",
@@ -117,7 +117,7 @@
     "status": "undecided",
     "text": "USPSTF concluded with moderate certainty that initiating aspirin for primary prevention in adults 60+ has no net benefit (a verdict of 'no net benefit', not 'net harm')",
     "issue_id": "Q1",
-    "answers_issue": true
+    "answers_issue": false
   },
   "C28": {
     "label": "defeated",

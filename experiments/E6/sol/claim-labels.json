@@ -104,8 +104,8 @@
     "answers_issue": true
   },
   "C23": {
-    "label": "unsupported",
-    "reason": "constructed support is insufficient for the proof standard without a standing pro/con contest",
+    "label": "insufficient",
+    "reason": "standing unopposed support is below the proof standard",
     "status": "undecided",
     "text": "Absolute aspirin-related bleeding harm increases with age, particularly from age 60 onward, despite no apparent age difference in relative bleeding risk.",
     "issue_id": "Q4",
@@ -125,6 +125,6 @@
     "status": "in",
     "text": "The USPSTF concludes with moderate certainty that initiating low-dose aspirin for primary cardiovascular prevention in adults aged 60 or older has no net benefit and recommends against initiation. This is the body's benefit\u2013harm assessment, not a measured finding of exactly zero effect or uniform net harm.",
     "issue_id": "Q1",
-    "answers_issue": true
+    "answers_issue": false
   }
 }

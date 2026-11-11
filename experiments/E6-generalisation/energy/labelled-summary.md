@@ -1,7 +1,10 @@
+Derived with C3 scope migration and C6 labels; historical state and metrics are unchanged.
+
 ## Issues
 
 **Q1** Can PJM serve projected data-centre load growth in Northern Virginia through 2030 without new dispatchable generation?
  *(main)*
+Scope: population=Can PJM serve projected data-centre load growth in Northern Virginia through 2030 without new dispatchable generation?; outcome=Can PJM serve projected data-centre load growth in Northern Virginia through 2030 without new dispatchable generation?; period=through 2030 — untested
 - accepted C20: Synapse's Advanced Policy portfolio, including 9 GW of new gas, has modeled PJM-wide LOLE of 0.04 days in 2030.  [preponderance; pro 2 vs con 0; component finding, not an answer to the issue as posed]
   surviving support meets the proof standard
 - accepted C22: The Pennsylvania study's Reference scenario reports PJM-wide LOLE of 0.59 days in 2030 despite modeled gas additions and data-centre flexibility.  [preponderance; pro 2 vs con 0; component finding, not an answer to the issue as posed]
@@ -13,6 +16,7 @@
 - no accepted answer yet
 
 **Q2** How much electricity demand and peak load do planning projections attribute to Northern Virginia data centres through 2030, and how does that growth fit within total local and PJM-wide demand?
+Scope: population=How much electricity demand and peak load do planning projections attribute to Northern Virginia data centres through 2030, and how does that growth fit within total local and PJM-wide demand?; outcome=How much electricity demand and peak load do planning projections attribute to Northern Virginia data centres through 2030, and how does that growth fit within total local and PJM-wide demand?; period=through 2030 — unsupported
 - unsupported C5: Northern Virginia data centres account for less than half of projected local peak-load growth through 2030.  [preponderance; pro 0 vs con 0]
   evidence bears on the claim but no supporting argument was built
 - accepted C24: PJM states that data centres account for most of the Dominion forecast adjustment in its breakout of data-centre and voltage-reduction effects.  [preponderance; pro 1 vs con 0; component finding, not an answer to the issue as posed]
@@ -30,6 +34,7 @@
 - no accepted answer yet
 
 **Q3** What supply and demand-side resources are projected to be available to PJM through 2030 if new dispatchable generation is excluded?
+Scope: population=What supply and demand-side resources are projected to be available to PJM through 2030 if new dispatchable generation is excluded?; outcome=What supply and demand-side resources are projected to be available to PJM through 2030 if new dispatchable generation is excluded?; period=through 2030 — unsupported
 - unsupported C10: Excluding new dispatchable generation, PJM's available accredited capacity remains unchanged through 2030 as resource gains offset losses.  [preponderance; pro 0 vs con 0]
   evidence bears on the claim but no supporting argument was built
 - accepted C30: Synapse's Status Quo scenario assumes roughly 8 GW of demand response through 2030; Advanced Policy assumes DERs and demand response reduce peak load by about 31 GW.  [preponderance; pro 2 vs con 0; component finding, not an answer to the issue as posed]
@@ -45,6 +50,7 @@
 - no accepted answer yet
 
 **Q4** Under the projected loads and a resource portfolio without new dispatchable generation, does PJM meet its resource-adequacy requirements through 2030?
+Scope: population=Under the projected loads and a resource portfolio without new dispatchable generation, does PJM meet its resource-adequacy requirements through 2030?; outcome=Under the projected loads and a resource portfolio without new dispatchable generation, does PJM meet its resource-adequacy requirements through 2030?; period=through 2030 — unsupported
 - unsupported C13: Without new dispatchable generation, PJM's projected accredited capacity exactly meets its resource-adequacy requirement throughout the planning period through 2030.  [preponderance; pro 0 vs con 0]
   evidence bears on the claim but no supporting argument was built
 - accepted C36: The Pennsylvania report's Reference and High Load and Low Supply scenarios exceed PJM's LOLE criterion in every modeled year; both add gas.  [preponderance; pro 2 vs con 0; component finding, not an answer to the issue as posed]
@@ -56,6 +62,7 @@
 - no accepted answer yet
 
 **Q5** Can the transmission system deliver the required electricity to Northern Virginia through 2030 under the no-new-dispatchable-generation scenario?
+Scope: population=Can the transmission system deliver the required electricity to Northern Virginia through 2030 under the no-new-dispatchable-generation scenario?; outcome=Can the transmission system deliver the required electricity to Northern Virginia through 2030 under the no-new-dispatchable-generation scenario?; period=through 2030 — defeated
 - defeated C16: Without new dispatchable generation, existing transmission can deliver projected Northern Virginia data-centre load through 2030 while meeting applicable reliability criteria; no transmission upgrades are required.  [preponderance; pro 0 vs con 0]
   all constructed support is out, withdrawn or inapplicable
 - accepted C38: The Maryland OPC report records BGE's request for incentives for an estimated $634 million of transmission projects addressing Northern Virginia data-centre reliability needs in the 2022 RTEP.  [preponderance; pro 2 vs con 0; component finding, not an answer to the issue as posed]
@@ -69,6 +76,7 @@
 - no accepted answer yet
 
 **Q6** What operating conditions or service restrictions are required to serve the projected growth where resource adequacy or transmission capability would otherwise be insufficient?
+Scope: population=What operating conditions or service restrictions are required to serve the projected growth where resource adequacy or transmission capability would otherwise be insufficient?; outcome=What operating conditions or service restrictions are required to serve the projected growth where resource adequacy or transmission capability would otherwise be insufficient?; period=source-reported follow-up — untested
 - accepted C42: Synapse's Advanced Policy scenario assumes a 17 percent PJM peak reduction in 2030 from DERs including demand response, with some flexibility participating in emergency load response.  [preponderance; pro 2 vs con 0; component finding, not an answer to the issue as posed]
   surviving support meets the proof standard
 - accepted C43: The Pennsylvania assessment assumes Reference-case flexibility of 13 percent of peak data-centre load during 0.50 percent of annual hours, using stress-hour demand shifting without reducing annual energy.  [preponderance; pro 2 vs con 0; component finding, not an answer to the issue as posed]

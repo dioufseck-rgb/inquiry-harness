@@ -39,14 +39,15 @@ def setup_case(kind):
     return g, c
 
 
-@pytest.mark.parametrize("kind", ["accepted", "refuted", "defeated", "contested", "unsupported", "untested"])
+@pytest.mark.parametrize("kind", ["accepted", "refuted", "defeated", "contested", "unsupported", "untested", "weak"])
 def test_each_status_label_is_derived_without_changing_proof_statuses(kind):
     g, c = setup_case(kind)
     ev = evaluate(g)
-    assert ev.claims[c.id].label == kind
+    label = "insufficient" if kind == "weak" else kind
+    assert ev.claims[c.id].label == label
     assert ev.status(c.id) in ("in", "out", "undecided")
     report = summary(g, ev)
-    assert f"- {kind} {c.id}:" in report
+    assert f"- {label} {c.id}:" in report
     assert all(mark not in report + wigmore(g, ev) for mark in ("✓", "✗"))
 
 
@@ -55,7 +56,7 @@ def test_expected_undecided_requires_a_real_contest_not_weak_unopposed_support()
     ev = evaluate(g)
     inq = Inquiry(id="weak", question="q", graph=g)
     assert ev.status(c.id) == "undecided" and ev.claims[c.id].pro_ids
-    assert ev.claims[c.id].label == "unsupported" and "insufficient" in ev.claims[c.id].label_reason
+    assert ev.claims[c.id].label == "insufficient" and "below the proof standard" in ev.claims[c.id].label_reason
     assert not shape_match(inq, ev, "undecided")
     g2, _ = setup_case("contested")
     inq2 = Inquiry(id="contested", question="q", graph=g2)

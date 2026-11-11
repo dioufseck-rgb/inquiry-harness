@@ -54,7 +54,7 @@ class ClaimDetail(BaseModel):
     con_strength: int = 0
     corroborated: bool = False
     met: bool = False
-    label: Literal["", "accepted", "refuted", "defeated", "contested", "unsupported", "untested"] = ""
+    label: Literal["", "accepted", "refuted", "defeated", "contested", "insufficient", "unsupported", "untested"] = ""
     label_reason: str = ""
 
 
@@ -412,7 +412,7 @@ def evaluate(g: ArgumentGraph, max_iter: int = 10) -> Evaluation:
 
 
 def claim_status_label(g: ArgumentGraph, ev: Evaluation, claim_id: str) -> tuple[str, str]:
-    """Six report labels, without changing the compatible proof statuses."""
+    """Seven report labels, without changing the compatible proof statuses."""
     claim = g.claim(claim_id)
     detail = ev.claims[claim_id]
     if detail.status == "in":
@@ -439,9 +439,17 @@ def claim_status_label(g: ArgumentGraph, ev: Evaluation, claim_id: str) -> tuple
         return "untested", "no evidence bears on the claim and no argument tests it"
     if not built:
         return "unsupported", "evidence bears on the claim but no supporting argument was built"
-    # The requested six labels do not name weak, unopposed support below its
-    # proof standard. Keep it explicit and never reward it as contested.
-    return "unsupported", "constructed support is insufficient for the proof standard without a standing pro/con contest"
+    return "insufficient", "standing unopposed support is below the proof standard"
+
+
+def issue_scope_label(g: ArgumentGraph, ev: Evaluation, issue_id: str) -> str:
+    """Status at the question's scope, separate from a narrower composed answer."""
+    claims = [c for c in g.claims_for_issue(issue_id) if c.answers_issue]
+    labels = {claim_status_label(g, ev, c.id)[0] for c in claims}
+    for label in ("accepted", "contested", "insufficient", "unsupported", "defeated", "refuted", "untested"):
+        if label in labels:
+            return label
+    return "untested"
 
 
 # ---------------------------------------------------------------------------

@@ -18,7 +18,7 @@ from __future__ import annotations
 import re
 from typing import Any, Optional
 
-from .argument.evaluate import Evaluation, is_discharged
+from .argument.evaluate import Evaluation, is_discharged, issue_scope_label
 from .state import Inquiry
 from .closure import accepted_components, answer_scope, whole_question_answer
 
@@ -81,6 +81,7 @@ def metrics(inq: Inquiry, ev: Evaluation, gold: Optional[dict[str, Any]] = None,
         "whole_question_answered": whole_question_answer(g, ev) is not None,
         "answer_scope": answer_scope(whole_question_answer(g, ev)) if whole_question_answer(g, ev) else "",
         "components_accepted": len(accepted_components(g, ev)),
+        "main_issue_scope_label": issue_scope_label(g, ev, g.main_issue_id) if g.main_issue_id else "untested",
         "composed_claims": sum(c.created_by_move == "compose" for c in g.claims),
         "composition_accepted": sum(c.live and ev.status(c.id) == "in" and any(
             a.scheme == "composition" and ev.labels.get(a.id) == "in" for a in g.arguments_for(c.id)) for c in g.claims),

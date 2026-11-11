@@ -21,7 +21,7 @@
     "status": "in",
     "text": "\u201cNo measurable return\u201d conflates unmeasured benefits, absent financial impact, and negative returns; these interpretations yield different answers about enterprise generative-AI pilots.",
     "issue_id": "Q1",
-    "answers_issue": true
+    "answers_issue": false
   },
   "C6": {
     "label": "contested",
@@ -45,7 +45,7 @@
     "status": "undecided",
     "text": "The originating material shifts between organizations, investments, and pilots, so its roughly 95% statements do not identify a single consistent denominator.",
     "issue_id": "Q2",
-    "answers_issue": true
+    "answers_issue": false
   },
   "C10": {
     "label": "accepted",
@@ -93,7 +93,7 @@
     "status": "in",
     "text": "Other studies report organization-level, production-use, or broader AI outcomes rather than comparable enterprise generative-AI pilot return rates.",
     "issue_id": "Q4",
-    "answers_issue": true
+    "answers_issue": false
   },
   "C19": {
     "label": "accepted",
@@ -125,7 +125,7 @@
     "status": "undecided",
     "text": "NANDA's report says 5% of integrated AI pilots extract millions in value, while the vast majority have no measurable P&L impact.",
     "issue_id": "Q2",
-    "answers_issue": true
+    "answers_issue": false
   },
   "C23": {
     "label": "accepted",
@@ -133,7 +133,7 @@
     "status": "in",
     "text": "The report states that ROI impact was measured six months post-pilot and adjusted for department size; the supplied methodology passages do not identify the pilot denominator or calculation behind the headline proportion.",
     "issue_id": "Q3",
-    "answers_issue": true
+    "answers_issue": false
   },
   "C25": {
     "label": "refuted",
@@ -141,7 +141,7 @@
     "status": "out",
     "text": "The supplied NANDA report does not establish that roughly 95% of enterprise generative-AI pilots generally deliver no measurable return: its headline pilot denominator is unidentified, and its statement about no measurable P&L impact does not demonstrate an absence of all benefits.",
     "issue_id": "Q1",
-    "answers_issue": true
+    "answers_issue": false
   },
   "C26": {
     "label": "refuted",
