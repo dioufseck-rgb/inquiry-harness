@@ -1,0 +1,290 @@
+{
+  "move": "hypothesize",
+  "run_id": "health-aspirin-tonight-openai-t7",
+  "n_requested": 3,
+  "input_sha256": "baa06ad3ff2d78f17c108a326ad0849c2064429b37d378e14da9d615c97b0af6",
+  "preparation": {
+    "projection": "hypothesize",
+    "historical_snapshot": false
+  },
+  "samples": [
+    {
+      "sample": 1,
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "tokens_in": 4699,
+      "tokens_out": 2026,
+      "cost_usd": 0.0240644,
+      "api_calls": 2,
+      "seconds": 16.41,
+      "metrics": {
+        "n_claims": 13,
+        "avg_len": 162.84615384615384,
+        "avg_digits": 1.3076923076923077,
+        "max_len": 232,
+        "n_over_guard": 0,
+        "n_with_null": 4,
+        "n_issues": 4,
+        "exclusive_groups": 4
+      },
+      "raw_metrics": {
+        "n_claims": 11,
+        "avg_len": 164.9090909090909,
+        "avg_digits": 1.4545454545454546,
+        "max_len": 220,
+        "n_over_guard": 1,
+        "n_with_null": 3,
+        "n_issues": 4,
+        "exclusive_groups": 3
+      },
+      "move_summary": {
+        "claims": [
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "C5",
+          "C6",
+          "C7",
+          "C8",
+          "C9",
+          "C10",
+          "C11",
+          "C12",
+          "C13"
+        ],
+        "dropped": [],
+        "exclusive_groups": 4,
+        "placed_by_rule": [],
+        "rejected_specificity": [
+          {
+            "issue_id": "Q2",
+            "text": "Net harm is best defined as an unweighted count of all ischemic events versus all major bleeds; this equal-weighting makes aspirin's balance look worse, since bleeds are as frequent as events prevented.",
+            "reasons": [
+              "weighting_rule not specified in answerhood: equal-weighting"
+            ],
+            "attempt": 1
+          }
+        ]
+      },
+      "error": "",
+      "graph": "sample-001\\inquiry.json",
+      "graph_sha256": "a548f59d07671aff5ac43e27179e52fb8eafa80bbe2676afccfa8560de889e7d",
+      "references_valid": true
+    },
+    {
+      "sample": 2,
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "tokens_in": 2238,
+      "tokens_out": 1834,
+      "cost_usd": 0.0200192,
+      "api_calls": 1,
+      "seconds": 11.75,
+      "metrics": {
+        "n_claims": 13,
+        "avg_len": 154.3846153846154,
+        "avg_digits": 1.4615384615384615,
+        "max_len": 214,
+        "n_over_guard": 0,
+        "n_with_null": 4,
+        "n_issues": 4,
+        "exclusive_groups": 4
+      },
+      "raw_metrics": {
+        "n_claims": 12,
+        "avg_len": 163.16666666666666,
+        "avg_digits": 1.5,
+        "max_len": 214,
+        "n_over_guard": 0,
+        "n_with_null": 3,
+        "n_issues": 4,
+        "exclusive_groups": 4
+      },
+      "move_summary": {
+        "claims": [
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "C5",
+          "C6",
+          "C7",
+          "C8",
+          "C9",
+          "C10",
+          "C11",
+          "C12",
+          "C13"
+        ],
+        "dropped": [],
+        "exclusive_groups": 4,
+        "placed_by_rule": [],
+        "rejected_specificity": []
+      },
+      "error": "",
+      "graph": "sample-002\\inquiry.json",
+      "graph_sha256": "001832b61a6562f54d454128399f10bd7284c57c8d6205e0dc2d6c818e1736b0",
+      "references_valid": true
+    },
+    {
+      "sample": 3,
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "tokens_in": 2238,
+      "tokens_out": 1629,
+      "cost_usd": 0.0179692,
+      "api_calls": 1,
+      "seconds": 10.88,
+      "metrics": {
+        "n_claims": 12,
+        "avg_len": 152.83333333333334,
+        "avg_digits": 1.25,
+        "max_len": 208,
+        "n_over_guard": 0,
+        "n_with_null": 4,
+        "n_issues": 4,
+        "exclusive_groups": 4
+      },
+      "raw_metrics": {
+        "n_claims": 11,
+        "avg_len": 162.27272727272728,
+        "avg_digits": 1.2727272727272727,
+        "max_len": 208,
+        "n_over_guard": 0,
+        "n_with_null": 3,
+        "n_issues": 4,
+        "exclusive_groups": 4
+      },
+      "move_summary": {
+        "claims": [
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "C5",
+          "C6",
+          "C7",
+          "C8",
+          "C9",
+          "C10",
+          "C11",
+          "C12"
+        ],
+        "dropped": [],
+        "exclusive_groups": 4,
+        "placed_by_rule": [],
+        "rejected_specificity": []
+      },
+      "error": "",
+      "graph": "sample-003\\inquiry.json",
+      "graph_sha256": "9e2d59e471b4504ada05b3c77c9f3d2739dd5969b54532a90dc0e846d6fdefbb",
+      "references_valid": true
+    }
+  ],
+  "skill_sha256": "d428470236ba9afc8426a261b3b65ef0971968139a3c1e8b9d309ad0bd7e557b",
+  "provider": "anthropic",
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "aggregate": {
+    "avg_digits": {
+      "mean": 1.3397435897435896,
+      "min": 1.25,
+      "max": 1.4615384615384615,
+      "n": 3
+    },
+    "avg_len": {
+      "mean": 156.68803418803418,
+      "min": 152.83333333333334,
+      "max": 162.84615384615384,
+      "n": 3
+    },
+    "exclusive_groups": {
+      "mean": 4,
+      "min": 4,
+      "max": 4,
+      "n": 3
+    },
+    "max_len": {
+      "mean": 218,
+      "min": 208,
+      "max": 232,
+      "n": 3
+    },
+    "n_claims": {
+      "mean": 12.666666666666666,
+      "min": 12,
+      "max": 13,
+      "n": 3
+    },
+    "n_issues": {
+      "mean": 4,
+      "min": 4,
+      "max": 4,
+      "n": 3
+    },
+    "n_over_guard": {
+      "mean": 0,
+      "min": 0,
+      "max": 0,
+      "n": 3
+    },
+    "n_with_null": {
+      "mean": 4,
+      "min": 4,
+      "max": 4,
+      "n": 3
+    },
+    "raw_avg_digits": {
+      "mean": 1.4090909090909092,
+      "min": 1.2727272727272727,
+      "max": 1.5,
+      "n": 3
+    },
+    "raw_avg_len": {
+      "mean": 163.44949494949495,
+      "min": 162.27272727272728,
+      "max": 164.9090909090909,
+      "n": 3
+    },
+    "raw_exclusive_groups": {
+      "mean": 3.6666666666666665,
+      "min": 3,
+      "max": 4,
+      "n": 3
+    },
+    "raw_max_len": {
+      "mean": 214,
+      "min": 208,
+      "max": 220,
+      "n": 3
+    },
+    "raw_n_claims": {
+      "mean": 11.333333333333334,
+      "min": 11,
+      "max": 12,
+      "n": 3
+    },
+    "raw_n_issues": {
+      "mean": 4,
+      "min": 4,
+      "max": 4,
+      "n": 3
+    },
+    "raw_n_over_guard": {
+      "mean": 0.3333333333333333,
+      "min": 0,
+      "max": 1,
+      "n": 3
+    },
+    "raw_n_with_null": {
+      "mean": 3,
+      "min": 3,
+      "max": 3,
+      "n": 3
+    }
+  }
+}

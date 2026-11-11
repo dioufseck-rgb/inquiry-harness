@@ -427,12 +427,13 @@ class Harness:
             self._record("frame", moves.frame(inq, self.proposer, samples=self.frame_samples))
         if inq.phase == "framed":
             self._record("hypothesize", moves.hypothesize(inq, self.proposer))
-            if not inq.main_claims():
+            if not any(c.kind == "substantive" for c in inq.main_claims()):
                 # nothing to inquire into; try once more, then stop rather than conclude on an empty graph
                 inq.notes.append("hypothesize: no claims on the main issue; retrying once")
                 inq.phase = "framed"
+                inq.graph.claims = []  # replace a placeholder-only draft, including its automatic nulls
                 self._record("hypothesize", moves.hypothesize(inq, self.proposer))
-                if not inq.main_claims():
+                if not any(c.kind == "substantive" for c in inq.main_claims()):
                     raise RuntimeError("hypothesize produced no claims on the main issue twice; "
                                        "see the hypothesize skill and the model's reply")
         if inq.phase == "hypothesized":

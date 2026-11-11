@@ -1,0 +1,5531 @@
+{
+  "checker_sha256": "2f22811e980cc1254cf95f583614042bda4dfd63d23c53e9986d1dc8b65b42c3",
+  "method": "First parseable Hypothesize proposal before the policy guard; same current checker for every version. Native manifests and replies are unchanged.",
+  "candidate_version": "after-v5",
+  "pass": false,
+  "cells": [
+    {
+      "version": "after",
+      "frame": "aspirin",
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "native_manifest": "experiments\\E1\\after\\aspirin\\sol\\moves.json",
+      "input_sha256": "baa06ad3ff2d78f17c108a326ad0849c2064429b37d378e14da9d615c97b0af6",
+      "skill_sha256": "90b1b8a6bbaca926ec302ea50674a8536660866ba51bbeb36aae0965072a9b4a",
+      "samples": [
+        {
+          "sample": 1,
+          "error": "",
+          "metrics": {
+            "n_claims": 14,
+            "avg_len": 163.71428571428572,
+            "avg_digits": 1.5714285714285714,
+            "max_len": 214,
+            "n_over_guard": 0,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 1
+          },
+          "raw_metrics": {
+            "n_claims": 14,
+            "avg_len": 165.07142857142858,
+            "avg_digits": 1.4285714285714286,
+            "max_len": 214,
+            "n_over_guard": 0,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 1
+          },
+          "raw_violations": [],
+          "pass": true
+        },
+        {
+          "sample": 2,
+          "error": "",
+          "metrics": {
+            "n_claims": 14,
+            "avg_len": 177.35714285714286,
+            "avg_digits": 2,
+            "max_len": 214,
+            "n_over_guard": 0,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 1
+          },
+          "raw_metrics": {
+            "n_claims": 14,
+            "avg_len": 180.35714285714286,
+            "avg_digits": 2,
+            "max_len": 240,
+            "n_over_guard": 1,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 1
+          },
+          "raw_violations": [
+            {
+              "text": "For adults aged 60 and older, an unweighted composite of myocardial infarction, ischemic stroke, cardiovascular death, intracranial hemorrhage and major extracranial bleeding, without double-counting, defines one interpretation of net harm.",
+              "reasons": [
+                "endpoint_definition not specified in answerhood: composite of myocardial infarction, ischemic stroke, cardiovascular death, intracranial hemorrhage and major extracranial bleeding, without double-counting, defines one interpretat"
+              ]
+            }
+          ],
+          "pass": false
+        },
+        {
+          "sample": 3,
+          "error": "",
+          "metrics": {
+            "n_claims": 14,
+            "avg_len": 178.92857142857142,
+            "avg_digits": 1.4285714285714286,
+            "max_len": 240,
+            "n_over_guard": 0,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 1
+          },
+          "raw_metrics": {
+            "n_claims": 14,
+            "avg_len": 178.92857142857142,
+            "avg_digits": 1.4285714285714286,
+            "max_len": 240,
+            "n_over_guard": 0,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 1
+          },
+          "raw_violations": [],
+          "pass": true
+        }
+      ],
+      "tokens_in": 9009,
+      "tokens_out": 5323,
+      "cost_usd": 0.06739300000000001,
+      "api_calls": 5,
+      "aggregate": {
+        "avg_digits": {
+          "mean": 1.6666666666666667,
+          "min": 1.4285714285714286,
+          "max": 2,
+          "n": 3
+        },
+        "avg_len": {
+          "mean": 173.33333333333334,
+          "min": 163.71428571428572,
+          "max": 178.92857142857142,
+          "n": 3
+        },
+        "exclusive_groups": {
+          "mean": 1,
+          "min": 1,
+          "max": 1,
+          "n": 3
+        },
+        "max_len": {
+          "mean": 222.66666666666666,
+          "min": 214,
+          "max": 240,
+          "n": 3
+        },
+        "n_claims": {
+          "mean": 14,
+          "min": 14,
+          "max": 14,
+          "n": 3
+        },
+        "n_issues": {
+          "mean": 4,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        },
+        "n_over_guard": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
+        "n_with_null": {
+          "mean": 4,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        },
+        "raw_avg_digits": {
+          "mean": 1.619047619047619,
+          "min": 1.4285714285714286,
+          "max": 2,
+          "n": 3
+        },
+        "raw_avg_len": {
+          "mean": 174.78571428571428,
+          "min": 165.07142857142858,
+          "max": 180.35714285714286,
+          "n": 3
+        },
+        "raw_exclusive_groups": {
+          "mean": 1,
+          "min": 1,
+          "max": 1,
+          "n": 3
+        },
+        "raw_max_len": {
+          "mean": 231.33333333333334,
+          "min": 214,
+          "max": 240,
+          "n": 3
+        },
+        "raw_n_claims": {
+          "mean": 14,
+          "min": 14,
+          "max": 14,
+          "n": 3
+        },
+        "raw_n_issues": {
+          "mean": 4,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        },
+        "raw_n_over_guard": {
+          "mean": 0.3333333333333333,
+          "min": 0,
+          "max": 1,
+          "n": 3
+        },
+        "raw_n_with_null": {
+          "mean": 4,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        }
+      },
+      "pass": false
+    },
+    {
+      "version": "after",
+      "frame": "aspirin",
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "native_manifest": "experiments\\E1\\after\\aspirin\\sonnet\\moves.json",
+      "input_sha256": "baa06ad3ff2d78f17c108a326ad0849c2064429b37d378e14da9d615c97b0af6",
+      "skill_sha256": "90b1b8a6bbaca926ec302ea50674a8536660866ba51bbeb36aae0965072a9b4a",
+      "samples": [
+        {
+          "sample": 1,
+          "error": "",
+          "metrics": {
+            "n_claims": 12,
+            "avg_len": 173.08333333333334,
+            "avg_digits": 1.8333333333333333,
+            "max_len": 214,
+            "n_over_guard": 0,
+            "n_with_null": 3,
+            "n_issues": 4,
+            "exclusive_groups": 2
+          },
+          "raw_metrics": {
+            "n_claims": 12,
+            "avg_len": 173.08333333333334,
+            "avg_digits": 1.8333333333333333,
+            "max_len": 214,
+            "n_over_guard": 0,
+            "n_with_null": 3,
+            "n_issues": 4,
+            "exclusive_groups": 2
+          },
+          "raw_violations": [],
+          "pass": false
+        },
+        {
+          "sample": 2,
+          "error": "",
+          "metrics": {
+            "n_claims": 11,
+            "avg_len": 174.63636363636363,
+            "avg_digits": 2,
+            "max_len": 229,
+            "n_over_guard": 0,
+            "n_with_null": 3,
+            "n_issues": 4,
+            "exclusive_groups": 4
+          },
+          "raw_metrics": {
+            "n_claims": 10,
+            "avg_len": 169.7,
+            "avg_digits": 2.2,
+            "max_len": 208,
+            "n_over_guard": 1,
+            "n_with_null": 3,
+            "n_issues": 4,
+            "exclusive_groups": 4
+          },
+          "raw_violations": [
+            {
+              "text": "Net harm is best defined by a weighted composite of nonfatal MI, ischemic stroke, and cardiovascular death against intracranial and major extracranial bleeding, with fatal events weighted above nonfatal ones.",
+              "reasons": [
+                "endpoint_definition not specified in answerhood: composite of nonfatal MI, ischemic stroke, and cardiovascular death against intracranial and major extracranial bleeding, with fatal events weighted above nonfatal ones"
+              ]
+            }
+          ],
+          "pass": false
+        },
+        {
+          "sample": 3,
+          "error": "",
+          "metrics": {
+            "n_claims": 14,
+            "avg_len": 178.71428571428572,
+            "avg_digits": 2.2857142857142856,
+            "max_len": 225,
+            "n_over_guard": 0,
+            "n_with_null": 3,
+            "n_issues": 4,
+            "exclusive_groups": 5
+          },
+          "raw_metrics": {
+            "n_claims": 13,
+            "avg_len": 176.53846153846155,
+            "avg_digits": 2.1538461538461537,
+            "max_len": 225,
+            "n_over_guard": 1,
+            "n_with_null": 3,
+            "n_issues": 4,
+            "exclusive_groups": 4
+          },
+          "raw_violations": [
+            {
+              "text": "Net harm is best defined as an unweighted composite of first myocardial infarction, ischemic stroke, cardiovascular death, intracranial hemorrhage and major extracranial bleeding, counting each participant's first event once.",
+              "reasons": [
+                "endpoint_definition not specified in answerhood: composite of first myocardial infarction, ischemic stroke, cardiovascular death, intracranial hemorrhage and major extracranial bleeding, counting each participant's first event on"
+              ]
+            }
+          ],
+          "pass": false
+        }
+      ],
+      "tokens_in": 14895,
+      "tokens_out": 6087,
+      "cost_usd": 0.078956,
+      "api_calls": 5,
+      "aggregate": {
+        "avg_digits": {
+          "mean": 2.0396825396825395,
+          "min": 1.8333333333333333,
+          "max": 2.2857142857142856,
+          "n": 3
+        },
+        "avg_len": {
+          "mean": 175.47799422799423,
+          "min": 173.08333333333334,
+          "max": 178.71428571428572,
+          "n": 3
+        },
+        "exclusive_groups": {
+          "mean": 3.6666666666666665,
+          "min": 2,
+          "max": 5,
+          "n": 3
+        },
+        "max_len": {
+          "mean": 222.66666666666666,
+          "min": 214,
+          "max": 229,
+          "n": 3
+        },
+        "n_claims": {
+          "mean": 12.333333333333334,
+          "min": 11,
+          "max": 14,
+          "n": 3
+        },
+        "n_issues": {
+          "mean": 4,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        },
+        "n_over_guard": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
+        "n_with_null": {
+          "mean": 3,
+          "min": 3,
+          "max": 3,
+          "n": 3
+        },
+        "raw_avg_digits": {
+          "mean": 2.062393162393162,
+          "min": 1.8333333333333333,
+          "max": 2.2,
+          "n": 3
+        },
+        "raw_avg_len": {
+          "mean": 173.10726495726496,
+          "min": 169.7,
+          "max": 176.53846153846155,
+          "n": 3
+        },
+        "raw_exclusive_groups": {
+          "mean": 3.3333333333333335,
+          "min": 2,
+          "max": 4,
+          "n": 3
+        },
+        "raw_max_len": {
+          "mean": 215.66666666666666,
+          "min": 208,
+          "max": 225,
+          "n": 3
+        },
+        "raw_n_claims": {
+          "mean": 11.666666666666666,
+          "min": 10,
+          "max": 13,
+          "n": 3
+        },
+        "raw_n_issues": {
+          "mean": 4,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        },
+        "raw_n_over_guard": {
+          "mean": 0.6666666666666666,
+          "min": 0,
+          "max": 1,
+          "n": 3
+        },
+        "raw_n_with_null": {
+          "mean": 3,
+          "min": 3,
+          "max": 3,
+          "n": 3
+        }
+      },
+      "pass": false
+    },
+    {
+      "version": "after",
+      "frame": "ulez",
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "native_manifest": "experiments\\E1\\after\\ulez\\sol\\moves.json",
+      "input_sha256": "ab7959025877fea6412b397f3bf9a98eed78afba8d5209c066e08e0ba444246b",
+      "skill_sha256": "90b1b8a6bbaca926ec302ea50674a8536660866ba51bbeb36aae0965072a9b4a",
+      "samples": [
+        {
+          "sample": 1,
+          "error": "",
+          "metrics": {
+            "n_claims": 27,
+            "avg_len": 129.62962962962962,
+            "avg_digits": 2.185185185185185,
+            "max_len": 163,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 5
+          },
+          "raw_metrics": {
+            "n_claims": 27,
+            "avg_len": 129.62962962962962,
+            "avg_digits": 2.185185185185185,
+            "max_len": 163,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 5
+          },
+          "raw_violations": [],
+          "pass": true
+        },
+        {
+          "sample": 2,
+          "error": "",
+          "metrics": {
+            "n_claims": 26,
+            "avg_len": 130.5,
+            "avg_digits": 3.3846153846153846,
+            "max_len": 179,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 5
+          },
+          "raw_metrics": {
+            "n_claims": 26,
+            "avg_len": 130.5,
+            "avg_digits": 3.3846153846153846,
+            "max_len": 179,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 5
+          },
+          "raw_violations": [],
+          "pass": true
+        },
+        {
+          "sample": 3,
+          "error": "",
+          "metrics": {
+            "n_claims": 25,
+            "avg_len": 127,
+            "avg_digits": 5.08,
+            "max_len": 156,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 5
+          },
+          "raw_metrics": {
+            "n_claims": 25,
+            "avg_len": 127,
+            "avg_digits": 5.08,
+            "max_len": 156,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 5
+          },
+          "raw_violations": [],
+          "pass": false
+        }
+      ],
+      "tokens_in": 5679,
+      "tokens_out": 6977,
+      "cost_usd": 0.074891,
+      "api_calls": 3,
+      "aggregate": {
+        "avg_digits": {
+          "mean": 3.5499335232668567,
+          "min": 2.185185185185185,
+          "max": 5.08,
+          "n": 3
+        },
+        "avg_len": {
+          "mean": 129.04320987654322,
+          "min": 127,
+          "max": 130.5,
+          "n": 3
+        },
+        "exclusive_groups": {
+          "mean": 5,
+          "min": 5,
+          "max": 5,
+          "n": 3
+        },
+        "max_len": {
+          "mean": 166,
+          "min": 156,
+          "max": 179,
+          "n": 3
+        },
+        "n_claims": {
+          "mean": 26,
+          "min": 25,
+          "max": 27,
+          "n": 3
+        },
+        "n_issues": {
+          "mean": 6,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "n_over_guard": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
+        "n_with_null": {
+          "mean": 6,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "raw_avg_digits": {
+          "mean": 3.5499335232668567,
+          "min": 2.185185185185185,
+          "max": 5.08,
+          "n": 3
+        },
+        "raw_avg_len": {
+          "mean": 129.04320987654322,
+          "min": 127,
+          "max": 130.5,
+          "n": 3
+        },
+        "raw_exclusive_groups": {
+          "mean": 5,
+          "min": 5,
+          "max": 5,
+          "n": 3
+        },
+        "raw_max_len": {
+          "mean": 166,
+          "min": 156,
+          "max": 179,
+          "n": 3
+        },
+        "raw_n_claims": {
+          "mean": 26,
+          "min": 25,
+          "max": 27,
+          "n": 3
+        },
+        "raw_n_issues": {
+          "mean": 6,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "raw_n_over_guard": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
+        "raw_n_with_null": {
+          "mean": 6,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        }
+      },
+      "pass": false
+    },
+    {
+      "version": "after",
+      "frame": "ulez",
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "native_manifest": "experiments\\E1\\after\\ulez\\sonnet\\moves.json",
+      "input_sha256": "ab7959025877fea6412b397f3bf9a98eed78afba8d5209c066e08e0ba444246b",
+      "skill_sha256": "90b1b8a6bbaca926ec302ea50674a8536660866ba51bbeb36aae0965072a9b4a",
+      "samples": [
+        {
+          "sample": 1,
+          "error": "",
+          "metrics": {
+            "n_claims": 15,
+            "avg_len": 145.2,
+            "avg_digits": 2.6666666666666665,
+            "max_len": 205,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 2
+          },
+          "raw_metrics": {
+            "n_claims": 15,
+            "avg_len": 145.73333333333332,
+            "avg_digits": 2.933333333333333,
+            "max_len": 205,
+            "n_over_guard": 1,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 2
+          },
+          "raw_violations": [
+            {
+              "text": "The August 2023 ULEZ expansion lowered roadside NO2 in outer London by a modest amount, roughly 1 to 5 \u00b5g/m3 (about 2-10%), beyond the background trend and relative to comparison sites.",
+              "reasons": [
+                "digit count 11 exceeds 8"
+              ]
+            }
+          ],
+          "pass": false
+        },
+        {
+          "sample": 2,
+          "error": "",
+          "metrics": {
+            "n_claims": 16,
+            "avg_len": 142.8125,
+            "avg_digits": 2.375,
+            "max_len": 186,
+            "n_over_guard": 1,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 4
+          },
+          "raw_metrics": {
+            "n_claims": 16,
+            "avg_len": 142.875,
+            "avg_digits": 2.625,
+            "max_len": 186,
+            "n_over_guard": 2,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 4
+          },
+          "raw_violations": [
+            {
+              "text": "The August 2023 ULEZ expansion reduced roadside NO2 in outer London by a modest amount, roughly 1-5% relative to the counterfactual, over the first 1-2 years.",
+              "reasons": [
+                "digit count 9 exceeds 8",
+                "followup_window not specified in answerhood: over the first 1-2 years"
+              ]
+            },
+            {
+              "text": "The expansion reduced roadside NO2 in outer London by a larger amount, more than 5% relative to the counterfactual, over the first 1-2 years.",
+              "reasons": [
+                "followup_window not specified in answerhood: over the first 1-2 years"
+              ]
+            }
+          ],
+          "pass": false
+        },
+        {
+          "sample": 3,
+          "error": "",
+          "metrics": {
+            "n_claims": 15,
+            "avg_len": 138.73333333333332,
+            "avg_digits": 2.533333333333333,
+            "max_len": 185,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 5
+          },
+          "raw_metrics": {
+            "n_claims": 14,
+            "avg_len": 146.07142857142858,
+            "avg_digits": 3.0714285714285716,
+            "max_len": 185,
+            "n_over_guard": 1,
+            "n_with_null": 5,
+            "n_issues": 6,
+            "exclusive_groups": 5
+          },
+          "raw_violations": [
+            {
+              "text": "The August 2023 ULEZ expansion lowered roadside NO2 in outer London relative to the counterfactual, by a modest amount of roughly 1 to 5 \u00b5g/m3 (about 3-12%) in the first 1-2 years.",
+              "reasons": [
+                "digit count 13 exceeds 8"
+              ]
+            }
+          ],
+          "pass": false
+        }
+      ],
+      "tokens_in": 17807,
+      "tokens_out": 6021,
+      "cost_usd": 0.084736,
+      "api_calls": 6,
+      "aggregate": {
+        "avg_digits": {
+          "mean": 2.525,
+          "min": 2.375,
+          "max": 2.6666666666666665,
+          "n": 3
+        },
+        "avg_len": {
+          "mean": 142.2486111111111,
+          "min": 138.73333333333332,
+          "max": 145.2,
+          "n": 3
+        },
+        "exclusive_groups": {
+          "mean": 3.6666666666666665,
+          "min": 2,
+          "max": 5,
+          "n": 3
+        },
+        "max_len": {
+          "mean": 192,
+          "min": 185,
+          "max": 205,
+          "n": 3
+        },
+        "n_claims": {
+          "mean": 15.333333333333334,
+          "min": 15,
+          "max": 16,
+          "n": 3
+        },
+        "n_issues": {
+          "mean": 6,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "n_over_guard": {
+          "mean": 0.3333333333333333,
+          "min": 0,
+          "max": 1,
+          "n": 3
+        },
+        "n_with_null": {
+          "mean": 6,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "raw_avg_digits": {
+          "mean": 2.8765873015873016,
+          "min": 2.625,
+          "max": 3.0714285714285716,
+          "n": 3
+        },
+        "raw_avg_len": {
+          "mean": 144.89325396825396,
+          "min": 142.875,
+          "max": 146.07142857142858,
+          "n": 3
+        },
+        "raw_exclusive_groups": {
+          "mean": 3.6666666666666665,
+          "min": 2,
+          "max": 5,
+          "n": 3
+        },
+        "raw_max_len": {
+          "mean": 192,
+          "min": 185,
+          "max": 205,
+          "n": 3
+        },
+        "raw_n_claims": {
+          "mean": 15,
+          "min": 14,
+          "max": 16,
+          "n": 3
+        },
+        "raw_n_issues": {
+          "mean": 6,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "raw_n_over_guard": {
+          "mean": 1.3333333333333333,
+          "min": 1,
+          "max": 2,
+          "n": 3
+        },
+        "raw_n_with_null": {
+          "mean": 5.666666666666667,
+          "min": 5,
+          "max": 6,
+          "n": 3
+        }
+      },
+      "pass": false
+    },
+    {
+      "version": "after-v2",
+      "frame": "aspirin",
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "native_manifest": "experiments\\E1\\after-v2\\aspirin\\sol\\moves.json",
+      "input_sha256": "baa06ad3ff2d78f17c108a326ad0849c2064429b37d378e14da9d615c97b0af6",
+      "skill_sha256": "6d2834566b1584bdd6c8a5743c789db87b004d10558ee76909f6080179a066d2",
+      "samples": [
+        {
+          "sample": 1,
+          "error": "",
+          "metrics": {
+            "n_claims": 14,
+            "avg_len": 169.14285714285714,
+            "avg_digits": 2,
+            "max_len": 238,
+            "n_over_guard": 0,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 2
+          },
+          "raw_metrics": {
+            "n_claims": 14,
+            "avg_len": 169.14285714285714,
+            "avg_digits": 2,
+            "max_len": 238,
+            "n_over_guard": 0,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 2
+          },
+          "raw_violations": [],
+          "pass": true
+        },
+        {
+          "sample": 2,
+          "error": "",
+          "metrics": {
+            "n_claims": 14,
+            "avg_len": 176.71428571428572,
+            "avg_digits": 1.5714285714285714,
+            "max_len": 228,
+            "n_over_guard": 0,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 1
+          },
+          "raw_metrics": {
+            "n_claims": 14,
+            "avg_len": 176.71428571428572,
+            "avg_digits": 1.5714285714285714,
+            "max_len": 228,
+            "n_over_guard": 0,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 1
+          },
+          "raw_violations": [],
+          "pass": true
+        },
+        {
+          "sample": 3,
+          "error": "",
+          "metrics": {
+            "n_claims": 12,
+            "avg_len": 182.25,
+            "avg_digits": 1.5,
+            "max_len": 244,
+            "n_over_guard": 0,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 2
+          },
+          "raw_metrics": {
+            "n_claims": 12,
+            "avg_len": 182.25,
+            "avg_digits": 1.5,
+            "max_len": 244,
+            "n_over_guard": 0,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 2
+          },
+          "raw_violations": [],
+          "pass": true
+        }
+      ],
+      "tokens_in": 5448,
+      "tokens_out": 4595,
+      "cost_usd": 0.0508631,
+      "api_calls": 3,
+      "aggregate": {
+        "avg_digits": {
+          "mean": 1.6904761904761905,
+          "min": 1.5,
+          "max": 2,
+          "n": 3
+        },
+        "avg_len": {
+          "mean": 176.03571428571428,
+          "min": 169.14285714285714,
+          "max": 182.25,
+          "n": 3
+        },
+        "exclusive_groups": {
+          "mean": 1.6666666666666667,
+          "min": 1,
+          "max": 2,
+          "n": 3
+        },
+        "max_len": {
+          "mean": 236.66666666666666,
+          "min": 228,
+          "max": 244,
+          "n": 3
+        },
+        "n_claims": {
+          "mean": 13.333333333333334,
+          "min": 12,
+          "max": 14,
+          "n": 3
+        },
+        "n_issues": {
+          "mean": 4,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        },
+        "n_over_guard": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
+        "n_with_null": {
+          "mean": 4,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        },
+        "raw_avg_digits": {
+          "mean": 1.6904761904761905,
+          "min": 1.5,
+          "max": 2,
+          "n": 3
+        },
+        "raw_avg_len": {
+          "mean": 176.03571428571428,
+          "min": 169.14285714285714,
+          "max": 182.25,
+          "n": 3
+        },
+        "raw_exclusive_groups": {
+          "mean": 1.6666666666666667,
+          "min": 1,
+          "max": 2,
+          "n": 3
+        },
+        "raw_max_len": {
+          "mean": 236.66666666666666,
+          "min": 228,
+          "max": 244,
+          "n": 3
+        },
+        "raw_n_claims": {
+          "mean": 13.333333333333334,
+          "min": 12,
+          "max": 14,
+          "n": 3
+        },
+        "raw_n_issues": {
+          "mean": 4,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        },
+        "raw_n_over_guard": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
+        "raw_n_with_null": {
+          "mean": 4,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        }
+      },
+      "pass": true
+    },
+    {
+      "version": "after-v2",
+      "frame": "aspirin",
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "native_manifest": "experiments\\E1\\after-v2\\aspirin\\sonnet\\moves.json",
+      "input_sha256": "baa06ad3ff2d78f17c108a326ad0849c2064429b37d378e14da9d615c97b0af6",
+      "skill_sha256": "6d2834566b1584bdd6c8a5743c789db87b004d10558ee76909f6080179a066d2",
+      "samples": [
+        {
+          "sample": 1,
+          "error": "",
+          "metrics": {
+            "n_claims": 15,
+            "avg_len": 160.4,
+            "avg_digits": 1.5333333333333334,
+            "max_len": 211,
+            "n_over_guard": 0,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 3
+          },
+          "raw_metrics": {
+            "n_claims": 13,
+            "avg_len": 168.92307692307693,
+            "avg_digits": 1.6923076923076923,
+            "max_len": 211,
+            "n_over_guard": 1,
+            "n_with_null": 3,
+            "n_issues": 4,
+            "exclusive_groups": 4
+          },
+          "raw_violations": [
+            {
+              "text": "Net harm is best defined as an unweighted composite of first MI, ischemic stroke, cardiovascular death, intracranial hemorrhage and major extracranial bleeding, counting each participant's first event once.",
+              "reasons": [
+                "endpoint_definition not specified in answerhood: composite of first MI, ischemic stroke, cardiovascular death, intracranial hemorrhage and major extracranial bleeding, counting each participant's first event once"
+              ]
+            }
+          ],
+          "pass": false
+        },
+        {
+          "sample": 2,
+          "error": "",
+          "metrics": {
+            "n_claims": 12,
+            "avg_len": 158.41666666666666,
+            "avg_digits": 1.8333333333333333,
+            "max_len": 209,
+            "n_over_guard": 0,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 3
+          },
+          "raw_metrics": {
+            "n_claims": 13,
+            "avg_len": 163.15384615384616,
+            "avg_digits": 1.6923076923076923,
+            "max_len": 220,
+            "n_over_guard": 1,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 3
+          },
+          "raw_violations": [
+            {
+              "text": "Net harm is best defined by a composite of first myocardial infarction, ischemic stroke, and cardiovascular death against intracranial and major extracranial bleeding, with fatal and nonfatal events weighted by severity.",
+              "reasons": [
+                "endpoint_definition not specified in answerhood: composite of first myocardial infarction, ischemic stroke, and cardiovascular death against intracranial and major extracranial bleeding, with fatal and nonfatal events weighted by"
+              ]
+            }
+          ],
+          "pass": false
+        },
+        {
+          "sample": 3,
+          "error": "",
+          "metrics": {
+            "n_claims": 15,
+            "avg_len": 161.86666666666667,
+            "avg_digits": 1.5333333333333334,
+            "max_len": 224,
+            "n_over_guard": 0,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 4
+          },
+          "raw_metrics": {
+            "n_claims": 13,
+            "avg_len": 166.46153846153845,
+            "avg_digits": 1.6923076923076923,
+            "max_len": 211,
+            "n_over_guard": 1,
+            "n_with_null": 3,
+            "n_issues": 4,
+            "exclusive_groups": 3
+          },
+          "raw_violations": [
+            {
+              "text": "Net harm is best defined as a composite of first MI, ischemic stroke and cardiovascular death against intracranial hemorrhage and major extracranial bleeding, with fatal and nonfatal events weighted by severity.",
+              "reasons": [
+                "endpoint_definition not specified in answerhood: composite of first MI, ischemic stroke and cardiovascular death against intracranial hemorrhage and major extracranial bleeding, with fatal and nonfatal events weighted by severity"
+              ]
+            }
+          ],
+          "pass": false
+        }
+      ],
+      "tokens_in": 18664,
+      "tokens_out": 6783,
+      "cost_usd": 0.09312500000000001,
+      "api_calls": 6,
+      "aggregate": {
+        "avg_digits": {
+          "mean": 1.6333333333333333,
+          "min": 1.5333333333333334,
+          "max": 1.8333333333333333,
+          "n": 3
+        },
+        "avg_len": {
+          "mean": 160.2277777777778,
+          "min": 158.41666666666666,
+          "max": 161.86666666666667,
+          "n": 3
+        },
+        "exclusive_groups": {
+          "mean": 3.3333333333333335,
+          "min": 3,
+          "max": 4,
+          "n": 3
+        },
+        "max_len": {
+          "mean": 214.66666666666666,
+          "min": 209,
+          "max": 224,
+          "n": 3
+        },
+        "n_claims": {
+          "mean": 14,
+          "min": 12,
+          "max": 15,
+          "n": 3
+        },
+        "n_issues": {
+          "mean": 4,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        },
+        "n_over_guard": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
+        "n_with_null": {
+          "mean": 4,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        },
+        "raw_avg_digits": {
+          "mean": 1.6923076923076923,
+          "min": 1.6923076923076923,
+          "max": 1.6923076923076923,
+          "n": 3
+        },
+        "raw_avg_len": {
+          "mean": 166.17948717948718,
+          "min": 163.15384615384616,
+          "max": 168.92307692307693,
+          "n": 3
+        },
+        "raw_exclusive_groups": {
+          "mean": 3.3333333333333335,
+          "min": 3,
+          "max": 4,
+          "n": 3
+        },
+        "raw_max_len": {
+          "mean": 214,
+          "min": 211,
+          "max": 220,
+          "n": 3
+        },
+        "raw_n_claims": {
+          "mean": 13,
+          "min": 13,
+          "max": 13,
+          "n": 3
+        },
+        "raw_n_issues": {
+          "mean": 4,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        },
+        "raw_n_over_guard": {
+          "mean": 1,
+          "min": 1,
+          "max": 1,
+          "n": 3
+        },
+        "raw_n_with_null": {
+          "mean": 3.3333333333333335,
+          "min": 3,
+          "max": 4,
+          "n": 3
+        }
+      },
+      "pass": false
+    },
+    {
+      "version": "after-v2",
+      "frame": "ulez",
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "native_manifest": "experiments\\E1\\after-v2\\ulez\\sol\\moves.json",
+      "input_sha256": "ab7959025877fea6412b397f3bf9a98eed78afba8d5209c066e08e0ba444246b",
+      "skill_sha256": "6d2834566b1584bdd6c8a5743c789db87b004d10558ee76909f6080179a066d2",
+      "samples": [
+        {
+          "sample": 1,
+          "error": "",
+          "metrics": {
+            "n_claims": 25,
+            "avg_len": 143.28,
+            "avg_digits": 4.92,
+            "max_len": 183,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 5
+          },
+          "raw_metrics": {
+            "n_claims": 25,
+            "avg_len": 143.28,
+            "avg_digits": 4.92,
+            "max_len": 183,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 5
+          },
+          "raw_violations": [],
+          "pass": true
+        },
+        {
+          "sample": 2,
+          "error": "",
+          "metrics": {
+            "n_claims": 25,
+            "avg_len": 141.16,
+            "avg_digits": 4.84,
+            "max_len": 193,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 5
+          },
+          "raw_metrics": {
+            "n_claims": 25,
+            "avg_len": 141.16,
+            "avg_digits": 4.84,
+            "max_len": 193,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 5
+          },
+          "raw_violations": [],
+          "pass": true
+        },
+        {
+          "sample": 3,
+          "error": "",
+          "metrics": {
+            "n_claims": 26,
+            "avg_len": 138.15384615384616,
+            "avg_digits": 4.153846153846154,
+            "max_len": 191,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 5
+          },
+          "raw_metrics": {
+            "n_claims": 26,
+            "avg_len": 138.15384615384616,
+            "avg_digits": 4.153846153846154,
+            "max_len": 191,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 5
+          },
+          "raw_violations": [],
+          "pass": true
+        }
+      ],
+      "tokens_in": 5898,
+      "tokens_out": 7663,
+      "cost_usd": 0.0819481,
+      "api_calls": 3,
+      "aggregate": {
+        "avg_digits": {
+          "mean": 4.637948717948718,
+          "min": 4.153846153846154,
+          "max": 4.92,
+          "n": 3
+        },
+        "avg_len": {
+          "mean": 140.86461538461538,
+          "min": 138.15384615384616,
+          "max": 143.28,
+          "n": 3
+        },
+        "exclusive_groups": {
+          "mean": 5,
+          "min": 5,
+          "max": 5,
+          "n": 3
+        },
+        "max_len": {
+          "mean": 189,
+          "min": 183,
+          "max": 193,
+          "n": 3
+        },
+        "n_claims": {
+          "mean": 25.333333333333332,
+          "min": 25,
+          "max": 26,
+          "n": 3
+        },
+        "n_issues": {
+          "mean": 6,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "n_over_guard": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
+        "n_with_null": {
+          "mean": 6,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "raw_avg_digits": {
+          "mean": 4.637948717948718,
+          "min": 4.153846153846154,
+          "max": 4.92,
+          "n": 3
+        },
+        "raw_avg_len": {
+          "mean": 140.86461538461538,
+          "min": 138.15384615384616,
+          "max": 143.28,
+          "n": 3
+        },
+        "raw_exclusive_groups": {
+          "mean": 5,
+          "min": 5,
+          "max": 5,
+          "n": 3
+        },
+        "raw_max_len": {
+          "mean": 189,
+          "min": 183,
+          "max": 193,
+          "n": 3
+        },
+        "raw_n_claims": {
+          "mean": 25.333333333333332,
+          "min": 25,
+          "max": 26,
+          "n": 3
+        },
+        "raw_n_issues": {
+          "mean": 6,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "raw_n_over_guard": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
+        "raw_n_with_null": {
+          "mean": 6,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        }
+      },
+      "pass": true
+    },
+    {
+      "version": "after-v2",
+      "frame": "ulez",
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "native_manifest": "experiments\\E1\\after-v2\\ulez\\sonnet\\moves.json",
+      "input_sha256": "ab7959025877fea6412b397f3bf9a98eed78afba8d5209c066e08e0ba444246b",
+      "skill_sha256": "6d2834566b1584bdd6c8a5743c789db87b004d10558ee76909f6080179a066d2",
+      "samples": [
+        {
+          "sample": 1,
+          "error": "",
+          "metrics": {
+            "n_claims": 16,
+            "avg_len": 140.25,
+            "avg_digits": 2.1875,
+            "max_len": 175,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 4
+          },
+          "raw_metrics": {
+            "n_claims": 16,
+            "avg_len": 140.25,
+            "avg_digits": 2.1875,
+            "max_len": 175,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 4
+          },
+          "raw_violations": [],
+          "pass": true
+        },
+        {
+          "sample": 2,
+          "error": "",
+          "metrics": {
+            "n_claims": 16,
+            "avg_len": 145.5625,
+            "avg_digits": 2.0625,
+            "max_len": 215,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 3
+          },
+          "raw_metrics": {
+            "n_claims": 15,
+            "avg_len": 152,
+            "avg_digits": 2.1333333333333333,
+            "max_len": 215,
+            "n_over_guard": 0,
+            "n_with_null": 5,
+            "n_issues": 6,
+            "exclusive_groups": 3
+          },
+          "raw_violations": [],
+          "pass": true
+        },
+        {
+          "sample": 3,
+          "error": "",
+          "metrics": {
+            "n_claims": 17,
+            "avg_len": 135.8235294117647,
+            "avg_digits": 1.2941176470588236,
+            "max_len": 191,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 2
+          },
+          "raw_metrics": {
+            "n_claims": 17,
+            "avg_len": 135.8235294117647,
+            "avg_digits": 1.2941176470588236,
+            "max_len": 191,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 2
+          },
+          "raw_violations": [],
+          "pass": true
+        }
+      ],
+      "tokens_in": 8889,
+      "tokens_out": 6193,
+      "cost_usd": 0.0752959,
+      "api_calls": 3,
+      "aggregate": {
+        "avg_digits": {
+          "mean": 1.8480392156862746,
+          "min": 1.2941176470588236,
+          "max": 2.1875,
+          "n": 3
+        },
+        "avg_len": {
+          "mean": 140.5453431372549,
+          "min": 135.8235294117647,
+          "max": 145.5625,
+          "n": 3
+        },
+        "exclusive_groups": {
+          "mean": 3,
+          "min": 2,
+          "max": 4,
+          "n": 3
+        },
+        "max_len": {
+          "mean": 193.66666666666666,
+          "min": 175,
+          "max": 215,
+          "n": 3
+        },
+        "n_claims": {
+          "mean": 16.333333333333332,
+          "min": 16,
+          "max": 17,
+          "n": 3
+        },
+        "n_issues": {
+          "mean": 6,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "n_over_guard": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
+        "n_with_null": {
+          "mean": 6,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "raw_avg_digits": {
+          "mean": 1.8716503267973856,
+          "min": 1.2941176470588236,
+          "max": 2.1875,
+          "n": 3
+        },
+        "raw_avg_len": {
+          "mean": 142.69117647058823,
+          "min": 135.8235294117647,
+          "max": 152,
+          "n": 3
+        },
+        "raw_exclusive_groups": {
+          "mean": 3,
+          "min": 2,
+          "max": 4,
+          "n": 3
+        },
+        "raw_max_len": {
+          "mean": 193.66666666666666,
+          "min": 175,
+          "max": 215,
+          "n": 3
+        },
+        "raw_n_claims": {
+          "mean": 16,
+          "min": 15,
+          "max": 17,
+          "n": 3
+        },
+        "raw_n_issues": {
+          "mean": 6,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "raw_n_over_guard": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
+        "raw_n_with_null": {
+          "mean": 5.666666666666667,
+          "min": 5,
+          "max": 6,
+          "n": 3
+        }
+      },
+      "pass": true
+    },
+    {
+      "version": "after-v3",
+      "frame": "aspirin",
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "native_manifest": "experiments\\E1\\after-v3\\aspirin\\sol\\moves.json",
+      "input_sha256": "baa06ad3ff2d78f17c108a326ad0849c2064429b37d378e14da9d615c97b0af6",
+      "skill_sha256": "d428470236ba9afc8426a261b3b65ef0971968139a3c1e8b9d309ad0bd7e557b",
+      "samples": [
+        {
+          "sample": 1,
+          "error": "",
+          "metrics": {
+            "n_claims": 15,
+            "avg_len": 181.2,
+            "avg_digits": 2,
+            "max_len": 245,
+            "n_over_guard": 0,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 1
+          },
+          "raw_metrics": {
+            "n_claims": 15,
+            "avg_len": 181.2,
+            "avg_digits": 2,
+            "max_len": 245,
+            "n_over_guard": 0,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 1
+          },
+          "raw_violations": [],
+          "pass": true
+        },
+        {
+          "sample": 2,
+          "error": "",
+          "metrics": {
+            "n_claims": 13,
+            "avg_len": 172.76923076923077,
+            "avg_digits": 2,
+            "max_len": 205,
+            "n_over_guard": 0,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 3
+          },
+          "raw_metrics": {
+            "n_claims": 13,
+            "avg_len": 172.76923076923077,
+            "avg_digits": 2,
+            "max_len": 205,
+            "n_over_guard": 0,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 3
+          },
+          "raw_violations": [],
+          "pass": true
+        },
+        {
+          "sample": 3,
+          "error": "",
+          "metrics": {
+            "n_claims": 14,
+            "avg_len": 158.21428571428572,
+            "avg_digits": 2,
+            "max_len": 219,
+            "n_over_guard": 0,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 1
+          },
+          "raw_metrics": {
+            "n_claims": 14,
+            "avg_len": 158.21428571428572,
+            "avg_digits": 2,
+            "max_len": 219,
+            "n_over_guard": 0,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 1
+          },
+          "raw_violations": [],
+          "pass": true
+        }
+      ],
+      "tokens_in": 5670,
+      "tokens_out": 4477,
+      "cost_usd": 0.0498829,
+      "api_calls": 3,
+      "aggregate": {
+        "avg_digits": {
+          "mean": 2,
+          "min": 2,
+          "max": 2,
+          "n": 3
+        },
+        "avg_len": {
+          "mean": 170.72783882783884,
+          "min": 158.21428571428572,
+          "max": 181.2,
+          "n": 3
+        },
+        "exclusive_groups": {
+          "mean": 1.6666666666666667,
+          "min": 1,
+          "max": 3,
+          "n": 3
+        },
+        "max_len": {
+          "mean": 223,
+          "min": 205,
+          "max": 245,
+          "n": 3
+        },
+        "n_claims": {
+          "mean": 14,
+          "min": 13,
+          "max": 15,
+          "n": 3
+        },
+        "n_issues": {
+          "mean": 4,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        },
+        "n_over_guard": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
+        "n_with_null": {
+          "mean": 4,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        },
+        "raw_avg_digits": {
+          "mean": 2,
+          "min": 2,
+          "max": 2,
+          "n": 3
+        },
+        "raw_avg_len": {
+          "mean": 170.72783882783884,
+          "min": 158.21428571428572,
+          "max": 181.2,
+          "n": 3
+        },
+        "raw_exclusive_groups": {
+          "mean": 1.6666666666666667,
+          "min": 1,
+          "max": 3,
+          "n": 3
+        },
+        "raw_max_len": {
+          "mean": 223,
+          "min": 205,
+          "max": 245,
+          "n": 3
+        },
+        "raw_n_claims": {
+          "mean": 14,
+          "min": 13,
+          "max": 15,
+          "n": 3
+        },
+        "raw_n_issues": {
+          "mean": 4,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        },
+        "raw_n_over_guard": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
+        "raw_n_with_null": {
+          "mean": 4,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        }
+      },
+      "pass": true
+    },
+    {
+      "version": "after-v3",
+      "frame": "aspirin",
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "native_manifest": "experiments\\E1\\after-v3\\aspirin\\sonnet\\moves.json",
+      "input_sha256": "baa06ad3ff2d78f17c108a326ad0849c2064429b37d378e14da9d615c97b0af6",
+      "skill_sha256": "d428470236ba9afc8426a261b3b65ef0971968139a3c1e8b9d309ad0bd7e557b",
+      "samples": [
+        {
+          "sample": 1,
+          "error": "",
+          "metrics": {
+            "n_claims": 14,
+            "avg_len": 152.21428571428572,
+            "avg_digits": 1.2857142857142858,
+            "max_len": 207,
+            "n_over_guard": 0,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 4
+          },
+          "raw_metrics": {
+            "n_claims": 13,
+            "avg_len": 149.53846153846155,
+            "avg_digits": 1.3846153846153846,
+            "max_len": 207,
+            "n_over_guard": 1,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 4
+          },
+          "raw_violations": [
+            {
+              "text": "Net harm is best defined as an unweighted composite of MI, ischemic stroke, cardiovascular death, intracranial hemorrhage and major extracranial bleeding, each counted equally.",
+              "reasons": [
+                "endpoint_definition not specified in answerhood: composite of MI, ischemic stroke, cardiovascular death, intracranial hemorrhage and major extracranial bleeding, each counted equally"
+              ]
+            }
+          ],
+          "pass": false
+        },
+        {
+          "sample": 2,
+          "error": "",
+          "metrics": {
+            "n_claims": 14,
+            "avg_len": 152.28571428571428,
+            "avg_digits": 1.2142857142857142,
+            "max_len": 212,
+            "n_over_guard": 0,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 3
+          },
+          "raw_metrics": {
+            "n_claims": 11,
+            "avg_len": 159.0909090909091,
+            "avg_digits": 1.4545454545454546,
+            "max_len": 204,
+            "n_over_guard": 1,
+            "n_with_null": 3,
+            "n_issues": 4,
+            "exclusive_groups": 3
+          },
+          "raw_violations": [
+            {
+              "text": "Net harm is best defined by a composite of MI, ischemic stroke, cardiovascular death versus intracranial and major extracranial bleeding, with severity weighting for fatal and disabling events.",
+              "reasons": [
+                "endpoint_definition not specified in answerhood: composite of MI, ischemic stroke, cardiovascular death versus intracranial and major extracranial bleeding, with severity weighting for fatal and disabling events"
+              ]
+            }
+          ],
+          "pass": false
+        },
+        {
+          "sample": 3,
+          "error": "",
+          "metrics": {
+            "n_claims": 15,
+            "avg_len": 162.86666666666667,
+            "avg_digits": 1.4,
+            "max_len": 220,
+            "n_over_guard": 0,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 4
+          },
+          "raw_metrics": {
+            "n_claims": 12,
+            "avg_len": 175.91666666666666,
+            "avg_digits": 1.5,
+            "max_len": 220,
+            "n_over_guard": 1,
+            "n_with_null": 3,
+            "n_issues": 4,
+            "exclusive_groups": 4
+          },
+          "raw_violations": [
+            {
+              "text": "Net harm should be defined by an unweighted composite of myocardial infarction, ischemic stroke, cardiovascular death, intracranial hemorrhage and major extracranial bleeding, counting each person's first event once.",
+              "reasons": [
+                "endpoint_definition not specified in answerhood: composite of myocardial infarction, ischemic stroke, cardiovascular death, intracranial hemorrhage and major extracranial bleeding, counting each person's first event once"
+              ]
+            }
+          ],
+          "pass": false
+        }
+      ],
+      "tokens_in": 19444,
+      "tokens_out": 6498,
+      "cost_usd": 0.09062,
+      "api_calls": 6,
+      "aggregate": {
+        "avg_digits": {
+          "mean": 1.3,
+          "min": 1.2142857142857142,
+          "max": 1.4,
+          "n": 3
+        },
+        "avg_len": {
+          "mean": 155.7888888888889,
+          "min": 152.21428571428572,
+          "max": 162.86666666666667,
+          "n": 3
+        },
+        "exclusive_groups": {
+          "mean": 3.6666666666666665,
+          "min": 3,
+          "max": 4,
+          "n": 3
+        },
+        "max_len": {
+          "mean": 213,
+          "min": 207,
+          "max": 220,
+          "n": 3
+        },
+        "n_claims": {
+          "mean": 14.333333333333334,
+          "min": 14,
+          "max": 15,
+          "n": 3
+        },
+        "n_issues": {
+          "mean": 4,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        },
+        "n_over_guard": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
+        "n_with_null": {
+          "mean": 4,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        },
+        "raw_avg_digits": {
+          "mean": 1.4463869463869463,
+          "min": 1.3846153846153846,
+          "max": 1.5,
+          "n": 3
+        },
+        "raw_avg_len": {
+          "mean": 161.51534576534576,
+          "min": 149.53846153846155,
+          "max": 175.91666666666666,
+          "n": 3
+        },
+        "raw_exclusive_groups": {
+          "mean": 3.6666666666666665,
+          "min": 3,
+          "max": 4,
+          "n": 3
+        },
+        "raw_max_len": {
+          "mean": 210.33333333333334,
+          "min": 204,
+          "max": 220,
+          "n": 3
+        },
+        "raw_n_claims": {
+          "mean": 12,
+          "min": 11,
+          "max": 13,
+          "n": 3
+        },
+        "raw_n_issues": {
+          "mean": 4,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        },
+        "raw_n_over_guard": {
+          "mean": 1,
+          "min": 1,
+          "max": 1,
+          "n": 3
+        },
+        "raw_n_with_null": {
+          "mean": 3.3333333333333335,
+          "min": 3,
+          "max": 4,
+          "n": 3
+        }
+      },
+      "pass": false
+    },
+    {
+      "version": "after-v3",
+      "frame": "ulez",
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "native_manifest": "experiments\\E1\\after-v3\\ulez\\sol\\moves.json",
+      "input_sha256": "ab7959025877fea6412b397f3bf9a98eed78afba8d5209c066e08e0ba444246b",
+      "skill_sha256": "d428470236ba9afc8426a261b3b65ef0971968139a3c1e8b9d309ad0bd7e557b",
+      "samples": [
+        {
+          "sample": 1,
+          "error": "",
+          "metrics": {
+            "n_claims": 26,
+            "avg_len": 135.84615384615384,
+            "avg_digits": 4.884615384615385,
+            "max_len": 184,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 6
+          },
+          "raw_metrics": {
+            "n_claims": 26,
+            "avg_len": 135.84615384615384,
+            "avg_digits": 4.884615384615385,
+            "max_len": 184,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 6
+          },
+          "raw_violations": [],
+          "pass": true
+        },
+        {
+          "sample": 2,
+          "error": "",
+          "metrics": {
+            "n_claims": 25,
+            "avg_len": 138.88,
+            "avg_digits": 3.12,
+            "max_len": 197,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 5
+          },
+          "raw_metrics": {
+            "n_claims": 25,
+            "avg_len": 138.88,
+            "avg_digits": 3.12,
+            "max_len": 197,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 5
+          },
+          "raw_violations": [],
+          "pass": true
+        },
+        {
+          "sample": 3,
+          "error": "",
+          "metrics": {
+            "n_claims": 24,
+            "avg_len": 140.95833333333334,
+            "avg_digits": 2.0416666666666665,
+            "max_len": 183,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 4
+          },
+          "raw_metrics": {
+            "n_claims": 24,
+            "avg_len": 140.95833333333334,
+            "avg_digits": 2.0416666666666665,
+            "max_len": 183,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 4
+          },
+          "raw_violations": [],
+          "pass": true
+        }
+      ],
+      "tokens_in": 6120,
+      "tokens_out": 7120,
+      "cost_usd": 0.0767179,
+      "api_calls": 3,
+      "aggregate": {
+        "avg_digits": {
+          "mean": 3.348760683760684,
+          "min": 2.0416666666666665,
+          "max": 4.884615384615385,
+          "n": 3
+        },
+        "avg_len": {
+          "mean": 138.56149572649574,
+          "min": 135.84615384615384,
+          "max": 140.95833333333334,
+          "n": 3
+        },
+        "exclusive_groups": {
+          "mean": 5,
+          "min": 4,
+          "max": 6,
+          "n": 3
+        },
+        "max_len": {
+          "mean": 188,
+          "min": 183,
+          "max": 197,
+          "n": 3
+        },
+        "n_claims": {
+          "mean": 25,
+          "min": 24,
+          "max": 26,
+          "n": 3
+        },
+        "n_issues": {
+          "mean": 6,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "n_over_guard": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
+        "n_with_null": {
+          "mean": 6,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "raw_avg_digits": {
+          "mean": 3.348760683760684,
+          "min": 2.0416666666666665,
+          "max": 4.884615384615385,
+          "n": 3
+        },
+        "raw_avg_len": {
+          "mean": 138.56149572649574,
+          "min": 135.84615384615384,
+          "max": 140.95833333333334,
+          "n": 3
+        },
+        "raw_exclusive_groups": {
+          "mean": 5,
+          "min": 4,
+          "max": 6,
+          "n": 3
+        },
+        "raw_max_len": {
+          "mean": 188,
+          "min": 183,
+          "max": 197,
+          "n": 3
+        },
+        "raw_n_claims": {
+          "mean": 25,
+          "min": 24,
+          "max": 26,
+          "n": 3
+        },
+        "raw_n_issues": {
+          "mean": 6,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "raw_n_over_guard": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
+        "raw_n_with_null": {
+          "mean": 6,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        }
+      },
+      "pass": true
+    },
+    {
+      "version": "after-v3",
+      "frame": "ulez",
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "native_manifest": "experiments\\E1\\after-v3\\ulez\\sonnet\\moves.json",
+      "input_sha256": "ab7959025877fea6412b397f3bf9a98eed78afba8d5209c066e08e0ba444246b",
+      "skill_sha256": "d428470236ba9afc8426a261b3b65ef0971968139a3c1e8b9d309ad0bd7e557b",
+      "samples": [
+        {
+          "sample": 1,
+          "error": "",
+          "metrics": {
+            "n_claims": 18,
+            "avg_len": 138.22222222222223,
+            "avg_digits": 1.9444444444444444,
+            "max_len": 205,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 2
+          },
+          "raw_metrics": {
+            "n_claims": 16,
+            "avg_len": 136.875,
+            "avg_digits": 2.1875,
+            "max_len": 183,
+            "n_over_guard": 1,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 3
+          },
+          "raw_violations": [
+            {
+              "text": "No published evaluation estimates an outer London roadside NO2 effect with a defined comparison group for the first 1-2 years.",
+              "reasons": [
+                "followup_window not specified in answerhood: for the first 1-2 years"
+              ]
+            }
+          ],
+          "pass": false
+        },
+        {
+          "sample": 2,
+          "error": "",
+          "metrics": {
+            "n_claims": 15,
+            "avg_len": 141.8,
+            "avg_digits": 2.066666666666667,
+            "max_len": 203,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 3
+          },
+          "raw_metrics": {
+            "n_claims": 14,
+            "avg_len": 145.21428571428572,
+            "avg_digits": 2.7142857142857144,
+            "max_len": 184,
+            "n_over_guard": 1,
+            "n_with_null": 5,
+            "n_issues": 6,
+            "exclusive_groups": 3
+          },
+          "raw_violations": [
+            {
+              "text": "The expansion lowered roadside NO2 in outer London by a large amount, more than 10% beyond the background trend, in the first year or so after 29 August 2023.",
+              "reasons": [
+                "digit count 9 exceeds 8"
+              ]
+            }
+          ],
+          "pass": false
+        },
+        {
+          "sample": 3,
+          "error": "",
+          "metrics": {
+            "n_claims": 15,
+            "avg_len": 132.93333333333334,
+            "avg_digits": 1.5333333333333334,
+            "max_len": 166,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 1
+          },
+          "raw_metrics": {
+            "n_claims": 14,
+            "avg_len": 138.92857142857142,
+            "avg_digits": 1.5714285714285714,
+            "max_len": 166,
+            "n_over_guard": 0,
+            "n_with_null": 5,
+            "n_issues": 6,
+            "exclusive_groups": 2
+          },
+          "raw_violations": [],
+          "pass": true
+        }
+      ],
+      "tokens_in": 15886,
+      "tokens_out": 5816,
+      "cost_usd": 0.0794808,
+      "api_calls": 5,
+      "aggregate": {
+        "avg_digits": {
+          "mean": 1.8481481481481483,
+          "min": 1.5333333333333334,
+          "max": 2.066666666666667,
+          "n": 3
+        },
+        "avg_len": {
+          "mean": 137.65185185185186,
+          "min": 132.93333333333334,
+          "max": 141.8,
+          "n": 3
+        },
+        "exclusive_groups": {
+          "mean": 2,
+          "min": 1,
+          "max": 3,
+          "n": 3
+        },
+        "max_len": {
+          "mean": 191.33333333333334,
+          "min": 166,
+          "max": 205,
+          "n": 3
+        },
+        "n_claims": {
+          "mean": 16,
+          "min": 15,
+          "max": 18,
+          "n": 3
+        },
+        "n_issues": {
+          "mean": 6,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "n_over_guard": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
+        "n_with_null": {
+          "mean": 6,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "raw_avg_digits": {
+          "mean": 2.1577380952380953,
+          "min": 1.5714285714285714,
+          "max": 2.7142857142857144,
+          "n": 3
+        },
+        "raw_avg_len": {
+          "mean": 140.33928571428572,
+          "min": 136.875,
+          "max": 145.21428571428572,
+          "n": 3
+        },
+        "raw_exclusive_groups": {
+          "mean": 2.6666666666666665,
+          "min": 2,
+          "max": 3,
+          "n": 3
+        },
+        "raw_max_len": {
+          "mean": 177.66666666666666,
+          "min": 166,
+          "max": 184,
+          "n": 3
+        },
+        "raw_n_claims": {
+          "mean": 14.666666666666666,
+          "min": 14,
+          "max": 16,
+          "n": 3
+        },
+        "raw_n_issues": {
+          "mean": 6,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "raw_n_over_guard": {
+          "mean": 0.6666666666666666,
+          "min": 0,
+          "max": 1,
+          "n": 3
+        },
+        "raw_n_with_null": {
+          "mean": 5.333333333333333,
+          "min": 5,
+          "max": 6,
+          "n": 3
+        }
+      },
+      "pass": false
+    },
+    {
+      "version": "after-v4",
+      "frame": "aspirin",
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "native_manifest": "experiments\\E1\\after-v4\\aspirin\\sol\\moves.json",
+      "input_sha256": "baa06ad3ff2d78f17c108a326ad0849c2064429b37d378e14da9d615c97b0af6",
+      "skill_sha256": "d428470236ba9afc8426a261b3b65ef0971968139a3c1e8b9d309ad0bd7e557b",
+      "samples": [
+        {
+          "sample": 1,
+          "error": "",
+          "metrics": {
+            "n_claims": 15,
+            "avg_len": 159.66666666666666,
+            "avg_digits": 2,
+            "max_len": 208,
+            "n_over_guard": 0,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 1
+          },
+          "raw_metrics": {
+            "n_claims": 15,
+            "avg_len": 159.66666666666666,
+            "avg_digits": 2,
+            "max_len": 208,
+            "n_over_guard": 0,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 1
+          },
+          "raw_violations": [],
+          "pass": true
+        },
+        {
+          "sample": 2,
+          "error": "",
+          "metrics": {
+            "n_claims": 13,
+            "avg_len": 178,
+            "avg_digits": 2,
+            "max_len": 232,
+            "n_over_guard": 0,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 3
+          },
+          "raw_metrics": {
+            "n_claims": 13,
+            "avg_len": 178,
+            "avg_digits": 2,
+            "max_len": 232,
+            "n_over_guard": 0,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 3
+          },
+          "raw_violations": [],
+          "pass": true
+        },
+        {
+          "sample": 3,
+          "error": "",
+          "metrics": {
+            "n_claims": 15,
+            "avg_len": 176.8,
+            "avg_digits": 2,
+            "max_len": 230,
+            "n_over_guard": 0,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 3
+          },
+          "raw_metrics": {
+            "n_claims": 15,
+            "avg_len": 176.8,
+            "avg_digits": 2,
+            "max_len": 230,
+            "n_over_guard": 0,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 3
+          },
+          "raw_violations": [],
+          "pass": true
+        }
+      ],
+      "tokens_in": 4377,
+      "tokens_out": 5150,
+      "cost_usd": 0.05544919999999999,
+      "api_calls": 3,
+      "aggregate": {
+        "avg_digits": {
+          "mean": 2,
+          "min": 2,
+          "max": 2,
+          "n": 3
+        },
+        "avg_len": {
+          "mean": 171.48888888888888,
+          "min": 159.66666666666666,
+          "max": 178,
+          "n": 3
+        },
+        "exclusive_groups": {
+          "mean": 2.3333333333333335,
+          "min": 1,
+          "max": 3,
+          "n": 3
+        },
+        "max_len": {
+          "mean": 223.33333333333334,
+          "min": 208,
+          "max": 232,
+          "n": 3
+        },
+        "n_claims": {
+          "mean": 14.333333333333334,
+          "min": 13,
+          "max": 15,
+          "n": 3
+        },
+        "n_issues": {
+          "mean": 4,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        },
+        "n_over_guard": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
+        "n_with_null": {
+          "mean": 4,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        },
+        "raw_avg_digits": {
+          "mean": 2,
+          "min": 2,
+          "max": 2,
+          "n": 3
+        },
+        "raw_avg_len": {
+          "mean": 171.48888888888888,
+          "min": 159.66666666666666,
+          "max": 178,
+          "n": 3
+        },
+        "raw_exclusive_groups": {
+          "mean": 2.3333333333333335,
+          "min": 1,
+          "max": 3,
+          "n": 3
+        },
+        "raw_max_len": {
+          "mean": 223.33333333333334,
+          "min": 208,
+          "max": 232,
+          "n": 3
+        },
+        "raw_n_claims": {
+          "mean": 14.333333333333334,
+          "min": 13,
+          "max": 15,
+          "n": 3
+        },
+        "raw_n_issues": {
+          "mean": 4,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        },
+        "raw_n_over_guard": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
+        "raw_n_with_null": {
+          "mean": 4,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        }
+      },
+      "pass": true
+    },
+    {
+      "version": "after-v4",
+      "frame": "aspirin",
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "native_manifest": "experiments\\E1\\after-v4\\aspirin\\sonnet\\moves.json",
+      "input_sha256": "baa06ad3ff2d78f17c108a326ad0849c2064429b37d378e14da9d615c97b0af6",
+      "skill_sha256": "d428470236ba9afc8426a261b3b65ef0971968139a3c1e8b9d309ad0bd7e557b",
+      "samples": [
+        {
+          "sample": 1,
+          "error": "",
+          "metrics": {
+            "n_claims": 14,
+            "avg_len": 164.28571428571428,
+            "avg_digits": 1.7142857142857142,
+            "max_len": 227,
+            "n_over_guard": 0,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 5
+          },
+          "raw_metrics": {
+            "n_claims": 13,
+            "avg_len": 154.92307692307693,
+            "avg_digits": 1.8461538461538463,
+            "max_len": 227,
+            "n_over_guard": 1,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 4
+          },
+          "raw_violations": [
+            {
+              "text": "Net harm is best defined as an unweighted composite of ischemic cardiovascular events against major bleeding, counting fatal and nonfatal events equally.",
+              "reasons": [
+                "endpoint_definition not specified in answerhood: composite of ischemic cardiovascular events against major bleeding, counting fatal and nonfatal events equally"
+              ]
+            }
+          ],
+          "pass": false
+        },
+        {
+          "sample": 2,
+          "error": "",
+          "metrics": {
+            "n_claims": 15,
+            "avg_len": 137.06666666666666,
+            "avg_digits": 1.4,
+            "max_len": 217,
+            "n_over_guard": 0,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 4
+          },
+          "raw_metrics": {
+            "n_claims": 13,
+            "avg_len": 132.23076923076923,
+            "avg_digits": 1.5384615384615385,
+            "max_len": 187,
+            "n_over_guard": 1,
+            "n_with_null": 3,
+            "n_issues": 4,
+            "exclusive_groups": 4
+          },
+          "raw_violations": [
+            {
+              "text": "Net harm is best defined as an unweighted composite of cardiovascular events (fatal and nonfatal) plus major bleeding, each counted as one event.",
+              "reasons": [
+                "endpoint_definition not specified in answerhood: composite of cardiovascular events (fatal and nonfatal) plus major bleeding, each counted as one event"
+              ]
+            }
+          ],
+          "pass": false
+        },
+        {
+          "sample": 3,
+          "error": "",
+          "metrics": {
+            "n_claims": 12,
+            "avg_len": 169.83333333333334,
+            "avg_digits": 1.5833333333333333,
+            "max_len": 250,
+            "n_over_guard": 0,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 4
+          },
+          "raw_metrics": {
+            "n_claims": 10,
+            "avg_len": 173.2,
+            "avg_digits": 1.8,
+            "max_len": 250,
+            "n_over_guard": 1,
+            "n_with_null": 3,
+            "n_issues": 4,
+            "exclusive_groups": 4
+          },
+          "raw_violations": [
+            {
+              "text": "Net harm is best defined as an unweighted composite of ischemic events and major bleeding, counting fatal and nonfatal events equally.",
+              "reasons": [
+                "endpoint_definition not specified in answerhood: composite of ischemic events and major bleeding, counting fatal and nonfatal events equally"
+              ]
+            }
+          ],
+          "pass": false
+        }
+      ],
+      "tokens_in": 14328,
+      "tokens_out": 6117,
+      "cost_usd": 0.0730452,
+      "api_calls": 6,
+      "aggregate": {
+        "avg_digits": {
+          "mean": 1.5658730158730159,
+          "min": 1.4,
+          "max": 1.7142857142857142,
+          "n": 3
+        },
+        "avg_len": {
+          "mean": 157.06190476190477,
+          "min": 137.06666666666666,
+          "max": 169.83333333333334,
+          "n": 3
+        },
+        "exclusive_groups": {
+          "mean": 4.333333333333333,
+          "min": 4,
+          "max": 5,
+          "n": 3
+        },
+        "max_len": {
+          "mean": 231.33333333333334,
+          "min": 217,
+          "max": 250,
+          "n": 3
+        },
+        "n_claims": {
+          "mean": 13.666666666666666,
+          "min": 12,
+          "max": 15,
+          "n": 3
+        },
+        "n_issues": {
+          "mean": 4,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        },
+        "n_over_guard": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
+        "n_with_null": {
+          "mean": 4,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        },
+        "raw_avg_digits": {
+          "mean": 1.7282051282051283,
+          "min": 1.5384615384615385,
+          "max": 1.8461538461538463,
+          "n": 3
+        },
+        "raw_avg_len": {
+          "mean": 153.45128205128205,
+          "min": 132.23076923076923,
+          "max": 173.2,
+          "n": 3
+        },
+        "raw_exclusive_groups": {
+          "mean": 4,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        },
+        "raw_max_len": {
+          "mean": 221.33333333333334,
+          "min": 187,
+          "max": 250,
+          "n": 3
+        },
+        "raw_n_claims": {
+          "mean": 12,
+          "min": 10,
+          "max": 13,
+          "n": 3
+        },
+        "raw_n_issues": {
+          "mean": 4,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        },
+        "raw_n_over_guard": {
+          "mean": 1,
+          "min": 1,
+          "max": 1,
+          "n": 3
+        },
+        "raw_n_with_null": {
+          "mean": 3.3333333333333335,
+          "min": 3,
+          "max": 4,
+          "n": 3
+        }
+      },
+      "pass": false
+    },
+    {
+      "version": "after-v4",
+      "frame": "ulez",
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "native_manifest": "experiments\\E1\\after-v4\\ulez\\sol\\moves.json",
+      "input_sha256": "ab7959025877fea6412b397f3bf9a98eed78afba8d5209c066e08e0ba444246b",
+      "skill_sha256": "d428470236ba9afc8426a261b3b65ef0971968139a3c1e8b9d309ad0bd7e557b",
+      "samples": [
+        {
+          "sample": 1,
+          "error": "",
+          "metrics": {
+            "n_claims": 23,
+            "avg_len": 137.3913043478261,
+            "avg_digits": 4.217391304347826,
+            "max_len": 195,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 4
+          },
+          "raw_metrics": {
+            "n_claims": 23,
+            "avg_len": 137.3913043478261,
+            "avg_digits": 4.217391304347826,
+            "max_len": 195,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 4
+          },
+          "raw_violations": [],
+          "pass": true
+        },
+        {
+          "sample": 2,
+          "error": "",
+          "metrics": {
+            "n_claims": 21,
+            "avg_len": 148.23809523809524,
+            "avg_digits": 4.857142857142857,
+            "max_len": 181,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 5
+          },
+          "raw_metrics": {
+            "n_claims": 21,
+            "avg_len": 148.23809523809524,
+            "avg_digits": 4.857142857142857,
+            "max_len": 181,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 5
+          },
+          "raw_violations": [],
+          "pass": true
+        },
+        {
+          "sample": 3,
+          "error": "",
+          "metrics": {
+            "n_claims": 22,
+            "avg_len": 137.36363636363637,
+            "avg_digits": 4.7727272727272725,
+            "max_len": 185,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 3
+          },
+          "raw_metrics": {
+            "n_claims": 22,
+            "avg_len": 137.36363636363637,
+            "avg_digits": 4.7727272727272725,
+            "max_len": 185,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 3
+          },
+          "raw_violations": [],
+          "pass": true
+        }
+      ],
+      "tokens_in": 4992,
+      "tokens_out": 6320,
+      "cost_usd": 0.06770269999999999,
+      "api_calls": 3,
+      "aggregate": {
+        "avg_digits": {
+          "mean": 4.615753811405985,
+          "min": 4.217391304347826,
+          "max": 4.857142857142857,
+          "n": 3
+        },
+        "avg_len": {
+          "mean": 140.99767864985256,
+          "min": 137.36363636363637,
+          "max": 148.23809523809524,
+          "n": 3
+        },
+        "exclusive_groups": {
+          "mean": 4,
+          "min": 3,
+          "max": 5,
+          "n": 3
+        },
+        "max_len": {
+          "mean": 187,
+          "min": 181,
+          "max": 195,
+          "n": 3
+        },
+        "n_claims": {
+          "mean": 22,
+          "min": 21,
+          "max": 23,
+          "n": 3
+        },
+        "n_issues": {
+          "mean": 6,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "n_over_guard": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
+        "n_with_null": {
+          "mean": 6,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "raw_avg_digits": {
+          "mean": 4.615753811405985,
+          "min": 4.217391304347826,
+          "max": 4.857142857142857,
+          "n": 3
+        },
+        "raw_avg_len": {
+          "mean": 140.99767864985256,
+          "min": 137.36363636363637,
+          "max": 148.23809523809524,
+          "n": 3
+        },
+        "raw_exclusive_groups": {
+          "mean": 4,
+          "min": 3,
+          "max": 5,
+          "n": 3
+        },
+        "raw_max_len": {
+          "mean": 187,
+          "min": 181,
+          "max": 195,
+          "n": 3
+        },
+        "raw_n_claims": {
+          "mean": 22,
+          "min": 21,
+          "max": 23,
+          "n": 3
+        },
+        "raw_n_issues": {
+          "mean": 6,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "raw_n_over_guard": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
+        "raw_n_with_null": {
+          "mean": 6,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        }
+      },
+      "pass": true
+    },
+    {
+      "version": "after-v4",
+      "frame": "ulez",
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "native_manifest": "experiments\\E1\\after-v4\\ulez\\sonnet\\moves.json",
+      "input_sha256": "ab7959025877fea6412b397f3bf9a98eed78afba8d5209c066e08e0ba444246b",
+      "skill_sha256": "d428470236ba9afc8426a261b3b65ef0971968139a3c1e8b9d309ad0bd7e557b",
+      "samples": [
+        {
+          "sample": 1,
+          "error": "",
+          "metrics": {
+            "n_claims": 14,
+            "avg_len": 135.64285714285714,
+            "avg_digits": 2.2857142857142856,
+            "max_len": 188,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 5
+          },
+          "raw_metrics": {
+            "n_claims": 14,
+            "avg_len": 135.64285714285714,
+            "avg_digits": 2.2857142857142856,
+            "max_len": 188,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 5
+          },
+          "raw_violations": [],
+          "pass": true
+        },
+        {
+          "sample": 2,
+          "error": "",
+          "metrics": {
+            "n_claims": 15,
+            "avg_len": 127.13333333333334,
+            "avg_digits": 2.2,
+            "max_len": 178,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 1
+          },
+          "raw_metrics": {
+            "n_claims": 14,
+            "avg_len": 132.71428571428572,
+            "avg_digits": 2.2857142857142856,
+            "max_len": 178,
+            "n_over_guard": 0,
+            "n_with_null": 5,
+            "n_issues": 6,
+            "exclusive_groups": 2
+          },
+          "raw_violations": [],
+          "pass": true
+        },
+        {
+          "sample": 3,
+          "error": "",
+          "metrics": {
+            "n_claims": 15,
+            "avg_len": 141.53333333333333,
+            "avg_digits": 2.2,
+            "max_len": 203,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 2
+          },
+          "raw_metrics": {
+            "n_claims": 15,
+            "avg_len": 141.53333333333333,
+            "avg_digits": 2.2,
+            "max_len": 203,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 2
+          },
+          "raw_violations": [],
+          "pass": true
+        }
+      ],
+      "tokens_in": 7605,
+      "tokens_out": 5510,
+      "cost_usd": 0.061919600000000005,
+      "api_calls": 3,
+      "aggregate": {
+        "avg_digits": {
+          "mean": 2.2285714285714286,
+          "min": 2.2,
+          "max": 2.2857142857142856,
+          "n": 3
+        },
+        "avg_len": {
+          "mean": 134.76984126984127,
+          "min": 127.13333333333334,
+          "max": 141.53333333333333,
+          "n": 3
+        },
+        "exclusive_groups": {
+          "mean": 2.6666666666666665,
+          "min": 1,
+          "max": 5,
+          "n": 3
+        },
+        "max_len": {
+          "mean": 189.66666666666666,
+          "min": 178,
+          "max": 203,
+          "n": 3
+        },
+        "n_claims": {
+          "mean": 14.666666666666666,
+          "min": 14,
+          "max": 15,
+          "n": 3
+        },
+        "n_issues": {
+          "mean": 6,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "n_over_guard": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
+        "n_with_null": {
+          "mean": 6,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "raw_avg_digits": {
+          "mean": 2.257142857142857,
+          "min": 2.2,
+          "max": 2.2857142857142856,
+          "n": 3
+        },
+        "raw_avg_len": {
+          "mean": 136.63015873015874,
+          "min": 132.71428571428572,
+          "max": 141.53333333333333,
+          "n": 3
+        },
+        "raw_exclusive_groups": {
+          "mean": 3,
+          "min": 2,
+          "max": 5,
+          "n": 3
+        },
+        "raw_max_len": {
+          "mean": 189.66666666666666,
+          "min": 178,
+          "max": 203,
+          "n": 3
+        },
+        "raw_n_claims": {
+          "mean": 14.333333333333334,
+          "min": 14,
+          "max": 15,
+          "n": 3
+        },
+        "raw_n_issues": {
+          "mean": 6,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "raw_n_over_guard": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
+        "raw_n_with_null": {
+          "mean": 5.666666666666667,
+          "min": 5,
+          "max": 6,
+          "n": 3
+        }
+      },
+      "pass": true
+    },
+    {
+      "version": "after-v5",
+      "frame": "aspirin",
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "native_manifest": "experiments\\E1\\after-v5\\aspirin\\sol\\moves.json",
+      "input_sha256": "baa06ad3ff2d78f17c108a326ad0849c2064429b37d378e14da9d615c97b0af6",
+      "skill_sha256": "d428470236ba9afc8426a261b3b65ef0971968139a3c1e8b9d309ad0bd7e557b",
+      "samples": [
+        {
+          "sample": 1,
+          "error": "",
+          "metrics": {
+            "n_claims": 18,
+            "avg_len": 148,
+            "avg_digits": 2,
+            "max_len": 193,
+            "n_over_guard": 0,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 2
+          },
+          "raw_metrics": {
+            "n_claims": 18,
+            "avg_len": 148,
+            "avg_digits": 2,
+            "max_len": 193,
+            "n_over_guard": 0,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 2
+          },
+          "raw_violations": [],
+          "pass": true
+        },
+        {
+          "sample": 2,
+          "error": "",
+          "metrics": {
+            "n_claims": 17,
+            "avg_len": 152.7058823529412,
+            "avg_digits": 2,
+            "max_len": 206,
+            "n_over_guard": 0,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 1
+          },
+          "raw_metrics": {
+            "n_claims": 17,
+            "avg_len": 152.7058823529412,
+            "avg_digits": 2,
+            "max_len": 206,
+            "n_over_guard": 0,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 1
+          },
+          "raw_violations": [],
+          "pass": true
+        },
+        {
+          "sample": 3,
+          "error": "",
+          "metrics": {
+            "n_claims": 17,
+            "avg_len": 181.7058823529412,
+            "avg_digits": 2,
+            "max_len": 218,
+            "n_over_guard": 0,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 1
+          },
+          "raw_metrics": {
+            "n_claims": 17,
+            "avg_len": 181.7058823529412,
+            "avg_digits": 2,
+            "max_len": 218,
+            "n_over_guard": 0,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 1
+          },
+          "raw_violations": [],
+          "pass": true
+        }
+      ],
+      "tokens_in": 4329,
+      "tokens_out": 5086,
+      "cost_usd": 0.058221999999999996,
+      "api_calls": 3,
+      "aggregate": {
+        "avg_digits": {
+          "mean": 2,
+          "min": 2,
+          "max": 2,
+          "n": 3
+        },
+        "avg_len": {
+          "mean": 160.80392156862746,
+          "min": 148,
+          "max": 181.7058823529412,
+          "n": 3
+        },
+        "exclusive_groups": {
+          "mean": 1.3333333333333333,
+          "min": 1,
+          "max": 2,
+          "n": 3
+        },
+        "max_len": {
+          "mean": 205.66666666666666,
+          "min": 193,
+          "max": 218,
+          "n": 3
+        },
+        "n_claims": {
+          "mean": 17.333333333333332,
+          "min": 17,
+          "max": 18,
+          "n": 3
+        },
+        "n_issues": {
+          "mean": 4,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        },
+        "n_over_guard": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
+        "n_with_null": {
+          "mean": 4,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        },
+        "raw_avg_digits": {
+          "mean": 2,
+          "min": 2,
+          "max": 2,
+          "n": 3
+        },
+        "raw_avg_len": {
+          "mean": 160.80392156862746,
+          "min": 148,
+          "max": 181.7058823529412,
+          "n": 3
+        },
+        "raw_exclusive_groups": {
+          "mean": 1.3333333333333333,
+          "min": 1,
+          "max": 2,
+          "n": 3
+        },
+        "raw_max_len": {
+          "mean": 205.66666666666666,
+          "min": 193,
+          "max": 218,
+          "n": 3
+        },
+        "raw_n_claims": {
+          "mean": 17.333333333333332,
+          "min": 17,
+          "max": 18,
+          "n": 3
+        },
+        "raw_n_issues": {
+          "mean": 4,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        },
+        "raw_n_over_guard": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
+        "raw_n_with_null": {
+          "mean": 4,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        }
+      },
+      "pass": true
+    },
+    {
+      "version": "after-v5",
+      "frame": "aspirin",
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "native_manifest": "experiments\\E1\\after-v5\\aspirin\\sonnet\\moves.json",
+      "input_sha256": "baa06ad3ff2d78f17c108a326ad0849c2064429b37d378e14da9d615c97b0af6",
+      "skill_sha256": "d428470236ba9afc8426a261b3b65ef0971968139a3c1e8b9d309ad0bd7e557b",
+      "samples": [
+        {
+          "sample": 1,
+          "error": "",
+          "metrics": {
+            "n_claims": 13,
+            "avg_len": 162.84615384615384,
+            "avg_digits": 1.3076923076923077,
+            "max_len": 232,
+            "n_over_guard": 0,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 4
+          },
+          "raw_metrics": {
+            "n_claims": 11,
+            "avg_len": 164.9090909090909,
+            "avg_digits": 1.4545454545454546,
+            "max_len": 220,
+            "n_over_guard": 1,
+            "n_with_null": 3,
+            "n_issues": 4,
+            "exclusive_groups": 3
+          },
+          "raw_violations": [
+            {
+              "text": "Net harm is best defined as an unweighted count of all ischemic events versus all major bleeds; this equal-weighting makes aspirin's balance look worse, since bleeds are as frequent as events prevented.",
+              "reasons": [
+                "weighting_rule not specified in answerhood: equal-weighting"
+              ]
+            }
+          ],
+          "pass": false
+        },
+        {
+          "sample": 2,
+          "error": "",
+          "metrics": {
+            "n_claims": 13,
+            "avg_len": 154.3846153846154,
+            "avg_digits": 1.4615384615384615,
+            "max_len": 214,
+            "n_over_guard": 0,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 4
+          },
+          "raw_metrics": {
+            "n_claims": 12,
+            "avg_len": 163.16666666666666,
+            "avg_digits": 1.5,
+            "max_len": 214,
+            "n_over_guard": 0,
+            "n_with_null": 3,
+            "n_issues": 4,
+            "exclusive_groups": 4
+          },
+          "raw_violations": [],
+          "pass": true
+        },
+        {
+          "sample": 3,
+          "error": "",
+          "metrics": {
+            "n_claims": 12,
+            "avg_len": 152.83333333333334,
+            "avg_digits": 1.25,
+            "max_len": 208,
+            "n_over_guard": 0,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 4
+          },
+          "raw_metrics": {
+            "n_claims": 11,
+            "avg_len": 162.27272727272728,
+            "avg_digits": 1.2727272727272727,
+            "max_len": 208,
+            "n_over_guard": 0,
+            "n_with_null": 3,
+            "n_issues": 4,
+            "exclusive_groups": 4
+          },
+          "raw_violations": [],
+          "pass": true
+        }
+      ],
+      "tokens_in": 9175,
+      "tokens_out": 5489,
+      "cost_usd": 0.062052800000000005,
+      "api_calls": 4,
+      "aggregate": {
+        "avg_digits": {
+          "mean": 1.3397435897435896,
+          "min": 1.25,
+          "max": 1.4615384615384615,
+          "n": 3
+        },
+        "avg_len": {
+          "mean": 156.68803418803418,
+          "min": 152.83333333333334,
+          "max": 162.84615384615384,
+          "n": 3
+        },
+        "exclusive_groups": {
+          "mean": 4,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        },
+        "max_len": {
+          "mean": 218,
+          "min": 208,
+          "max": 232,
+          "n": 3
+        },
+        "n_claims": {
+          "mean": 12.666666666666666,
+          "min": 12,
+          "max": 13,
+          "n": 3
+        },
+        "n_issues": {
+          "mean": 4,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        },
+        "n_over_guard": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
+        "n_with_null": {
+          "mean": 4,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        },
+        "raw_avg_digits": {
+          "mean": 1.4090909090909092,
+          "min": 1.2727272727272727,
+          "max": 1.5,
+          "n": 3
+        },
+        "raw_avg_len": {
+          "mean": 163.44949494949495,
+          "min": 162.27272727272728,
+          "max": 164.9090909090909,
+          "n": 3
+        },
+        "raw_exclusive_groups": {
+          "mean": 3.6666666666666665,
+          "min": 3,
+          "max": 4,
+          "n": 3
+        },
+        "raw_max_len": {
+          "mean": 214,
+          "min": 208,
+          "max": 220,
+          "n": 3
+        },
+        "raw_n_claims": {
+          "mean": 11.333333333333334,
+          "min": 11,
+          "max": 12,
+          "n": 3
+        },
+        "raw_n_issues": {
+          "mean": 4,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        },
+        "raw_n_over_guard": {
+          "mean": 0.3333333333333333,
+          "min": 0,
+          "max": 1,
+          "n": 3
+        },
+        "raw_n_with_null": {
+          "mean": 3,
+          "min": 3,
+          "max": 3,
+          "n": 3
+        }
+      },
+      "pass": false
+    },
+    {
+      "version": "after-v5",
+      "frame": "ulez",
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "native_manifest": "experiments\\E1\\after-v5\\ulez\\sol\\moves.json",
+      "input_sha256": "ab7959025877fea6412b397f3bf9a98eed78afba8d5209c066e08e0ba444246b",
+      "skill_sha256": "d428470236ba9afc8426a261b3b65ef0971968139a3c1e8b9d309ad0bd7e557b",
+      "samples": [
+        {
+          "sample": 1,
+          "error": "",
+          "metrics": {
+            "n_claims": 25,
+            "avg_len": 123.36,
+            "avg_digits": 4.84,
+            "max_len": 163,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 5
+          },
+          "raw_metrics": {
+            "n_claims": 25,
+            "avg_len": 123.36,
+            "avg_digits": 4.84,
+            "max_len": 163,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 5
+          },
+          "raw_violations": [],
+          "pass": true
+        },
+        {
+          "sample": 2,
+          "error": "",
+          "metrics": {
+            "n_claims": 23,
+            "avg_len": 111.6086956521739,
+            "avg_digits": 1.3043478260869565,
+            "max_len": 144,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 5
+          },
+          "raw_metrics": {
+            "n_claims": 23,
+            "avg_len": 111.6086956521739,
+            "avg_digits": 1.3043478260869565,
+            "max_len": 144,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 5
+          },
+          "raw_violations": [],
+          "pass": true
+        },
+        {
+          "sample": 3,
+          "error": "",
+          "metrics": {
+            "n_claims": 24,
+            "avg_len": 136.08333333333334,
+            "avg_digits": 4.958333333333333,
+            "max_len": 197,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 4
+          },
+          "raw_metrics": {
+            "n_claims": 24,
+            "avg_len": 136.08333333333334,
+            "avg_digits": 4.958333333333333,
+            "max_len": 197,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 4
+          },
+          "raw_violations": [],
+          "pass": true
+        }
+      ],
+      "tokens_in": 4992,
+      "tokens_out": 6361,
+      "cost_usd": 0.0681127,
+      "api_calls": 3,
+      "aggregate": {
+        "avg_digits": {
+          "mean": 3.7008937198067633,
+          "min": 1.3043478260869565,
+          "max": 4.958333333333333,
+          "n": 3
+        },
+        "avg_len": {
+          "mean": 123.68400966183574,
+          "min": 111.6086956521739,
+          "max": 136.08333333333334,
+          "n": 3
+        },
+        "exclusive_groups": {
+          "mean": 4.666666666666667,
+          "min": 4,
+          "max": 5,
+          "n": 3
+        },
+        "max_len": {
+          "mean": 168,
+          "min": 144,
+          "max": 197,
+          "n": 3
+        },
+        "n_claims": {
+          "mean": 24,
+          "min": 23,
+          "max": 25,
+          "n": 3
+        },
+        "n_issues": {
+          "mean": 6,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "n_over_guard": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
+        "n_with_null": {
+          "mean": 6,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "raw_avg_digits": {
+          "mean": 3.7008937198067633,
+          "min": 1.3043478260869565,
+          "max": 4.958333333333333,
+          "n": 3
+        },
+        "raw_avg_len": {
+          "mean": 123.68400966183574,
+          "min": 111.6086956521739,
+          "max": 136.08333333333334,
+          "n": 3
+        },
+        "raw_exclusive_groups": {
+          "mean": 4.666666666666667,
+          "min": 4,
+          "max": 5,
+          "n": 3
+        },
+        "raw_max_len": {
+          "mean": 168,
+          "min": 144,
+          "max": 197,
+          "n": 3
+        },
+        "raw_n_claims": {
+          "mean": 24,
+          "min": 23,
+          "max": 25,
+          "n": 3
+        },
+        "raw_n_issues": {
+          "mean": 6,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "raw_n_over_guard": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
+        "raw_n_with_null": {
+          "mean": 6,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        }
+      },
+      "pass": true
+    },
+    {
+      "version": "after-v5",
+      "frame": "ulez",
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "native_manifest": "experiments\\E1\\after-v5\\ulez\\sonnet\\moves.json",
+      "input_sha256": "ab7959025877fea6412b397f3bf9a98eed78afba8d5209c066e08e0ba444246b",
+      "skill_sha256": "d428470236ba9afc8426a261b3b65ef0971968139a3c1e8b9d309ad0bd7e557b",
+      "samples": [
+        {
+          "sample": 1,
+          "error": "",
+          "metrics": {
+            "n_claims": 17,
+            "avg_len": 127.76470588235294,
+            "avg_digits": 1.8823529411764706,
+            "max_len": 174,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 3
+          },
+          "raw_metrics": {
+            "n_claims": 17,
+            "avg_len": 127.76470588235294,
+            "avg_digits": 1.8823529411764706,
+            "max_len": 174,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 3
+          },
+          "raw_violations": [],
+          "pass": true
+        },
+        {
+          "sample": 2,
+          "error": "",
+          "metrics": {
+            "n_claims": 17,
+            "avg_len": 127.29411764705883,
+            "avg_digits": 1.7647058823529411,
+            "max_len": 188,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 3
+          },
+          "raw_metrics": {
+            "n_claims": 16,
+            "avg_len": 132.1875,
+            "avg_digits": 1.8125,
+            "max_len": 188,
+            "n_over_guard": 0,
+            "n_with_null": 5,
+            "n_issues": 6,
+            "exclusive_groups": 4
+          },
+          "raw_violations": [],
+          "pass": true
+        },
+        {
+          "sample": 3,
+          "error": "",
+          "metrics": {
+            "n_claims": 17,
+            "avg_len": 125.23529411764706,
+            "avg_digits": 1.8235294117647058,
+            "max_len": 191,
+            "n_over_guard": 0,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 3
+          },
+          "raw_metrics": {
+            "n_claims": 16,
+            "avg_len": 130,
+            "avg_digits": 1.875,
+            "max_len": 191,
+            "n_over_guard": 0,
+            "n_with_null": 5,
+            "n_issues": 6,
+            "exclusive_groups": 3
+          },
+          "raw_violations": [],
+          "pass": true
+        }
+      ],
+      "tokens_in": 7605,
+      "tokens_out": 5570,
+      "cost_usd": 0.06251960000000001,
+      "api_calls": 3,
+      "aggregate": {
+        "avg_digits": {
+          "mean": 1.8235294117647058,
+          "min": 1.7647058823529411,
+          "max": 1.8823529411764706,
+          "n": 3
+        },
+        "avg_len": {
+          "mean": 126.76470588235294,
+          "min": 125.23529411764706,
+          "max": 127.76470588235294,
+          "n": 3
+        },
+        "exclusive_groups": {
+          "mean": 3,
+          "min": 3,
+          "max": 3,
+          "n": 3
+        },
+        "max_len": {
+          "mean": 184.33333333333334,
+          "min": 174,
+          "max": 191,
+          "n": 3
+        },
+        "n_claims": {
+          "mean": 17,
+          "min": 17,
+          "max": 17,
+          "n": 3
+        },
+        "n_issues": {
+          "mean": 6,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "n_over_guard": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
+        "n_with_null": {
+          "mean": 6,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "raw_avg_digits": {
+          "mean": 1.8566176470588236,
+          "min": 1.8125,
+          "max": 1.8823529411764706,
+          "n": 3
+        },
+        "raw_avg_len": {
+          "mean": 129.984068627451,
+          "min": 127.76470588235294,
+          "max": 132.1875,
+          "n": 3
+        },
+        "raw_exclusive_groups": {
+          "mean": 3.3333333333333335,
+          "min": 3,
+          "max": 4,
+          "n": 3
+        },
+        "raw_max_len": {
+          "mean": 184.33333333333334,
+          "min": 174,
+          "max": 191,
+          "n": 3
+        },
+        "raw_n_claims": {
+          "mean": 16.333333333333332,
+          "min": 16,
+          "max": 17,
+          "n": 3
+        },
+        "raw_n_issues": {
+          "mean": 6,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "raw_n_over_guard": {
+          "mean": 0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
+        "raw_n_with_null": {
+          "mean": 5.333333333333333,
+          "min": 5,
+          "max": 6,
+          "n": 3
+        }
+      },
+      "pass": true
+    },
+    {
+      "version": "before",
+      "frame": "aspirin",
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "native_manifest": "experiments\\E1\\before\\aspirin\\sol\\moves.json",
+      "input_sha256": "baa06ad3ff2d78f17c108a326ad0849c2064429b37d378e14da9d615c97b0af6",
+      "skill_sha256": "b821f900754e04f69c44395ce232779697b03bbc4928128a55176437b3e8103b",
+      "samples": [
+        {
+          "sample": 1,
+          "error": "",
+          "metrics": {
+            "n_claims": 17,
+            "avg_len": 311.8235294117647,
+            "avg_digits": 5.647058823529412,
+            "max_len": 418,
+            "n_over_guard": 17,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 1
+          },
+          "raw_metrics": {
+            "n_claims": 17,
+            "avg_len": 311.8235294117647,
+            "avg_digits": 5.647058823529412,
+            "max_len": 418,
+            "n_over_guard": 17,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 1
+          },
+          "raw_violations": [
+            {
+              "text": "Among adults aged 60 years and older without established cardiovascular disease, initiating aspirin 100 mg daily rather than no aspirin increases five-year net adverse-event risk by at least 1 per 1,000 people, defining an adverse event as a person's first myocardial infarction, ischemic stroke, cardiovascular death, intracranial hemorrhage, or major extracranial bleed and counting each person only once.",
+              "reasons": [
+                "length 407 exceeds 250 characters",
+                "digit count 10 exceeds 8",
+                "dose not specified in answerhood: 100 mg"
+              ]
+            },
+            {
+              "text": "Among adults aged 60 years and older without established cardiovascular disease, initiating aspirin 100 mg daily rather than no aspirin decreases five-year net adverse-event risk by at least 1 per 1,000 people, defining an adverse event as a person's first myocardial infarction, ischemic stroke, cardiovascular death, intracranial hemorrhage, or major extracranial bleed and counting each person only once.",
+              "reasons": [
+                "length 407 exceeds 250 characters",
+                "digit count 10 exceeds 8",
+                "dose not specified in answerhood: 100 mg"
+              ]
+            },
+            {
+              "text": "For adults aged 60 years and older without established cardiovascular disease, the US Preventive Services Task Force recommends against initiating low-dose aspirin for primary prevention because it judges initiation to have no net benefit for net cardiovascular harm.",
+              "reasons": [
+                "length 267 exceeds 250 characters"
+              ]
+            },
+            {
+              "text": "Among adults aged 60 years and older without established cardiovascular disease, initiating aspirin 100 mg daily changes five-year risk of a first myocardial infarction, ischemic stroke, cardiovascular death, intracranial hemorrhage, or major extracranial bleed by less than 1 per 1,000 people in either direction, counting each person only once.",
+              "reasons": [
+                "length 346 exceeds 250 characters",
+                "digit count 10 exceeds 8",
+                "dose not specified in answerhood: 100 mg"
+              ]
+            },
+            {
+              "text": "There is no single direction of effect on net cardiovascular harm across defensible endpoint definitions: counting all serious events equally and weighting events by their fatality and disability consequences can give opposite benefit\u2013harm conclusions for the same older population and follow-up period.",
+              "reasons": [
+                "length 303 exceeds 250 characters"
+              ]
+            },
+            {
+              "text": "An unweighted, person-level endpoint can define net harm as the five-year risk of a first myocardial infarction, ischemic stroke, cardiovascular death, intracranial hemorrhage, or major extracranial bleed; a fatal event that meets multiple categories contributes only one event to the composite.",
+              "reasons": [
+                "length 295 exceeds 250 characters"
+              ]
+            },
+            {
+              "text": "A severity-weighted endpoint can define net harm as expected quality-adjusted life-years lost over a specified horizon, assigning consequences to fatal events, nonfatal events, and persistent disability through mutually exclusive health states rather than summing overlapping event labels.",
+              "reasons": [
+                "length 289 exceeds 250 characters"
+              ]
+            },
+            {
+              "text": "For the same population and five-year follow-up, an unweighted first-event composite and a severity-weighted health-state analysis can yield opposite signs for aspirin's net effect because the events prevented and caused have different mortality and disability consequences.",
+              "reasons": [
+                "length 274 exceeds 250 characters",
+                "endpoint_definition not specified in answerhood: first-event composite and a severity-weighted health-state analysis can yield opposite signs for aspirin's net effect because the events prevented and caused have different mortali"
+              ]
+            },
+            {
+              "text": "Neither a non-overlapping cardiovascular-and-bleeding composite nor an explicit severity-weighted endpoint is defined in the reported aspirin-versus-control comparison, so that comparison reports separate outcomes but no operationalized net-harm outcome.",
+              "reasons": [
+                "length 254 exceeds 250 characters"
+              ]
+            },
+            {
+              "text": "Among adults aged 60 years and older without established cardiovascular disease, initiating aspirin 100 mg daily reduces the five-year cumulative risk of first myocardial infarction by at least 10% relative to no aspirin; the absolute reduction is therefore at least 0.10 times the corresponding untreated five-year risk.",
+              "reasons": [
+                "length 321 exceeds 250 characters",
+                "digit count 10 exceeds 8",
+                "dose not specified in answerhood: 100 mg"
+              ]
+            },
+            {
+              "text": "Among adults aged 60 years and older without established cardiovascular disease, initiating aspirin 100 mg daily reduces the five-year cumulative risk of first ischemic stroke by at least 10% relative to no aspirin; the absolute reduction is therefore at least 0.10 times the corresponding untreated five-year risk.",
+              "reasons": [
+                "length 315 exceeds 250 characters",
+                "digit count 10 exceeds 8",
+                "dose not specified in answerhood: 100 mg"
+              ]
+            },
+            {
+              "text": "Among adults aged 60 years and older without established cardiovascular disease, initiating aspirin 100 mg daily reduces five-year cardiovascular mortality by at least 5% relative to no aspirin; the absolute reduction is therefore at least 0.05 times the corresponding untreated five-year risk.",
+              "reasons": [
+                "length 294 exceeds 250 characters",
+                "digit count 9 exceeds 8",
+                "dose not specified in answerhood: 100 mg"
+              ]
+            },
+            {
+              "text": "Among adults aged 60 years and older without established cardiovascular disease, initiating aspirin 100 mg daily has no causal effect on five-year risks of first myocardial infarction, first ischemic stroke, or cardiovascular death compared with no aspirin.",
+              "reasons": [
+                "length 257 exceeds 250 characters",
+                "dose not specified in answerhood: 100 mg"
+              ]
+            },
+            {
+              "text": "Among adults aged 60 years and older without established cardiovascular disease, initiating aspirin 100 mg daily increases the five-year cumulative risk of intracranial hemorrhage by at least 20% relative to no aspirin; the absolute increase is therefore at least 0.20 times the corresponding untreated five-year risk.",
+              "reasons": [
+                "length 318 exceeds 250 characters",
+                "digit count 10 exceeds 8",
+                "dose not specified in answerhood: 100 mg"
+              ]
+            },
+            {
+              "text": "Among adults aged 60 years and older without established cardiovascular disease, initiating aspirin 100 mg daily increases the five-year cumulative risk of major extracranial bleeding by at least 20% relative to no aspirin, defining major bleeding as fatal bleeding or bleeding requiring hospitalization or transfusion; the absolute increase is therefore at least 0.20 times the corresponding untreated five-year risk.",
+              "reasons": [
+                "length 418 exceeds 250 characters",
+                "digit count 10 exceeds 8",
+                "dose not specified in answerhood: 100 mg"
+              ]
+            },
+            {
+              "text": "Among adults aged 60 years and older without established cardiovascular disease, initiating aspirin 100 mg daily increases five-year fatal bleeding risk relative to no aspirin, with fatal intracranial and fatal extracranial bleeding classified separately and each death counted once.",
+              "reasons": [
+                "length 283 exceeds 250 characters",
+                "dose not specified in answerhood: 100 mg"
+              ]
+            },
+            {
+              "text": "Among adults aged 60 years and older without established cardiovascular disease, initiating aspirin 100 mg daily has no causal effect on five-year risks of intracranial hemorrhage, major extracranial bleeding, or fatal bleeding compared with no aspirin.",
+              "reasons": [
+                "length 253 exceeds 250 characters",
+                "dose not specified in answerhood: 100 mg"
+              ]
+            }
+          ],
+          "pass": false
+        },
+        {
+          "sample": 2,
+          "error": "",
+          "metrics": {
+            "n_claims": 18,
+            "avg_len": 332.1111111111111,
+            "avg_digits": 8.777777777777779,
+            "max_len": 477,
+            "n_over_guard": 17,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 2
+          },
+          "raw_metrics": {
+            "n_claims": 18,
+            "avg_len": 332.1111111111111,
+            "avg_digits": 8.777777777777779,
+            "max_len": 477,
+            "n_over_guard": 17,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 2
+          },
+          "raw_violations": [
+            {
+              "text": "In adults aged 60 years and older without established cardiovascular disease, initiating aspirin 75\u2013100 mg daily rather than no aspirin reduces the five-year absolute risk of a first net-harm event by at least 1 per 1,000 people. A net-harm event is myocardial infarction, ischemic stroke, cardiovascular death, intracranial hemorrhage, or major extracranial bleeding; each person contributes only their first qualifying event, and all qualifying events receive equal weight.",
+              "reasons": [
+                "length 475 exceeds 250 characters",
+                "digit count 12 exceeds 8",
+                "dose not specified in answerhood: 75\u2013100 mg",
+                "weighting_rule not specified in answerhood: equal weight"
+              ]
+            },
+            {
+              "text": "In adults aged 60 years and older without established cardiovascular disease, initiating aspirin 75\u2013100 mg daily rather than no aspirin increases the five-year absolute risk of a first net-harm event by at least 1 per 1,000 people. A net-harm event is myocardial infarction, ischemic stroke, cardiovascular death, intracranial hemorrhage, or major extracranial bleeding; each person contributes only their first qualifying event, and all qualifying events receive equal weight.",
+              "reasons": [
+                "length 477 exceeds 250 characters",
+                "digit count 12 exceeds 8",
+                "dose not specified in answerhood: 75\u2013100 mg",
+                "weighting_rule not specified in answerhood: equal weight"
+              ]
+            },
+            {
+              "text": "The US Preventive Services Task Force recommends against initiating low-dose aspirin for primary prevention in adults aged 60 years and older without established cardiovascular disease, judging that initiation provides no net benefit for net cardiovascular harm when cardiovascular benefits and treatment-related bleeding harms are considered together.",
+              "reasons": [
+                "length 352 exceeds 250 characters"
+              ]
+            },
+            {
+              "text": "In adults aged 60 years and older without established cardiovascular disease, initiating aspirin 75\u2013100 mg daily rather than no aspirin leaves the five-year absolute risk of a first net-harm event unchanged. The composite includes myocardial infarction, ischemic stroke, cardiovascular death, intracranial hemorrhage, and major extracranial bleeding, with each person counted once and all qualifying events equally weighted.",
+              "reasons": [
+                "length 424 exceeds 250 characters",
+                "dose not specified in answerhood: 75\u2013100 mg",
+                "endpoint_definition not specified in answerhood: composite includes myocardial infarction, ischemic stroke, cardiovascular death, intracranial hemorrhage, and major extracranial bleeding, with each person counted once and all qua",
+                "weighting_rule not specified in answerhood: equally weighted"
+              ]
+            },
+            {
+              "text": "In adults aged 60 years and older without established cardiovascular disease, the five-year absolute difference from initiating aspirin 75\u2013100 mg daily is less than 1 event per 1,000 people in either direction for an equally weighted, first-event composite of myocardial infarction, ischemic stroke, cardiovascular death, intracranial hemorrhage, and major extracranial bleeding.",
+              "reasons": [
+                "length 379 exceeds 250 characters",
+                "digit count 12 exceeds 8",
+                "dose not specified in answerhood: 75\u2013100 mg",
+                "endpoint_definition not specified in answerhood: first-event composite of myocardial infarction, ischemic stroke, cardiovascular death, intracranial hemorrhage, and major extracranial bleeding",
+                "weighting_rule not specified in answerhood: equally weighted"
+              ]
+            },
+            {
+              "text": "An unweighted first-event composite operationalizes net cardiovascular harm as the five-year probability of at least one myocardial infarction, ischemic stroke, cardiovascular death, intracranial hemorrhage, or major extracranial bleed. It counts each person once, gives fatal and nonfatal qualifying events equal weight, and does not add cardiovascular death again when it follows an already counted event.",
+              "reasons": [
+                "length 407 exceeds 250 characters",
+                "endpoint_definition not specified in answerhood: first-event composite operationalizes net cardiovascular harm as the five-year probability of at least one myocardial infarction, ischemic stroke, cardiovascular death, intracrania",
+                "weighting_rule not specified in answerhood: counts each person once",
+                "weighting_rule not specified in answerhood: equal weight"
+              ]
+            },
+            {
+              "text": "A severity-weighted operationalization measures net cardiovascular harm as quality-adjusted life-years lost over a common follow-up period from myocardial infarction, ischemic stroke, cardiovascular death, intracranial hemorrhage, and major extracranial bleeding. Death contributes lost remaining survival within that period, nonfatal events contribute disability losses, and joint health states prevent overlapping disabilities from being counted twice.",
+              "reasons": [
+                "length 454 exceeds 250 characters"
+              ]
+            },
+            {
+              "text": "For at least one age-and-risk stratum among adults aged 60 years and older, the estimated direction of aspirin's net effect differs between an equally weighted first-event composite and a quality-adjusted-life-year measure applied to the same population, regimen, and follow-up.",
+              "reasons": [
+                "length 278 exceeds 250 characters",
+                "endpoint_definition not specified in answerhood: first-event composite and a quality-adjusted-life-year measure applied to the same population, regimen, and follow-up",
+                "weighting_rule not specified in answerhood: equally weighted"
+              ]
+            },
+            {
+              "text": "In adults aged 60 years and older without established cardiovascular disease, initiating aspirin 75\u2013100 mg daily rather than no aspirin reduces first myocardial infarction by at least 10% relatively and at least 1 event per 1,000 people absolutely over five years.",
+              "reasons": [
+                "length 264 exceeds 250 characters",
+                "digit count 14 exceeds 8",
+                "dose not specified in answerhood: 75\u2013100 mg",
+                "followup_window not specified in answerhood: over five years"
+              ]
+            },
+            {
+              "text": "In adults aged 60 years and older without established cardiovascular disease, initiating aspirin 75\u2013100 mg daily rather than no aspirin reduces first ischemic stroke by at least 10% relatively and at least 1 event per 1,000 people absolutely over five years.",
+              "reasons": [
+                "length 258 exceeds 250 characters",
+                "digit count 14 exceeds 8",
+                "dose not specified in answerhood: 75\u2013100 mg",
+                "followup_window not specified in answerhood: over five years"
+              ]
+            },
+            {
+              "text": "In adults aged 60 years and older without established cardiovascular disease, initiating aspirin 75\u2013100 mg daily rather than no aspirin changes five-year cardiovascular mortality by less than 1 death per 1,000 people in either direction.",
+              "reasons": [
+                "digit count 12 exceeds 8",
+                "dose not specified in answerhood: 75\u2013100 mg"
+              ]
+            },
+            {
+              "text": "In adults aged 60 years and older without established cardiovascular disease, initiating aspirin 75\u2013100 mg daily rather than no aspirin reduces five-year cardiovascular mortality by at least 1 death per 1,000 people.",
+              "reasons": [
+                "digit count 12 exceeds 8",
+                "dose not specified in answerhood: 75\u2013100 mg"
+              ]
+            },
+            {
+              "text": "In adults aged 60 years and older without established cardiovascular disease, initiating aspirin 75\u2013100 mg daily rather than no aspirin has no causal effect over five years on first myocardial infarction, first ischemic stroke, or cardiovascular death.",
+              "reasons": [
+                "length 252 exceeds 250 characters",
+                "dose not specified in answerhood: 75\u2013100 mg",
+                "followup_window not specified in answerhood: over five years"
+              ]
+            },
+            {
+              "text": "In adults aged 60 years and older without established cardiovascular disease, initiating aspirin 75\u2013100 mg daily rather than no aspirin increases intracranial hemorrhage by at least 20% relatively and at least 1 event per 1,000 people absolutely over five years.",
+              "reasons": [
+                "length 262 exceeds 250 characters",
+                "digit count 14 exceeds 8",
+                "dose not specified in answerhood: 75\u2013100 mg",
+                "followup_window not specified in answerhood: over five years"
+              ]
+            },
+            {
+              "text": "In adults aged 60 years and older without established cardiovascular disease, initiating aspirin 75\u2013100 mg daily rather than no aspirin increases major extracranial bleeding by at least 20% relatively and at least 3 events per 1,000 people absolutely over five years, defining major bleeding as fatal bleeding or bleeding requiring hospitalization or transfusion.",
+              "reasons": [
+                "length 363 exceeds 250 characters",
+                "digit count 14 exceeds 8",
+                "dose not specified in answerhood: 75\u2013100 mg",
+                "followup_window not specified in answerhood: over five years"
+              ]
+            },
+            {
+              "text": "In adults aged 60 years and older without established cardiovascular disease, initiating aspirin 75\u2013100 mg daily rather than no aspirin increases five-year nonfatal major bleeding by at least 3 events per 1,000 people while changing fatal bleeding by less than 1 death per 1,000 people in either direction. Major bleeding includes intracranial hemorrhage and extracranial bleeding requiring hospitalization or transfusion.",
+              "reasons": [
+                "length 422 exceeds 250 characters",
+                "digit count 17 exceeds 8",
+                "dose not specified in answerhood: 75\u2013100 mg"
+              ]
+            },
+            {
+              "text": "In adults aged 60 years and older without established cardiovascular disease, initiating aspirin 75\u2013100 mg daily rather than no aspirin has no causal effect over five years on intracranial hemorrhage or major extracranial bleeding.",
+              "reasons": [
+                "dose not specified in answerhood: 75\u2013100 mg",
+                "followup_window not specified in answerhood: over five years"
+              ]
+            }
+          ],
+          "pass": false
+        },
+        {
+          "sample": 3,
+          "error": "",
+          "metrics": {
+            "n_claims": 16,
+            "avg_len": 313.5625,
+            "avg_digits": 9.25,
+            "max_len": 419,
+            "n_over_guard": 15,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 1
+          },
+          "raw_metrics": {
+            "n_claims": 16,
+            "avg_len": 313.5625,
+            "avg_digits": 9.25,
+            "max_len": 419,
+            "n_over_guard": 15,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 1
+          },
+          "raw_violations": [
+            {
+              "text": "Among adults aged 60 years and older without established cardiovascular disease, initiating aspirin 75\u2013100 mg daily increases five-year net harm by at least 1 additional affected person per 1,000 compared with no initiation, when net harm is defined as the risk of a first myocardial infarction, ischemic stroke, cardiovascular death, intracranial hemorrhage, or major extracranial bleed, with each person counted once.",
+              "reasons": [
+                "length 419 exceeds 250 characters",
+                "digit count 12 exceeds 8",
+                "dose not specified in answerhood: 75\u2013100 mg"
+              ]
+            },
+            {
+              "text": "Among adults aged 60 years and older without established cardiovascular disease, initiating aspirin 75\u2013100 mg daily decreases five-year net harm by at least 1 fewer affected person per 1,000 compared with no initiation, when net harm is defined as the risk of a first myocardial infarction, ischemic stroke, cardiovascular death, intracranial hemorrhage, or major extracranial bleed, with each person counted once.",
+              "reasons": [
+                "length 414 exceeds 250 characters",
+                "digit count 12 exceeds 8",
+                "dose not specified in answerhood: 75\u2013100 mg"
+              ]
+            },
+            {
+              "text": "The US Preventive Services Task Force recommends against initiating low-dose aspirin for primary prevention in adults aged 60 years and older without established cardiovascular disease, concluding that initiation has no net benefit for net cardiovascular harm after cardiovascular benefits and bleeding harms are considered.",
+              "reasons": [
+                "length 324 exceeds 250 characters"
+              ]
+            },
+            {
+              "text": "Among adults aged 60 years and older without established cardiovascular disease, initiating aspirin 75\u2013100 mg daily changes five-year net harm by less than 1 affected person per 1,000 in either direction, using the same first-event composite of myocardial infarction, ischemic stroke, cardiovascular death, intracranial hemorrhage, and major extracranial bleeding.",
+              "reasons": [
+                "length 364 exceeds 250 characters",
+                "digit count 12 exceeds 8",
+                "dose not specified in answerhood: 75\u2013100 mg",
+                "endpoint_definition not specified in answerhood: first-event composite of myocardial infarction, ischemic stroke, cardiovascular death, intracranial hemorrhage, and major extracranial bleeding"
+              ]
+            },
+            {
+              "text": "An unweighted first-event composite defines net harm as the probability of experiencing at least one myocardial infarction, ischemic stroke, cardiovascular death, intracranial hemorrhage, or major extracranial bleed during a fixed follow-up period; each person contributes at most once, and fatal and nonfatal events receive equal weight.",
+              "reasons": [
+                "length 338 exceeds 250 characters",
+                "endpoint_definition not specified in answerhood: first-event composite defines net harm as the probability of experiencing at least one myocardial infarction, ischemic stroke, cardiovascular death, intracranial hemorrhage, or maj",
+                "weighting_rule not specified in answerhood: equal weight"
+              ]
+            },
+            {
+              "text": "A quality-adjusted survival definition of net harm incorporates cardiovascular events and bleeding through their effects on survival and health-related quality of life, distinguishes fatal from nonfatal outcomes, and assigns each person's time to mutually exclusive health states rather than summing overlapping event losses.",
+              "reasons": [
+                "length 325 exceeds 250 characters"
+              ]
+            },
+            {
+              "text": "For aspirin initiation in adults aged 60 years and older, replacing an equal-event first-event composite with quality-adjusted survival changes the direction of the estimated net effect in at least one age and baseline-risk stratum when the population, regimen, and follow-up are held constant.",
+              "reasons": [
+                "length 294 exceeds 250 characters",
+                "endpoint_definition not specified in answerhood: first-event composite with quality-adjusted survival changes the direction of the estimated net effect in at least one age and baseline-risk stratum when the population, regimen, a"
+              ]
+            },
+            {
+              "text": "Among adults aged 60 years and older without established cardiovascular disease, initiating aspirin 75\u2013100 mg daily reduces the five-year risk of first myocardial infarction by 10%\u201320% relatively and by 1\u20135 events per 1,000 people absolutely compared with no initiation.",
+              "reasons": [
+                "length 270 exceeds 250 characters",
+                "digit count 17 exceeds 8",
+                "dose not specified in answerhood: 75\u2013100 mg"
+              ]
+            },
+            {
+              "text": "Among adults aged 60 years and older without established cardiovascular disease, initiating aspirin 75\u2013100 mg daily reduces the five-year risk of first ischemic stroke by 5%\u201320% relatively and by 1\u20134 events per 1,000 people absolutely compared with no initiation.",
+              "reasons": [
+                "length 263 exceeds 250 characters",
+                "digit count 16 exceeds 8",
+                "dose not specified in answerhood: 75\u2013100 mg"
+              ]
+            },
+            {
+              "text": "Among adults aged 60 years and older without established cardiovascular disease, initiating aspirin 75\u2013100 mg daily changes five-year cardiovascular mortality by less than 1 death per 1,000 people in either direction and by less than 5% relatively compared with no initiation.",
+              "reasons": [
+                "length 276 exceeds 250 characters",
+                "digit count 13 exceeds 8",
+                "dose not specified in answerhood: 75\u2013100 mg"
+              ]
+            },
+            {
+              "text": "Among adults aged 60 years and older without established cardiovascular disease, initiating aspirin 75\u2013100 mg daily has no causal effect on the five-year risks of first myocardial infarction, first ischemic stroke, or cardiovascular death compared with no initiation.",
+              "reasons": [
+                "length 267 exceeds 250 characters",
+                "dose not specified in answerhood: 75\u2013100 mg"
+              ]
+            },
+            {
+              "text": "Among adults aged 60 years and older without established cardiovascular disease, initiating aspirin 75\u2013100 mg daily increases five-year intracranial hemorrhage risk by 20%\u201350% relatively and by 1\u20133 events per 1,000 people absolutely compared with no initiation, counting fatal and nonfatal intracranial hemorrhages together.",
+              "reasons": [
+                "length 324 exceeds 250 characters",
+                "digit count 17 exceeds 8",
+                "dose not specified in answerhood: 75\u2013100 mg"
+              ]
+            },
+            {
+              "text": "Among adults aged 60 years and older without established cardiovascular disease, initiating aspirin 75\u2013100 mg daily increases five-year major extracranial bleeding risk by 30%\u201370% relatively and by 5\u201315 events per 1,000 people absolutely compared with no initiation, defining major extracranial bleeding as bleeding outside the skull that causes death or requires hospitalization or transfusion.",
+              "reasons": [
+                "length 395 exceeds 250 characters",
+                "digit count 18 exceeds 8",
+                "dose not specified in answerhood: 75\u2013100 mg"
+              ]
+            },
+            {
+              "text": "For adults aged 60 years and older without established cardiovascular disease receiving aspirin 75\u2013100 mg daily, the absolute five-year excess of major bleeding is greater in those aged 70 years and older than in those aged 60\u201369 years when other baseline bleeding-risk factors are standardized to the same distribution.",
+              "reasons": [
+                "length 320 exceeds 250 characters",
+                "digit count 13 exceeds 8",
+                "dose not specified in answerhood: 75\u2013100 mg"
+              ]
+            },
+            {
+              "text": "Among adults aged 60 years and older without established cardiovascular disease, initiating aspirin 75\u2013100 mg daily has no causal effect on five-year intracranial hemorrhage or major extracranial bleeding risk compared with no initiation.",
+              "reasons": [
+                "dose not specified in answerhood: 75\u2013100 mg"
+              ]
+            }
+          ],
+          "pass": false
+        }
+      ],
+      "tokens_in": 4704,
+      "tokens_out": 7935,
+      "cost_usd": 0.0835935,
+      "api_calls": 3,
+      "aggregate": {
+        "avg_digits": {
+          "mean": 7.8916122004357305,
+          "min": 5.647058823529412,
+          "max": 9.25,
+          "n": 3
+        },
+        "avg_len": {
+          "mean": 319.16571350762524,
+          "min": 311.8235294117647,
+          "max": 332.1111111111111,
+          "n": 3
+        },
+        "exclusive_groups": {
+          "mean": 1.3333333333333333,
+          "min": 1,
+          "max": 2,
+          "n": 3
+        },
+        "max_len": {
+          "mean": 438,
+          "min": 418,
+          "max": 477,
+          "n": 3
+        },
+        "n_claims": {
+          "mean": 17,
+          "min": 16,
+          "max": 18,
+          "n": 3
+        },
+        "n_issues": {
+          "mean": 4,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        },
+        "n_over_guard": {
+          "mean": 16.333333333333332,
+          "min": 15,
+          "max": 17,
+          "n": 3
+        },
+        "n_with_null": {
+          "mean": 4,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        },
+        "raw_avg_digits": {
+          "mean": 7.8916122004357305,
+          "min": 5.647058823529412,
+          "max": 9.25,
+          "n": 3
+        },
+        "raw_avg_len": {
+          "mean": 319.16571350762524,
+          "min": 311.8235294117647,
+          "max": 332.1111111111111,
+          "n": 3
+        },
+        "raw_exclusive_groups": {
+          "mean": 1.3333333333333333,
+          "min": 1,
+          "max": 2,
+          "n": 3
+        },
+        "raw_max_len": {
+          "mean": 438,
+          "min": 418,
+          "max": 477,
+          "n": 3
+        },
+        "raw_n_claims": {
+          "mean": 17,
+          "min": 16,
+          "max": 18,
+          "n": 3
+        },
+        "raw_n_issues": {
+          "mean": 4,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        },
+        "raw_n_over_guard": {
+          "mean": 16.333333333333332,
+          "min": 15,
+          "max": 17,
+          "n": 3
+        },
+        "raw_n_with_null": {
+          "mean": 4,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        }
+      },
+      "pass": false
+    },
+    {
+      "version": "before",
+      "frame": "aspirin",
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "native_manifest": "experiments\\E1\\before\\aspirin\\sonnet\\moves.json",
+      "input_sha256": "baa06ad3ff2d78f17c108a326ad0849c2064429b37d378e14da9d615c97b0af6",
+      "skill_sha256": "b821f900754e04f69c44395ce232779697b03bbc4928128a55176437b3e8103b",
+      "samples": [
+        {
+          "sample": 1,
+          "error": "",
+          "metrics": {
+            "n_claims": 14,
+            "avg_len": 206,
+            "avg_digits": 3.0714285714285716,
+            "max_len": 333,
+            "n_over_guard": 6,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 4
+          },
+          "raw_metrics": {
+            "n_claims": 14,
+            "avg_len": 206,
+            "avg_digits": 3.0714285714285716,
+            "max_len": 333,
+            "n_over_guard": 6,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 4
+          },
+          "raw_violations": [
+            {
+              "text": "In adults aged 60 and over without established cardiovascular disease, initiating low-dose aspirin increases net cardiovascular harm over 5 years: the excess of intracranial and major extracranial bleeding outweighs the reduction in myocardial infarction and ischemic stroke under an explicit severity-weighting rule.",
+              "reasons": [
+                "length 317 exceeds 250 characters",
+                "followup_window not specified in answerhood: over 5 years"
+              ]
+            },
+            {
+              "text": "In adults aged 60 and over without established cardiovascular disease, initiating low-dose aspirin reduces net cardiovascular harm over 5-10 years, because the absolute reduction in MI and ischemic stroke exceeds the absolute excess of serious bleeding, at least in those with high baseline cardiovascular risk and low bleeding risk.",
+              "reasons": [
+                "length 333 exceeds 250 characters",
+                "followup_window not specified in answerhood: over 5-10 years"
+              ]
+            },
+            {
+              "text": "Net harm is best defined as a severity-weighted combination of fatal and nonfatal MI, ischemic stroke and cardiovascular death against intracranial hemorrhage and major extracranial bleeding, with fatal events weighted more heavily and overlapping events counted once per participant.",
+              "reasons": [
+                "length 284 exceeds 250 characters"
+              ]
+            },
+            {
+              "text": "In adults aged 60 and over without cardiovascular disease, low-dose aspirin initiation reduces first MI and ischemic stroke by about 10-20% in relative terms, an absolute reduction of only a few events per 1000 over 5 years, with no clear reduction in cardiovascular death.",
+              "reasons": [
+                "length 273 exceeds 250 characters",
+                "digit count 11 exceeds 8",
+                "followup_window not specified in answerhood: over 5 years"
+              ]
+            },
+            {
+              "text": "In adults aged 60 and over, aspirin initiation produces no statistically significant reduction in the composite of first MI, ischemic stroke and cardiovascular death over about 5 years (ASPREE: HR about 0.95, CI including 1).",
+              "reasons": [
+                "endpoint_definition not specified in answerhood: composite of first MI, ischemic stroke and cardiovascular death over about 5 years (ASPREE: HR about 0.95, CI including 1)",
+                "followup_window not specified in answerhood: over about 5 years"
+              ]
+            },
+            {
+              "text": "Initiating low-dose aspirin increases major extracranial bleeding by about 30-50% in relative terms, about 2-4 additional events per 1000 over 5 years in adults aged 60 and over, and also increases intracranial hemorrhage.",
+              "reasons": [
+                "digit count 13 exceeds 8",
+                "followup_window not specified in answerhood: over 5 years"
+              ]
+            }
+          ],
+          "pass": false
+        },
+        {
+          "sample": 2,
+          "error": "",
+          "metrics": {
+            "n_claims": 14,
+            "avg_len": 213.5,
+            "avg_digits": 2.9285714285714284,
+            "max_len": 336,
+            "n_over_guard": 6,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 4
+          },
+          "raw_metrics": {
+            "n_claims": 14,
+            "avg_len": 213.5,
+            "avg_digits": 2.9285714285714284,
+            "max_len": 336,
+            "n_over_guard": 6,
+            "n_with_null": 4,
+            "n_issues": 4,
+            "exclusive_groups": 4
+          },
+          "raw_violations": [
+            {
+              "text": "In adults aged 60 and over without established cardiovascular disease, initiating low-dose aspirin increases net cardiovascular harm over 5 to 10 years: excess intracranial and major extracranial bleeding outweighs the reduction in myocardial infarction and ischemic stroke when events are combined under an explicit severity weighting.",
+              "reasons": [
+                "length 336 exceeds 250 characters"
+              ]
+            },
+            {
+              "text": "Initiating low-dose aspirin yields a small net reduction in cardiovascular harm in adults aged 60 and over, because the absolute reduction in myocardial infarction and ischemic stroke exceeds the absolute increase in serious bleeding over 5 to 10 years.",
+              "reasons": [
+                "length 253 exceeds 250 characters"
+              ]
+            },
+            {
+              "text": "An unweighted composite counting each of myocardial infarction, ischemic stroke, cardiovascular death, intracranial hemorrhage and major extracranial bleeding as one event gives a net result different from a severity-weighted scheme that weights fatal and disabling events more heavily.",
+              "reasons": [
+                "length 286 exceeds 250 characters"
+              ]
+            },
+            {
+              "text": "Initiating low-dose aspirin reduces first myocardial infarction and ischemic stroke by about 10 to 20% in relative terms in primary prevention trials, a small absolute reduction over 5 years. It does not clearly reduce cardiovascular death.",
+              "reasons": [
+                "followup_window not specified in answerhood: over 5 years"
+              ]
+            },
+            {
+              "text": "In adults aged 70 and over, aspirin initiation shows no significant reduction in cardiovascular events (the ASPREE trial hazard ratio was about 0.92 to 0.95, with a confidence interval including 1).",
+              "reasons": [
+                "digit count 9 exceeds 8"
+              ]
+            },
+            {
+              "text": "Initiating low-dose aspirin increases major extracranial bleeding by about 30 to 50% in relative terms, and intracranial hemorrhage by a smaller amount, in adults aged 60 and over over 5 years.",
+              "reasons": [
+                "followup_window not specified in answerhood: over 5 years"
+              ]
+            }
+          ],
+          "pass": false
+        },
+        {
+          "sample": 3,
+          "error": "",
+          "metrics": {
+            "n_claims": 14,
+            "avg_len": 195.64285714285714,
+            "avg_digits": 2.7857142857142856,
+            "max_len": 359,
+            "n_over_guard": 4,
+            "n_with_null": 3,
+            "n_issues": 4,
+            "exclusive_groups": 2
+          },
+          "raw_metrics": {
+            "n_claims": 14,
+            "avg_len": 195.64285714285714,
+            "avg_digits": 2.7857142857142856,
+            "max_len": 359,
+            "n_over_guard": 4,
+            "n_with_null": 3,
+            "n_issues": 4,
+            "exclusive_groups": 3
+          },
+          "raw_violations": [
+            {
+              "text": "In adults aged 60 and over without established cardiovascular disease, initiating low-dose aspirin increases net harm over 5 years: the absolute excess of major bleeding (including intracranial hemorrhage) is larger than the absolute reduction in myocardial infarction, ischemic stroke, and cardiovascular death, under a count-based or severity-weighted rule.",
+              "reasons": [
+                "length 359 exceeds 250 characters",
+                "followup_window not specified in answerhood: over 5 years"
+              ]
+            },
+            {
+              "text": "Initiating low-dose aspirin reduces net cardiovascular harm over 5 years in adults aged 60 and over, because the absolute reduction in cardiovascular events exceeds the absolute excess of major bleeding.",
+              "reasons": [
+                "followup_window not specified in answerhood: over 5 years"
+              ]
+            },
+            {
+              "text": "Net harm is best defined as a composite of nonfatal MI, nonfatal ischemic stroke, cardiovascular death, intracranial hemorrhage, and major extracranial bleeding, with each event counted once at its first occurrence and no severity weighting.",
+              "reasons": [
+                "endpoint_definition not specified in answerhood: composite of nonfatal MI, nonfatal ischemic stroke, cardiovascular death, intracranial hemorrhage, and major extracranial bleeding, with each event counted once at its first occurr"
+              ]
+            },
+            {
+              "text": "In adults aged 70 and over, mainly in ASPREE, low-dose aspirin did not significantly reduce a composite of cardiovascular death, MI, or stroke over a median of about 4.7 years.",
+              "reasons": [
+                "endpoint_definition not specified in answerhood: composite of cardiovascular death, MI, or stroke over a median of about 4.7 years"
+              ]
+            }
+          ],
+          "pass": false
+        }
+      ],
+      "tokens_in": 7776,
+      "tokens_out": 5831,
+      "cost_usd": 0.070463,
+      "api_calls": 3,
+      "aggregate": {
+        "avg_digits": {
+          "mean": 2.9285714285714284,
+          "min": 2.7857142857142856,
+          "max": 3.0714285714285716,
+          "n": 3
+        },
+        "avg_len": {
+          "mean": 205.04761904761904,
+          "min": 195.64285714285714,
+          "max": 213.5,
+          "n": 3
+        },
+        "exclusive_groups": {
+          "mean": 3.3333333333333335,
+          "min": 2,
+          "max": 4,
+          "n": 3
+        },
+        "max_len": {
+          "mean": 342.6666666666667,
+          "min": 333,
+          "max": 359,
+          "n": 3
+        },
+        "n_claims": {
+          "mean": 14,
+          "min": 14,
+          "max": 14,
+          "n": 3
+        },
+        "n_issues": {
+          "mean": 4,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        },
+        "n_over_guard": {
+          "mean": 5.333333333333333,
+          "min": 4,
+          "max": 6,
+          "n": 3
+        },
+        "n_with_null": {
+          "mean": 3.6666666666666665,
+          "min": 3,
+          "max": 4,
+          "n": 3
+        },
+        "raw_avg_digits": {
+          "mean": 2.9285714285714284,
+          "min": 2.7857142857142856,
+          "max": 3.0714285714285716,
+          "n": 3
+        },
+        "raw_avg_len": {
+          "mean": 205.04761904761904,
+          "min": 195.64285714285714,
+          "max": 213.5,
+          "n": 3
+        },
+        "raw_exclusive_groups": {
+          "mean": 3.6666666666666665,
+          "min": 3,
+          "max": 4,
+          "n": 3
+        },
+        "raw_max_len": {
+          "mean": 342.6666666666667,
+          "min": 333,
+          "max": 359,
+          "n": 3
+        },
+        "raw_n_claims": {
+          "mean": 14,
+          "min": 14,
+          "max": 14,
+          "n": 3
+        },
+        "raw_n_issues": {
+          "mean": 4,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        },
+        "raw_n_over_guard": {
+          "mean": 5.333333333333333,
+          "min": 4,
+          "max": 6,
+          "n": 3
+        },
+        "raw_n_with_null": {
+          "mean": 3.6666666666666665,
+          "min": 3,
+          "max": 4,
+          "n": 3
+        }
+      },
+      "pass": false
+    },
+    {
+      "version": "before",
+      "frame": "ulez",
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "native_manifest": "experiments\\E1\\before\\ulez\\sol\\moves.json",
+      "input_sha256": "ab7959025877fea6412b397f3bf9a98eed78afba8d5209c066e08e0ba444246b",
+      "skill_sha256": "b821f900754e04f69c44395ce232779697b03bbc4928128a55176437b3e8103b",
+      "samples": [
+        {
+          "sample": 1,
+          "error": "",
+          "metrics": {
+            "n_claims": 26,
+            "avg_len": 212.96153846153845,
+            "avg_digits": 3.730769230769231,
+            "max_len": 286,
+            "n_over_guard": 11,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 3
+          },
+          "raw_metrics": {
+            "n_claims": 26,
+            "avg_len": 212.96153846153845,
+            "avg_digits": 3.730769230769231,
+            "max_len": 286,
+            "n_over_guard": 11,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 3
+          },
+          "raw_violations": [
+            {
+              "text": "The expansion reduced the mean roadside NO2 concentration across outer London sites newly covered by the scheme by more than 0% but less than 5% during its first full year, relative to a counterfactual without the expansion that accounts for meteorology and pre-existing fleet turnover.",
+              "reasons": [
+                "length 286 exceeds 250 characters"
+              ]
+            },
+            {
+              "text": "The expansion reduced the mean roadside NO2 concentration across outer London sites newly covered by the scheme by at least 5% but less than 10% during its first full year, relative to a counterfactual without the expansion that accounts for meteorology and pre-existing fleet turnover.",
+              "reasons": [
+                "length 286 exceeds 250 characters"
+              ]
+            },
+            {
+              "text": "The expansion reduced the mean roadside NO2 concentration across outer London sites newly covered by the scheme by at least 10% during its first full year, relative to a counterfactual without the expansion that accounts for meteorology and pre-existing fleet turnover.",
+              "reasons": [
+                "length 269 exceeds 250 characters"
+              ]
+            },
+            {
+              "text": "The expansion induced vehicle replacement between its November 2022 confirmation and August 2023 implementation, so treating all pre-29 August 2023 observations as untreated excludes part of the expansion's causal effect.",
+              "reasons": [
+                "digit count 14 exceeds 8"
+              ]
+            },
+            {
+              "text": "Among automatic roadside and kerbside monitors in newly covered outer London with at least 75% valid observations in both periods, mean NO2 was lower during the first 12 months after 29 August 2023 than during the preceding 12 months.",
+              "reasons": [
+                "digit count 13 exceeds 8",
+                "followup_window not specified in answerhood: during the first 12 months"
+              ]
+            },
+            {
+              "text": "Among automatic roadside and kerbside monitors in newly covered outer London with at least 75% valid observations in both periods, mean NO2 was higher during the first 12 months after 29 August 2023 than during the preceding 12 months.",
+              "reasons": [
+                "digit count 13 exceeds 8",
+                "followup_window not specified in answerhood: during the first 12 months"
+              ]
+            },
+            {
+              "text": "Among automatic roadside and kerbside monitors in newly covered outer London with at least 75% valid observations in both periods, mean NO2 was unchanged between the 12 months before and the 12 months after 29 August 2023.",
+              "reasons": [
+                "digit count 13 exceeds 8"
+              ]
+            },
+            {
+              "text": "The set of outer London roadside and kerbside sites with continuous pre- and post-expansion measurements omits entire newly covered boroughs, so a pooled monitor mean is not a direct measurement of the mean across all newly covered roadside locations.",
+              "reasons": [
+                "length 251 exceeds 250 characters"
+              ]
+            },
+            {
+              "text": "The official six-month London-wide ULEZ evaluation reports that outer London roadside NO2 during the first six months after expansion was approximately 4% lower than its modelled no-expansion counterfactual, rather than merely reporting a raw before-and-after decline.",
+              "reasons": [
+                "length 268 exceeds 250 characters",
+                "followup_window not specified in answerhood: during the first six months"
+              ]
+            },
+            {
+              "text": "ANPR observations in the expansion area show a higher ULEZ compliance rate after 29 August 2023 than before confirmation of the expansion in November 2022.",
+              "reasons": [
+                "digit count 10 exceeds 8"
+              ]
+            },
+            {
+              "text": "ANPR observations in the expansion area show fewer distinct non-compliant vehicles per average day after 29 August 2023 than before confirmation of the expansion in November 2022.",
+              "reasons": [
+                "digit count 10 exceeds 8"
+              ]
+            }
+          ],
+          "pass": false
+        },
+        {
+          "sample": 2,
+          "error": "",
+          "metrics": {
+            "n_claims": 30,
+            "avg_len": 199.86666666666667,
+            "avg_digits": 4.233333333333333,
+            "max_len": 255,
+            "n_over_guard": 10,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 4
+          },
+          "raw_metrics": {
+            "n_claims": 30,
+            "avg_len": 199.86666666666667,
+            "avg_digits": 4.233333333333333,
+            "max_len": 255,
+            "n_over_guard": 10,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 4
+          },
+          "raw_violations": [
+            {
+              "text": "Across a fixed panel of outer London roadside and kerbside monitors, the unadjusted mean NO2 concentration was at least 5% lower in the 12 months after 29 August 2023 than in the preceding 12 months.",
+              "reasons": [
+                "digit count 12 exceeds 8"
+              ]
+            },
+            {
+              "text": "Across a fixed panel of outer London roadside and kerbside monitors, the unadjusted mean NO2 concentration was lower by more than zero but less than 5% in the 12 months after 29 August 2023 than in the preceding 12 months.",
+              "reasons": [
+                "digit count 12 exceeds 8"
+              ]
+            },
+            {
+              "text": "Across a fixed panel of outer London roadside and kerbside monitors, the unadjusted mean NO2 concentration increased in the 12 months after 29 August 2023 compared with the preceding 12 months.",
+              "reasons": [
+                "digit count 11 exceeds 8"
+              ]
+            },
+            {
+              "text": "Across a fixed panel of outer London roadside and kerbside monitors, the unadjusted mean NO2 concentration did not change between the 12 months before and after 29 August 2023.",
+              "reasons": [
+                "digit count 9 exceeds 8"
+              ]
+            },
+            {
+              "text": "The official six-month evaluation reported outer London roadside NO2 concentrations approximately 3.5% below its modelled no-expansion counterfactual over the first six months of operation.",
+              "reasons": [
+                "followup_window not specified in answerhood: over the first six months"
+              ]
+            },
+            {
+              "text": "The share of vehicles observed driving in outer London that met ULEZ standards rose from approximately 91% in June 2023 to at least 96% during 2024.",
+              "reasons": [
+                "digit count 12 exceeds 8"
+              ]
+            },
+            {
+              "text": "The average daily number of non-compliant vehicles observed driving in outer London fell by at least 50% between June 2023 and the corresponding official monitoring period in 2024.",
+              "reasons": [
+                "digit count 10 exceeds 8"
+              ]
+            },
+            {
+              "text": "Meteorological conditions during the first 12 months after expansion lowered outer London roadside mean NO2 by at least 1% relative to concentrations under the preceding year's meteorological conditions, holding emissions constant.",
+              "reasons": [
+                "followup_window not specified in answerhood: during the first 12 months"
+              ]
+            },
+            {
+              "text": "Meteorological conditions during the first 12 months after expansion raised outer London roadside mean NO2 by at least 1% relative to concentrations under the preceding year's meteorological conditions, holding emissions constant.",
+              "reasons": [
+                "followup_window not specified in answerhood: during the first 12 months"
+              ]
+            },
+            {
+              "text": "Changes in outer London traffic activity unrelated to the expansion, including other transport policies, travel demand, and road works, changed first-year roadside mean NO2 by at least 1% relative to holding those activities at their pre-expansion levels.",
+              "reasons": [
+                "length 255 exceeds 250 characters"
+              ]
+            }
+          ],
+          "pass": false
+        },
+        {
+          "sample": 3,
+          "error": "",
+          "metrics": {
+            "n_claims": 26,
+            "avg_len": 242.57692307692307,
+            "avg_digits": 8.307692307692308,
+            "max_len": 331,
+            "n_over_guard": 17,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 3
+          },
+          "raw_metrics": {
+            "n_claims": 26,
+            "avg_len": 242.57692307692307,
+            "avg_digits": 8.307692307692308,
+            "max_len": 331,
+            "n_over_guard": 17,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 3
+          },
+          "raw_violations": [
+            {
+              "text": "The expansion reduced the mean NO2 concentration across continuously operating outer London roadside and kerbside monitors by at least 5% during 29 August 2023\u201328 August 2024, relative to a meteorology-adjusted counterfactual without the expansion but with underlying fleet turnover and other policies continuing.",
+              "reasons": [
+                "length 313 exceeds 250 characters",
+                "digit count 14 exceeds 8"
+              ]
+            },
+            {
+              "text": "The expansion reduced the mean NO2 concentration across continuously operating outer London roadside and kerbside monitors by more than 0% but less than 5% during 29 August 2023\u201328 August 2024, relative to a meteorology-adjusted counterfactual without the expansion but with underlying fleet turnover and other policies continuing.",
+              "reasons": [
+                "length 331 exceeds 250 characters",
+                "digit count 15 exceeds 8"
+              ]
+            },
+            {
+              "text": "The expansion increased the mean NO2 concentration across continuously operating outer London roadside and kerbside monitors during 29 August 2023\u201328 August 2024, relative to a meteorology-adjusted counterfactual without the expansion but with underlying fleet turnover and other policies continuing.",
+              "reasons": [
+                "length 300 exceeds 250 characters",
+                "digit count 13 exceeds 8"
+              ]
+            },
+            {
+              "text": "The expansion caused no change in the mean NO2 concentration across continuously operating outer London roadside and kerbside monitors during 29 August 2023\u201328 August 2024 relative to the same no-expansion counterfactual.",
+              "reasons": [
+                "digit count 13 exceeds 8"
+              ]
+            },
+            {
+              "text": "The expansion caused fleet changes between its November 2022 confirmation and its August 2023 implementation, so treating 29 August 2023 as the beginning of all treatment assigns part of the expansion's effect to the pre-intervention baseline.",
+              "reasons": [
+                "digit count 14 exceeds 8"
+              ]
+            },
+            {
+              "text": "Among outer London roadside and kerbside monitors with at least 75% valid hourly NO2 data in each comparison period, the equally weighted site mean was lower during 29 August 2023\u201328 August 2024 than during 29 August 2022\u201328 August 2023.",
+              "reasons": [
+                "digit count 27 exceeds 8",
+                "weighting_rule not specified in answerhood: equally weighted"
+              ]
+            },
+            {
+              "text": "Among outer London roadside and kerbside monitors with at least 75% valid hourly NO2 data in each comparison period, the equally weighted site mean was higher during 29 August 2023\u201328 August 2024 than during 29 August 2022\u201328 August 2023.",
+              "reasons": [
+                "digit count 27 exceeds 8",
+                "weighting_rule not specified in answerhood: equally weighted"
+              ]
+            },
+            {
+              "text": "At least ten roadside or kerbside continuous NO2 monitors in the newly covered outer London area operated at unchanged locations and achieved at least 75% valid hourly data in each of the twelve-month periods immediately before and after implementation.",
+              "reasons": [
+                "length 253 exceeds 250 characters"
+              ]
+            },
+            {
+              "text": "Among outer London roadside and kerbside monitors meeting the same data-capture criteria in both periods, the equally weighted site mean NO2 concentration was unchanged between the twelve months before and after implementation.",
+              "reasons": [
+                "weighting_rule not specified in answerhood: equally weighted"
+              ]
+            },
+            {
+              "text": "The official one-year London-wide ULEZ evaluation reports a reduction of between 1% and 10% in outer London roadside NO2 during calendar year 2024 attributable to the expansion, using an estimated no-expansion concentration counterfactual rather than a raw before-and-after comparison.",
+              "reasons": [
+                "length 285 exceeds 250 characters"
+              ]
+            },
+            {
+              "text": "A counterfactual fitted to pre-announcement outer London roadside NO2 trends, meteorological conditions, and suitable outside-London control sites predicts a higher mean concentration for 29 August 2023\u201328 August 2024 than was observed at the matched outer London monitors.",
+              "reasons": [
+                "length 273 exceeds 250 characters",
+                "digit count 13 exceeds 8"
+              ]
+            },
+            {
+              "text": "A counterfactual fitted to pre-announcement outer London roadside NO2 trends, meteorological conditions, and suitable outside-London control sites predicts a lower mean concentration for 29 August 2023\u201328 August 2024 than was observed at the matched outer London monitors.",
+              "reasons": [
+                "length 272 exceeds 250 characters",
+                "digit count 13 exceeds 8"
+              ]
+            },
+            {
+              "text": "The mean outer London roadside NO2 concentration during 29 August 2023\u201328 August 2024 equals the mean predicted by a no-expansion counterfactual accounting for pre-existing trends and meteorology.",
+              "reasons": [
+                "digit count 13 exceeds 8"
+              ]
+            },
+            {
+              "text": "For matched outer London ANPR locations, hours, and vehicle classes, the share of observed vehicles meeting ULEZ standards was higher in the first six months after implementation than in the final comparable monitoring period before the November 2022 confirmation.",
+              "reasons": [
+                "length 264 exceeds 250 characters"
+              ]
+            },
+            {
+              "text": "For matched outer London ANPR locations and observation hours, the daily number of non-compliant vehicle observations was lower in the first six months after implementation than in the final comparable monitoring period before the November 2022 confirmation.",
+              "reasons": [
+                "length 258 exceeds 250 characters"
+              ]
+            },
+            {
+              "text": "Seasonally adjusted total motor-vehicle traffic in outer London changed by less than 2% in either direction during the first six months after implementation relative to its pre-expansion trend, while the observed compliance rate increased.",
+              "reasons": [
+                "followup_window not specified in answerhood: during the first six months"
+              ]
+            },
+            {
+              "text": "Meteorological conditions during 29 August 2023\u201328 August 2024 lowered outer London roadside mean NO2 relative to what the same emissions would have produced under the preceding year's meteorological conditions.",
+              "reasons": [
+                "digit count 13 exceeds 8"
+              ]
+            }
+          ],
+          "pass": false
+        }
+      ],
+      "tokens_in": 5154,
+      "tokens_out": 8914,
+      "cost_usd": 0.0937885,
+      "api_calls": 3,
+      "aggregate": {
+        "avg_digits": {
+          "mean": 5.423931623931624,
+          "min": 3.730769230769231,
+          "max": 8.307692307692308,
+          "n": 3
+        },
+        "avg_len": {
+          "mean": 218.46837606837607,
+          "min": 199.86666666666667,
+          "max": 242.57692307692307,
+          "n": 3
+        },
+        "exclusive_groups": {
+          "mean": 3.3333333333333335,
+          "min": 3,
+          "max": 4,
+          "n": 3
+        },
+        "max_len": {
+          "mean": 290.6666666666667,
+          "min": 255,
+          "max": 331,
+          "n": 3
+        },
+        "n_claims": {
+          "mean": 27.333333333333332,
+          "min": 26,
+          "max": 30,
+          "n": 3
+        },
+        "n_issues": {
+          "mean": 6,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "n_over_guard": {
+          "mean": 12.666666666666666,
+          "min": 10,
+          "max": 17,
+          "n": 3
+        },
+        "n_with_null": {
+          "mean": 6,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "raw_avg_digits": {
+          "mean": 5.423931623931624,
+          "min": 3.730769230769231,
+          "max": 8.307692307692308,
+          "n": 3
+        },
+        "raw_avg_len": {
+          "mean": 218.46837606837607,
+          "min": 199.86666666666667,
+          "max": 242.57692307692307,
+          "n": 3
+        },
+        "raw_exclusive_groups": {
+          "mean": 3.3333333333333335,
+          "min": 3,
+          "max": 4,
+          "n": 3
+        },
+        "raw_max_len": {
+          "mean": 290.6666666666667,
+          "min": 255,
+          "max": 331,
+          "n": 3
+        },
+        "raw_n_claims": {
+          "mean": 27.333333333333332,
+          "min": 26,
+          "max": 30,
+          "n": 3
+        },
+        "raw_n_issues": {
+          "mean": 6,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "raw_n_over_guard": {
+          "mean": 12.666666666666666,
+          "min": 10,
+          "max": 17,
+          "n": 3
+        },
+        "raw_n_with_null": {
+          "mean": 6,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        }
+      },
+      "pass": false
+    },
+    {
+      "version": "before",
+      "frame": "ulez",
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "native_manifest": "experiments\\E1\\before\\ulez\\sonnet\\moves.json",
+      "input_sha256": "ab7959025877fea6412b397f3bf9a98eed78afba8d5209c066e08e0ba444246b",
+      "skill_sha256": "b821f900754e04f69c44395ce232779697b03bbc4928128a55176437b3e8103b",
+      "samples": [
+        {
+          "sample": 1,
+          "error": "",
+          "metrics": {
+            "n_claims": 20,
+            "avg_len": 164.4,
+            "avg_digits": 2.8,
+            "max_len": 247,
+            "n_over_guard": 2,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 3
+          },
+          "raw_metrics": {
+            "n_claims": 19,
+            "avg_len": 170.47368421052633,
+            "avg_digits": 2.8947368421052633,
+            "max_len": 247,
+            "n_over_guard": 2,
+            "n_with_null": 5,
+            "n_issues": 6,
+            "exclusive_groups": 5
+          },
+          "raw_violations": [
+            {
+              "text": "The August 2023 expansion reduced annual-mean roadside NO2 in outer London by a modest amount, roughly 1 to 3 \u00b5g/m3 (about 3-10%), relative to a trend-adjusted or control-site counterfactual, within the first 1-2 years.",
+              "reasons": [
+                "digit count 13 exceeds 8",
+                "followup_window not specified in answerhood: within the first 1-2 years"
+              ]
+            },
+            {
+              "text": "The expansion reduced annual-mean roadside NO2 in outer London by a large amount, more than 3 \u00b5g/m3 (over 10%), relative to the counterfactual within the first 1-2 years.",
+              "reasons": [
+                "followup_window not specified in answerhood: within the first 1-2 years"
+              ]
+            }
+          ],
+          "pass": false
+        },
+        {
+          "sample": 2,
+          "error": "",
+          "metrics": {
+            "n_claims": 18,
+            "avg_len": 157.16666666666666,
+            "avg_digits": 2.611111111111111,
+            "max_len": 242,
+            "n_over_guard": 1,
+            "n_with_null": 6,
+            "n_issues": 6,
+            "exclusive_groups": 2
+          },
+          "raw_metrics": {
+            "n_claims": 17,
+            "avg_len": 163.52941176470588,
+            "avg_digits": 2.7058823529411766,
+            "max_len": 242,
+            "n_over_guard": 1,
+            "n_with_null": 5,
+            "n_issues": 6,
+            "exclusive_groups": 3
+          },
+          "raw_violations": [
+            {
+              "text": "The 29 August 2023 expansion reduced roadside NO2 in outer London by a measurable amount, at least 5% relative to a counterfactual (control sites or trend- and meteorology-adjusted) in the first 1-2 years.",
+              "reasons": [
+                "digit count 10 exceeds 8"
+              ]
+            }
+          ],
+          "pass": false
+        },
+        {
+          "sample": 3,
+          "error": "",
+          "metrics": {
+            "n_claims": 16,
+            "avg_len": 177.6875,
+            "avg_digits": 2.4375,
+            "max_len": 250,
+            "n_over_guard": 2,
+            "n_with_null": 5,
+            "n_issues": 6,
+            "exclusive_groups": 4
+          },
+          "raw_metrics": {
+            "n_claims": 16,
+            "avg_len": 177.6875,
+            "avg_digits": 2.4375,
+            "max_len": 250,
+            "n_over_guard": 2,
+            "n_with_null": 5,
+            "n_issues": 6,
+            "exclusive_groups": 5
+          },
+          "raw_violations": [
+            {
+              "text": "The 29 August 2023 expansion reduced roadside NO2 in outer London by a measurable amount, at least about 3% (roughly 1 \u00b5g/m3 or more) beyond the background trend, in the first 1-2 years, relative to comparison sites or a meteorology-normalised trend.",
+              "reasons": [
+                "digit count 12 exceeds 8"
+              ]
+            },
+            {
+              "text": "The expansion reduced outer London roadside NO2 by a small amount, under about 3% (under about 1 \u00b5g/m3) beyond the background trend, within the first 1-2 years.",
+              "reasons": [
+                "followup_window not specified in answerhood: within the first 1-2 years"
+              ]
+            }
+          ],
+          "pass": false
+        }
+      ],
+      "tokens_in": 7752,
+      "tokens_out": 7604,
+      "cost_usd": 0.088145,
+      "api_calls": 3,
+      "aggregate": {
+        "avg_digits": {
+          "mean": 2.616203703703704,
+          "min": 2.4375,
+          "max": 2.8,
+          "n": 3
+        },
+        "avg_len": {
+          "mean": 166.41805555555555,
+          "min": 157.16666666666666,
+          "max": 177.6875,
+          "n": 3
+        },
+        "exclusive_groups": {
+          "mean": 3,
+          "min": 2,
+          "max": 4,
+          "n": 3
+        },
+        "max_len": {
+          "mean": 246.33333333333334,
+          "min": 242,
+          "max": 250,
+          "n": 3
+        },
+        "n_claims": {
+          "mean": 18,
+          "min": 16,
+          "max": 20,
+          "n": 3
+        },
+        "n_issues": {
+          "mean": 6,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "n_over_guard": {
+          "mean": 1.6666666666666667,
+          "min": 1,
+          "max": 2,
+          "n": 3
+        },
+        "n_with_null": {
+          "mean": 5.666666666666667,
+          "min": 5,
+          "max": 6,
+          "n": 3
+        },
+        "raw_avg_digits": {
+          "mean": 2.67937306501548,
+          "min": 2.4375,
+          "max": 2.8947368421052633,
+          "n": 3
+        },
+        "raw_avg_len": {
+          "mean": 170.56353199174407,
+          "min": 163.52941176470588,
+          "max": 177.6875,
+          "n": 3
+        },
+        "raw_exclusive_groups": {
+          "mean": 4.333333333333333,
+          "min": 3,
+          "max": 5,
+          "n": 3
+        },
+        "raw_max_len": {
+          "mean": 246.33333333333334,
+          "min": 242,
+          "max": 250,
+          "n": 3
+        },
+        "raw_n_claims": {
+          "mean": 17.333333333333332,
+          "min": 16,
+          "max": 19,
+          "n": 3
+        },
+        "raw_n_issues": {
+          "mean": 6,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "raw_n_over_guard": {
+          "mean": 1.6666666666666667,
+          "min": 1,
+          "max": 2,
+          "n": 3
+        },
+        "raw_n_with_null": {
+          "mean": 5,
+          "min": 5,
+          "max": 5,
+          "n": 3
+        }
+      },
+      "pass": false
+    }
+  ]
+}

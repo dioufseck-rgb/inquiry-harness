@@ -1,0 +1,316 @@
+{
+  "move": "hypothesize",
+  "run_id": "ulez-live-4",
+  "n_requested": 3,
+  "input_sha256": "ab7959025877fea6412b397f3bf9a98eed78afba8d5209c066e08e0ba444246b",
+  "preparation": {
+    "projection": "hypothesize",
+    "historical_snapshot": false
+  },
+  "samples": [
+    {
+      "sample": 1,
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "tokens_in": 5939,
+      "tokens_out": 1706,
+      "cost_usd": 0.0272132,
+      "api_calls": 2,
+      "seconds": 14.28,
+      "metrics": {
+        "n_claims": 15,
+        "avg_len": 145.2,
+        "avg_digits": 2.6666666666666665,
+        "max_len": 205,
+        "n_over_guard": 0,
+        "n_with_null": 6,
+        "n_issues": 6,
+        "exclusive_groups": 2
+      },
+      "raw_metrics": {
+        "n_claims": 15,
+        "avg_len": 145.73333333333332,
+        "avg_digits": 2.933333333333333,
+        "max_len": 205,
+        "n_over_guard": 1,
+        "n_with_null": 6,
+        "n_issues": 6,
+        "exclusive_groups": 2
+      },
+      "move_summary": {
+        "claims": [
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "C5",
+          "C6",
+          "C7",
+          "C8",
+          "C9",
+          "C10",
+          "C11",
+          "C12",
+          "C13",
+          "C14",
+          "C15"
+        ],
+        "dropped": [],
+        "exclusive_groups": 2,
+        "placed_by_rule": [],
+        "rejected_specificity": [
+          {
+            "issue_id": "Q1",
+            "text": "The August 2023 ULEZ expansion lowered roadside NO2 in outer London by a modest amount, roughly 1 to 5 \u00b5g/m3 (about 2-10%), beyond the background trend and relative to comparison sites.",
+            "reasons": [
+              "digit count 11 exceeds 8"
+            ],
+            "attempt": 1
+          }
+        ]
+      },
+      "error": "",
+      "graph": "sample-001\\inquiry.json",
+      "graph_sha256": "108a83900c8c73ae474c606efec7e893445d1c77a0a086395bed4eee8bba5030",
+      "references_valid": true
+    },
+    {
+      "sample": 2,
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "tokens_in": 5926,
+      "tokens_out": 2278,
+      "cost_usd": 0.029950400000000002,
+      "api_calls": 2,
+      "seconds": 17.42,
+      "metrics": {
+        "n_claims": 16,
+        "avg_len": 142.8125,
+        "avg_digits": 2.375,
+        "max_len": 186,
+        "n_over_guard": 0,
+        "n_with_null": 6,
+        "n_issues": 6,
+        "exclusive_groups": 4
+      },
+      "raw_metrics": {
+        "n_claims": 16,
+        "avg_len": 142.875,
+        "avg_digits": 2.625,
+        "max_len": 186,
+        "n_over_guard": 1,
+        "n_with_null": 6,
+        "n_issues": 6,
+        "exclusive_groups": 4
+      },
+      "move_summary": {
+        "claims": [
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "C5",
+          "C6",
+          "C7",
+          "C8",
+          "C9",
+          "C10",
+          "C11",
+          "C12",
+          "C13",
+          "C14",
+          "C15",
+          "C16"
+        ],
+        "dropped": [],
+        "exclusive_groups": 4,
+        "placed_by_rule": [],
+        "rejected_specificity": [
+          {
+            "issue_id": "Q1",
+            "text": "The August 2023 ULEZ expansion reduced roadside NO2 in outer London by a modest amount, roughly 1-5% relative to the counterfactual, over the first 1-2 years.",
+            "reasons": [
+              "digit count 9 exceeds 8"
+            ],
+            "attempt": 1
+          }
+        ]
+      },
+      "error": "",
+      "graph": "sample-002\\inquiry.json",
+      "graph_sha256": "bcb3ef18fbd6733bf4a96b8d580696f91d6853863342c3e555836b9b96840210",
+      "references_valid": true
+    },
+    {
+      "sample": 3,
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "tokens_in": 5942,
+      "tokens_out": 2037,
+      "cost_usd": 0.0275724,
+      "api_calls": 2,
+      "seconds": 16.58,
+      "metrics": {
+        "n_claims": 15,
+        "avg_len": 138.73333333333332,
+        "avg_digits": 2.533333333333333,
+        "max_len": 185,
+        "n_over_guard": 0,
+        "n_with_null": 6,
+        "n_issues": 6,
+        "exclusive_groups": 5
+      },
+      "raw_metrics": {
+        "n_claims": 14,
+        "avg_len": 146.07142857142858,
+        "avg_digits": 3.0714285714285716,
+        "max_len": 185,
+        "n_over_guard": 1,
+        "n_with_null": 5,
+        "n_issues": 6,
+        "exclusive_groups": 5
+      },
+      "move_summary": {
+        "claims": [
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "C5",
+          "C6",
+          "C7",
+          "C8",
+          "C9",
+          "C10",
+          "C11",
+          "C12",
+          "C13",
+          "C14",
+          "C15"
+        ],
+        "dropped": [],
+        "exclusive_groups": 5,
+        "placed_by_rule": [],
+        "rejected_specificity": [
+          {
+            "issue_id": "Q1",
+            "text": "The August 2023 ULEZ expansion lowered roadside NO2 in outer London relative to the counterfactual, by a modest amount of roughly 1 to 5 \u00b5g/m3 (about 3-12%) in the first 1-2 years.",
+            "reasons": [
+              "digit count 13 exceeds 8"
+            ],
+            "attempt": 1
+          }
+        ]
+      },
+      "error": "",
+      "graph": "sample-003\\inquiry.json",
+      "graph_sha256": "631621b0b0ef37c9155ad550d5a1de2e9aacecfb7a3234878d65cc69af6bb11e",
+      "references_valid": true
+    }
+  ],
+  "skill_sha256": "90b1b8a6bbaca926ec302ea50674a8536660866ba51bbeb36aae0965072a9b4a",
+  "provider": "anthropic",
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "aggregate": {
+    "avg_digits": {
+      "mean": 2.525,
+      "min": 2.375,
+      "max": 2.6666666666666665,
+      "n": 3
+    },
+    "avg_len": {
+      "mean": 142.2486111111111,
+      "min": 138.73333333333332,
+      "max": 145.2,
+      "n": 3
+    },
+    "exclusive_groups": {
+      "mean": 3.6666666666666665,
+      "min": 2,
+      "max": 5,
+      "n": 3
+    },
+    "max_len": {
+      "mean": 192,
+      "min": 185,
+      "max": 205,
+      "n": 3
+    },
+    "n_claims": {
+      "mean": 15.333333333333334,
+      "min": 15,
+      "max": 16,
+      "n": 3
+    },
+    "n_issues": {
+      "mean": 6,
+      "min": 6,
+      "max": 6,
+      "n": 3
+    },
+    "n_over_guard": {
+      "mean": 0,
+      "min": 0,
+      "max": 0,
+      "n": 3
+    },
+    "n_with_null": {
+      "mean": 6,
+      "min": 6,
+      "max": 6,
+      "n": 3
+    },
+    "raw_avg_digits": {
+      "mean": 2.8765873015873016,
+      "min": 2.625,
+      "max": 3.0714285714285716,
+      "n": 3
+    },
+    "raw_avg_len": {
+      "mean": 144.89325396825396,
+      "min": 142.875,
+      "max": 146.07142857142858,
+      "n": 3
+    },
+    "raw_exclusive_groups": {
+      "mean": 3.6666666666666665,
+      "min": 2,
+      "max": 5,
+      "n": 3
+    },
+    "raw_max_len": {
+      "mean": 192,
+      "min": 185,
+      "max": 205,
+      "n": 3
+    },
+    "raw_n_claims": {
+      "mean": 15,
+      "min": 14,
+      "max": 16,
+      "n": 3
+    },
+    "raw_n_issues": {
+      "mean": 6,
+      "min": 6,
+      "max": 6,
+      "n": 3
+    },
+    "raw_n_over_guard": {
+      "mean": 1,
+      "min": 1,
+      "max": 1,
+      "n": 3
+    },
+    "raw_n_with_null": {
+      "mean": 5.666666666666667,
+      "min": 5,
+      "max": 6,
+      "n": 3
+    }
+  }
+}

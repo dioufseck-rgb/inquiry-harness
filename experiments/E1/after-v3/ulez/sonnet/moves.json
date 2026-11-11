@@ -1,0 +1,309 @@
+{
+  "move": "hypothesize",
+  "run_id": "ulez-live-4",
+  "n_requested": 3,
+  "input_sha256": "ab7959025877fea6412b397f3bf9a98eed78afba8d5209c066e08e0ba444246b",
+  "preparation": {
+    "projection": "hypothesize",
+    "historical_snapshot": false
+  },
+  "samples": [
+    {
+      "sample": 1,
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "tokens_in": 6393,
+      "tokens_out": 2463,
+      "cost_usd": 0.0353552,
+      "api_calls": 2,
+      "seconds": 17.09,
+      "metrics": {
+        "n_claims": 18,
+        "avg_len": 138.22222222222223,
+        "avg_digits": 1.9444444444444444,
+        "max_len": 205,
+        "n_over_guard": 0,
+        "n_with_null": 6,
+        "n_issues": 6,
+        "exclusive_groups": 2
+      },
+      "raw_metrics": {
+        "n_claims": 16,
+        "avg_len": 136.875,
+        "avg_digits": 2.1875,
+        "max_len": 183,
+        "n_over_guard": 1,
+        "n_with_null": 6,
+        "n_issues": 6,
+        "exclusive_groups": 3
+      },
+      "move_summary": {
+        "claims": [
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "C5",
+          "C6",
+          "C7",
+          "C8",
+          "C9",
+          "C10",
+          "C11",
+          "C12",
+          "C13",
+          "C14",
+          "C15",
+          "C16",
+          "C17",
+          "C18"
+        ],
+        "dropped": [],
+        "exclusive_groups": 2,
+        "placed_by_rule": [],
+        "rejected_specificity": [
+          {
+            "issue_id": "Q3",
+            "text": "No published evaluation estimates an outer London roadside NO2 effect with a defined comparison group for the first 1-2 years.",
+            "reasons": [
+              "followup_window not specified in answerhood: for the first 1-2 years"
+            ],
+            "attempt": 1
+          }
+        ]
+      },
+      "error": "",
+      "graph": "sample-001\\inquiry.json",
+      "graph_sha256": "97c3d6fd58102cc18ba4ae1bf3b586ab51aa6cb2779a606fea6cd25ad6ffeb5d",
+      "references_valid": true
+    },
+    {
+      "sample": 2,
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "tokens_in": 6395,
+      "tokens_out": 2000,
+      "cost_usd": 0.027196400000000003,
+      "api_calls": 2,
+      "seconds": 15.31,
+      "metrics": {
+        "n_claims": 15,
+        "avg_len": 141.8,
+        "avg_digits": 2.066666666666667,
+        "max_len": 203,
+        "n_over_guard": 0,
+        "n_with_null": 6,
+        "n_issues": 6,
+        "exclusive_groups": 3
+      },
+      "raw_metrics": {
+        "n_claims": 14,
+        "avg_len": 145.21428571428572,
+        "avg_digits": 2.7142857142857144,
+        "max_len": 184,
+        "n_over_guard": 1,
+        "n_with_null": 5,
+        "n_issues": 6,
+        "exclusive_groups": 3
+      },
+      "move_summary": {
+        "claims": [
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "C5",
+          "C6",
+          "C7",
+          "C8",
+          "C9",
+          "C10",
+          "C11",
+          "C12",
+          "C13",
+          "C14",
+          "C15"
+        ],
+        "dropped": [],
+        "exclusive_groups": 3,
+        "placed_by_rule": [],
+        "rejected_specificity": [
+          {
+            "issue_id": "Q1",
+            "text": "The expansion lowered roadside NO2 in outer London by a large amount, more than 10% beyond the background trend, in the first year or so after 29 August 2023.",
+            "reasons": [
+              "digit count 9 exceeds 8"
+            ],
+            "attempt": 1
+          }
+        ]
+      },
+      "error": "",
+      "graph": "sample-002\\inquiry.json",
+      "graph_sha256": "dc37c91350170ad8987057b0b6326662ed8882c785ee1ef563c1da63ba94d73b",
+      "references_valid": true
+    },
+    {
+      "sample": 3,
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "tokens_in": 3098,
+      "tokens_out": 1353,
+      "cost_usd": 0.016929200000000002,
+      "api_calls": 1,
+      "seconds": 9.52,
+      "metrics": {
+        "n_claims": 15,
+        "avg_len": 132.93333333333334,
+        "avg_digits": 1.5333333333333334,
+        "max_len": 166,
+        "n_over_guard": 0,
+        "n_with_null": 6,
+        "n_issues": 6,
+        "exclusive_groups": 1
+      },
+      "raw_metrics": {
+        "n_claims": 14,
+        "avg_len": 138.92857142857142,
+        "avg_digits": 1.5714285714285714,
+        "max_len": 166,
+        "n_over_guard": 0,
+        "n_with_null": 5,
+        "n_issues": 6,
+        "exclusive_groups": 2
+      },
+      "move_summary": {
+        "claims": [
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "C5",
+          "C6",
+          "C7",
+          "C8",
+          "C9",
+          "C10",
+          "C11",
+          "C12",
+          "C13",
+          "C14",
+          "C15"
+        ],
+        "dropped": [],
+        "exclusive_groups": 1,
+        "placed_by_rule": [],
+        "rejected_specificity": []
+      },
+      "error": "",
+      "graph": "sample-003\\inquiry.json",
+      "graph_sha256": "77f72b0e894056601e5cb880635777b8b3423e15d4e109bcb23bdba288f001a4",
+      "references_valid": true
+    }
+  ],
+  "skill_sha256": "d428470236ba9afc8426a261b3b65ef0971968139a3c1e8b9d309ad0bd7e557b",
+  "provider": "anthropic",
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "aggregate": {
+    "avg_digits": {
+      "mean": 1.8481481481481483,
+      "min": 1.5333333333333334,
+      "max": 2.066666666666667,
+      "n": 3
+    },
+    "avg_len": {
+      "mean": 137.65185185185186,
+      "min": 132.93333333333334,
+      "max": 141.8,
+      "n": 3
+    },
+    "exclusive_groups": {
+      "mean": 2,
+      "min": 1,
+      "max": 3,
+      "n": 3
+    },
+    "max_len": {
+      "mean": 191.33333333333334,
+      "min": 166,
+      "max": 205,
+      "n": 3
+    },
+    "n_claims": {
+      "mean": 16,
+      "min": 15,
+      "max": 18,
+      "n": 3
+    },
+    "n_issues": {
+      "mean": 6,
+      "min": 6,
+      "max": 6,
+      "n": 3
+    },
+    "n_over_guard": {
+      "mean": 0,
+      "min": 0,
+      "max": 0,
+      "n": 3
+    },
+    "n_with_null": {
+      "mean": 6,
+      "min": 6,
+      "max": 6,
+      "n": 3
+    },
+    "raw_avg_digits": {
+      "mean": 2.1577380952380953,
+      "min": 1.5714285714285714,
+      "max": 2.7142857142857144,
+      "n": 3
+    },
+    "raw_avg_len": {
+      "mean": 140.33928571428572,
+      "min": 136.875,
+      "max": 145.21428571428572,
+      "n": 3
+    },
+    "raw_exclusive_groups": {
+      "mean": 2.6666666666666665,
+      "min": 2,
+      "max": 3,
+      "n": 3
+    },
+    "raw_max_len": {
+      "mean": 177.66666666666666,
+      "min": 166,
+      "max": 184,
+      "n": 3
+    },
+    "raw_n_claims": {
+      "mean": 14.666666666666666,
+      "min": 14,
+      "max": 16,
+      "n": 3
+    },
+    "raw_n_issues": {
+      "mean": 6,
+      "min": 6,
+      "max": 6,
+      "n": 3
+    },
+    "raw_n_over_guard": {
+      "mean": 0.6666666666666666,
+      "min": 0,
+      "max": 1,
+      "n": 3
+    },
+    "raw_n_with_null": {
+      "mean": 5.333333333333333,
+      "min": 5,
+      "max": 6,
+      "n": 3
+    }
+  }
+}

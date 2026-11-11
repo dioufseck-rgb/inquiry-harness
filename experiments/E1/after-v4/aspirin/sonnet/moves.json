@@ -1,0 +1,311 @@
+{
+  "move": "hypothesize",
+  "run_id": "health-aspirin-tonight-openai-t7",
+  "n_requested": 3,
+  "input_sha256": "baa06ad3ff2d78f17c108a326ad0849c2064429b37d378e14da9d615c97b0af6",
+  "preparation": {
+    "projection": "hypothesize",
+    "historical_snapshot": false
+  },
+  "samples": [
+    {
+      "sample": 1,
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "tokens_in": 4780,
+      "tokens_out": 2179,
+      "cost_usd": 0.025756400000000002,
+      "api_calls": 2,
+      "seconds": 15.77,
+      "metrics": {
+        "n_claims": 14,
+        "avg_len": 164.28571428571428,
+        "avg_digits": 1.7142857142857142,
+        "max_len": 227,
+        "n_over_guard": 0,
+        "n_with_null": 4,
+        "n_issues": 4,
+        "exclusive_groups": 5
+      },
+      "raw_metrics": {
+        "n_claims": 13,
+        "avg_len": 154.92307692307693,
+        "avg_digits": 1.8461538461538463,
+        "max_len": 227,
+        "n_over_guard": 1,
+        "n_with_null": 4,
+        "n_issues": 4,
+        "exclusive_groups": 4
+      },
+      "move_summary": {
+        "claims": [
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "C5",
+          "C6",
+          "C7",
+          "C8",
+          "C9",
+          "C10",
+          "C11",
+          "C12",
+          "C13",
+          "C14"
+        ],
+        "dropped": [],
+        "exclusive_groups": 5,
+        "placed_by_rule": [],
+        "rejected_specificity": [
+          {
+            "issue_id": "Q2",
+            "text": "Net harm is best defined as an unweighted composite of ischemic cardiovascular events against major bleeding, counting fatal and nonfatal events equally.",
+            "reasons": [
+              "endpoint_definition not specified in answerhood: composite of ischemic cardiovascular events against major bleeding, counting fatal and nonfatal events equally"
+            ],
+            "attempt": 1
+          }
+        ]
+      },
+      "error": "",
+      "graph": "sample-001\\inquiry.json",
+      "graph_sha256": "58068a5c7588fe32ec66bd922709dbddc3a9d647367cc03ddf7c0ffeccb62698",
+      "references_valid": true
+    },
+    {
+      "sample": 2,
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "tokens_in": 4780,
+      "tokens_out": 2098,
+      "cost_usd": 0.0249464,
+      "api_calls": 2,
+      "seconds": 15.26,
+      "metrics": {
+        "n_claims": 15,
+        "avg_len": 137.06666666666666,
+        "avg_digits": 1.4,
+        "max_len": 217,
+        "n_over_guard": 0,
+        "n_with_null": 4,
+        "n_issues": 4,
+        "exclusive_groups": 4
+      },
+      "raw_metrics": {
+        "n_claims": 13,
+        "avg_len": 132.23076923076923,
+        "avg_digits": 1.5384615384615385,
+        "max_len": 187,
+        "n_over_guard": 1,
+        "n_with_null": 3,
+        "n_issues": 4,
+        "exclusive_groups": 4
+      },
+      "move_summary": {
+        "claims": [
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "C5",
+          "C6",
+          "C7",
+          "C8",
+          "C9",
+          "C10",
+          "C11",
+          "C12",
+          "C13",
+          "C14",
+          "C15"
+        ],
+        "dropped": [],
+        "exclusive_groups": 4,
+        "placed_by_rule": [],
+        "rejected_specificity": [
+          {
+            "issue_id": "Q2",
+            "text": "Net harm is best defined as an unweighted composite of cardiovascular events (fatal and nonfatal) plus major bleeding, each counted as one event.",
+            "reasons": [
+              "endpoint_definition not specified in answerhood: composite of cardiovascular events (fatal and nonfatal) plus major bleeding, each counted as one event"
+            ],
+            "attempt": 1
+          }
+        ]
+      },
+      "error": "",
+      "graph": "sample-002\\inquiry.json",
+      "graph_sha256": "3f75f47403ac3ee356298d1006ace3a8abcabcf395142b4f9785277ee75e1b86",
+      "references_valid": true
+    },
+    {
+      "sample": 3,
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "tokens_in": 4768,
+      "tokens_out": 1840,
+      "cost_usd": 0.0223424,
+      "api_calls": 2,
+      "seconds": 13.55,
+      "metrics": {
+        "n_claims": 12,
+        "avg_len": 169.83333333333334,
+        "avg_digits": 1.5833333333333333,
+        "max_len": 250,
+        "n_over_guard": 0,
+        "n_with_null": 4,
+        "n_issues": 4,
+        "exclusive_groups": 4
+      },
+      "raw_metrics": {
+        "n_claims": 10,
+        "avg_len": 173.2,
+        "avg_digits": 1.8,
+        "max_len": 250,
+        "n_over_guard": 1,
+        "n_with_null": 3,
+        "n_issues": 4,
+        "exclusive_groups": 4
+      },
+      "move_summary": {
+        "claims": [
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "C5",
+          "C6",
+          "C7",
+          "C8",
+          "C9",
+          "C10",
+          "C11",
+          "C12"
+        ],
+        "dropped": [],
+        "exclusive_groups": 4,
+        "placed_by_rule": [],
+        "rejected_specificity": [
+          {
+            "issue_id": "Q2",
+            "text": "Net harm is best defined as an unweighted composite of ischemic events and major bleeding, counting fatal and nonfatal events equally.",
+            "reasons": [
+              "endpoint_definition not specified in answerhood: composite of ischemic events and major bleeding, counting fatal and nonfatal events equally"
+            ],
+            "attempt": 1
+          }
+        ]
+      },
+      "error": "",
+      "graph": "sample-003\\inquiry.json",
+      "graph_sha256": "c158f314ceb182088fa913679c7605a89dfccaed3c9c69192e50cfd83f4d8f76",
+      "references_valid": true
+    }
+  ],
+  "skill_sha256": "d428470236ba9afc8426a261b3b65ef0971968139a3c1e8b9d309ad0bd7e557b",
+  "provider": "anthropic",
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "aggregate": {
+    "avg_digits": {
+      "mean": 1.5658730158730159,
+      "min": 1.4,
+      "max": 1.7142857142857142,
+      "n": 3
+    },
+    "avg_len": {
+      "mean": 157.06190476190477,
+      "min": 137.06666666666666,
+      "max": 169.83333333333334,
+      "n": 3
+    },
+    "exclusive_groups": {
+      "mean": 4.333333333333333,
+      "min": 4,
+      "max": 5,
+      "n": 3
+    },
+    "max_len": {
+      "mean": 231.33333333333334,
+      "min": 217,
+      "max": 250,
+      "n": 3
+    },
+    "n_claims": {
+      "mean": 13.666666666666666,
+      "min": 12,
+      "max": 15,
+      "n": 3
+    },
+    "n_issues": {
+      "mean": 4,
+      "min": 4,
+      "max": 4,
+      "n": 3
+    },
+    "n_over_guard": {
+      "mean": 0,
+      "min": 0,
+      "max": 0,
+      "n": 3
+    },
+    "n_with_null": {
+      "mean": 4,
+      "min": 4,
+      "max": 4,
+      "n": 3
+    },
+    "raw_avg_digits": {
+      "mean": 1.7282051282051283,
+      "min": 1.5384615384615385,
+      "max": 1.8461538461538463,
+      "n": 3
+    },
+    "raw_avg_len": {
+      "mean": 153.45128205128205,
+      "min": 132.23076923076923,
+      "max": 173.2,
+      "n": 3
+    },
+    "raw_exclusive_groups": {
+      "mean": 4,
+      "min": 4,
+      "max": 4,
+      "n": 3
+    },
+    "raw_max_len": {
+      "mean": 221.33333333333334,
+      "min": 187,
+      "max": 250,
+      "n": 3
+    },
+    "raw_n_claims": {
+      "mean": 12,
+      "min": 10,
+      "max": 13,
+      "n": 3
+    },
+    "raw_n_issues": {
+      "mean": 4,
+      "min": 4,
+      "max": 4,
+      "n": 3
+    },
+    "raw_n_over_guard": {
+      "mean": 1,
+      "min": 1,
+      "max": 1,
+      "n": 3
+    },
+    "raw_n_with_null": {
+      "mean": 3.3333333333333335,
+      "min": 3,
+      "max": 4,
+      "n": 3
+    }
+  }
+}

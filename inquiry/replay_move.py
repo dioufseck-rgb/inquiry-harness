@@ -226,13 +226,16 @@ def _proposals(llm: RecordingLLM) -> list[dict]:
 
 
 def hypothesis_metrics(claims: list, issues: list) -> dict:
+    from .specificity import claim_specificity_errors
     texts = [c.text if hasattr(c, "text") else c["text"] for c in claims]
     digits = [sum(ch.isdigit() for ch in text) for text in texts]
+    issue_ids = [c.issue_id if hasattr(c, "issue_id") else c.get("issue_id") for c in claims]
+    anchors = {i.id: i.answerhood for i in issues}
     return {"n_claims": len(texts), "avg_len": mean(map(len, texts)) if texts else 0,
             "avg_digits": mean(digits) if digits else 0, "max_len": max(map(len, texts), default=0),
-            "n_over_guard": sum(len(t) > 250 or n > 8 for t, n in zip(texts, digits)),
+            "n_over_guard": sum(bool(claim_specificity_errors(t, anchors.get(cid, ""))) for t, cid in zip(texts, issue_ids)),
             "n_with_null": sum(any((getattr(c, "issue_id", None) if not isinstance(c, dict) else c.get("issue_id")) == issue.id
-                                      and (getattr(c, "kind", None) if not isinstance(c, dict) else c.get("kind")) in ("null", "deflationary")
+                                      and (getattr(c, "kind", None) if not isinstance(c, dict) else c.get("kind")) == "null"
                                       for c in claims) for issue in issues), "n_issues": len(issues)}
 
 

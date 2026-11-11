@@ -1,0 +1,282 @@
+{
+  "move": "hypothesize",
+  "run_id": "health-aspirin-tonight-openai-t7",
+  "n_requested": 3,
+  "input_sha256": "baa06ad3ff2d78f17c108a326ad0849c2064429b37d378e14da9d615c97b0af6",
+  "preparation": {
+    "projection": "hypothesize",
+    "historical_snapshot": false
+  },
+  "samples": [
+    {
+      "sample": 1,
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "tokens_in": 2592,
+      "tokens_out": 1928,
+      "cost_usd": 0.024979,
+      "api_calls": 1,
+      "seconds": 12.89,
+      "metrics": {
+        "n_claims": 14,
+        "avg_len": 206,
+        "avg_digits": 3.0714285714285716,
+        "max_len": 333,
+        "n_over_guard": 5,
+        "n_with_null": 4,
+        "n_issues": 4,
+        "exclusive_groups": 4
+      },
+      "raw_metrics": {
+        "n_claims": 14,
+        "avg_len": 206,
+        "avg_digits": 3.0714285714285716,
+        "max_len": 333,
+        "n_over_guard": 5,
+        "n_with_null": 4,
+        "n_issues": 4,
+        "exclusive_groups": 4
+      },
+      "move_summary": {
+        "claims": [
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "C5",
+          "C6",
+          "C7",
+          "C8",
+          "C9",
+          "C10",
+          "C11",
+          "C12",
+          "C13",
+          "C14"
+        ],
+        "dropped": [],
+        "exclusive_groups": 4,
+        "placed_by_rule": []
+      },
+      "error": "",
+      "graph": "sample-001\\inquiry.json",
+      "graph_sha256": "e11bcda13bbac9cc098cf0554741ed758e3e16a8096968d96745819c7498ca79",
+      "references_valid": true
+    },
+    {
+      "sample": 2,
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "tokens_in": 2592,
+      "tokens_out": 2019,
+      "cost_usd": 0.023417,
+      "api_calls": 1,
+      "seconds": 14.01,
+      "metrics": {
+        "n_claims": 14,
+        "avg_len": 213.5,
+        "avg_digits": 2.9285714285714284,
+        "max_len": 336,
+        "n_over_guard": 4,
+        "n_with_null": 4,
+        "n_issues": 4,
+        "exclusive_groups": 4
+      },
+      "raw_metrics": {
+        "n_claims": 14,
+        "avg_len": 213.5,
+        "avg_digits": 2.9285714285714284,
+        "max_len": 336,
+        "n_over_guard": 4,
+        "n_with_null": 4,
+        "n_issues": 4,
+        "exclusive_groups": 4
+      },
+      "move_summary": {
+        "claims": [
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "C5",
+          "C6",
+          "C7",
+          "C8",
+          "C9",
+          "C10",
+          "C11",
+          "C12",
+          "C13",
+          "C14"
+        ],
+        "dropped": [],
+        "exclusive_groups": 4,
+        "placed_by_rule": []
+      },
+      "error": "",
+      "graph": "sample-002\\inquiry.json",
+      "graph_sha256": "eecf171448709df922dcbddd997a9797fcef50f1cee81d41318885321b6ba630",
+      "references_valid": true
+    },
+    {
+      "sample": 3,
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "tokens_in": 2592,
+      "tokens_out": 1884,
+      "cost_usd": 0.022067,
+      "api_calls": 1,
+      "seconds": 12.58,
+      "metrics": {
+        "n_claims": 14,
+        "avg_len": 195.64285714285714,
+        "avg_digits": 2.7857142857142856,
+        "max_len": 359,
+        "n_over_guard": 1,
+        "n_with_null": 4,
+        "n_issues": 4,
+        "exclusive_groups": 2
+      },
+      "raw_metrics": {
+        "n_claims": 14,
+        "avg_len": 195.64285714285714,
+        "avg_digits": 2.7857142857142856,
+        "max_len": 359,
+        "n_over_guard": 1,
+        "n_with_null": 4,
+        "n_issues": 4,
+        "exclusive_groups": 3
+      },
+      "move_summary": {
+        "claims": [
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "C5",
+          "C6",
+          "C7",
+          "C8",
+          "C9",
+          "C10",
+          "C11",
+          "C12",
+          "C13",
+          "C14"
+        ],
+        "dropped": [],
+        "exclusive_groups": 2,
+        "placed_by_rule": []
+      },
+      "error": "",
+      "graph": "sample-003\\inquiry.json",
+      "graph_sha256": "bd56222d166c58f7432416d14c624d5fffb086392357f4ec5f94563fcfc584c2",
+      "references_valid": true
+    }
+  ],
+  "skill_sha256": "b821f900754e04f69c44395ce232779697b03bbc4928128a55176437b3e8103b",
+  "provider": "anthropic",
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "aggregate": {
+    "avg_digits": {
+      "mean": 2.9285714285714284,
+      "min": 2.7857142857142856,
+      "max": 3.0714285714285716,
+      "n": 3
+    },
+    "avg_len": {
+      "mean": 205.04761904761904,
+      "min": 195.64285714285714,
+      "max": 213.5,
+      "n": 3
+    },
+    "exclusive_groups": {
+      "mean": 3.3333333333333335,
+      "min": 2,
+      "max": 4,
+      "n": 3
+    },
+    "max_len": {
+      "mean": 342.6666666666667,
+      "min": 333,
+      "max": 359,
+      "n": 3
+    },
+    "n_claims": {
+      "mean": 14,
+      "min": 14,
+      "max": 14,
+      "n": 3
+    },
+    "n_issues": {
+      "mean": 4,
+      "min": 4,
+      "max": 4,
+      "n": 3
+    },
+    "n_over_guard": {
+      "mean": 3.3333333333333335,
+      "min": 1,
+      "max": 5,
+      "n": 3
+    },
+    "n_with_null": {
+      "mean": 4,
+      "min": 4,
+      "max": 4,
+      "n": 3
+    },
+    "raw_avg_digits": {
+      "mean": 2.9285714285714284,
+      "min": 2.7857142857142856,
+      "max": 3.0714285714285716,
+      "n": 3
+    },
+    "raw_avg_len": {
+      "mean": 205.04761904761904,
+      "min": 195.64285714285714,
+      "max": 213.5,
+      "n": 3
+    },
+    "raw_exclusive_groups": {
+      "mean": 3.6666666666666665,
+      "min": 3,
+      "max": 4,
+      "n": 3
+    },
+    "raw_max_len": {
+      "mean": 342.6666666666667,
+      "min": 333,
+      "max": 359,
+      "n": 3
+    },
+    "raw_n_claims": {
+      "mean": 14,
+      "min": 14,
+      "max": 14,
+      "n": 3
+    },
+    "raw_n_issues": {
+      "mean": 4,
+      "min": 4,
+      "max": 4,
+      "n": 3
+    },
+    "raw_n_over_guard": {
+      "mean": 3.3333333333333335,
+      "min": 1,
+      "max": 5,
+      "n": 3
+    },
+    "raw_n_with_null": {
+      "mean": 4,
+      "min": 4,
+      "max": 4,
+      "n": 3
+    }
+  }
+}

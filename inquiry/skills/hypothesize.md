@@ -13,11 +13,31 @@ answers; you do not list those pairs.
 
 ## Procedure
 
+A claim is an answer, not a measurement protocol. Keep each claim at **250
+characters or fewer and at most 8 digits**. Give a direction or a broad
+magnitude band in the units sources use, and the population and period the
+issue names. Rivals differ in direction or band, not endpoint construction.
+Do not invent a dose, endpoint definition, weighting rule, fixed baseline or
+follow-up window that the issue's answerhood does not specify. A detailed
+saved answerhood is not a reason to copy its whole protocol into every claim.
+Keep design checks and measurement caveats for appraisal and critical questions.
+Count every digit in the text, including years, identifiers, units and both
+ends of a range. Use one magnitude band in one unit, rather than restating it
+in several numerical forms. Do not add a follow-up period beyond the period
+the issue names. If a numerical band would exceed the digit budget, use a
+qualitative direction instead.
+For conceptual or definition issues, distinguish broad interpretations rather
+than designing a new endpoint. Do not enumerate an endpoint's event components,
+first-event counting, deduplication or numerical weights unless that exact
+recipe is already specified in the issue's answerhood. A request to discuss
+definitions does not itself specify a recipe. State what an interpretation
+changes about the answer, leaving its measurement details to the sources.
+
 1. For each issue, write the live substantive answers. Two to four is usual.
    Each claim must be a proposition that evidence could support or defeat,
    stated with enough precision that two readers would agree on what would
-   confirm it. "The policy helped" is not a claim; "the policy reduced X by
-   at least 10% within a year" is.
+   confirm it. Name the outcome and affected population instead of saying
+   only that a policy or treatment "helped".
 2. Add the null answer, kind `null`: the thing did not happen, has no effect,
    or is not the case. This is what the substantive claims must beat.
 3. Where the question's framing could dissolve, add a deflationary answer,

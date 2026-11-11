@@ -22,6 +22,10 @@ answer contains, and the tree of sub-questions whose answers compose it.
 5. Write the answerhood condition: what a complete answer would contain.
    For a causal question that is a direction, a magnitude, and the measure
    held constant. For an evaluative one it is the standard and the verdict.
+   Describe the answer in terms sources use. Do not demand a newly specified
+   follow-up window, patient-level composite, endpoint definition or severity
+   weighting scheme unless the question itself asks for it. Sources may report
+   different periods and component outcomes; comparing them is later work.
 6. Decompose into sub-questions only where the main question cannot be
    answered without them. Each sub-question gets its own type and answerhood.
    `depends_on` lists the zero-based indexes of sub-questions that must be

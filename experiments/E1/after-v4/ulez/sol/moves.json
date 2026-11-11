@@ -1,0 +1,309 @@
+{
+  "move": "hypothesize",
+  "run_id": "ulez-live-4",
+  "n_requested": 3,
+  "input_sha256": "ab7959025877fea6412b397f3bf9a98eed78afba8d5209c066e08e0ba444246b",
+  "preparation": {
+    "projection": "hypothesize",
+    "historical_snapshot": false
+  },
+  "samples": [
+    {
+      "sample": 1,
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "tokens_in": 1664,
+      "tokens_out": 2496,
+      "cost_usd": 0.0291185,
+      "api_calls": 1,
+      "seconds": 50.98,
+      "metrics": {
+        "n_claims": 23,
+        "avg_len": 137.3913043478261,
+        "avg_digits": 4.217391304347826,
+        "max_len": 195,
+        "n_over_guard": 0,
+        "n_with_null": 6,
+        "n_issues": 6,
+        "exclusive_groups": 4
+      },
+      "raw_metrics": {
+        "n_claims": 23,
+        "avg_len": 137.3913043478261,
+        "avg_digits": 4.217391304347826,
+        "max_len": 195,
+        "n_over_guard": 0,
+        "n_with_null": 6,
+        "n_issues": 6,
+        "exclusive_groups": 4
+      },
+      "move_summary": {
+        "claims": [
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "C5",
+          "C6",
+          "C7",
+          "C8",
+          "C9",
+          "C10",
+          "C11",
+          "C12",
+          "C13",
+          "C14",
+          "C15",
+          "C16",
+          "C17",
+          "C18",
+          "C19",
+          "C20",
+          "C21",
+          "C22",
+          "C23"
+        ],
+        "dropped": [],
+        "exclusive_groups": 4,
+        "placed_by_rule": [],
+        "rejected_specificity": []
+      },
+      "error": "",
+      "graph": "sample-001\\inquiry.json",
+      "graph_sha256": "c5fc42a1097af33e4e26409d54cc3e9d19472096b8072af358bb0d86a8a737e3",
+      "references_valid": true
+    },
+    {
+      "sample": 2,
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "tokens_in": 1664,
+      "tokens_out": 1865,
+      "cost_usd": 0.018822099999999998,
+      "api_calls": 1,
+      "seconds": 31.73,
+      "metrics": {
+        "n_claims": 21,
+        "avg_len": 148.23809523809524,
+        "avg_digits": 4.857142857142857,
+        "max_len": 181,
+        "n_over_guard": 0,
+        "n_with_null": 6,
+        "n_issues": 6,
+        "exclusive_groups": 5
+      },
+      "raw_metrics": {
+        "n_claims": 21,
+        "avg_len": 148.23809523809524,
+        "avg_digits": 4.857142857142857,
+        "max_len": 181,
+        "n_over_guard": 0,
+        "n_with_null": 6,
+        "n_issues": 6,
+        "exclusive_groups": 5
+      },
+      "move_summary": {
+        "claims": [
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "C5",
+          "C6",
+          "C7",
+          "C8",
+          "C9",
+          "C10",
+          "C11",
+          "C12",
+          "C13",
+          "C14",
+          "C15",
+          "C16",
+          "C17",
+          "C18",
+          "C19",
+          "C20",
+          "C21"
+        ],
+        "dropped": [],
+        "exclusive_groups": 5,
+        "placed_by_rule": [],
+        "rejected_specificity": []
+      },
+      "error": "",
+      "graph": "sample-002\\inquiry.json",
+      "graph_sha256": "d5a347cfa252afb9c2c086a296532d025e856053415e0d80900acd6aa3804b7d",
+      "references_valid": true
+    },
+    {
+      "sample": 3,
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "tokens_in": 1664,
+      "tokens_out": 1959,
+      "cost_usd": 0.019762099999999998,
+      "api_calls": 1,
+      "seconds": 33.06,
+      "metrics": {
+        "n_claims": 22,
+        "avg_len": 137.36363636363637,
+        "avg_digits": 4.7727272727272725,
+        "max_len": 185,
+        "n_over_guard": 0,
+        "n_with_null": 6,
+        "n_issues": 6,
+        "exclusive_groups": 3
+      },
+      "raw_metrics": {
+        "n_claims": 22,
+        "avg_len": 137.36363636363637,
+        "avg_digits": 4.7727272727272725,
+        "max_len": 185,
+        "n_over_guard": 0,
+        "n_with_null": 6,
+        "n_issues": 6,
+        "exclusive_groups": 3
+      },
+      "move_summary": {
+        "claims": [
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "C5",
+          "C6",
+          "C7",
+          "C8",
+          "C9",
+          "C10",
+          "C11",
+          "C12",
+          "C13",
+          "C14",
+          "C15",
+          "C16",
+          "C17",
+          "C18",
+          "C19",
+          "C20",
+          "C21",
+          "C22"
+        ],
+        "dropped": [],
+        "exclusive_groups": 3,
+        "placed_by_rule": [],
+        "rejected_specificity": []
+      },
+      "error": "",
+      "graph": "sample-003\\inquiry.json",
+      "graph_sha256": "12dc139fe4ab47ab4eefb3c056671c16c7c278180158ba27ecfef46411ffc6a7",
+      "references_valid": true
+    }
+  ],
+  "skill_sha256": "d428470236ba9afc8426a261b3b65ef0971968139a3c1e8b9d309ad0bd7e557b",
+  "provider": "openai",
+  "model": "gpt-6.1-sol",
+  "effort": "medium",
+  "aggregate": {
+    "avg_digits": {
+      "mean": 4.615753811405985,
+      "min": 4.217391304347826,
+      "max": 4.857142857142857,
+      "n": 3
+    },
+    "avg_len": {
+      "mean": 140.99767864985256,
+      "min": 137.36363636363637,
+      "max": 148.23809523809524,
+      "n": 3
+    },
+    "exclusive_groups": {
+      "mean": 4,
+      "min": 3,
+      "max": 5,
+      "n": 3
+    },
+    "max_len": {
+      "mean": 187,
+      "min": 181,
+      "max": 195,
+      "n": 3
+    },
+    "n_claims": {
+      "mean": 22,
+      "min": 21,
+      "max": 23,
+      "n": 3
+    },
+    "n_issues": {
+      "mean": 6,
+      "min": 6,
+      "max": 6,
+      "n": 3
+    },
+    "n_over_guard": {
+      "mean": 0,
+      "min": 0,
+      "max": 0,
+      "n": 3
+    },
+    "n_with_null": {
+      "mean": 6,
+      "min": 6,
+      "max": 6,
+      "n": 3
+    },
+    "raw_avg_digits": {
+      "mean": 4.615753811405985,
+      "min": 4.217391304347826,
+      "max": 4.857142857142857,
+      "n": 3
+    },
+    "raw_avg_len": {
+      "mean": 140.99767864985256,
+      "min": 137.36363636363637,
+      "max": 148.23809523809524,
+      "n": 3
+    },
+    "raw_exclusive_groups": {
+      "mean": 4,
+      "min": 3,
+      "max": 5,
+      "n": 3
+    },
+    "raw_max_len": {
+      "mean": 187,
+      "min": 181,
+      "max": 195,
+      "n": 3
+    },
+    "raw_n_claims": {
+      "mean": 22,
+      "min": 21,
+      "max": 23,
+      "n": 3
+    },
+    "raw_n_issues": {
+      "mean": 6,
+      "min": 6,
+      "max": 6,
+      "n": 3
+    },
+    "raw_n_over_guard": {
+      "mean": 0,
+      "min": 0,
+      "max": 0,
+      "n": 3
+    },
+    "raw_n_with_null": {
+      "mean": 6,
+      "min": 6,
+      "max": 6,
+      "n": 3
+    }
+  }
+}

@@ -21,6 +21,7 @@ live.py is just sequencing.
 from __future__ import annotations
 
 import re
+import json
 from collections import Counter
 from pathlib import Path
 from statistics import median
@@ -35,6 +36,7 @@ from .argument.graph import (
 )
 from .argument.schemes import SCHEMES
 from .llm import LLM
+from .specificity import claim_specificity_errors, source_answerhood
 from .state import (
     Conclusion, Framing, Inquiry, Judgement, PlannedTest, Reflection, StopAssessment,
 )
@@ -259,6 +261,8 @@ def is_meta_issue(text: str) -> bool:
 
 def apply_frame(inq: Inquiry, out: FrameOutput) -> dict:
     g = inq.graph
+    answerhood, frame_specificity = source_answerhood(inq.question, out.answerhood)
+    out = out.model_copy(update={"answerhood": answerhood})
     original_type = out.question_type
     question = inq.question.lower()
     if re.search(r"\bwhat\b.*\b(?:recommend|advise)", question):
@@ -287,14 +291,18 @@ def apply_frame(inq: Inquiry, out: FrameOutput) -> dict:
             kept.append((i, s))
     index_to_issue: dict[int, Issue] = {}
     for i, s in kept:
-        index_to_issue[i] = g.add_issue(s.text, question_type=s.question_type, answerhood=s.answerhood,
+        sub_answerhood, reasons = source_answerhood(inq.question, s.answerhood)
+        if reasons:
+            frame_specificity.extend(f"sub-issue {i}: {reason}" for reason in reasons)
+        index_to_issue[i] = g.add_issue(s.text, question_type=s.question_type, answerhood=sub_answerhood,
                                        parent_id=main.id, search_topic=s.search_topic)
     for i, s in kept:
         iss = index_to_issue[i]
         iss.depends_on = [index_to_issue[j].id for j in s.depends_on if j in index_to_issue and j != i]
     inq.phase = "framed"
     return {"main_issue": main.id, "sub_issues": [x.id for x in index_to_issue.values()],
-            "dropped": dropped, "question_type": out.question_type, "type_by_rule": original_type != out.question_type}
+            "dropped": dropped, "question_type": out.question_type, "type_by_rule": original_type != out.question_type,
+            "frame_specificity": frame_specificity}
 
 
 def frame(inq: Inquiry, llm: LLM, samples: int = 1) -> dict:
@@ -333,7 +341,22 @@ class HypothesizeOutput(BaseModel):
 
 
 def hypothesize_view(inq: Inquiry) -> str:
-    return "\n\n".join([_framing_block(inq), _issues_block(inq, with_claims=False)])
+    # Old saved frames may demand an invented protocol. Render the same
+    # source-reporting answerhood used by Frame without mutating the snapshot.
+    # Scope/background is not permission to add protocol details to claims.
+    g = inq.graph
+    lines = [f"# Question\n\n{inq.question}", "# Issues"]
+    for issue in g.issues:
+        if issue.status == "dropped":
+            continue
+        answerhood, _ = source_answerhood(inq.question, issue.answerhood)
+        lines.append(f"{issue.id} [{'main; ' if issue.id == g.main_issue_id else ''}{issue.question_type}]: {issue.text}\n"
+                     f"Source-reporting answerhood: {answerhood}")
+    contract = {"max_characters": 250, "max_digits": 8,
+                "protocol_permission": "Only an exact recipe already specified in the issue answerhood is permitted. A request to discuss definitions is not such a recipe.",
+                "unrequested_protocol": ["dose", "enumerated endpoint components", "event counting", "weighting rule", "fixed baseline", "follow-up window"],
+                "conceptual_answers": "State the consequences of broad interpretations; leave measurement recipes to sources."}
+    return "\n\n".join(lines + ["# Claim contract enforced by code\n" + json.dumps(contract)])
 
 
 def apply_hypothesize(inq: Inquiry, out: HypothesizeOutput) -> dict:
@@ -342,9 +365,16 @@ def apply_hypothesize(inq: Inquiry, out: HypothesizeOutput) -> dict:
     dropped: list[str] = []
     index_to_id: dict[int, str] = {}
     placed_by_rule: list[dict] = []
+    rejected_specificity: list[dict] = []
     for i, p in enumerate(out.claims):
         if g.issue(p.issue_id) is None:
             dropped.append(f"{p.issue_id}: unknown issue")
+            continue
+        reasons = claim_specificity_errors(p.text, g.issue(p.issue_id).answerhood)
+        if reasons:
+            rejection = {"issue_id": p.issue_id, "text": p.text, "reasons": reasons}
+            rejected_specificity.append(rejection)
+            dropped.append(f"{p.issue_id}: rejected_specificity: {'; '.join(reasons)}")
             continue
         # The proposal supplies explicit population/outcome labels copied from
         # answerhood. Require both labels and the body's verdict in the claim;
@@ -380,8 +410,10 @@ def apply_hypothesize(inq: Inquiry, out: HypothesizeOutput) -> dict:
         index_to_id[i] = c.id
     # every issue gets a null answer to beat, even if the model forgot one
     for iss in g.issues:
+        if iss.status == "dropped":
+            continue
         claims = g.claims_for_issue(iss.id)
-        if claims and not any(c.kind in ("null", "deflationary") for c in claims):
+        if not any(c.kind == "null" for c in claims):
             c = g.add_claim(f"None of the proposed answers to {iss.id} is established", issue_id=iss.id,
                             kind="null", rationale="added by the harness: every issue needs a null to beat")
             added.append(c.id)
@@ -414,12 +446,36 @@ def apply_hypothesize(inq: Inquiry, out: HypothesizeOutput) -> dict:
         for c in g.claims_for_issue(g.main_issue_id):
             c.proof_standard = inq.framing.standard_override  # type: ignore[assignment]
     inq.phase = "hypothesized"
-    return {"claims": added, "dropped": dropped, "exclusive_groups": groups_applied, "placed_by_rule": placed_by_rule}
+    return {"claims": added, "dropped": dropped, "exclusive_groups": groups_applied, "placed_by_rule": placed_by_rule,
+            "rejected_specificity": rejected_specificity}
 
 
 def hypothesize(inq: Inquiry, llm: LLM) -> dict:
-    out = llm.complete_json(skill_text("hypothesize"), hypothesize_view(inq), HypothesizeOutput)
-    return apply_hypothesize(inq, out)
+    view = hypothesize_view(inq)
+    out = llm.complete_json(skill_text("hypothesize"), view, HypothesizeOutput)
+    rejected, keep, index_map = [], [], {}
+    for index, proposal in enumerate(out.claims):
+        issue = inq.graph.issue(proposal.issue_id)
+        reasons = claim_specificity_errors(proposal.text, issue.answerhood) if issue else []
+        if reasons:
+            rejected.append({"issue_id": proposal.issue_id, "text": proposal.text, "reasons": reasons, "attempt": 1})
+        else:
+            index_map[index] = len(keep)
+            keep.append(proposal)
+    if rejected:
+        repair_view = view + "\n\n# Rejected specificity\n" + json.dumps(rejected, ensure_ascii=False)
+        repair_view += ("\nReturn replacement claims only for the rejected proposals. Each must be at most 250 characters "
+                        "and 8 digits, without extra dose, endpoint construction, weights, baseline or follow-up details. "
+                        "Do not repeat the accepted proposals. This is the only specificity correction attempt.")
+        repaired = llm.complete_json(skill_text("hypothesize"), repair_view, HypothesizeOutput)
+        groups = [[index_map[i] for i in group if i in index_map] for group in out.exclusive_groups]
+        groups = [group for group in groups if len(group) > 1]
+        offset = len(keep)
+        groups += [[offset + i for i in group] for group in repaired.exclusive_groups]
+        out = HypothesizeOutput(claims=keep + repaired.claims, exclusive_groups=groups)
+    result = apply_hypothesize(inq, out)
+    result["rejected_specificity"] = rejected + [dict(item, attempt=2) for item in result["rejected_specificity"]]
+    return result
 
 
 # ---------------------------------------------------------------------------
