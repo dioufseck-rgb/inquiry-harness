@@ -86,4 +86,3 @@
 - `single_origin` C24: accepted on evidence from one origin
 - `single_origin` C25: accepted on evidence from one origin
 - `orphan_evidence` (33): E11, E13, E14, E19, E20, E21, E23, E25, E26, E30, E40, E41, E42, E43, E44, E47, E48, E49, E50, E51, E52, E60, E61, E62, E63, E66, E71, E72, E74, E75, E76, E79, E80 used in no argument
-

@@ -113,4 +113,3 @@
 - `single_origin` C17: accepted on evidence from one origin
 - `main_issue_unresolved` Q1: no accepted claim answers the main issue
 - `orphan_evidence` (16): E2, E3, E5, E6, E10, E11, E12, E14, E16, E18, E20, E33, E36, E37, E42, E45 used in no argument
-

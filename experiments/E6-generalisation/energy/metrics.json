@@ -1,0 +1,257 @@
+{
+  "id": "energy",
+  "rounds": 1,
+  "sources": 11,
+  "origins": 11,
+  "duplicate_sources": 0,
+  "evidence": 197,
+  "orphans": 120,
+  "supporting_args": 25,
+  "supporting_in": 24,
+  "claims_supported_unargued": 0,
+  "coverage_eligible_claims": [
+    "C20",
+    "C22",
+    "C24",
+    "C25",
+    "C26",
+    "C28",
+    "C31",
+    "C33",
+    "C36",
+    "C37",
+    "C42",
+    "C43",
+    "C44"
+  ],
+  "main_supporting_in": 0,
+  "main_component_supporting_in": 4,
+  "undecided_empty": true,
+  "undecided_supported": false,
+  "attacks": 4,
+  "attacks_out": 1,
+  "attacks_discharged": 2,
+  "counters_dropped": 0,
+  "counters_dropped_reasons": {},
+  "counters_inapplicable": 0,
+  "counters_inapplicable_reasons": {},
+  "accepted_claims": 24,
+  "single_origin_accepts": 24,
+  "main_status": {
+    "C20": "in",
+    "C22": "in",
+    "C23": "in",
+    "C45": "in"
+  },
+  "main_labels": {
+    "C20": "accepted",
+    "C22": "accepted",
+    "C23": "accepted",
+    "C45": "accepted"
+  },
+  "absence_assertions": 0,
+  "provider_proposer": "openai",
+  "provider_critic": "anthropic",
+  "model_proposer": "gpt-6.1-sol",
+  "model_critic": "claude-sonnet-5-5",
+  "effort_proposer": "medium",
+  "effort_critic": "medium",
+  "tokens_in": 1256003,
+  "tokens_out": 91948,
+  "calls": 155,
+  "stop_reason": "no undecided main claim has anything evidence could settle",
+  "reopened_cqs": 0,
+  "reopened_cqs_active": 0,
+  "reopened_then_discharged": 0,
+  "supporting_original": 0,
+  "supporting_scoped": 25,
+  "applicable_original": 0,
+  "applicable_scoped": 24,
+  "main_supporting_in_original": 0,
+  "gold_sources_found": 1,
+  "gold_sources_total": 5,
+  "gold_sources_missing": [
+    "Integrated Resource Plan",
+    "Base Residual Auction",
+    "Data Center Energy Usage Report",
+    "interconnection queue"
+  ],
+  "gold_facts_found": 3,
+  "gold_facts_total": 4,
+  "gold_facts_missing": [
+    "MW-day"
+  ],
+  "shape_expected": "undecided",
+  "shape_match": false,
+  "shape_match_regex": false,
+  "shape_match_judge": null,
+  "error": null,
+  "seconds": 1847.2,
+  "packet_sources": 16,
+  "packet_path": "runs\\bench\\energy-pjm-tonight-openai-t7",
+  "packet_sha256": "d19b04be7a0eae6f6eb94b76d93d31ce63aa32971577fe91cd0aa8e78ccb11be",
+  "config": {
+    "rounds": 2,
+    "frame_samples": 1,
+    "review_frame": false,
+    "live_retrieval": false,
+    "proposer": "openai:gpt-6.1-sol",
+    "critic": "anthropic:claude-sonnet-5-5",
+    "effort": "medium"
+  },
+  "implementation_commit": "6cf25aba63deb31305b2deaaed1ce36f46cc4a10",
+  "runner_sha256": "52ef1729a69cdcf3697b73268488a90ab82ee95940959742115b12de9018b5c4",
+  "cost_by_provider": {
+    "anthropic": 0.1931635,
+    "openai": 3.7933476
+  },
+  "cost_usd": 3.9865111,
+  "api_calls": 155,
+  "references_valid": true,
+  "ledger_valid": true,
+  "search_queries": 6,
+  "fetched_urls": [
+    "https://www.synapse-energy.com/sites/default/files/Synapse%20-%20The%20Next%20Decade%20in%20PJM%2025-073.pdf",
+    "https://www.pjm.com/-/media/DotCom/committees-groups/task-forces/sacmstf/2025/20251029/20251029-item-03---analysis-group-sub-annual-capacity-market---presentation.pdf",
+    "https://modoenergy.com/research/en/pjm-market-outlook-bess-tb4-spreads",
+    "https://opc.maryland.gov/Portals/0/Files/Publications/Rising%20Transmission%20Costs%202026-03-25%20CORRECTED%20FINAL.pdf?ver=QPn-TuDmu9N_o2Aj1y6r4w%3D%3D",
+    "https://www.pjm.com/-/media/DotCom/library/reports-notices/load-forecast/2026-load-report.pdf",
+    "https://www.pjm.com/-/media/DotCom/library/reports-notices/load-forecast/2025-load-report.pdf",
+    "https://www.pjm.com/-/media/DotCom/planning/res-adeq/load-forecast/dominion-documentation.pdf",
+    "https://www.pjm.com/-/media/DotCom/planning/res-adeq/load-forecast/2025-long-term-load-forecast-supplement.pdf",
+    "https://www.pjm.com/-/media/DotCom/planning/res-adeq/elcc/2025-pjm-elcc-rrs.pdf",
+    "https://www.pjm.com/-/media/DotCom/library/reports-notices/special-reports/2024/20240624-energy-transition-in-pjm-flexibility-for-the-future.pdf",
+    "https://www.puc.pa.gov/media/4044/2026_assessing_electricity_resource_adequacy_in_pa_and_pjm.pdf",
+    "https://www.pjm.com/-/media/DotCom/committees-groups/task-forces/elccstf/2025/20251209/20251209-item-02---pjm-elcc-rrs-model-evaluation---e3-report.pdf",
+    "https://www.pjm.com/-/media/DotCom/documents/manuals/m14h.pdf",
+    "https://www.pjm.com/-/media/DotCom/documents/manuals/m14c.pdf",
+    "https://www.eia.gov/electricity/data/eia860/",
+    "https://www.eia.gov/petroleum/supply/monthly/"
+  ],
+  "accepted_main_claims": [],
+  "accepted_components": [
+    {
+      "id": "C20",
+      "text": "Synapse's Advanced Policy portfolio, including 9 GW of new gas, has modeled PJM-wide LOLE of 0.04 days in 2030.",
+      "issue_id": "Q1"
+    },
+    {
+      "id": "C22",
+      "text": "The Pennsylvania study's Reference scenario reports PJM-wide LOLE of 0.59 days in 2030 despite modeled gas additions and data-centre flexibility.",
+      "issue_id": "Q1"
+    },
+    {
+      "id": "C23",
+      "text": "The Maryland OPC records transmission projects proposed to address reliability needs associated with Northern Virginia data centres.",
+      "issue_id": "Q1"
+    },
+    {
+      "id": "C24",
+      "text": "PJM states that data centres account for most of the Dominion forecast adjustment in its breakout of data-centre and voltage-reduction effects.",
+      "issue_id": "Q2"
+    },
+    {
+      "id": "C25",
+      "text": "PJM's 2026 forecast requires firm commitments for near-term large-load adjustments and derates longer-term non-firm projects for uncertainty.",
+      "issue_id": "Q2"
+    },
+    {
+      "id": "C26",
+      "text": "Dominion's forecast submission averages high and low statistical scenarios and is checked against executed contracts; engineering agreements are not classified as firm load.",
+      "issue_id": "Q2"
+    },
+    {
+      "id": "C28",
+      "text": "The Pennsylvania adequacy study converts PJM large-load peak forecasts to annual energy using a flat load shape and cannot separate Dominion data centres from voltage optimization.",
+      "issue_id": "Q2"
+    },
+    {
+      "id": "C29",
+      "text": "The Pennsylvania study's No New Data Centers scenario removes incremental data-centre load from 2027 onward; its flat demand is an assumption, not a finding of no expected growth.",
+      "issue_id": "Q2"
+    },
+    {
+      "id": "C30",
+      "text": "Synapse's Status Quo scenario assumes roughly 8 GW of demand response through 2030; Advanced Policy assumes DERs and demand response reduce peak load by about 31 GW.",
+      "issue_id": "Q3"
+    },
+    {
+      "id": "C31",
+      "text": "Synapse assumes Dominion offshore wind is completed by 2030; other advanced-energy builds are economically selected within queue-based limits, not guaranteed additions.",
+      "issue_id": "Q3"
+    },
+    {
+      "id": "C32",
+      "text": "PJM's ELCC study administratively assumes a capacity benefit of external ties of 1.5%; this is not a quantified commitment of firm imports through 2030.",
+      "issue_id": "Q3"
+    },
+    {
+      "id": "C33",
+      "text": "PJM's ELCC portfolios include planned resources, assumed external firm transactions and demand resources; later-year additions and retirements use a vendor forecast.",
+      "issue_id": "Q3"
+    },
+    {
+      "id": "C34",
+      "text": "The Pennsylvania study assumes scheduled thermal retirements, allows earlier economic retirement, and assumes Three Mile Island Unit 1 returns in summer 2027.",
+      "issue_id": "Q3"
+    },
+    {
+      "id": "C36",
+      "text": "The Pennsylvania report's Reference and High Load and Low Supply scenarios exceed PJM's LOLE criterion in every modeled year; both add gas.",
+      "issue_id": "Q4"
+    },
+    {
+      "id": "C37",
+      "text": "Synapse's Status Quo and Advanced Policy portfolios report LOLE above and below PJM's criterion, respectively; both include new gas.",
+      "issue_id": "Q4"
+    },
+    {
+      "id": "C38",
+      "text": "The Maryland OPC report records BGE's request for incentives for an estimated $634 million of transmission projects addressing Northern Virginia data-centre reliability needs in the 2022 RTEP.",
+      "issue_id": "Q5"
+    },
+    {
+      "id": "C39",
+      "text": "The Pennsylvania resource-adequacy report allows unrestricted within-zone transfers and defines adequacy outages as generation shortages, not transmission or distribution outages.",
+      "issue_id": "Q5"
+    },
+    {
+      "id": "C40",
+      "text": "Synapse's Advanced Policy scenario permits economic advanced transmission additions from 2028; that permission is not a committed Northern Virginia upgrade schedule.",
+      "issue_id": "Q5"
+    },
+    {
+      "id": "C41",
+      "text": "PJM's ELCC and reserve analysis models the RTO as an isolated area without internal transmission constraints; its results do not test Northern Virginia deliverability.",
+      "issue_id": "Q5"
+    },
+    {
+      "id": "C42",
+      "text": "Synapse's Advanced Policy scenario assumes a 17 percent PJM peak reduction in 2030 from DERs including demand response, with some flexibility participating in emergency load response.",
+      "issue_id": "Q6"
+    },
+    {
+      "id": "C43",
+      "text": "The Pennsylvania assessment assumes Reference-case flexibility of 13 percent of peak data-centre load during 0.50 percent of annual hours, using stress-hour demand shifting without reducing annual energy.",
+      "issue_id": "Q6"
+    },
+    {
+      "id": "C44",
+      "text": "PJM attributes higher demand-response accreditation for 2027/28 to removing its performance window and treating demand response as available around the clock; winter capability remains a rating constraint.",
+      "issue_id": "Q6"
+    },
+    {
+      "id": "C45",
+      "text": "PJM's Table 4 reports a 12,804 MW UCAP shortfall for delivery year 2029/2030 under its vendor-forecast portfolio, comparing 148,375 MW of accredited UCAP with a 161,179 MW requirement. This is a table balance, not a measure of capacity actually procurable in RPM: capacity-interconnection-rights limits can further reduce available offers.",
+      "issue_id": "Q1"
+    },
+    {
+      "id": "C46",
+      "text": "PJM's ELCC study reports Table 4 UCAP shortfalls of 4,189 MW in delivery year 2028/2029 and 12,804 MW in 2029/2030 under its vendor-forecast portfolios. The totals include assumed external firm capacity purchases and sales, and the requirements incorporate an administratively assumed emergency-import capacity benefit of ties; these are not import-independent adequacy findings.",
+      "issue_id": "Q4"
+    }
+  ],
+  "main_load_bearing": {},
+  "single_origin_flag_missing": [],
+  "pass": false
+}

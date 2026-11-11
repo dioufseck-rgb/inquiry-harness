@@ -1,0 +1,234 @@
+{
+  "C5": {
+    "label": "unsupported",
+    "reason": "evidence bears on the claim but no supporting argument was built",
+    "status": "undecided",
+    "text": "Northern Virginia data centres account for less than half of projected local peak-load growth through 2030.",
+    "issue_id": "Q2",
+    "answers_issue": true
+  },
+  "C10": {
+    "label": "unsupported",
+    "reason": "evidence bears on the claim but no supporting argument was built",
+    "status": "undecided",
+    "text": "Excluding new dispatchable generation, PJM's available accredited capacity remains unchanged through 2030 as resource gains offset losses.",
+    "issue_id": "Q3",
+    "answers_issue": true
+  },
+  "C13": {
+    "label": "unsupported",
+    "reason": "evidence bears on the claim but no supporting argument was built",
+    "status": "undecided",
+    "text": "Without new dispatchable generation, PJM's projected accredited capacity exactly meets its resource-adequacy requirement throughout the planning period through 2030.",
+    "issue_id": "Q4",
+    "answers_issue": true
+  },
+  "C16": {
+    "label": "defeated",
+    "reason": "all constructed support is out, withdrawn or inapplicable",
+    "status": "undecided",
+    "text": "Without new dispatchable generation, existing transmission can deliver projected Northern Virginia data-centre load through 2030 while meeting applicable reliability criteria; no transmission upgrades are required.",
+    "issue_id": "Q5",
+    "answers_issue": true
+  },
+  "C20": {
+    "label": "accepted",
+    "reason": "surviving support meets the proof standard",
+    "status": "in",
+    "text": "Synapse's Advanced Policy portfolio, including 9 GW of new gas, has modeled PJM-wide LOLE of 0.04 days in 2030.",
+    "issue_id": "Q1",
+    "answers_issue": false
+  },
+  "C22": {
+    "label": "accepted",
+    "reason": "surviving support meets the proof standard",
+    "status": "in",
+    "text": "The Pennsylvania study's Reference scenario reports PJM-wide LOLE of 0.59 days in 2030 despite modeled gas additions and data-centre flexibility.",
+    "issue_id": "Q1",
+    "answers_issue": false
+  },
+  "C23": {
+    "label": "accepted",
+    "reason": "surviving support meets the proof standard",
+    "status": "in",
+    "text": "The Maryland OPC records transmission projects proposed to address reliability needs associated with Northern Virginia data centres.",
+    "issue_id": "Q1",
+    "answers_issue": false
+  },
+  "C24": {
+    "label": "accepted",
+    "reason": "surviving support meets the proof standard",
+    "status": "in",
+    "text": "PJM states that data centres account for most of the Dominion forecast adjustment in its breakout of data-centre and voltage-reduction effects.",
+    "issue_id": "Q2",
+    "answers_issue": false
+  },
+  "C25": {
+    "label": "accepted",
+    "reason": "surviving support meets the proof standard",
+    "status": "in",
+    "text": "PJM's 2026 forecast requires firm commitments for near-term large-load adjustments and derates longer-term non-firm projects for uncertainty.",
+    "issue_id": "Q2",
+    "answers_issue": false
+  },
+  "C26": {
+    "label": "accepted",
+    "reason": "surviving support meets the proof standard",
+    "status": "in",
+    "text": "Dominion's forecast submission averages high and low statistical scenarios and is checked against executed contracts; engineering agreements are not classified as firm load.",
+    "issue_id": "Q2",
+    "answers_issue": false
+  },
+  "C28": {
+    "label": "accepted",
+    "reason": "surviving support meets the proof standard",
+    "status": "in",
+    "text": "The Pennsylvania adequacy study converts PJM large-load peak forecasts to annual energy using a flat load shape and cannot separate Dominion data centres from voltage optimization.",
+    "issue_id": "Q2",
+    "answers_issue": false
+  },
+  "C29": {
+    "label": "accepted",
+    "reason": "surviving support meets the proof standard",
+    "status": "in",
+    "text": "The Pennsylvania study's No New Data Centers scenario removes incremental data-centre load from 2027 onward; its flat demand is an assumption, not a finding of no expected growth.",
+    "issue_id": "Q2",
+    "answers_issue": false
+  },
+  "C30": {
+    "label": "accepted",
+    "reason": "surviving support meets the proof standard",
+    "status": "in",
+    "text": "Synapse's Status Quo scenario assumes roughly 8 GW of demand response through 2030; Advanced Policy assumes DERs and demand response reduce peak load by about 31 GW.",
+    "issue_id": "Q3",
+    "answers_issue": false
+  },
+  "C31": {
+    "label": "accepted",
+    "reason": "surviving support meets the proof standard",
+    "status": "in",
+    "text": "Synapse assumes Dominion offshore wind is completed by 2030; other advanced-energy builds are economically selected within queue-based limits, not guaranteed additions.",
+    "issue_id": "Q3",
+    "answers_issue": false
+  },
+  "C32": {
+    "label": "accepted",
+    "reason": "surviving support meets the proof standard",
+    "status": "in",
+    "text": "PJM's ELCC study administratively assumes a capacity benefit of external ties of 1.5%; this is not a quantified commitment of firm imports through 2030.",
+    "issue_id": "Q3",
+    "answers_issue": false
+  },
+  "C33": {
+    "label": "accepted",
+    "reason": "surviving support meets the proof standard",
+    "status": "in",
+    "text": "PJM's ELCC portfolios include planned resources, assumed external firm transactions and demand resources; later-year additions and retirements use a vendor forecast.",
+    "issue_id": "Q3",
+    "answers_issue": false
+  },
+  "C34": {
+    "label": "accepted",
+    "reason": "surviving support meets the proof standard",
+    "status": "in",
+    "text": "The Pennsylvania study assumes scheduled thermal retirements, allows earlier economic retirement, and assumes Three Mile Island Unit 1 returns in summer 2027.",
+    "issue_id": "Q3",
+    "answers_issue": false
+  },
+  "C36": {
+    "label": "accepted",
+    "reason": "surviving support meets the proof standard",
+    "status": "in",
+    "text": "The Pennsylvania report's Reference and High Load and Low Supply scenarios exceed PJM's LOLE criterion in every modeled year; both add gas.",
+    "issue_id": "Q4",
+    "answers_issue": false
+  },
+  "C37": {
+    "label": "accepted",
+    "reason": "surviving support meets the proof standard",
+    "status": "in",
+    "text": "Synapse's Status Quo and Advanced Policy portfolios report LOLE above and below PJM's criterion, respectively; both include new gas.",
+    "issue_id": "Q4",
+    "answers_issue": false
+  },
+  "C38": {
+    "label": "accepted",
+    "reason": "surviving support meets the proof standard",
+    "status": "in",
+    "text": "The Maryland OPC report records BGE's request for incentives for an estimated $634 million of transmission projects addressing Northern Virginia data-centre reliability needs in the 2022 RTEP.",
+    "issue_id": "Q5",
+    "answers_issue": false
+  },
+  "C39": {
+    "label": "accepted",
+    "reason": "surviving support meets the proof standard",
+    "status": "in",
+    "text": "The Pennsylvania resource-adequacy report allows unrestricted within-zone transfers and defines adequacy outages as generation shortages, not transmission or distribution outages.",
+    "issue_id": "Q5",
+    "answers_issue": false
+  },
+  "C40": {
+    "label": "accepted",
+    "reason": "surviving support meets the proof standard",
+    "status": "in",
+    "text": "Synapse's Advanced Policy scenario permits economic advanced transmission additions from 2028; that permission is not a committed Northern Virginia upgrade schedule.",
+    "issue_id": "Q5",
+    "answers_issue": false
+  },
+  "C41": {
+    "label": "accepted",
+    "reason": "surviving support meets the proof standard",
+    "status": "in",
+    "text": "PJM's ELCC and reserve analysis models the RTO as an isolated area without internal transmission constraints; its results do not test Northern Virginia deliverability.",
+    "issue_id": "Q5",
+    "answers_issue": false
+  },
+  "C42": {
+    "label": "accepted",
+    "reason": "surviving support meets the proof standard",
+    "status": "in",
+    "text": "Synapse's Advanced Policy scenario assumes a 17 percent PJM peak reduction in 2030 from DERs including demand response, with some flexibility participating in emergency load response.",
+    "issue_id": "Q6",
+    "answers_issue": false
+  },
+  "C43": {
+    "label": "accepted",
+    "reason": "surviving support meets the proof standard",
+    "status": "in",
+    "text": "The Pennsylvania assessment assumes Reference-case flexibility of 13 percent of peak data-centre load during 0.50 percent of annual hours, using stress-hour demand shifting without reducing annual energy.",
+    "issue_id": "Q6",
+    "answers_issue": false
+  },
+  "C44": {
+    "label": "accepted",
+    "reason": "surviving support meets the proof standard",
+    "status": "in",
+    "text": "PJM attributes higher demand-response accreditation for 2027/28 to removing its performance window and treating demand response as available around the clock; winter capability remains a rating constraint.",
+    "issue_id": "Q6",
+    "answers_issue": false
+  },
+  "C45": {
+    "label": "accepted",
+    "reason": "surviving support meets the proof standard",
+    "status": "in",
+    "text": "PJM's Table 4 reports a 12,804 MW UCAP shortfall for delivery year 2029/2030 under its vendor-forecast portfolio, comparing 148,375 MW of accredited UCAP with a 161,179 MW requirement. This is a table balance, not a measure of capacity actually procurable in RPM: capacity-interconnection-rights limits can further reduce available offers.",
+    "issue_id": "Q1",
+    "answers_issue": false
+  },
+  "C46": {
+    "label": "accepted",
+    "reason": "surviving support meets the proof standard",
+    "status": "in",
+    "text": "PJM's ELCC study reports Table 4 UCAP shortfalls of 4,189 MW in delivery year 2028/2029 and 12,804 MW in 2029/2030 under its vendor-forecast portfolios. The totals include assumed external firm capacity purchases and sales, and the requirements incorporate an administratively assumed emergency-import capacity benefit of ties; these are not import-independent adequacy findings.",
+    "issue_id": "Q4",
+    "answers_issue": false
+  },
+  "C47": {
+    "label": "defeated",
+    "reason": "all constructed support is out, withdrawn or inapplicable",
+    "status": "undecided",
+    "text": "Modo states that Dominion data centres account for most of its projected PJM coincident-peak increment from 2029 to 2030. This records Modo's attribution, not a validated demand forecast or an estimate of Northern Virginia's cumulative local peak-load growth.",
+    "issue_id": "Q2",
+    "answers_issue": false
+  }
+}

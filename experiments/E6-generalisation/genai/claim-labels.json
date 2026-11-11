@@ -1,0 +1,162 @@
+{
+  "C3": {
+    "label": "refuted",
+    "reason": "a contrary claim is accepted",
+    "status": "out",
+    "text": "Fewer than half of enterprise generative-AI pilots generally deliver no measurable return.",
+    "issue_id": "Q1",
+    "answers_issue": true
+  },
+  "C4": {
+    "label": "untested",
+    "reason": "no evidence bears on the claim and no argument tests it",
+    "status": "undecided",
+    "text": "Enterprise generative-AI pilots have no general tendency to fail to deliver measurable returns.",
+    "issue_id": "Q1",
+    "answers_issue": true
+  },
+  "C5": {
+    "label": "accepted",
+    "reason": "surviving support meets the proof standard",
+    "status": "in",
+    "text": "\u201cNo measurable return\u201d conflates unmeasured benefits, absent financial impact, and negative returns; these interpretations yield different answers about enterprise generative-AI pilots.",
+    "issue_id": "Q1",
+    "answers_issue": true
+  },
+  "C6": {
+    "label": "contested",
+    "reason": "standing pro and con arguments prevent an accepted answer",
+    "status": "undecided",
+    "text": "MIT NANDA's 2025 State of AI in Business report originated the widely circulated claim that 95% of organizations were getting zero return from generative-AI investments.",
+    "issue_id": "Q2",
+    "answers_issue": true
+  },
+  "C8": {
+    "label": "unsupported",
+    "reason": "evidence bears on the claim but no supporting argument was built",
+    "status": "out",
+    "text": "No identifiable research report originated the roughly 95% claim about enterprise generative-AI pilots.",
+    "issue_id": "Q2",
+    "answers_issue": true
+  },
+  "C9": {
+    "label": "contested",
+    "reason": "standing pro and con arguments prevent an accepted answer",
+    "status": "undecided",
+    "text": "The originating material shifts between organizations, investments, and pilots, so its roughly 95% statements do not identify a single consistent denominator.",
+    "issue_id": "Q2",
+    "answers_issue": true
+  },
+  "C10": {
+    "label": "accepted",
+    "reason": "surviving support meets the proof standard",
+    "status": "in",
+    "text": "The originating research studied a selected set of enterprise AI initiatives using interviews, surveys, and public cases, rather than a probability sample of enterprise generative-AI pilots.",
+    "issue_id": "Q3",
+    "answers_issue": true
+  },
+  "C11": {
+    "label": "accepted",
+    "reason": "surviving support meets the proof standard",
+    "status": "in",
+    "text": "The originating research assessed enterprise generative-AI returns through reported organizational outcomes, rather than audited financial returns for every sampled pilot.",
+    "issue_id": "Q3",
+    "answers_issue": true
+  },
+  "C13": {
+    "label": "refuted",
+    "reason": "a contrary claim is accepted",
+    "status": "out",
+    "text": "The originating research did not assess returns from enterprise generative-AI projects.",
+    "issue_id": "Q3",
+    "answers_issue": true
+  },
+  "C15": {
+    "label": "refuted",
+    "reason": "a contrary claim is accepted",
+    "status": "out",
+    "text": "Google Cloud's 2024 survey reported that 74% of organizations using generative AI in production saw ROI on at least one use case; this was not a pilot-level return rate.",
+    "issue_id": "Q4",
+    "answers_issue": true
+  },
+  "C17": {
+    "label": "unsupported",
+    "reason": "evidence bears on the claim but no supporting argument was built",
+    "status": "undecided",
+    "text": "Other empirical studies report no proportions or outcome distributions concerning returns from enterprise generative-AI projects.",
+    "issue_id": "Q4",
+    "answers_issue": true
+  },
+  "C18": {
+    "label": "accepted",
+    "reason": "surviving support meets the proof standard",
+    "status": "in",
+    "text": "Other studies report organization-level, production-use, or broader AI outcomes rather than comparable enterprise generative-AI pilot return rates.",
+    "issue_id": "Q4",
+    "answers_issue": true
+  },
+  "C19": {
+    "label": "accepted",
+    "reason": "surviving support meets the proof standard",
+    "status": "in",
+    "text": "NANDA reports zero return for 95% of organizations; separately, it says 5% of integrated AI pilots extract millions and the vast majority have no measurable P&L impact.",
+    "issue_id": "Q1",
+    "answers_issue": false
+  },
+  "C20": {
+    "label": "accepted",
+    "reason": "surviving support meets the proof standard",
+    "status": "in",
+    "text": "NANDA reports that 60% of organizations evaluated enterprise-grade tools, 20% reached pilots and 5% reached production; these are adoption-stage shares, not pilot return rates.",
+    "issue_id": "Q1",
+    "answers_issue": false
+  },
+  "C21": {
+    "label": "accepted",
+    "reason": "surviving support meets the proof standard",
+    "status": "in",
+    "text": "The complement of the reported 5% of integrated pilots extracting millions is 95% not meeting that threshold, not 95% demonstrated to lack any measurable benefit.",
+    "issue_id": "Q1",
+    "answers_issue": false
+  },
+  "C22": {
+    "label": "contested",
+    "reason": "standing pro and con arguments prevent an accepted answer",
+    "status": "undecided",
+    "text": "NANDA's report says 5% of integrated AI pilots extract millions in value, while the vast majority have no measurable P&L impact.",
+    "issue_id": "Q2",
+    "answers_issue": true
+  },
+  "C23": {
+    "label": "accepted",
+    "reason": "surviving support meets the proof standard",
+    "status": "in",
+    "text": "The report states that ROI impact was measured six months post-pilot and adjusted for department size; the supplied methodology passages do not identify the pilot denominator or calculation behind the headline proportion.",
+    "issue_id": "Q3",
+    "answers_issue": true
+  },
+  "C25": {
+    "label": "refuted",
+    "reason": "a contrary claim is accepted",
+    "status": "out",
+    "text": "The supplied NANDA report does not establish that roughly 95% of enterprise generative-AI pilots generally deliver no measurable return: its headline pilot denominator is unidentified, and its statement about no measurable P&L impact does not demonstrate an absence of all benefits.",
+    "issue_id": "Q1",
+    "answers_issue": true
+  },
+  "C26": {
+    "label": "refuted",
+    "reason": "a contrary claim is accepted",
+    "status": "out",
+    "text": "The report separates evaluation, pilot and production stages, reports different implementation timelines across firm categories, and warns that six months may be insufficient for complex enterprise deployments; the supplied passages do not establish how timing or implementation maturity affected the headline return proportion.",
+    "issue_id": "Q3",
+    "answers_issue": false
+  },
+  "C27": {
+    "label": "refuted",
+    "reason": "a contrary claim is accepted",
+    "status": "out",
+    "text": "The supplied secondary article attributes to IBM's 2025 CEO study a finding that 25% of AI initiatives had delivered expected ROI; it does not identify these as exclusively enterprise generative-AI pilots or reproduce the primary study's design and uncertainty.",
+    "issue_id": "Q4",
+    "answers_issue": false
+  }
+}

@@ -39,5 +39,27 @@
   },
   "protected_opus_reserve_usd": 20,
   "budget_ledger": "runs/tonight-2/budget.json",
-  "fixed_packet": "runs/bench/health-aspirin-20261110-0209"
+  "fixed_packet": "runs/bench/health-aspirin-20261110-0209",
+  "n5_commit": "6cf25ab",
+  "generalisation": {
+    "status": "completed",
+    "energy": "completed_fail",
+    "genai": "completed_structural_pass_expected_shape_fail",
+    "runs_each": 1,
+    "implementation_commit": "6cf25ab",
+    "tuned_from_results": false
+  },
+  "final_validation": {
+    "tests_passed": 147,
+    "api_calls": 262,
+    "state_anchors_valid": true,
+    "ledgers_valid": true,
+    "references_valid": true,
+    "costs_reconcile": true,
+    "pending_calls": 0
+  },
+  "tonight_cost_by_provider_usd": {
+    "anthropic": 2.2633985,
+    "openai": 6.5398966
+  }
 }

@@ -27,7 +27,7 @@ def render(paths, report_path, title):
             inq.evaluation.claims[claim.id].label_reason = reason
         # Derived reports only: never rewrite the experimental state or ledger.
         (path / "claim-labels.json").write_text(json.dumps(labels, indent=2), encoding="utf-8")
-        (path / "labelled-summary.md").write_text(summary(inq.graph, inq.evaluation) + "\n", encoding="utf-8")
+        (path / "labelled-summary.md").write_text(summary(inq.graph, inq.evaluation).rstrip() + "\n", encoding="utf-8")
         m["main_labels_derived"] = {c.id: labels[c.id]["label"] for c in inq.main_claims() if c.answers_issue}
         runs.append((name, path, m))
     def cell(value):
@@ -81,8 +81,8 @@ def render(paths, report_path, title):
                      f"Main-support applicability blockers: {('; '.join(blockers[:6])) if blockers else 'none recorded'}. "
                      + component_text
                      + ("The graph has no accepted composed answer to the main issue; accepted components alone do not establish the requested whole-question comparison." if not accepted else "The accepted main proposition is stated above and must be read at that recorded scope."))
-    interpretation = Path("experiments/E6/interpretation.md")
-    if "generalisation" not in str(report_path) and interpretation.exists():
+    interpretation = Path("experiments/E6-generalisation/interpretation.md" if "generalisation" in str(report_path) else "experiments/E6/interpretation.md")
+    if interpretation.exists():
         lines += ["", interpretation.read_text(encoding="utf-8").strip(), ""]
     lines += ["", "## Six status labels (N5)", "",
               "Labels are derived from the saved evaluation without changing its compatible in/out/undecided proof statuses. Accepted means the proof standard is met; refuted means a contrary is accepted; defeated means every constructed supporting argument is out, withdrawn or inapplicable; contested requires standing pro and con support; unsupported means evidence without an argument; untested means no bearing evidence or constructed support.", "",

@@ -1,0 +1,194 @@
+{
+  "id": "genai",
+  "rounds": 1,
+  "sources": 16,
+  "origins": 14,
+  "duplicate_sources": 1,
+  "evidence": 161,
+  "orphans": 100,
+  "supporting_args": 17,
+  "supporting_in": 14,
+  "claims_supported_unargued": 0,
+  "coverage_eligible_claims": [
+    "C10",
+    "C11",
+    "C18",
+    "C23",
+    "C5",
+    "C6",
+    "C9"
+  ],
+  "main_supporting_in": 2,
+  "main_component_supporting_in": 3,
+  "undecided_empty": false,
+  "undecided_supported": false,
+  "attacks": 3,
+  "attacks_out": 0,
+  "attacks_discharged": 1,
+  "counters_dropped": 0,
+  "counters_dropped_reasons": {},
+  "counters_inapplicable": 0,
+  "counters_inapplicable_reasons": {},
+  "accepted_claims": 8,
+  "single_origin_accepts": 6,
+  "main_status": {
+    "C3": "out",
+    "C4": "undecided",
+    "C5": "in",
+    "C19": "in",
+    "C20": "in",
+    "C21": "in",
+    "C25": "out"
+  },
+  "main_labels": {
+    "C3": "refuted",
+    "C4": "untested",
+    "C5": "accepted",
+    "C19": "accepted",
+    "C20": "accepted",
+    "C21": "accepted",
+    "C25": "refuted"
+  },
+  "absence_assertions": 0,
+  "provider_proposer": "openai",
+  "provider_critic": "anthropic",
+  "model_proposer": "gpt-6.1-sol",
+  "model_critic": "claude-sonnet-5-5",
+  "effort_proposer": "medium",
+  "effort_critic": "medium",
+  "tokens_in": 412680,
+  "tokens_out": 54778,
+  "calls": 42,
+  "stop_reason": "main issue answered by C5",
+  "reopened_cqs": 2,
+  "reopened_cqs_active": 1,
+  "reopened_then_discharged": 1,
+  "supporting_original": 11,
+  "supporting_scoped": 6,
+  "applicable_original": 10,
+  "applicable_scoped": 5,
+  "main_supporting_in_original": 2,
+  "gold_sources_found": 2,
+  "gold_sources_total": 3,
+  "gold_sources_missing": [
+    "Gartner"
+  ],
+  "gold_facts_found": 3,
+  "gold_facts_total": 3,
+  "gold_facts_missing": [],
+  "shape_expected": "undecided",
+  "shape_match": false,
+  "shape_match_regex": false,
+  "shape_match_judge": null,
+  "error": null,
+  "seconds": 1015.61,
+  "packet_sources": 16,
+  "packet_path": "runs\\bench\\it-genai-95-tonight-openai-t7",
+  "packet_sha256": "3569381ffe247ed7a213779e9586146ef19b482d2485c2f9d07b690ced71093c",
+  "config": {
+    "rounds": 2,
+    "frame_samples": 1,
+    "review_frame": false,
+    "live_retrieval": false,
+    "proposer": "openai:gpt-6.1-sol",
+    "critic": "anthropic:claude-sonnet-5-5",
+    "effort": "medium"
+  },
+  "implementation_commit": "6cf25aba63deb31305b2deaaed1ce36f46cc4a10",
+  "runner_sha256": "52ef1729a69cdcf3697b73268488a90ab82ee95940959742115b12de9018b5c4",
+  "cost_by_provider": {
+    "anthropic": 0.1492655,
+    "openai": 1.3760405
+  },
+  "cost_usd": 1.525306,
+  "api_calls": 42,
+  "references_valid": true,
+  "ledger_valid": true,
+  "search_queries": 1,
+  "fetched_urls": [
+    "https://mlq.ai/media/quarterly_decks/v0.1_State_of_AI_in_Business_2025_Report.pdf",
+    "https://www.aigl.blog/state-of-ai-in-business-2025/",
+    "https://getdx.com/blog/the-ai-divide/",
+    "https://www.dataiku.com/blog/moving-past-genai-pilots",
+    "https://www.linkedin.com/pulse/genai-divide-why-95-pilots-fail-polynome-ai-lrntc",
+    "https://www.innovativehumancapital.com/article/the-genai-divide-why-95-of-enterprise-ai-investments-fail-and-how-the-5-succeed",
+    "https://virtualizationreview.com/articles/2025/08/19/mit-report-finds-most-ai-business-investments-fail-reveals-genai-divide.aspx",
+    "https://www.linkedin.com/pulse/genai-divide-my-deepdive-viral-mit-study-what-holds-up-kouloures-ijynf",
+    "https://www.linkedin.com/posts/jared-lesage-08272468_the-genai-divide-state-of-ai-in-business-activity-7364733577063768064-1fuZ",
+    "https://www.linkedin.com/posts/roboticprocessautomationandtransformation_mit-study-state-of-ai-in-business-2025-activity-7488957918751670272-yviK",
+    "https://confx-analytics.com/resources/read-the-95-percent-figure/",
+    "https://consulting-huber.com/ai-measurement-crisis.html",
+    "https://fortune.com/2025/08/18/mit-report-95-percent-generative-ai-pilots-at-companies-failing-cfo/",
+    "https://www.teamim.com/blog/avoiding-95-percent-ai-failure-rate",
+    "https://www.thedataexperts.us/writing/enterprise-ai-failure-crisis-95-percent-failure-rate.html",
+    "https://www.linkedin.com/posts/vinbrill-solution_artificialintelligence-genai-ai-activity-7382770196236877824-Idyp"
+  ],
+  "accepted_main_claims": [
+    {
+      "id": "C5",
+      "text": "\u201cNo measurable return\u201d conflates unmeasured benefits, absent financial impact, and negative returns; these interpretations yield different answers about enterprise generative-AI pilots.",
+      "target": {},
+      "scope": true
+    }
+  ],
+  "accepted_components": [
+    {
+      "id": "C10",
+      "text": "The originating research studied a selected set of enterprise AI initiatives using interviews, surveys, and public cases, rather than a probability sample of enterprise generative-AI pilots.",
+      "issue_id": "Q3"
+    },
+    {
+      "id": "C11",
+      "text": "The originating research assessed enterprise generative-AI returns through reported organizational outcomes, rather than audited financial returns for every sampled pilot.",
+      "issue_id": "Q3"
+    },
+    {
+      "id": "C18",
+      "text": "Other studies report organization-level, production-use, or broader AI outcomes rather than comparable enterprise generative-AI pilot return rates.",
+      "issue_id": "Q4"
+    },
+    {
+      "id": "C19",
+      "text": "NANDA reports zero return for 95% of organizations; separately, it says 5% of integrated AI pilots extract millions and the vast majority have no measurable P&L impact.",
+      "issue_id": "Q1"
+    },
+    {
+      "id": "C20",
+      "text": "NANDA reports that 60% of organizations evaluated enterprise-grade tools, 20% reached pilots and 5% reached production; these are adoption-stage shares, not pilot return rates.",
+      "issue_id": "Q1"
+    },
+    {
+      "id": "C21",
+      "text": "The complement of the reported 5% of integrated pilots extracting millions is 95% not meeting that threshold, not 95% demonstrated to lack any measurable benefit.",
+      "issue_id": "Q1"
+    },
+    {
+      "id": "C23",
+      "text": "The report states that ROI impact was measured six months post-pilot and adjusted for department size; the supplied methodology passages do not identify the pilot denominator or calculation behind the headline proportion.",
+      "issue_id": "Q3"
+    }
+  ],
+  "main_load_bearing": {
+    "C3": [],
+    "C4": [
+      {
+        "node_id": "A20",
+        "kind": "argument",
+        "detail": "attack -> A1",
+        "effect": "out",
+        "claim_id": "C4"
+      },
+      {
+        "node_id": "A20:grounds",
+        "kind": "cq_answer",
+        "detail": "Are the grounds for the attack themselves evidenced?",
+        "effect": "out",
+        "claim_id": "C4"
+      }
+    ],
+    "C5": [],
+    "C25": []
+  },
+  "single_origin_flag_missing": [],
+  "pass": true
+}

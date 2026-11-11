@@ -1,5 +1,7 @@
 # Move experiments: two providers, fixed graphs
 
+This page records the initial campaign through `0cb1476`. The subsequent [TONIGHT-2 work](tonight-2.md) adds the CQ audit, original/scoped split, six labels and the [full E6 aspirin runs](E6.md). E6's skip below describes the original stopping point; the follow-up runs completed and both failed their declared gate. Costs below cover only the initial campaign.
+
 E2, E4 and E5 pass their stated gates. E1's raw specificity gate and E3's attack-count gate fail. E6 was therefore skipped, including Opus. No held-out question or live full-harness run was made during this campaign.
 
 Both providers use medium effort: `openai:gpt-6.1-sol` and `anthropic:claude-sonnet-5-5`. Every sample records provider, model, effort, usage, cost estimate, graph hash and errors. All costs below are usage estimates, not invoice totals.
@@ -11,7 +13,7 @@ Both providers use medium effort: `openai:gpt-6.1-sol` and `anthropic:claude-son
 | [E3](../../experiments/E3/report.md) | Fail | Applicable attacks average 2.00–4.33 across the four critic/proposer cells. Only one sample reaches six; the five-attack condition is not met on both. Needs were manually tagged. |
 | [E4](../../experiments/E4/report.md) | Pass | Final candidate answers every standing attack; all concessions have validated CQ/check/reason records; mean defenses exceed concessions on both providers. |
 | [E5](../../experiments/E5/report.md) | Pass | Grade D is extracted in all six guarded samples and 100% of retained quotes verify on both providers. Direction agreement is reported separately. |
-| [E6](../../experiments/E6/gate.json) | Skipped | E1 and E2 must both pass. The $20 Anthropic Opus reserve remains unused. Requested full metrics are implemented and tested locally. |
+| [E6 follow-up](E6.md) | Initially skipped | The initial campaign required E1 and E2 to pass. TONIGHT-2 later authorized the retained-claim guard rule and recorded the full runs separately. The $20 Anthropic Opus reserve remains unused. |
 
 ## What changed
 

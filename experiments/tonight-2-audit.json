@@ -1,0 +1,154 @@
+{
+  "campaign": "TONIGHT-2",
+  "review_kind": "agent_provisional_user_authorized",
+  "human_review_completed": false,
+  "human_blank_cases": 10,
+  "human_review_file_sha256": "8cbe38c0692415da5ee3fec65b0ac66f967590bbcfc5891aeeb9f12065e09256",
+  "held_out_runs": 0,
+  "live_retrieval_runs": 0,
+  "spendable_limits_usd": {
+    "anthropic": 16,
+    "openai": 10
+  },
+  "protected_opus_reserve_usd": 20,
+  "cost_by_provider": {
+    "anthropic": 2.2633984999999996,
+    "openai": 6.5398966000000005
+  },
+  "cost_usd": 8.8032951,
+  "api_calls": 262,
+  "pending_calls": 0,
+  "unknown_cost_calls": 0,
+  "api_error_calls": 0,
+  "costs_reconcile": true,
+  "E3_1": [
+    {
+      "manifest": "experiments\\E3_1\\sample-001\\sol\\moves.json",
+      "references_valid": true,
+      "state_file_sha256": "be4fc7426666a46822a357c0092beeca6698fb35d4a60ab112132976bf57752d",
+      "cost_usd": 0.1533049,
+      "api_calls": 1
+    },
+    {
+      "manifest": "experiments\\E3_1\\sample-001\\sonnet\\moves.json",
+      "references_valid": true,
+      "state_file_sha256": "5b48ac551e71a2fe9a25f98a2c8984367ccd04687c4d8fd895f040f17afbee31",
+      "cost_usd": 0.2034455,
+      "api_calls": 1
+    },
+    {
+      "manifest": "experiments\\E3_1\\sample-002\\sol\\moves.json",
+      "references_valid": true,
+      "state_file_sha256": "81e2159a2c2fc614d96f18d6f6d1e148b912185a1c02f4bd2123439020674849",
+      "cost_usd": 0.1438399,
+      "api_calls": 1
+    },
+    {
+      "manifest": "experiments\\E3_1\\sample-002\\sonnet\\moves.json",
+      "references_valid": true,
+      "state_file_sha256": "2031907d37b4fc03598dcbdb7952046c98730660f3fa91bdb1db9c8e9e66a931",
+      "cost_usd": 0.1894139,
+      "api_calls": 1
+    },
+    {
+      "manifest": "experiments\\E3_1\\sample-003\\sol\\moves.json",
+      "references_valid": true,
+      "state_file_sha256": "b0827651c06fa0666f5e197d47e71f95855d1d3cd63f27c45bba2a75b0eb2c42",
+      "cost_usd": 0.146576,
+      "api_calls": 1
+    },
+    {
+      "manifest": "experiments\\E3_1\\sample-003\\sonnet\\moves.json",
+      "references_valid": true,
+      "state_file_sha256": "661040abd84c4e23a96311b4798f0798129459e1aaaf1558754194933171df19",
+      "cost_usd": 0.18970389999999998,
+      "api_calls": 1
+    }
+  ],
+  "full_cycles": [
+    {
+      "path": "experiments\\E6\\sonnet",
+      "question_id": "health-aspirin",
+      "implementation_commit": "20a225acaa311f833eaab2a637b80ed242549d52",
+      "runner_sha256": "52ef1729a69cdcf3697b73268488a90ab82ee95940959742115b12de9018b5c4",
+      "state_file_sha256": "2c8acb068b56ca907619f04eddfedea3cfac40d265b3f9dbdb47b6f6b82b33de",
+      "state_anchor_valid": true,
+      "final_ledger_hash": "75f733280a3eb0fc26d2527b9065ebee8316d426e17bfe9dbb9213f28b0ada5d",
+      "ledger_events": 25,
+      "references_valid": true,
+      "evaluation_reproduced": true,
+      "packet_urls_only": true,
+      "pass": false,
+      "error": null,
+      "api_calls": 36,
+      "cost_by_provider": {
+        "anthropic": 1.2433867,
+        "openai": 0.1252173
+      },
+      "seconds": 400.36
+    },
+    {
+      "path": "experiments\\E6\\sol",
+      "question_id": "health-aspirin",
+      "implementation_commit": "20a225acaa311f833eaab2a637b80ed242549d52",
+      "runner_sha256": "52ef1729a69cdcf3697b73268488a90ab82ee95940959742115b12de9018b5c4",
+      "state_file_sha256": "986f427cc7716a1995eaa645a9d28d4e7b138e427803d0ef1632ef6d81e64570",
+      "state_anchor_valid": true,
+      "final_ledger_hash": "b7fad1514db9ffe5ad9ce43b4ab3d902e918c33f7e1926bd86dbbd789e33261a",
+      "ledger_events": 15,
+      "references_valid": true,
+      "evaluation_reproduced": true,
+      "packet_urls_only": true,
+      "pass": false,
+      "error": null,
+      "api_calls": 23,
+      "cost_by_provider": {
+        "anthropic": 0.0950195,
+        "openai": 0.8015704
+      },
+      "seconds": 628.42
+    },
+    {
+      "path": "experiments\\E6-generalisation\\energy",
+      "question_id": "energy-pjm",
+      "implementation_commit": "6cf25aba63deb31305b2deaaed1ce36f46cc4a10",
+      "runner_sha256": "52ef1729a69cdcf3697b73268488a90ab82ee95940959742115b12de9018b5c4",
+      "state_file_sha256": "4a4bc89b3c9508f2d4b0d67eabb0ab7801e96430f9111bfe680cc9884282b6a6",
+      "state_anchor_valid": true,
+      "final_ledger_hash": "c73ba4e47fa168246b0221ef592843f7fbabedef03e2838acdf184219b18f1e8",
+      "ledger_events": 15,
+      "references_valid": true,
+      "evaluation_reproduced": true,
+      "packet_urls_only": true,
+      "pass": false,
+      "error": null,
+      "api_calls": 155,
+      "cost_by_provider": {
+        "anthropic": 0.1931635,
+        "openai": 3.7933476
+      },
+      "seconds": 1847.2
+    },
+    {
+      "path": "experiments\\E6-generalisation\\genai",
+      "question_id": "it-genai-95",
+      "implementation_commit": "6cf25aba63deb31305b2deaaed1ce36f46cc4a10",
+      "runner_sha256": "52ef1729a69cdcf3697b73268488a90ab82ee95940959742115b12de9018b5c4",
+      "state_file_sha256": "709e712dd69253d48534942034ae2ff751b2dc30d66b51d0e88fa9e9fab8f2b7",
+      "state_anchor_valid": true,
+      "final_ledger_hash": "e3dbbbc0808a93a20bac992c05d8ea3cb6d4766622191db4d948e494a0538a07",
+      "ledger_events": 15,
+      "references_valid": true,
+      "evaluation_reproduced": true,
+      "packet_urls_only": true,
+      "pass": true,
+      "error": null,
+      "api_calls": 42,
+      "cost_by_provider": {
+        "anthropic": 0.1492655,
+        "openai": 1.3760405
+      },
+      "seconds": 1015.61
+    }
+  ]
+}
