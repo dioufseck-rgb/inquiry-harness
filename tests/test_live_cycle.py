@@ -263,7 +263,7 @@ def test_one_round_builds_graph_and_ledger(tmp_path):
     # persistence
     assert store.verify_ledger() is True
     moves_run = [e["move"] for e in store.events()]
-    assert moves_run == ["frame", "hypothesize", "plan", "gather", "argue", "critique", "respond", "revise",
+    assert moves_run == ["frame", "hypothesize", "plan", "gather", "argue", "revise", "coverage_check", "critique", "respond",
                          "evaluate", "reflect", "stop", "conclude"]
     reloaded = store.load()
     assert reloaded.model_dump() == inq.model_dump()

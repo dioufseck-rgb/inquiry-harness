@@ -1104,6 +1104,27 @@ def argue(inq: Inquiry, llm: LLM) -> dict:
     return total
 
 
+def coverage_check(inq: Inquiry, llm: LLM) -> dict:
+    """After revision, repair each H2 gap with one claim-scoped Argue call."""
+    g = inq.graph
+    result = {"claims": [], "arguments": [], "claim_reasons": {}}
+    for issue in g.issues:
+        claim_ids, ev_ids = issue_evidence(g, issue.id, include_unassigned=issue.id == g.main_issue_id)
+        for cid in argue_coverage(inq, claim_ids, ev_ids):
+            view = argue_view(inq, issue.id)
+            view += "\n\n# Required post-Revise coverage correction\n" + json.dumps({
+                "claim_id": cid, "instruction": "Return an argument for this claim or one claim-level reason; no new scoped claims."})
+            out = llm.complete_json(skill_text("argue"), view, ArgueOutput)
+            out.scoped_claims = []
+            part = apply_argue(inq, out, allowed_claims={cid}, allowed_evidence=set(ev_ids))
+            if argue_coverage(inq, {cid}, ev_ids):
+                raise ValueError(f"Post-Revise coverage unresolved after one call: {cid}")
+            result["claims"].append(cid)
+            result["arguments"].extend(part["arguments"])
+            result["claim_reasons"].update(part["claim_reasons"])
+    return result
+
+
 # ---------------------------------------------------------------------------
 # Critique
 # ---------------------------------------------------------------------------
@@ -1606,9 +1627,19 @@ def apply_revise(inq: Inquiry, out: ReviseOutput) -> dict:
                 if op.op == "split" and len(texts) < 2:
                     dropped.append(f"split {op.claim_id}: needs two or more parts")
                     continue
+                created = sum(x.created_by_move == "revise" and x.created_round == inq.round
+                              and x.issue_id == c.issue_id for x in g.claims)
+                if created + len(texts) > 4:
+                    dropped.append(f"{op.op} {op.claim_id}: four-new-claims-per-issue round guard")
+                    continue
                 carry = [x for x in op.carry_arguments if g.arg(x.partition("@")[0]) is not None]
                 new = g.supersede_claim(op.claim_id, texts, carry_arguments=carry, kind=op.kind,
                                         target=op.target, reason=op.reason, answers_issue=op.answers_issue)
+                for claim in new:
+                    claim.created_by_move, claim.created_round = "revise", inq.round
+                    for e in g.evidence:
+                        if c.id in e.bears_on:
+                            e.bears_on[claim.id] = e.bears_on[c.id]  # hints, not inherited arguments
                 done["narrowed" if op.op == "narrow" else "split"].append(f"{op.claim_id}->{','.join(x.id for x in new)}")
                 inq.notes.append(f"revise: {op.op} {op.claim_id} -> {', '.join(x.id for x in new)}: {op.reason}")
             elif op.op == "reclassify":

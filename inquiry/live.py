@@ -486,6 +486,9 @@ class Harness:
             if computed is not None:
                 self._record("compute", computed)
             self._record("argue", moves.argue(inq, self.proposer))
+            moves.evaluate_move(inq)
+            self._record("revise", moves.revise(inq, self.proposer))
+            self._record("coverage_check", moves.coverage_check(inq, self.proposer))
             ev = moves.evaluate_move(inq)  # the critic sees evaluated arguments
             crit = moves.critique(inq, self.critic)
             self._record("critique", crit)
@@ -494,8 +497,6 @@ class Harness:
             self.pending_queries = list(crit["needed_evidence"])
             ev = moves.evaluate_move(inq)  # the proposer sees which attacks stand
             self._record("respond", moves.respond(inq, self.proposer))
-            ev = moves.evaluate_move(inq)  # review findings now have their effect; revise turns them into claim changes
-            self._record("revise", moves.revise(inq, self.proposer))
             ev = moves.evaluate_move(inq)
             self._record("evaluate", {
                 "accepted": {k: v for k, v in ev.issues.items() if v},
