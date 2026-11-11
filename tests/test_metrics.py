@@ -56,7 +56,7 @@ def test_shape_match_variants():
     # remove the only argument: main undecided
     inq.graph.arguments.clear()
     ev = evaluate_move(inq)
-    assert shape_match(inq, ev, "undecided") is True
+    assert shape_match(inq, ev, "undecided") is False  # no argument is not a contested result
 
 
 def test_bench_select_and_table(tmp_path):

@@ -1,0 +1,130 @@
+{
+  "C2": {
+    "label": "unsupported",
+    "reason": "evidence bears on the claim but no supporting argument was built",
+    "status": "undecided",
+    "text": "In adults 60 and over without prior cardiovascular disease, starting low-dose aspirin yields net benefit: event reductions exceed the bleeding increase.",
+    "issue_id": "Q1",
+    "answers_issue": true
+  },
+  "C4": {
+    "label": "unsupported",
+    "reason": "evidence bears on the claim but no supporting argument was built",
+    "status": "undecided",
+    "text": "Low-dose aspirin initiation in adults 60 and over has no net effect on cardiovascular harm.",
+    "issue_id": "Q1",
+    "answers_issue": true
+  },
+  "C7": {
+    "label": "unsupported",
+    "reason": "evidence bears on the claim but no supporting argument was built",
+    "status": "undecided",
+    "text": "Low-dose aspirin initiation has no effect on major cardiovascular events in older adults.",
+    "issue_id": "Q2",
+    "answers_issue": true
+  },
+  "C9": {
+    "label": "unsupported",
+    "reason": "evidence bears on the claim but no supporting argument was built",
+    "status": "out",
+    "text": "Low-dose aspirin initiation in older adults does not significantly increase major bleeding.",
+    "issue_id": "Q3",
+    "answers_issue": true
+  },
+  "C11": {
+    "label": "contested",
+    "reason": "standing pro and con arguments prevent an accepted answer",
+    "status": "undecided",
+    "text": "Benefit is concentrated in higher baseline cardiovascular risk, but bleeding risk rises with it too, so net benefit is not clearly better in high-risk groups.",
+    "issue_id": "Q4",
+    "answers_issue": true
+  },
+  "C13": {
+    "label": "accepted",
+    "reason": "surviving support meets the proof standard",
+    "status": "in",
+    "text": "USPSTF recommends against initiating low-dose aspirin for primary prevention in adults 60 and over, judging harms to outweigh or equal benefits.",
+    "issue_id": "Q5",
+    "answers_issue": true
+  },
+  "C15": {
+    "label": "refuted",
+    "reason": "a contrary claim is accepted",
+    "status": "out",
+    "text": "Guideline bodies and pooled analyses give no consistent net-balance conclusion for adults 60 and over.",
+    "issue_id": "Q5",
+    "answers_issue": true
+  },
+  "C16": {
+    "label": "unsupported",
+    "reason": "evidence bears on the claim but no supporting argument was built",
+    "status": "out",
+    "text": "None of the proposed answers to Q4 is established",
+    "issue_id": "Q4",
+    "answers_issue": true
+  },
+  "C17": {
+    "label": "accepted",
+    "reason": "surviving support meets the proof standard",
+    "status": "in",
+    "text": "As cited by the USPSTF, ACC/AHA advises against routine low-dose aspirin for primary prevention in adults over 70 and in adults at increased bleeding risk.",
+    "issue_id": "Q5",
+    "answers_issue": true
+  },
+  "C22": {
+    "label": "defeated",
+    "reason": "all constructed support is out, withdrawn or inapplicable",
+    "status": "out",
+    "text": "With age, the absolute bleeding burden and the modelled net balance worsen (net loss of QALYs/life-years at 70-79), while relative effects of aspirin do not differ by age",
+    "issue_id": "Q4",
+    "answers_issue": true
+  },
+  "C23": {
+    "label": "contested",
+    "reason": "standing pro and con arguments prevent an accepted answer",
+    "status": "undecided",
+    "text": "Relative effects of aspirin on cardiovascular events and bleeding are reported as not differing significantly by age or baseline risk in most trials, while absolute benefit and bleeding harm are greater at higher risk and older age.",
+    "issue_id": "Q4",
+    "answers_issue": true
+  },
+  "C24": {
+    "label": "defeated",
+    "reason": "all constructed support is out, withdrawn or inapplicable",
+    "status": "undecided",
+    "text": "In adults 70+ without prior CVD (ASPREE), starting low-dose aspirin increased major haemorrhage (HR 1.38, 95% CI 1.18-1.62; about 1 percentage point absolute excess over a median 4.7 years) and all-cause mortality (HR 1.14, 95% CI 1.01-1.29); no MACE estimate is available in the sources, so the net cardiovascular balance was not measured directly",
+    "issue_id": "Q1",
+    "answers_issue": false
+  },
+  "C25": {
+    "label": "unsupported",
+    "reason": "constructed support is insufficient for the proof standard without a standing pro/con contest",
+    "status": "undecided",
+    "text": "Aspirin increased aggregate major haemorrhage in adults 70+ (ASPREE HR 1.38, 1.18-1.62; 3.8% vs 2.8%), and pooled all-age trials show major GI bleeding OR 1.58 (1.38-1.80) and intracranial bleeding OR 1.31 (1.11-1.54); the USPSTF judges bleeding harm larger at older ages",
+    "issue_id": "Q3",
+    "answers_issue": false
+  },
+  "C26": {
+    "label": "defeated",
+    "reason": "all constructed support is out, withdrawn or inapplicable",
+    "status": "undecided",
+    "text": "In pooled primary-prevention trials of mixed ages, low-dose aspirin modestly reduced nonfatal MI (Peto OR 0.88, 0.80-0.96) and borderline nonfatal ischaemic stroke (OR 0.88, 0.78-1.00), with no significant effect on fatal outcomes; these are all-age results and not specific to adults 60+",
+    "issue_id": "Q2",
+    "answers_issue": false
+  },
+  "C27": {
+    "label": "defeated",
+    "reason": "all constructed support is out, withdrawn or inapplicable",
+    "status": "undecided",
+    "text": "USPSTF concluded with moderate certainty that initiating aspirin for primary prevention in adults 60+ has no net benefit (a verdict of 'no net benefit', not 'net harm')",
+    "issue_id": "Q1",
+    "answers_issue": true
+  },
+  "C28": {
+    "label": "defeated",
+    "reason": "all constructed support is out, withdrawn or inapplicable",
+    "status": "undecided",
+    "text": "In ASPREE (70+) and ARRIVE (55+), reports describe no significant difference in cardiovascular composite outcomes with aspirin; no effect estimates or CIs are available in the retrieved sources, so a small benefit is not excluded",
+    "issue_id": "Q2",
+    "answers_issue": false
+  }
+}

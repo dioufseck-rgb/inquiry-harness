@@ -42,5 +42,5 @@ def test_empty_retrieval_cannot_score_as_expected_undecided():
     inq.graph.arguments.clear()
     judge = FakeLLM({})
     score = score_shape(inq, evaluate_move(inq), {"shape": "undecided"}, judge)
-    assert score["shape_match_regex"] is True and score["shape_match"] is False
+    assert score["shape_match_regex"] is False and score["shape_match"] is False
     assert score["shape_match_judge"] is None and not judge.calls

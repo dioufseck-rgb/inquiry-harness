@@ -10,11 +10,11 @@ Renderers for the argument graph.
 
 from __future__ import annotations
 
-from .evaluate import Evaluation, LoadBearing
+from .evaluate import Evaluation, LoadBearing, claim_status_label
 from .graph import ArgumentGraph
 from .schemes import SCHEMES
 
-_MARK = {"in": "✓", "out": "✗", "undecided": "?"}
+_MARK = {"in": "in", "out": "out", "undecided": "undecided"}
 
 
 def _short(text: str, n: int = 70) -> str:
@@ -80,7 +80,7 @@ def wigmore(g: ArgumentGraph, ev: Evaluation | None = None) -> str:
         if ev is None:
             return ""
         if node_id in ev.claims:
-            return f" {_MARK[ev.claims[node_id].status]}"
+            return f" {claim_status_label(g, ev, node_id)[0]}"
         if node_id in ev.labels:
             return f" {_MARK[ev.labels[node_id]]}"
         if node_id in ev.applicable and not ev.applicable[node_id]:
@@ -130,11 +130,13 @@ def summary(g: ArgumentGraph, ev: Evaluation, lb: list[LoadBearing] | None = Non
         for c in g.claims_for_issue(iss.id):
             d = ev.claims[c.id]
             lines.append(
-                f"- {_MARK[d.status]} {c.id}: {c.text}  "
+                f"- {claim_status_label(g, ev, c.id)[0]} {c.id}: {c.text}  "
                 f"[{d.standard}; pro {d.pro_strength} vs con {d.con_strength}"
                 f"{'; corroborated' if d.corroborated else ''}"
                 f"{'; component finding, not an answer to the issue as posed' if not c.answers_issue else ''}]"
             )
+            if d.label_reason:
+                lines.append(f"  {d.label_reason}")
         if not accepted:
             lines.append("- no accepted answer yet")
         lines.append("")

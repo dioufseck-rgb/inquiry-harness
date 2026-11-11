@@ -53,6 +53,8 @@ class ClaimDetail(BaseModel):
     con_strength: int = 0
     corroborated: bool = False
     met: bool = False
+    label: Literal["", "accepted", "refuted", "defeated", "contested", "unsupported", "untested"] = ""
+    label_reason: str = ""
 
 
 class Flag(BaseModel):
@@ -357,8 +359,43 @@ def evaluate(g: ArgumentGraph, max_iter: int = 10) -> Evaluation:
     for iss in g.issues:
         # live claims that still answer the issue as posed; a component finding does not answer it
         ev.issues[iss.id] = [c.id for c in g.claims_for_issue(iss.id) if details[c.id].status == "in" and c.answers_issue]
+    for claim in g.claims:
+        details[claim.id].label, details[claim.id].label_reason = claim_status_label(g, ev, claim.id)
     ev.flags = _flags(g, ev)
     return ev
+
+
+def claim_status_label(g: ArgumentGraph, ev: Evaluation, claim_id: str) -> tuple[str, str]:
+    """Six report labels, without changing the compatible proof statuses."""
+    claim = g.claim(claim_id)
+    detail = ev.claims[claim_id]
+    if detail.status == "in":
+        return "accepted", "surviving support meets the proof standard"
+    if any(ev.status(cid) == "in" and g.claim(cid) and g.claim(cid).live for cid in claim.contrary_ids):
+        return "refuted", "a contrary claim is accepted"
+    built = g.arguments_for(claim_id)
+    def standing(argument):
+        return not argument.withdrawn and ev.applicable.get(argument.id, False) and ev.labels.get(argument.id) != "out"
+    pro = [a for a in built if standing(a)]
+    contrary = {a.id: a for cid in claim.contrary_ids for a in g.arguments_for(cid) if standing(a)}
+    for a in g.arguments:
+        if not a.is_attack or a.attacks.type != "rebut" or not standing(a):
+            continue
+        target = g.arg(a.attacks.target_id)
+        if a.attacks.target_id == claim_id or (target and target.claim_id == claim_id):
+            contrary[a.id] = a
+    if pro and contrary:
+        return "contested", "standing pro and con arguments prevent an accepted answer"
+    if built and all(a.withdrawn or not ev.applicable.get(a.id, False) or ev.labels.get(a.id) == "out" for a in built):
+        return "defeated", "all constructed support is out, withdrawn or inapplicable"
+    bearing = any(claim_id in e.bears_on for e in g.evidence) or bool(built)
+    if not bearing:
+        return "untested", "no evidence bears on the claim and no argument tests it"
+    if not built:
+        return "unsupported", "evidence bears on the claim but no supporting argument was built"
+    # The requested six labels do not name weak, unopposed support below its
+    # proof standard. Keep it explicit and never reward it as contested.
+    return "unsupported", "constructed support is insufficient for the proof standard without a standing pro/con contest"
 
 
 # ---------------------------------------------------------------------------

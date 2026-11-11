@@ -45,6 +45,8 @@ def score_shape(inq: Inquiry, ev, expected: dict[str, Any], judge: LLM) -> dict[
     if not inq.graph.evidence:
         result["shape_match"] = False
         return result
+    if expected.get("shape") in ("undecided", "contested"):
+        return result  # a semantic judge cannot waive the deterministic contest requirement
     if regex is not False or not accepted:
         return result
     system = (

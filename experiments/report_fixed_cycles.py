@@ -4,6 +4,9 @@ import json
 from pathlib import Path
 
 from inquiry.metrics import one_line
+from inquiry.argument.evaluate import claim_status_label
+from inquiry.argument.render import summary
+from inquiry.state import Inquiry
 
 
 def render(paths, report_path, title):
@@ -14,6 +17,18 @@ def render(paths, report_path, title):
             print(json.dumps({"waiting_for": str(path / "metrics.json")}))
             return False
         m = json.loads((path / "metrics.json").read_text(encoding="utf-8"))
+        inq = Inquiry.model_validate_json((path / "run/inquiry.json").read_text(encoding="utf-8"))
+        labels = {}
+        for claim in inq.graph.live_claims():
+            label, reason = claim_status_label(inq.graph, inq.evaluation, claim.id)
+            labels[claim.id] = {"label": label, "reason": reason, "status": inq.evaluation.status(claim.id),
+                                "text": claim.text, "issue_id": claim.issue_id, "answers_issue": claim.answers_issue}
+            inq.evaluation.claims[claim.id].label = label
+            inq.evaluation.claims[claim.id].label_reason = reason
+        # Derived reports only: never rewrite the experimental state or ledger.
+        (path / "claim-labels.json").write_text(json.dumps(labels, indent=2), encoding="utf-8")
+        (path / "labelled-summary.md").write_text(summary(inq.graph, inq.evaluation) + "\n", encoding="utf-8")
+        m["main_labels_derived"] = {c.id: labels[c.id]["label"] for c in inq.main_claims() if c.answers_issue}
         runs.append((name, path, m))
     def cell(value):
         return str(value).replace("|", "\\|").replace("\n", " ")
@@ -28,6 +43,7 @@ def render(paths, report_path, title):
         ("reopened_then_discharged", lambda m: m['reopened_then_discharged']),
         ("main_supporting_in_original", lambda m: m['main_supporting_in_original']),
         ("accepted main claims (IDs, stated scope)", lambda m: ids(m['accepted_main_claims'])),
+        ("main answer labels (N5)", lambda m: m['main_labels_derived']),
         ("undecided_empty / undecided_supported", lambda m: f"{m['undecided_empty']} / {m['undecided_supported']}"),
         ("component findings accepted", lambda m: ids(m['accepted_components'])),
         ("shape regex / judge", lambda m: f"{m.get('shape_match_regex')} / {m.get('shape_match_judge')}"),
@@ -68,6 +84,9 @@ def render(paths, report_path, title):
     interpretation = Path("experiments/E6/interpretation.md")
     if "generalisation" not in str(report_path) and interpretation.exists():
         lines += ["", interpretation.read_text(encoding="utf-8").strip(), ""]
+    lines += ["", "## Six status labels (N5)", "",
+              "Labels are derived from the saved evaluation without changing its compatible in/out/undecided proof statuses. Accepted means the proof standard is met; refuted means a contrary is accepted; defeated means every constructed supporting argument is out, withdrawn or inapplicable; contested requires standing pro and con support; unsupported means evidence without an argument; untested means no bearing evidence or constructed support.", "",
+              "The six requested labels omit one case: standing, unopposed support that is too weak to meet the proof standard. That case is labelled unsupported with an explicit insufficient-support reason, and never earns a contested shape match. An expected undecided verdict now requires an actual contested main answer. Each run includes claim-labels.json and labelled-summary.md; native metrics and state from earlier runs remain unchanged."]
     lines += ["", "## Review authority and limits", "",
               "The user's instruction to continue while asleep authorized separate provisional agent adjudication for N1. No Mamadou hand review is claimed; his blank file is preserved. N1 contains no same-claim cross-provider pairs, and E3.1's ≥70% against-Sol overlap has no valid denominator. E3.1's attack-count criterion was unmet and remains reported. N4's stated preconditions require that result recorded, not a fabricated pass.", "",
               "A passing per-run result requires zero supported-but-unargued claims, a nonempty accepted/supported main issue, no missing single-origin flags, no absence assertions and at least one reopened CQ discharged in Respond. Failure is retained. Costs are API-usage estimates; local raw replies, state snapshots and hash-chained ledgers remain alongside the compact metrics.", ""]

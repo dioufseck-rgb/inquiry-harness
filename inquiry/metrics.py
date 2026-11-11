@@ -31,11 +31,9 @@ def shape_match(inq: Inquiry, ev: Evaluation, shape: str) -> Optional[bool]:
     g = inq.graph
     main = [c for c in inq.main_claims() if c.answers_issue]
     accepted = [c for c in main if ev.status(c.id) == "in"]
-    if shape == "undecided":
-        return not accepted
-    if shape == "contested":
-        with_pro = [c for c in main if ev.claims[c.id].pro_ids]
-        return len(with_pro) >= 2 and not accepted
+    if shape in ("undecided", "contested"):
+        from .argument.evaluate import claim_status_label
+        return not accepted and any(claim_status_label(g, ev, c.id)[0] == "contested" for c in main)
     if shape.startswith("accepted:"):
         pat = re.compile(shape[len("accepted:"):], re.I)
         return any(pat.search(c.text) for c in accepted)
@@ -104,6 +102,7 @@ def metrics(inq: Inquiry, ev: Evaluation, gold: Optional[dict[str, Any]] = None,
         "accepted_claims": sum(1 for c in g.claims if ev.status(c.id) == "in"),
         "single_origin_accepts": flags.count("single_origin"),
         "main_status": {c.id: ev.status(c.id) for c in inq.main_claims()},
+        "main_labels": {c.id: ev.claims[c.id].label for c in inq.main_claims()},
         "absence_assertions": len(inq.conclusion.flags) if inq.conclusion else 0,
         "provider_proposer": inq.llm_config.get("proposer", {}).get("provider", ""),
         "provider_critic": inq.llm_config.get("critic", {}).get("provider", ""),
