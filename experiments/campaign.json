@@ -1,0 +1,896 @@
+{
+  "providers": [
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "effort": "medium"
+    },
+    {
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium"
+    }
+  ],
+  "gates": {
+    "E1": false,
+    "E2": true,
+    "E3": false,
+    "E4": true,
+    "E5": true
+  },
+  "E6": {
+    "status": "not_run",
+    "e1_pass": false,
+    "e2_pass": true,
+    "full_run_allowed": false,
+    "reason": "E1 raw specificity gate failed on one Sonnet aspirin sample; both E1 and E2 are required.",
+    "sonnet_full_run": "not_run",
+    "sol_full_run": "not_run",
+    "opus_full_run": "not_run",
+    "opus_condition": "Sonnet must first pass its E6 full run",
+    "anthropic_opus_reserve_usd": 20,
+    "held_out_runs": 0,
+    "live_full_harness_runs": 0,
+    "metrics_ready": [
+      "claims_supported_unargued",
+      "main_supporting_in",
+      "main_component_supporting_in",
+      "undecided_empty",
+      "undecided_supported"
+    ],
+    "validation": "125 local tests passed, including empty, supported, withdrawn and component-only main-answer cases"
+  },
+  "totals": {
+    "E1": {
+      "samples": 72,
+      "api_calls": 91,
+      "tokens_in": 216198,
+      "tokens_out": 149440,
+      "cost_usd": {
+        "anthropic": 0.9203588999999999,
+        "openai": 0.8285645999999998
+      }
+    },
+    "E2": {
+      "samples": 36,
+      "api_calls": 187,
+      "tokens_in": 4591726,
+      "tokens_out": 419947,
+      "cost_usd": {
+        "anthropic": 7.3605924,
+        "openai": 5.391389600000001
+      }
+    },
+    "E3": {
+      "samples": 12,
+      "api_calls": 12,
+      "tokens_in": 831321,
+      "tokens_out": 13181,
+      "cost_usd": {
+        "anthropic": 1.08778,
+        "openai": 0.3504931
+      }
+    },
+    "E4": {
+      "samples": 24,
+      "api_calls": 30,
+      "tokens_in": 1783044,
+      "tokens_out": 27303,
+      "cost_usd": {
+        "anthropic": 2.3489165,
+        "openai": 0.9352605999999999
+      }
+    },
+    "E5": {
+      "samples": 12,
+      "api_calls": 12,
+      "tokens_in": 197235,
+      "tokens_out": 36711,
+      "cost_usd": {
+        "anthropic": 0.430224,
+        "openai": 0.2425893
+      }
+    }
+  },
+  "estimated_cost_usd": {
+    "anthropic": 12.147871799999999,
+    "openai": 7.7482972000000006
+  },
+  "cost_reconciled": true,
+  "api_calls": 332,
+  "failed_samples": [
+    {
+      "manifest": "experiments\\E4\\after\\sol\\moves.json",
+      "sample": 3,
+      "error": "ValueError: Respond unresolved after one correction: A27"
+    }
+  ],
+  "graph_audit": [
+    {
+      "graph": "experiments\\E1\\after\\aspirin\\sol\\sample-001\\inquiry.json",
+      "graph_sha256": "5c8c874fc25a84f292ec521538d02daf9d0054d98880c806f8eac417fa6eafe7",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after\\aspirin\\sol\\sample-002\\inquiry.json",
+      "graph_sha256": "8f9735753a003fa2c2ffbf2b83f208944931ccb4bfe81832262f95b724a11f1a",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after\\aspirin\\sol\\sample-003\\inquiry.json",
+      "graph_sha256": "2d5e1824d3298d5ce107c176cc2671dabbc18b9d0fc1bcd290c9d8332584a403",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after\\aspirin\\sonnet\\sample-001\\inquiry.json",
+      "graph_sha256": "b7620a3f6c4e528e42fc03c8ad5c156f3828d399f4eea7d6cb7dca99ca5f6f3d",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after\\aspirin\\sonnet\\sample-002\\inquiry.json",
+      "graph_sha256": "9777ff0a242c6b314fc025ae659fe864210246395c0b8acd237ce03d43aae068",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after\\aspirin\\sonnet\\sample-003\\inquiry.json",
+      "graph_sha256": "0b3bed9fb93acb598611ed5299c7500277ff32374ddb53cf1c3022ddc22032aa",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after\\ulez\\sol\\sample-001\\inquiry.json",
+      "graph_sha256": "94e5344fef56713c8c2eda6496af372c6c7280a7ddbec8d5211fd5c1f56780ee",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after\\ulez\\sol\\sample-002\\inquiry.json",
+      "graph_sha256": "d952ad7e82c98f9fa164d85c5a6f392f1b02528e1dc6b6efa75a9a2e6fa70fcc",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after\\ulez\\sol\\sample-003\\inquiry.json",
+      "graph_sha256": "7062e7efdc7a28c11e11bd4538626c6747221d3ce3d4f893b2ecad3914871897",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after\\ulez\\sonnet\\sample-001\\inquiry.json",
+      "graph_sha256": "108a83900c8c73ae474c606efec7e893445d1c77a0a086395bed4eee8bba5030",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after\\ulez\\sonnet\\sample-002\\inquiry.json",
+      "graph_sha256": "bcb3ef18fbd6733bf4a96b8d580696f91d6853863342c3e555836b9b96840210",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after\\ulez\\sonnet\\sample-003\\inquiry.json",
+      "graph_sha256": "631621b0b0ef37c9155ad550d5a1de2e9aacecfb7a3234878d65cc69af6bb11e",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v2\\aspirin\\sol\\sample-001\\inquiry.json",
+      "graph_sha256": "0c6f851d2650a1d982e28fea01cc872f615a3b107d60fa8f823a199a1d37bfdd",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v2\\aspirin\\sol\\sample-002\\inquiry.json",
+      "graph_sha256": "96fbd94c5ae41db8d57794b66cc214b663def6dadabccf39d8b030f030b2fd43",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v2\\aspirin\\sol\\sample-003\\inquiry.json",
+      "graph_sha256": "0b5d05cba2c71c9b51541bd087254122bc1d86f5b7c01178c77082cdfed1a56c",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v2\\aspirin\\sonnet\\sample-001\\inquiry.json",
+      "graph_sha256": "31ce74703cf4af721032a1e279a29eb7ae3608ee95617145a03bf079100f0aca",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v2\\aspirin\\sonnet\\sample-002\\inquiry.json",
+      "graph_sha256": "0b495ffb2ae02c01cf62bc5632d5ce4fdb6f2fb18a2c9862b47888dc29f51d69",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v2\\aspirin\\sonnet\\sample-003\\inquiry.json",
+      "graph_sha256": "ed8b348fac836fd0f68317f9ac02af658d6782971c5fa36ca2652bd0eb6fa51f",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v2\\ulez\\sol\\sample-001\\inquiry.json",
+      "graph_sha256": "76779c6119b717d5931c37583452816210e14b17c46bbe7f138a31cbeb851bc0",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v2\\ulez\\sol\\sample-002\\inquiry.json",
+      "graph_sha256": "6ed3d0a3e16a0c0f3d3221c11fead3be501a53044b2712c54b4b285fd389f9f9",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v2\\ulez\\sol\\sample-003\\inquiry.json",
+      "graph_sha256": "f83c17b9b8fe197fab9b937bca541eafac159c8ce9161d404c01ab1f9385dd18",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v2\\ulez\\sonnet\\sample-001\\inquiry.json",
+      "graph_sha256": "155b4c72ce518293984003a4f4ddff8ec1304faf87782af31b63e595c24dd30e",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v2\\ulez\\sonnet\\sample-002\\inquiry.json",
+      "graph_sha256": "d8c1a04c066fcb786d02f7ad6fa22ba8d09e468599624ecc4c50ee0d02bf39fe",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v2\\ulez\\sonnet\\sample-003\\inquiry.json",
+      "graph_sha256": "9df28b3e0d5510db4779bc945fcb64f7ea6abba9b3262f301968e23b0002a66d",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v3\\aspirin\\sol\\sample-001\\inquiry.json",
+      "graph_sha256": "0cb1e04a08a175e56ce8421d28d9c4c9fb308267774fb6946db14ad0cbbd0e07",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v3\\aspirin\\sol\\sample-002\\inquiry.json",
+      "graph_sha256": "f9abb701dd2283da43486253a1fca4fb9bc925ec511e391c0b8bb2ec4d668a26",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v3\\aspirin\\sol\\sample-003\\inquiry.json",
+      "graph_sha256": "918165b8ed32ac37830947ec17b155c0472999fffcab71358375ee55651811b6",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v3\\aspirin\\sonnet\\sample-001\\inquiry.json",
+      "graph_sha256": "bb265539f9cb72a8cc5c56afce0100301360c312ed184cdd6fbb2a5413c3e55a",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v3\\aspirin\\sonnet\\sample-002\\inquiry.json",
+      "graph_sha256": "45adbe103abc20e0f510e946c5abc2e58eeec1b1901dc4df9ae2477eabf0659f",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v3\\aspirin\\sonnet\\sample-003\\inquiry.json",
+      "graph_sha256": "a26c13d7c5798c633387d68e2f5d34489d38fb87c9482ec421e737a5261d782c",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v3\\ulez\\sol\\sample-001\\inquiry.json",
+      "graph_sha256": "464837c89a7736e3a715c4aaad0d87ba822c7c247cf5f4a3dfe1858d30dd3c3a",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v3\\ulez\\sol\\sample-002\\inquiry.json",
+      "graph_sha256": "9e17141915422eb202a5a8a4f30ffe3db381c5008987d50943b9de3d6b7dc68a",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v3\\ulez\\sol\\sample-003\\inquiry.json",
+      "graph_sha256": "3f6e08780cb4d6623ec55c91a83eec69a96ad1187b169cac4a97aad98bfcf385",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v3\\ulez\\sonnet\\sample-001\\inquiry.json",
+      "graph_sha256": "97c3d6fd58102cc18ba4ae1bf3b586ab51aa6cb2779a606fea6cd25ad6ffeb5d",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v3\\ulez\\sonnet\\sample-002\\inquiry.json",
+      "graph_sha256": "dc37c91350170ad8987057b0b6326662ed8882c785ee1ef563c1da63ba94d73b",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v3\\ulez\\sonnet\\sample-003\\inquiry.json",
+      "graph_sha256": "77f72b0e894056601e5cb880635777b8b3423e15d4e109bcb23bdba288f001a4",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v4\\aspirin\\sol\\sample-001\\inquiry.json",
+      "graph_sha256": "2b05ced77863f5978e742fca94a2a43607abd9d69c4587f05bb4ba9d3310d751",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v4\\aspirin\\sol\\sample-002\\inquiry.json",
+      "graph_sha256": "7aecd8ec88ee43652003acacf5df2b03374ce4e13b589796e640173c518f3ab6",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v4\\aspirin\\sol\\sample-003\\inquiry.json",
+      "graph_sha256": "9d12c7669c2dd046f49e6d5e395dee8a77d28b7717765690d9d883d6d0a44379",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v4\\aspirin\\sonnet\\sample-001\\inquiry.json",
+      "graph_sha256": "58068a5c7588fe32ec66bd922709dbddc3a9d647367cc03ddf7c0ffeccb62698",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v4\\aspirin\\sonnet\\sample-002\\inquiry.json",
+      "graph_sha256": "3f75f47403ac3ee356298d1006ace3a8abcabcf395142b4f9785277ee75e1b86",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v4\\aspirin\\sonnet\\sample-003\\inquiry.json",
+      "graph_sha256": "c158f314ceb182088fa913679c7605a89dfccaed3c9c69192e50cfd83f4d8f76",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v4\\ulez\\sol\\sample-001\\inquiry.json",
+      "graph_sha256": "c5fc42a1097af33e4e26409d54cc3e9d19472096b8072af358bb0d86a8a737e3",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v4\\ulez\\sol\\sample-002\\inquiry.json",
+      "graph_sha256": "d5a347cfa252afb9c2c086a296532d025e856053415e0d80900acd6aa3804b7d",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v4\\ulez\\sol\\sample-003\\inquiry.json",
+      "graph_sha256": "12dc139fe4ab47ab4eefb3c056671c16c7c278180158ba27ecfef46411ffc6a7",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v4\\ulez\\sonnet\\sample-001\\inquiry.json",
+      "graph_sha256": "daaed725663f24568d484edecc9dafdeab87b1e24913a012baf81b3e6a87a989",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v4\\ulez\\sonnet\\sample-002\\inquiry.json",
+      "graph_sha256": "c8d52e6614a80a8d20730b5b9ea77248387e5037ecda22d590978a906a12b1d4",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v4\\ulez\\sonnet\\sample-003\\inquiry.json",
+      "graph_sha256": "eebf332543a886effae38ec1eb22ad3342da9ca1fa6b4e9c56bd82191e077f49",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v5\\aspirin\\sol\\sample-001\\inquiry.json",
+      "graph_sha256": "a383bba3bf4d72e381a29cecf2ac2ba316000eb448b6694a149f818fc1e027bf",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v5\\aspirin\\sol\\sample-002\\inquiry.json",
+      "graph_sha256": "8a0dea60e09dce5adc5bae572bbda260314e224ff3d302f8d747b2a2b2636535",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v5\\aspirin\\sol\\sample-003\\inquiry.json",
+      "graph_sha256": "e9bbeacf7011af3fe5dd3d18fbe1035af6bc0c6376fc710f408f81de0e8efdb9",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v5\\aspirin\\sonnet\\sample-001\\inquiry.json",
+      "graph_sha256": "a548f59d07671aff5ac43e27179e52fb8eafa80bbe2676afccfa8560de889e7d",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v5\\aspirin\\sonnet\\sample-002\\inquiry.json",
+      "graph_sha256": "001832b61a6562f54d454128399f10bd7284c57c8d6205e0dc2d6c818e1736b0",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v5\\aspirin\\sonnet\\sample-003\\inquiry.json",
+      "graph_sha256": "9e2d59e471b4504ada05b3c77c9f3d2739dd5969b54532a90dc0e846d6fdefbb",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v5\\ulez\\sol\\sample-001\\inquiry.json",
+      "graph_sha256": "91d2b16d12f7ad226a1aee610ceb76241606e1ea4bfd75d93afacd773cb6292f",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v5\\ulez\\sol\\sample-002\\inquiry.json",
+      "graph_sha256": "a1e25fb130ea322ebb9c668fc5c91eea80ca8eb1bbd9904bf827f4b6fae34c45",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v5\\ulez\\sol\\sample-003\\inquiry.json",
+      "graph_sha256": "5d9dc44de61799133351d95a9f551cd15ba595b67da0b52969b08bdffd0451b6",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v5\\ulez\\sonnet\\sample-001\\inquiry.json",
+      "graph_sha256": "7459d40d896d327341a79e52a41b9beff0365fd37fc06c2413ed76c95d8c7222",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v5\\ulez\\sonnet\\sample-002\\inquiry.json",
+      "graph_sha256": "7d1aa04d33b968be786ada183c3dba87c8bdf55902b63a7ace4a50c42a432786",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\after-v5\\ulez\\sonnet\\sample-003\\inquiry.json",
+      "graph_sha256": "7c0e80bcec6dbfa3da2a63fee8f18a434fd67f7c0dc0975eea679370cc5eb1d2",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\before\\aspirin\\sol\\sample-001\\inquiry.json",
+      "graph_sha256": "e9640ede54adc74df3e4192df53f9f5409c712d8805139cadb26f7ab6fc2b979",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\before\\aspirin\\sol\\sample-002\\inquiry.json",
+      "graph_sha256": "87943b93e7fdd46a31e07cf19800e6284e06df614f7c90b6320b8f36ce221b1b",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\before\\aspirin\\sol\\sample-003\\inquiry.json",
+      "graph_sha256": "3fcb62c68cd4871533ceac4926d8a3d05500fef3313ff45bdabc47dd638a5312",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\before\\aspirin\\sonnet\\sample-001\\inquiry.json",
+      "graph_sha256": "e11bcda13bbac9cc098cf0554741ed758e3e16a8096968d96745819c7498ca79",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\before\\aspirin\\sonnet\\sample-002\\inquiry.json",
+      "graph_sha256": "eecf171448709df922dcbddd997a9797fcef50f1cee81d41318885321b6ba630",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\before\\aspirin\\sonnet\\sample-003\\inquiry.json",
+      "graph_sha256": "bd56222d166c58f7432416d14c624d5fffb086392357f4ec5f94563fcfc584c2",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\before\\ulez\\sol\\sample-001\\inquiry.json",
+      "graph_sha256": "384c312db4f8eb387475bca655aad4af185ac12d562b579519204f5ed8bf60a5",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\before\\ulez\\sol\\sample-002\\inquiry.json",
+      "graph_sha256": "4497ccb70d369309c00639a97319994019fb9a2f3ab2db376d6adbebe3532dc0",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\before\\ulez\\sol\\sample-003\\inquiry.json",
+      "graph_sha256": "5cc3e7d85ddf45ae4a474719702aac9e2c1c17e0110195962481d4c3f7fa2258",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\before\\ulez\\sonnet\\sample-001\\inquiry.json",
+      "graph_sha256": "1c88be2ba0a27375479e6bd5f31f3e981dbf01728d891b782008d0e1199c71d2",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\before\\ulez\\sonnet\\sample-002\\inquiry.json",
+      "graph_sha256": "22e4d6a8ee1211f3153cd5644f94a1d740ccbb982ad9a7c1d8991b579a72ef30",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E1\\before\\ulez\\sonnet\\sample-003\\inquiry.json",
+      "graph_sha256": "15b76f79eda05aedf65801d98e7f7a6ea98f984df80c4c573b1a7189b296f544",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E2\\after\\claude-claims\\sol\\sample-001\\inquiry.json",
+      "graph_sha256": "b44fb33284f69b3e2c6c34bbad2ef35fee6cc8cf6d66832dfb20eff2dc1b9a3f",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E2\\after\\claude-claims\\sol\\sample-002\\inquiry.json",
+      "graph_sha256": "f9a2d19dcf7c1fd922786758dd555771292a7194f4bbdbab5356f3de8b2b9eae",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E2\\after\\claude-claims\\sol\\sample-003\\inquiry.json",
+      "graph_sha256": "7298cc58762bf26c5e6fabfd956160e94da780ca3b1ce7190445f2af19948a51",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E2\\after\\claude-claims\\sonnet\\sample-001\\inquiry.json",
+      "graph_sha256": "e643e415b734e1cd9a93eed645ed706b2c5bdcf1cf190945d1da63e84767b0de",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E2\\after\\claude-claims\\sonnet\\sample-002\\inquiry.json",
+      "graph_sha256": "e54a7a2cb9548cb74c3fcf1249cfef2daffacdd54b28d826335c0962cc41bbf5",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E2\\after\\claude-claims\\sonnet\\sample-003\\inquiry.json",
+      "graph_sha256": "dc88037d0ad4ec38941d692bd2c714820f4ed7dd3b6509d3c8dbaec0c543c478",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E2\\after\\h1-claims\\sol\\sample-001\\inquiry.json",
+      "graph_sha256": "3e9954187aacd69a92f83a97e0839083ccac3e7542c121bfc99da52143a60e69",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E2\\after\\h1-claims\\sol\\sample-002\\inquiry.json",
+      "graph_sha256": "619a1acc562c8a54c47ee736582a1396d3debfcbe56660bc8249c169d410579a",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E2\\after\\h1-claims\\sol\\sample-003\\inquiry.json",
+      "graph_sha256": "1600eb15211713a32e8ec95bab0feb73071db877fad71191c3d2bfd22f193ad2",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E2\\after\\h1-claims\\sonnet\\sample-001\\inquiry.json",
+      "graph_sha256": "7d68456ee8a20520a426e28c62fd20d8b342b09168ef09628e19195582c07e95",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E2\\after\\h1-claims\\sonnet\\sample-002\\inquiry.json",
+      "graph_sha256": "23093464215fe59126a0cf2c9cd923f4753b6a4808446e105a96502a6cf1e289",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E2\\after\\h1-claims\\sonnet\\sample-003\\inquiry.json",
+      "graph_sha256": "97f254157c31ca5a1a1c18eb83f1c729d2c2439741803408247c90ea39f41250",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E2\\after\\own-claims\\sol\\sample-001\\inquiry.json",
+      "graph_sha256": "d95507ee344d959de333e92a14ecdbad1d771966062e5346e78b8972490c81dc",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E2\\after\\own-claims\\sol\\sample-002\\inquiry.json",
+      "graph_sha256": "631d78e88a89fbf1bc4e8ac1ae8ad8e32619e322393985a7c5188d58a98db166",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E2\\after\\own-claims\\sol\\sample-003\\inquiry.json",
+      "graph_sha256": "292d2d53efbacf7b1214c89df9b950180fb8a369697f79694b7ebaad88cf2e9d",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E2\\after\\own-claims\\sonnet\\sample-001\\inquiry.json",
+      "graph_sha256": "1b2ad15ae221c4989ed528ded67de2f83450faf9470818354d283ebea1462fe2",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E2\\after\\own-claims\\sonnet\\sample-002\\inquiry.json",
+      "graph_sha256": "97dbb579ab033db4b2b42bf56be98f10ab31cb6d304b0b6b33c95b3e5996b54a",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E2\\after\\own-claims\\sonnet\\sample-003\\inquiry.json",
+      "graph_sha256": "b452184a39afc6f05c2a9662913acac7d026dcf56e6cf8970f6ac62e84d63f6d",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E2\\before\\claude-claims\\sol\\sample-001\\inquiry.json",
+      "graph_sha256": "44de289dd3f48c173d8d4be1584ca650eb220f1cdfdb5d77d1756b02ca2cb740",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E2\\before\\claude-claims\\sol\\sample-002\\inquiry.json",
+      "graph_sha256": "fc53e62ba188ea01303e52778201c796a4a0cf8486eef0b9a8c519bc3472ed81",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E2\\before\\claude-claims\\sol\\sample-003\\inquiry.json",
+      "graph_sha256": "59363412105bc4e2f08910b85386ef3a484443cc84a6c1d101b9714740ee5e98",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E2\\before\\claude-claims\\sonnet\\sample-001\\inquiry.json",
+      "graph_sha256": "cfe6c6330a976a5164d320b103aacfad9d3b1de6757a2218bbb3520a3d375f32",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E2\\before\\claude-claims\\sonnet\\sample-002\\inquiry.json",
+      "graph_sha256": "b2b032a61946a407a98528a36f2ec600a00ee3998e1ceb511cb11e21ce1387e6",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E2\\before\\claude-claims\\sonnet\\sample-003\\inquiry.json",
+      "graph_sha256": "526b65203d4eebdc97be082d84c2ed48836cb6bc05f8ca5e7f545e684a13e87d",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E2\\before\\h1-claims\\sol\\sample-001\\inquiry.json",
+      "graph_sha256": "7ab70600c9f596af532fc3255933ed99b6bae9217668f51ac7b7b3dd63874f23",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E2\\before\\h1-claims\\sol\\sample-002\\inquiry.json",
+      "graph_sha256": "c5a5f2902c284f3043c5a28fbb9cea777135f6ac5b9bca09833f9e9d312293e5",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E2\\before\\h1-claims\\sol\\sample-003\\inquiry.json",
+      "graph_sha256": "6cab87f693aa81462a33387e8a42e4cc6d36b11399c8b5e80663143a0e9cfc1c",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E2\\before\\h1-claims\\sonnet\\sample-001\\inquiry.json",
+      "graph_sha256": "d493d5787504983ea438fb7857bf61475655ddfc31fac106b808149da7ed4d79",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E2\\before\\h1-claims\\sonnet\\sample-002\\inquiry.json",
+      "graph_sha256": "466171fd241cd5aaa7af558fd3c2eb0d8ead47f7d58ec334c3aa1ddb209862e4",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E2\\before\\h1-claims\\sonnet\\sample-003\\inquiry.json",
+      "graph_sha256": "d0e5b5f4409188d01c01f6c3d8d9058e0a2d989803217be34e4de9e44c489786",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E2\\before\\own-claims\\sol\\sample-001\\inquiry.json",
+      "graph_sha256": "fa70ee9a77ed9360fa69f33ead156cd0d2888caea7858127afc0e6ca09081517",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E2\\before\\own-claims\\sol\\sample-002\\inquiry.json",
+      "graph_sha256": "7b5ce38dbb1d0f026f3eb279ec6b231e60017418742810e8a758af4e1c537fc8",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E2\\before\\own-claims\\sol\\sample-003\\inquiry.json",
+      "graph_sha256": "d9a08f836cc6e468bc7f6bec721af9d8458b3d039782f4b0bb79a41ffd6645ee",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E2\\before\\own-claims\\sonnet\\sample-001\\inquiry.json",
+      "graph_sha256": "f9a4337cd4e2addf62bf8d18398134523da9745f4331a55eb020440d78ca17a8",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E2\\before\\own-claims\\sonnet\\sample-002\\inquiry.json",
+      "graph_sha256": "d820b23ac63fc377a3fc6e3452f6e345e2a6d6308970412177bd3c442dc62bba",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E2\\before\\own-claims\\sonnet\\sample-003\\inquiry.json",
+      "graph_sha256": "a1218502cd680e99aac44a4acc515e0195ff6bd7e5e1d665990d557df41573b8",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E3\\runs\\sol\\sol\\sample-001\\inquiry.json",
+      "graph_sha256": "b64ff1dcd48113c2444e7df23886887c9e6e52eb8a13d26b8a56bb008fea16fb",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E3\\runs\\sol\\sol\\sample-002\\inquiry.json",
+      "graph_sha256": "ea4966b483705adb0e8a68e366a70b0c0b71483b6907bf158255d5831a55b16b",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E3\\runs\\sol\\sol\\sample-003\\inquiry.json",
+      "graph_sha256": "4b986c1c0f7335849701fdca2491611ea479288fb1dab36b906330f353c45c54",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E3\\runs\\sol\\sonnet\\sample-001\\inquiry.json",
+      "graph_sha256": "3a317f6b232d0b35e63a5fffe68410f72da8a4ec549f4b35741fa41a1097d095",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E3\\runs\\sol\\sonnet\\sample-002\\inquiry.json",
+      "graph_sha256": "b98d0d236d2adaf07635cf18a93ffbe8c77605be2d4ef1024ca20f15f98d516a",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E3\\runs\\sol\\sonnet\\sample-003\\inquiry.json",
+      "graph_sha256": "d728a8d4602517ae828ed2ffb53b38c82da663cc9d19d0a000c0372dc249407d",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E3\\runs\\sonnet\\sol\\sample-001\\inquiry.json",
+      "graph_sha256": "48529a55e8ee7b3b3df4aaab6d71e78622f86372d57c4f2a4acee29926edff1a",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E3\\runs\\sonnet\\sol\\sample-002\\inquiry.json",
+      "graph_sha256": "ad55193401c288460a6e674add3d7fcf2e3704ba4cd6880b707465ee6e3e373f",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E3\\runs\\sonnet\\sol\\sample-003\\inquiry.json",
+      "graph_sha256": "86c78b5a16a53f96675dc534bc936cd79ff2399e067ea54c85414059ed61e7f5",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E3\\runs\\sonnet\\sonnet\\sample-001\\inquiry.json",
+      "graph_sha256": "2ddcc4c054e81a292308e613b2ddfadc54f74f993923936b42c9c16af82a3b07",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E3\\runs\\sonnet\\sonnet\\sample-002\\inquiry.json",
+      "graph_sha256": "03754b24a4a19c3f72f7799049b6c345eb42d03f9d6e2d806e3151b6683754a9",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E3\\runs\\sonnet\\sonnet\\sample-003\\inquiry.json",
+      "graph_sha256": "cbc7b338f544c9c442532889367fb7b5e48669fa8d8639843605130e761bdbdd",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E4\\after\\sol\\sample-001\\inquiry.json",
+      "graph_sha256": "875eaaf07b3c4ea88b68a731ae32cb1a1eabade73d169b0448a93803b3a26ca7",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E4\\after\\sol\\sample-002\\inquiry.json",
+      "graph_sha256": "8f23079a2fdba0ad6fd1cde053ba9b63a18c81b9a3576400be424aabda086b31",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E4\\after\\sol\\sample-003\\inquiry.json",
+      "graph_sha256": "19012349139ce98e27e75148a7ad6f3c73a1d07dd60a43fc0a92a91f82f096d1",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E4\\after\\sonnet\\sample-001\\inquiry.json",
+      "graph_sha256": "9d93d3863506917d2f92de4bcebf3a52b7916e917a72c2e04c7ba28c39229db7",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E4\\after\\sonnet\\sample-002\\inquiry.json",
+      "graph_sha256": "da0296c05975ca82960d48a0eb2b35c81dd07c867442ddb582e4dd9c57625aab",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E4\\after\\sonnet\\sample-003\\inquiry.json",
+      "graph_sha256": "ed431f97cddc190eb884a26c0aefa2e4ee330297c5d76bb3dbe63795535cfcf6",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E4\\after-v2\\sol\\sample-001\\inquiry.json",
+      "graph_sha256": "ad96bf834169cf9dd1d8747dc500fe593624d741aae8a003dbb0b36455895431",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E4\\after-v2\\sol\\sample-002\\inquiry.json",
+      "graph_sha256": "f08b5c1894a10a4392f42930cd990e3993ebdf49c4d7251c2d7c5fa2eee3db20",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E4\\after-v2\\sol\\sample-003\\inquiry.json",
+      "graph_sha256": "08df5bc33674bd694f74000e5414eb3a2f8213cf88298f29dc7d18f585a41da6",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E4\\after-v2\\sonnet\\sample-001\\inquiry.json",
+      "graph_sha256": "fa73d330d900d7ed7fcb7bab689e0fe8e128497ce4b070c5afaef48852c5e25c",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E4\\after-v2\\sonnet\\sample-002\\inquiry.json",
+      "graph_sha256": "28904549c45495ef9d4a4f43bcd2f21cb68e966512ac0010da19ad35004de7e6",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E4\\after-v2\\sonnet\\sample-003\\inquiry.json",
+      "graph_sha256": "b18b1e1ae1d6bb8d259d83ee15a966e13a1bc6763637d89720372675872c768b",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E4\\after-v3\\sol\\sample-001\\inquiry.json",
+      "graph_sha256": "4cd880f4a989f2f58d4fbc498b1547f3417235d700c36fe5f4efe770c9a56d31",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E4\\after-v3\\sol\\sample-002\\inquiry.json",
+      "graph_sha256": "ff315fe6a03618645f2497e388a54476fe3104a234c1b9550b67d749c96548fc",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E4\\after-v3\\sol\\sample-003\\inquiry.json",
+      "graph_sha256": "a94748577fbd8c7c30a36f795d8b078b37febab13012bd434655cc361533a01e",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E4\\after-v3\\sonnet\\sample-001\\inquiry.json",
+      "graph_sha256": "9e2f5048fe4cd73a8d2c1fc07e8c20abc126cbb8256ad5bb47e57f903c37a863",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E4\\after-v3\\sonnet\\sample-002\\inquiry.json",
+      "graph_sha256": "024a1c62ce5ac97cc643242d44843d36fd32fe019ec45a34a03c9e17bc35a03e",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E4\\after-v3\\sonnet\\sample-003\\inquiry.json",
+      "graph_sha256": "13b18961c0a3054c4d62d3146f9fb34d2f873a9fa68492bee6d32c739ba42491",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E4\\before\\sol\\sample-001\\inquiry.json",
+      "graph_sha256": "f3ab724d32580ab90366a28c143b15002d9cb24fe23f07014cf9044aac58b08b",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E4\\before\\sol\\sample-002\\inquiry.json",
+      "graph_sha256": "4addc3be502acfecfd1804a90d5fc5bb708dd06a3ec5b3ad11eb2607fea15ce6",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E4\\before\\sol\\sample-003\\inquiry.json",
+      "graph_sha256": "f8fecdf693d04ead0ab3c2f53f7b43cc4da257c0bd501bf694af62c17c00f80b",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E4\\before\\sonnet\\sample-001\\inquiry.json",
+      "graph_sha256": "dfeb83ebddd36fcfd665fcc01ad46b4957716465ab53e547f37ef9f8b0d43e6a",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E4\\before\\sonnet\\sample-002\\inquiry.json",
+      "graph_sha256": "dc84df9dddcf5fe770c32239c1e6ee846319cbe1adb83afb3b83b00faaa8e847",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E4\\before\\sonnet\\sample-003\\inquiry.json",
+      "graph_sha256": "10c80124a3b93aae363c24cb0773d1ada2d38d94f72cdaebdc7b02e0ee08d24c",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E5\\guarded\\sol\\sample-001\\inquiry.json",
+      "graph_sha256": "b1cb9a7eb06ce7dd063eddafd9c85f94c89e76700db226fb79ce7f00ae0bb24a",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E5\\guarded\\sol\\sample-002\\inquiry.json",
+      "graph_sha256": "8906ee6090ccc9d94ee46f7b4463ebca938ca925a799e3bed6cc85d6233194b6",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E5\\guarded\\sol\\sample-003\\inquiry.json",
+      "graph_sha256": "8cbe05095d17cff20a3b04ee7d3a259ed1aa07cb305a3074cbe77b4ab3a31564",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E5\\guarded\\sonnet\\sample-001\\inquiry.json",
+      "graph_sha256": "62d474a23540d698b3dcbec63d80931575e323519e3c584a936c5350be3a8539",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E5\\guarded\\sonnet\\sample-002\\inquiry.json",
+      "graph_sha256": "fb28a4ff9f588da3ce6c2569abe7cc6fde75b2fe1e364ab485cf25ecb9f859f7",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E5\\guarded\\sonnet\\sample-003\\inquiry.json",
+      "graph_sha256": "6c7f7f33347bd90515051269752257dc1e975d4b6d32c69aab9495cdb1ce96eb",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E5\\original\\sol\\sample-001\\inquiry.json",
+      "graph_sha256": "b2e778106f4496f3ea551cb37a82a5e936bb55b64d3e66e5a6cb0c4d94c4686f",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E5\\original\\sol\\sample-002\\inquiry.json",
+      "graph_sha256": "8da3795fbdbe1ab431106b84f0d38257a87b007d1b0ac2c8ef70ff783f1e4c63",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E5\\original\\sol\\sample-003\\inquiry.json",
+      "graph_sha256": "3b474a5181f29042ad601dcdd89549dfe383bc7df7dc85967d832014223de7e5",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E5\\original\\sonnet\\sample-001\\inquiry.json",
+      "graph_sha256": "17c1442afc68b5893184c206ece9eb90f5adc6fe0e8b559ee66d16decd7331d2",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E5\\original\\sonnet\\sample-002\\inquiry.json",
+      "graph_sha256": "f820584040be17d214cfad1df3f87db03b838f9a1f60760b963ceef28fbfff10",
+      "references_valid": true
+    },
+    {
+      "graph": "experiments\\E5\\original\\sonnet\\sample-003\\inquiry.json",
+      "graph_sha256": "6779dce0adab41b23ff6b13e101ac74b6876e07c7addbcafd849a499d609c9db",
+      "references_valid": true
+    }
+  ],
+  "limits_usd": {
+    "anthropic": 50,
+    "openai": 16
+  },
+  "protected_opus_reserve_usd": 20,
+  "tests_passed": 125
+}

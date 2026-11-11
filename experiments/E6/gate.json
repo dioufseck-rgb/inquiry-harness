@@ -1,0 +1,22 @@
+{
+  "status": "not_run",
+  "e1_pass": false,
+  "e2_pass": true,
+  "full_run_allowed": false,
+  "reason": "E1 raw specificity gate failed on one Sonnet aspirin sample; both E1 and E2 are required.",
+  "sonnet_full_run": "not_run",
+  "sol_full_run": "not_run",
+  "opus_full_run": "not_run",
+  "opus_condition": "Sonnet must first pass its E6 full run",
+  "anthropic_opus_reserve_usd": 20,
+  "held_out_runs": 0,
+  "live_full_harness_runs": 0,
+  "metrics_ready": [
+    "claims_supported_unargued",
+    "main_supporting_in",
+    "main_component_supporting_in",
+    "undecided_empty",
+    "undecided_supported"
+  ],
+  "validation": "125 local tests passed, including empty, supported, withdrawn and component-only main-answer cases"
+}

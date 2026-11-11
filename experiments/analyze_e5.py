@@ -58,6 +58,7 @@ def analyze():
             lines.append(f"| {c['version']} | {s['provider']}:{s['model']} | {s['sample']} | {s['evidence']} | {s['quote_verified']:.1%} | {s['grade_d_found']} | {s['gold_facts_found']} | {agreement} | {s['direction_pairs_observed']}/{s['direction_pairs_total']} | ${s['cost_usd']:.4f} |")
     lines += ["", "Only S16 is read, from local text; no retrieval, gold injection into prompts, or held-out question is involved. Gold labels were frozen before outputs. Separate manual adjudications credit equivalent abbreviations/pronouns and a fact split across items; missing Grade D or numeric bounds are not inferred. The detailed matches and missing direction pairs are saved for review. Agreement is conditional on explicitly labelled matched pairs; pair coverage is shown alongside it.", "",
               "Quote verification uses literal source membership after whitespace/case folding, including any clipping in the stored quote. It does not assume that plausible paraphrases are verified quotations.", ""]
+    lines += ["For a gold fact split across extracted items, direction comparison uses the union of their explicit hints. The combined lifetime-model gold fact spans two age bands; age-specific hints may differ and therefore disagree with its combined neutral label. This aggregation limitation is visible in the detailed directions, rather than resolved by changing the frozen labels.", ""]
     (root / "report.md").write_text("\n".join(lines), encoding="utf-8")
     print(json.dumps({"pass": result["pass"], "cells": len(cells)}))
 

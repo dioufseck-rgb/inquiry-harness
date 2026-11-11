@@ -54,3 +54,11 @@ evidence denominator, so a zero cannot hide an empty eligibility set.
 
 The campaign must pass E1 and E2 on both providers before any full-harness run.
 Held-out questions are not part of this campaign.
+
+The completed campaign is summarized in [the bench report](../bench/results/move-experiments.md).
+E6 was skipped because E1's raw gate failed, although E2 passed. The full metrics
+now distinguish `undecided_empty` from `undecided_supported`: the latter requires
+an IN supporting argument for a live claim that actually answers the main issue.
+Accepted component findings are counted separately and cannot satisfy the main
+shape check. Coverage uses the same offered-evidence policy as move replays.
+These changes were verified with local scripted graphs, without a live E6 run.

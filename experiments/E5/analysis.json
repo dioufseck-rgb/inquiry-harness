@@ -20,11 +20,11 @@
           "evidence": 19,
           "quote_verified": 1.0,
           "grade_d_found": true,
-          "gold_facts_found": 9,
-          "direction_agreement_observed": 0.9411764705882353,
-          "direction_pairs_observed": 17,
+          "gold_facts_found": 10,
+          "direction_agreement_observed": 0.8181818181818182,
+          "direction_pairs_observed": 22,
           "direction_pairs_total": 26,
-          "direction_pairs_correct": 16,
+          "direction_pairs_correct": 18,
           "fact_matches": [
             {
               "gold_id": "G1",
@@ -92,8 +92,11 @@
             },
             {
               "gold_id": "G10",
-              "evidence_ids": [],
-              "manually_adjudicated": false
+              "evidence_ids": [
+                "E155",
+                "E156"
+              ],
+              "manually_adjudicated": true
             }
           ],
           "directions": [
@@ -303,41 +306,51 @@
               "gold_id": "G10",
               "claim_id": "C1",
               "expected": "neutral",
-              "actual": [],
-              "fact_found": false,
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
               "agree": false
             },
             {
               "gold_id": "G10",
               "claim_id": "C2",
               "expected": "neutral",
-              "actual": [],
-              "fact_found": false,
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
               "agree": false
             },
             {
               "gold_id": "G10",
               "claim_id": "C3",
               "expected": "neutral",
-              "actual": [],
-              "fact_found": false,
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
               "agree": false
             },
             {
               "gold_id": "G10",
               "claim_id": "C4",
               "expected": "for",
-              "actual": [],
-              "fact_found": false,
-              "agree": false
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
             },
             {
               "gold_id": "G10",
               "claim_id": "C6",
               "expected": "for",
-              "actual": [],
-              "fact_found": false,
-              "agree": false
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
             }
           ],
           "pass": true
@@ -354,11 +367,11 @@
           "evidence": 20,
           "quote_verified": 1.0,
           "grade_d_found": true,
-          "gold_facts_found": 9,
-          "direction_agreement_observed": 0.875,
-          "direction_pairs_observed": 16,
+          "gold_facts_found": 10,
+          "direction_agreement_observed": 0.7619047619047619,
+          "direction_pairs_observed": 21,
           "direction_pairs_total": 26,
-          "direction_pairs_correct": 14,
+          "direction_pairs_correct": 16,
           "fact_matches": [
             {
               "gold_id": "G1",
@@ -426,8 +439,11 @@
             },
             {
               "gold_id": "G10",
-              "evidence_ids": [],
-              "manually_adjudicated": false
+              "evidence_ids": [
+                "E156",
+                "E157"
+              ],
+              "manually_adjudicated": true
             }
           ],
           "directions": [
@@ -635,41 +651,51 @@
               "gold_id": "G10",
               "claim_id": "C1",
               "expected": "neutral",
-              "actual": [],
-              "fact_found": false,
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
               "agree": false
             },
             {
               "gold_id": "G10",
               "claim_id": "C2",
               "expected": "neutral",
-              "actual": [],
-              "fact_found": false,
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
               "agree": false
             },
             {
               "gold_id": "G10",
               "claim_id": "C3",
               "expected": "neutral",
-              "actual": [],
-              "fact_found": false,
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
               "agree": false
             },
             {
               "gold_id": "G10",
               "claim_id": "C4",
               "expected": "for",
-              "actual": [],
-              "fact_found": false,
-              "agree": false
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
             },
             {
               "gold_id": "G10",
               "claim_id": "C6",
               "expected": "for",
-              "actual": [],
-              "fact_found": false,
-              "agree": false
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
             }
           ],
           "pass": true
@@ -686,11 +712,11 @@
           "evidence": 20,
           "quote_verified": 1.0,
           "grade_d_found": true,
-          "gold_facts_found": 9,
-          "direction_agreement_observed": 0.9375,
-          "direction_pairs_observed": 16,
+          "gold_facts_found": 10,
+          "direction_agreement_observed": 0.8095238095238095,
+          "direction_pairs_observed": 21,
           "direction_pairs_total": 26,
-          "direction_pairs_correct": 15,
+          "direction_pairs_correct": 17,
           "fact_matches": [
             {
               "gold_id": "G1",
@@ -758,8 +784,11 @@
             },
             {
               "gold_id": "G10",
-              "evidence_ids": [],
-              "manually_adjudicated": false
+              "evidence_ids": [
+                "E168",
+                "E169"
+              ],
+              "manually_adjudicated": true
             }
           ],
           "directions": [
@@ -967,41 +996,51 @@
               "gold_id": "G10",
               "claim_id": "C1",
               "expected": "neutral",
-              "actual": [],
-              "fact_found": false,
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
               "agree": false
             },
             {
               "gold_id": "G10",
               "claim_id": "C2",
               "expected": "neutral",
-              "actual": [],
-              "fact_found": false,
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
               "agree": false
             },
             {
               "gold_id": "G10",
               "claim_id": "C3",
               "expected": "neutral",
-              "actual": [],
-              "fact_found": false,
+              "actual": [
+                "against"
+              ],
+              "fact_found": true,
               "agree": false
             },
             {
               "gold_id": "G10",
               "claim_id": "C4",
               "expected": "for",
-              "actual": [],
-              "fact_found": false,
-              "agree": false
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
             },
             {
               "gold_id": "G10",
               "claim_id": "C6",
               "expected": "for",
-              "actual": [],
-              "fact_found": false,
-              "agree": false
+              "actual": [
+                "for"
+              ],
+              "fact_found": true,
+              "agree": true
             }
           ],
           "pass": true
