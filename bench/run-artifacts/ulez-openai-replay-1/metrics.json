@@ -1,0 +1,61 @@
+{
+  "id": "ulez-openai-replay-1",
+  "rounds": 2,
+  "sources": 8,
+  "origins": 6,
+  "duplicate_sources": 1,
+  "evidence": 187,
+  "orphans": 0,
+  "supporting_args": 2,
+  "supporting_in": 1,
+  "attacks": 1,
+  "attacks_out": 0,
+  "attacks_discharged": 0,
+  "counters_dropped": 0,
+  "counters_dropped_reasons": {},
+  "counters_inapplicable": 0,
+  "counters_inapplicable_reasons": {},
+  "accepted_claims": 1,
+  "single_origin_accepts": 0,
+  "main_status": {
+    "C1": "undecided",
+    "C2": "undecided",
+    "C3": "undecided",
+    "C4": "undecided"
+  },
+  "absence_assertions": 0,
+  "provider_proposer": "openai",
+  "provider_critic": "openai",
+  "model_proposer": "gpt-6.1-sol",
+  "model_critic": "gpt-6-astra",
+  "effort_proposer": "medium",
+  "effort_critic": "high",
+  "tokens_in": 1387414,
+  "tokens_out": 95481,
+  "calls": 179,
+  "stop_reason": "rounds exhausted",
+  "gold_sources_found": 1,
+  "gold_sources_total": 4,
+  "gold_sources_missing": [
+    "London-wide ULEZ Six Month Report",
+    "s44407-025-00030-9",
+    "Supplementary"
+  ],
+  "gold_facts_found": 4,
+  "gold_facts_total": 5,
+  "gold_facts_missing": [
+    "Table 70"
+  ],
+  "shape_expected": "undecided",
+  "shape_match": true,
+  "checks": {
+    "ledger_valid": true,
+    "references_valid": true,
+    "false_corroboration": [],
+    "duplicate_sources_zero": false,
+    "attacks_discharged_positive": false,
+    "main_in_pro": [],
+    "c1_or_c2_undecided": true,
+    "absence_assertions_zero": true
+  }
+}

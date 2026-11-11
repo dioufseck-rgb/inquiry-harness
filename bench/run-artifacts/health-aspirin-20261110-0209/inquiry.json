@@ -1,0 +1,4667 @@
+{
+  "id": "health-aspirin-20261110-0209",
+  "question": "Does initiating low-dose aspirin for primary prevention reduce net cardiovascular harm in adults aged 60 and over?",
+  "created_at": "2026-11-10T02:09:44+00:00",
+  "phase": "concluded",
+  "round": 1,
+  "framing": {
+    "restatement": "In adults aged 60 or older with no prior cardiovascular disease, does starting daily low-dose aspirin lower the overall balance of cardiovascular harm, counting prevented cardiovascular events against bleeding and other harms it causes?",
+    "question_type": "mixed",
+    "scope_in": [
+      "Adults aged 60 and over without established atherosclerotic cardiovascular disease (primary prevention)",
+      "Initiation of low-dose aspirin (about 75-100 mg/day) versus placebo or no aspirin",
+      "Benefits: nonfatal MI, nonfatal ischemic stroke, cardiovascular death",
+      "Harms: major gastrointestinal bleeding, intracranial hemorrhage, hemorrhagic stroke, other major extracranial bleeding",
+      "Effect modifiers: age band, baseline cardiovascular risk, diabetes, bleeding risk, concurrent statin use",
+      "All-cause mortality and cancer outcomes as they bear on net harm"
+    ],
+    "scope_out": [
+      "Secondary prevention in people with prior MI, stroke, or revascularization",
+      "Aspirin for cancer or dementia prevention as a primary aim",
+      "Higher aspirin doses and other antiplatelet agents",
+      "Continuing or deprescribing aspirin in long-term users, except as it informs the question",
+      "Cost-effectiveness"
+    ],
+    "presuppositions": [
+      "Net cardiovascular harm can be defined by weighing events of differing severity (for example, by a stated weighting or a composite)",
+      "Trial or pooled evidence exists that enrolled or can be stratified to adults 60 and over",
+      "The effect of initiating aspirin is distinguishable from that of continuing it",
+      "Benefit and bleeding harm are of comparable enough importance to be netted, or the weighting is stated"
+    ],
+    "answerhood": "A verdict on whether initiation lowers net cardiovascular harm in adults 60 and over, stated with the weighting used to combine outcomes. It includes absolute event differences per 1,000 treated over a stated follow-up for cardiovascular events and for major bleeding, plus the direction and size of the net balance. It also says whether the answer differs by baseline risk, age band, or bleeding risk, and notes any guideline positions on the same question.",
+    "standard_override": null
+  },
+  "graph": {
+    "issues": [
+      {
+        "id": "Q1",
+        "text": "Does initiating low-dose aspirin for primary prevention reduce net cardiovascular harm in adults aged 60 and over?",
+        "answerhood": "A verdict on whether initiation lowers net cardiovascular harm in adults 60 and over, stated with the weighting used to combine outcomes. It includes absolute event differences per 1,000 treated over a stated follow-up for cardiovascular events and for major bleeding, plus the direction and size of the net balance. It also says whether the answer differs by baseline risk, age band, or bleeding risk, and notes any guideline positions on the same question.",
+        "question_type": "mixed",
+        "parent_id": null,
+        "depends_on": [],
+        "status": "open",
+        "presuppositions": [
+          "Net cardiovascular harm can be defined by weighing events of differing severity (for example, by a stated weighting or a composite)",
+          "Trial or pooled evidence exists that enrolled or can be stratified to adults 60 and over",
+          "The effect of initiating aspirin is distinguishable from that of continuing it",
+          "Benefit and bleeding harm are of comparable enough importance to be netted, or the weighting is stated"
+        ]
+      },
+      {
+        "id": "Q2",
+        "text": "What do randomized trials and meta-analyses of low-dose aspirin for primary prevention show for major cardiovascular events (MI, ischemic stroke, CV death), in participants 60 and over where reported?",
+        "answerhood": "Relative and absolute effect estimates with confidence intervals, follow-up duration, and age-specific results, including ASPREE, ARRIVE, ASCEND, and pooled analyses",
+        "question_type": "empirical",
+        "parent_id": "Q1",
+        "depends_on": [],
+        "status": "open",
+        "presuppositions": []
+      },
+      {
+        "id": "Q3",
+        "text": "What do these same studies show for major bleeding (gastrointestinal, intracranial, other extracranial) attributable to low-dose aspirin in adults 60 and over?",
+        "answerhood": "Relative and absolute excess bleeding risk with confidence intervals by bleeding type and age band",
+        "question_type": "empirical",
+        "parent_id": "Q1",
+        "depends_on": [],
+        "status": "open",
+        "presuppositions": []
+      },
+      {
+        "id": "Q4",
+        "text": "What did trials in older adults find for all-cause mortality, cancer incidence and mortality, and disability-free survival under aspirin?",
+        "answerhood": "Effect estimates for non-CV outcomes, including any signal of harm in older participants, with the measure and follow-up stated",
+        "question_type": "empirical",
+        "parent_id": "Q1",
+        "depends_on": [],
+        "status": "open",
+        "presuppositions": []
+      },
+      {
+        "id": "Q5",
+        "text": "Does the balance of benefit and harm vary with baseline cardiovascular risk, age within the 60+ range, diabetes, statin use, or bleeding risk?",
+        "answerhood": "Subgroup or interaction estimates, or modeled net outcomes, showing whether any subgroup has net benefit",
+        "question_type": "causal",
+        "parent_id": "Q1",
+        "depends_on": [
+          "Q2",
+          "Q3"
+        ],
+        "status": "open",
+        "presuppositions": []
+      },
+      {
+        "id": "Q6",
+        "text": "Combining benefit and harm under a stated weighting, what is the net effect per 1,000 treated for adults 60 and over?",
+        "answerhood": "A net balance with the weighting stated, and sensitivity of the sign to plausible changes in weights",
+        "question_type": "evaluative",
+        "parent_id": "Q1",
+        "depends_on": [
+          "Q2",
+          "Q3",
+          "Q4",
+          "Q5"
+        ],
+        "status": "open",
+        "presuppositions": []
+      },
+      {
+        "id": "Q7",
+        "text": "What do current guidelines and recommendations (for example USPSTF 2022, ACC/AHA, ESC) conclude for initiating aspirin at 60 and over, and on what basis?",
+        "answerhood": "The recommendation, its grade, the age threshold, and the evidence it cites",
+        "question_type": "empirical",
+        "parent_id": "Q1",
+        "depends_on": [],
+        "status": "open",
+        "presuppositions": []
+      }
+    ],
+    "claims": [
+      {
+        "id": "C1",
+        "text": "In adults 60+ without prior CVD, initiating low-dose aspirin increases net cardiovascular harm: excess major bleeding (GI and intracranial) per 1,000 treated over about 5 years equals or exceeds the MI and ischemic stroke events prevented, under equal or bleeding-weighted severity weights.",
+        "issue_id": "Q1",
+        "kind": "substantive",
+        "contrary_ids": [
+          "C2",
+          "C4",
+          "C5"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "ASPREE and the post-2018 meta-analyses show small ischemic benefit with clear bleeding excess in older adults."
+      },
+      {
+        "id": "C2",
+        "text": "In adults 60+ without prior CVD, initiating low-dose aspirin yields a small net reduction in cardiovascular harm over about 5 years, with prevented MI and ischemic stroke outweighing bleeding under a severity-weighted composite.",
+        "issue_id": "Q1",
+        "kind": "substantive",
+        "contrary_ids": [
+          "C1",
+          "C4",
+          "C5"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "Pooled meta-analyses show about a 10% reduction in major CV events, which could outweigh bleeding if bleeds are weighted by case fatality."
+      },
+      {
+        "id": "C3",
+        "text": "Net benefit from initiating aspirin in adults 60+ occurs only in a high-baseline-risk, low-bleeding-risk subgroup; for the average person aged 60+ the net balance is neutral or negative.",
+        "issue_id": "Q1",
+        "kind": "substantive",
+        "contrary_ids": [
+          "C4",
+          "C5"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "Guidelines and modeling suggest the balance depends on risk stratification."
+      },
+      {
+        "id": "C4",
+        "text": "Initiating low-dose aspirin in adults 60+ has no net effect on cardiovascular harm; benefits and bleeding harms offset to within a net difference of about zero per 1,000 treated.",
+        "issue_id": "Q1",
+        "kind": "null",
+        "contrary_ids": [
+          "C1",
+          "C2",
+          "C3"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "Null answer: the balance is indistinguishable from zero."
+      },
+      {
+        "id": "C5",
+        "text": "The net-harm question has no single answer because the sign depends on the weighting of nonfatal events versus bleeds, so any verdict is an artifact of the weights chosen.",
+        "issue_id": "Q1",
+        "kind": "deflationary",
+        "contrary_ids": [
+          "C1",
+          "C2",
+          "C3"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "The presupposition that outcomes can be netted may fail."
+      },
+      {
+        "id": "C6",
+        "text": "Across primary prevention trials, low-dose aspirin reduces major CV events (MI, ischemic stroke, CV death) by roughly 8-15% relatively, which is about 1-3 fewer events per 1,000 treated over 5 years in older adults.",
+        "issue_id": "Q2",
+        "kind": "substantive",
+        "contrary_ids": [
+          "C8"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "Meta-analyses of ASCEND, ARRIVE, ASPREE, and earlier trials."
+      },
+      {
+        "id": "C7",
+        "text": "In participants aged 70+ (ASPREE), aspirin did not significantly reduce the CV composite (HR about 0.95, CI including 1) over a median of about 4.7 years.",
+        "issue_id": "Q2",
+        "kind": "substantive",
+        "contrary_ids": [
+          "C8"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "ASPREE's primary CV results in older adults."
+      },
+      {
+        "id": "C8",
+        "text": "Aspirin has no effect on major CV events in primary prevention in adults 60+.",
+        "issue_id": "Q2",
+        "kind": "null",
+        "contrary_ids": [
+          "C6",
+          "C7"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "Null answer."
+      },
+      {
+        "id": "C9",
+        "text": "Low-dose aspirin increases major bleeding by roughly 30-50% relatively, about 2-5 additional major bleeds per 1,000 treated over 5 years in adults 60+, with the excess concentrated in GI bleeding and rising with age.",
+        "issue_id": "Q3",
+        "kind": "substantive",
+        "contrary_ids": [
+          "C11"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "ASPREE HR about 1.38 for major hemorrhage; pooled analyses agree."
+      },
+      {
+        "id": "C10",
+        "text": "Aspirin significantly increases intracranial hemorrhage in adults 60+, by at least 0.5 per 1,000 over 5 years.",
+        "issue_id": "Q3",
+        "kind": "substantive",
+        "contrary_ids": [
+          "C11"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "Some pooled analyses report an ICH signal; individual trials are underpowered."
+      },
+      {
+        "id": "C11",
+        "text": "Low-dose aspirin does not increase major bleeding in adults 60+ beyond chance.",
+        "issue_id": "Q3",
+        "kind": "null",
+        "contrary_ids": [
+          "C10",
+          "C9"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "Null answer."
+      },
+      {
+        "id": "C12",
+        "text": "In older adults, aspirin increased all-cause mortality, driven by cancer deaths, in ASPREE (HR about 1.14 overall), with no benefit on disability-free survival.",
+        "issue_id": "Q4",
+        "kind": "substantive",
+        "contrary_ids": [
+          "C13"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "ASPREE secondary analyses reported higher cancer mortality and late-emerging signals."
+      },
+      {
+        "id": "C13",
+        "text": "Aspirin has no effect on all-cause mortality, cancer incidence or mortality, or disability-free survival in older adults; any observed differences are chance findings.",
+        "issue_id": "Q4",
+        "kind": "null",
+        "contrary_ids": [
+          "C12",
+          "C14"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "Pooled data and other trials show no consistent mortality or cancer signal, so this competes with the harm claim."
+      },
+      {
+        "id": "C14",
+        "text": "Aspirin reduces long-term cancer incidence or mortality (especially colorectal) in adults 60+, offsetting some net harm.",
+        "issue_id": "Q4",
+        "kind": "substantive",
+        "contrary_ids": [
+          "C13"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "Earlier trials' long-term follow-up suggested colorectal cancer reductions, but ASPREE contradicts this."
+      },
+      {
+        "id": "C15",
+        "text": "The net balance is more favorable at higher baseline CV risk, but absolute bleeding excess rises with age and prior bleeding risk, so no 60+ subgroup shows reliable net benefit.",
+        "issue_id": "Q5",
+        "kind": "substantive",
+        "contrary_ids": [
+          "C16",
+          "C17"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "Benefit scales with risk, but bleeding does not shrink."
+      },
+      {
+        "id": "C16",
+        "text": "Some subgroups (for example, high 10-year CV risk adults aged 60-69 with low bleeding risk, or people with diabetes) have a net benefit from aspirin.",
+        "issue_id": "Q5",
+        "kind": "substantive",
+        "contrary_ids": [
+          "C15",
+          "C17"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "Modeling and guidelines cite this for selected individuals."
+      },
+      {
+        "id": "C17",
+        "text": "There is no credible heterogeneity of net effect by risk, age, diabetes, statin use, or bleeding risk; subgroup interactions are null.",
+        "issue_id": "Q5",
+        "kind": "null",
+        "contrary_ids": [
+          "C15",
+          "C16"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "Trials report non-significant interactions."
+      },
+      {
+        "id": "C18",
+        "text": "Under equal weighting of MI, ischemic stroke, and major bleeding, the net effect per 1,000 treated over about 5 years in adults 60+ is harm or zero, not benefit.",
+        "issue_id": "Q6",
+        "kind": "substantive",
+        "contrary_ids": [
+          "C19",
+          "C20"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "Bleeding excess is similar in size to or larger than the events prevented."
+      },
+      {
+        "id": "C19",
+        "text": "Under weighting by case fatality or disability burden, so that bleeds count less than MI or stroke, the net effect per 1,000 treated is a small benefit.",
+        "issue_id": "Q6",
+        "kind": "substantive",
+        "contrary_ids": [
+          "C18",
+          "C20"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "Sign depends on weighting."
+      },
+      {
+        "id": "C20",
+        "text": "The net effect is zero under any plausible weighting.",
+        "issue_id": "Q6",
+        "kind": "null",
+        "contrary_ids": [
+          "C18",
+          "C19"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "Null answer."
+      },
+      {
+        "id": "C21",
+        "text": "USPSTF 2022 recommends against initiating low-dose aspirin for primary prevention in adults 60+ (Grade D), and ACC/AHA 2019 advises against routine use in those over 70 or at increased bleeding risk, citing a bleeding excess that outweighs benefit.",
+        "issue_id": "Q7",
+        "kind": "substantive",
+        "contrary_ids": [
+          "C22"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "These are the published positions."
+      },
+      {
+        "id": "C22",
+        "text": "Guidelines (ESC and others) recommend routine aspirin initiation for primary prevention in adults 60+.",
+        "issue_id": "Q7",
+        "kind": "null",
+        "contrary_ids": [
+          "C21"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "Null: no major guideline recommends routine initiation, so this competes with the substantive answer."
+      }
+    ],
+    "evidence": [
+      {
+        "id": "E1",
+        "text": "ASPREE enrolled 19,114 adults aged 70+ (65+ for Black and Hispanic US participants) without CVD, dementia or disability, randomized to 100 mg enteric-coated aspirin (9525) or placebo (9589), with median follow-up of 4.7 years. This is a primary-prevention, low-dose, older-adult population that fits the question.",
+        "kind": "tangible",
+        "source_id": "S1",
+        "quote": "Of the 19,114 persons who were enrolled, 9525 were assigned to receive aspirin and 9589 to receive placebo. A total of 1052 deaths occurred during a median of 4.7 years of follow-up.",
+        "location": "Abstract, Methods and Results",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "strong",
+          "force": "moderate",
+          "credibility_notes": ""
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C7": "neutral",
+          "C12": "for"
+        }
+      },
+      {
+        "id": "E2",
+        "text": "All-cause mortality was higher with aspirin: 12.7 vs 11.1 deaths per 1000 person-years, HR 1.14 (95% CI 1.01-1.29). The CI lower bound is close to 1, so the result is only marginally significant. This is about 1.6 excess deaths per 1000 person-years.",
+        "kind": "tangible",
+        "source_id": "S1",
+        "quote": "12.7 events per 1000 person-years in the aspirin group and 11.1 events per 1000 person-years in the placebo group (hazard ratio, 1.14; 95% confidence interval [CI], 1.01 to 1.29)",
+        "location": "Abstract, Results",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "strong",
+          "force": "moderate",
+          "credibility_notes": "Mortality was a secondary end point and the CI is borderline. The authors call the result unexpected and urge caution."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C12": "for",
+          "C13": "against",
+          "C18": "for",
+          "C1": "for",
+          "C2": "against"
+        }
+      },
+      {
+        "id": "E3",
+        "text": "Cancer was the main driver of the excess deaths. Cancer death occurred in 3.1% on aspirin vs 2.3% on placebo (HR 1.31, 95% CI 1.10-1.56), and the cause-specific analyses were post hoc and exploratory.",
+        "kind": "tangible",
+        "source_id": "S1",
+        "quote": "Cancer-related death occurred in 3.1% of the participants in the aspirin group and in 2.3% of those in the placebo group (hazard ratio, 1.31; 95% CI, 1.10 to 1.56).",
+        "location": "Abstract, Results",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "moderate",
+          "force": "moderate",
+          "credibility_notes": "Cause-specific analyses were post hoc and exploratory, with no multiplicity adjustment. Deaths were adjudicated blind, which supports accuracy. The authors note the finding is inconsistent with earlier studies."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C12": "for",
+          "C13": "against",
+          "C14": "against"
+        }
+      },
+      {
+        "id": "E4",
+        "text": "The companion primary analysis reported no benefit of aspirin on the primary end point of disability-free survival. This abstract says so but gives no HR or counts, so the figure must come from the companion paper.",
+        "kind": "testimonial",
+        "source_id": "S1",
+        "quote": "the daily use of aspirin did not provide a benefit with regard to the primary end point of disability-free survival among older adults.",
+        "location": "Abstract, Background",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "moderate",
+          "force": "weak",
+          "credibility_notes": "This is a summary statement without numbers (no DFS HR, CI or event counts). The CV composite and major hemorrhage results are not in this abstract."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {
+          "unusable": "Gives no numbers and restates the DFS result, which E24 gives in full (A1)."
+        },
+        "bears_on": {
+          "C12": "for",
+          "C13": "against"
+        }
+      },
+      {
+        "id": "E5",
+        "text": "ASPREE design: 19,114 adults aged 70+ (65+ for US minorities) without CVD, dementia or disability were randomized to 100 mg enteric-coated aspirin (n=9525) or placebo (n=9589). Follow-up was a median of 4.7 years, with intention-to-treat Cox analyses. This sets the population, dose and follow-up for the ASPREE-based claims.",
+        "kind": "tangible",
+        "source_id": "S2",
+        "quote": "randomly assigned to receive daily 100 mg of enteric-coated aspirin (n = 9525) or matching placebo (n = 9589).",
+        "location": "Methods, Trial Design",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "strong",
+          "force": "moderate",
+          "credibility_notes": ""
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C7": "neutral",
+          "C12": "neutral",
+          "C13": "neutral"
+        }
+      },
+      {
+        "id": "E6",
+        "text": "Aspirin did not significantly change overall cancer incidence (981 vs 952 events; HR 1.04, 95% CI 0.95-1.14), nor all solid cancers or hematological cancer. This undercuts any claim that aspirin lowers cancer incidence in older adults over about 4.7 years.",
+        "kind": "tangible",
+        "source_id": "S2",
+        "quote": "981 cancer events occurred in the aspirin and 952 in the placebo groups. There was no statistically significant difference between groups for all incident cancers (hazard ratio [HR] = 1.04, 95% confidence interval [CI] = 0.95 to 1.14)",
+        "location": "Abstract, Results",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "strong",
+          "force": "strong",
+          "credibility_notes": ""
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C14": "against",
+          "C13": "neutral"
+        }
+      },
+      {
+        "id": "E7",
+        "text": "Aspirin was associated with more metastatic cancer (HR 1.19, 1.00-1.43) and stage 4 cancer at diagnosis (HR 1.22, 1.02-1.45). It was also associated with higher cancer death for stage 3 (HR 2.11, 1.03-4.33) and stage 4 (HR 1.31, 1.04-1.64) disease. This is a signal of harm on advanced cancer, not on overall incidence.",
+        "kind": "tangible",
+        "source_id": "S2",
+        "quote": "aspirin was associated with an increased risk of incident cancer that had metastasized (HR = 1.19, 95% CI = 1.00 to 1.43) or was stage 4 at diagnosis (HR = 1.22, 95% CI = 1.02 to 1.45)",
+        "location": "Abstract, Results",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "moderate",
+          "force": "moderate",
+          "credibility_notes": "These are secondary and subgroup analyses with many comparisons. Some CIs have lower bounds at or near 1.0, and the stage 3 death estimate is wide (1.03-4.33). The finding is hypothesis-generating."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C12": "for",
+          "C13": "against",
+          "C14": "against"
+        }
+      },
+      {
+        "id": "E8",
+        "text": "The authors state that ASPREE found higher all-cause mortality on aspirin, evident from about 3 years and largely attributable to cancer death. The exact HR is not given in this part. Here it is an authors' restatement of the earlier primary report.",
+        "kind": "testimonial",
+        "source_id": "S2",
+        "quote": "ASPREE participants randomized to aspirin experienced higher all-cause mortality (3). This became evident at 3 years postrandomization and was largely attributable to death from cancer.",
+        "location": "Introduction, para. 1",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "moderate",
+          "force": "weak",
+          "credibility_notes": "The sentence is a secondhand summary of the 2018 paper. It gives no numbers and cannot be counted as independent corroboration."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {
+          "unusable": "Authors' secondhand restatement of the 2018 paper. It adds nothing independent."
+        },
+        "bears_on": {
+          "C12": "for",
+          "C13": "against"
+        }
+      },
+      {
+        "id": "E9",
+        "text": "The authors report that earlier trials in younger populations showed a delayed cancer benefit (lower incidence and death, especially colorectal) with longer follow-up. They also note that the 2016 USPSTF advice excluded adults 70+ because the evidence was insufficient. This is background context and is not ASPREE data.",
+        "kind": "testimonial",
+        "source_id": "S2",
+        "quote": "With more prolonged follow-up, participants randomized to daily aspirin had a reduced risk of incident cancer and death from cancer, particularly colorectal cancer (7, 8).",
+        "location": "Introduction, para. 1",
+        "credentials": {
+          "relevance": "weak",
+          "credibility": "moderate",
+          "force": "weak",
+          "credibility_notes": "This is a literature summary by interested authors, covering mostly younger cohorts. ASPREE's follow-up was too short to test a delayed benefit."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {
+          "unusable": "Background literature on younger cohorts, not ASPREE data. It only loosely bears on C14 in adults 60+."
+        },
+        "bears_on": {
+          "C14": "for"
+        }
+      },
+      {
+        "id": "E10",
+        "text": "Aspirin did not change the incidence of a first incident cancer in ASPREE participants (mean age about 74). There were 981 cases in the aspirin arm and 952 in the placebo arm, over about 44,000 person-years per arm. This gives no sign of a cancer-prevention benefit over roughly 4.7 years, so no offset to net harm (C14).",
+        "kind": "tangible",
+        "source_id": "S2",
+        "quote": "First incident cancer 981 (23.9) 952 (23.0) 1.04 (0.95 to 1.14)",
+        "location": "Table 2; Results, Incidence",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "strong",
+          "force": "strong",
+          "credibility_notes": ""
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C13": "for",
+          "C14": "against",
+          "C12": "neutral"
+        }
+      },
+      {
+        "id": "E11",
+        "text": "Cancer deaths were higher with aspirin: 283 versus 212 among those with incident cancer (HR 1.35, 95% CI 1.13 to 1.61). This supports the claim that excess mortality in ASPREE was driven by cancer deaths. It also counts against any cancer offset and against a null all-cause effect.",
+        "kind": "tangible",
+        "source_id": "S2",
+        "quote": "First incident cancer 981 (23.9) 952 (23.0) 1.04 (0.95 to 1.14) 283 (6.4) 212 (4.8) 1.35 (1.13 to 1.61)",
+        "location": "Table 2",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "moderate",
+          "force": "moderate",
+          "credibility_notes": "Cancer mortality is a secondary, post hoc-type outcome, and the denominator is people who developed cancer, not the whole randomized population. The comparison is not adjusted for multiplicity. The excess may be partly a chance finding."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C12": "for",
+          "C13": "against",
+          "C14": "against",
+          "C18": "for"
+        }
+      },
+      {
+        "id": "E12",
+        "text": "Aspirin was associated with more cancers presenting at stage 4 (275 versus 228, HR 1.22, 95% CI 1.02 to 1.45), and stage 4 cancer deaths were also higher (HR 1.31, 95% CI 1.04 to 1.64). Incidence of stage 1 to 3 cancers did not differ. This suggests later-stage presentation or progression rather than prevention.",
+        "kind": "tangible",
+        "source_id": "S2",
+        "quote": "aspirin was associated with an increase in the incidence of cancers presenting at stage 4 (HR = 1.22, 95% CI = 1.02 to 1.45).",
+        "location": "Results, Incidence; Table 3",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "moderate",
+          "force": "moderate",
+          "credibility_notes": "Stage-specific analyses are exploratory, with multiple comparisons and borderline confidence intervals."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C12": "for",
+          "C14": "against",
+          "C13": "against"
+        }
+      },
+      {
+        "id": "E13",
+        "text": "Colorectal cancer incidence was unchanged (139 versus 137, HR 1.02, 95% CI 0.81 to 1.30), and colorectal cancer mortality was higher with aspirin (HR 1.77, 95% CI 1.02 to 3.06). There is no sign of the colorectal benefit that C14 posits, within this short follow-up.",
+        "kind": "tangible",
+        "source_id": "S2",
+        "quote": "Colorectal 139 (3.3) 137 (3.2) 1.02 (0.81 to 1.30) 35 (0.8) 20 (0.5) 1.77 (1.02 to 3.06)",
+        "location": "Table 3, anatomic site",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "moderate",
+          "force": "weak",
+          "credibility_notes": "Small event counts, a wide confidence interval and a site-specific subgroup, with no multiplicity control. Follow-up of about 4.7 years is too short to judge long-term colorectal prevention."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C14": "against",
+          "C12": "for"
+        }
+      },
+      {
+        "id": "E14",
+        "text": "The trial population was older and had limited use of aspirin before the trial. The aspirin arm was 9525 participants and the placebo arm 9589. 11% had used aspirin regularly before entry. Only 3% were aged 65 to 69. Average adherence to study medication was about 73% in the aspirin arm. The results apply mainly to those aged 70 and over, and adherence dilutes the effect estimates.",
+        "kind": "tangible",
+        "source_id": "S2",
+        "quote": "Prior aspirin use was low (11.0%) and balanced across groups ... on average 72.7% for the aspirin group and 74.5% for the placebo group.",
+        "location": "Results, Participants; Table 1",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "strong",
+          "force": "moderate",
+          "credibility_notes": ""
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {
+          "unusable": "Describes ASPREE's population and adherence for directness questions only. It is not a premise."
+        },
+        "bears_on": {
+          "C7": "neutral",
+          "C15": "neutral",
+          "C3": "neutral"
+        }
+      },
+      {
+        "id": "E15",
+        "text": "Among ASPREE participants (median 4.7 years, mostly aged 70+), solid-tumor cancers followed by death were more frequent with aspirin: 5.9 vs 4.4 per 1000 person-years, HR 1.33. This supports an excess cancer-related mortality signal with aspirin in older adults.",
+        "kind": "statistical",
+        "source_id": "S2",
+        "quote": "the rate of solid tumor cancers with subsequent death was increased from 4.4 cases per 1000 person-years of observation among those randomly assigned to placebo to 5.9 cases per 1000 person-years among those receiving aspirin (HR = 1.33, 95% CI = 1.11 to 1.61)",
+        "location": "Results, Deaths",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "moderate",
+          "force": "moderate",
+          "credibility_notes": "Randomized, blinded adjudication of cancer and cause of death. This is a secondary, post hoc-style analysis with no multiplicity control, and the authors acknowledge possible chance findings."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C12": "for",
+          "C13": "against",
+          "C14": "against",
+          "C18": "for"
+        }
+      },
+      {
+        "id": "E16",
+        "text": "Aspirin showed no association with incidence in any anatomic cancer subtype, but more deaths from solid tumors occurred in the aspirin arm at all sites, including colorectal cancer (35 vs 20 deaths, HR 1.77).",
+        "kind": "statistical",
+        "source_id": "S2",
+        "quote": "There was no association of aspirin with the incidence of cancer in any anatomic subtype. However, the aspirin-treated group was observed to have more deaths from solid tumors ... including colorectal cancer deaths (35 vs 20, HR = 1.77, 95% CI = 1.02 to 3.06).",
+        "location": "Results, Deaths",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "moderate",
+          "force": "moderate",
+          "credibility_notes": "The colorectal CI barely excludes 1, it comes from a small number of events, and it is a subgroup analysis without multiplicity adjustment."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C12": "for",
+          "C14": "against",
+          "C13": "against"
+        }
+      },
+      {
+        "id": "E17",
+        "text": "Cancer deaths were higher with aspirin at stage 3 (HR 2.11) and stage 4 (HR 1.31) presentation, and the authors report that localized and metastatic presentations both showed increased progression to death.",
+        "kind": "statistical",
+        "source_id": "S2",
+        "quote": "Table 3 demonstrates a higher death rate among the aspirin group presenting with stage 3 (HR = 2.11, 95% CI = 1.03 to 4.33) or stage 4 disease (HR = 1.31, 95% CI = 1.04 to 1.64).",
+        "location": "Results, Deaths; Table 3",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "moderate",
+          "force": "moderate",
+          "credibility_notes": "Stage-stratified subgroup with wide CIs (stage 3) and no multiplicity control."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C12": "for",
+          "C14": "against"
+        }
+      },
+      {
+        "id": "E18",
+        "text": "The authors describe the absolute excess cancer mortality in ASPREE as small, about 1.5 extra cancer deaths per 1000 person-years. They also say the all-cause mortality excess was explained almost entirely by cancer deaths and was less likely to be a chance finding.",
+        "kind": "testimonial",
+        "source_id": "S2",
+        "quote": "the increased risk in ASPREE was small (an extra 1.5 deaths from cancer per 1000 person-years) in comparison with the risk of mortality from other causes.",
+        "location": "Discussion",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "moderate",
+          "force": "moderate",
+          "credibility_notes": "Authors' own interpretation. The all-cause mortality HR is in the earlier-part and 2018 paper, not here."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C12": "for",
+          "C13": "against",
+          "C18": "for",
+          "C1": "for"
+        }
+      },
+      {
+        "id": "E19",
+        "text": "Earlier pooled trials, with participants about 10 years younger, found no increase or decrease in cancer incidence or mortality during the intervention period. ASCEND found no increased cancer mortality at 7.4 years. Older long-term follow-up studies suggested delayed colorectal cancer benefit (20-year cancer mortality HR 0.65), so a later offset cannot be excluded.",
+        "kind": "testimonial",
+        "source_id": "S2",
+        "quote": "allocation to aspirin reduced the 20-year risk of cancer mortality (HR = 0.65, 95% CI = 0.48 to 0.88), and the benefit increased with treatment duration.",
+        "location": "Discussion",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "moderate",
+          "force": "weak",
+          "credibility_notes": "Secondhand summary of other studies. Those trials were in younger populations and were mostly not designed to test this question."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C14": "for",
+          "C13": "for",
+          "C12": "against"
+        }
+      },
+      {
+        "id": "E20",
+        "text": "The increase in cancer mortality was not significantly modified by age, sex or malignancy risk factors, although a non-significant trend toward higher cancer mortality with age was noted. Power for subgroups and specific cancer types was limited.",
+        "kind": "statistical",
+        "source_id": "S2",
+        "quote": "an aspirin-associated non-statistically significant trend toward increasing cancer mortality, but not cancer incidence, was observed with age.",
+        "location": "Results, Subgroup Analyses; Figure 3",
+        "credentials": {
+          "relevance": "weak",
+          "credibility": "moderate",
+          "force": "weak",
+          "credibility_notes": "Underpowered subgroup analysis. It bears only indirectly on the question of effect modification."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C15": "neutral",
+          "C17": "for"
+        }
+      },
+      {
+        "id": "E21",
+        "text": "In ASPREE participants (mostly aged 70+, median follow-up 4.7 years), daily low-dose aspirin was associated with a higher risk of incident solid cancers presenting at an advanced stage. This is the authors' own conclusion. The part provides no numbers.",
+        "kind": "testimonial",
+        "source_id": "S2",
+        "quote": "daily low-dose aspirin was associated with an increased risk of incident solid cancers presenting at an advanced stage.",
+        "location": "Discussion/Conclusion paragraph (start of part 4)",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "moderate",
+          "force": "moderate",
+          "credibility_notes": "This is a summary statement with no effect sizes in this part. Cancer was a secondary outcome, so multiplicity applies, and the finding is not a prespecified confirmatory result."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C12": "for",
+          "C13": "against",
+          "C14": "against",
+          "C1": "for"
+        }
+      },
+      {
+        "id": "E22",
+        "text": "Cancer mortality was higher with aspirin for both localized and advanced cancers. The authors suggest a possible adverse effect on cancer evolution in older adults. This is consistent with the excess cancer deaths behind the all-cause mortality signal.",
+        "kind": "testimonial",
+        "source_id": "S2",
+        "quote": "Mortality from both localized and advanced cancers was higher in those taking aspirin, suggesting a possible adverse effect of aspirin on cancer evolution in older adults.",
+        "location": "Discussion/Conclusion paragraph (start of part 4)",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "moderate",
+          "force": "moderate",
+          "credibility_notes": "The mechanism is speculative ('suggesting', 'possible'). The effect sizes are in earlier parts, not here."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {
+          "unusable": "Speculative mechanism statement that restates the cancer-death excess already used."
+        },
+        "bears_on": {
+          "C12": "for",
+          "C13": "against",
+          "C14": "against"
+        }
+      },
+      {
+        "id": "E23",
+        "text": "The authors say the cohort is still being followed for a possible delayed reduction in cancer incidence or mortality. A long-term benefit offsetting the harm is therefore not excluded and is untested at 4.7 years. The authors also suggest the adverse impact may be specific to this age group.",
+        "kind": "testimonial",
+        "source_id": "S2",
+        "quote": "The cohort continues to be followed to explore the possibility of a delayed reduction in cancer incidence and/or mortality that may emerge with longer-term observation.",
+        "location": "Discussion/Conclusion paragraph (start of part 4)",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "moderate",
+          "force": "weak",
+          "credibility_notes": "This is a statement of future intent and a hypothesis, not data. The age-specificity claim rests on external molecular literature."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {
+          "unusable": "Statement of future intent, not data."
+        },
+        "bears_on": {
+          "C14": "neutral",
+          "C13": "neutral"
+        }
+      },
+      {
+        "id": "E24",
+        "text": "ASPREE found no effect of 100 mg/day aspirin on disability-free survival (death, dementia, or persistent physical disability) over a median 4.7 years in healthy adults aged 70+ (65+ for US Black and Hispanic participants).",
+        "kind": "statistical",
+        "source_id": "S3",
+        "quote": "21.5 events per 1000 person-years in the aspirin group and 21.2 per 1000 person-years in the placebo group (hazard ratio, 1.01; 95% confidence interval [CI], 0.92 to 1.11; P=0.79)",
+        "location": "Abstract, Results",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "strong",
+          "force": "strong",
+          "credibility_notes": ""
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C12": "for",
+          "C13": "for",
+          "C5": "neutral"
+        }
+      },
+      {
+        "id": "E25",
+        "text": "Major hemorrhage was significantly higher with aspirin than placebo in older adults (3.8% vs 2.8%, HR 1.38), which is about 10 extra major bleeds per 1,000 over roughly 4.7 years.",
+        "kind": "statistical",
+        "source_id": "S3",
+        "quote": "The rate of major hemorrhage was higher in the aspirin group than in the placebo group (3.8% vs. 2.8%; hazard ratio, 1.38; 95% CI, 1.18 to 1.62; P<0.001).",
+        "location": "Abstract, Results",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "strong",
+          "force": "strong",
+          "credibility_notes": ""
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C9": "for",
+          "C11": "against",
+          "C1": "for",
+          "C2": "against"
+        }
+      },
+      {
+        "id": "E26",
+        "text": "All-cause death rate was numerically higher with aspirin (12.7 vs 11.1 per 1000 person-years), but the abstract calls the differences for individual secondary endpoints not substantial. No HR or CI is given here, and the cancer-death breakdown is absent.",
+        "kind": "statistical",
+        "source_id": "S3",
+        "quote": "death from any cause (12.7 events per 1000 person-years in the aspirin group and 11.1 events per 1000 person-years in the placebo group)",
+        "location": "Abstract, Results",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "strong",
+          "force": "moderate",
+          "credibility_notes": "The abstract gives no CI for mortality and does not report cancer deaths, so it only partly supports the C12 mortality claim."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C12": "for",
+          "C13": "against"
+        }
+      },
+      {
+        "id": "E27",
+        "text": "Adherence was only about 62-64% in the final year, and the trial stopped early for futility on the primary end point. Both limit the effect that can be seen and the generalisability of the findings.",
+        "kind": "tangible",
+        "source_id": "S3",
+        "quote": "The rate of adherence to the assigned intervention was 62.1% in the aspirin group and 64.1% in the placebo group in the final year of trial participation.",
+        "location": "Abstract, Results",
+        "credentials": {
+          "relevance": "weak",
+          "credibility": "strong",
+          "force": "weak",
+          "credibility_notes": "Bears on interpretation only. The source does not give a CV composite HR, so it does not address C7 or C8."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {
+          "unusable": "Reports adherence and early futility stop for the disability-free survival primary endpoint; it gives no CV composite estimate, so it bears on none of the claims beyond interpretive caveats."
+        },
+        "bears_on": {
+          "C7": "neutral",
+          "C8": "neutral"
+        }
+      },
+      {
+        "id": "E28",
+        "text": "The USPSTF recommends against initiating low-dose aspirin for primary prevention of CVD in adults 60 or older, Grade D. This directly states the 2022 guideline position on the question.",
+        "kind": "testimonial",
+        "source_id": "S4",
+        "quote": "The USPSTF recommends against initiating low-dose aspirin use for the primary prevention of CVD in adults 60 years or older.",
+        "location": "Recommendation Summary table",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "strong",
+          "force": "moderate",
+          "credibility_notes": "A guideline is a judgement built on evidence, not a trial result. Its force for the net-harm question comes from the reasoning behind it, which is not in this part."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C21": "for",
+          "C22": "against",
+          "C1": "for",
+          "C2": "against",
+          "C18": "for"
+        }
+      },
+      {
+        "id": "E29",
+        "text": "The USPSTF concluded with moderate certainty that initiating aspirin in adults 60+ has no net benefit. The statement does not say whether net balance is zero or negative, and gives no per-1,000 figures in this part.",
+        "kind": "testimonial",
+        "source_id": "S4",
+        "quote": "The USPSTF concludes with moderate certainty that initiating aspirin use for the primary prevention of CVD events in adults 60 years or older has no net benefit.",
+        "location": "USPSTF Assessment of Magnitude of Net Benefit",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "strong",
+          "force": "moderate",
+          "credibility_notes": "The conclusion is qualitative. The absolute event numbers and the weighting (QALY-based modelling) are not in this part, so it cannot settle the size or sign of the balance."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C1": "for",
+          "C4": "for",
+          "C2": "against",
+          "C3": "for",
+          "C18": "for",
+          "C20": "neutral"
+        }
+      },
+      {
+        "id": "E30",
+        "text": "For adults 40-59 with 10-year CVD risk of 10% or more, the net benefit is small, and the benefit is greater at higher CVD risk (>15% or >20%). People not at increased bleeding risk are more likely to benefit. This supports risk and bleeding-risk heterogeneity, but it is about under-60s and does not show net benefit in a 60+ subgroup.",
+        "kind": "testimonial",
+        "source_id": "S4",
+        "quote": "The benefits of initiating aspirin use are greater for individuals at higher risk for CVD events (eg, those with >15% or >20% 10-year CVD risk).",
+        "location": "Recommendation Summary table; Implementation",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "strong",
+          "force": "moderate",
+          "credibility_notes": "The 40-59 Grade C applies to a different age band. The statement gives no 60+ subgroup net benefit."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C15": "for",
+          "C3": "for",
+          "C16": "neutral",
+          "C17": "against"
+        }
+      },
+      {
+        "id": "E31",
+        "text": "Bleeding risk (GI bleeding, intracranial hemorrhage, hemorrhagic stroke), with or without aspirin, rises with older age. Other risk factors are male sex, diabetes, GI disease, liver disease, smoking, hypertension, and NSAID, steroid or anticoagulant use. Net benefits generally shrink with age because of bleeding, and modelling suggests considering stopping around age 75.",
+        "kind": "testimonial",
+        "source_id": "S4",
+        "quote": "The net benefits, however, generally become progressively smaller with advancing age because of an increased risk for bleeding, and modeling data suggest that it may be reasonable to consider stopping aspirin use around age 75 years.",
+        "location": "Assessment of Risk: Bleeding Risk; Stopping Age",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "moderate",
+          "force": "moderate",
+          "credibility_notes": "The modelling is cited but not shown in this part, and the statement gives no quantified age-specific bleeding figures."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C15": "for",
+          "C9": "for",
+          "C3": "for",
+          "C17": "against"
+        }
+      },
+      {
+        "id": "E32",
+        "text": "The 2022 recommendation shifted from the 2016 position, which favoured initiation at 50-59 with an individual decision at 60-69. The change rested on new trial evidence, updated analyses and WHS follow-up. The USPSTF also concluded the evidence is inadequate that aspirin reduces colorectal cancer incidence or mortality, which bears on the cancer offset.",
+        "kind": "testimonial",
+        "source_id": "S4",
+        "quote": "the USPSTF concluded that the evidence is inadequate that low-dose aspirin use reduces CRC incidence or mortality.",
+        "location": "Other Related USPSTF Recommendations",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "strong",
+          "force": "moderate",
+          "credibility_notes": "'Inadequate evidence' means the case for a colorectal cancer benefit is unproven. It is not evidence of no effect."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C14": "against",
+          "C21": "for"
+        }
+      },
+      {
+        "id": "E33",
+        "text": "The recommendation applies to adults without CVD who are not at increased bleeding risk, yet it still advises against initiation at 60+. A no-net-benefit conclusion even in a population selected as low bleeding risk weakens any claim of net benefit in a 60+ low-bleeding-risk subgroup.",
+        "kind": "testimonial",
+        "source_id": "S4",
+        "quote": "adults 40 years or older without signs or symptoms of CVD or known CVD ... who are not at increased risk for bleeding",
+        "location": "Patient Population Under Consideration",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "moderate",
+          "force": "moderate",
+          "credibility_notes": "This is an inference from the stated applicability. The statement does not report a separate low-bleeding-risk 60+ analysis in this part."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {
+          "unusable": "Inference from the guideline's stated applicability, not a reported subgroup analysis. It is weaker than the other evidence on the same point."
+        },
+        "bears_on": {
+          "C3": "for",
+          "C16": "against"
+        }
+      },
+      {
+        "id": "E34",
+        "text": "Pooled low-dose aspirin trials show a statistically significant reduction in nonfatal MI (Peto OR 0.88, 95% CI 0.80-0.96; 11 trials, n=134,470). Nonfatal ischemic stroke is reduced at the margin of significance (Peto OR 0.88, 0.78-1.00; 5 trials, n=54,947). The text gives relative effects only, with no absolute events per 1,000.",
+        "kind": "statistical",
+        "source_id": "S4",
+        "quote": "low-dose aspirin use was associated with a statistically significant decreased risk of nonfatal myocardial infarction (Peto odds ratio [OR], 0.88 [95% CI, 0.80-0.96])",
+        "location": "Benefits of Preventive Medication, paras 3-4",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "strong",
+          "force": "moderate",
+          "credibility_notes": "The stroke interval touches 1.0 (P=.046). Absolute differences are not given in this passage, which limits force for the per-1,000 test."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C6": "for",
+          "C8": "against",
+          "C2": "for"
+        }
+      },
+      {
+        "id": "E35",
+        "text": "Pooled low-dose aspirin analyses found no significant effect on fatal MI, fatal stroke, cardiovascular mortality or all-cause mortality, at 3.6 to 10.1 years of follow-up.",
+        "kind": "statistical",
+        "source_id": "S4",
+        "quote": "low-dose aspirin use was not associated with a statistically significant effect on fatal myocardial infarction, fatal stroke, cardiovascular mortality, or all-cause mortality (at 3.6 to 10.1 years of follow-up)",
+        "location": "Benefits of Preventive Medication, para 4",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "strong",
+          "force": "moderate",
+          "credibility_notes": "Pooled across all ages and with few fatal events, so power is limited. No estimates are quoted."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C6": "against",
+          "C8": "neutral",
+          "C13": "for",
+          "C12": "against"
+        }
+      },
+      {
+        "id": "E36",
+        "text": "Relative benefit is not clearly modified by baseline CVD risk, but absolute benefit is greater at higher risk. Most trials with age subanalyses found no significant difference in relative effect by age.",
+        "kind": "testimonial",
+        "source_id": "S4",
+        "quote": "the absolute magnitude of the benefit is greater in persons at higher CVD risk.",
+        "location": "Benefits of Preventive Medication, paras 4-5",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "moderate",
+          "force": "moderate",
+          "credibility_notes": "This is the Task Force's summary of the subgroup analyses, without interaction estimates. Subgroup analyses are typically underpowered."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C3": "for",
+          "C15": "for",
+          "C17": "against"
+        }
+      },
+      {
+        "id": "E37",
+        "text": "For low-dose aspirin, pooled major GI bleeding is increased by 58% (Peto OR 1.58, 1.38-1.80; 10 trials, n=119,130). Intracranial bleeds are also increased (Peto OR 1.31, 1.11-1.54; 11 trials, n=134,470). Fatal hemorrhagic stroke was not significantly increased.",
+        "kind": "statistical",
+        "source_id": "S4",
+        "quote": "a 58% increase in major gastrointestinal bleeding (Peto OR, 1.58 [95% CI, 1.38-1.80]). ... increase in intracranial bleeds ... (Peto OR, 1.31 [95% CI, 1.11-1.54])",
+        "location": "Harms of Preventive Medication, para 2",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "strong",
+          "force": "strong",
+          "credibility_notes": "Pooled randomized data, all ages. No absolute excess per 1,000 is given in this passage, so the intracranial excess of 0.5 per 1,000 cannot be checked."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C9": "for",
+          "C10": "for",
+          "C11": "against",
+          "C1": "for"
+        }
+      },
+      {
+        "id": "E38",
+        "text": "Relative bleeding risk does not appear to differ by age, sex, diabetes, CVD risk or race, but absolute bleeding incidence rises with age, more so from 60 on. Bleeding excess emerges soon after starting aspirin, which is relevant to initiation.",
+        "kind": "testimonial",
+        "source_id": "S4",
+        "quote": "the absolute incidence of bleeding, and thus the magnitude of bleeding harm, increases with age, and more so in adults 60 years or older.",
+        "location": "Harms of Preventive Medication, para 3",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "moderate",
+          "force": "moderate",
+          "credibility_notes": "A summary of subgroup findings without numbers in this passage."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C9": "for",
+          "C15": "for",
+          "C16": "against",
+          "C17": "against"
+        }
+      },
+      {
+        "id": "E39",
+        "text": "The USPSTF microsimulation, which used the pooled trial estimates, found that initiating aspirin at 60-69 gives QALY changes from slightly negative to slightly positive and generally negative life-years. At 70-79 it gives loss of both QALYs and life-years at all risk levels up to 20% 10-year risk. The Task Force concluded there is no net benefit from initiation at 60 or older.",
+        "kind": "statistical",
+        "source_id": "S4",
+        "quote": "Initiation of aspirin use in persons aged 60 to 69 years results in quality-adjusted life-years gained that range from slightly negative to slightly positive ... initiation of aspirin use has no net benefit in persons 60 years or older.",
+        "location": "Estimate of Magnitude of Net Benefit, para 3",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "moderate",
+          "force": "strong",
+          "credibility_notes": "Modelled lifetime outcomes depend on assumptions: no CVD mortality effect, no CRC incidence effect. The outcomes are QALYs and life-years rather than events per 1,000 over 5 years."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C1": "for",
+          "C2": "against",
+          "C3": "for",
+          "C4": "for",
+          "C16": "against",
+          "C15": "for",
+          "C18": "for",
+          "C19": "against",
+          "C20": "neutral",
+          "C21": "for"
+        }
+      },
+      {
+        "id": "E40",
+        "text": "ASPREE reported higher colorectal cancer mortality on aspirin at 4.7 years (Peto OR 1.74, 1.02-2.95). The Task Force treats this as not firm evidence of harm, but it casts doubt on a CRC benefit. Longer-term observational follow-up of WHS and the Thrombosis Prevention Trial suggested lower CRC mortality, though the WHS effect was attenuated. The WHS CRC incidence reduction at 17.5 years did not persist to 26 years.",
+        "kind": "statistical",
+        "source_id": "S4",
+        "quote": "ASPREE reported that aspirin use was associated with statistically significantly higher CRC mortality at 4.7 years of follow-up (Peto OR, 1.74 [95% CI, 1.02-2.95])",
+        "location": "Benefits of Preventive Medication, paras 6-8",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "moderate",
+          "force": "moderate",
+          "credibility_notes": "The ASPREE CRC death finding has a wide CI and few events. Post-trial follow-up is subject to bias, and the long-term evidence is dominated by a women-only trial."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C12": "for",
+          "C14": "against",
+          "C13": "against"
+        }
+      },
+      {
+        "id": "E41",
+        "text": "The USPSTF microsimulation assumed no aspirin effect on CRC incidence in its base case because evidence was insufficient. Four primary-prevention trials found no association with CRC incidence up to about 10 years.",
+        "kind": "statistical",
+        "source_id": "S4",
+        "quote": "Four studies conducted in primary CVD prevention populations found no association between aspirin use and CRC incidence at up to approximately 10 years of follow-up.",
+        "location": "Benefits of Preventive Medication, para 6; Estimate of Magnitude of Net Benefit, para 1",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "moderate",
+          "force": "weak",
+          "credibility_notes": "Summary without effect sizes. Follow-up is short relative to the latency of any CRC effect."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C14": "against"
+        }
+      },
+      {
+        "id": "E42",
+        "text": "ACC/AHA guidance (2019, cited as ref 35) says low-dose aspirin (75-100 mg/d) might be considered for primary prevention only in select adults aged 40-70 at higher CVD risk and not at increased bleeding risk. It is not recommended routinely in adults over 70 or in anyone at increased bleeding risk. This is a secondhand report of another guideline's position.",
+        "kind": "testimonial",
+        "source_id": "S4",
+        "quote": "Low-dose aspirin use is not recommended on a routine basis for primary prevention of CVD in adults older than 70 years or among adults of any age who are at increased risk of bleeding.",
+        "location": "Other considerations / recommendations of others, paragraph after 'More research is needed'",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "moderate",
+          "force": "moderate",
+          "credibility_notes": "The USPSTF summarises the ACC/AHA position rather than the original guideline. It gives no rationale or numbers in this passage. The summary is brief but consistent with the cited guideline."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C21": "for",
+          "C22": "against",
+          "C3": "for",
+          "C16": "for"
+        }
+      },
+      {
+        "id": "E43",
+        "text": "The USPSTF lists as a research gap the GI bleeding risk of aspirin in populations representative of the US primary prevention population. It also lists long-term (10-20 year) colorectal cancer effects in primary prevention. This signals uncertainty in the bleeding estimates and in any cancer offset.",
+        "kind": "testimonial",
+        "source_id": "S4",
+        "quote": "The gastrointestinal bleeding risk associated with aspirin use in populations representative of the US primary CVD prevention population.",
+        "location": "Research needs list, 'More research is needed' section",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "moderate",
+          "force": "weak",
+          "credibility_notes": "This is a statement about evidence gaps, not an estimate. It does not give effect sizes."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {
+          "unusable": "Lists research gaps and gives no estimate."
+        },
+        "bears_on": {
+          "C14": "neutral",
+          "C9": "neutral",
+          "C5": "neutral"
+        }
+      },
+      {
+        "id": "E44",
+        "text": "The USPSTF says clinicians weighing continuation or discontinuation in existing users should consider age, CVD risk, bleeding risk and preferences, and that people should not stop aspirin without consulting a clinician. The recommendation applies only to people without CVD or other indications. This bears on how much the guideline speaks to initiation versus continuation.",
+        "kind": "testimonial",
+        "source_id": "S4",
+        "quote": "For persons who are deciding with their clinician whether to continue or discontinue taking aspirin for primary prevention, clinicians may want to consider that person's age, level of CVD risk and bleeding risk, preferences",
+        "location": "Response to Public Comment, first paragraph",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "strong",
+          "force": "weak",
+          "credibility_notes": "This is a statement of the guideline's own scope. It adds no event data."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {
+          "unusable": "Scope statement on continuation versus initiation, with no event data."
+        },
+        "bears_on": {
+          "C15": "neutral",
+          "C5": "neutral"
+        }
+      },
+      {
+        "id": "E45",
+        "text": "In response to public comment the USPSTF added shared decision-making factors for initiation and clarified how it assessed the precision of CVD risk assessment. This part of the page gives no absolute event counts per 1,000, pooled relative risks or bleeding figures. It does not answer test T2 for MI, stroke, bleeding or ICH.",
+        "kind": "missing",
+        "source_id": "S4",
+        "quote": "the USPSTF clarified language about its assessment of the precision of CVD risk assessment and added information on factors that can be considered by clinicians and patients as they engage in shared decision-making about the initiation of aspirin use.",
+        "location": "Response to Public Comment, second paragraph",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "strong",
+          "force": "weak",
+          "credibility_notes": "The page segment simply lacks the quantitative data. Those data may appear in earlier parts, which were already extracted, or in the AHRQ evidence review (ref 14)."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {
+          "unusable": "Notes the absence of quantitative data in the passage and gives no evidence on the claims."
+        },
+        "bears_on": {
+          "C5": "neutral",
+          "C16": "neutral"
+        }
+      },
+      {
+        "id": "E46",
+        "text": "The USPSTF concludes with moderate certainty that initiating low-dose aspirin for primary prevention in adults 60 or older has no net benefit. This is a guideline position on the question, though the table does not state the grade here.",
+        "kind": "testimonial",
+        "source_id": "S4",
+        "quote": "The USPSTF concludes with moderate certainty that initiating aspirin use for the primary prevention of CVD events in adults 60 years or older has no net benefit.",
+        "location": "Rationale/Assessment table, USPSTF assessment row",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "moderate",
+          "force": "moderate",
+          "credibility_notes": "This is a synthesized judgement based on a review and a model, and the numbers behind it are not in this part. It is not independent event data. The grade (D) is not shown in this excerpt."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C21": "for",
+          "C22": "against",
+          "C1": "for",
+          "C4": "for",
+          "C2": "against",
+          "C18": "for"
+        }
+      },
+      {
+        "id": "E47",
+        "text": "The USPSTF finds adequate evidence that aspirin harms (GI bleeding, intracranial bleeding, hemorrhagic stroke) are small overall but larger in older groups, particularly over 60. This supports age-dependent bleeding excess but gives no absolute figures.",
+        "kind": "testimonial",
+        "source_id": "S4",
+        "quote": "the magnitude of the harms is small overall but increases in older age groups, particularly in adults older than 60 years.",
+        "location": "Rationale/Assessment table, Harms of aspirin use row",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "moderate",
+          "force": "moderate",
+          "credibility_notes": "The statement is qualitative, with no per-1,000 numbers or confidence intervals."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C9": "for",
+          "C10": "for",
+          "C11": "against",
+          "C15": "for"
+        }
+      },
+      {
+        "id": "E48",
+        "text": "The USPSTF finds a small benefit for cardiovascular events (nonfatal MI and stroke) in adults 40 or older at increased CVD risk. The benefit grows with 10-year risk, and lifetime benefit is greater when aspirin is started younger. This supports risk gradient and age dependence but not a 60+ subgroup benefit.",
+        "kind": "testimonial",
+        "source_id": "S4",
+        "quote": "the absolute magnitude of benefit increases with increasing 10-year CVD risk and that the magnitude of the lifetime benefits is greater when aspirin is initiated at a younger age.",
+        "location": "Rationale/Assessment table, Benefits of aspirin use row",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "moderate",
+          "force": "moderate",
+          "credibility_notes": "The statement is qualitative. It does not separate out the 60+ band or give absolute events per 1,000."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C6": "for",
+          "C8": "against",
+          "C15": "for",
+          "C16": "neutral",
+          "C3": "for"
+        }
+      },
+      {
+        "id": "E49",
+        "text": "The USPSTF concludes with moderate certainty that aspirin in adults 40-59 with 10% or greater 10-year CVD risk has a small net benefit. Net benefit therefore exists in a younger, higher-risk group but not at 60 and over.",
+        "kind": "testimonial",
+        "source_id": "S4",
+        "quote": "aspirin use for the primary prevention of CVD events in adults aged 40 to 59 years who have a 10% or greater 10-year CVD risk has a small net benefit.",
+        "location": "Rationale/Assessment table, USPSTF assessment row",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "moderate",
+          "force": "moderate",
+          "credibility_notes": "This applies to the 40-59 age band, which is outside the 60+ scope. It bears on age-band heterogeneity only indirectly."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {
+          "unusable": "Concerns the 40-59 age band, outside the 60+ scope."
+        },
+        "bears_on": {
+          "C16": "against",
+          "C15": "for",
+          "C3": "neutral",
+          "C17": "against"
+        }
+      },
+      {
+        "id": "E50",
+        "text": "A pooled meta-analysis of older primary prevention trials plus ARRIVE, ASCEND and ASPREE gave NNT 265 for the composite CV outcome (CV death, nonfatal MI, nonfatal stroke) and NNH 210 for major bleeding. This is roughly 3.8 prevented events against 4.8 bleeds per 1,000, so bleeding at least equals benefit. Follow-up and age strata are not given, and the figures are relayed secondhand.",
+        "kind": "statistical",
+        "source_id": "S5",
+        "quote": "number needed to treat of 265 to prevent a composite cardiovascular outcome (cardiovascular mortality, nonfatal myocardial infarction, and nonfatal stroke) and number needed to harm of 210 to prevent a major bleeding event",
+        "location": "Paragraph 7 (meta-analysis)",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "moderate",
+          "force": "moderate",
+          "credibility_notes": "Secondhand report of a pooled analysis. The source gives no CIs, follow-up or age-specific data, and the text says 'prevent' a bleed where it means 'cause'. The population is not restricted to age 60+."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C1": "for",
+          "C2": "against",
+          "C4": "against",
+          "C6": "for",
+          "C8": "against",
+          "C9": "for",
+          "C11": "against",
+          "C18": "for"
+        }
+      },
+      {
+        "id": "E51",
+        "text": "In pooled studies with estimated 10-year CVD risk above 10%, benefit and harm were similarly balanced (NNT 196 vs NNH 152), so higher baseline risk did not produce net benefit. This is about 5.1 events prevented against 6.6 bleeds per 1,000.",
+        "kind": "statistical",
+        "source_id": "S5",
+        "quote": "Studies with an estimated population 10-year CVD risk of greater than 10% experienced a similar balance of benefits and harms (number needed to treat = 196; number needed to harm = 152).",
+        "location": "Paragraph 7",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "moderate",
+          "force": "moderate",
+          "credibility_notes": "Secondhand and study-level stratification only. No CIs or age restriction are given."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C3": "for",
+          "C15": "for",
+          "C16": "against",
+          "C1": "for"
+        }
+      },
+      {
+        "id": "E52",
+        "text": "ARRIVE (age 55+, no diabetes, median 5 years, moderate risk) found no difference in the composite CV outcome. GI bleeding was about 1% with aspirin vs 0.5% with placebo (HR 2.11, 95% CI 1.36-3.28), roughly 5 extra per 1,000.",
+        "kind": "statistical",
+        "source_id": "S5",
+        "quote": "no difference occurred between the groups in a composite outcome... 1% of the aspirin group experienced gastrointestinal bleeding compared with only 0.5% of the placebo group (hazard ratio = 2.11; 95% confidence interval, 1.36 to 3.28)",
+        "location": "Paragraph 4 (ARRIVE)",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "moderate",
+          "force": "moderate",
+          "credibility_notes": "Secondary summary of a primary trial. ARRIVE enrolled adults 55+, not only 60+, and no 60+ subgroup is given."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C8": "for",
+          "C9": "for",
+          "C11": "against",
+          "C1": "for",
+          "C4": "neutral"
+        }
+      },
+      {
+        "id": "E53",
+        "text": "ASCEND (diabetes, 7.4 years): aspirin gave fewer serious vascular events (NNT 91), offset by more major bleeds (NNH 112), and the authors concluded there was no net benefit. This is a diabetes subgroup, not an age 60+ group.",
+        "kind": "statistical",
+        "source_id": "S5",
+        "quote": "number needed to treat of 91 to prevent a vascular event and number needed to harm of 112 to cause a major bleeding event, from which they concluded that aspirin provided no net benefit.",
+        "location": "Paragraph 5 (ASCEND)",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "moderate",
+          "force": "moderate",
+          "credibility_notes": "Secondhand. Population is adults 40+ with diabetes, so applicability to 60+ is indirect."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C16": "against",
+          "C4": "for",
+          "C6": "for",
+          "C9": "for",
+          "C1": "for"
+        }
+      },
+      {
+        "id": "E54",
+        "text": "ASPREE (age 70+, 5 years): no difference in disability-free survival or CVD events, with significantly more major hemorrhage and higher all-cause mortality on aspirin. The mortality increase is reported without a hazard ratio here.",
+        "kind": "testimonial",
+        "source_id": "S5",
+        "quote": "the aspirin group had a significantly higher rate of major hemorrhage and higher all-cause mortality.",
+        "location": "Paragraph 6 (ASPREE)",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "moderate",
+          "force": "weak",
+          "credibility_notes": "No effect sizes are given. The primary ASPREE reports (S1-S3) are better sources for these figures."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C7": "for",
+          "C12": "for",
+          "C13": "against",
+          "C11": "against"
+        }
+      },
+      {
+        "id": "E55",
+        "text": "The authors conclude that for most patients the risks of primary-prevention aspirin outweigh benefits, and that clinicians should deprescribe it. Possible benefit remains at very high CVD risk (20% or more over 10 years) or in statin-intolerant patients. They note the 2016 USPSTF gave only a weak recommendation for ages 60-69 and found insufficient evidence above 69.",
+        "kind": "testimonial",
+        "source_id": "S5",
+        "quote": "the data otherwise suggest that the risks of low-dose aspirin therapy for primary prevention outweigh any potential benefits. For most patients, we should be deprescribing aspirin for primary prevention of CVD.",
+        "location": "Paragraph 8; Paragraph 2 (2016 USPSTF)",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "weak",
+          "force": "weak",
+          "credibility_notes": "Editorial opinion that advocates a position. It is useful as a record of the 2016 guideline and of 2019 expert opinion, not as independent evidence. It predates the USPSTF 2022 recommendation."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C1": "for",
+          "C3": "for",
+          "C16": "against",
+          "C21": "neutral",
+          "C22": "against"
+        }
+      },
+      {
+        "id": "E56",
+        "text": "The ASPREE absolute excess of major hemorrhage with aspirin over a median of about 4.7 years, per 1,000 treated, is about: 10 per 1,000",
+        "kind": "model_output",
+        "source_id": null,
+        "quote": "(asp - pla) * 10",
+        "location": "computed",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "strong",
+          "force": "strong",
+          "credibility_notes": "computed from E25, E25"
+        },
+        "independence_group": "title:effectofaspirinondisabilityfreesurvivalinthehealthy",
+        "origin": "instrument",
+        "provenance": {
+          "instrument": "arithmetic/1",
+          "name": "ASPREE excess major hemorrhage per 1,000 over about 4.7 years",
+          "expression": "(asp - pla) * 10",
+          "inputs": "asp=3.8 from E25 (ASPREE major hemorrhage cumulative incidence, aspirin arm, %, median 4.7 y); pla=2.8 from E25 (ASPREE major hemorrhage cumulative incidence, placebo arm, %, median 4.7 y)",
+          "result": "10.0",
+          "round": "1"
+        },
+        "bears_on": {
+          "C9": "for",
+          "C11": "against",
+          "C1": "for"
+        }
+      },
+      {
+        "id": "E57",
+        "text": "The ARRIVE absolute excess of GI bleeding with aspirin over a median of about 5 years, per 1,000 treated, is about: 5 per 1,000",
+        "kind": "model_output",
+        "source_id": null,
+        "quote": "(asp - pla) * 10",
+        "location": "computed",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "moderate",
+          "force": "moderate",
+          "credibility_notes": "computed from E52, E52"
+        },
+        "independence_group": "title:rethinkingaspirinfortheprimarypreventionof",
+        "origin": "instrument",
+        "provenance": {
+          "instrument": "arithmetic/1",
+          "name": "ARRIVE excess GI bleeding per 1,000 over about 5 years",
+          "expression": "(asp - pla) * 10",
+          "inputs": "asp=1 from E52 (ARRIVE GI bleeding, aspirin arm, %, median 5 y); pla=0.5 from E52 (ARRIVE GI bleeding, placebo arm, %, median 5 y)",
+          "result": "5.0",
+          "round": "1"
+        },
+        "bears_on": {}
+      },
+      {
+        "id": "E58",
+        "text": "In higher-risk pooled studies, the excess of major bleeds over CV events prevented, per 1,000 treated and counting events equally, is about: 1.477 per 1,000",
+        "kind": "model_output",
+        "source_id": null,
+        "quote": "1000 / nnh - 1000 / nnt",
+        "location": "computed",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "moderate",
+          "force": "moderate",
+          "credibility_notes": "computed from E51, E51"
+        },
+        "independence_group": "title:rethinkingaspirinfortheprimarypreventionof",
+        "origin": "instrument",
+        "provenance": {
+          "instrument": "arithmetic/1",
+          "name": "NNT versus NNH net events per 1,000 at higher baseline risk",
+          "expression": "1000 / nnh - 1000 / nnt",
+          "inputs": "nnt=196 from E51 (number needed to treat to prevent one CV event, pooled studies with 10-year CVD risk above 10%); nnh=152 from E51 (number needed to harm for one major bleed, same pooled studies)",
+          "result": "1.4769065520945217",
+          "round": "1"
+        },
+        "bears_on": {
+          "C3": "for",
+          "C15": "for",
+          "C16": "against",
+          "C18": "for"
+        }
+      },
+      {
+        "id": "E59",
+        "text": "The ASPREE excess all-cause deaths with aspirin over a median of about 4.7 years, per 1,000 treated, is about: 7.52 per 1,000",
+        "kind": "model_output",
+        "source_id": null,
+        "quote": "(r_asp - r_pla) * 4.7",
+        "location": "computed",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "strong",
+          "force": "moderate",
+          "credibility_notes": "computed from E2, E2"
+        },
+        "independence_group": "title:effectofaspirinonallcausemortalityinthehealthyelderly",
+        "origin": "instrument",
+        "provenance": {
+          "instrument": "arithmetic/1",
+          "name": "ASPREE excess all-cause deaths per 1,000 over about 4.7 years",
+          "expression": "(r_asp - r_pla) * 4.7",
+          "inputs": "r_asp=12.7 from E2 (ASPREE all-cause death rate, aspirin arm, per 1000 person-years); r_pla=11.1 from E2 (ASPREE all-cause death rate, placebo arm, per 1000 person-years)",
+          "result": "7.519999999999999",
+          "round": "1"
+        },
+        "bears_on": {
+          "C12": "for",
+          "C13": "against",
+          "C18": "for",
+          "C2": "against"
+        }
+      }
+    ],
+    "sources": [
+      {
+        "id": "S1",
+        "url": "https://digitalcommons.library.tmc.edu/uthmed_docs/372/",
+        "title": "Effect of Aspirin On All-Cause Mortality In The Healthy Elderly",
+        "publisher": "New England Journal of Medicine (ASPREE investigators; McNeil et al.), repository record via UTHealth/TMC Digital Commons",
+        "date": "2018-10-18",
+        "fetched_at": "2026-11-10T02:10:43+00:00",
+        "kind": "primary",
+        "derived_from": null,
+        "derived_from_note": "",
+        "competence": "The ASPREE investigators ran the randomized trial and adjudicated deaths blind to assignment, so they have first-hand data on mortality and cause of death in 19,114 older adults. This record shows only the abstract, not the full text or tables.",
+        "incentives": "Trial investigators funded by the National Institute on Aging and others, with no obvious stake in the direction of the result. The authors themselves say the finding was unexpected and should be read with caution.",
+        "text_path": "sources\\S1.txt",
+        "query": "ASPREE all-cause mortality cancer death aspirin older adults McNeil Annals Internal Medicine 2018",
+        "read_fully": true
+      },
+      {
+        "id": "S2",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7936068/",
+        "title": "Effect of Aspirin on Cancer Incidence and Mortality in Older ...",
+        "publisher": "Journal of the National Cancer Institute (Oxford University Press); ASPREE Investigator Group, McNeil et al.; PMC open-access copy",
+        "date": "2020-08-11",
+        "fetched_at": "2026-11-10T02:10:55+00:00",
+        "kind": "primary",
+        "derived_from": null,
+        "derived_from_note": "",
+        "competence": "The ASPREE investigators ran the trial and adjudicated cancer endpoints from clinical records, so they have direct access to the randomized data. This is a prespecified secondary-endpoint analysis, not an independent re-analysis.",
+        "incentives": "The authors are the trial's own investigators and may want to explain the unexpected mortality finding. The trial was publicly funded (NCI/NIA/Australian bodies), and no commercial stake in aspirin is evident in this part. Funding statements fall outside this part.",
+        "text_path": "sources\\S2.txt",
+        "query": "ASPREE all-cause mortality cancer death aspirin older adults McNeil Annals Internal Medicine 2018",
+        "read_fully": true
+      },
+      {
+        "id": "S3",
+        "url": "https://www.healthpartners.com/knowledgeexchange/display/document-rn11758",
+        "title": "Effect of aspirin on disability-free survival in the healthy ...",
+        "publisher": "HealthPartners Knowledge Exchange (abstract record of the NEJM ASPREE disability-free survival paper, McNeil et al.)",
+        "date": "2018",
+        "fetched_at": "2026-11-10T02:11:49+00:00",
+        "kind": "primary",
+        "derived_from": null,
+        "derived_from_note": "",
+        "competence": "The text is the abstract of the ASPREE investigators' own report of the randomized trial, so it reports first-hand trial data (19,114 participants, median 4.7 years). It is an abstract only, so full tables and event counts are not shown.",
+        "incentives": "The host is a library/knowledge-exchange repository with no stake in the result. The trial was funded by the National Institute on Aging and others, and the investigators have an interest in the trial's findings but no evident interest in the direction of the result.",
+        "text_path": "sources\\S3.txt",
+        "query": "ASPREE disability-free survival aspirin 70 years hazard ratio",
+        "read_fully": true
+      },
+      {
+        "id": "S4",
+        "url": "https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/aspirin-to-prevent-cardiovascular-disease-preventive-medication",
+        "title": "Recommendation: Aspirin Use to Prevent Cardiovascular ...",
+        "publisher": "US Preventive Services Task Force (USPSTF)",
+        "date": "2022-04-26",
+        "fetched_at": "2026-11-10T02:12:02+00:00",
+        "kind": "unknown",
+        "derived_from": null,
+        "derived_from_note": "",
+        "competence": "The USPSTF is an independent expert panel that commissioned a systematic evidence review and a microsimulation model, so it is well placed to synthesise trial evidence and set guideline positions. This part reports conclusions and rationale, not the underlying data.",
+        "incentives": "As a guideline body it aims to give evidence-based, conflict-managed recommendations, and it states its recommendations are independent of the US government. It has no evident financial stake, but it has an institutional interest in defending its own revision of the 2016 position.",
+        "text_path": "sources\\S4.txt",
+        "query": "USPSTF 2022 aspirin primary prevention evidence report Guirguis-Blake JAMA major bleeding absolute risk",
+        "read_fully": true
+      },
+      {
+        "id": "S5",
+        "url": "https://www.aafp.org/afp/2019/0601/p670",
+        "title": "Rethinking Aspirin for the Primary Prevention of ...",
+        "publisher": "American Family Physician (AAFP), editorial by Lin and Middleton",
+        "date": "2019-06-01",
+        "fetched_at": "2026-11-10T02:13:34+00:00",
+        "kind": "secondary",
+        "derived_from": null,
+        "derived_from_note": "Meta-analysis cited as ref 16 (pooled primary prevention trials including ARRIVE, ASCEND and ASPREE); also ARRIVE, ASCEND and ASPREE trial reports",
+        "competence": "Physician-editors summarising ARRIVE, ASCEND, ASPREE, the 2016 USPSTF recommendation and a pooled meta-analysis (ref 16); they did no primary analysis, and the editorial predates the 2022 USPSTF update.",
+        "incentives": "An editorial advocating that USPSTF reassess and that family physicians deprescribe aspirin. This is a stated opinion, not a neutral summary. The text discloses no financial conflicts.",
+        "text_path": "sources\\S5.txt",
+        "query": "Zheng Roddick 2019 JAMA aspirin primary prevention meta-analysis number needed to treat harm",
+        "read_fully": true
+      }
+    ],
+    "arguments": [
+      {
+        "id": "A1",
+        "scheme": "study_result",
+        "premise_ids": [
+          "E25",
+          "E56",
+          "E24"
+        ],
+        "claim_id": "C1",
+        "attacks": null,
+        "cq": {
+          "design": {
+            "status": "answered",
+            "answer": "ASPREE was a randomized placebo-controlled trial, so it identifies the effect of initiating aspirin by intervention.",
+            "evidence_ids": [
+              "E24"
+            ]
+          },
+          "directness": {
+            "status": "answered",
+            "answer": "Participants were mainly aged 70+ with limited prior aspirin use, so the result applies to the older end of the 60+ band. Outcomes were major hemorrhage and disability-free survival, not a cardiovascular-event balance.",
+            "evidence_ids": [
+              "E14"
+            ]
+          },
+          "uncertainty": {
+            "status": "answered",
+            "answer": "Major hemorrhage was 3.8% vs 2.8%, HR 1.38 (95% CI 1.18-1.62). This is about 10 excess major bleeds per 1,000 over 4.7 years.",
+            "evidence_ids": [
+              "E25",
+              "E56"
+            ]
+          },
+          "reported": {
+            "status": "answered",
+            "answer": "The abstract states the figures directly.",
+            "evidence_ids": [
+              "E25"
+            ]
+          },
+          "bias": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          },
+          "consistency": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          },
+          "precision": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          }
+        },
+        "strength_override": null,
+        "origin": "proposer",
+        "note": "ASPREE shows a bleeding excess of about 10 per 1,000 and no disability-free survival gain. This supports net harm in the 70+ group, but it does not directly count prevented MI and stroke.",
+        "round": 1
+      },
+      {
+        "id": "A2",
+        "scheme": "study_result",
+        "premise_ids": [
+          "E2",
+          "E59",
+          "E18",
+          "E21"
+        ],
+        "claim_id": "C1",
+        "attacks": null,
+        "cq": {
+          "design": {
+            "status": "answered",
+            "answer": "Randomized trial. Mortality and cancer were secondary outcomes, so they are weaker than a primary endpoint.",
+            "evidence_ids": [
+              "E2"
+            ]
+          },
+          "directness": {
+            "status": "answered",
+            "answer": "Population is mainly 70+. All-cause mortality and cancer bear on net harm only as the scope allows.",
+            "evidence_ids": [
+              "E14"
+            ]
+          },
+          "uncertainty": {
+            "status": "answered",
+            "answer": "HR 1.14 (95% CI 1.01-1.29). The excess is about 7.5 deaths per 1,000 over 4.7 years, and the CI is borderline.",
+            "evidence_ids": [
+              "E2",
+              "E59"
+            ]
+          },
+          "reported": {
+            "status": "answered",
+            "answer": "The abstract states the figures. The authors attribute the excess largely to cancer deaths, about 1.5 per 1,000 person-years.",
+            "evidence_ids": [
+              "E2",
+              "E18"
+            ]
+          },
+          "bias": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          },
+          "consistency": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          },
+          "precision": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          }
+        },
+        "strength_override": null,
+        "origin": "proposer",
+        "note": "Mortality excess and advanced-cancer signal point the same way as net harm. The evidence is marginal and from secondary outcomes.",
+        "round": 1
+      },
+      {
+        "id": "A3",
+        "scheme": "statistical_generalization",
+        "premise_ids": [
+          "E37",
+          "E34",
+          "E50"
+        ],
+        "claim_id": "C1",
+        "attacks": null,
+        "cq": {
+          "representative": {
+            "status": "answered",
+            "answer": "Pooled trials cover all ages, not only 60+. Benefit is a relative reduction of 12% for MI and stroke, against a 58% increase in GI bleeding and 31% in intracranial bleeds. The pooled NNT of 265 vs NNH of 210 shows bleeding at least equal to benefit.",
+            "evidence_ids": [
+              "E34",
+              "E37",
+              "E50"
+            ]
+          },
+          "size": {
+            "status": "answered",
+            "answer": "Large pools (n=119,130 to 134,470) with CIs reported for the USPSTF figures. The E50 NNT/NNH figures give no CIs.",
+            "evidence_ids": [
+              "E37",
+              "E34"
+            ]
+          },
+          "measurement": {
+            "status": "answered",
+            "answer": "Outcomes were defined consistently across pooled randomized trials. The E50 composite is secondhand.",
+            "evidence_ids": [
+              "E50"
+            ]
+          },
+          "reference_class": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          },
+          "stability": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          }
+        },
+        "strength_override": null,
+        "origin": "proposer",
+        "note": "Roughly 3.8 prevented events against 4.8 bleeds per 1,000, with equal weights. The age restriction is missing.",
+        "round": 1
+      },
+      {
+        "id": "A4",
+        "scheme": "model_output",
+        "premise_ids": [
+          "E39",
+          "E29",
+          "E46"
+        ],
+        "claim_id": "C1",
+        "attacks": null,
+        "cq": {
+          "validated": {
+            "status": "answered",
+            "answer": "The USPSTF microsimulation covered ages 60-69 and 70-79. Validation details are not shown here.",
+            "evidence_ids": [
+              "E39"
+            ]
+          },
+          "inputs": {
+            "status": "answered",
+            "answer": "Inputs were the pooled trial estimates.",
+            "evidence_ids": [
+              "E39",
+              "E34",
+              "E37"
+            ]
+          },
+          "reproducible": {
+            "status": "defaulted",
+            "answer": "Only the summary of the run is available, not its parameters.",
+            "evidence_ids": []
+          },
+          "sensitivity": {
+            "status": "answered",
+            "answer": "At 70-79 QALYs and life-years are lost at all risk levels up to 20%. At 60-69 the result ranges from slightly negative to slightly positive.",
+            "evidence_ids": [
+              "E39"
+            ]
+          },
+          "structure": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          },
+          "idealisation": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          }
+        },
+        "strength_override": null,
+        "origin": "proposer",
+        "note": "The model supports no net benefit at 60+ and net loss at 70-79. It does not distinguish net harm from a zero balance in 60-69, so it supports C4 as well.",
+        "round": 1
+      },
+      {
+        "id": "A5",
+        "scheme": "document_record",
+        "premise_ids": [
+          "E28",
+          "E42",
+          "E55"
+        ],
+        "claim_id": "C1",
+        "attacks": null,
+        "cq": {
+          "authentic": {
+            "status": "answered",
+            "answer": "The USPSTF 2022 statement, with the ACC/AHA position relayed in it, plus the 2019 editorial record of the 2016 guideline.",
+            "evidence_ids": [
+              "E28",
+              "E42",
+              "E55"
+            ]
+          },
+          "accuracy": {
+            "status": "answered",
+            "answer": "A guideline records a position and not event data. The editorial is advocacy and is weak.",
+            "evidence_ids": [
+              "E55"
+            ]
+          },
+          "reading": {
+            "status": "answered",
+            "answer": "USPSTF recommends against initiation at 60+ (Grade D). ACC/AHA does not recommend aspirin routinely above 70. This records the guideline position but does not settle the sign of the balance.",
+            "evidence_ids": [
+              "E28",
+              "E42"
+            ]
+          },
+          "definitions": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          },
+          "currency": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          }
+        },
+        "strength_override": null,
+        "origin": "proposer",
+        "note": "Records the guideline position the question asks about.",
+        "round": 1
+      },
+      {
+        "id": "A6",
+        "scheme": "statistical_generalization",
+        "premise_ids": [
+          "E51",
+          "E58",
+          "E36",
+          "E48",
+          "E30",
+          "E31"
+        ],
+        "claim_id": "C3",
+        "attacks": null,
+        "cq": {
+          "representative": {
+            "status": "answered",
+            "answer": "Study-level stratification gives NNT 196 vs NNH 152 in pooled trials with 10-year risk above 10%, so higher baseline risk did not produce clear net benefit. Absolute benefit rises with risk and bleeding falls with lower bleeding risk, but this is about under-60s.",
+            "evidence_ids": [
+              "E51",
+              "E58",
+              "E36",
+              "E48",
+              "E30",
+              "E31"
+            ]
+          },
+          "size": {
+            "status": "answered",
+            "answer": "No CIs are given in E51. Subgroup analyses are typically underpowered.",
+            "evidence_ids": [
+              "E51",
+              "E36"
+            ]
+          },
+          "measurement": {
+            "status": "answered",
+            "answer": "Risk strata are study-level estimates of population risk, not individual-level.",
+            "evidence_ids": [
+              "E51"
+            ]
+          },
+          "reference_class": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          },
+          "stability": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          }
+        },
+        "strength_override": null,
+        "origin": "proposer",
+        "note": "Supports heterogeneity by risk and bleeding. Higher risk alone showed no net benefit here, and there is no 60+ subgroup with net benefit.",
+        "round": 1
+      },
+      {
+        "id": "A7",
+        "scheme": "study_result",
+        "premise_ids": [
+          "E52",
+          "E57",
+          "E53"
+        ],
+        "claim_id": "C1",
+        "attacks": null,
+        "cq": {
+          "design": {
+            "status": "answered",
+            "answer": "ARRIVE and ASCEND were randomized trials. The reports are secondhand summaries.",
+            "evidence_ids": [
+              "E52",
+              "E53"
+            ]
+          },
+          "directness": {
+            "status": "answered",
+            "answer": "ARRIVE enrolled adults 55+ without diabetes and ASCEND enrolled adults 40+ with diabetes. Neither is restricted to 60+.",
+            "evidence_ids": [
+              "E52",
+              "E53"
+            ]
+          },
+          "uncertainty": {
+            "status": "answered",
+            "answer": "ARRIVE GI bleeding HR 2.11 (1.36-3.28), about 5 excess per 1,000 over 5 years. ASCEND reported NNT 91 vs NNH 112 with no net benefit.",
+            "evidence_ids": [
+              "E52",
+              "E57",
+              "E53"
+            ]
+          },
+          "reported": {
+            "status": "answered",
+            "answer": "Both are secondary summaries of the primary trials.",
+            "evidence_ids": [
+              "E52",
+              "E53"
+            ]
+          },
+          "bias": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          },
+          "consistency": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          },
+          "precision": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          }
+        },
+        "strength_override": null,
+        "origin": "proposer",
+        "note": "Two further trials show bleeding excess with no composite benefit (ARRIVE) or offsetting benefit (ASCEND).",
+        "round": 1
+      },
+      {
+        "id": "A8",
+        "scheme": "study_result",
+        "premise_ids": [
+          "E1",
+          "E5",
+          "E54"
+        ],
+        "claim_id": "C7",
+        "attacks": null,
+        "cq": {
+          "design": {
+            "status": "answered",
+            "answer": "ASPREE was a randomized double-blind placebo-controlled trial with intention-to-treat Cox analyses, which identifies the causal effect of initiating aspirin.",
+            "evidence_ids": [
+              "E1",
+              "E5"
+            ]
+          },
+          "directness": {
+            "status": "answered",
+            "answer": "Population is adults 70+ (65+ for US minorities) without CVD, on 100 mg aspirin, median 4.7 years, matching the claim's setting. Only 3% were aged 65-69.",
+            "evidence_ids": [
+              "E1",
+              "E5"
+            ]
+          },
+          "uncertainty": {
+            "status": "answered",
+            "answer": "Sample sizes are reported (9525 vs 9589) and the trial ran a median of 4.7 years. The secondary summary E54 gives no CV effect size or interval, so the HR of about 0.95 and its CI are not documented in the view.",
+            "evidence_ids": [
+              "E1",
+              "E5"
+            ]
+          },
+          "reported": {
+            "status": "answered",
+            "answer": "Design and arms are stated in the primary ASPREE reports. The CV-event null result comes only from the secondary summary E54, which says no difference in CVD events.",
+            "evidence_ids": [
+              "E5",
+              "E54"
+            ]
+          },
+          "bias": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          },
+          "consistency": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          },
+          "precision": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          }
+        },
+        "strength_override": null,
+        "origin": "proposer",
+        "note": "Design and population are well supported. The specific HR of about 0.95 is not in the evidence; E54 supports only 'no difference in CVD events'. The argument is weakened accordingly.",
+        "round": 1
+      },
+      {
+        "id": "A9",
+        "scheme": "statistical_generalization",
+        "premise_ids": [
+          "E35"
+        ],
+        "claim_id": "C8",
+        "attacks": null,
+        "cq": {
+          "representative": {
+            "status": "answered",
+            "answer": "Pooled low-dose aspirin trials from the USPSTF review cover mixed ages, so they only partly represent adults 60+.",
+            "evidence_ids": [
+              "E35"
+            ]
+          },
+          "size": {
+            "status": "answered",
+            "answer": "Pooled trials are large, but fatal events are few, so power is limited and no estimates are quoted.",
+            "evidence_ids": [
+              "E35"
+            ]
+          },
+          "measurement": {
+            "status": "answered",
+            "answer": "Fatal MI, fatal stroke, CV mortality and all-cause mortality are measured as separate outcomes across trials with follow-up of 3.6 to 10.1 years.",
+            "evidence_ids": [
+              "E35"
+            ]
+          },
+          "reference_class": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          },
+          "stability": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          }
+        },
+        "strength_override": null,
+        "origin": "proposer",
+        "note": "Weak support for the null. Absence of significance on fatal outcomes is not evidence of no effect, and nonfatal MI is significantly reduced (E34), so C8 is undercut.",
+        "round": 1
+      },
+      {
+        "id": "A10",
+        "scheme": "expert_opinion",
+        "premise_ids": [
+          "E38",
+          "E47"
+        ],
+        "claim_id": "C9",
+        "attacks": null,
+        "cq": {
+          "expertise": {
+            "status": "answered",
+            "answer": "USPSTF is a recognised guideline body that systematically reviews the aspirin trial evidence.",
+            "evidence_ids": [
+              "E38",
+              "E47"
+            ]
+          },
+          "field": {
+            "status": "answered",
+            "answer": "Bleeding harms of preventive aspirin and their variation with age fall within its remit as a preventive-medicine guideline body.",
+            "evidence_ids": [
+              "E47"
+            ]
+          },
+          "assertion": {
+            "status": "answered",
+            "answer": "It states that relative bleeding risk does not differ by age, that absolute bleeding incidence rises with age, more so from 60, and that harms are small overall but larger over 60. This supports only the age-rising part of C9, not the magnitude.",
+            "evidence_ids": [
+              "E38",
+              "E47"
+            ]
+          },
+          "basis": {
+            "status": "answered",
+            "answer": "The statements summarise pooled trial evidence reviewed by the Task Force, although the passages give no numbers.",
+            "evidence_ids": [
+              "E38",
+              "E47"
+            ]
+          },
+          "consensus": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          },
+          "bias": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          }
+        },
+        "strength_override": null,
+        "origin": "proposer",
+        "note": "Supports only the qualitative age-gradient component of C9. It gives no per-1,000 figures, so it is weak.",
+        "round": 1
+      },
+      {
+        "id": "A11",
+        "scheme": "study_result",
+        "premise_ids": [
+          "E3",
+          "E11",
+          "E15",
+          "E26"
+        ],
+        "claim_id": "C12",
+        "attacks": null,
+        "cq": {
+          "design": {
+            "status": "answered",
+            "answer": "ASPREE was a randomized, double-blind, placebo-controlled trial with intention-to-treat analysis and blinded adjudication of cancer deaths. This design can identify a causal effect, although the cause-specific analyses were post hoc.",
+            "evidence_ids": [
+              "E5",
+              "E3"
+            ]
+          },
+          "directness": {
+            "status": "answered",
+            "answer": "The population is adults aged 70+ (65+ for US minorities) without CVD, taking 100 mg aspirin. This matches the older-adult primary-prevention setting of the question.",
+            "evidence_ids": [
+              "E5"
+            ]
+          },
+          "uncertainty": {
+            "status": "answered",
+            "answer": "Confidence intervals are reported: cancer death HR 1.31 (1.10-1.56), solid-tumour death HR 1.33 (1.11-1.61), cancer death among those with incident cancer HR 1.35 (1.13-1.61). The all-cause mortality CI is borderline (E2).",
+            "evidence_ids": [
+              "E3",
+              "E11",
+              "E15",
+              "E26"
+            ]
+          },
+          "reported": {
+            "status": "answered",
+            "answer": "The estimates are quoted from the abstract and tables of the primary reports.",
+            "evidence_ids": [
+              "E3",
+              "E11",
+              "E15"
+            ]
+          },
+          "bias": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          },
+          "consistency": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          },
+          "precision": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          }
+        },
+        "strength_override": null,
+        "origin": "proposer",
+        "note": "Supports the cancer-driven excess mortality. The no-benefit-on-DFS half is covered by A1. The excess is exploratory and borderline.",
+        "round": 1
+      },
+      {
+        "id": "A12",
+        "scheme": "study_result",
+        "premise_ids": [
+          "E7",
+          "E12",
+          "E13",
+          "E16",
+          "E17",
+          "E40"
+        ],
+        "claim_id": "C12",
+        "attacks": null,
+        "cq": {
+          "design": {
+            "status": "answered",
+            "answer": "Randomized trial, so stage and site comparisons are randomized contrasts, but they are exploratory subgroups.",
+            "evidence_ids": [
+              "E5"
+            ]
+          },
+          "directness": {
+            "status": "answered",
+            "answer": "Same ASPREE older-adult population, with cancer-stage and site outcomes.",
+            "evidence_ids": [
+              "E5"
+            ]
+          },
+          "uncertainty": {
+            "status": "answered",
+            "answer": "CIs are reported and several are wide or borderline: stage 3 death 1.03-4.33, colorectal death 1.02-3.06.",
+            "evidence_ids": [
+              "E17",
+              "E16"
+            ]
+          },
+          "reported": {
+            "status": "answered",
+            "answer": "Estimates are quoted from the paper's tables and text, and the USPSTF restates the colorectal figure.",
+            "evidence_ids": [
+              "E12",
+              "E13",
+              "E40"
+            ]
+          },
+          "bias": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          },
+          "consistency": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          },
+          "precision": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          }
+        },
+        "strength_override": null,
+        "origin": "proposer",
+        "note": "Advanced-stage and cancer-death signals consistent with possible harm. Hypothesis-generating only.",
+        "round": 1
+      },
+      {
+        "id": "A13",
+        "scheme": "study_result",
+        "premise_ids": [
+          "E6",
+          "E10"
+        ],
+        "claim_id": "C14",
+        "attacks": null,
+        "cq": {
+          "design": {
+            "status": "answered",
+            "answer": "A randomized trial is adequate for incidence, but 4.7 years is short for a delayed colorectal benefit.",
+            "evidence_ids": [
+              "E5"
+            ]
+          },
+          "directness": {
+            "status": "answered",
+            "answer": "The population is adults aged 70+ and cancer incidence is the outcome, which matches the claim. The claimed long-term effect is not tested.",
+            "evidence_ids": [
+              "E5",
+              "E23"
+            ]
+          },
+          "uncertainty": {
+            "status": "answered",
+            "answer": "HR 1.04 (0.95-1.14) with 981 vs 952 events, a narrow CI.",
+            "evidence_ids": [
+              "E6",
+              "E10"
+            ]
+          },
+          "reported": {
+            "status": "answered",
+            "answer": "Reported directly in the abstract and Table 2.",
+            "evidence_ids": [
+              "E6",
+              "E10"
+            ]
+          },
+          "bias": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          },
+          "consistency": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          },
+          "precision": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          }
+        },
+        "strength_override": null,
+        "origin": "proposer",
+        "note": "Argument against C14: no incidence reduction over 4.7 years. This does not rule out a delayed benefit.",
+        "round": 1
+      },
+      {
+        "id": "A14",
+        "scheme": "document_record",
+        "premise_ids": [
+          "E32",
+          "E41"
+        ],
+        "claim_id": "C14",
+        "attacks": null,
+        "cq": {
+          "authentic": {
+            "status": "answered",
+            "answer": "Official USPSTF recommendation statement.",
+            "evidence_ids": [
+              "E32"
+            ]
+          },
+          "accuracy": {
+            "status": "answered",
+            "answer": "It is an evidence-review synthesis. Its conclusion is that evidence is inadequate, not that there is no effect.",
+            "evidence_ids": [
+              "E32",
+              "E41"
+            ]
+          },
+          "reading": {
+            "status": "answered",
+            "answer": "Read as 'unproven'. Four primary-prevention trials show no CRC incidence association up to about 10 years.",
+            "evidence_ids": [
+              "E41"
+            ]
+          },
+          "definitions": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          },
+          "currency": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          }
+        },
+        "strength_override": null,
+        "origin": "proposer",
+        "note": "Weakly undercuts C14 as an established claim.",
+        "round": 1
+      },
+      {
+        "id": "A15",
+        "scheme": "study_result",
+        "premise_ids": [
+          "E19",
+          "E35"
+        ],
+        "claim_id": "C13",
+        "attacks": null,
+        "cq": {
+          "design": {
+            "status": "answered",
+            "answer": "E35 is pooled randomized trials and E19 is a secondhand summary. Both are adequate for a null on all-cause mortality but are underpowered for subgroups.",
+            "evidence_ids": [
+              "E35",
+              "E19"
+            ]
+          },
+          "directness": {
+            "status": "answered",
+            "answer": "They are mostly younger populations, so only partly direct for adults 70+.",
+            "evidence_ids": [
+              "E19",
+              "E35"
+            ]
+          },
+          "uncertainty": {
+            "status": "answered",
+            "answer": "No estimates are quoted, so uncertainty is not shown.",
+            "evidence_ids": [
+              "E35"
+            ]
+          },
+          "reported": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          },
+          "bias": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          },
+          "consistency": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          },
+          "precision": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          }
+        },
+        "strength_override": null,
+        "origin": "proposer",
+        "note": "Weak support for the null from pooled younger-population trials. It is contradicted by the ASPREE signals in the older age group.",
+        "round": 1
+      },
+      {
+        "id": "A16",
+        "scheme": "statistical_generalization",
+        "premise_ids": [
+          "E20"
+        ],
+        "claim_id": "C17",
+        "attacks": null,
+        "cq": {
+          "representative": {
+            "status": "answered",
+            "answer": "ASPREE enrolled mainly adults 70 and over with low prior aspirin use, so it is not representative of the whole 60+ range. The subgroup is also about cancer mortality, not net CV balance.",
+            "evidence_ids": [
+              "E14"
+            ]
+          },
+          "size": {
+            "status": "answered",
+            "answer": "The source states that subgroup power was limited. Uncertainty is reported only as non-significance, so the null interaction is weak.",
+            "evidence_ids": [
+              "E20"
+            ]
+          },
+          "measurement": {
+            "status": "defaulted",
+            "answer": "Cancer mortality was measured the same way across ASPREE arms and subgroups, as in a randomized trial.",
+            "evidence_ids": []
+          },
+          "reference_class": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          },
+          "stability": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          }
+        },
+        "strength_override": null,
+        "origin": "proposer",
+        "note": "Weak argument for the null. The evidence is an underpowered, non-significant interaction for cancer mortality only. It does not address CV benefit or bleeding heterogeneity, and a lack of significance is not evidence of no interaction.",
+        "round": 1
+      },
+      {
+        "id": "A17",
+        "scheme": "study_result",
+        "premise_ids": [
+          "E2",
+          "E59"
+        ],
+        "claim_id": "C18",
+        "attacks": null,
+        "cq": {
+          "design": {
+            "status": "answered",
+            "answer": "ASPREE was a randomized, double-blind placebo-controlled trial, adequate for a causal claim about aspirin initiation.",
+            "evidence_ids": [
+              "E2"
+            ]
+          },
+          "directness": {
+            "status": "answered",
+            "answer": "Participants were mostly aged 70+, healthy and without CVD, initiating low-dose aspirin. This matches the 60+ primary-prevention initiation setting, though the sample skews older.",
+            "evidence_ids": [
+              "E2",
+              "E15"
+            ]
+          },
+          "uncertainty": {
+            "status": "answered",
+            "answer": "HR 1.14 with 95% CI 1.01-1.29 is reported. The computed excess of about 7.5 deaths per 1,000 over 4.7 years follows from the rates.",
+            "evidence_ids": [
+              "E2",
+              "E59"
+            ]
+          },
+          "reported": {
+            "status": "answered",
+            "answer": "The abstract states the rates and HR directly.",
+            "evidence_ids": [
+              "E2"
+            ]
+          },
+          "bias": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          },
+          "consistency": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          },
+          "precision": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          }
+        },
+        "strength_override": null,
+        "origin": "proposer",
+        "note": "All-cause mortality excess is an equal-weight signal of harm or zero net benefit. It is a secondary endpoint with a borderline CI.",
+        "round": 1
+      },
+      {
+        "id": "A18",
+        "scheme": "study_result",
+        "premise_ids": [
+          "E11",
+          "E15",
+          "E18"
+        ],
+        "claim_id": "C18",
+        "attacks": null,
+        "cq": {
+          "design": {
+            "status": "answered",
+            "answer": "Randomized trial with blinded adjudication of cancer and cause of death; the cancer-mortality analyses are secondary.",
+            "evidence_ids": [
+              "E15"
+            ]
+          },
+          "directness": {
+            "status": "answered",
+            "answer": "Same ASPREE population, mostly 70+, so it applies to older adults. Cancer death is an outcome bearing on net harm, within scope.",
+            "evidence_ids": [
+              "E15",
+              "E18"
+            ]
+          },
+          "uncertainty": {
+            "status": "answered",
+            "answer": "HR 1.33 (1.11-1.61) and HR 1.35 (1.13-1.61) are reported with CIs.",
+            "evidence_ids": [
+              "E11",
+              "E15"
+            ]
+          },
+          "reported": {
+            "status": "answered",
+            "answer": "The tables and results text state the figures directly.",
+            "evidence_ids": [
+              "E11",
+              "E15"
+            ]
+          },
+          "bias": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          },
+          "consistency": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          },
+          "precision": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          }
+        },
+        "strength_override": null,
+        "origin": "proposer",
+        "note": "Cancer-death excess of about 1.5 per 1,000 person-years counts against any offset from cancer and pushes the net toward harm.",
+        "round": 1
+      },
+      {
+        "id": "A19",
+        "scheme": "study_result",
+        "premise_ids": [
+          "E50",
+          "E58"
+        ],
+        "claim_id": "C18",
+        "attacks": null,
+        "cq": {
+          "design": {
+            "status": "answered",
+            "answer": "Pooled meta-analysis of randomized trials, adequate for a causal claim.",
+            "evidence_ids": [
+              "E50"
+            ]
+          },
+          "directness": {
+            "status": "answered",
+            "answer": "The pool is not restricted to ages 60+, and follow-up is not given, so the match is imperfect. Equal weighting of events is the claim's own setting.",
+            "evidence_ids": [
+              "E50"
+            ]
+          },
+          "uncertainty": {
+            "status": "answered",
+            "answer": "No CIs are given; only NNT 265 and NNH 210, and the computed difference is about 1.5 net excess bleeds per 1,000.",
+            "evidence_ids": [
+              "E50",
+              "E58"
+            ]
+          },
+          "reported": {
+            "status": "answered",
+            "answer": "The figures are relayed secondhand in an editorial.",
+            "evidence_ids": [
+              "E50"
+            ]
+          },
+          "bias": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          },
+          "consistency": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          },
+          "precision": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          }
+        },
+        "strength_override": null,
+        "origin": "proposer",
+        "note": "Under equal weighting, bleeds slightly exceed events prevented.",
+        "round": 1
+      },
+      {
+        "id": "A20",
+        "scheme": "model_output",
+        "premise_ids": [
+          "E39"
+        ],
+        "claim_id": "C18",
+        "attacks": null,
+        "cq": {
+          "validated": {
+            "status": "answered",
+            "answer": "The USPSTF microsimulation used the pooled trial estimates. Outcomes are lifetime QALYs and life-years rather than 5-year events, so the fit is indirect.",
+            "evidence_ids": [
+              "E39"
+            ]
+          },
+          "inputs": {
+            "status": "answered",
+            "answer": "Inputs are the pooled trial estimates reviewed by the Task Force.",
+            "evidence_ids": [
+              "E39"
+            ]
+          },
+          "reproducible": {
+            "status": "defaulted",
+            "answer": "The run is not recorded in this excerpt.",
+            "evidence_ids": []
+          },
+          "sensitivity": {
+            "status": "answered",
+            "answer": "Results are qualitatively consistent across the 60-69 and 70-79 bands and risk levels up to 20%, with 60-69 QALYs ranging from slightly negative to slightly positive.",
+            "evidence_ids": [
+              "E39"
+            ]
+          },
+          "structure": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          },
+          "idealisation": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          }
+        },
+        "strength_override": null,
+        "origin": "proposer",
+        "note": "The model shows no net benefit, with losses at 70-79. This also weakens C19 and does not support a clear net-zero claim.",
+        "round": 1
+      },
+      {
+        "id": "A21",
+        "scheme": "expert_opinion",
+        "premise_ids": [
+          "E28",
+          "E29",
+          "E46"
+        ],
+        "claim_id": "C18",
+        "attacks": null,
+        "cq": {
+          "expertise": {
+            "status": "answered",
+            "answer": "USPSTF is the national guideline body that reviewed the evidence.",
+            "evidence_ids": [
+              "E29"
+            ]
+          },
+          "field": {
+            "status": "answered",
+            "answer": "Net benefit of primary-prevention aspirin is within its remit.",
+            "evidence_ids": [
+              "E28"
+            ]
+          },
+          "assertion": {
+            "status": "answered",
+            "answer": "It states moderate certainty of no net benefit and recommends against initiation at 60+. It does not say whether the balance is zero or negative.",
+            "evidence_ids": [
+              "E29",
+              "E46"
+            ]
+          },
+          "basis": {
+            "status": "answered",
+            "answer": "Based on an evidence review and a microsimulation.",
+            "evidence_ids": [
+              "E39"
+            ]
+          },
+          "consensus": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          },
+          "bias": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          }
+        },
+        "strength_override": null,
+        "origin": "proposer",
+        "note": "Guideline support is compatible with harm or zero, so it is only moderate for C18.",
+        "round": 1
+      },
+      {
+        "id": "A22",
+        "scheme": "document_record",
+        "premise_ids": [
+          "E28",
+          "E46"
+        ],
+        "claim_id": "C21",
+        "attacks": null,
+        "cq": {
+          "authentic": {
+            "status": "answered",
+            "answer": "Both items are from the USPSTF's own recommendation page, the stated origin.",
+            "evidence_ids": [
+              "E28",
+              "E46"
+            ]
+          },
+          "accuracy": {
+            "status": "answered",
+            "answer": "The recommendation statement and assessment are the Task Force's own record of its position, a fact of record about what the guideline says.",
+            "evidence_ids": [
+              "E28",
+              "E46"
+            ]
+          },
+          "reading": {
+            "status": "answered",
+            "answer": "The quotes state the recommendation against initiation at 60+ and the conclusion of no net benefit with moderate certainty. The Grade D label appears in the summary table, with no contested interpretation.",
+            "evidence_ids": [
+              "E28",
+              "E46"
+            ]
+          },
+          "definitions": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          },
+          "currency": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          }
+        },
+        "strength_override": null,
+        "origin": "proposer",
+        "note": "USPSTF 2022 position. The 'net benefit' rationale is also supported by the microsimulation, E39, in a separate argument.",
+        "round": 1
+      },
+      {
+        "id": "A23",
+        "scheme": "document_record",
+        "premise_ids": [
+          "E42"
+        ],
+        "claim_id": "C21",
+        "attacks": null,
+        "cq": {
+          "authentic": {
+            "status": "answered",
+            "answer": "It is the USPSTF's own page citing the ACC/AHA 2019 guideline (ref 35). This is a secondhand report, but it is the stated origin of the passage.",
+            "evidence_ids": [
+              "E42"
+            ]
+          },
+          "accuracy": {
+            "status": "answered",
+            "answer": "The USPSTF summary is brief and consistent with the cited guideline. No independent check is in the view.",
+            "evidence_ids": [
+              "E42"
+            ]
+          },
+          "reading": {
+            "status": "answered",
+            "answer": "The quote states directly that routine use is not recommended over age 70 or at increased bleeding risk. No interpretation is needed.",
+            "evidence_ids": [
+              "E42"
+            ]
+          },
+          "definitions": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          },
+          "currency": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          }
+        },
+        "strength_override": null,
+        "origin": "proposer",
+        "note": "ACC/AHA 2019 position. It also contradicts C22 by limiting use to select higher-risk adults aged 40-70 without increased bleeding risk.",
+        "round": 1
+      },
+      {
+        "id": "A24",
+        "scheme": "model_output",
+        "premise_ids": [
+          "E39"
+        ],
+        "claim_id": "C21",
+        "attacks": null,
+        "cq": {
+          "validated": {
+            "status": "answered",
+            "answer": "This is the USPSTF's own decision-analytic model, which it used as the basis for its recommendation. It was run for ages 60-69 and 70-79 across risk levels.",
+            "evidence_ids": [
+              "E39"
+            ]
+          },
+          "inputs": {
+            "status": "answered",
+            "answer": "The inputs were the pooled trial estimates, as stated in the passage.",
+            "evidence_ids": [
+              "E39"
+            ]
+          },
+          "reproducible": {
+            "status": "defaulted",
+            "answer": "The run is not documented in this excerpt. The USPSTF publishes the model separately.",
+            "evidence_ids": []
+          },
+          "sensitivity": {
+            "status": "answered",
+            "answer": "The result is negative or null across the 60-69 and 70-79 bands and across risk levels up to 20%, which suggests it is robust. The assumptions of no CVD mortality effect and no CRC effect remain.",
+            "evidence_ids": [
+              "E39"
+            ]
+          },
+          "structure": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          },
+          "idealisation": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          }
+        },
+        "strength_override": null,
+        "origin": "proposer",
+        "note": "This supports the basis the guideline cites for its recommendation: modelled lifetime QALYs and life-years show no net benefit at 60+.",
+        "round": 1
+      },
+      {
+        "id": "A25",
+        "scheme": "document_record",
+        "premise_ids": [
+          "E32"
+        ],
+        "claim_id": "C21",
+        "attacks": null,
+        "cq": {
+          "authentic": {
+            "status": "answered",
+            "answer": "The item is from the USPSTF recommendation page.",
+            "evidence_ids": [
+              "E32"
+            ]
+          },
+          "accuracy": {
+            "status": "answered",
+            "answer": "It is the Task Force's own account of how its position changed and of its CRC finding.",
+            "evidence_ids": [
+              "E32"
+            ]
+          },
+          "reading": {
+            "status": "answered",
+            "answer": "The quote states that the CRC evidence is inadequate. The text's account of the shift from 2016 rests on the page itself and requires no contested reading.",
+            "evidence_ids": [
+              "E32"
+            ]
+          },
+          "definitions": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          },
+          "currency": {
+            "status": "open",
+            "answer": "",
+            "evidence_ids": []
+          }
+        },
+        "strength_override": null,
+        "origin": "proposer",
+        "note": "This supports the evidence basis and the change from 2016: the evidence on cancer offset is inadequate, so it does not offset the harms.",
+        "round": 1
+      },
+      {
+        "id": "A26",
+        "scheme": "attack",
+        "premise_ids": [
+          "E6",
+          "E10",
+          "E13",
+          "E41"
+        ],
+        "claim_id": null,
+        "attacks": {
+          "target_id": "C14",
+          "type": "rebut",
+          "note": "",
+          "raises_cq": ""
+        },
+        "cq": {
+          "grounds": {
+            "status": "answered",
+            "answer": "premises supplied",
+            "evidence_ids": [
+              "E6",
+              "E10",
+              "E13",
+              "E41"
+            ]
+          }
+        },
+        "strength_override": null,
+        "origin": "critic",
+        "note": "[consistency] C14 says aspirin reduces cancer incidence or mortality, especially colorectal, in adults 60+. The 60+ randomized data in the graph point the other way. ASPREE overall cancer incidence was 981 vs 952 (HR 1.04, 0.95-1.14). Colorectal incidence was 139 vs 137 (HR 1.02), and colorectal death was higher on aspirin (HR 1.77). Four primary-prevention trials found no association with CRC incidence up to about 10 years (E41). C14 is 'in' only because A13 and A14 are filed as support when their evidence is against it. (conceded by proposer: The critic is right that E6, E10, E13 and E41 show no cancer-incidence reduction at 60+. A14 and A13 do not support C14. Evidence of a delayed benefit at 60+ from long follow-up would be needed to answer it.)",
+        "round": 1
+      },
+      {
+        "id": "A27",
+        "scheme": "attack",
+        "premise_ids": [
+          "E6",
+          "E10"
+        ],
+        "claim_id": null,
+        "attacks": {
+          "target_id": "A13",
+          "type": "undercut",
+          "note": "",
+          "raises_cq": "consistency"
+        },
+        "cq": {
+          "grounds": {
+            "status": "answered",
+            "answer": "premises supplied",
+            "evidence_ids": [
+              "E6",
+              "E10"
+            ]
+          }
+        },
+        "strength_override": null,
+        "origin": "critic",
+        "note": "[consistency] A13 is filed as support for C14, but its own result (HR 1.04, 95% CI 0.95-1.14, no incidence reduction) contradicts C14. The proposer's note calls it an 'argument against C14'. A null or adverse incidence result cannot license the conclusion that aspirin reduces cancer incidence, so the inference from R to C fails in direction, not just in degree. (conceded by proposer: A13's own result (HR 1.04, CI 0.95-1.14) runs against C14. The design and directness answers do not fix the direction. Evidence of a reduction in cancer incidence at 60+ would be needed.)",
+        "round": 1
+      },
+      {
+        "id": "A28",
+        "scheme": "attack",
+        "premise_ids": [
+          "E32",
+          "E41"
+        ],
+        "claim_id": null,
+        "attacks": {
+          "target_id": "A14",
+          "type": "undercut",
+          "note": "",
+          "raises_cq": "definitions"
+        },
+        "cq": {
+          "grounds": {
+            "status": "answered",
+            "answer": "premises supplied",
+            "evidence_ids": [
+              "E32",
+              "E41"
+            ]
+          }
+        },
+        "strength_override": null,
+        "origin": "critic",
+        "note": "[definitions] E32 says the USPSTF found the evidence 'inadequate that low-dose aspirin use reduces CRC incidence or mortality'. E41 reports no CRC incidence association up to about 10 years. 'Inadequate evidence of benefit' is not a record that benefit exists. A14 reads a finding of unproven benefit as support for C14's assertion that the benefit is real. (conceded by proposer: E32 and E41 record inadequate evidence of benefit, not benefit. Evidence of a real CRC benefit at 60+ would be needed.)",
+        "round": 1
+      },
+      {
+        "id": "A29",
+        "scheme": "attack",
+        "premise_ids": [
+          "E34",
+          "E48"
+        ],
+        "claim_id": null,
+        "attacks": {
+          "target_id": "C8",
+          "type": "rebut",
+          "note": "",
+          "raises_cq": ""
+        },
+        "cq": {
+          "grounds": {
+            "status": "answered",
+            "answer": "premises supplied",
+            "evidence_ids": [
+              "E34",
+              "E48"
+            ]
+          }
+        },
+        "strength_override": null,
+        "origin": "critic",
+        "note": "[consistency] C8 says aspirin has no effect on major CV events. Pooled low-dose trials show a statistically significant reduction in nonfatal MI (Peto OR 0.88, 0.80-0.96; 11 trials, n=134,470). Nonfatal ischemic stroke is reduced at the margin (OR 0.88, 0.78-1.00). The USPSTF finds a small CV benefit that grows with risk (E48). Nonfatal MI and ischemic stroke are components of 'major CV events' as Q2 defines them. (conceded by proposer: E34 shows a significant pooled reduction in nonfatal MI. C8's blanket null is not supported. Evidence of no effect on CV events at 60+ would be needed.)",
+        "round": 1
+      },
+      {
+        "id": "A30",
+        "scheme": "attack",
+        "premise_ids": [
+          "E34"
+        ],
+        "claim_id": null,
+        "attacks": {
+          "target_id": "A9",
+          "type": "undercut",
+          "note": "",
+          "raises_cq": "reference_class"
+        },
+        "cq": {
+          "grounds": {
+            "status": "answered",
+            "answer": "premises supplied",
+            "evidence_ids": [
+              "E34"
+            ]
+          }
+        },
+        "strength_override": null,
+        "origin": "critic",
+        "note": "[reference_class] A9 generalises from fatal MI, fatal stroke, CV mortality and all-cause mortality (E35) to 'major CV events'. The fatal-only class has few events and was chosen without the nonfatal components, where the pooled data show a significant effect (E34, nonfatal MI OR 0.88). A non-significant result in an underpowered subset is not evidence of no effect on the composite. (conceded by proposer: A9 generalises from the fatal-only outcomes in E35, which have few events, and ignores the nonfatal components in E34. Evidence of a null on the full composite at 60+ would be needed.)",
+        "round": 1
+      },
+      {
+        "id": "A31",
+        "scheme": "attack",
+        "premise_ids": [
+          "E25",
+          "E56",
+          "E53"
+        ],
+        "claim_id": null,
+        "attacks": {
+          "target_id": "C9",
+          "type": "rebut",
+          "note": "",
+          "raises_cq": ""
+        },
+        "cq": {
+          "grounds": {
+            "status": "answered",
+            "answer": "premises supplied",
+            "evidence_ids": [
+              "E25",
+              "E56",
+              "E53"
+            ]
+          }
+        },
+        "strength_override": null,
+        "origin": "critic",
+        "note": "[consistency] C9 puts the absolute excess at about 2-5 major bleeds per 1,000 over 5 years in adults 60+. The only 60+ randomized trial in the graph shows major hemorrhage of 3.8% vs 2.8% (HR 1.38, 1.18-1.62), about 10 extra per 1,000 over a median of 4.7 years (E56). ASCEND's NNH of 112 is about 8.9 per 1,000. C9's absolute range understates the bleeding excess in the older population it names. Its relative range (30-50%) also sits below the pooled GI bleeding estimate (+58%, E37). (conceded by proposer: E56 (about 10 per 1,000 in ASPREE) and ASCEND's NNH of 112 (about 8.9 per 1,000) exceed C9's 2-5 range, and the pooled GI estimate (+58%, E37) exceeds its 30-50% range. C9's numbers should be revised upward.)",
+        "round": 1
+      },
+      {
+        "id": "A32",
+        "scheme": "attack",
+        "premise_ids": [
+          "E53"
+        ],
+        "claim_id": null,
+        "attacks": {
+          "target_id": "C1",
+          "type": "rebut",
+          "note": "",
+          "raises_cq": ""
+        },
+        "cq": {
+          "grounds": {
+            "status": "answered",
+            "answer": "premises supplied",
+            "evidence_ids": [
+              "E53"
+            ]
+          }
+        },
+        "strength_override": null,
+        "origin": "critic",
+        "note": "[consistency] C1 says excess major bleeding equals or exceeds the events prevented under equal weights. In ASCEND, NNT was 91 for a serious vascular event and NNH was 112 for a major bleed. That is about 11.0 events prevented against 8.9 bleeds per 1,000, so prevented events exceed bleeds under equal weighting. A7 cites E53 as support for C1, but E53's own numbers contradict C1's equal-weight condition. ASCEND is a diabetes population aged 40+, not exclusively 60+. That limits this rebuttal, but it equally limits A7's use of E53 as support. (conceded by proposer: E53 gives NNT 91 against NNH 112, which is about 11.0 prevented against 8.9 bleeds per 1,000. Under equal weights that favours aspirin in ASCEND, so it cannot support C1's equal-weight condition. Age-60+ data showing bleeding at or above events prevented would be needed.)",
+        "round": 1
+      },
+      {
+        "id": "A33",
+        "scheme": "attack",
+        "premise_ids": [
+          "E53"
+        ],
+        "claim_id": null,
+        "attacks": {
+          "target_id": "A7",
+          "type": "undercut",
+          "note": "",
+          "raises_cq": "consistency"
+        },
+        "cq": {
+          "grounds": {
+            "status": "answered",
+            "answer": "premises supplied",
+            "evidence_ids": [
+              "E53"
+            ]
+          }
+        },
+        "strength_override": null,
+        "origin": "critic",
+        "note": "[consistency] A7 counts ASCEND as showing bleeding that equals or exceeds benefit. E53 gives NNT 91 vs NNH 112, which is benefit greater than bleeding when events are counted equally. The ASCEND authors' 'no net benefit' rests on their own severity judgement, not on C1's equal-weight comparison. ARRIVE (E52) gives only a GI-bleeding excess and a null composite, with no 60+ stratum. (conceded by proposer: E53 does not support equal-weight bleeding at or above benefit. ARRIVE (E52) shows only a GI-bleeding excess and a null composite, with no 60+ stratum. A 60+ trial result on the equal-weight balance would be needed.)",
+        "round": 1
+      },
+      {
+        "id": "A34",
+        "scheme": "attack",
+        "premise_ids": [
+          "E1",
+          "E39"
+        ],
+        "claim_id": null,
+        "attacks": {
+          "target_id": "A1",
+          "type": "undercut",
+          "note": "",
+          "raises_cq": "directness"
+        },
+        "cq": {
+          "grounds": {
+            "status": "answered",
+            "answer": "premises supplied",
+            "evidence_ids": [
+              "E1",
+              "E39"
+            ]
+          }
+        },
+        "strength_override": null,
+        "origin": "critic",
+        "note": "[directness] A1 supports a claim about adults 60+ using a trial of adults 70+ (65+ for US minorities) (E1). It also nets nothing on the benefit side: E24 is disability-free survival, not MI or stroke. For ages 60-69, the USPSTF model gives QALYs 'from slightly negative to slightly positive' (E39). The 70+ bleeding excess therefore cannot be carried to the whole 60+ band as 'equals or exceeds benefit'. (conceded by proposer: ASPREE is mostly 70+ and E24 is a disability-free survival result. E39 gives 60-69 QALYs from slightly negative to slightly positive. A 60-69 specific balance would be needed.)",
+        "round": 1
+      },
+      {
+        "id": "A35",
+        "scheme": "attack",
+        "premise_ids": [
+          "E50",
+          "E38"
+        ],
+        "claim_id": null,
+        "attacks": {
+          "target_id": "A3",
+          "type": "undercut",
+          "note": "",
+          "raises_cq": "reference_class"
+        },
+        "cq": {
+          "grounds": {
+            "status": "answered",
+            "answer": "premises supplied",
+            "evidence_ids": [
+              "E50",
+              "E38"
+            ]
+          }
+        },
+        "strength_override": null,
+        "origin": "critic",
+        "note": "[reference_class] NNT 265 vs NNH 210 comes from a pool not restricted to 60+, with no follow-up stated and no CIs given (E50). E38 says absolute bleeding incidence rises with age, more so from 60, and absolute benefit also scales with baseline risk. All-age per-1,000 figures are therefore the wrong reference class for C1's 60+ per-1,000 balance. The ~1 per 1,000 net difference has no interval, so its sign is not established. (conceded by proposer: E50 is not restricted to 60+, has no follow-up stated and no CIs, and the margin is about 1 per 1,000. Its sign is not established. An age-restricted pooled estimate with intervals would be needed.)",
+        "round": 1
+      },
+      {
+        "id": "A36",
+        "scheme": "attack",
+        "premise_ids": [
+          "E29",
+          "E42"
+        ],
+        "claim_id": null,
+        "attacks": {
+          "target_id": "A5",
+          "type": "undercut",
+          "note": "",
+          "raises_cq": "definitions"
+        },
+        "cq": {
+          "grounds": {
+            "status": "answered",
+            "answer": "premises supplied",
+            "evidence_ids": [
+              "E29",
+              "E42"
+            ]
+          }
+        },
+        "strength_override": null,
+        "origin": "critic",
+        "note": "[definitions] The USPSTF concludes there is 'no net benefit' (E29) and does not say whether the balance is zero or negative. ACC/AHA says aspirin 'might be considered' in select adults aged 40-70 at higher risk (E42), which includes ages 60-70. Neither record states C1's quantity, that bleeding equals or exceeds prevented events per 1,000. A guideline grade is not a measure of the event balance. (conceded by proposer: E29 and E42 record guideline positions, not the per-1,000 event balance. ACC/AHA also permits consideration of aspirin up to age 70 in select higher-risk adults. A5 supports the guideline position only.)",
+        "round": 1
+      },
+      {
+        "id": "A37",
+        "scheme": "attack",
+        "premise_ids": [
+          "E19",
+          "E40"
+        ],
+        "claim_id": null,
+        "attacks": {
+          "target_id": "A4",
+          "type": "undercut",
+          "note": "",
+          "raises_cq": "idealisation"
+        },
+        "cq": {
+          "grounds": {
+            "status": "answered",
+            "answer": "premises supplied",
+            "evidence_ids": [
+              "E19",
+              "E40"
+            ]
+          }
+        },
+        "strength_override": null,
+        "origin": "critic",
+        "note": "[idealisation] The lifetime microsimulation's base case assumes no aspirin effect on CRC incidence and no CVD mortality effect (E39 notes). Long-term follow-up reports a 20-year cancer mortality HR of 0.65 (E19), and WHS/TPT follow-up suggested lower CRC mortality (E40). Over a lifetime horizon, that idealisation pushes QALYs toward loss. The sign of the 60-69 result, already 'slightly negative to slightly positive', depends on it. (conceded by proposer: E39's base case assumes no CRC effect. E19 and E40 report long-term signals of benefit, and the 60-69 result is near zero. A sensitivity run with a delayed CRC benefit would be needed.)",
+        "round": 1
+      },
+      {
+        "id": "A38",
+        "scheme": "attack",
+        "premise_ids": [
+          "E19",
+          "E40"
+        ],
+        "claim_id": null,
+        "attacks": {
+          "target_id": "A20",
+          "type": "undercut",
+          "note": "",
+          "raises_cq": "idealisation"
+        },
+        "cq": {
+          "grounds": {
+            "status": "answered",
+            "answer": "premises supplied",
+            "evidence_ids": [
+              "E19",
+              "E40"
+            ]
+          }
+        },
+        "strength_override": null,
+        "origin": "critic",
+        "note": "[idealisation] Same idealisation as A4: the model zeroes any delayed CRC benefit, which E19 and E40 report in long-term follow-up. C18 is also stated as events per 1,000 over about 5 years under equal weighting. Lifetime QALYs and life-years are a different measure and weighting, so the model output does not test C18 as stated. (conceded by proposer: A20 uses lifetime QALYs and life-years, which differ from C18's 5-year equal-weight events per 1,000. The model also zeroes any delayed CRC benefit. A 5-year event-based model run would be needed.)",
+        "round": 1
+      },
+      {
+        "id": "A39",
+        "scheme": "attack",
+        "premise_ids": [
+          "E3",
+          "E35"
+        ],
+        "claim_id": null,
+        "attacks": {
+          "target_id": "A17",
+          "type": "undercut",
+          "note": "",
+          "raises_cq": "directness"
+        },
+        "cq": {
+          "grounds": {
+            "status": "answered",
+            "answer": "premises supplied",
+            "evidence_ids": [
+              "E3",
+              "E35"
+            ]
+          }
+        },
+        "strength_override": null,
+        "origin": "critic",
+        "note": "[directness] C18 is a net balance of MI, ischemic stroke and major bleeding under equal weights. A17's outcome is all-cause mortality, and the excess there is attributed mainly to cancer deaths (E3, HR 1.31). Cancer deaths are not a term in C18's composite. Pooled trials found no significant all-cause mortality effect at 3.6-10.1 years (E35). A borderline secondary-endpoint excess (lower CI 1.01) from a different outcome cannot establish the sign of C18's equal-weight event balance. (conceded by proposer: A17's outcome is all-cause mortality, driven by cancer deaths. Those are not terms in C18's MI, stroke and bleeding composite. The result is borderline (CI 1.01-1.29) and E35 shows no pooled effect. It cannot fix C18's sign.)",
+        "round": 1
+      },
+      {
+        "id": "A40",
+        "scheme": "attack",
+        "premise_ids": [
+          "E3",
+          "E19"
+        ],
+        "claim_id": null,
+        "attacks": {
+          "target_id": "A18",
+          "type": "undercut",
+          "note": "",
+          "raises_cq": "bias"
+        },
+        "cq": {
+          "grounds": {
+            "status": "answered",
+            "answer": "premises supplied",
+            "evidence_ids": [
+              "E3",
+              "E19"
+            ]
+          }
+        },
+        "strength_override": null,
+        "origin": "critic",
+        "note": "[bias] The cancer-death analyses were post hoc and exploratory, with no multiplicity adjustment, and the authors call them inconsistent with earlier studies (E3). ASCEND found no increase in cancer mortality at 7.4 years (E19). Even if the excess were real, cancer death lies outside the MI/stroke/bleeding composite that C18 weights. (conceded by proposer: The cancer-death analyses were post hoc and exploratory (E3), and E19 reports no excess cancer mortality in ASCEND. Cancer death is outside C18's composite. A prespecified or replicated cancer-mortality result would be needed.)",
+        "round": 1
+      },
+      {
+        "id": "A41",
+        "scheme": "attack",
+        "premise_ids": [
+          "E50",
+          "E51"
+        ],
+        "claim_id": null,
+        "attacks": {
+          "target_id": "A19",
+          "type": "undercut",
+          "note": "",
+          "raises_cq": "directness"
+        },
+        "cq": {
+          "grounds": {
+            "status": "answered",
+            "answer": "premises supplied",
+            "evidence_ids": [
+              "E50",
+              "E51"
+            ]
+          }
+        },
+        "strength_override": null,
+        "origin": "critic",
+        "note": "[directness] A19 cites E58 (1.477 per 1,000), which is computed from the >10% 10-year-risk stratum (E51: NNT 196, NNH 152), not the overall pool. The overall pool (E50: NNT 265, NNH 210) gives about 1.0 per 1,000. Neither pool is age-restricted, neither has a follow-up or interval, and the net margin is about 1 event per 1,000 with no CI. The sign is not established. (conceded by proposer: E58 (1.477 per 1,000) is computed from the >10% risk stratum (E51). The overall pool (E50) gives about 1.0 per 1,000. Neither is age-restricted and neither has an interval. An age-restricted estimate with a CI would be needed.)",
+        "round": 1
+      },
+      {
+        "id": "A42",
+        "scheme": "attack",
+        "premise_ids": [
+          "E39",
+          "E51"
+        ],
+        "claim_id": null,
+        "attacks": {
+          "target_id": "C3",
+          "type": "rebut",
+          "note": "",
+          "raises_cq": ""
+        },
+        "cq": {
+          "grounds": {
+            "status": "answered",
+            "answer": "premises supplied",
+            "evidence_ids": [
+              "E39",
+              "E51"
+            ]
+          }
+        },
+        "strength_override": null,
+        "origin": "critic",
+        "note": "[consistency] C3 asserts that net benefit exists in a high-risk, low-bleeding-risk 60+ subgroup. The model shows loss of both QALYs and life-years at 70-79 at all risk levels up to 20%, and 'no net benefit in persons 60 years or older' (E39). Pooled higher-risk (>10%) studies showed bleeding exceeding benefit (E51). The subgroup-benefit evidence offered (E30, E48) concerns adults 40-59. (conceded by proposer: E39 shows no net benefit at 60+, including at higher risk. The subgroup-benefit evidence (E30, E48) is about ages 40-59. C3's claim of a 60+ benefit subgroup lacks 60+ evidence.)",
+        "round": 1
+      },
+      {
+        "id": "A43",
+        "scheme": "attack",
+        "premise_ids": [
+          "E30",
+          "E39"
+        ],
+        "claim_id": null,
+        "attacks": {
+          "target_id": "A6",
+          "type": "undercut",
+          "note": "",
+          "raises_cq": "reference_class"
+        },
+        "cq": {
+          "grounds": {
+            "status": "answered",
+            "answer": "premises supplied",
+            "evidence_ids": [
+              "E30",
+              "E39"
+            ]
+          }
+        },
+        "strength_override": null,
+        "origin": "critic",
+        "note": "[reference_class] A6's only support for a subgroup with net benefit comes from the 40-59 band (E30: Grade C, 40-59 with ≥10% risk). For 60+, E39 shows no net benefit, including at higher risk levels. A6's own risk-stratified premise (E51/E58) shows net bleeding excess at higher risk. The argument transfers a younger-band finding to C3's 60+ subgroup. (conceded by proposer: A6's subgroup-benefit support (E30) concerns ages 40-59. Its own risk-stratified premise (E51) shows bleeding excess at higher risk. A 60+ high-risk, low-bleeding-risk analysis would be needed.)",
+        "round": 1
+      },
+      {
+        "id": "A44",
+        "scheme": "attack",
+        "premise_ids": [
+          "E35",
+          "E19"
+        ],
+        "claim_id": null,
+        "attacks": {
+          "target_id": "C12",
+          "type": "rebut",
+          "note": "",
+          "raises_cq": ""
+        },
+        "cq": {
+          "grounds": {
+            "status": "answered",
+            "answer": "premises supplied",
+            "evidence_ids": [
+              "E35",
+              "E19"
+            ]
+          }
+        },
+        "strength_override": null,
+        "origin": "critic",
+        "note": "[consistency] C12 generalises from 'in ASPREE' to 'in older adults, aspirin increased all-cause mortality'. Pooled low-dose trials found no significant all-cause mortality effect (E35). Earlier pooled trials and ASCEND at 7.4 years found no excess cancer mortality (E19). These populations were younger, but the ASPREE result is a single borderline secondary endpoint (HR 1.14, 1.01-1.29) that is not replicated. (conceded by proposer: ASPREE's mortality result is a single borderline secondary endpoint that is not replicated (E35, E19). C12 should be stated as ASPREE-specific and hypothesis-generating. Replication in another older cohort would be needed.)",
+        "round": 1
+      },
+      {
+        "id": "A45",
+        "scheme": "attack",
+        "premise_ids": [
+          "E40"
+        ],
+        "claim_id": null,
+        "attacks": {
+          "target_id": "A12",
+          "type": "undercut",
+          "note": "",
+          "raises_cq": "bias"
+        },
+        "cq": {
+          "grounds": {
+            "status": "answered",
+            "answer": "premises supplied",
+            "evidence_ids": [
+              "E40"
+            ]
+          }
+        },
+        "strength_override": null,
+        "origin": "critic",
+        "note": "[bias] The stage- and site-specific cancer contrasts are multiple uncorrected subgroup tests with CIs touching 1 (colorectal death 1.02-3.06; stage 3 death 1.03-4.33). The USPSTF treats the ASPREE CRC death finding as not firm evidence of harm (E40). These signals are hypothesis-generating and cannot carry C12's mortality claim. (conceded by proposer: The stage- and site-specific cancer contrasts are uncorrected exploratory subgroups with CIs touching 1 (E7, E13, E17). The USPSTF treats the CRC finding as not firm (E40). They cannot carry C12's mortality claim.)",
+        "round": 1
+      },
+      {
+        "id": "A46",
+        "scheme": "attack",
+        "premise_ids": [
+          "E42"
+        ],
+        "claim_id": null,
+        "attacks": {
+          "target_id": "A23",
+          "type": "undercut",
+          "note": "",
+          "raises_cq": "definitions"
+        },
+        "cq": {
+          "grounds": {
+            "status": "answered",
+            "answer": "premises supplied",
+            "evidence_ids": [
+              "E42"
+            ]
+          }
+        },
+        "strength_override": null,
+        "origin": "critic",
+        "note": "[definitions] C21 says ACC/AHA advises against routine use over 70, 'citing a bleeding excess that outweighs benefit'. E42 gives no rationale, and the guideline permits consideration of aspirin in select adults aged 40-70 at higher risk. For ages 60-70, ACC/AHA does not align with the USPSTF's 'against at 60+'. C21's framing of a single agreed position and its stated basis go beyond E42. (conceded by proposer: E42 gives no rationale for the ACC/AHA position and permits consideration of aspirin in select adults up to age 70. C21's stated basis and single agreed position at 60-70 go beyond it. The ACC/AHA guideline's own reasoning would be needed.)",
+        "round": 1
+      }
+    ],
+    "main_issue_id": "Q1"
+  },
+  "tests": [
+    {
+      "id": "T1",
+      "claim_ids": [
+        "C7",
+        "C8",
+        "C6",
+        "C12",
+        "C13"
+      ],
+      "observation": "ASPREE primary reports: CV composite HR, major hemorrhage HR, all-cause mortality HR, cancer death, disability-free survival, with absolute event counts and follow-up",
+      "expected_if": {
+        "C7": "CV composite HR about 0.95 with CI crossing 1 at 4.7 years",
+        "C8": "HR near 1 across trials, including the older-adult trial",
+        "C6": "Pooled trial estimates show a significant 8-15% reduction, but ASPREE alone would be non-significant",
+        "C12": "All-cause mortality HR about 1.14 (CI 1.01-1.29) in the 2018 ASPREE paper, with cancer deaths excess and DFS HR about 1.01",
+        "C13": "All-cause mortality HR CI centered near 1 and no cancer signal"
+      },
+      "diagnosticity": "high",
+      "queries": [
+        "ASPREE Low-Dose Aspirin healthy older adults NEJM 2018 cardiovascular events major hemorrhage McNeil",
+        "ASPREE all-cause mortality cancer death aspirin older adults McNeil Annals Internal Medicine 2018",
+        "ASPREE disability-free survival aspirin 70 years hazard ratio"
+      ],
+      "status": "run",
+      "round": 1
+    },
+    {
+      "id": "T2",
+      "claim_ids": [
+        "C6",
+        "C8",
+        "C9",
+        "C11",
+        "C10",
+        "C1",
+        "C2",
+        "C4"
+      ],
+      "observation": "Pooled meta-analyses and USPSTF evidence review giving absolute events per 1,000 for MI, stroke, CV death, major GI bleed, intracranial hemorrhage, in primary prevention",
+      "expected_if": {
+        "C6": "Pooled RR about 0.89-0.90 for MACE, absolute about 1-3 per 1,000 per 5 yr",
+        "C8": "Pooled CI includes 1 for MACE",
+        "C9": "Major bleeding RR about 1.4-1.5, with excess about 2-5 per 1,000",
+        "C11": "Bleeding CI includes 1",
+        "C10": "ICH RR above 1 with significant excess",
+        "C1": "Bleeding excess is at least equal to prevented MI/stroke events",
+        "C2": "Prevented ischemic events exceed bleeds",
+        "C4": "The two are approximately equal"
+      },
+      "diagnosticity": "high",
+      "queries": [
+        "USPSTF 2022 aspirin primary prevention evidence report Guirguis-Blake JAMA major bleeding absolute risk",
+        "Zheng Roddick 2019 JAMA aspirin primary prevention meta-analysis number needed to treat harm",
+        "Abdelaziz 2019 aspirin primary prevention meta-analysis intracranial hemorrhage Cochrane 2023 Cochrane aspirin primary prevention"
+      ],
+      "status": "run",
+      "round": 1
+    },
+    {
+      "id": "T3",
+      "claim_ids": [
+        "C3",
+        "C15",
+        "C16",
+        "C17"
+      ],
+      "observation": "Subgroup/interaction results by age, baseline risk, diabetes, statin use, and bleeding risk from ASCEND, ARRIVE, ASPREE and modeling studies",
+      "expected_if": {
+        "C3": "Net benefit appears only at high CV risk with low bleeding risk",
+        "C15": "No subgroup shows reliable net benefit, bleeding excess rises with age",
+        "C16": "The diabetes or 60-69 high-risk subgroup shows net benefit (e.g. ASCEND vascular events down but bleeds up equal)",
+        "C17": "Interaction p-values are null and effects are homogeneous"
+      },
+      "diagnosticity": "high",
+      "queries": [
+        "ASCEND aspirin diabetes primary prevention serious vascular events major bleeding NEJM 2018 Bowman",
+        "aspirin primary prevention net benefit by baseline cardiovascular risk bleeding risk modelling Selak 2019 Lancet",
+        "ASPREE statin use subgroup aspirin cardiovascular events interaction",
+        "aspirin primary prevention age subgroup 60-69 vs 70+ meta-analysis interaction"
+      ],
+      "status": "planned",
+      "round": 1
+    },
+    {
+      "id": "T4",
+      "claim_ids": [
+        "C14",
+        "C12",
+        "C13"
+      ],
+      "observation": "Long-term cancer incidence and mortality under aspirin in older adults: ASPREE cancer analyses, post-trial follow-up, and colorectal cancer meta-analyses",
+      "expected_if": {
+        "C14": "Reduced colorectal cancer incidence or mortality after 10 or more years in adults 60+",
+        "C12": "Higher advanced cancer incidence and cancer death in ASPREE",
+        "C13": "No significant cancer difference"
+      },
+      "diagnosticity": "medium",
+      "queries": [
+        "ASPREE-XT post-trial follow-up aspirin cancer mortality 2024 older adults",
+        "McNeil ASPREE cancer incidence advanced cancer aspirin JNCI 2021",
+        "Rothwell aspirin long-term cancer death meta-analysis Lancet 2012 colorectal"
+      ],
+      "status": "planned",
+      "round": 1
+    },
+    {
+      "id": "T5",
+      "claim_ids": [
+        "C21",
+        "C22"
+      ],
+      "observation": "Text and grades of USPSTF 2022, ACC/AHA 2019, ESC 2021 and ADA recommendations on aspirin initiation at 60+",
+      "expected_if": {
+        "C21": "USPSTF 2022: do not initiate at 60+ (Grade D); ACC/AHA: avoid in those over 70 or at increased bleeding risk (Class III Harm)",
+        "C22": "The guidelines recommend routine initiation at 60+"
+      },
+      "diagnosticity": "high",
+      "queries": [
+        "USPSTF 2022 final recommendation statement aspirin use to prevent cardiovascular disease 60 years or older grade D",
+        "2019 ACC/AHA primary prevention guideline aspirin class III harm older than 70 Arnett",
+        "2021 ESC guidelines cardiovascular disease prevention aspirin primary prevention not recommended"
+      ],
+      "status": "planned",
+      "round": 1
+    },
+    {
+      "id": "T6",
+      "claim_ids": [
+        "C18",
+        "C19",
+        "C20",
+        "C5",
+        "C1",
+        "C2"
+      ],
+      "observation": "Quantified net-benefit analyses with explicit weights (case fatality, QALYs, or equal weight) and sensitivity of the sign",
+      "expected_if": {
+        "C18": "Equal weighting gives net harm or zero",
+        "C19": "Case-fatality or QALY weighting gives a small net benefit",
+        "C20": "Net near zero under all weights",
+        "C5": "The sign flips between weighting schemes"
+      },
+      "diagnosticity": "medium",
+      "queries": [
+        "aspirin primary prevention net clinical benefit weighted composite older adults decision analysis",
+        "aspirin primary prevention benefit harm balance QALY microsimulation age 60 USPSTF modeling study",
+        "ASPREE net benefit analysis aspirin hemorrhage versus cardiovascular events weighting"
+      ],
+      "status": "planned",
+      "round": 1
+    }
+  ],
+  "reflections": [
+    {
+      "round": 1,
+      "established": [
+        "C1: In adults 60+ without prior CVD, initiating low-dose aspirin increases net cardiovascular harm: excess major bleeding (GI and intracranial) per 1,000 treated over about 5 years equals or exceeds the MI and ischemic stroke events prevented, under equal or bleeding-weighted severity weights.",
+        "C7: In participants aged 70+ (ASPREE), aspirin did not significantly reduce the CV composite (HR about 0.95, CI including 1) over a median of about 4.7 years.",
+        "C12: In older adults, aspirin increased all-cause mortality, driven by cancer deaths, in ASPREE (HR about 1.14 overall), with no benefit on disability-free survival.",
+        "C18: Under equal weighting of MI, ischemic stroke, and major bleeding, the net effect per 1,000 treated over about 5 years in adults 60+ is harm or zero, not benefit.",
+        "C21: USPSTF 2022 recommends against initiating low-dose aspirin for primary prevention in adults 60+ (Grade D), and ACC/AHA 2019 advises against routine use in those over 70 or at increased bleeding risk, citing a bleeding excess that outweighs benefit."
+      ],
+      "assumed": [
+        "A4:reproducible defaulted — Only the summary of the run is available, not its parameters.",
+        "A16:measurement defaulted — Cancer mortality was measured the same way across ASPREE arms and subgroups, as in a randomized trial.",
+        "A20:reproducible defaulted — The run is not recorded in this excerpt.",
+        "A24:reproducible defaulted — The run is not documented in this excerpt. The USPSTF publishes the model separately.",
+        "C21 rests on one origin"
+      ],
+      "load_bearing_node_ids": [
+        "E2",
+        "E18",
+        "E21",
+        "E24",
+        "E25",
+        "E56",
+        "E59",
+        "A1",
+        "A1:design",
+        "A1:directness",
+        "A1:uncertainty",
+        "A1:reported",
+        "A2",
+        "A2:design",
+        "A2:directness",
+        "A2:uncertainty",
+        "A2:reported",
+        "E39",
+        "E51",
+        "A42",
+        "A42:grounds",
+        "A43",
+        "A43:grounds"
+      ],
+      "framing_drift": null,
+      "directive": "C2 no_argument: no argument supports this claim; evidence bearing on it is needed; C2 contrary_supported: A1 supports contrary C1; C2 contrary_supported: A2 supports contrary C1; C3 defeated_by: A6 is out because A43 (undercut) stands: [reference_class] A6's only support for a subgroup with net benefit comes from the 40-59 band (E30: Grade C, 40-59 with ≥10% risk). For 60+, E39 shows no net benefit, including at higher risk levels. A6's own risk-stratified premise (E51/E58) shows net bleeding excess at higher risk. The argument transfers a younger-band finding to C3's 60+ subgroup. (conceded by proposer: A6's subgroup-benefit support (E30) concerns ages 40-59. Its own risk-stratified premise (E51) shows bleeding excess at higher risk. A 60+ high-risk, low-bleeding-risk analysis would be needed.); C3 rebutted: rebuttal A42 stands: [consistency] C3 asserts that net benefit exists in a high-risk, low-bleeding-risk 60+ subgroup. The model shows loss of both QALYs and life-years at 70-79 at all risk levels up to 20%, and 'no net benefit in persons 60 years or older' (E39). Pooled higher-risk (>10%) studies showed bleeding exceeding benefit (E51). The subgroup-benefit evidence offered (E30, E48) concerns adults 40-59. (conceded by proposer: E39 shows no net benefit at 60+, including at higher risk. The subgroup-benefit evidence (E30, E48) is about ages 40-59. C3's claim of a 60+ benefit subgroup lacks 60+ evidence.); C4 no_argument: no argument supports this claim; evidence bearing on it is needed; C4 contrary_supported: A1 supports contrary C1; C4 contrary_supported: A2 supports contrary C1; C5 no_argument: no argument supports this claim; evidence bearing on it is needed; C5 contrary_supported: A1 supports contrary C1; C5 contrary_supported: A2 supports contrary C1"
+    }
+  ],
+  "stop_assessments": [
+    {
+      "round": 1,
+      "decision": "stop",
+      "reason": "main issue answered by C1",
+      "undecided_on_path": [],
+      "obtainable": [
+        "T3",
+        "T4",
+        "T5",
+        "T6"
+      ]
+    }
+  ],
+  "conclusion": {
+    "round": 1,
+    "answer": "Starting low-dose aspirin for primary prevention in adults 60 and over is not shown to lower net cardiovascular harm. The evidence leans toward harm or zero net benefit. C1 is accepted: excess major bleeding equals or exceeds the MI and ischemic stroke events prevented. The main trial evidence is ASPREE (adults 70+, about 4.7 years), where major hemorrhage rose from 2.8% to 3.8% (about 10 extra per 1,000) and there was no disability-free survival gain. The weighting that supports this is equal or bleeding-weighted. Under equal weighting, C18 holds that the net is harm or zero. A severity-weighted small benefit (C2, C19) has no supporting argument. The size of the net balance is not quantified for the 60+ band. The only per-1,000 netting is all-age pooled data (NNT 265 vs NNH 210, about 1 per 1,000 net bleeding excess, no CI). ASCEND, a diabetes population, gave the opposite sign under equal weights (about 11 prevented vs 8.9 bleeds per 1,000). Both pooled figures include ASPREE, so they are not independent. No 60+ subgroup with net benefit was found. USPSTF 2022 recommends against initiation at 60+ (Grade D) on a moderate-certainty conclusion of no net benefit. This guideline position rests on one origin, a lifetime QALY model that uses the same pooled inputs.",
+    "judgements": [
+      {
+        "text": "Initiating low-dose aspirin in adults 60+ increases net cardiovascular harm, or at best gives no net benefit, with bleeding at least equal to prevented events; the claim leans on ASPREE (70+) and the pooled all-age data, and is not directly measured at 60-69.",
+        "confidence": "moderate",
+        "rests_on": "E25/E56 (ASPREE major hemorrhage, about 10 per 1,000) and E24 (no disability-free survival gain); the 70+ trial is carried to the 60+ band, and the 60-69 model result ranges from slightly negative to slightly positive (E39).",
+        "claim_ids": [
+          "C1"
+        ]
+      },
+      {
+        "text": "Under equal weighting of MI, stroke and major bleeding, the net effect over about 5 years is harm or zero, not benefit; the margin is about 1 per 1,000 with no interval in all-age pools.",
+        "confidence": "moderate",
+        "rests_on": "E50 pooled NNT 265 vs NNH 210 (secondhand, not age-restricted, no CI) plus the ASPREE mortality excess (E2, E59), which is borderline (CI 1.01-1.29).",
+        "claim_ids": [
+          "C18"
+        ]
+      },
+      {
+        "text": "In ASPREE, aspirin did not significantly reduce CV events in adults 70+, though the exact hazard ratio is not documented in the evidence read.",
+        "confidence": "moderate",
+        "rests_on": "E54, a secondhand summary stating no difference in CVD events; the HR of about 0.95 is not in the retrieved evidence.",
+        "claim_ids": [
+          "C7"
+        ]
+      },
+      {
+        "text": "ASPREE showed higher all-cause mortality driven by cancer deaths (HR 1.14, 1.01-1.29) in older adults. This is a borderline, post hoc secondary finding that has not been replicated.",
+        "confidence": "moderate",
+        "rests_on": "E2 and E3, a single trial; pooled younger-population trials found no mortality effect (E35, E19).",
+        "claim_ids": [
+          "C12"
+        ]
+      },
+      {
+        "text": "USPSTF 2022 recommends against initiating aspirin at 60+ (Grade D) with moderate certainty of no net benefit. ACC/AHA 2019 advises against routine use over 70 or at increased bleeding risk, but permits consideration at 40-70 in select high-risk patients.",
+        "confidence": "moderate",
+        "rests_on": "E28, E46 and E42 (the ACC/AHA position relayed secondhand); ESC and the original ACC/AHA text were not retrieved in this inquiry.",
+        "claim_ids": [
+          "C21"
+        ]
+      },
+      {
+        "text": "No 60+ subgroup with net benefit was shown. Benefit rises with baseline risk, but bleeding rises with age and offsets it, and the evidence for a benefit subgroup concerns ages 40-59.",
+        "confidence": "low",
+        "rests_on": "E39 and E51 against C3/C16; C3 is not accepted, and C15 has no accepted support, so this is a lean and not a settled finding.",
+        "claim_ids": [
+          "C3",
+          "C15",
+          "C16"
+        ]
+      },
+      {
+        "text": "The size of the bleeding and CV-event effects in the 60+ band is not settled. C9's 2-5 per 1,000 range is understated versus ASPREE (about 10 per 1,000), and the CV benefit estimate (C6) has no supporting argument.",
+        "confidence": "low",
+        "rests_on": "A31 rebuttal of C9; E34 gives relative effects only, with no absolute events per 1,000.",
+        "claim_ids": [
+          "C6",
+          "C9",
+          "C10"
+        ]
+      }
+    ],
+    "what_would_change_this": [
+      "An age-restricted (60-69 and 70+) pooled analysis with absolute MI, stroke and major bleeding per 1,000 and confidence intervals showing prevented events exceeding bleeds under equal weights.",
+      "A 60-69 specific balance, or a microsimulation sensitivity run with a delayed colorectal cancer benefit, that turns the 'slightly negative to slightly positive' result clearly positive.",
+      "Long-term ASPREE follow-up showing a delayed cancer incidence or mortality reduction, or a replication of the cancer-death excess in another older cohort.",
+      "A 60+ high-risk, low-bleeding-risk subgroup analysis showing net benefit.",
+      "The primary ASPREE CV composite estimate (HR and CI) and intracranial hemorrhage counts, which would ground C7's figure and C10."
+    ],
+    "unresolved": [
+      "Per-1,000 net balance specifically for ages 60-69 is not established; the evidence is mostly ASPREE (70+) and all-age pools.",
+      "Whether the sign depends on the weighting (C5) is not settled: no argument supports a severity-weighted benefit, but none was tested quantitatively.",
+      "Absolute CV benefit per 1,000 (C6) and the intracranial hemorrhage excess (C10) are not quantified in the documents read.",
+      "ESC 2021 guidance and the original ACC/AHA 2019 text were not retrieved in this inquiry; C21 rests on USPSTF and a secondhand ACC/AHA summary.",
+      "The cancer-mortality excess is post hoc and exploratory, and the effect of statin use and diabetes on the balance is not resolved (ASCEND's diabetes data is not restricted to 60+).",
+      "The evidence is not independent: the pooled analysis includes ASPREE, ARRIVE and ASCEND, and the microsimulation uses the same pooled inputs."
+    ],
+    "flags": [
+      "absence_assertion: Under equal weighting of MI, stroke and major bleeding, the net effect over about 5 years is harm or zero, not benefit; the margin is about 1 per 1,000 with no interval in all-age pools."
+    ]
+  },
+  "evaluation": {
+    "applicable": {
+      "A1": true,
+      "A2": true,
+      "A3": true,
+      "A4": true,
+      "A5": true,
+      "A6": true,
+      "A7": true,
+      "A8": true,
+      "A9": true,
+      "A10": true,
+      "A11": true,
+      "A12": true,
+      "A13": true,
+      "A14": true,
+      "A15": false,
+      "A16": true,
+      "A17": true,
+      "A18": true,
+      "A19": true,
+      "A20": true,
+      "A21": true,
+      "A22": true,
+      "A23": true,
+      "A24": true,
+      "A25": true,
+      "A26": true,
+      "A27": true,
+      "A28": true,
+      "A29": true,
+      "A30": true,
+      "A31": true,
+      "A32": true,
+      "A33": true,
+      "A34": true,
+      "A35": true,
+      "A36": true,
+      "A37": true,
+      "A38": true,
+      "A39": true,
+      "A40": true,
+      "A41": true,
+      "A42": true,
+      "A43": true,
+      "A44": true,
+      "A45": true,
+      "A46": true
+    },
+    "inapplicable_reasons": {
+      "A15": [
+        "open assumption: reported"
+      ]
+    },
+    "argument_strength": {
+      "A1": "moderate",
+      "A2": "moderate",
+      "A3": "moderate",
+      "A4": "weak",
+      "A5": "weak",
+      "A6": "moderate",
+      "A7": "moderate",
+      "A8": "weak",
+      "A9": "moderate",
+      "A10": "moderate",
+      "A11": "moderate",
+      "A12": "weak",
+      "A13": "strong",
+      "A14": "weak",
+      "A15": "weak",
+      "A16": "weak",
+      "A17": "moderate",
+      "A18": "moderate",
+      "A19": "moderate",
+      "A20": "weak",
+      "A21": "moderate",
+      "A22": "moderate",
+      "A23": "moderate",
+      "A24": "weak",
+      "A25": "moderate",
+      "A26": "weak",
+      "A27": "moderate",
+      "A28": "weak",
+      "A29": "moderate",
+      "A30": "moderate",
+      "A31": "moderate",
+      "A32": "moderate",
+      "A33": "moderate",
+      "A34": "moderate",
+      "A35": "moderate",
+      "A36": "moderate",
+      "A37": "weak",
+      "A38": "weak",
+      "A39": "moderate",
+      "A40": "weak",
+      "A41": "moderate",
+      "A42": "moderate",
+      "A43": "moderate",
+      "A44": "weak",
+      "A45": "moderate",
+      "A46": "moderate"
+    },
+    "labels": {
+      "A1": "in",
+      "A2": "in",
+      "A3": "out",
+      "A4": "out",
+      "A5": "out",
+      "A6": "out",
+      "A7": "out",
+      "A8": "in",
+      "A9": "out",
+      "A10": "in",
+      "A11": "in",
+      "A12": "out",
+      "A13": "out",
+      "A14": "out",
+      "A16": "in",
+      "A17": "in",
+      "A18": "out",
+      "A19": "in",
+      "A20": "out",
+      "A21": "in",
+      "A22": "in",
+      "A23": "out",
+      "A24": "in",
+      "A25": "in",
+      "A26": "in",
+      "A27": "in",
+      "A28": "in",
+      "A29": "in",
+      "A30": "in",
+      "A31": "in",
+      "A32": "in",
+      "A33": "in",
+      "A34": "in",
+      "A35": "in",
+      "A36": "in",
+      "A37": "in",
+      "A38": "in",
+      "A39": "in",
+      "A40": "in",
+      "A41": "in",
+      "A42": "in",
+      "A43": "in",
+      "A44": "in",
+      "A45": "in",
+      "A46": "in"
+    },
+    "claims": {
+      "C1": {
+        "standard": "preponderance",
+        "status": "in",
+        "pro_ids": [
+          "A1",
+          "A2"
+        ],
+        "con_ids": [
+          "A32"
+        ],
+        "pro_strength": 3,
+        "con_strength": 2,
+        "corroborated": true,
+        "met": true
+      },
+      "C2": {
+        "standard": "preponderance",
+        "status": "out",
+        "pro_ids": [],
+        "con_ids": [
+          "A1",
+          "A2"
+        ],
+        "pro_strength": 0,
+        "con_strength": 2,
+        "corroborated": false,
+        "met": false
+      },
+      "C3": {
+        "standard": "preponderance",
+        "status": "out",
+        "pro_ids": [],
+        "con_ids": [
+          "A42"
+        ],
+        "pro_strength": 0,
+        "con_strength": 2,
+        "corroborated": false,
+        "met": false
+      },
+      "C4": {
+        "standard": "preponderance",
+        "status": "out",
+        "pro_ids": [],
+        "con_ids": [
+          "A1",
+          "A2"
+        ],
+        "pro_strength": 0,
+        "con_strength": 2,
+        "corroborated": false,
+        "met": false
+      },
+      "C5": {
+        "standard": "preponderance",
+        "status": "out",
+        "pro_ids": [],
+        "con_ids": [
+          "A1",
+          "A2"
+        ],
+        "pro_strength": 0,
+        "con_strength": 2,
+        "corroborated": false,
+        "met": false
+      },
+      "C6": {
+        "standard": "preponderance",
+        "status": "undecided",
+        "pro_ids": [],
+        "con_ids": [],
+        "pro_strength": 0,
+        "con_strength": 0,
+        "corroborated": false,
+        "met": false
+      },
+      "C7": {
+        "standard": "preponderance",
+        "status": "in",
+        "pro_ids": [
+          "A8"
+        ],
+        "con_ids": [],
+        "pro_strength": 1,
+        "con_strength": 0,
+        "corroborated": false,
+        "met": true
+      },
+      "C8": {
+        "standard": "preponderance",
+        "status": "out",
+        "pro_ids": [],
+        "con_ids": [
+          "A29",
+          "A8"
+        ],
+        "pro_strength": 0,
+        "con_strength": 2,
+        "corroborated": false,
+        "met": false
+      },
+      "C9": {
+        "standard": "preponderance",
+        "status": "undecided",
+        "pro_ids": [
+          "A10"
+        ],
+        "con_ids": [
+          "A31"
+        ],
+        "pro_strength": 2,
+        "con_strength": 2,
+        "corroborated": false,
+        "met": false
+      },
+      "C10": {
+        "standard": "preponderance",
+        "status": "undecided",
+        "pro_ids": [],
+        "con_ids": [],
+        "pro_strength": 0,
+        "con_strength": 0,
+        "corroborated": false,
+        "met": false
+      },
+      "C11": {
+        "standard": "preponderance",
+        "status": "out",
+        "pro_ids": [],
+        "con_ids": [
+          "A10"
+        ],
+        "pro_strength": 0,
+        "con_strength": 2,
+        "corroborated": false,
+        "met": false
+      },
+      "C12": {
+        "standard": "preponderance",
+        "status": "in",
+        "pro_ids": [
+          "A11"
+        ],
+        "con_ids": [
+          "A44"
+        ],
+        "pro_strength": 2,
+        "con_strength": 1,
+        "corroborated": false,
+        "met": true
+      },
+      "C13": {
+        "standard": "preponderance",
+        "status": "out",
+        "pro_ids": [],
+        "con_ids": [
+          "A11"
+        ],
+        "pro_strength": 0,
+        "con_strength": 2,
+        "corroborated": false,
+        "met": false
+      },
+      "C14": {
+        "standard": "preponderance",
+        "status": "out",
+        "pro_ids": [],
+        "con_ids": [
+          "A26"
+        ],
+        "pro_strength": 0,
+        "con_strength": 1,
+        "corroborated": false,
+        "met": false
+      },
+      "C15": {
+        "standard": "clear_and_convincing",
+        "status": "out",
+        "pro_ids": [],
+        "con_ids": [
+          "A16"
+        ],
+        "pro_strength": 0,
+        "con_strength": 1,
+        "corroborated": false,
+        "met": false
+      },
+      "C16": {
+        "standard": "clear_and_convincing",
+        "status": "out",
+        "pro_ids": [],
+        "con_ids": [
+          "A16"
+        ],
+        "pro_strength": 0,
+        "con_strength": 1,
+        "corroborated": false,
+        "met": false
+      },
+      "C17": {
+        "standard": "clear_and_convincing",
+        "status": "undecided",
+        "pro_ids": [
+          "A16"
+        ],
+        "con_ids": [],
+        "pro_strength": 1,
+        "con_strength": 0,
+        "corroborated": false,
+        "met": false
+      },
+      "C18": {
+        "standard": "preponderance",
+        "status": "in",
+        "pro_ids": [
+          "A17",
+          "A19",
+          "A21"
+        ],
+        "con_ids": [],
+        "pro_strength": 3,
+        "con_strength": 0,
+        "corroborated": true,
+        "met": true
+      },
+      "C19": {
+        "standard": "preponderance",
+        "status": "out",
+        "pro_ids": [],
+        "con_ids": [
+          "A17",
+          "A19",
+          "A21"
+        ],
+        "pro_strength": 0,
+        "con_strength": 2,
+        "corroborated": false,
+        "met": false
+      },
+      "C20": {
+        "standard": "preponderance",
+        "status": "out",
+        "pro_ids": [],
+        "con_ids": [
+          "A17",
+          "A19",
+          "A21"
+        ],
+        "pro_strength": 0,
+        "con_strength": 2,
+        "corroborated": false,
+        "met": false
+      },
+      "C21": {
+        "standard": "preponderance",
+        "status": "in",
+        "pro_ids": [
+          "A22",
+          "A24",
+          "A25"
+        ],
+        "con_ids": [],
+        "pro_strength": 2,
+        "con_strength": 0,
+        "corroborated": false,
+        "met": true
+      },
+      "C22": {
+        "standard": "preponderance",
+        "status": "out",
+        "pro_ids": [],
+        "con_ids": [
+          "A22",
+          "A24",
+          "A25"
+        ],
+        "pro_strength": 0,
+        "con_strength": 2,
+        "corroborated": false,
+        "met": false
+      }
+    },
+    "issues": {
+      "Q1": [
+        "C1"
+      ],
+      "Q2": [
+        "C7"
+      ],
+      "Q3": [],
+      "Q4": [
+        "C12"
+      ],
+      "Q5": [],
+      "Q6": [
+        "C18"
+      ],
+      "Q7": [
+        "C21"
+      ]
+    },
+    "flags": [
+      {
+        "code": "inapplicable_argument",
+        "node_id": "A15",
+        "detail": "open assumption: reported"
+      },
+      {
+        "code": "single_origin",
+        "node_id": "C21",
+        "detail": "accepted on evidence from one origin"
+      }
+    ],
+    "converged": true
+  },
+  "notes": [
+    "critic needs: INDEPENDENCE NOTE: E50 (the pooled NNT 265 / NNH 210 meta-analysis) includes ASPREE, ARRIVE and ASCEND. A1/A2 (ASPREE), A7 (ARRIVE, ASCEND) and A3/A19 (the pool) are therefore not independent support for C1/C18. E2, E26 and E59 all report the same ASPREE mortality rates. E39 (the microsimulation) takes as inputs the same pooled estimates as E34/E37.",
+    "critic needs: McNeil et al., NEJM 2018, 'Effect of Aspirin on Cardiovascular Events and Bleeding in the Healthy Elderly' (ASPREE): CV composite HR and CI, major hemorrhage and intracranial hemorrhage counts per 1,000 over 4.7 years. Needed to ground C7's HR of about 0.95 and C10.",
+    "critic needs: Guirguis-Blake et al., JAMA 2022, AHRQ evidence review for USPSTF aspirin: absolute events per 1,000 for MI, stroke, major GI bleeding and intracranial bleeding, stratified by age ≥60 or ≥70.",
+    "critic needs: Zheng & Roddick, JAMA 2019 meta-analysis (likely source of NNT 265 / NNH 210): CIs, follow-up, and age-subgroup (≥65/≥70) results.",
+    "critic needs: Dehmer et al., JAMA 2022, USPSTF microsimulation: per-1,000 net CV events and bleeds at ages 60-69 by 10-year risk, and sensitivity to the no-CRC-effect assumption.",
+    "critic needs: ASPREE-XT long-term follow-up (Lancet Oncology / later reports): cancer incidence and mortality beyond 4.7 years, to test a delayed offset.",
+    "critic needs: ESC 2021 Guidelines on CVD prevention in clinical practice: aspirin recommendation for primary prevention by age, including diabetes at high risk. C21/C22 currently rest only on USPSTF and a secondhand ACC/AHA summary.",
+    "critic needs: Arnett et al., 2019 ACC/AHA Primary Prevention Guideline, original text and rationale for the aspirin recommendation (Class IIb for 40-70, III: Harm for >70).",
+    "critic needs: ARRIVE (Gaziano, Lancet 2018) and ASCEND (NEJM 2018) age-stratified (≥60 or ≥65) net results: serious vascular events vs major bleeds per 1,000."
+  ]
+}

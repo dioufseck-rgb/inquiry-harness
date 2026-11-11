@@ -1,0 +1,411 @@
+flowchart BT
+    Q1{{"Q1: Did the August 2023 expansion of London's Ultra Low Emission Zone red…"}}
+    Q2{{"Q2: What did roadside NO2 concentrations at outer London monitoring sites…"}}
+    Q3{{"Q3: What did official or independent evaluations (e.g. the Mayor's/TfL/GL…"}}
+    Q4{{"Q4: What would NO2 have been in outer London without the expansion, given…"}}
+    Q5{{"Q5: What changed in vehicle fleet compliance and traffic volumes in outer…"}}
+    Q6{{"Q6: What other factors changed concurrently in outer London that could af…"}}
+    C1["C1 ?: The expansion reduced roadside NO2 at outer London monitors by a meas…"]
+    C1 -.->|answers| Q1
+    C2["C2 ?: The expansion produced a small reduction in outer London roadside NO2…"]
+    C2 -.->|answers| Q1
+    C3["C3 ✗: After accounting for the background downward trend and meteorology, r…"]
+    C3 -.->|answers| Q1
+    C4["C4 ?: The question cannot be answered as posed: the effect is real but too …"]
+    C4 -.->|answers| Q1
+    C5["C5 ?: Outer London roadside and kerbside NO2 monitors recorded lower concen…"]
+    C5 -.->|answers| Q2
+    C6["C6 ?: Outer London roadside NO2 at monitors showed no consistent before/aft…"]
+    C6 -.->|answers| Q2
+    C7["C7 ✗: Outer London has too few roadside and kerbside monitors, or too many …"]
+    C7 -.->|answers| Q2
+    C8["C8 ✗: Published evaluations (the GLA/TfL/Mayor's reports, with Imperial/Kin…"]
+    C8 -.->|answers| Q3
+    C9["C9 ?: Independent analyses using difference-in-differences against sites ou…"]
+    C9 -.->|answers| Q3
+    C10["C10 ?: No published evaluation using observed monitor data provides a quanti…"]
+    C10 -.->|answers| Q3
+    C11["C11 ?: The counterfactual path, using the pre-existing trend and meteorologi…"]
+    C11 -.->|answers| Q4
+    C12["C12 ✗: The counterfactual path, estimated from control sites outside Greater…"]
+    C12 -.->|answers| Q4
+    C13["C13 ?: Counterfactual estimates for outer London vary so widely with the met…"]
+    C13 -.->|answers| Q4
+    C14["C14 ✗: The share of ULEZ-compliant vehicles observed in outer London rose af…"]
+    C14 -.->|answers| Q5
+    C15["C15 ✓: Outer London compliance and traffic volumes showed no change around t…"]
+    C15 -.->|answers| Q5
+    C16["C16 ✗: Outer London traffic volumes fell by more than 2-3% after the expansi…"]
+    C16 -.->|answers| Q5
+    C17["C17 ✗: Concurrent factors (a milder or windier autumn and winter, rising rem…"]
+    C17 -.->|answers| Q6
+    C18["C18 ?: No concurrent factor in outer London changed enough during the period…"]
+    C18 -.->|answers| Q6
+    C19["C19 ?: Local traffic schemes, such as low traffic neighbourhoods and road wo…"]
+    C19 -.->|answers| Q6
+    E1(["E1: The official one-year report estimates that roadside NO2 in outer Lon…"])
+    E2(["E2: The report estimates that all ULEZ phases combined lowered roadside N…"])
+    E3(["E3: The report states that the general improvement in NO2 across London s…"])
+    E4(["E4: The report says the effects began before the formal start date, with …"])
+    E5(["E5: The report estimates that around 97% of vehicles seen in London are U…"])
+    E6(["E6: The official one-year report estimates outer London NO2 was 4.8% lowe…"])
+    E7(["E7: The report's 27% London-wide NO2 fall is not an expansion effect spec…"])
+    E8(["E8: Compliance of vehicles subject to the standards was 96.7% London-wide…"])
+    E9(["E9: Outer London boroughs that opposed the expansion saw NOx falls of abo…"])
+    E10(["E10: The Conservative London Assembly spokesman disputes that a counterfac…"])
+    E11(["E11: Modelled London-wide population-weighted mean NO2 fell from 28.8 to 1…"])
+    E12(["E12: The report attributes the 2019-2024 improvement to long-term trends p…"])
+    E13(["E13: TfL-commissioned modelling projected that the expansion would cut tra…"])
+    E14(["E14: Earlier ULEZ phases were estimated to have reduced roadside NO2 by 46…"])
+    E15(["E15: About 90% of cars seen in outer London already met ULEZ standards bef…"])
+    E16(["E16: A 2021 study found the first ULEZ phase reduced NO2 by under 3% avera…"])
+    E17(["E17: Using weather normalisation and augmented synthetic control, the stud…"])
+    E18(["E18: The study describes its design: 124 London monitoring sites, 60 other…"])
+    E19(["E19: The authors say simple before-and-after comparisons are unreliable be…"])
+    E20(["E20: The abstract reports that the 2019 central ULEZ cut NO2 by about 19.6…"])
+    E21(["E21: Independent weather-normalised synthetic-control analysis finds no st…"])
+    E22(["E22: The Fig. 3 caption states that significant NO2 and NOx effects were f…"])
+    E23(["E23: The authors explain the absence of an ULEZ3 effect by pre-existing sp…"])
+    E24(["E24: The authors critique the GLA's DID evaluation of ULEZ1. They say it u…"])
+    E25(["E25: For ULEZ1, outer London NO2 changes at traffic sites were not statist…"])
+    E26(["E26: For ULEZ3 (the August 2023 expansion), the non-compliant vehicle shar…"])
+    E27(["E27: The share of non-compliant vehicles fell from 23.1% in January 2020 t…"])
+    E28(["E28: The authors infer that the expansions to inner and outer London limit…"])
+    E29(["E29: The study used 124 London AURN/LAQN sites and 60 other UK city sites …"])
+    E30(["E30: In 2023 after ULEZ3, urban traffic site NO2 across central, inner and…"])
+    E31(["E31: The study's design for estimating the counterfactual: hourly NO2 and …"])
+    E32(["E32: The weather-normalised model's training data run from 8 March 2018 to…"])
+    E33(["E33: The authors report model validation and robustness checks. The random…"])
+    E34(["E34: Confidence intervals for the effects come from a Jackknife+ procedure…"])
+    E35(["E35: The study's data come from public monitoring networks (AURN and LAQN)…"])
+    E36(["E36: The reference list shows the methods used: meteorological normalisati…"])
+    E37(["E37: The study's headline finding is that the August 2023 ULEZ expansion (…"])
+    E38(["E38: The method builds the counterfactual from 60 UK sites outside London …"])
+    E39(["E39: The study uses 124 London monitoring sites, which suggests that cover…"])
+    E40(["E40: For the 2019 ULEZ1, outer London urban background NO2 fell by 4.6% (~…"])
+    E41(["E41: Using weather-normalised synthetic counterfactuals, the August 2023 e…"])
+    E42(["E42: The weather-normalised trend and the counterfactual trend did not dif…"])
+    E43(["E43: Non-compliant vehicles in London were already down to 7.4% by the sta…"])
+    E44(["E44: For ULEZ1, NO2 effects at outer London traffic sites were small and n…"])
+    E45(["E45: The authors criticise the GLA's difference-in-differences design. Its…"])
+    E46(["E46: The study's ULEZ3 evaluation used hourly data from 19 July 2021 to 30…"])
+    E47(["E47: The control group is sites in other major UK cities outside London, s…"])
+    E48(["E48: The analysis uses 124 London sites and 60 sites in other UK cities, s…"])
+    E49(["E49: Hourly data are weather-normalised with random forest models, which u…"])
+    E50(["E50: The authors report 2023 post-ULEZ3 NO2 levels of 15.7-44.8 µg/m3 at u…"])
+    E51(["E51: The study's counterfactual comes from a Ridge augmented synthetic con…"])
+    E52(["E52: Separate counterfactuals were built for central, inner and outer Lond…"])
+    E53(["E53: The authors tested for an announcement (anticipatory) effect only for…"])
+    E54(["E54: The averaged effect excludes the first two weeks after implementation…"])
+    E55(["E55: The reference list shows the authors used machine-learning causal-inf…"])
+    E56(["E56: The official 'up to 4.8%' reduction, applied to the reported 2024 out…"])
+    E57(["E57: If the upper-end 4.7% fall is read as a relative fall, the non-compli…"])
+    E58(["E58: The pre-expansion modelled projection of about 1.5% for outer London …"])
+    E59(["E59: London-wide annual roadside NO2 fell 49% between 2016 and 2023, again…"])
+    E60(["E60: The report says more than 150 reference-grade monitoring sites operat…"])
+    E61(["E61: The report states that more than 95% of vehicles seen in London are n…"])
+    E62(["E62: The GLA attributes London's accelerated emissions reduction since 201…"])
+    E63(["E63: The executive summary reports UK zone-level NO2 compliance for 2024: …"])
+    E64(["E64: As of 2020, London had 1,699 passive diffusion tube locations and 127…"])
+    E65(["E65: Monitoring provision varies a lot between boroughs. Some, such as Bex…"])
+    E66(["E66: The report advises that the best use of local monitoring data is to c…"])
+    E67(["E67: Describes a meteorological normalisation method (random forest via rm…"])
+    E68(["E68: The lockdown analysis found NO2 about 40% below the model counterfact…"])
+    E69(["E69: The method's own stated rationale is that meteorological normalisatio…"])
+    E70(["E70: UK-wide roadside NO2 annual mean fell to 20.4 µg/m3 in 2025. This is …"])
+    E71(["E71: Long-run UK roadside trend: NO2 fell by about 1.8 µg/m3 per year on a…"])
+    E72(["E72: The page gives no meteorological normalisation, no outer London serie…"])
+    E73(["E73: UK roadside NO2 was roughly flat to slightly rising in the later year…"])
+    E74(["E74: The GLA's own COVID analysis states that its before/after NO2 compari…"])
+    E75(["E75: The GLA argues that year-on-year comparisons are inappropriate for Lo…"])
+    E76(["E76: If the observed 2024 outer London level were 22 µg/m3 and the officia…"])
+    E77(["E77: The official 'up to 4.8%' effect, in absolute terms, is equivalent to…"])
+    E78(["E78: Reading the upper-end fall as relative, the drop in non-compliant sha…"])
+    E79(["E79: The pre-implementation fleet shift (Jan 2020 to implementation) was l…"])
+    A1("A1 ✗<br/>study_result")
+    E17 --> A1
+    E21 --> A1
+    E22 --> A1
+    E37 --> A1
+    E41 --> A1
+    E42 --> A1
+    E31 --> A1
+    E34 --> A1
+    E38 --> A1
+    E52 --> A1
+    A1 --> C3
+    A2("A2 ✗<br/>study_result")
+    E21 --> A2
+    E41 --> A2
+    E26 --> A2
+    E28 --> A2
+    E44 --> A2
+    E56 --> A2
+    E58 --> A2
+    A2 --> C2
+    A3("A3 ✗<br/>document_record")
+    E1 --> A3
+    E6 --> A3
+    A3 --> C1
+    A4("A4 ✗<br/>best_explanation")
+    E4 --> A4
+    E27 --> A4
+    E43 --> A4
+    E23 --> A4
+    E10 --> A4
+    E15 --> A4
+    E33 --> A4
+    E53 --> A4
+    A4 --> C4
+    A5("A5 ✗<br/>statistical_generalization")
+    E3 --> A5
+    A5 --> C5
+    A6("A6 ✗<br/>study_result")
+    E1 --> A6
+    E6 --> A6
+    A6 --> C8
+    A7("A7 ✗<br/>model_output")
+    E5 --> A7
+    A7 --> C8
+    A8("A8 ✗<br/>study_result")
+    E17 --> A8
+    E21 --> A8
+    E31 --> A8
+    E37 --> A8
+    E38 --> A8
+    E41 --> A8
+    E52 --> A8
+    A8 --> C9
+    A9("A9 ✗<br/>study_result")
+    E24 --> A9
+    E45 --> A9
+    E47 --> A9
+    A9 --> C9
+    A10("A10 ✗<br/>study_result")
+    E10 --> A10
+    A10 --> C10
+    A11("A11 ✗<br/>study_result")
+    E17 --> A11
+    E21 --> A11
+    E37 --> A11
+    E41 --> A11
+    E42 --> A11
+    E31 --> A11
+    E38 --> A11
+    E18 --> A11
+    E49 --> A11
+    A11 --> C12
+    A12("A12 ✗<br/>expert_opinion")
+    E28 --> A12
+    A12 --> C12
+    A13("A13 ✗<br/>expert_opinion")
+    E24 --> A13
+    E45 --> A13
+    E47 --> A13
+    E10 --> A13
+    A13 --> C13
+    A14("A14 ✓<br/>document_record")
+    E8 --> A14
+    E5 --> A14
+    A14 --> C14
+    A15("A15 ✓<br/>study_result")
+    E26 --> A15
+    E43 --> A15
+    A15 --> C15
+    A16("A16 ✗<br/>statistical_generalization")
+    E27 --> A16
+    E15 --> A16
+    E23 --> A16
+    A16 --> C15
+    A17("A17 ✗<br/>statistical_generalization")
+    E27 --> A17
+    A17 --> C17
+    A18>"A18 ✓<br/>attack<br/>undercut"]
+    E27 --> A18
+    E4 --> A18
+    E32 --> A18
+    A18 -. undercut .-x A1
+    A19>"A19 ✓<br/>attack<br/>undercut"]
+    E27 --> A19
+    E4 --> A19
+    E47 --> A19
+    A19 -. undercut .-x A11
+    A20>"A20 ✓<br/>attack<br/>undercut"]
+    E27 --> A20
+    E4 --> A20
+    E47 --> A20
+    A20 -. undercut .-x A8
+    A21>"A21 ✓<br/>attack<br/>rebut"]
+    E26 --> A21
+    E43 --> A21
+    E5 --> A21
+    A21 -. rebut .-x C3
+    A22>"A22 ✓<br/>attack<br/>rebut"]
+    E1 --> A22
+    A22 -. rebut .-x C3
+    A23>"A23 ✓<br/>attack<br/>undermine"]
+    E44 --> A23
+    E25 --> A23
+    A23 -. undermine .-x E22
+    A24>"A24 ✓<br/>attack<br/>undermine"]
+    E3 --> A24
+    A24 -. undermine .-x E56
+    A25>"A25 ✓<br/>attack<br/>undermine"]
+    E5 --> A25
+    E13 --> A25
+    A25 -. undermine .-x E58
+    A26>"A26 ✓<br/>attack<br/>undermine"]
+    E1 --> A26
+    A26 -. undermine .-x E6
+    A27>"A27 ✓<br/>attack<br/>undercut"]
+    E1 --> A27
+    A27 -. undercut .-x A3
+    A28>"A28 ✓<br/>attack<br/>undercut"]
+    E24 --> A28
+    E45 --> A28
+    A28 -. undercut .-x A6
+    A29>"A29 ✓<br/>attack<br/>rebut"]
+    E41 --> A29
+    E37 --> A29
+    A29 -. rebut .-x C8
+    A30>"A30 ✓<br/>attack<br/>undercut"]
+    E28 --> A30
+    E44 --> A30
+    A30 -. undercut .-x A7
+    A31>"A31 ✗<br/>attack<br/>rebut"]
+    E40 --> A31
+    E31 --> A31
+    E34 --> A31
+    A31 -. rebut .-x C4
+    A32>"A32 ✓<br/>attack<br/>undermine"]
+    E31 --> A32
+    E18 --> A32
+    A32 -. undermine .-x E10
+    A33>"A33 ✓<br/>attack<br/>rebut"]
+    E8 --> A33
+    E26 --> A33
+    A33 -. rebut .-x C15
+    A34>"A34 ✓<br/>attack<br/>undercut"]
+    E43 --> A34
+    E15 --> A34
+    A34 -. undercut .-x A16
+    A35>"A35 ✓<br/>attack<br/>undercut"]
+    E4 --> A35
+    E27 --> A35
+    A35 -. undercut .-x A17
+    A36>"A36 ✓<br/>attack<br/>rebut"]
+    E42 --> A36
+    A36 -. rebut .-x C17
+    A37>"A37 ✓<br/>attack<br/>undercut"]
+    E3 --> A37
+    E19 --> A37
+    A37 -. undercut .-x A5
+    A38>"A38 ✓<br/>attack<br/>rebut"]
+    E1 --> A38
+    A38 -. rebut .-x C12
+    A39>"A39 ✓<br/>attack<br/>undercut"]
+    E40 --> A39
+    E31 --> A39
+    E34 --> A39
+    A39 -. undercut .-x A31
+    A40("A40 ✗<br/>model_output")
+    E77 --> A40
+    E56 --> A40
+    A40 --> C2
+    A41("A41 ✗<br/>best_explanation")
+    E78 --> A41
+    E79 --> A41
+    A41 --> C2
+    A42("A42 ✗<br/>document_record")
+    E59 --> A42
+    E71 --> A42
+    E65 --> A42
+    E66 --> A42
+    A42 --> C4
+    A43("A43 ✗<br/>document_record")
+    E64 --> A43
+    E60 --> A43
+    A43 --> C7
+    A44("A44 ✗<br/>statistical_generalization")
+    E73 --> A44
+    E71 --> A44
+    A44 --> C13
+    A45("A45 ✗<br/>document_record")
+    E61 --> A45
+    A45 --> C14
+    A46("A46 ✗<br/>model_output")
+    E78 --> A46
+    E79 --> A46
+    A46 --> C15
+    A47("A47 ✗<br/>document_record")
+    E19 --> A47
+    A47 --> C17
+    A48("A48 ✗<br/>study_result")
+    E42 --> A48
+    A48 --> C17
+    A49>"A49 ✓<br/>attack<br/>undermine"]
+    E8 --> A49
+    E26 --> A49
+    A49 -. undermine .-x E78
+    A50>"A50 ✓<br/>attack<br/>undercut"]
+    E8 --> A50
+    E43 --> A50
+    A50 -. undercut .-x A41
+    A51>"A51 ✓<br/>attack<br/>undercut"]
+    E8 --> A51
+    A51 -. undercut .-x A46
+    A52>"A52 ✓<br/>attack<br/>undercut"]
+    E24 --> A52
+    E47 --> A52
+    A52 -. undercut .-x A9
+    A53>"A53 ✓<br/>attack<br/>rebut"]
+    E3 --> A53
+    E52 --> A53
+    A53 -. rebut .-x C7
+    A54>"A54 ✓<br/>attack<br/>undercut"]
+    E64 --> A54
+    E60 --> A54
+    A54 -. undercut .-x A43
+    A55>"A55 ✓<br/>attack<br/>undercut"]
+    E42 --> A55
+    A55 -. undercut .-x A48
+    A56>"A56 ✓<br/>attack<br/>undercut"]
+    E19 --> A56
+    E42 --> A56
+    A56 -. undercut .-x A47
+    A57>"A57 ✓<br/>attack<br/>undercut"]
+    E28 --> A57
+    E26 --> A57
+    A57 -. undercut .-x A12
+    A58>"A58 ✓<br/>attack<br/>undercut"]
+    E73 --> A58
+    E71 --> A58
+    A58 -. undercut .-x A44
+    A59>"A59 ✓<br/>attack<br/>undercut"]
+    E52 --> A59
+    E40 --> A59
+    A59 -. undercut .-x A42
+    A60>"A60 ✓<br/>attack<br/>undercut"]
+    E27 --> A60
+    A60 -. undercut .-x A45
+    C1 <-. contrary .-> C2
+    C1 <-. contrary .-> C3
+    C1 <-. contrary .-> C4
+    C2 <-. contrary .-> C3
+    C2 <-. contrary .-> C4
+    C3 <-. contrary .-> C4
+    C5 <-. contrary .-> C6
+    C5 <-. contrary .-> C7
+    C6 <-. contrary .-> C7
+    C8 <-. contrary .-> C9
+    C10 <-. contrary .-> C8
+    C10 <-. contrary .-> C9
+    C11 <-. contrary .-> C12
+    C11 <-. contrary .-> C13
+    C12 <-. contrary .-> C13
+    C14 <-. contrary .-> C15
+    C14 <-. contrary .-> C16
+    C15 <-. contrary .-> C16
+    C17 <-. contrary .-> C18
+    C17 <-. contrary .-> C19
+    C18 <-. contrary .-> C19
