@@ -1,0 +1,249 @@
+{
+  "whole_question_answered": false,
+  "answer_scope": "",
+  "components_accepted": 17,
+  "main_issue_scope_label": "untested",
+  "composed_claims": 0,
+  "composition_accepted": 0,
+  "id": "sol",
+  "rounds": 2,
+  "sources": 14,
+  "origins": 13,
+  "duplicate_sources": 1,
+  "evidence": 365,
+  "orphans": 291,
+  "supporting_args": 20,
+  "supporting_in": 18,
+  "claims_supported_unargued": 0,
+  "coverage_eligible_claims": [
+    "C11",
+    "C12",
+    "C16",
+    "C17",
+    "C18",
+    "C20",
+    "C23",
+    "C25",
+    "C27",
+    "C28",
+    "C29",
+    "C30"
+  ],
+  "main_supporting_in": 0,
+  "main_component_supporting_in": 5,
+  "undecided_empty": true,
+  "undecided_supported": false,
+  "attacks": 5,
+  "attacks_out": 2,
+  "attacks_discharged": 0,
+  "counters_dropped": 0,
+  "counters_dropped_reasons": {},
+  "counters_inapplicable": 0,
+  "counters_inapplicable_reasons": {},
+  "accepted_claims": 17,
+  "single_origin_accepts": 16,
+  "main_status": {
+    "C11": "in",
+    "C12": "in",
+    "C13": "in",
+    "C14": "in",
+    "C27": "undecided"
+  },
+  "main_labels": {
+    "C11": "accepted",
+    "C12": "accepted",
+    "C13": "accepted",
+    "C14": "accepted",
+    "C27": "defeated"
+  },
+  "absence_assertions": 0,
+  "provider_proposer": "openai",
+  "provider_critic": "anthropic",
+  "model_proposer": "gpt-6.1-sol",
+  "model_critic": "claude-sonnet-5-5",
+  "effort_proposer": "medium",
+  "effort_critic": "medium",
+  "tokens_in": 1889757,
+  "tokens_out": 141411,
+  "calls": 215,
+  "stop_reason": "compose or extend the accepted components; components accepted: ['C11', 'C12', 'C13', 'C14', 'C15', 'C16', 'C17', 'C18', 'C19', 'C20', 'C21', 'C23', 'C24', 'C25']; no whole-question answer",
+  "reopened_cqs": 0,
+  "reopened_cqs_active": 0,
+  "reopened_then_discharged": 0,
+  "supporting_original": 0,
+  "supporting_scoped": 20,
+  "applicable_original": 0,
+  "applicable_scoped": 19,
+  "main_supporting_in_original": 0,
+  "gold_sources_found": 1,
+  "gold_sources_total": 5,
+  "gold_sources_missing": [
+    "Integrated Resource Plan",
+    "Base Residual Auction",
+    "Data Center Energy Usage Report",
+    "interconnection queue"
+  ],
+  "gold_facts_found": 3,
+  "gold_facts_total": 4,
+  "gold_facts_missing": [
+    "MW-day"
+  ],
+  "shape_expected": "undecided",
+  "shape_match": false,
+  "error": {
+    "type": "BudgetExceeded",
+    "message": "openai budget would exceed $8.00; no request sent"
+  },
+  "seconds": 2495.84,
+  "packet_sources": 16,
+  "packet_path": "runs\\bench\\energy-pjm-tonight-openai-t7",
+  "packet_sha256": "d19b04be7a0eae6f6eb94b76d93d31ce63aa32971577fe91cd0aa8e78ccb11be",
+  "config": {
+    "rounds": 2,
+    "frame_samples": 1,
+    "review_frame": false,
+    "live_retrieval": false,
+    "proposer": "openai:gpt-6.1-sol",
+    "critic": "anthropic:claude-sonnet-5-5",
+    "effort": "medium",
+    "budget_campaign": "tonight-3",
+    "budget_ledger": "runs\\tonight-3\\budget.json",
+    "budget_limits": {
+      "anthropic": 12,
+      "openai": 8
+    },
+    "capped_compose_pass": 1
+  },
+  "implementation_commit": "01bc1007fe5bfe0c6943f266f1124b94d0a25237",
+  "runner_sha256": "b27682a18df200145cec45f2d51a58e20a06a745bf872515f7f26d5183e484c4",
+  "cost_by_provider": {
+    "anthropic": 0.2208875,
+    "openai": 5.8253651
+  },
+  "cost_usd": 6.0462526,
+  "api_calls": 215,
+  "references_valid": true,
+  "ledger_valid": true,
+  "search_queries": 12,
+  "fetched_urls": [
+    "https://www.synapse-energy.com/sites/default/files/Synapse%20-%20The%20Next%20Decade%20in%20PJM%2025-073.pdf",
+    "https://www.pjm.com/-/media/DotCom/committees-groups/task-forces/sacmstf/2025/20251029/20251029-item-03---analysis-group-sub-annual-capacity-market---presentation.pdf",
+    "https://modoenergy.com/research/en/pjm-market-outlook-bess-tb4-spreads",
+    "https://opc.maryland.gov/Portals/0/Files/Publications/Rising%20Transmission%20Costs%202026-03-25%20CORRECTED%20FINAL.pdf?ver=QPn-TuDmu9N_o2Aj1y6r4w%3D%3D",
+    "https://www.pjm.com/-/media/DotCom/library/reports-notices/load-forecast/2026-load-report.pdf",
+    "https://www.pjm.com/-/media/DotCom/library/reports-notices/load-forecast/2025-load-report.pdf",
+    "https://www.pjm.com/-/media/DotCom/planning/res-adeq/load-forecast/dominion-documentation.pdf",
+    "https://www.pjm.com/-/media/DotCom/planning/res-adeq/load-forecast/2025-long-term-load-forecast-supplement.pdf",
+    "https://www.pjm.com/-/media/DotCom/planning/res-adeq/elcc/2025-pjm-elcc-rrs.pdf",
+    "https://www.pjm.com/-/media/DotCom/library/reports-notices/special-reports/2024/20240624-energy-transition-in-pjm-flexibility-for-the-future.pdf",
+    "https://www.puc.pa.gov/media/4044/2026_assessing_electricity_resource_adequacy_in_pa_and_pjm.pdf",
+    "https://www.pjm.com/-/media/DotCom/committees-groups/task-forces/elccstf/2025/20251209/20251209-item-02---pjm-elcc-rrs-model-evaluation---e3-report.pdf",
+    "https://www.pjm.com/-/media/DotCom/documents/manuals/m14h.pdf",
+    "https://www.pjm.com/-/media/DotCom/documents/manuals/m14c.pdf",
+    "https://www.eia.gov/electricity/data/eia860/",
+    "https://www.eia.gov/petroleum/supply/monthly/",
+    "https://www.pjm.com/-/media/DotCom/documents/manuals/m14h.pdf",
+    "https://www.pjm.com/-/media/DotCom/documents/manuals/m14c.pdf",
+    "https://www.eia.gov/electricity/data/eia860/",
+    "https://www.eia.gov/petroleum/supply/monthly/"
+  ],
+  "accepted_main_claims": [],
+  "accepted_components": [
+    {
+      "id": "C11",
+      "text": "Synapse reports that its Advanced Policy portfolio meets PJM's regional adequacy criterion in 2030, with LOLE of 0.04 days per year; the portfolio includes new gas.",
+      "issue_id": "Q1"
+    },
+    {
+      "id": "C12",
+      "text": "Synapse reports that its Status Quo portfolio fails PJM's regional adequacy criterion in 2030, with LOLE of 1.6 days per year, despite including new gas.",
+      "issue_id": "Q1"
+    },
+    {
+      "id": "C13",
+      "text": "Synapse's Status Quo and Advanced Policy scenarios both include new PJM gas generation through 2030; neither is a PJM-wide no-new-dispatchable-generation test.",
+      "issue_id": "Q1"
+    },
+    {
+      "id": "C14",
+      "text": "PJM's adequacy model excludes internal transmission constraints and substitutes an administrative ties benefit for explicit neighboring-system modeling; it does not establish Northern Virginia deliverability.",
+      "issue_id": "Q1"
+    },
+    {
+      "id": "C15",
+      "text": "Dominion reports a data-centre coincident peak of 4 GW in its served market in 2025, not a separately identified Northern Virginia baseline.",
+      "issue_id": "Q2"
+    },
+    {
+      "id": "C16",
+      "text": "Dominion treats construction authorizations as firm load and engineering authorizations as non-firm; energization typically follows equipment ordering by about three years.",
+      "issue_id": "Q2"
+    },
+    {
+      "id": "C17",
+      "text": "PJM says its firm/non-firm project distinction lowered near-term large-load adjustments versus its prior forecast; near-term projects require firm commitments and longer-term non-firm projects are derated.",
+      "issue_id": "Q2"
+    },
+    {
+      "id": "C18",
+      "text": "The Pennsylvania adequacy study uses PJM peak adjustments for Reference data-centre load; its High Load case halves utility forecasts and smooths timing. Energy conversion assumes a flat load shape.",
+      "issue_id": "Q2"
+    },
+    {
+      "id": "C19",
+      "text": "Modo projects 9.7 GW of PJM thermal retirements by 2030; this is not a net reliable-capacity balance.",
+      "issue_id": "Q3"
+    },
+    {
+      "id": "C20",
+      "text": "Synapse assumes about 31 GW of peak reduction from DERs and flexibility in Advanced Policy in 2030, versus about 8 GW of demand response in Status Quo.",
+      "issue_id": "Q3"
+    },
+    {
+      "id": "C21",
+      "text": "Synapse makes under-construction resources and most engineering-stage resources eligible by 2030 if economic; Advanced Policy doubles historical active-project advancement rates.",
+      "issue_id": "Q3"
+    },
+    {
+      "id": "C23",
+      "text": "PJM reports partial reliability credit for solar, wind, storage and demand resources in its near-term portfolios; nameplate additions are not equivalent firm-capacity additions.",
+      "issue_id": "Q3"
+    },
+    {
+      "id": "C24",
+      "text": "The Pennsylvania resource-adequacy study permits and selects new gas generation, so its resource expansion is not a PJM-wide no-new-dispatchable scenario.",
+      "issue_id": "Q3"
+    },
+    {
+      "id": "C25",
+      "text": "PJM's planning study includes demand resources and assumed external firm capacity trades; its ties benefit is an administrative assumption, not verified Northern Virginia import capability.",
+      "issue_id": "Q3"
+    },
+    {
+      "id": "C28",
+      "text": "Synapse reports that PJM's forecast attributes 30 GW, or 94 percent, of regional peak-demand growth through 2030 to data centres; it does not allocate that growth to Northern Virginia.",
+      "issue_id": "Q2"
+    },
+    {
+      "id": "C29",
+      "text": "Modo assigns most of its projected final-year load increment to Dominion, labeled Northern Virginia, but provides no quantified local share or defined geographic boundary.",
+      "issue_id": "Q2"
+    },
+    {
+      "id": "C30",
+      "text": "The Pennsylvania study's No New Data Centers case excludes additions anywhere in PJM from 2027 onward; its flat demand is an imposed counterfactual, not a forecast of no expected local growth.",
+      "issue_id": "Q2"
+    }
+  ],
+  "main_load_bearing": {},
+  "composition_details": [],
+  "cannot_compose": [
+    "cannot_compose ['C11', 'C12', 'C13']: The LOLE results use comparable units, but concern different modeled portfolios and policy assumptions, not a shared no-new-dispatchable comparison. Both portfolios include new gas. Neither their differing adequacy results nor their inclusion of gas establishes what would happen without new dispatchable generation. A modeled counterfactual excluding those additions and testing Northern Virginia load service is missing.",
+    "cannot_compose ['C14', 'C25']: These findings document limitations in PJM modeling and capacity accounting, but have different populations, comparisons and periods. Neither provides verified Northern Virginia transmission or import capability. They therefore cannot establish either ability or inability to serve the projected local load; an explicit local deliverability analysis is missing.",
+    "cannot_compose ['C15', 'C16', 'C17', 'C18']: The baseline, project-firmness rules and forecast assumptions concern different geographic populations, forecast comparisons and, for C15, a different period. They do not supply a common Northern Virginia load-growth trajectory through 2030. A geographic reconciliation and quantified conversion from project commitments and forecast assumptions to coincident local demand are missing, as is a corresponding deliverable-resource balance.",
+    "cannot_compose ['C19', 'C20', 'C21', 'C23']: Thermal retirements, assumed demand-side peak reductions, project eligibility and partial reliability accreditation are not interchangeable quantities. They concern different portfolios and periods and cannot be netted into reliable capacity without a shared scenario, accredited contributions, deployment timing and overlap accounting. No such balance establishes Northern Virginia service without new dispatchable generation.",
+    "cannot_compose ['C13', 'C24']: Both findings identify studies that include new gas, but their populations and comparisons differ. Together they identify an untested counterfactual, not an answer to it. A no-new-dispatchable resource-adequacy and local-deliverability test is needed; inclusion or selection of gas does not by itself establish that gas is indispensable or that service without it is feasible."
+  ],
+  "single_origin_flag_missing": [],
+  "pass": false
+}

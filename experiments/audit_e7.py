@@ -49,6 +49,8 @@ def audit():
                   "scope_fields_nonempty": all(c.scope.population and c.scope.outcome and c.scope.period for c in inq.graph.claims)}
         results.append({"name": plan["name"], "status": "recorded", "checks": checks,
                         "all_integrity_checks_pass": all(checks.values()), "rounds": inq.round,
+                        "rounds_completed": len({s.round for s in inq.stop_assessments if s.round > 0}),
+                        "phase": inq.phase,
                         "error": m["error"], "composed_claims": m["composed_claims"],
                         "composition_accepted": m["composition_accepted"],
                         "whole_question_answered": m["whole_question_answered"]})

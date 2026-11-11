@@ -20,6 +20,7 @@ def read_run(path):
     m["answer_scope_derived"] = answer_scope(answer) if answer else ""
     m["answer_derived"] = f"{answer.id}: {answer.text}" if answer else "none"
     m["contract_corrections_derived"] = sum(n.startswith("contract repair in ") for n in inq.notes)
+    m["rounds_completed_derived"] = len({s.round for s in inq.stop_assessments if s.round > 0})
     return m, inq
 
 
@@ -85,9 +86,10 @@ def render():
             lines.append("No completed E7 result is available yet. " + ("The user explicitly approved C3, both aspirin runs and optional Energy; execution uses the shared caps." if approved else "Explicit payload approval is pending.") + " No experimental result is inferred from the passing deterministic tests.")
             continue
         m, inq = data
+        lines.append(f"Proposer `{m['config']['proposer']}`; critic `{m['config']['critic']}`; medium effort. Implementation `{m['implementation_commit']}`; packet `{m['packet_sha256']}`.")
         compositions = m.get("composition_details", [])
         if not compositions:
-            lines.append("No composition was constructed. " + " ".join(m.get("cannot_compose", [])))
+            lines.append(f"No composition was constructed, so the critic had no composed claim to attack. Across the component arguments: attacks={m['attacks']}, discharged attacks={m['attacks_discharged']}, reopened CQ discharges={m['reopened_then_discharged']}. " + " ".join(m.get("cannot_compose", [])))
         for composition in compositions:
             claim = inq.graph.claim(composition["claim_id"])
             attacks = [a for a in inq.graph.arguments if a.is_attack
@@ -122,17 +124,34 @@ def render():
         lines.append("No completed Energy result is recorded. Sol proposer and Sonnet critic are authorized after the aspirin runs, subject to the shared budget.")
     else:
         m, inq = energy
-        lines.append(f"Sol proposer / Sonnet critic: rounds={m['rounds']}, whole_question_answered={m['whole_question_answered']}, main scope={m['main_issue_scope_label']}, composed_claims={m['composed_claims']}, composition_accepted={m['composition_accepted']}, absence_assertions={m['absence_assertions']}, claims_supported_unargued={m['claims_supported_unargued']}, error={m['error']}; estimated cost ${m['cost_usd']:.4f}.")
-        lines += ["", "Stop: " + m["stop_reason"], "", "Composition attempts: " + (" ".join(m.get("cannot_compose", [])) or "no cannot_compose explanation recorded")]
+        lines.append(f"Sol proposer / Sonnet critic: rounds entered/completed={m['rounds']}/{m['rounds_completed_derived']}, whole_question_answered={m['whole_question_answered']}, main scope={m['main_issue_scope_label']}, composed_claims={m['composed_claims']}, composition_accepted={m['composition_accepted']}, absence_assertions={m['absence_assertions']}, claims_supported_unargued={m['claims_supported_unargued']}, error={m['error']}; estimated cost ${m['cost_usd']:.4f}.")
+        if m["error"]:
+            lines += ["", "This optional run is incomplete. The shared OpenAI preflight refused the next request during round-two Argue because its reservation would exceed the $8 cap; no rejected request was sent. Round two reached Gather and Compute and partially applied Argue, but did not complete Revise, Critique, Respond, Compose or Conclude. The first-round missing-link explanations are retained; a completed two-round negative result is not claimed.",
+                      "", "Last stop assessment (continue): " + m["stop_reason"]]
+            lines += ["", "The partial graph labels the main scope untested; the pre-run prediction specified unsupported. This difference is retained."]
+        else:
+            lines += ["", "Stop: " + m["stop_reason"]]
+        lines += ["", "Composition attempts: " + (" ".join(m.get("cannot_compose", [])) or "no cannot_compose explanation recorded")]
+        chain = [c for c in inq.graph.live_claims() if inq.evaluation.status(c.id) == "in"
+                 and any(word in c.text.casefold() for word in ("gas", "lole", "northern virginia"))]
+        if chain:
+            lines += ["", "Accepted component chain retained in the partial graph:", "",
+                      "| Component | Finding | Supporting route |", "|---|---|---|"]
+            for claim in chain:
+                supports = [a for a in inq.graph.arguments_for(claim.id) if inq.evaluation.labels.get(a.id) == "in"]
+                route = "; ".join(f"{a.id} ← {', '.join(a.premise_ids)}" for a in supports)
+                lines.append(f"| {claim.id} | {cell(claim.text)} | {cell(route)} |")
         for c in m.get("composition_details", []):
             claim = inq.graph.claim(c["claim_id"])
             lines.append(f"- {claim.id} ({c['status']}): {claim.text}; premises {c['premise_claim_ids']}; scope {claim.scope.summary()}")
         if inq.conclusion:
             lines += ["", "Answer: " + inq.conclusion.answer]
+        lines += ["", "Fixed-cache limit: the source packet includes text capped at 400,000 characters with original read_fully=false. Reading all cached characters does not establish that an original web manual was read in full. No missing text was fetched."]
     ledger_path = Path("runs/tonight-3/budget.json")
     if ledger_path.exists():
         ledger = json.loads(ledger_path.read_text(encoding="utf-8"))
-        lines += ["", "## Budget and provenance", "", f"Shared estimated spend: {ledger['spent']}; {len(ledger['pending'])} pending reservations; {len(ledger['calls'])} completed API requests. Opus reserve untouched. Each run records implementation commit, packet fingerprint, validated references and hash-chained ledger checks. Raw replies remain local."]
+        spend = ledger["spent"]
+        lines += ["", "## Budget and provenance", "", f"Shared estimated spend: Anthropic ${spend.get('anthropic', 0):.4f}; OpenAI ${spend.get('openai', 0):.4f}; total ${sum(spend.values()):.4f}. There are {len(ledger['pending'])} pending reservations and {len(ledger['calls'])} completed API requests. Opus reserve untouched. Each run records implementation commit, packet fingerprint, validated references and hash-chained ledger checks. Raw replies remain local."]
     path = Path("bench/results/E7.md")
     path.write_text("\n".join(lines), encoding="utf-8")
     print(json.dumps({"report": str(path), "pending": pending}))

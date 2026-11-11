@@ -1,5 +1,5 @@
 {
-  "status": "aspirin_completed_energy_authorized",
+  "status": "completed_with_budget_limited_energy",
   "prepared_from_commit": "b2bcb4b3b903c87a7bc61e6d7f678799c834de1e",
   "budget_limits_usd": {
     "anthropic": 12,
@@ -291,5 +291,30 @@
       "composed_claims": 0,
       "error": null
     }
+  },
+  "energy_result": {
+    "metrics_path": "experiments/E7-energy/sol/metrics.json",
+    "rounds_entered": 2,
+    "rounds_completed": 1,
+    "whole_question_answered": false,
+    "composed_claims": 0,
+    "error": {
+      "type": "BudgetExceeded",
+      "message": "openai budget would exceed $8.00; no request sent"
+    }
+  },
+  "final_validation": {
+    "tests_passed": 166,
+    "all_integrity_checks_pass": true,
+    "spent_usd": {
+      "anthropic": 1.6086605,
+      "openai": 7.6427878999999965
+    },
+    "api_calls": 291,
+    "pending_calls": 0,
+    "within_caps": true,
+    "opus_used": false,
+    "live_retrieval": false,
+    "held_out_questions": 0
   }
 }

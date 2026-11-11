@@ -1,0 +1,98 @@
+[
+  {
+    "url": "https://www.synapse-energy.com/sites/default/files/Synapse%20-%20The%20Next%20Decade%20in%20PJM%2025-073.pdf",
+    "title": "The Next Decade in PJM",
+    "characters": 82241,
+    "text_sha256": "337ceaddac06b5d4d5367030fe69f49d483a956a324051048f9465aa1a2fcfd1"
+  },
+  {
+    "url": "https://www.pjm.com/-/media/DotCom/committees-groups/task-forces/sacmstf/2025/20251029/20251029-item-03---analysis-group-sub-annual-capacity-market---presentation.pdf",
+    "title": "Evaluation of Sub-Annual Designs for PJM's RPM",
+    "characters": 23869,
+    "text_sha256": "514a99cef4af486b3678647c8e505fd11df3121c9b737b0bfdaaadd20a3f912c"
+  },
+  {
+    "url": "https://modoenergy.com/research/en/pjm-market-outlook-bess-tb4-spreads",
+    "title": "PJM Market Outlook Report July 2026 - Research",
+    "characters": 5500,
+    "text_sha256": "9bb28b80b7dd0954bf73a762428ec6eded15442414e4d005a5cc8d7f06a174e1"
+  },
+  {
+    "url": "https://opc.maryland.gov/Portals/0/Files/Publications/Rising%20Transmission%20Costs%202026-03-25%20CORRECTED%20FINAL.pdf?ver=QPn-TuDmu9N_o2Aj1y6r4w%3D%3D",
+    "title": "PJM Transmission Cost Impacts on Electricity Customers in ...",
+    "characters": 105400,
+    "text_sha256": "73096e247c3b5e0a586c90d29ec9d261a7cf4625eccf2ebc7480f77987db3863"
+  },
+  {
+    "url": "https://www.pjm.com/-/media/DotCom/library/reports-notices/load-forecast/2026-load-report.pdf",
+    "title": "2026 PJM Load Forecast Report",
+    "characters": 48102,
+    "text_sha256": "6736be19fe0f45c9f8bfc1fb27610109a01f59bc43c572c306af2e2f0e33f45f"
+  },
+  {
+    "url": "https://www.pjm.com/-/media/DotCom/library/reports-notices/load-forecast/2025-load-report.pdf",
+    "title": "2025 PJM Long-Term Load Forecast Report",
+    "characters": 50652,
+    "text_sha256": "6b00399512564dfcab40fda0d11dc95384d3bd023b35b8a22eaa8b33bd899c90"
+  },
+  {
+    "url": "https://www.pjm.com/-/media/DotCom/planning/res-adeq/load-forecast/dominion-documentation.pdf",
+    "title": "Dominion Energy (\u201cthe Company\u201d) submitted a data center ...",
+    "characters": 7112,
+    "text_sha256": "6fcb457225ea9f1f10f7fdc82760460553d21e7cc197b14256f2dee0ed3a7dcf"
+  },
+  {
+    "url": "https://www.pjm.com/-/media/DotCom/planning/res-adeq/load-forecast/2025-long-term-load-forecast-supplement.pdf",
+    "title": "2025 Long-Term Load Forecast Supplement",
+    "characters": 66847,
+    "text_sha256": "28544280c7ee4473e9882e83b77a5ef1821477026337d95219247f62ae67f3c1"
+  },
+  {
+    "url": "https://www.pjm.com/-/media/DotCom/planning/res-adeq/elcc/2025-pjm-elcc-rrs.pdf",
+    "title": "2025 PJM Effective Load Carrying Capability and Reserve ...",
+    "characters": 146760,
+    "text_sha256": "3e71bc7cc0b2229bd108e9a24f786d51b8003181bd1e849e04472391e79de49c"
+  },
+  {
+    "url": "https://www.pjm.com/-/media/DotCom/library/reports-notices/special-reports/2024/20240624-energy-transition-in-pjm-flexibility-for-the-future.pdf",
+    "title": "Energy Transition in PJM: Flexibility for the Future",
+    "characters": 45245,
+    "text_sha256": "95e4191a2901ead1b91d8eef1165789ca8b579d9fd3d355efe5187a4c1e83c23"
+  },
+  {
+    "url": "https://www.puc.pa.gov/media/4044/2026_assessing_electricity_resource_adequacy_in_pa_and_pjm.pdf",
+    "title": "2026_assessing_electricity_reso...",
+    "characters": 113491,
+    "text_sha256": "cb521c0f1b32c97975923b2613ca75550eb55cf8ecf55e60c109d50d442388de"
+  },
+  {
+    "url": "https://www.pjm.com/-/media/DotCom/committees-groups/task-forces/elccstf/2025/20251209/20251209-item-02---pjm-elcc-rrs-model-evaluation---e3-report.pdf",
+    "title": "PJM ELCC / RRS Model Evaluation",
+    "characters": 198955,
+    "text_sha256": "d8f6af43aebe9ed8f3a30e6fb55ebd52aa7c6c176522083b89b588028a1fe9fa"
+  },
+  {
+    "url": "https://www.pjm.com/-/media/DotCom/documents/manuals/m14h.pdf",
+    "title": "PJM Manual 14H:",
+    "characters": 400000,
+    "text_sha256": "a1b6679809e0f365fd71418d83ae3e2c53b5619004fbbe84f19744737bcff04b"
+  },
+  {
+    "url": "https://www.pjm.com/-/media/DotCom/documents/manuals/m14c.pdf",
+    "title": "PJM Manual 14C:",
+    "characters": 208356,
+    "text_sha256": "853a4cd82f0230d9306970b6e6b5642de0b5f5d802e5b981ce8164fa5e3a42bf"
+  },
+  {
+    "url": "https://www.eia.gov/electricity/data/eia860/",
+    "title": "Annual Electric Power Industry Report, Form EIA-860 ...",
+    "characters": 6738,
+    "text_sha256": "fbe029df2f8c899675d464591651df75129ed39b16fc2090a415464eaeab892e"
+  },
+  {
+    "url": "https://www.eia.gov/petroleum/supply/monthly/",
+    "title": "Annual Electric Power Industry Report, Form EIA-860 ... (supplementary)",
+    "characters": 3539,
+    "text_sha256": "6bc3f3fb10ab99842c7234139a5008840cfea66db228c771abe6c8e9cedb8822"
+  }
+]
