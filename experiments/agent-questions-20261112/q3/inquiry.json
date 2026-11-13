@@ -1,0 +1,3463 @@
+{
+  "id": "q3",
+  "question": "Are lead times for large power transformers in the United States still above two years in 2026, and what is the current typical range?",
+  "created_at": "2026-11-13T01:45:08+00:00",
+  "phase": "concluded",
+  "round": 2,
+  "framing": {
+    "restatement": "Are lead times for large power transformers in the United States still above two years in 2026, and what is their current typical range?",
+    "question_type": "empirical",
+    "scope_in": [
+      "Lead times for large power transformers in the United States in 2026.",
+      "Whether current typical lead times remain above two years.",
+      "The current typical range, using sources' reported lead-time definitions and reporting periods."
+    ],
+    "scope_out": [
+      "Lead times for other equipment, except where necessary to distinguish large power transformers.",
+      "Lead times outside the United States unless explicitly applicable to United States procurement.",
+      "Forecasts for periods beyond 2026.",
+      "Causes of long lead times or recommendations for reducing them."
+    ],
+    "presuppositions": [
+      "Large power transformers are an identifiable equipment category for which United States lead times can be reported.",
+      "A current typical range can be meaningfully characterized, although lead times may vary by transformer specifications and procurement circumstances.",
+      "The word 'still' suggests that lead times previously exceeded two years; that historical premise may require qualification."
+    ],
+    "answerhood": "A complete answer states whether current typical United States lead times for large power transformers remain above two years in 2026 and gives the current typical range in months or years. It identifies the dates and lead-time definitions underlying the reported figures, distinguishes current observations from forecasts or older reports, and notes material variation where a single range would be misleading.",
+    "standard_override": null
+  },
+  "graph": {
+    "issues": [
+      {
+        "id": "Q1",
+        "text": "Are lead times for large power transformers in the United States still above two years in 2026, and what is the current typical range?",
+        "answerhood": "A complete answer states whether current typical United States lead times for large power transformers remain above two years in 2026 and gives the current typical range in months or years. It identifies the dates and lead-time definitions underlying the reported figures, distinguishes current observations from forecasts or older reports, and notes material variation where a single range would be misleading.",
+        "question_type": "empirical",
+        "parent_id": null,
+        "depends_on": [],
+        "status": "open",
+        "presuppositions": [
+          "Large power transformers are an identifiable equipment category for which United States lead times can be reported.",
+          "A current typical range can be meaningfully characterized, although lead times may vary by transformer specifications and procurement circumstances.",
+          "The word 'still' suggests that lead times previously exceeded two years; that historical premise may require qualification."
+        ],
+        "search_topic": "United States large power transformer lead times",
+        "scope": {
+          "population": "Large power transformers in the United States",
+          "comparison": "Two years",
+          "outcome": "Whether lead times are still above two years and the current typical range",
+          "period": "2026, using current source-reported lead-time periods",
+          "relation": "unknown",
+          "magnitude": null,
+          "narrower_than": [],
+          "parent_scope": {}
+        }
+      }
+    ],
+    "claims": [
+      {
+        "id": "C1",
+        "text": "In 2026, typical lead times for large power transformers in the United States remain above two years, ranging from 30–48 months.",
+        "issue_id": "Q1",
+        "kind": "substantive",
+        "contrary_ids": [
+          "C2",
+          "C3",
+          "C4"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "Continued supply constraints could sustain typical lead times moderately above the two-year threshold.",
+        "scope": {
+          "population": "Large power transformers in the United States",
+          "comparison": "Two years",
+          "outcome": "Whether lead times are still above two years and the current typical range",
+          "period": "2026, using current source-reported lead-time periods",
+          "relation": "is",
+          "magnitude": {
+            "low": 30.0,
+            "high": 48.0,
+            "unit": "months"
+          },
+          "narrower_than": [],
+          "parent_scope": {}
+        },
+        "target": {},
+        "superseded_by": "C6",
+        "revision_of": null,
+        "created_by_move": "",
+        "created_round": 0,
+        "critique_round": 0,
+        "review_note": "A2 supports what Ryan Sales reports, not a representative measured 2026 United States range. The 30–48-month magnitude is removed: the approximately 28–48-month range belongs to a June 2025 letter, while the January 2026 assessment supplies only a threshold. A2 is carried solely for the attributed statement, not as evidence that its underlying empirical assessment is verified. A1 is withdrawn because its historical equipment-specific averages do not establish this reported January 2026 assessment or a current bounded range.",
+        "answers_issue": true
+      },
+      {
+        "id": "C2",
+        "text": "In 2026, typical lead times for large power transformers in the United States remain above two years, ranging from 49–72 months.",
+        "issue_id": "Q1",
+        "kind": "substantive",
+        "contrary_ids": [
+          "C1",
+          "C3",
+          "C4",
+          "C6"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "Persistent production backlogs could sustain a substantially longer typical lead-time range.",
+        "scope": {
+          "population": "Large power transformers in the United States",
+          "comparison": "Two years",
+          "outcome": "Whether lead times are still above two years and the current typical range",
+          "period": "2026, using current source-reported lead-time periods",
+          "relation": "is",
+          "magnitude": {
+            "low": 49.0,
+            "high": 72.0,
+            "unit": "months"
+          },
+          "narrower_than": [],
+          "parent_scope": {}
+        },
+        "target": {},
+        "superseded_by": "C7",
+        "revision_of": null,
+        "created_by_move": "",
+        "created_round": 0,
+        "critique_round": 0,
+        "review_note": "Argue: evidence supports a narrower claim",
+        "answers_issue": true
+      },
+      {
+        "id": "C3",
+        "text": "In 2026, typical lead times for large power transformers in the United States no longer exceed two years.",
+        "issue_id": "Q1",
+        "kind": "null",
+        "contrary_ids": [
+          "C1",
+          "C2",
+          "C6"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "Supply expansion or easing demand could have brought typical lead times back within the threshold.",
+        "scope": {
+          "population": "Large power transformers in the United States",
+          "comparison": "Two years",
+          "outcome": "Whether lead times are still above two years and the current typical range",
+          "period": "2026, using current source-reported lead-time periods",
+          "relation": "is",
+          "magnitude": {
+            "low": 0.0,
+            "high": 24.0,
+            "unit": "months"
+          },
+          "narrower_than": [],
+          "parent_scope": {}
+        },
+        "target": {},
+        "superseded_by": null,
+        "revision_of": null,
+        "created_by_move": "",
+        "created_round": 0,
+        "critique_round": 0,
+        "review_note": "",
+        "answers_issue": true
+      },
+      {
+        "id": "C4",
+        "text": "In 2026, lead times for large power transformers in the United States vary materially across equipment and order conditions, making a single typical range misleading.",
+        "issue_id": "Q1",
+        "kind": "deflationary",
+        "contrary_ids": [
+          "C1",
+          "C2"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "Market heterogeneity could make the question's premise of one representative national range inappropriate.",
+        "scope": {
+          "population": "Large power transformers in the United States",
+          "comparison": "Two years",
+          "outcome": "Whether lead times are still above two years and the current typical range",
+          "period": "2026, using current source-reported lead-time periods",
+          "relation": "is",
+          "magnitude": null,
+          "narrower_than": [],
+          "parent_scope": {}
+        },
+        "target": {},
+        "superseded_by": "C5",
+        "revision_of": null,
+        "created_by_move": "",
+        "created_round": 0,
+        "critique_round": 0,
+        "review_note": "Argue: evidence supports a narrower claim",
+        "answers_issue": true
+      },
+      {
+        "id": "C5",
+        "text": "Ryan Sales reports that individual transformer quotations can be shorter or longer than market averages depending on rating, voltage, design options and factory backlog.",
+        "issue_id": "Q1",
+        "kind": "substantive",
+        "contrary_ids": [],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "revision of C4: Argue: evidence supports a narrower claim",
+        "scope": {
+          "population": "Large power transformers in the United States",
+          "comparison": "Two years",
+          "outcome": "Reported dependence of individual quotations on specifications and factory backlog",
+          "period": "2026, using current source-reported lead-time periods",
+          "relation": "is",
+          "magnitude": null,
+          "narrower_than": [],
+          "parent_scope": {}
+        },
+        "target": {
+          "evidence_status": "reported"
+        },
+        "superseded_by": null,
+        "revision_of": "C4",
+        "created_by_move": "argue",
+        "created_round": 1,
+        "critique_round": 0,
+        "review_note": "C5 expressly records what Ryan Sales reports about quotation variability; it does not claim independently established large-power-transformer expertise, quantify dispersion, or establish that a pooled range is misleading. E6 directly supports that attribution. The access criticism limits any broader empirical inference from A3 but is immaterial to this source-report finding. Its single origin is sufficient to establish the attribution, not independent corroboration.",
+        "answers_issue": false
+      },
+      {
+        "id": "C6",
+        "text": "Ryan Sales attributes to POWER's January 2026 review the assessment that large-transformer lead times remained above two years. This is a secondary report of an early-2026 assessment, not a verified measurement of the current typical United States range.",
+        "issue_id": "Q1",
+        "kind": "substantive",
+        "contrary_ids": [
+          "C2",
+          "C3"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "revision of C1: A2 supports what Ryan Sales reports, not a representative measured 2026 United States range. The 30–48-month magnitude is removed: the approximately 28–48-month range belongs to a June 2025 letter, while the January 2026 assessment supplies only a threshold. A2 is carried solely for the attributed statement, not as evidence that its underlying empirical assessment is verified. A1 is withdrawn because its historical equipment-specific averages do not establish this reported January 2026 assessment or a current bounded range.",
+        "scope": {
+          "population": "Large power transformers in the United States",
+          "comparison": "Two years",
+          "outcome": "Ryan Sales's attribution of an above-two-year assessment to POWER",
+          "period": "January 2026 review, as quoted by Ryan Sales",
+          "relation": "is",
+          "magnitude": null,
+          "narrower_than": [
+            "outcome",
+            "period"
+          ],
+          "parent_scope": {
+            "outcome": "Whether lead times are still above two years and the current typical range",
+            "period": "2026, using current source-reported lead-time periods"
+          }
+        },
+        "target": {
+          "population": "Large power transformers in the United States",
+          "intervention": "Not applicable",
+          "comparator": "Two years",
+          "outcome": "Ryan Sales's attribution of an above-two-year assessment to POWER",
+          "horizon": "January 2026 review, as quoted by Ryan Sales",
+          "quantity": "Reported threshold assessment; no bounded typical range",
+          "scope": "Secondary account only; underlying measurement dates, lead-time endpoints and United States coverage remain unverified",
+          "evidence_status": "reported"
+        },
+        "superseded_by": null,
+        "revision_of": "C1",
+        "created_by_move": "revise",
+        "created_round": 1,
+        "critique_round": 0,
+        "review_note": "The access and range criticisms concern the superseded market-estimate inference, not the current attribution claim. A7 and E4–E5 establish what Ryan Sales attributes to POWER while explicitly preserving the absence of a verified current US range. One origin suffices for this limited record claim; C6 remains a component finding that does not settle Q1.",
+        "answers_issue": false
+      },
+      {
+        "id": "C7",
+        "text": "DistroForge reports 30–36 months order to receipt for US large power transformers as current in 2026, but its observation dates are unverified and its supplied publication date conflicts with later citations.",
+        "issue_id": "Q1",
+        "kind": "substantive",
+        "contrary_ids": [],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "revision of C2: Argue: evidence supports a narrower claim",
+        "scope": {
+          "population": "Large power transformers in the United States",
+          "comparison": "Two years",
+          "outcome": "DistroForge's reported 30–36-month order-to-receipt range and its unresolved observation dates",
+          "period": "2026 as described by DistroForge; observation dates unverified",
+          "relation": "is",
+          "magnitude": {
+            "low": 30.0,
+            "high": 36.0,
+            "unit": "months"
+          },
+          "narrower_than": [
+            "period"
+          ],
+          "parent_scope": {
+            "period": "2026, using current source-reported lead-time periods"
+          }
+        },
+        "target": {
+          "evidence_status": "reported"
+        },
+        "superseded_by": null,
+        "revision_of": "C2",
+        "created_by_move": "argue",
+        "created_round": 2,
+        "critique_round": 0,
+        "review_note": "C7 records DistroForge's assertion and explicitly preserves its unresolved observation dates and conflicting chronology. A8 supports that source-report finding, not endorsement of 30–36 months as the current typical US range. The single-origin flag therefore does not require further narrowing; C7 remains a component finding.",
+        "answers_issue": false
+      }
+    ],
+    "evidence": [
+      {
+        "id": "E1",
+        "text": "The article reproduces a Q2 2025 average of approximately 128 weeks, or 29.4 months, for large substation power transformers; this is not a measurement taken in 2026.",
+        "kind": "statistical",
+        "source_id": "S1",
+        "quote": "| Large power transformers (substation) | ~128 weeks average | Wood Mackenzie Q2 2025 survey, reported by POWER (Jan 2026) and EEPower (Aug 2025) |",
+        "location": "Current lead-time ranges by equipment type, table, large power transformers row",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "moderate",
+          "force": "moderate",
+          "credibility_notes": "A named survey and reporting period are supplied, but the underlying survey is not presented. The article does not define the interval's start and end points or explicitly establish the survey's US coverage. About 29.4 months supports a roughly 30-month lower-end estimate, not the entire claimed 2026 range."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {
+          "reclassified": "The approximately 128-week average supplies historical context only. It is a derivative Q2 2025 figure with unverified United States coverage and interval endpoints, not a current range."
+        },
+        "bears_on": {
+          "C1": "for",
+          "C2": "against",
+          "C3": "against",
+          "C6": "for"
+        },
+        "role": "context"
+      },
+      {
+        "id": "E2",
+        "text": "The article reports a separate Q2 2025 average of 143–144 weeks, approximately 33 months, for generator step-up transformers.",
+        "kind": "statistical",
+        "source_id": "S1",
+        "quote": "| Generator step-up (GSU) transformers | 143–144 weeks average | Wood Mackenzie Q2 2025 survey (Oct 2025 and Aug 2025 reporting) |",
+        "location": "Current lead-time ranges by equipment type, table, GSU row",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "moderate",
+          "force": "moderate",
+          "credibility_notes": "This is an equipment-specific historical average reproduced from the same survey origin as the substation figure, not independent corroboration or a current 2026 observation. Procurement interval endpoints and geographic coverage are not specified."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {
+          "reclassified": "The generator step-up average supplies equipment-specific historical context only; it is neither independent corroboration nor a measured 2026 typical range."
+        },
+        "bears_on": {
+          "C1": "for",
+          "C2": "against",
+          "C3": "against",
+          "C4": "for",
+          "C6": "for"
+        },
+        "role": "context"
+      },
+      {
+        "id": "E3",
+        "text": "A June 2025 industry-association letter is reported as giving a 120–210-week range, approximately 28–48 months, for large substation and generator step-up transformers combined.",
+        "kind": "testimonial",
+        "source_id": "S1",
+        "quote": "| Large transformers, substation and GSU | 120–210 weeks | NEMA, NECA, NAED and GridWise Alliance letter to Commerce, June 2025 |",
+        "location": "Current lead-time ranges by equipment type, table, combined large-transformer row",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "moderate",
+          "force": "moderate",
+          "credibility_notes": "The letter is identified but not reproduced, and its sampling, definition of lead time and representativeness are unavailable here. The combined range is historical and should not be relabelled a measured typical 2026 range."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {
+          "reclassified": "The reported June 2025 range provides historical context only. It does not establish current 2026 lead times or ground the attribution recorded in C6."
+        },
+        "bears_on": {
+          "C1": "for",
+          "C3": "against",
+          "C4": "for",
+          "C6": "for"
+        },
+        "role": "context"
+      },
+      {
+        "id": "E4",
+        "text": "Ryan Sales attributes to POWER's January 2026 review the assessment that large-transformer lead times remained above two years.",
+        "kind": "testimonial",
+        "source_id": "S1",
+        "quote": "POWER magazine's January 2026 review found that distribution transformer availability had improved, while large units \"remain locked above two years.\"",
+        "location": "Transformers: power, pad mount and dry type, first paragraph",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "moderate",
+          "force": "moderate",
+          "credibility_notes": "This is an indirectly quoted early-2026 assessment, not a newly documented procurement survey. No exact range, measurement dates, interval endpoints or explicit geographic scope accompany this statement."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C1": "for",
+          "C2": "for",
+          "C3": "against",
+          "C6": "for"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E5",
+        "text": "The article explicitly cautions that most substantive data come from 2025 surveys and that published 2026 figures are limited.",
+        "kind": "testimonial",
+        "source_id": "S1",
+        "quote": "Second, most of the hard data is from 2025 surveys. Published 2026 numbers are thinner, which is why a current factory quote is worth more than any average.",
+        "location": "Current lead-time ranges by equipment type, paragraph following table",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "strong",
+          "force": "moderate",
+          "credibility_notes": "This accurately qualifies the article's own evidence base; it does not establish that no newer data exist elsewhere."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C1": "neutral",
+          "C2": "neutral",
+          "C3": "neutral",
+          "C4": "neutral",
+          "C6": "neutral"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E6",
+        "text": "The article characterizes its tabulated figures as market averages and warns that individual quotations depend on rating, voltage, design and factory backlog.",
+        "kind": "testimonial",
+        "source_id": "S1",
+        "quote": "Your quote can come in shorter or longer depending on kVA, voltage class, design options and the factory's backlog on the day you order.",
+        "location": "Current lead-time ranges by equipment type, introductory paragraph",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "moderate",
+          "force": "moderate",
+          "credibility_notes": "The supplier representative is positioned to understand quotation variability, but provides no quantified within-category distribution demonstrating that a representative pooled range would necessarily be misleading."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C4": "for",
+          "C5": "for"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E7",
+        "text": "The August 2025 release reports increasing US transformer lead times, but gives no numerical lead-time range, measurement period, order-to-delivery definition, or separate observation for large power transformers in 2026.",
+        "kind": "testimonial",
+        "source_id": "S2",
+        "quote": "Supply has not kept pace with demand, resulting in a growing market deficit across all transformer specifications and escalating lead times and prices.",
+        "location": "Paragraph immediately before 'Policy changes and tariffs also affect market'",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "moderate",
+          "force": "weak",
+          "credibility_notes": "This is the research producer's own qualitative summary, but the underlying methods and observations are not supplied. Its force for the claims is weak because increasing lead times in 2025 establish neither a two-year threshold nor a typical 2026 range, and the equipment category is broader than large power transformers."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C1": "neutral",
+          "C2": "neutral",
+          "C3": "neutral",
+          "C4": "neutral",
+          "C6": "neutral"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E8",
+        "text": "Wood Mackenzie's analyst forecasts that US transformer supply constraints will persist into the 2030s; this is a forward-looking assessment rather than an observed 2026 lead-time measurement.",
+        "kind": "testimonial",
+        "source_id": "S2",
+        "quote": "The convergence of accelerating electricity demand, aging infrastructure and supply chain vulnerabilities has created constraints that will persist well into the 2030s.",
+        "location": "'Some relief on the way', second paragraph, quotation attributed to Ben Boucher",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "moderate",
+          "force": "weak",
+          "credibility_notes": "The forecast comes from a named specialist discussing his firm's research, but no forecasting method or uncertainty is provided. Its force is weak because persistent supply constraints do not establish lead times above two years, quantify a typical range, or demonstrate material differences among procurement conditions."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C1": "neutral",
+          "C2": "neutral",
+          "C3": "neutral",
+          "C4": "neutral",
+          "C6": "neutral"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E9",
+        "text": "Wood Mackenzie reports that competition for transformer production slots has increased lead times in most transformer categories, but provides no numerical lead times, measurement dates, or interval definitions in this passage.",
+        "kind": "testimonial",
+        "source_id": "S4",
+        "quote": "The market imbalance has increased competition for available production slots, leading to a significant rise in both lead times and prices in most transformer categories.",
+        "location": "Key market developments, second paragraph",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "moderate",
+          "force": "weak",
+          "credibility_notes": "The authors have relevant research expertise, but the underlying measurements and methodology are not shown. Force is weak because an unspecified increase across transformer categories does not establish a current 2026 large-power-transformer range or whether it exceeds 24 months."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {
+          "unusable": "relay of S2, whose own evidence bears on the same claims"
+        },
+        "bears_on": {
+          "C1": "neutral",
+          "C2": "neutral",
+          "C3": "neutral",
+          "C4": "neutral",
+          "C6": "neutral"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E10",
+        "text": "Wood Mackenzie forecasts that tariffs will increase transformer lead times by making some imports cost prohibitive; this is an expectation rather than an observed 2026 procurement lead-time range.",
+        "kind": "testimonial",
+        "source_id": "S4",
+        "quote": "Not only will the average cost per transformer increase significantly due to the tariffs, but lead times will escalate as imports from certain high-tariff countries become cost prohibitive.",
+        "location": "Market expectations, first paragraph",
+        "credentials": {
+          "relevance": "weak",
+          "credibility": "moderate",
+          "force": "weak",
+          "credibility_notes": "Relevance and force are weak because the forecast specifies neither a reporting period nor a numerical lead-time range and does not isolate large power transformers. It cannot establish observed 2026 lead times or the two-year threshold."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {
+          "unusable": "relay of S2, whose own evidence bears on the same claims"
+        },
+        "bears_on": {
+          "C1": "neutral",
+          "C2": "neutral",
+          "C3": "neutral",
+          "C4": "neutral",
+          "C6": "neutral"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E11",
+        "text": "The article attributes average delivery lead times of 128 weeks for large power transformers and 144 weeks for generator step-up units to Wood Mackenzie's second-quarter 2025 survey, rather than to observations collected in 2026.",
+        "kind": "statistical",
+        "source_id": "S5",
+        "quote": "In Wood Mackenzie's second-quarter 2025 survey, large power transformers averaged 128 weeks for delivery and generator step-up units hit 144 weeks",
+        "location": "Why Transformer Lead Times Are Still Long in 2026, first paragraph",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "moderate",
+          "force": "weak",
+          "credibility_notes": "These figures repeat Wood Mackenzie's research, also represented by S2, and are not independent corroboration. They describe Q2 2025, not measured 2026 conditions. The article does not identify the start point of the delivery interval or provide the survey methodology; 128 weeks is approximately 29.4 months."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {
+          "reclassified": "This repeats the same Q2 2025 survey averages without supplying the primary methods, uncertainty or complete delivery-interval definition."
+        },
+        "bears_on": {
+          "C1": "neutral",
+          "C2": "neutral",
+          "C3": "against",
+          "C6": "neutral"
+        },
+        "role": "context"
+      },
+      {
+        "id": "E12",
+        "text": "For planning in 2026, the manufacturer describes large power transformer and GSU market windows as two years or more, without giving an upper bound or a separately defined interval for large power transformers.",
+        "kind": "testimonial",
+        "source_id": "S5",
+        "quote": "large power and GSUs, two years or more. These are market windows, not our quote",
+        "location": "What a Realistic 2026 Schedule Looks Like, first paragraph",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "moderate",
+          "force": "weak",
+          "credibility_notes": "This is an unsampled commercial market assessment, not a documented current procurement observation. It combines large power transformers with GSUs, does not explicitly define the interval's start and end, and says at least two years rather than strictly above two years. It cannot establish either proposed bounded range."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C1": "neutral",
+          "C2": "neutral",
+          "C3": "against",
+          "C6": "neutral"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E13",
+        "text": "The manufacturer cautions that its planning windows change quarterly and that an earlier 2026 lead-time estimate should be checked again later in the year.",
+        "kind": "testimonial",
+        "source_id": "S5",
+        "quote": "they shift quarterly, which is why a transformer procurement number from March should be re-verified in September.",
+        "location": "What a Realistic 2026 Schedule Looks Like, first paragraph",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "moderate",
+          "force": "weak",
+          "credibility_notes": "The warning supports caution about treating a dated estimate as current, but supplies no measured changes or evidence that variation within US large power transformers makes a representative range misleading."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C4": "for"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E14",
+        "text": "The article characterizes 2026 North American merchant-market quotes for utility- and substation-class large power transformers as frequently spanning one to four years (12–48 months), rather than a range uniformly above two years; it does not isolate US orders or define the interval's start and end points.",
+        "kind": "testimonial",
+        "source_id": "S6",
+        "quote": "Large power transformers (utility and substation class): frequently quoted at one to four years in the merchant market.",
+        "location": "What are transformer lead times right now?, first bullet",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "weak",
+          "force": "weak",
+          "credibility_notes": "The range is an unattributed commercial assertion without underlying quotations, sample size or observation dates; North American coverage is not separated into US results, and quoted lead times are not defined as order-to-delivery observations. It therefore cannot establish either a US typical range or that typical times have fallen below two years."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C1": "against",
+          "C2": "against",
+          "C3": "neutral",
+          "C4": "for",
+          "C6": "against"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E15",
+        "text": "Entogo says made-to-order special transformers have longer lead times than standard equipment because they follow the standard backlog, identifying a specification-related distinction without quantifying it.",
+        "kind": "testimonial",
+        "source_id": "S6",
+        "quote": "Made-to-order specials: longest of all, because they sit behind the standard backlog.",
+        "location": "What are transformer lead times right now?, third bullet",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "weak",
+          "force": "weak",
+          "credibility_notes": "No supporting order data or category-specific ranges are supplied, and the statement does not identify which specials are large power transformers or specifically US-bound."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C4": "for"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E16",
+        "text": "The article limits its multi-year market figures to purchases through brokers or capacity-constrained manufacturers, rather than presenting those figures as applicable to every sourcing arrangement.",
+        "kind": "testimonial",
+        "source_id": "S6",
+        "quote": "the multi-year figures describe the merchant market — the queue you join when you buy from a broker or a manufacturer running at capacity against everyone else’s orders.",
+        "location": "What actually shortens the timeline?, first paragraph",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "moderate",
+          "force": "moderate",
+          "credibility_notes": "This directly establishes the author's intended scope for its estimates, but does not independently demonstrate the size or prevalence of differences between sourcing channels."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C4": "for"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E17",
+        "text": "Entogo advertises shipment in 16–24 weeks for its North-American-specification builds, but does not identify these builds as large power transformers, document completed orders, or specify US delivery timing.",
+        "kind": "testimonial",
+        "source_id": "S6",
+        "quote": "North-American-spec (ANSI/IEEE) builds ship in 16–24 weeks",
+        "location": "What actually shortens the timeline?, paragraph beginning 'That is Entogo’s position.'",
+        "credentials": {
+          "relevance": "weak",
+          "credibility": "weak",
+          "force": "weak",
+          "credibility_notes": "This is an unverified vendor performance claim covering unspecified equipment; its shipment endpoint differs from delivery or energization, its starting point is unspecified, and applicability to US large power transformers is not established."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C3": "neutral",
+          "C4": "for"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E18",
+        "text": "The article presents 30–36 months as the current US large-power-transformer range, with extra-high-voltage units reaching 60 months.",
+        "kind": "testimonial",
+        "source_id": "S7",
+        "quote": "Transformer lead times in 2026 run 26 to 40 weeks for standard catalog distribution units and 30 to 36 months for large power transformers, with extra-high-voltage units reaching 60 months.",
+        "location": "Utility Transformer Lead Times in 2025 and 2026: The Short Answer, opening paragraph",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "weak",
+          "force": "moderate",
+          "credibility_notes": "The current-range assertion combines older observations and later reports without a new sampling period. The supplied March 24, 2026 date conflicts with references to May and July 2026 publications and the second half of 2026; the apparent currency cannot be trusted without checking originals."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C1": "for",
+          "C2": "against",
+          "C3": "against",
+          "C4": "for",
+          "C6": "for",
+          "C7": "for"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E19",
+        "text": "The article attributes a 30–36-month order-to-receipt range, versus 12–18 months previously, to GAO in 2023; this is historical evidence rather than a 2026 procurement observation.",
+        "kind": "testimonial",
+        "source_id": "S7",
+        "quote": "Large power transformers: 30 to 36 months order to receipt, against 12 to 18 months before the shortage (GAO, 2023).",
+        "location": "Utility Transformer Lead Times in 2025 and 2026: The Short Answer, first bullet",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "moderate",
+          "force": "weak",
+          "credibility_notes": "This is an attributed summary of GAO rather than the original record, and the 2023 observation cannot establish the current 2026 range."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C1": "neutral",
+          "C2": "neutral",
+          "C3": "neutral",
+          "C6": "neutral",
+          "C7": "for"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E20",
+        "text": "The article reports Wood Mackenzie's Q2 2025 averages as 128 weeks for power transformers and 143 weeks for generation step-up transformers, explicitly distinguishing these from current quotes.",
+        "kind": "testimonial",
+        "source_id": "S7",
+        "quote": "Wood Mackenzie’s Q2 2025 findings put power transformers at 128 weeks and generation step-up transformers at 143 weeks, both averages. These are historical observations, not current delivery quotes.",
+        "location": "Large Power Transformers: Still Measured in Years, first paragraph",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "moderate",
+          "force": "weak",
+          "credibility_notes": "The figures repeat Wood Mackenzie rather than independently corroborating it; their historical measurement period limits their force for a 2026 claim."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {
+          "reclassified": "The source explicitly identifies these figures as historical averages rather than current delivery quotes; they cannot ground a current 2026 range."
+        },
+        "bears_on": {
+          "C1": "neutral",
+          "C2": "neutral",
+          "C3": "neutral",
+          "C4": "for",
+          "C6": "neutral"
+        },
+        "role": "context"
+      },
+      {
+        "id": "E21",
+        "text": "The article says a May 2026 DOE-funded laboratory report describes large-power-transformer lead times stretching up to four years, an upper-end statement rather than a typical range.",
+        "kind": "testimonial",
+        "source_id": "S7",
+        "quote": "A DOE-funded national laboratory supply chain gap analysis published in May 2026 (report TP-5700-96742) describes current lead times as stretching up to four years.",
+        "location": "Utility Transformer Lead Times in 2025 and 2026: The Short Answer, first bullet",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "weak",
+          "force": "moderate",
+          "credibility_notes": "The cited report postdates the supplied publication date, and its observation period and underlying sample are not supplied. An 'up to' figure does not establish a typical range."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C1": "for",
+          "C2": "neutral",
+          "C3": "against",
+          "C4": "for",
+          "C6": "for"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E22",
+        "text": "The article attributes a lead time exceeding 160 weeks for generation step-up transformers in Q1 2026 to Wood Mackenzie via Reuters.",
+        "kind": "testimonial",
+        "source_id": "S7",
+        "quote": "Generation step-up transformers: past 160 weeks by Q1 2026, against a 143-week average in 2024 (Wood Mackenzie, reported by Reuters July 2026).",
+        "location": "Utility Transformer Lead Times in 2025 and 2026: The Short Answer, generation step-up bullet",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "weak",
+          "force": "moderate",
+          "credibility_notes": "This is a multiply mediated report concerning a specific transformer class, not a pooled large-power-transformer range. The July 2026 citation conflicts with the supplied March publication date, and the lead-time endpoints are unspecified."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C1": "for",
+          "C2": "neutral",
+          "C3": "against",
+          "C4": "for",
+          "C6": "for"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E23",
+        "text": "A historical DOE process chart, reportedly reproduced in a May 2026 report, allows up to six months from RFP to contract before the purchase-order lead-time clock.",
+        "kind": "testimonial",
+        "source_id": "S7",
+        "quote": "A 2014 DOE process chart reprinted in the same May 2026 federal lab analysis puts RFP to contract at up to six months before a manufacturer starts building anything.",
+        "location": "Transformer Delivery Time Is Not the Quoted Lead Time, second paragraph",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "moderate",
+          "force": "moderate",
+          "credibility_notes": "This describes a historical process allowance, not a measured 2026 duration. The cited 2026 reproduction also needs verification given the publication-date inconsistency."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C1": "neutral",
+          "C2": "neutral",
+          "C3": "neutral",
+          "C4": "for",
+          "C6": "neutral"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E24",
+        "text": "The article asserts that quoted manufacturing lead times exclude transport and site acceptance, so these quotes should not automatically be treated as order-to-receipt measurements.",
+        "kind": "testimonial",
+        "source_id": "S7",
+        "quote": "The back end is transport and acceptance. Large units move as controlled heavy shipments and site acceptance testing follows arrival rather than substituting for it. Neither step is inside a quoted lead time, and neither compresses much under pressure.",
+        "location": "Transformer Delivery Time Is Not the Quoted Lead Time, third paragraph",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "weak",
+          "force": "moderate",
+          "credibility_notes": "No supporting contract terms or procurement data establish this blanket definition, and the article also cites an explicitly order-to-receipt series. Definitions must be checked separately for each reported figure."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C1": "neutral",
+          "C2": "neutral",
+          "C3": "neutral",
+          "C4": "for",
+          "C6": "neutral"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E25",
+        "text": "The article asserts that specifying a single bushing make can constrain transformer sourcing, while permitting qualified alternatives can broaden options without guaranteeing earlier delivery; this is a qualification about procurement conditions, not a measured lead-time range.",
+        "kind": "testimonial",
+        "source_id": "S7",
+        "quote": "A spec that names one bushing make inherits that make’s queue. A performance spec that permits qualified equivalents can broaden sourcing options, subject to availability and engineering approval.",
+        "location": "Opening section on transformer bushings, paragraph beginning 'The lever is in your own document.'",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "moderate",
+          "force": "weak",
+          "credibility_notes": "This provides only indirect support for material variation in complete large-power-transformer lead times: it supplies neither quantified effects nor observed delivery intervals. The supplied March 24, 2026 publication date also conflicts with the excerpt's discussion of events after July 15, 2026, leaving the text's effective reporting date unclear."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C4": "for"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E26",
+        "text": "The FAQ reports current large-power-transformer lead times of 30–36 months, explicitly defined as order to receipt, compared with 12–18 months before the shortage; it attributes the comparison to GAO without identifying the observation period.",
+        "kind": "testimonial",
+        "source_id": "S7",
+        "quote": "Large power transformers now run 30 to 36 months order to receipt, against 12 to 18 months before the shortage (GAO).",
+        "location": "Frequently Asked Questions, “How long are transformer lead times in 2026?”",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "weak",
+          "force": "moderate",
+          "credibility_notes": "This is an attributed summary rather than original procurement data, with no dated measurement supporting 'now.' The supplied March 24 publication date is also inconsistent with references elsewhere in this section to May and July 2026 material. It supports a narrower interval within C1, not the exact 30–48-month range."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C1": "for",
+          "C2": "against",
+          "C3": "against",
+          "C6": "for",
+          "C7": "for"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E27",
+        "text": "The article separately reports generator step-up transformer lead times exceeding 160 weeks in Q1 2026, compared with a 143-week average in 2024, attributing these figures to Wood Mackenzie through Reuters.",
+        "kind": "testimonial",
+        "source_id": "S7",
+        "quote": "Generator step-up transformers passed 160 weeks by the first quarter of 2026, up from a 143-week average in 2024 (Wood Mackenzie, reported by Reuters).",
+        "location": "Frequently Asked Questions, “How long are transformer lead times in 2026?”",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "weak",
+          "force": "moderate",
+          "credibility_notes": "The figures are secondhand and require checking against Wood Mackenzie or Reuters; this passage does not define the lead-time endpoints or identify the 2026 statistic as an average. The source's supplied publication date precedes the Reuters report dated July 9, 2026 in its references."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C1": "for",
+          "C3": "against",
+          "C4": "for",
+          "C6": "for"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E28",
+        "text": "The article attributes lead times extending to four years, and 60 months for extra-high-voltage units, to a May 2026 DOE-funded national laboratory report; these are upper-end figures rather than a stated typical range.",
+        "kind": "testimonial",
+        "source_id": "S7",
+        "quote": "A DOE-funded national laboratory report published in May 2026 describes lead times stretching up to four years, with extra-high-voltage units reaching 60 months.",
+        "location": "Frequently Asked Questions, “How long are transformer lead times in 2026?”",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "weak",
+          "force": "moderate",
+          "credibility_notes": "The underlying report is not reproduced, the observation dates and lead-time endpoints are unspecified, and its May publication postdates the supplied article date. Upper-end observations do not establish that 49–72 months is typical."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C3": "against",
+          "C4": "for"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E29",
+        "text": "The FAQ rejects widely circulated claims of approximately 100% and 260% lead-time increases, saying those percentages are absent from the Reuters reporting cited by the trade coverage.",
+        "kind": "testimonial",
+        "source_id": "S7",
+        "quote": "Percentages near +100% for power transformers and +260% for generation step-up units circulated widely in trade coverage in mid-2026, but they do not appear in the Reuters reporting those write-ups cite.",
+        "location": "Frequently Asked Questions, “Are transformer lead times doubling in 2026?”",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "weak",
+          "force": "weak",
+          "credibility_notes": "The passage offers an unverified critique of other reporting, not direct lead-time measurements, and refers to mid-2026 coverage despite the supplied March publication date. It cautions against extrapolating dramatic increases but does not determine the current typical range."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C1": "neutral",
+          "C2": "neutral",
+          "C3": "neutral",
+          "C6": "neutral"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E30",
+        "text": "The post reports large power transformer lead times of 3–4 years, also expressed as 150–200+ weeks, for early 2026; these units are approximate rather than exactly equivalent.",
+        "kind": "testimonial",
+        "source_id": "S8",
+        "quote": "As of early 2026, these timelines have expanded significantly: ⚡Large Power Transformers (LPTs): 3 to 4 years (150–200+ weeks).",
+        "location": "Post body, Current Lead Times (2026)",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "weak",
+          "force": "weak",
+          "credibility_notes": "The post supplies no underlying source, sample, measurement date beyond 'early 2026', explicit US procurement scope, or definition of the lead-time start and end points. It supports an above-two-year assertion but does not verify a representative current US range; its stated range is 36–48 months, not precisely either candidate range."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C1": "for",
+          "C2": "against",
+          "C3": "against",
+          "C6": "for"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E31",
+        "text": "The post asserts that large power transformer lead times were typically 6–8 months before 2020, providing an unverified historical comparison rather than evidence of when they first exceeded two years.",
+        "kind": "testimonial",
+        "source_id": "S8",
+        "quote": "Before 2020, lead times for large power transformers were typically 6–8 months.",
+        "location": "Post body, opening historical comparison",
+        "credentials": {
+          "relevance": "weak",
+          "credibility": "weak",
+          "force": "weak",
+          "credibility_notes": "This historical assertion does not establish 2026 conditions or the intervening above-two-year baseline implied by 'still'; it also lacks supporting records, geographic scope and a lead-time definition."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C1": "neutral",
+          "C2": "neutral",
+          "C3": "neutral",
+          "C6": "neutral"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E32",
+        "text": "The post identifies retrofit options with substantially shorter reported lead times but cautions that these are often restricted to particular voltages or smaller capacities; it does not establish their availability for large power transformers.",
+        "kind": "testimonial",
+        "source_id": "S8",
+        "quote": "Some specialized providers (like ELSCO Transformers or Maddox Industrial Transformer) offer retrofitted units in 20–50 weeks, but these are often limited to specific voltages or smaller capacities.",
+        "location": "Post body, Quick-Ship/Retrofit Options",
+        "credentials": {
+          "relevance": "weak",
+          "credibility": "weak",
+          "force": "weak",
+          "credibility_notes": "No supplier documentation or observed orders substantiate the figures, and the text does not identify these options as large power transformers. Consequently, this is only a caution about equipment and procurement comparability, not proof of materially different ranges within US large power transformers."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C3": "neutral",
+          "C4": "for"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E33",
+        "text": "The article reports 2026 power-transformer lead times of 48–60 months for its Tier 1 supplier group, naming ABB, Siemens Energy, Hitachi Energy and GE Vernova; this is an asserted supplier-tier range, not documented US standard-order procurement evidence or a verified market-wide typical range.",
+        "kind": "testimonial",
+        "source_id": "S9",
+        "quote": "Tier 1 (ABB, Siemens Energy, Hitachi Energy, GE Vernova): 48-60 months, effectively closed for 2028 delivery. New orders targeting 2030-2031.",
+        "location": "The Lead Time Problem Is a Materials Problem, supplier-tier list",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "weak",
+          "force": "weak",
+          "credibility_notes": "No dated quotations, procurement records or underlying source support the estimate. The article does not explicitly define the lead-time clock or identify the observations' dates, equipment ratings or procurement terms. It supports above-two-year waits but does not establish the exact 49–72-month claim."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C2": "for",
+          "C3": "against"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E34",
+        "text": "The article reports a substantially shorter 24–36-month range for comparable equipment from its Tier 2 supplier group, suggesting that its own account does not support applying a 49–72-month range uniformly across available suppliers.",
+        "kind": "testimonial",
+        "source_id": "S9",
+        "quote": "Tier 2 (Efacec, Pauwels, SGB-SMIT, CG Power): 24-36 months for comparable equipment. Still viable for 2029 targets, but the window is closing.",
+        "location": "The Lead Time Problem Is a Materials Problem, supplier-tier list",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "weak",
+          "force": "weak",
+          "credibility_notes": "The range is unsupported by identifiable quotations or records; 'comparable equipment' is not technically defined, and US delivery applicability and the lead-time starting point are not explicitly documented. Its lower endpoint is exactly two years, not below two years."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C2": "against",
+          "C3": "against"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E35",
+        "text": "The article distinguishes the remaining wait after permitting from a full procurement lead time: it claims that reserving a production slot early can reduce the post-permit timeline from 48 months to 12–18 months. This is a planning illustration, not evidence that newly initiated standard orders arrive within two years.",
+        "kind": "testimonial",
+        "source_id": "S9",
+        "quote": "For a project facing a 30-month design and permitting cycle before breaking ground, a slot reservation made at LOI can compress the post-permit procurement timeline from 48 months to 12-18 months.",
+        "location": "Stage 3: Equipment quotation and slot reservation (concurrent with permitting)",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "weak",
+          "force": "weak",
+          "credibility_notes": "No completed project or contractual record substantiates the illustration. The shorter interval explicitly starts after permitting and follows an earlier reservation, so it cannot establish an order-to-delivery lead time within 24 months."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C3": "against"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E36",
+        "text": "The article separately asserts an average lead time of 144 weeks, approximately 33 months, for generator step-up transformers; it does not specify their ratings or establish that this is a representative US large-power-transformer sample.",
+        "kind": "testimonial",
+        "source_id": "S9",
+        "quote": "Generator step-up transformers average 144 weeks.",
+        "location": "Opening discussion, paragraph beginning 'The conventional development sequence'",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "weak",
+          "force": "weak",
+          "credibility_notes": "The average has no cited dataset, observation period, sample size, geographical definition or lead-time definition. Generator step-up transformers are a particular application and cannot automatically represent the full large-power-transformer market."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C2": "against",
+          "C3": "against"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E37",
+        "text": "The article attributes to DOE's March 5, 2026 briefing a report that some large transformer orders took up to 48 months; this is an upper-end observation, not a typical range or a documented cohort of orders placed in 2026.",
+        "kind": "testimonial",
+        "source_id": "S10",
+        "quote": "DOE's 2026 briefing described some large transformer orders taking as long as 48 months.",
+        "location": "Section 'A surprisingly long line', paragraph beginning 'All that demand'; endnotes 6–7 identify the March 5, 2026 briefing.",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "moderate",
+          "force": "weak",
+          "credibility_notes": "This is a secondhand report of DOE's statement, originating at https://www.energy.gov/oe/distribution-transformer-webinar-text-alternative, not independent corroboration. Its force is weak for claims about typical 2026 US lead times because it reports only some orders and does not define the order cohort, procurement terms, or lead-time endpoints."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C2": "neutral",
+          "C3": "against"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E38",
+        "text": "The article reports that Roseville Electric Utility buys large transformers for projects up to five years ahead, citing Reuters dated July 9, 2026; this describes advance procurement planning rather than a measured order-to-delivery interval.",
+        "kind": "testimonial",
+        "source_id": "S10",
+        "quote": "The utility, which used to buy equipment around a year ahead, is now buying large transformers for projects as many as five years in advance.",
+        "location": "Section 'A surprisingly long line', paragraph beginning 'California’s Roseville Electric Utility'; endnote 8.",
+        "credentials": {
+          "relevance": "weak",
+          "credibility": "moderate",
+          "force": "weak",
+          "credibility_notes": "The underlying origin is Reuters: https://www.reuters.com/business/energy/us-power-companies-scramble-secure-equipment-surging-data-center-demand-strains-2026-07-09/. Relevance and force are weak because a planning horizon does not establish manufacturing or delivery lead time, and the passage does not distinguish standard orders, reserved slots, or other procurement arrangements."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C2": "neutral",
+          "C3": "neutral"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E39",
+        "text": "The report labels global large-power-transformer lead times as currently 36–48 months, compared with 12–18 months before 2020, and defines this category as at least 100 MVA and at least 230 kV. These are presented as current figures rather than forecasts, but no observation dates, measurement method, or lead-time start and end points are supplied.",
+        "kind": "testimonial",
+        "source_id": "S11",
+        "quote": "| Large Power Transformer (LPT) | ≥100 MVA, ≥230 kV | 12–18 months | 36–48 months |",
+        "location": "Section 6, Transformer Lead Time Analysis by Category, Large Power Transformer row",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "weak",
+          "force": "weak",
+          "credibility_notes": "The figures lack identified underlying sources, sampling methods, and observation dates. The report's global scope does not establish a current United States range or independently substantiate the claimed 49–72 months."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C2": "neutral",
+          "C3": "neutral"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E40",
+        "text": "The report separately lists generator step-up transformers rated 50–500 MVA with a current lead-time range of 30–42 months, illustrating that its equipment categories carry different reported ranges.",
+        "kind": "testimonial",
+        "source_id": "S11",
+        "quote": "| Generator Step-Up Transformer (GSU) | 50–500 MVA | 14–18 months | 30–42 months |",
+        "location": "Section 6, Transformer Lead Time Analysis by Category, Generator Step-Up Transformer row",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "weak",
+          "force": "weak",
+          "credibility_notes": "No underlying observations or methodology are provided, and this global category-specific assertion is not a measured United States procurement range."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C2": "neutral",
+          "C3": "neutral"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E41",
+        "text": "The report treats specialized HVDC converter transformers as a separate category and assigns them a current lead-time range of 36–52 months rather than the 36–48 months assigned to its LPT category.",
+        "kind": "testimonial",
+        "source_id": "S11",
+        "quote": "| HVDC Converter Transformer | Specialized | 18–24 months | 36–52 months |",
+        "location": "Section 6, Transformer Lead Time Analysis by Category, HVDC Converter Transformer row",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "weak",
+          "force": "weak",
+          "credibility_notes": "The range is an unsupported global assertion without procurement observation dates or a lead-time definition; it cannot establish typical United States lead times in 2026."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C2": "neutral",
+          "C3": "neutral"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E42",
+        "text": "The FAQ reports current lead times of 36–48 months specifically for large power transformers rated at least 100 MVA and 230 kV; it does not identify a measurement period or establish that this range applies specifically to United States procurement.",
+        "kind": "testimonial",
+        "source_id": "S11",
+        "quote": "Large power transformers rated at 100 MVA or above and 230 kV or higher now carry lead times of 36–48 months, compared to 12–18 months before 2020.",
+        "location": "Frequently Asked Questions, Q2",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "weak",
+          "force": "weak",
+          "credibility_notes": "The estimate has no cited underlying source, sampling method, observation dates, or explicit US applicability. The article's publication date does not establish when the lead times were measured, so this cannot verify a current typical US range or reliably resolve the competing ranges."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C2": "against",
+          "C3": "against"
+        },
+        "role": "evidence"
+      }
+    ],
+    "sources": [
+      {
+        "id": "S1",
+        "url": "https://ryansales.net/resources/medium-voltage-equipment-lead-times/",
+        "title": "Medium Voltage Equipment Lead Times 2026",
+        "publisher": "Ryan Sales",
+        "date": "2026-10-14 (supplied source metadata; no date displayed in the provided article text)",
+        "fetched_at": "2026-11-13T01:46:11+00:00",
+        "kind": "derivative",
+        "derived_from": null,
+        "derived_from_note": "Wood Mackenzie Q2 2025 survey and 2024–2025 publications; POWER, January 2, 2026; EEPower, August 27, 2025; NEMA-led coalition letter to the Bureau of Industry and Security, June 4, 2025.",
+        "competence": "Ryan Sales represents electrical-equipment suppliers and offers factory quotations, but the published large-transformer figures are attributed to external surveys and reporting rather than its own procurement observations.",
+        "incentives": "The article promotes Ryan Sales' equipment-representation and quotation services and encourages readers to request current factory quotes.",
+        "text_path": "sources\\S1.txt",
+        "query": "\"Wood Mackenzie\" \"2026\" \"power transformers\" \"lead times\"",
+        "read_fully": true
+      },
+      {
+        "id": "S2",
+        "url": "https://www.woodmac.com/press-releases/power-transformers-and-distribution-transformers-will-face-supply-deficits-of-30-and-10-in-2025/",
+        "title": "Power transformers and distribution transformers will face ...",
+        "publisher": "Wood Mackenzie",
+        "date": "2025-08-14 (supplied source metadata)",
+        "fetched_at": "2026-11-13T01:46:38+00:00",
+        "kind": "primary",
+        "derived_from": null,
+        "derived_from_note": "",
+        "competence": "Wood Mackenzie reports findings from its own US transformer supply-chain research and quotes its senior supply-chain analyst, although the supplied release does not disclose its measurement methods.",
+        "incentives": "As a commercial energy research and consultancy firm, Wood Mackenzie has an interest in promoting its research and expertise.",
+        "text_path": "sources\\S2.txt",
+        "query": "\"Wood Mackenzie\" \"2026\" \"power transformers\" \"lead times\"",
+        "read_fully": true
+      },
+      {
+        "id": "S3",
+        "url": "https://www.woodmac.com/products/supply-chain-analytics/",
+        "title": "Power transformers and distribution transformers will face ... (supplementary)",
+        "publisher": "Wood Mackenzie",
+        "date": "",
+        "fetched_at": "2026-11-13T01:46:53+00:00",
+        "kind": "primary",
+        "derived_from": "S2",
+        "derived_from_note": "",
+        "competence": "Wood Mackenzie describes its own supply-chain analytics platform and proprietary industry data assets, but this page provides no dated observations of United States large-power-transformer lead times.",
+        "incentives": "The page markets Wood Mackenzie's analytics and consulting services, giving it an incentive to emphasize procurement uncertainty and the value of its data.",
+        "text_path": "sources\\S3.txt",
+        "query": "\"Wood Mackenzie\" \"2026\" \"power transformers\" \"lead times\"",
+        "read_fully": true
+      },
+      {
+        "id": "S4",
+        "url": "https://www.woodmac.com/news/opinion/transformer-troubles-manufacturing-and-policy-constraints-hit-us-transformer-supply/",
+        "title": "Power transformers and distribution transformers will face ... (supplementary)",
+        "publisher": "Wood Mackenzie",
+        "date": "Not displayed in the supplied text",
+        "fetched_at": "2026-11-13T01:46:58+00:00",
+        "kind": "primary",
+        "derived_from": "S2",
+        "derived_from_note": "",
+        "competence": "The authors are Wood Mackenzie supply-chain research and analytics specialists reporting findings from their team's own US transformer market update.",
+        "incentives": "The article promotes Wood Mackenzie's commercial Supply Chain Analytics offering and solicits registrations for a complimentary research extract.",
+        "text_path": "sources\\S4.txt",
+        "query": "\"Wood Mackenzie\" \"2026\" \"power transformers\" \"lead times\"",
+        "read_fully": true
+      },
+      {
+        "id": "S5",
+        "url": "https://www.ryantransformers.com/blog/transformer-lead-times-2026-buyers-guide",
+        "title": "Transformer Lead Times in 2026: How to Plan Your Order",
+        "publisher": "Ryan Electric (Jiangsu Ryan Electric Co., Ltd.)",
+        "date": "2026-09-07 (supplied metadata; not displayed in the provided article text)",
+        "fetched_at": "2026-11-13T01:47:11+00:00",
+        "kind": "secondary",
+        "derived_from": null,
+        "derived_from_note": "",
+        "competence": "The engineering and sales team identifies itself as a transformer manufacturer serving North American buyers, giving it potential access to factory schedules and quotations, but it presents no current procurement dataset or sampling method.",
+        "incentives": "The article markets the manufacturer's scheduling capabilities and invites prospective customers to request quotations.",
+        "text_path": "sources\\S5.txt",
+        "query": "\"Wood Mackenzie\" \"2026\" \"power transformers\" \"lead times\"",
+        "read_fully": true
+      },
+      {
+        "id": "S6",
+        "url": "https://entogo.ca/insights/transformer-lead-times-north-america-2026/",
+        "title": "Transformer lead times in North America in 2026",
+        "publisher": "Entogo",
+        "date": "2026-05-27 (supplied metadata; not displayed in the provided article text)",
+        "fetched_at": "2026-11-13T01:47:45+00:00",
+        "kind": "secondary",
+        "derived_from": null,
+        "derived_from_note": "",
+        "competence": "Entogo identifies itself as a Canada-based transformer manufacturer with its own factory, giving it potential access to its own production schedules, but the article provides no survey, procurement records or methodology for its broader North American market estimates.",
+        "incentives": "The article promotes Entogo's manufacturing and sourcing model by contrasting its advertised delivery times with longer merchant-market lead times.",
+        "text_path": "sources\\S6.txt",
+        "query": "\"large power transformers\" \"2026\" \"lead times\" United States",
+        "read_fully": true
+      },
+      {
+        "id": "S7",
+        "url": "https://distroforge.com/blog/transformer-procurement-2026/",
+        "title": "Transformer Lead Times 2026: US Procurement Numbers",
+        "publisher": "DistroForge",
+        "date": "2026-03-24",
+        "fetched_at": "2026-11-13T01:48:04+00:00",
+        "kind": "unknown",
+        "derived_from": null,
+        "derived_from_note": "",
+        "competence": "The publisher synthesizes attributed government and market-research reports but supplies no original procurement observations or survey methodology in this excerpt.",
+        "incentives": "The article addresses distributors and promotes procurement guidance and related content while presenting itself as a sourced market analysis.",
+        "text_path": "sources\\S7.txt",
+        "query": "\"large power transformers\" \"2026\" \"lead times\" United States",
+        "read_fully": true
+      },
+      {
+        "id": "S8",
+        "url": "https://www.linkedin.com/posts/aidan-potts-337a9636_key-takeaway-from-dtech-26-the-power-transformer-activity-7427298715230593024-C0Qd",
+        "title": "Power Transformer Lead Times Surge to 3-4 Years",
+        "publisher": "Aidan Potts (LinkedIn)",
+        "date": "Not established; supplied metadata says '9 months ago', while the post describes early 2026.",
+        "fetched_at": "2026-11-13T01:48:58+00:00",
+        "kind": "unknown",
+        "derived_from": null,
+        "derived_from_note": "",
+        "competence": "The author presents transformer lead-time figures as a DTECH 26 takeaway, but the supplied text establishes neither procurement expertise nor access to underlying orders, surveys or measurements.",
+        "incentives": "The post frames shortages as a market-share opportunity and tags equipment suppliers, suggesting an industry-networking or commercial-engagement interest without disclosing a specific affiliation.",
+        "text_path": "sources\\S8.txt",
+        "query": "\"large power transformers\" \"2026\" \"lead times\" United States",
+        "read_fully": true
+      },
+      {
+        "id": "S9",
+        "url": "https://build.inc/insights/data-center-electrical-procurement-sequence-workflow",
+        "title": "Data Center Electrical Procurement: Why the Order Has to Come ...",
+        "publisher": "Build (build.inc)",
+        "date": "Not displayed in the supplied text; the article discusses 2026 and references Q3 2026 results.",
+        "fetched_at": "2026-11-13T01:51:50+00:00",
+        "kind": "secondary",
+        "derived_from": null,
+        "derived_from_note": "",
+        "competence": "The article analyses electrical procurement for data-center developers, including US procurement, but supplies no identifiable purchase orders, manufacturer quotations, sampling methodology or sources for its lead-time estimates.",
+        "incentives": "The article promotes early procurement and AI-supported development workflows, giving it an interest in emphasizing procurement risks and the value of systematic monitoring.",
+        "text_path": "sources\\S9.txt",
+        "query": "\"2026\" utility \"large power transformers\" \"lead time\" procurement",
+        "read_fully": true
+      },
+      {
+        "id": "S10",
+        "url": "https://www.gsventures.com/post/ai-has-a-transformer-problem",
+        "title": "AI Has a Transformer Problem, and Not the One You Think",
+        "publisher": "GS Ventures",
+        "date": "2026-10-22 (supplied metadata; not displayed in the supplied article text)",
+        "fetched_at": "2026-11-13T01:52:59+00:00",
+        "kind": "secondary",
+        "derived_from": null,
+        "derived_from_note": "",
+        "competence": "The author synthesizes government reports and industry reporting across infrastructure sectors but provides no original transformer procurement records or lead-time measurements.",
+        "incentives": "The article presents the publisher's cross-industry analysis of infrastructure bottlenecks, emphasizing transformers' importance to AI and other investment sectors.",
+        "text_path": "sources\\S10.txt",
+        "query": "\"2026\" \"transformers\" \"lead times\" \"GE Vernova\"",
+        "read_fully": true
+      },
+      {
+        "id": "S11",
+        "url": "https://www.fjinno.net/global-transformer-supply-chain-report-2026/",
+        "title": "Global Transformer Supply Chain Report 2026-INNO - fjinno",
+        "publisher": "fjinno",
+        "date": "2026-03-24",
+        "fetched_at": "2026-11-13T01:53:17+00:00",
+        "kind": "unknown",
+        "derived_from": null,
+        "derived_from_note": "",
+        "competence": "The publisher presents transformer-market figures and equipment classifications, but this excerpt establishes no direct procurement observations, survey methodology, or access to manufacturer order books.",
+        "incentives": "",
+        "text_path": "sources\\S11.txt",
+        "query": "\"large power transformers\" \"2026\" \"30\" \"48\"",
+        "read_fully": true
+      }
+    ],
+    "arguments": [
+      {
+        "id": "A1",
+        "scheme": "study_result",
+        "premise_ids": [
+          "E1",
+          "E2",
+          "E11",
+          "E20"
+        ],
+        "claim_id": "C1",
+        "attacks": null,
+        "cq": {
+          "design": {
+            "status": "answered",
+            "outcome": "unresolved",
+            "answer": "The items identify a Wood Mackenzie survey, but do not supply its sampling or measurement methods. Adequacy for estimating typical procurement lead times cannot be assessed.",
+            "evidence_ids": [
+              "E1",
+              "E11"
+            ],
+            "revision": 1,
+            "answer_move": ""
+          },
+          "directness": {
+            "status": "answered",
+            "outcome": "unsatisfied",
+            "answer": "These are Q2 2025 equipment-specific averages, not observations collected in 2026 or a reported typical range of 30–48 months. US coverage and interval endpoints are not established in the supplied survey extracts.",
+            "evidence_ids": [
+              "E1",
+              "E2",
+              "E11",
+              "E20"
+            ],
+            "revision": 1,
+            "answer_move": ""
+          },
+          "uncertainty": {
+            "status": "answered",
+            "outcome": "unresolved",
+            "answer": "No sample size, confidence interval or dispersion around the reported averages is supplied.",
+            "evidence_ids": [
+              "E1",
+              "E2",
+              "E11"
+            ],
+            "revision": 1,
+            "answer_move": ""
+          },
+          "reported": {
+            "status": "answered",
+            "outcome": "unsatisfied",
+            "answer": "The supplied items are derivative summaries of survey estimates, not the study's design and results as required by this scheme.",
+            "evidence_ids": [
+              "E1",
+              "E11",
+              "E20"
+            ],
+            "revision": 1,
+            "answer_move": ""
+          },
+          "bias": {
+            "status": "open",
+            "outcome": "",
+            "answer": "",
+            "evidence_ids": [],
+            "revision": 0,
+            "answer_move": ""
+          },
+          "consistency": {
+            "status": "open",
+            "outcome": "",
+            "answer": "",
+            "evidence_ids": [],
+            "revision": 0,
+            "answer_move": ""
+          },
+          "precision": {
+            "status": "open",
+            "outcome": "",
+            "answer": "",
+            "evidence_ids": [],
+            "revision": 0,
+            "answer_move": ""
+          }
+        },
+        "strength_override": null,
+        "origin": "proposer",
+        "note": "One underlying survey origin, not independent corroboration. This historical evidence supports the prior above-two-year context but does not establish C1's current bounded range.",
+        "round": 1,
+        "withdrawn": "The derivative Q2 2025 survey summaries concern historical equipment-specific averages, not current 2026 observations or a typical 30–48-month interval. Their geographic coverage, sampling, dispersion and lead-time endpoints are not established. They also do not support the replacement claim about what Ryan Sales attributes to POWER."
+      },
+      {
+        "id": "A2",
+        "scheme": "position_to_know",
+        "premise_ids": [
+          "E3",
+          "E4",
+          "E5"
+        ],
+        "claim_id": "C6",
+        "attacks": null,
+        "cq": {
+          "access": {
+            "status": "answered",
+            "outcome": "unresolved",
+            "answer": "Ryan Sales identifies an industry letter and POWER review, but the underlying documents and their observation methods are absent. Access adequate to establish a current representative US range is not demonstrated.",
+            "evidence_ids": [
+              "E3",
+              "E4",
+              "E5"
+            ],
+            "revision": 1,
+            "answer_move": ""
+          },
+          "report": {
+            "status": "answered",
+            "outcome": "unsatisfied",
+            "answer": "The reported January 2026 assessment says large units remain above two years. The approximately 28–48-month range comes from a June 2025 letter, not a measured typical 2026 range of 30–48 months.",
+            "evidence_ids": [
+              "E3",
+              "E4"
+            ],
+            "revision": 1,
+            "answer_move": ""
+          },
+          "veracity": {
+            "status": "open",
+            "outcome": "",
+            "answer": "",
+            "evidence_ids": [],
+            "revision": 0,
+            "answer_move": ""
+          },
+          "objectivity": {
+            "status": "open",
+            "outcome": "",
+            "answer": "",
+            "evidence_ids": [],
+            "revision": 0,
+            "answer_move": ""
+          }
+        },
+        "strength_override": null,
+        "origin": "proposer",
+        "note": "The threshold assessment is relevant, but combining it with an older range does not establish every clause of C1.",
+        "round": 1,
+        "withdrawn": "The position-to-know inference does not establish a representative current US estimate, and its June 2025 range does not support a 2026 range. C6 is instead supported by A7 as a record of Ryan Sales's attribution to POWER. Withdrawing A2 also removes the improper use of historical context E3 as a supporting premise."
+      },
+      {
+        "id": "A3",
+        "scheme": "position_to_know",
+        "premise_ids": [
+          "E6"
+        ],
+        "claim_id": "C5",
+        "attacks": null,
+        "cq": {
+          "access": {
+            "status": "answered",
+            "outcome": "satisfied",
+            "answer": "The supplier representative is positioned to understand the specifications and factory conditions affecting equipment quotations.",
+            "evidence_ids": [
+              "E6"
+            ],
+            "revision": 1,
+            "answer_move": ""
+          },
+          "report": {
+            "status": "answered",
+            "outcome": "satisfied",
+            "answer": "The quotation explicitly says individual quotes can be shorter or longer depending on these factors. It does not quantify variation or reject the usefulness of market averages.",
+            "evidence_ids": [
+              "E6"
+            ],
+            "revision": 1,
+            "answer_move": ""
+          },
+          "veracity": {
+            "status": "open",
+            "outcome": "",
+            "answer": "",
+            "evidence_ids": [],
+            "revision": 0,
+            "answer_move": ""
+          },
+          "objectivity": {
+            "status": "open",
+            "outcome": "",
+            "answer": "",
+            "evidence_ids": [],
+            "revision": 0,
+            "answer_move": ""
+          }
+        },
+        "strength_override": null,
+        "origin": "proposer",
+        "note": "A supported qualification about individual quotations, not proof that a pooled typical range would be misleading.",
+        "round": 1,
+        "withdrawn": ""
+      },
+      {
+        "id": "A4",
+        "scheme": "attack",
+        "premise_ids": [
+          "E6"
+        ],
+        "claim_id": null,
+        "attacks": {
+          "target_id": "C5",
+          "type": "rebut",
+          "note": "",
+          "basis": "presence",
+          "challenged_revision": -1,
+          "answer_quote": "",
+          "was_reopened": false,
+          "raises_cq": ""
+        },
+        "cq": {
+          "grounds": {
+            "status": "answered",
+            "outcome": "",
+            "answer": "premises supplied",
+            "evidence_ids": [
+              "E6"
+            ],
+            "revision": 0,
+            "answer_move": ""
+          }
+        },
+        "strength_override": null,
+        "origin": "critic",
+        "note": "Low priority. E6 supports only that individual quotes vary, and C5 is scoped as a component finding. It does not show that a pooled typical range would be misleading, so C5 must not be read as answering the main issue.",
+        "round": 1,
+        "withdrawn": ""
+      },
+      {
+        "id": "A5",
+        "scheme": "attack",
+        "premise_ids": [
+          "E6",
+          "E1"
+        ],
+        "claim_id": null,
+        "attacks": {
+          "target_id": "A3",
+          "type": "undercut",
+          "note": "",
+          "basis": "presence",
+          "challenged_revision": -1,
+          "answer_quote": "",
+          "was_reopened": false,
+          "raises_cq": "access"
+        },
+        "cq": {
+          "grounds": {
+            "status": "answered",
+            "outcome": "",
+            "answer": "premises supplied",
+            "evidence_ids": [
+              "E6",
+              "E1"
+            ],
+            "revision": 0,
+            "answer_move": ""
+          }
+        },
+        "strength_override": null,
+        "origin": "critic",
+        "note": "[access] The access answer holds that a supplier representative is positioned to know quotation drivers. Ryan Sales is a distributor of medium-voltage equipment and is a derivative source (S1). The E1 table shows its figures are reproduced from Wood Mackenzie, not observed. The answer therefore supports knowledge of quoting generally, not of large-power-transformer lead times. Because C5 is scoped narrowly, this attack is minor.",
+        "round": 1,
+        "withdrawn": ""
+      },
+      {
+        "id": "A6",
+        "scheme": "attack",
+        "premise_ids": [
+          "E6"
+        ],
+        "claim_id": null,
+        "attacks": {
+          "target_id": "A4",
+          "type": "undercut",
+          "note": "",
+          "basis": "presence",
+          "challenged_revision": -1,
+          "answer_quote": "",
+          "was_reopened": false,
+          "raises_cq": ""
+        },
+        "cq": {
+          "grounds": {
+            "status": "answered",
+            "outcome": "",
+            "answer": "premises supplied",
+            "evidence_ids": [
+              "E6"
+            ],
+            "revision": 0,
+            "answer_move": ""
+          }
+        },
+        "strength_override": null,
+        "origin": "proposer",
+        "note": "E6 explicitly supports the quotation-variability attribution in C5. The attack instead challenges an inference that a pooled typical range would be misleading, which C5 does not assert. C5 is expressly a component finding, not an answer to the main issue; the absence of quantified dispersion limits that broader inference but does not rebut C5.",
+        "round": 1,
+        "withdrawn": ""
+      },
+      {
+        "id": "A7",
+        "scheme": "document_record",
+        "premise_ids": [
+          "E4",
+          "E5"
+        ],
+        "claim_id": "C6",
+        "attacks": null,
+        "cq": {
+          "authentic": {
+            "status": "answered",
+            "outcome": "satisfied",
+            "answer": "The supplied Ryan Sales article contains the quoted attribution and its qualification about the age of its data. The argument concerns that article's statements, not authentication of the underlying POWER review.",
+            "evidence_ids": [
+              "E4",
+              "E5"
+            ],
+            "revision": 1,
+            "answer_move": ""
+          },
+          "accuracy": {
+            "status": "answered",
+            "outcome": "satisfied",
+            "answer": "The direct quotations adequately establish what Ryan Sales attributes to POWER and the limitations Ryan Sales acknowledges. They do not establish an independently measured current US range.",
+            "evidence_ids": [
+              "E4",
+              "E5"
+            ],
+            "revision": 1,
+            "answer_move": ""
+          },
+          "reading": {
+            "status": "answered",
+            "outcome": "satisfied",
+            "answer": "Ryan Sales explicitly attributes 'remain locked above two years' to POWER's January 2026 review. Its acknowledgment that most hard data come from 2025 supports treating this as a secondary early-2026 assessment rather than a verified current range.",
+            "evidence_ids": [
+              "E4",
+              "E5"
+            ],
+            "revision": 1,
+            "answer_move": ""
+          },
+          "definitions": {
+            "status": "open",
+            "outcome": "",
+            "answer": "",
+            "evidence_ids": [],
+            "revision": 0,
+            "answer_move": ""
+          },
+          "currency": {
+            "status": "open",
+            "outcome": "",
+            "answer": "",
+            "evidence_ids": [],
+            "revision": 0,
+            "answer_move": ""
+          }
+        },
+        "strength_override": null,
+        "origin": "proposer",
+        "note": "This establishes the attribution in C6, not the truth of a market-wide lead-time estimate. It replaces the earlier inference that required access to underlying procurement observations.",
+        "round": 2,
+        "withdrawn": ""
+      },
+      {
+        "id": "A8",
+        "scheme": "document_record",
+        "premise_ids": [
+          "E18",
+          "E19",
+          "E26"
+        ],
+        "claim_id": "C7",
+        "attacks": null,
+        "cq": {
+          "authentic": {
+            "status": "answered",
+            "outcome": "satisfied",
+            "answer": "The supplied DistroForge text includes both the opening range and the FAQ's order-to-receipt wording. The publication-date inconsistency prevents treating the supplied date as verified currency, but does not prevent recording what the text says.",
+            "evidence_ids": [
+              "E18",
+              "E26"
+            ],
+            "revision": 1,
+            "answer_move": ""
+          },
+          "accuracy": {
+            "status": "answered",
+            "outcome": "satisfied",
+            "answer": "The quotations establish the article's reported range and definition. The historical GAO attribution and conflicting chronology establish why this record does not verify a current procurement observation.",
+            "evidence_ids": [
+              "E18",
+              "E19",
+              "E26"
+            ],
+            "revision": 1,
+            "answer_move": ""
+          },
+          "reading": {
+            "status": "answered",
+            "outcome": "satisfied",
+            "answer": "The FAQ explicitly says '30 to 36 months order to receipt' and presents it as current. The same range is attributed elsewhere to GAO in 2023, so the claim preserves rather than resolves the uncertainty about observation dates.",
+            "evidence_ids": [
+              "E19",
+              "E26"
+            ],
+            "revision": 1,
+            "answer_move": ""
+          },
+          "definitions": {
+            "status": "open",
+            "outcome": "",
+            "answer": "",
+            "evidence_ids": [],
+            "revision": 0,
+            "answer_move": ""
+          },
+          "currency": {
+            "status": "open",
+            "outcome": "",
+            "answer": "",
+            "evidence_ids": [],
+            "revision": 0,
+            "answer_move": ""
+          }
+        },
+        "strength_override": null,
+        "origin": "proposer",
+        "note": "A source-report finding, not endorsement of 30–36 months as the verified current typical range. The opening statement and FAQ are one origin, not independent corroboration.",
+        "round": 2,
+        "withdrawn": ""
+      }
+    ],
+    "main_issue_id": "Q1"
+  },
+  "tests": [
+    {
+      "id": "T1",
+      "claim_ids": [
+        "C1",
+        "C2",
+        "C3",
+        "C4"
+      ],
+      "observation": "Recent US procurement surveys or market reports provide observed large-power-transformer lead times applicable to 2026, with the measurement date, equipment category, and start and end points of the lead-time interval identified.",
+      "expected_if": {
+        "C1": "Current observations place typical order-to-delivery lead times at 30–48 months.",
+        "C2": "Current observations place typical order-to-delivery lead times at 49–72 months.",
+        "C3": "Current observations place typical order-to-delivery lead times at 24 months or less.",
+        "C4": "Reports separate materially different lead-time ranges by transformer specifications or procurement conditions and do not support a representative pooled range."
+      },
+      "diagnosticity": "high",
+      "queries": [
+        "\"Wood Mackenzie\" \"2026\" \"power transformers\" \"lead times\"",
+        "\"large power transformers\" \"2026\" \"lead times\" United States",
+        "site.energy.gov \"transformers\" \"lead times\" \"2026\""
+      ],
+      "candidate_ids": [],
+      "status": "run",
+      "round": 1
+    },
+    {
+      "id": "T2",
+      "claim_ids": [
+        "C1",
+        "C2",
+        "C3",
+        "C4"
+      ],
+      "observation": "Dated US utility procurement records, regulatory filings, or manufacturer disclosures show lead times for newly ordered large power transformers in 2026, distinguishing standard new orders from expedited purchases, reserved manufacturing slots, and delivery of previously ordered equipment.",
+      "expected_if": {
+        "C1": "Independent standard-order procurement records broadly corroborate 30–48 months from order placement to delivery.",
+        "C2": "Independent standard-order procurement records broadly corroborate 49–72 months from order placement to delivery.",
+        "C3": "Independent standard-order procurement records broadly corroborate delivery within 24 months, rather than merely short remaining waits for older orders.",
+        "C4": "Comparable records show substantial systematic differences by rating, voltage, customization, or access to reserved manufacturing slots, undermining a single typical range."
+      },
+      "diagnosticity": "high",
+      "queries": [
+        "\"2026\" utility \"large power transformers\" \"lead time\" procurement",
+        "\"2026\" \"power transformer\" \"lead times\" \"commission\"",
+        "\"2026\" \"transformers\" \"lead times\" \"GE Vernova\""
+      ],
+      "candidate_ids": [],
+      "status": "run",
+      "round": 1
+    },
+    {
+      "id": "T3",
+      "claim_ids": [
+        "C1",
+        "C2",
+        "C3",
+        "C4"
+      ],
+      "observation": "The original dated sources behind frequently quoted transformer lead-time ranges establish whether those figures are current observations, older measurements repeated in 2026, or forecasts, and whether they describe large power transformers rather than distribution transformers.",
+      "expected_if": {
+        "C1": "The 30–48-month range is supported by measurements current to 2026 for US large power transformer procurement, not solely by older reports or forecasts.",
+        "C2": "The 49–72-month range is supported by measurements current to 2026 for US large power transformer procurement, not solely by older reports or forecasts.",
+        "C3": "Above-two-year figures prove historical or forecast-only, while current measurements document typical lead times of 24 months or less.",
+        "C4": "Apparently conflicting ranges trace to different equipment classes, measurement periods, or lead-time definitions, with no defensible single current range across the relevant large-power-transformer categories."
+      },
+      "diagnosticity": "high",
+      "queries": [
+        "\"large power transformers\" \"2026\" \"30\" \"48\"",
+        "\"power transformers\" \"2026\" \"Wood Mackenzie\" \"128\"",
+        "\"large power transformers\" \"2026\" \"five\" \"six\" \"lead\""
+      ],
+      "candidate_ids": [],
+      "status": "run",
+      "round": 1
+    },
+    {
+      "id": "T4",
+      "claim_ids": [
+        "C6",
+        "C2",
+        "C3"
+      ],
+      "observation": "The original January 2026 POWER article contains the attributed above-two-year statement and identifies its geography, equipment category, underlying data source and observation period.",
+      "expected_if": {
+        "C6": "POWER contains the attributed assessment, with context establishing whether it concerns United States large-transformer procurement rather than another market or equipment class.",
+        "C2": "The article or its underlying data supports current United States lead times above two years; support for C2's exact range would additionally require typical values of 49–72 months.",
+        "C3": "Contemporaneous United States measurements show typical lead times at or below 24 months, or the above-two-year statement concerns older observations rather than 2026 conditions."
+      },
+      "diagnosticity": "high",
+      "queries": [
+        "POWER",
+        "NEMA",
+        "NECA",
+        "NAED",
+        "Retrieve the primary Wood Mackenzie Q2 2025 survey results and a separately dated 2026 United States large-power-transformer update, if available. Seek category-specific averages or typical quoted ranges, sampling methods, sample sizes, dispersion or intervals, and procurement-interval definitions. Establish whether these details are reported in the originals rather than treating their absence from secondary summaries as proof that they were not reported.",
+        "The Wood Mackenzie Q2 2025 survey and any 2026 updates, including US coverage, how lead time is defined (order to delivery), and the distribution of lead times. The 128-week average and the 143-week average could then be checked as one origin that S1, S5 and S7 all repeat.",
+        "DOE-",
+        "TP-5700-96742",
+        "The Reuters July 2026 reporting on Wood Mackenzie GSU lead times above 160 weeks, to confirm the figure and its date.",
+        "The GAO 2023 report on large power transformer lead times, to confirm the 30–36 month order-to-receipt figure.",
+        "Evidence for a typical 2026 range in the 49–72 month claim (C2). Nothing in the graph gives such a range, since the closest figures are 36–48 months (E30) and 30–36 months (E18). It needs primary 2026 data or should be reframed.",
+        "Quantified distributions that separate lead times by voltage or MVA class and by procurement channel (merchant market versus framework agreements), to support the claim of material variation.",
+        "site.powermag.com \"2026\" \"transformers\" \"locked\"",
+        "site.powermag.com \"January\" \"2026\" \"transformer\" \"lead times\"",
+        "\"Ryan Sales\" \"POWER\" \"two years\""
+      ],
+      "candidate_ids": [],
+      "status": "planned",
+      "round": 2
+    },
+    {
+      "id": "T5",
+      "claim_ids": [
+        "C2",
+        "C3",
+        "C4"
+      ],
+      "observation": "Wood Mackenzie's original Q2 2025 transformer survey and dated 2026 updates establish the populations behind the 128-week and 143-week averages, define order-to-delivery lead time, and provide any ranges or distributions rather than averages alone.",
+      "expected_if": {
+        "C2": "A 2026 update identifies 49–72 months as a typical United States large-power-transformer range; the older averages alone would not establish that range.",
+        "C3": "A 2026 update places typical United States large-power-transformer order-to-delivery lead times at or below 24 months.",
+        "C4": "Comparable data show substantial differences between transformer classes or procurement arrangements, so a pooled average or range conceals materially different typical lead times."
+      },
+      "diagnosticity": "high",
+      "queries": [
+        "site.woodmac.com transformers \"2025\" \"128\" \"143\"",
+        "site.woodmac.com \"2026\" \"transformer\" \"lead times\"",
+        "\"Wood Mackenzie\" \"Q2 2025\" transformers \"delivery\""
+      ],
+      "candidate_ids": [],
+      "status": "planned",
+      "round": 2
+    },
+    {
+      "id": "T6",
+      "claim_ids": [
+        "C2",
+        "C3",
+        "C4"
+      ],
+      "observation": "The original DOE-funded national laboratory report TP-5700-96742 can be authenticated, including its publication date, cited data dates, United States equipment scope, lead-time definition and whether any reported range is typical, an observed full range or a forecast.",
+      "expected_if": {
+        "C2": "The authenticated report supplies primary 2026 observations supporting a typical 49–72-month range for United States large power transformers.",
+        "C3": "The report supplies current observations placing typical lead times at or below 24 months.",
+        "C4": "The report quantifies distinct lead-time ranges by equipment specifications or purchasing conditions rather than treating all large transformers as one homogeneous category."
+      },
+      "diagnosticity": "high",
+      "queries": [
+        "\"TP-5700-96742\"",
+        "site.nrel.gov \"96742\" transformer",
+        "site.energy.gov \"2026\" \"large power transformers\" \"lead times\" \"May\""
+      ],
+      "candidate_ids": [],
+      "status": "planned",
+      "round": 2
+    },
+    {
+      "id": "T7",
+      "claim_ids": [
+        "C2",
+        "C3",
+        "C4"
+      ],
+      "observation": "The purported July 2026 Reuters report is located and dated, and its original Wood Mackenzie attribution establishes whether the above-160-week figure is an observed United States generator-step-up transformer average, a forecast or another statistic.",
+      "expected_if": {
+        "C2": "The report confirms a current above-two-year GSU lead time, but supporting the exact 49–72-month typical range would require additional data beyond an above-160-week figure.",
+        "C3": "Current representative large-transformer data are at or below 24 months; any above-160-week figure would need to concern older data or a narrower exceptional segment.",
+        "C4": "GSU figures differ materially from contemporaneous figures for other large-transformer classes measured on the same basis."
+      },
+      "diagnosticity": "high",
+      "queries": [
+        "site.reuters.com \"2026\" \"transformers\" \"160\"",
+        "site.reuters.com \"July\" \"2026\" \"Wood Mackenzie\" \"transformers\"",
+        "site.woodmac.com \"2026\" \"generator step-up\" \"lead\""
+      ],
+      "candidate_ids": [],
+      "status": "planned",
+      "round": 2
+    },
+    {
+      "id": "T8",
+      "claim_ids": [
+        "C2",
+        "C3"
+      ],
+      "observation": "The original 2023 GAO report confirms whether 30–36 months describes order-to-receipt lead times for United States large power transformers and identifies when and from whom that estimate was collected, separating the historical premise from current evidence.",
+      "expected_if": {
+        "C2": "A historical above-two-year baseline is compatible with C2 but cannot establish its 2026 range.",
+        "C3": "The same historical above-two-year baseline is compatible with subsequent improvement to 24 months or less and cannot establish current conditions."
+      },
+      "diagnosticity": "low",
+      "queries": [
+        "site.gao.gov \"2023\" \"large power transformers\" \"36\"",
+        "site.gao.gov \"transformers\" \"30 to 36\"",
+        "site.gao.gov \"transformers\" \"order\" \"receipt\""
+      ],
+      "candidate_ids": [],
+      "status": "planned",
+      "round": 2
+    },
+    {
+      "id": "T9",
+      "claim_ids": [
+        "C2",
+        "C3",
+        "C4"
+      ],
+      "observation": "Dated 2026 United States procurement datasets or utility regulatory exhibits report comparable new-order lead-time distributions by voltage or MVA class and distinguish merchant purchases from framework agreements, reserved slots and expedited stock purchases.",
+      "expected_if": {
+        "C2": "Representative standard new-order observations cluster in the 49–72-month range across the principal large-transformer classes.",
+        "C3": "Representative standard new-order observations cluster at or below 24 months, not merely expedited or previously reserved purchases.",
+        "C4": "Stratified medians, quantiles or reported typical ranges differ substantially by class or channel even after aligning the measurement dates and lead-time endpoints."
+      },
+      "diagnosticity": "high",
+      "queries": [
+        "\"2026\" \"transformer\" \"lead times\" \"MVA\" \"framework\"",
+        "\"2026\" \"transformers\" \"lead time\" \"kV\" \"procurement\"",
+        "\"2026\" \"transformer\" \"lead times\" \"reserved\" \"utility\""
+      ],
+      "candidate_ids": [],
+      "status": "planned",
+      "round": 2
+    }
+  ],
+  "reflections": [
+    {
+      "round": 1,
+      "established": [
+        "C5: Ryan Sales reports that individual transformer quotations can be shorter or longer than market averages depending on rating, voltage, design options and factory backlog."
+      ],
+      "assumed": [
+        "C5 rests on one origin"
+      ],
+      "load_bearing_node_ids": [
+        "E6",
+        "A3",
+        "A3:access",
+        "A3:report",
+        "A6",
+        "A6:grounds"
+      ],
+      "framing_drift": null,
+      "directive": "components accepted; compose or extend scope: ['C5']; C2 no_argument: no argument supports this claim; evidence bearing on it is needed; C3 no_argument: no argument supports this claim; evidence bearing on it is needed"
+    },
+    {
+      "round": 2,
+      "established": [
+        "C5: Ryan Sales reports that individual transformer quotations can be shorter or longer than market averages depending on rating, voltage, design options and factory backlog.",
+        "C6: Ryan Sales attributes to POWER's January 2026 review the assessment that large-transformer lead times remained above two years. This is a secondary report of an early-2026 assessment, not a verified measurement of the current typical United States range.",
+        "C7: DistroForge reports 30–36 months order to receipt for US large power transformers as current in 2026, but its observation dates are unverified and its supplied publication date conflicts with later citations."
+      ],
+      "assumed": [
+        "C5 rests on one origin",
+        "C6 rests on one origin",
+        "C7 rests on one origin"
+      ],
+      "load_bearing_node_ids": [
+        "E4",
+        "E5",
+        "A7",
+        "A7:authentic",
+        "A7:accuracy",
+        "A7:reading",
+        "E6",
+        "A3",
+        "A3:access",
+        "A3:report",
+        "A6",
+        "A6:grounds",
+        "E18",
+        "E19",
+        "E26",
+        "A8",
+        "A8:authentic",
+        "A8:accuracy",
+        "A8:reading"
+      ],
+      "framing_drift": null,
+      "directive": "components accepted; compose or extend scope: ['C5', 'C6', 'C7']; C3 no_argument: no argument supports this claim; evidence bearing on it is needed; C3 contrary_supported: A7 supports contrary C6"
+    }
+  ],
+  "stop_assessments": [
+    {
+      "round": 1,
+      "decision": "continue",
+      "reason": "compose or extend the accepted components; components accepted: ['C5']; no whole-question answer",
+      "undecided_on_path": [
+        "C2",
+        "C3",
+        "C6"
+      ],
+      "obtainable": [
+        "T2",
+        "T3"
+      ]
+    },
+    {
+      "round": 2,
+      "decision": "stop",
+      "reason": "rounds exhausted; components accepted: ['C5', 'C6', 'C7']; no whole-question answer",
+      "undecided_on_path": [],
+      "obtainable": [
+        "T4",
+        "T5",
+        "T6",
+        "T7",
+        "T8",
+        "T9"
+      ]
+    }
+  ],
+  "conclusion": {
+    "round": 2,
+    "answer": "The evidence gathered leans toward US large power transformer lead times still exceeding two years in 2026, but it does not settle the current typical range. Ryan Sales attributes an above-two-year assessment to POWER’s January 2026 review [C6]. DistroForge reports 30–36 months (2.5–3 years), explicitly from order to receipt, but its observation dates are unverified and its supplied publication date conflicts with later citations; that range should therefore be treated as a reported figure, not a verified current US benchmark [C7]. Individual quotations can be shorter or longer depending on specifications and factory backlog [C5].",
+    "judgements": [
+      {
+        "text": "The above-two-year conclusion is supported as a secondary early-2026 assessment, rather than a verified current US market measurement, resting on Ryan Sales’s quotation of POWER and its acknowledgment that most hard data come from 2025 [C6].",
+        "confidence": "moderate",
+        "rests_on": "E4–E5, through A7: the explicit January 2026 attribution and the source’s qualification about the age of its data.",
+        "claim_ids": [
+          "C6"
+        ]
+      },
+      {
+        "text": "The 30–36-month order-to-receipt range is established as what DistroForge reports, not as the verified current typical range, resting on its explicit wording and unresolved historical attribution and chronology [C7].",
+        "confidence": "moderate",
+        "rests_on": "E18, E19 and E26, through A8: the reported range, its order-to-receipt definition, its attribution elsewhere to GAO in 2023, and the conflicting publication chronology.",
+        "claim_ids": [
+          "C7"
+        ]
+      },
+      {
+        "text": "Individual quotations may differ from market averages with rating, voltage, design options and factory backlog, resting on Ryan Sales’s explicit qualification rather than quantified evidence that a single typical range is misleading [C5].",
+        "confidence": "moderate",
+        "rests_on": "E6, through A3: Ryan Sales’s statement identifying quotation drivers.",
+        "claim_ids": [
+          "C5"
+        ]
+      }
+    ],
+    "what_would_change_this": [
+      "Dated, representative 2026 US procurement observations with defined lead-time endpoints and a reported distribution would settle whether typical lead times exceed 24 months and establish a defensible current range.",
+      "The original POWER January 2026 review showing different wording, geographic coverage or observation dates would change the interpretation of the above-two-year assessment [C6; E4–E5].",
+      "Verified DistroForge revision dates and the underlying GAO record, together with evidence identifying whether 30–36 months reflects 2026 observations or a reused 2023 figure, would strengthen or displace that reported range [C7; E18–E19, E26].",
+      "Quantified 2026 US lead-time distributions by transformer class and procurement conditions would establish whether variation is large enough to make one typical range misleading, beyond the quotation variability reported by Ryan Sales [C5; E6]."
+    ],
+    "unresolved": [
+      "The main question remains unsettled: an accepted component finding is not a verified current typical US range, and the above-two-year assessment remains secondary [C6–C7].",
+      "Whether typical 2026 lead times fall within 49–72 months, or have fallen to 24 months or less, is not established by the accepted claims.",
+      "Material variation sufficient to make a single typical range misleading remains unestablished; the accepted finding only records factors affecting individual quotations [C5].",
+      "Primary-source checks remain outstanding for POWER, Wood Mackenzie, GAO, the cited DOE-funded laboratory report and Reuters; the relevant originals, measurement methods and interval definitions were not retrieved in this inquiry.",
+      "The historical averages and broader ranges in the documents read must not be relabelled current observations, and forecasts or upper-end waits do not establish a typical 2026 range."
+    ],
+    "flags": []
+  },
+  "evaluation": {
+    "applicable": {
+      "A1": false,
+      "A2": false,
+      "A3": true,
+      "A4": true,
+      "A5": true,
+      "A6": true,
+      "A7": true,
+      "A8": true
+    },
+    "inapplicable_reasons": {
+      "A1": [
+        "withdrawn: The derivative Q2 2025 survey summaries concern historical equipment-specific averages, not current 2026 observations or a typical 30–48-month interval. Their geographic coverage, sampling, dispersion and lead-time endpoints are not established. They also do not support the replacement claim about what Ryan Sales attributes to POWER.",
+        "assumption unresolved: design",
+        "assumption unsatisfied: directness",
+        "assumption unresolved: uncertainty",
+        "assumption unsatisfied: reported"
+      ],
+      "A2": [
+        "withdrawn: The position-to-know inference does not establish a representative current US estimate, and its June 2025 range does not support a 2026 range. C6 is instead supported by A7 as a record of Ryan Sales's attribution to POWER. Withdrawing A2 also removes the improper use of historical context E3 as a supporting premise.",
+        "assumption unresolved: access",
+        "assumption unsatisfied: report"
+      ]
+    },
+    "argument_strength": {
+      "A1": "weak",
+      "A2": "moderate",
+      "A3": "moderate",
+      "A4": "moderate",
+      "A5": "moderate",
+      "A6": "moderate",
+      "A7": "moderate",
+      "A8": "weak"
+    },
+    "labels": {
+      "A3": "in",
+      "A4": "out",
+      "A5": "in",
+      "A6": "in",
+      "A7": "in",
+      "A8": "in"
+    },
+    "claims": {
+      "C1": {
+        "standard": "preponderance",
+        "status": "undecided",
+        "pro_ids": [],
+        "con_ids": [],
+        "pro_strength": 0,
+        "con_strength": 0,
+        "corroborated": false,
+        "met": false,
+        "label": "defeated",
+        "label_reason": "all constructed support is out, withdrawn or inapplicable"
+      },
+      "C2": {
+        "standard": "preponderance",
+        "status": "out",
+        "pro_ids": [],
+        "con_ids": [
+          "A7"
+        ],
+        "pro_strength": 0,
+        "con_strength": 2,
+        "corroborated": false,
+        "met": false,
+        "label": "refuted",
+        "label_reason": "a contrary claim is accepted"
+      },
+      "C3": {
+        "standard": "preponderance",
+        "status": "out",
+        "pro_ids": [],
+        "con_ids": [
+          "A7"
+        ],
+        "pro_strength": 0,
+        "con_strength": 2,
+        "corroborated": false,
+        "met": false,
+        "label": "refuted",
+        "label_reason": "a contrary claim is accepted"
+      },
+      "C4": {
+        "standard": "preponderance",
+        "status": "undecided",
+        "pro_ids": [],
+        "con_ids": [],
+        "pro_strength": 0,
+        "con_strength": 0,
+        "corroborated": false,
+        "met": false,
+        "label": "unsupported",
+        "label_reason": "evidence bears on the claim but no supporting argument was built"
+      },
+      "C5": {
+        "standard": "preponderance",
+        "status": "in",
+        "pro_ids": [
+          "A3"
+        ],
+        "con_ids": [],
+        "pro_strength": 2,
+        "con_strength": 0,
+        "corroborated": false,
+        "met": true,
+        "label": "accepted",
+        "label_reason": "surviving support meets the proof standard"
+      },
+      "C6": {
+        "standard": "preponderance",
+        "status": "in",
+        "pro_ids": [
+          "A7"
+        ],
+        "con_ids": [],
+        "pro_strength": 2,
+        "con_strength": 0,
+        "corroborated": false,
+        "met": true,
+        "label": "accepted",
+        "label_reason": "surviving support meets the proof standard"
+      },
+      "C7": {
+        "standard": "preponderance",
+        "status": "in",
+        "pro_ids": [
+          "A8"
+        ],
+        "con_ids": [],
+        "pro_strength": 1,
+        "con_strength": 0,
+        "corroborated": false,
+        "met": true,
+        "label": "accepted",
+        "label_reason": "surviving support meets the proof standard"
+      }
+    },
+    "issues": {
+      "Q1": []
+    },
+    "flags": [
+      {
+        "code": "inapplicable_argument",
+        "node_id": "A1",
+        "detail": "withdrawn: The derivative Q2 2025 survey summaries concern historical equipment-specific averages, not current 2026 observations or a typical 30–48-month interval. Their geographic coverage, sampling, dispersion and lead-time endpoints are not established. They also do not support the replacement claim about what Ryan Sales attributes to POWER.; assumption unresolved: design; assumption unsatisfied: directness; assumption unresolved: uncertainty; assumption unsatisfied: reported"
+      },
+      {
+        "code": "inapplicable_argument",
+        "node_id": "A2",
+        "detail": "withdrawn: The position-to-know inference does not establish a representative current US estimate, and its June 2025 range does not support a 2026 range. C6 is instead supported by A7 as a record of Ryan Sales's attribution to POWER. Withdrawing A2 also removes the improper use of historical context E3 as a supporting premise.; assumption unresolved: access; assumption unsatisfied: report"
+      },
+      {
+        "code": "orphan_evidence",
+        "node_id": "E7",
+        "detail": "evidence used in no argument"
+      },
+      {
+        "code": "orphan_evidence",
+        "node_id": "E8",
+        "detail": "evidence used in no argument"
+      },
+      {
+        "code": "orphan_evidence",
+        "node_id": "E12",
+        "detail": "evidence used in no argument"
+      },
+      {
+        "code": "orphan_evidence",
+        "node_id": "E13",
+        "detail": "evidence used in no argument"
+      },
+      {
+        "code": "orphan_evidence",
+        "node_id": "E14",
+        "detail": "evidence used in no argument"
+      },
+      {
+        "code": "orphan_evidence",
+        "node_id": "E15",
+        "detail": "evidence used in no argument"
+      },
+      {
+        "code": "orphan_evidence",
+        "node_id": "E16",
+        "detail": "evidence used in no argument"
+      },
+      {
+        "code": "orphan_evidence",
+        "node_id": "E17",
+        "detail": "evidence used in no argument"
+      },
+      {
+        "code": "orphan_evidence",
+        "node_id": "E21",
+        "detail": "evidence used in no argument"
+      },
+      {
+        "code": "orphan_evidence",
+        "node_id": "E22",
+        "detail": "evidence used in no argument"
+      },
+      {
+        "code": "orphan_evidence",
+        "node_id": "E23",
+        "detail": "evidence used in no argument"
+      },
+      {
+        "code": "orphan_evidence",
+        "node_id": "E24",
+        "detail": "evidence used in no argument"
+      },
+      {
+        "code": "orphan_evidence",
+        "node_id": "E25",
+        "detail": "evidence used in no argument"
+      },
+      {
+        "code": "orphan_evidence",
+        "node_id": "E27",
+        "detail": "evidence used in no argument"
+      },
+      {
+        "code": "orphan_evidence",
+        "node_id": "E28",
+        "detail": "evidence used in no argument"
+      },
+      {
+        "code": "orphan_evidence",
+        "node_id": "E29",
+        "detail": "evidence used in no argument"
+      },
+      {
+        "code": "orphan_evidence",
+        "node_id": "E30",
+        "detail": "evidence used in no argument"
+      },
+      {
+        "code": "orphan_evidence",
+        "node_id": "E31",
+        "detail": "evidence used in no argument"
+      },
+      {
+        "code": "orphan_evidence",
+        "node_id": "E32",
+        "detail": "evidence used in no argument"
+      },
+      {
+        "code": "orphan_evidence",
+        "node_id": "E33",
+        "detail": "evidence used in no argument"
+      },
+      {
+        "code": "orphan_evidence",
+        "node_id": "E34",
+        "detail": "evidence used in no argument"
+      },
+      {
+        "code": "orphan_evidence",
+        "node_id": "E35",
+        "detail": "evidence used in no argument"
+      },
+      {
+        "code": "orphan_evidence",
+        "node_id": "E36",
+        "detail": "evidence used in no argument"
+      },
+      {
+        "code": "orphan_evidence",
+        "node_id": "E37",
+        "detail": "evidence used in no argument"
+      },
+      {
+        "code": "orphan_evidence",
+        "node_id": "E38",
+        "detail": "evidence used in no argument"
+      },
+      {
+        "code": "orphan_evidence",
+        "node_id": "E39",
+        "detail": "evidence used in no argument"
+      },
+      {
+        "code": "orphan_evidence",
+        "node_id": "E40",
+        "detail": "evidence used in no argument"
+      },
+      {
+        "code": "orphan_evidence",
+        "node_id": "E41",
+        "detail": "evidence used in no argument"
+      },
+      {
+        "code": "orphan_evidence",
+        "node_id": "E42",
+        "detail": "evidence used in no argument"
+      },
+      {
+        "code": "duplicate_source",
+        "node_id": "S3,S4",
+        "detail": "same origin (title:powertransformersanddistributiontransformerswillface) and neither is marked as derived from the other"
+      },
+      {
+        "code": "single_origin",
+        "node_id": "C5",
+        "detail": "accepted on evidence from one origin"
+      },
+      {
+        "code": "single_origin",
+        "node_id": "C6",
+        "detail": "accepted on evidence from one origin"
+      },
+      {
+        "code": "single_origin",
+        "node_id": "C7",
+        "detail": "accepted on evidence from one origin"
+      },
+      {
+        "code": "main_issue_unresolved",
+        "node_id": "Q1",
+        "detail": "no accepted claim answers the main issue; accepted component findings that do not answer it as posed: C5, C6, C7"
+      }
+    ],
+    "converged": true,
+    "reopened_cqs": {}
+  },
+  "notes": [
+    "revise: narrow C1 -> C6: A2 supports what Ryan Sales reports, not a representative measured 2026 United States range. The 30–48-month magnitude is removed: the approximately 28–48-month range belongs to a June 2025 letter, while the January 2026 assessment supplies only a threshold. A2 is carried solely for the attributed statement, not as evidence that its underlying empirical assessment is verified. A1 is withdrawn because its historical equipment-specific averages do not establish this reported January 2026 assessment or a current bounded range.",
+    "critic needs: Retrieve POWER's January 2026 review and the June 2025 NEMA/NECA/NAED/GridWise Alliance letter. Verify their exact statements, United States procurement coverage, observation dates, transformer categories, and lead-time start and end points. Determine whether the January assessment uses new 2026 observations or repeats older data. These originals have not been retrieved; their methods and definitions are not established by the supplied extracts.",
+    "critic needs: Retrieve the primary Wood Mackenzie Q2 2025 survey results and a separately dated 2026 United States large-power-transformer update, if available. Seek category-specific averages or typical quoted ranges, sampling methods, sample sizes, dispersion or intervals, and procurement-interval definitions. Establish whether these details are reported in the originals rather than treating their absence from secondary summaries as proof that they were not reported.",
+    "contract repair in revise (# SKILL: revise): 2 validation errors for ReviseOutput\noperations.0.scope.narrower_than.2\n  Input should be 'population', 'period', 'outcome' or 'comparison' [type=literal_error,",
+    "critic needs: The POWER magazine January 2026 article, to confirm the exact 'locked above two years' wording, its geographic scope and its underlying data source.",
+    "critic needs: The Wood Mackenzie Q2 2025 survey and any 2026 updates, including US coverage, how lead time is defined (order to delivery), and the distribution of lead times. The 128-week average and the 143-week average could then be checked as one origin that S1, S5 and S7 all repeat.",
+    "critic needs: The DOE-funded national laboratory report TP-5700-96742 (May 2026), to check its stated lead-time range, definitions and observation period. S7 and S8 are unverified, so their dates and sources need checking.",
+    "critic needs: The Reuters July 2026 reporting on Wood Mackenzie GSU lead times above 160 weeks, to confirm the figure and its date.",
+    "critic needs: The GAO 2023 report on large power transformer lead times, to confirm the 30–36 month order-to-receipt figure.",
+    "critic needs: Evidence for a typical 2026 range in the 49–72 month claim (C2). Nothing in the graph gives such a range, since the closest figures are 36–48 months (E30) and 30–36 months (E18). It needs primary 2026 data or should be reframed.",
+    "critic needs: Quantified distributions that separate lead times by voltage or MVA class and by procurement channel (merchant market versus framework agreements), to support the claim of material variation.",
+    "critic needs: Retrieve POWER's January 2026 review and the June 2025 NEMA/NECA/NAED/GridWise Alliance letter identified by Ryan Sales. Check their US procurement coverage, equipment categories, underlying observation dates, lead-time start and end points, and whether any numerical range describes typical 2026 conditions rather than historical observations. These primary documents and methods have not been retrieved; their reporting completeness is not yet established.",
+    "critic needs: Check DistroForge's publication and revision history against its May and July 2026 citations, and retrieve the GAO source underlying its 30–36-month order-to-receipt assertion. Determine whether that range is solely a historical 2023 figure or is supported by dated 2026 observations applicable to US large power transformers. The observation dates and effective article version are currently unverified.",
+    "critic needs: Wood Mackenzie's own Q2 2025 and any Q1–Q3 2026 transformer lead-time survey (woodmac.com press release or report) giving the large power transformer average, definition (order to delivery) and US coverage.",
+    "critic needs: POWER magazine January 2026 article on transformer lead times, to verify the 'remain locked above two years' quote and see any numeric range.",
+    "critic needs: GAO 2023/2024 report on large power transformer lead times, to check whether DistroForge's 30–36 month order-to-receipt figure is a 2023 observation rather than a 2026 one.",
+    "critic needs: DOE-funded national laboratory report TP-5700-96742 (May 2026) supply chain gap analysis, for observation dates and typical vs. maximum lead times.",
+    "critic needs: Reuters July 9, 2026 article on US power companies securing equipment, to verify Wood Mackenzie 2026 figures for power transformers and GSUs.",
+    "critic needs: Independent 2026 utility or OEM quotes (Hitachi Energy, Siemens Energy, GE Vernova, Prolec GE) for US large power transformers, to determine whether typical quotes fall within 24-48 months.",
+    "critic needs: Independence note: E1, E2, E11, E20 all trace to one Wood Mackenzie Q2 2025 survey, and E26/E18/E19 are the same DistroForge origin; treat as single sources, not corroboration. S5 and S8 figures are unsourced vendor or LinkedIn claims.",
+    "cannot_compose ['C5', 'C6', 'C7']: The components do not establish a shared period that can be copied exactly into a conclusion: C5 concerns '2026, using current source-reported lead-time periods'; C6 concerns 'January 2026 review, as quoted by Ryan Sales'; and C7 concerns '2026 as described by DistroForge; observation dates unverified'. No accepted component bridges these periods. C6 supplies a secondary attribution of an above-two-year assessment, while C7 supplies a reported 30–36-month order-to-receipt range with unresolved observation dates and conflicting publication chronology. Treating them as corroborating measurements of the current typical range would require unsupported temporal and measurement bridges. C5 explains variation in individual quotations but supplies neither a typical range nor those bridges. Thus the components support describing the separate reports, but not composing a finding that establishes both whether lead times remain above two years and the current typical range."
+  ],
+  "llm_usage": [
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 1099,
+      "output_tokens": 575,
+      "cache_write_input_tokens": 1096,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 1520,
+      "output_tokens": 1108,
+      "cache_write_input_tokens": 1517,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 1740,
+      "output_tokens": 843,
+      "cache_write_input_tokens": 1737,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 4322,
+      "output_tokens": 1597,
+      "cache_write_input_tokens": 4319,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 2998,
+      "output_tokens": 697,
+      "cache_write_input_tokens": 2995,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 2706,
+      "output_tokens": 115,
+      "cache_write_input_tokens": 2703,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 3642,
+      "output_tokens": 640,
+      "cache_write_input_tokens": 3639,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 4304,
+      "output_tokens": 989,
+      "cache_write_input_tokens": 4301,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 3240,
+      "output_tokens": 1006,
+      "cache_write_input_tokens": 3237,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5062,
+      "output_tokens": 1743,
+      "cache_write_input_tokens": 5059,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 4991,
+      "output_tokens": 458,
+      "cache_write_input_tokens": 4988,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 4484,
+      "output_tokens": 1138,
+      "cache_write_input_tokens": 4481,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 2821,
+      "output_tokens": 925,
+      "cache_write_input_tokens": 2818,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 11830,
+      "output_tokens": 1966,
+      "cache_write_input_tokens": 11827,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 10166,
+      "output_tokens": 1212,
+      "cache_write_input_tokens": 10163,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 10339,
+      "output_tokens": 1447,
+      "cached_input_tokens": 1582,
+      "cache_write_input_tokens": 8754,
+      "role": "proposer"
+    },
+    {
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "input_tokens": 15426,
+      "output_tokens": 766,
+      "cache_creation_input_tokens": 1659,
+      "role": "critic"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 9245,
+      "output_tokens": 165,
+      "cache_write_input_tokens": 9242,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 11045,
+      "output_tokens": 1557,
+      "cache_write_input_tokens": 11042,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 4460,
+      "output_tokens": 1219,
+      "cache_write_input_tokens": 4457,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5341,
+      "output_tokens": 123,
+      "cache_write_input_tokens": 5338,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5272,
+      "output_tokens": 179,
+      "cache_write_input_tokens": 5269,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5424,
+      "output_tokens": 163,
+      "cache_write_input_tokens": 5421,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5515,
+      "output_tokens": 152,
+      "cache_write_input_tokens": 5512,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5526,
+      "output_tokens": 122,
+      "cache_write_input_tokens": 5523,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 4441,
+      "output_tokens": 125,
+      "cache_write_input_tokens": 4438,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5111,
+      "output_tokens": 745,
+      "cache_write_input_tokens": 5108,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5663,
+      "output_tokens": 867,
+      "cache_write_input_tokens": 5660,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 4130,
+      "output_tokens": 450,
+      "cache_write_input_tokens": 4127,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 12938,
+      "output_tokens": 1782,
+      "cached_input_tokens": 1833,
+      "cache_write_input_tokens": 11102,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 13585,
+      "output_tokens": 787,
+      "cached_input_tokens": 1582,
+      "cache_write_input_tokens": 12000,
+      "role": "proposer"
+    },
+    {
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "input_tokens": 22221,
+      "output_tokens": 498,
+      "cache_read_input_tokens": 1659,
+      "role": "critic"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 2012,
+      "output_tokens": 302,
+      "cache_write_input_tokens": 2009,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 15022,
+      "output_tokens": 858,
+      "cache_write_input_tokens": 15019,
+      "role": "proposer"
+    }
+  ],
+  "llm_config": {
+    "proposer": {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "effort": "medium"
+    },
+    "critic": {
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium"
+    }
+  },
+  "counter_drops": [],
+  "claim_reasons": {
+    "C3": "No listed evidence establishes that typical US large-power-transformer lead times in 2026 are at most two years; shorter figures concern unspecified equipment, broader geography or a shortened post-permit interval rather than comparable full procurement lead times."
+  },
+  "response_dispositions": {
+    "A4": "counter"
+  },
+  "discharge_attempts": [],
+  "candidates": [
+    {
+      "id": "R1",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4302049/",
+      "title": "Moderated estimation of fold change and  dispersion for RNA-seq data with DESeq2.",
+      "snippet": "In comparative high-throughput sequencing assays, a fundamental task is the analysis of count data, such as read counts per gene in RNA-seq, for evidence of systematic changes across experimental conditions. Small replicate numbers, discreteness, large dynamic range and the presence of outliers require a suitable statistical approach. We present DESeq2, a method for differential analysis of count data, using shrinkage estimation for dispersions and fold changes to improve stability and interpretability of estimates. This enables a more quantitative analysis focused on the strength rather than the mere presence of differential expression. The DESeq2 package is available at http://www.bioconductor.org/packages/release/bioc/html/DESeq2.html webcite.",
+      "date": "2014-01-01",
+      "doi": "10.1186/s13059-014-0550-8",
+      "query": "POWER",
+      "issue_ids": [],
+      "tags": [
+        "needed_evidence"
+      ],
+      "status": "candidate"
+    },
+    {
+      "id": "R2",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC146917/",
+      "title": "Gapped BLAST and PSI-BLAST: a new generation of protein database search programs.",
+      "snippet": "The BLAST programs are widely used tools for searching protein and DNA databases for sequence similarities. For protein comparisons, a variety of definitional, algorithmic and statistical refinements described here permits the execution time of the BLAST programs to be decreased substantially while enhancing their sensitivity to weak similarities. A new criterion for triggering the extension of word hits, combined with a new heuristic for generating gapped alignments, yields a gapped BLAST program that runs at approximately three times the speed of the original. In addition, a method is introduced for automatically combining statistically significant alignments produced by BLAST into a position-specific score matrix, and searching the database using this matrix. The resulting Position-Specific Iterated BLAST (PSI-BLAST) program runs at approximately the same speed per iteration as gapped BLAST, but in many cases is much more sensitive to weak but biologically relevant sequence similarities. PSI-BLAST is used to uncover several new and interesting members of the BRCT superfamily.",
+      "date": "1997-09-01",
+      "doi": "10.1093/nar/25.17.3389",
+      "query": "POWER",
+      "issue_ids": [],
+      "tags": [
+        "needed_evidence"
+      ],
+      "status": "candidate"
+    },
+    {
+      "id": "R3",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC192859/",
+      "title": "Measuring inconsistency in meta-analyses.",
+      "snippet": "",
+      "date": "2003-09-01",
+      "doi": "10.1136/bmj.327.7414.557",
+      "query": "POWER",
+      "issue_ids": [],
+      "tags": [
+        "needed_evidence"
+      ],
+      "status": "candidate"
+    },
+    {
+      "id": "R4",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1239896/",
+      "title": "Gene set enrichment analysis: a knowledge-based approach for interpreting genome-wide expression profiles.",
+      "snippet": "Although genomewide RNA expression analysis has become a routine tool in biomedical research, extracting biological insight from such information remains a major challenge. Here, we describe a powerful analytical method called Gene Set Enrichment Analysis (GSEA) for interpreting gene expression data. The method derives its power by focusing on gene sets, that is, groups of genes that share common biological function, chromosomal location, or regulation. We demonstrate how GSEA yields insights into several cancer-related data sets, including leukemia and lung cancer. Notably, where single-gene analysis finds little similarity between two independent studies of patient survival in lung cancer, GSEA reveals many biological pathways in common. The GSEA method is embodied in a freely available software package, together with an initial database of 1,325 biologically defined gene sets.",
+      "date": "2005-09-30",
+      "doi": "10.1073/pnas.0506580102",
+      "query": "POWER",
+      "issue_ids": [],
+      "tags": [
+        "needed_evidence"
+      ],
+      "status": "candidate"
+    },
+    {
+      "id": "R5",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC308517/",
+      "title": "CLUSTAL W: improving the sensitivity of progressive multiple sequence alignment through sequence weighting, position-specific gap penalties and weight matrix choice.",
+      "snippet": "The sensitivity of the commonly used progressive multiple sequence alignment method has been greatly improved for the alignment of divergent protein sequences. Firstly, individual weights are assigned to each sequence in a partial alignment in order to down-weight near-duplicate sequences and up-weight the most divergent ones. Secondly, amino acid substitution matrices are varied at different alignment stages according to the divergence of the sequences to be aligned. Thirdly, residue-specific gap penalties and locally reduced gap penalties in hydrophilic regions encourage new gaps in potential loop regions rather than regular secondary structure. Fourthly, positions in early alignments where gaps have been opened receive locally reduced gap penalties to encourage the opening up of new gaps at these positions. These modifications are incorporated into a new program, CLUSTAL W which is freely available.",
+      "date": "1994-11-01",
+      "doi": "10.1093/nar/22.22.4673",
+      "query": "POWER",
+      "issue_ids": [],
+      "tags": [
+        "needed_evidence"
+      ],
+      "status": "candidate"
+    },
+    {
+      "id": "R6",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1213120/",
+      "title": "The genetics of Caenorhabditis elegans.",
+      "snippet": "Methods are described for the isolation, complementation and mapping of mutants of Caenorhabditis elegans, a small free-living nematode worm. About 300 EMS-induced mutants affecting behavior and morphology have been characterized and about one hundred genes have been defined. Mutations in 77 of these alter the movement of the animal. Estimates of the induced mutation frequency of both the visible mutants and X chromosome lethals suggests that, just as in Drosophila, the genetic units in C. elegans are large.",
+      "date": "1974-05-01",
+      "doi": "10.1093/genetics/77.1.71",
+      "query": "NEMA",
+      "issue_ids": [],
+      "tags": [
+        "needed_evidence"
+      ],
+      "status": "candidate"
+    },
+    {
+      "id": "R7",
+      "url": "https://doi.org/10.1056/nejmoa1707914",
+      "title": "Antiinflammatory Therapy with Canakinumab for Atherosclerotic Disease.",
+      "snippet": " Background Experimental and clinical data suggest that reducing inflammation without affecting lipid levels may reduce the risk of cardiovascular disease. Yet, the inflammatory hypothesis of atherothrombosis has remained unproved. Methods We conducted a randomized, double-blind trial of canakinumab, a therapeutic monoclonal antibody targeting interleukin-1β, involving 10,061 patients with previous myocardial infarction and a high-sensitivity C-reactive protein level of 2 mg or more per liter. The trial compared three doses of canakinumab (50 mg, 150 mg, and 300 mg, administered subcutaneously every 3 months) with placebo. The primary efficacy end point was nonfatal myocardial infarction, nonfatal stroke, or cardiovascular death. Results At 48 months, the median reduction from baseline in the high-sensitivity C-reactive protein level was 26 percentage points greater in the group that received the 50-mg dose of canakinumab, 37 percentage points greater in the 150-mg group, and 41 percentage points greater in the 300-mg group than in the placebo group. Canakinumab did not reduce lipid levels from baseline. At a median follow-up of 3.7 years, the incidence rate for the primary end point was 4.50 events per 100 person-years in the placebo group, 4.11 events per 100 person-years in the 50-mg group, 3.86 events per 100 person-years in the 150-mg group, and 3.90 events per 100 person-years in the 300-mg group. The hazard ratios as compared with placebo were as follows: in the 50-mg group, 0.93 (95% confidence interval [CI], 0.80 to 1.07; P=0.30); in the 150-mg group, 0.85 (95% CI,",
+      "date": "2017-08-27",
+      "doi": "10.1056/nejmoa1707914",
+      "query": "NEMA",
+      "issue_ids": [],
+      "tags": [
+        "needed_evidence"
+      ],
+      "status": "candidate"
+    },
+    {
+      "id": "R8",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1691236/",
+      "title": "Biological identifications through DNA barcodes.",
+      "snippet": "Although much biological research depends upon species diagnoses, taxonomic expertise is collapsing. We are convinced that the sole prospect for a sustainable identification capability lies in the construction of systems that employ DNA sequences as taxon 'barcodes'. We establish that the mitochondrial gene cytochrome c oxidase I (COI) can serve as the core of a global bioidentification system for animals. First, we demonstrate that COI profiles, derived from the low-density sampling of higher taxonomic categories, ordinarily assign newly analysed taxa to the appropriate phylum or order. Second, we demonstrate that species-level assignments can be obtained by creating comprehensive COI profiles. A model COI profile, based upon the analysis of a single individual from each of 200 closely allied species of lepidopterans, was 100% successful in correctly identifying subsequent specimens. When fully developed, a COI identification system will provide a reliable, cost-effective and accessible solution to the current problem of species identification. Its assembly will also generate important new insights into the diversification of life and the rules of molecular evolution.",
+      "date": "2003-02-01",
+      "doi": "10.1098/rspb.2002.2218",
+      "query": "NEMA",
+      "issue_ids": [],
+      "tags": [
+        "needed_evidence"
+      ],
+      "status": "candidate"
+    },
+    {
+      "id": "R9",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7953461/",
+      "title": "Interleukin-6 Receptor Antagonists in Critically Ill Patients with Covid-19.",
+      "snippet": " Background The efficacy of interleukin-6 receptor antagonists in critically ill patients with coronavirus disease 2019 (Covid-19) is unclear. Methods We evaluated tocilizumab and sarilumab in an ongoing international, multifactorial, adaptive platform trial. Adult patients with Covid-19, within 24 hours after starting organ support in the intensive care unit (ICU), were randomly assigned to receive tocilizumab (8 mg per kilogram of body weight), sarilumab (400 mg), or standard care (control). The primary outcome was respiratory and cardiovascular organ support-free days, on an ordinal scale combining in-hospital death (assigned a value of -1) and days free of organ support to day 21. The trial uses a Bayesian statistical model with predefined criteria for superiority, efficacy, equivalence, or futility. An odds ratio greater than 1 represented improved survival, more organ support-free days, or both. Results Both tocilizumab and sarilumab met the predefined criteria for efficacy. At that time, 353 patients had been assigned to tocilizumab, 48 to sarilumab, and 402 to control. The median number of organ support-free days was 10 (interquartile range, -1 to 16) in the tocilizumab group, 11 (interquartile range, 0 to 16) in the sarilumab group, and 0 (interquartile range, -1 to 15) in the control group. The median adjusted cumulative odds ratios were 1.64 (95% credible interval, 1.25 to 2.14) for tocilizumab and 1.76 (95% credible interval, 1.17 to 2.91) for sarilumab as compared with control, yielding posterior probabilities of superiority to control of more than 99.9% and of",
+      "date": "2021-02-25",
+      "doi": "10.1056/nejmoa2100433",
+      "query": "NEMA",
+      "issue_ids": [],
+      "tags": [
+        "needed_evidence"
+      ],
+      "status": "candidate"
+    },
+    {
+      "id": "R10",
+      "url": "https://doi.org/10.1016/s0140-6736(17)32247-x",
+      "title": "Effect of interleukin-1β inhibition with canakinumab on incident lung cancer in patients with atherosclerosis: exploratory results from a randomised, double-blind, placebo-controlled trial.",
+      "snippet": " Background Inflammation in the tumour microenvironment mediated by interleukin 1β is hypothesised to have a major role in cancer invasiveness, progression, and metastases. We did an additional analysis in the Canakinumab Anti-inflammatory Thrombosis Outcomes Study (CANTOS), a randomised trial of the role of interleukin-1β inhibition in atherosclerosis, with the aim of establishing whether inhibition of a major product of the Nod-like receptor protein 3 (NLRP3) inflammasome with canakinumab might alter cancer incidence. Methods We did a randomised, double-blind, placebo-controlled trial of canakinumab in 10 061 patients with atherosclerosis who had had a myocardial infarction, were free of previously diagnosed cancer, and had concentrations of high-sensitivity C-reactive protein (hsCRP) of 2 mg/L or greater. To assess dose-response effects, patients were randomly assigned by computer-generated codes to three canakinumab doses (50 mg, 150 mg, and 300 mg, subcutaneously every 3 months) or placebo. Participants were followed up for incident cancer diagnoses, which were adjudicated by an oncology endpoint committee masked to drug or dose allocation. Analysis was by intention to treat. The trial is registered with ClinicalTrials.gov, NCT01327846. The trial is closed (the last patient visit was in June, 2017). Findings Baseline concentrations of hsCRP (median 6·0 mg/L vs 4·2 mg/L; p Interpretation Our hypothesis-generating data suggest the possibility that anti-inflammatory therapy with canakinumab targeting the interleukin-1β innate immunity pathway could significantly reduce in",
+      "date": "2017-08-27",
+      "doi": "10.1016/s0140-6736(17)32247-x",
+      "query": "NEMA",
+      "issue_ids": [],
+      "tags": [
+        "needed_evidence"
+      ],
+      "status": "candidate"
+    },
+    {
+      "id": "R11",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4301845/",
+      "title": "Functional polarization of tumour-associated macrophages by tumour-derived lactic acid.",
+      "snippet": "Macrophages have an important role in the maintenance of tissue homeostasis. To perform this function, macrophages must have the capacity to monitor the functional states of their 'client cells': namely, the parenchymal cells in the various tissues in which macrophages reside. Tumours exhibit many features of abnormally developed organs, including tissue architecture and cellular composition. Similarly to macrophages in normal tissues and organs, macrophages in tumours (tumour-associated macrophages) perform some key homeostatic functions that allow tumour maintenance and growth. However, the signals involved in communication between tumours and macrophages are poorly defined. Here we show that lactic acid produced by tumour cells, as a by-product of aerobic or anaerobic glycolysis, has a critical function in signalling, through inducing the expression of vascular endothelial growth factor and the M2-like polarization of tumour-associated macrophages. Furthermore, we demonstrate that this effect of lactic acid is mediated by hypoxia-inducible factor 1α (HIF1α). Finally, we show that the lactate-induced expression of arginase 1 by macrophages has an important role in tumour growth. Collectively, these findings identify a mechanism of communication between macrophages and their client cells, including tumour cells. This communication most probably evolved to promote homeostasis in normal tissues but can also be engaged in tumours to promote their growth.",
+      "date": "2014-07-13",
+      "doi": "10.1038/nature13490",
+      "query": "NECA",
+      "issue_ids": [],
+      "tags": [
+        "needed_evidence"
+      ],
+      "status": "candidate"
+    },
+    {
+      "id": "R12",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2118603/",
+      "title": "Adenosine generation catalyzed by CD39 and CD73 expressed on regulatory T cells mediates immune suppression.",
+      "snippet": "The study of T regulatory cells (T reg cells) has been limited by the lack of specific surface markers and an inability to define mechanisms of suppression. We show that the expression of CD39/ENTPD1 in concert with CD73/ecto-5'-nucleotidase distinguishes CD4(+)/CD25(+)/Foxp3(+) T reg cells from other T cells. These ectoenzymes generate pericellular adenosine from extracellular nucleotides. The coordinated expression of CD39/CD73 on T reg cells and the adenosine A2A receptor on activated T effector cells generates immunosuppressive loops, indicating roles in the inhibitory function of T reg cells. Consequently, T reg cells from Cd39-null mice show impaired suppressive properties in vitro and fail to block allograft rejection in vivo. We conclude that CD39 and CD73 are surface markers of T reg cells that impart a specific biochemical signature characterized by adenosine generation that has functional relevance for cellular immunoregulation.",
+      "date": "2007-05-14",
+      "doi": "10.1084/jem.20062512",
+      "query": "NECA",
+      "issue_ids": [],
+      "tags": [
+        "needed_evidence"
+      ],
+      "status": "candidate"
+    },
+    {
+      "id": "R13",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9389454/",
+      "title": "International Union of Pharmacology. XXV. Nomenclature and classification of adenosine receptors.",
+      "snippet": "Four adenosine receptors have been cloned and characterized from several mammalian species. The receptors are named adenosine A(1), A(2A), A(2B), and A(3). The A(2A) and A(2B) receptors preferably interact with members of the G(s) family of G proteins and the A(1) and A(3) receptors with G(i/o) proteins. However, other G protein interactions have also been described. Adenosine is the preferred endogenous agonist at all these receptors, but inosine can also activate the A(3) receptor. The levels of adenosine seen under basal conditions are sufficient to cause some activation of all the receptors, at least where they are abundantly expressed. Adenosine levels during, e.g., ischemia can activate all receptors even when expressed in low abundance. Accordingly, experiments with receptor antagonists and mice with targeted disruption of adenosine A(1), A(2A), and A(3) expression reveal roles for these receptors under physiological and particularly pathophysiological conditions. There are pharmacological tools that can be used to classify A(1), A(2A), and A(3) receptors but few drugs that interact selectively with A(2B) receptors. Testable models of the interaction of these drugs with their receptors have been generated by site-directed mutagenesis and homology-based modelling. Both agonists and antagonists are being developed as potential drugs.",
+      "date": "2001-12-01",
+      "doi": "10.1016/s0031-6997(24)01511-4",
+      "query": "NECA",
+      "issue_ids": [],
+      "tags": [
+        "needed_evidence"
+      ],
+      "status": "candidate"
+    },
+    {
+      "id": "R14",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10212980/",
+      "title": "The blood-brain barrier: structure, regulation, and drug delivery.",
+      "snippet": "Blood-brain barrier (BBB) is a natural protective membrane that prevents central nervous system (CNS) from toxins and pathogens in blood. However, the presence of BBB complicates the pharmacotherapy for CNS disorders as the most chemical drugs and biopharmaceuticals have been impeded to enter the brain. Insufficient drug delivery into the brain leads to low therapeutic efficacy as well as aggravated side effects due to the accumulation in other organs and tissues. Recent breakthrough in materials science and nanotechnology provides a library of advanced materials with customized structure and property serving as a powerful toolkit for targeted drug delivery. In-depth research in the field of anatomical and pathological study on brain and BBB further facilitates the development of brain-targeted strategies for enhanced BBB crossing. In this review, the physiological structure and different cells contributing to this barrier are summarized. Various emerging strategies for permeability regulation and BBB crossing including passive transcytosis, intranasal administration, ligands conjugation, membrane coating, stimuli-triggered BBB disruption, and other strategies to overcome BBB obstacle are highlighted. Versatile drug delivery systems ranging from organic, inorganic, and biologics-derived materials with their synthesis procedures and unique physio-chemical properties are summarized and analyzed. This review aims to provide an up-to-date and comprehensive guideline for researchers in diverse fields, offering perspectives on further development of brain-targeted drug delivery s",
+      "date": "2023-05-25",
+      "doi": "10.1038/s41392-023-01481-w",
+      "query": "NECA",
+      "issue_ids": [],
+      "tags": [
+        "needed_evidence"
+      ],
+      "status": "candidate"
+    },
+    {
+      "id": "R15",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3199571/",
+      "title": "Mechanisms underlying acute protection from cardiac ischemia-reperfusion injury.",
+      "snippet": "Mitochondria play an important role in cell death and cardioprotection. During ischemia, when ATP is progressively depleted, ion pumps cannot function resulting in a rise in calcium (Ca(2+)), which further accelerates ATP depletion. The rise in Ca(2+) during ischemia and reperfusion leads to mitochondrial Ca(2+) accumulation, particularly during reperfusion when oxygen is reintroduced. Reintroduction of oxygen allows generation of ATP; however, damage to the electron transport chain results in increased mitochondrial generation of reactive oxygen species (ROS). Mitochondrial Ca(2+) overload and increased ROS can result in opening of the mitochondrial permeability transition pore, which further compromises cellular energetics. The resultant low ATP and altered ion homeostasis result in rupture of the plasma membrane and cell death. Mitochondria have long been proposed as central players in cell death, since the mitochondria are central to synthesis of both ATP and ROS and since mitochondrial and cytosolic Ca(2+) overload are key components of cell death. Many cardioprotective mechanisms converge on the mitochondria to reduce cell death. Reducing Ca(2+) overload and reducing ROS have both been reported to reduce ischemic injury. Preconditioning activates a number of signaling pathways that reduce Ca(2+) overload and reduce activation of the mitochondrial permeability transition pore. The mitochondrial targets of cardioprotective signals are discussed in detail.",
+      "date": "2008-04-01",
+      "doi": "10.1152/physrev.00024.2007",
+      "query": "NECA",
+      "issue_ids": [],
+      "tags": [
+        "needed_evidence"
+      ],
+      "status": "candidate"
+    },
+    {
+      "id": "R16",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8686573/",
+      "title": "Chronos: a cell population dynamics model of CRISPR experiments that improves inference of gene fitness effects.",
+      "snippet": "CRISPR loss of function screens are powerful tools to interrogate biology but exhibit a number of biases and artifacts that can confound the results. Here, we introduce Chronos, an algorithm for inferring gene knockout fitness effects based on an explicit model of cell proliferation dynamics after CRISPR gene knockout. We test Chronos on two pan-cancer CRISPR datasets and one longitudinal CRISPR screen. Chronos generally outperforms competitors in separation of controls and strength of biomarker associations, particularly when longitudinal data is available. Additionally, Chronos exhibits the lowest copy number and screen quality bias of evaluated methods. Chronos is available at https://github.com/broadinstitute/chronos .",
+      "date": "2021-12-20",
+      "doi": "10.1186/s13059-021-02540-7",
+      "query": "NAED",
+      "issue_ids": [],
+      "tags": [
+        "needed_evidence"
+      ],
+      "status": "candidate"
+    },
+    {
+      "id": "R17",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC303651/",
+      "title": "Adaptation of the distal convoluted tubule of the rat. Structural and functional effects of dietary salt intake and chronic diuretic infusion.",
+      "snippet": "We studied the effects of dietary NaCl intake on the renal distal tubule by feeding rats high or low NaCl chow or by chronically infusing furosemide. Furosemide-treated animals were offered saline as drinking fluid to replace urinary losses. Effects of naCl intake were evaluated using free-flow micropuncture, in vivo microperfusion, and morphometric techniques. Dietary NaCl restriction did not affect NaCl delivery to the early distal tubule but markedly increased the capacity of the distal convoluted tubule to transport Na and Cl. Chronic furosemide infusion increased NaCl delivery to the early distal tubule and also increased the rates of Na and Cl transport above the rates observed in low NaCl diet rats. When compared with high NaCl intake alone, chronic furosemide infusion with saline ingestion increased the fractional volume of distal convoluted tubule cells by nearly 100%, whereas dietary NaCl restriction had no effect. The results are consistent with the hypotheses that (a) chronic NaCl restriction increases the transport ability of the distal convoluted tubule independent of changes in tubule structure, (b) high rates of ion delivery to the distal nephron cause tubule hypertrophy, and (c) tubule hypertrophy is associated with increases in ion transport capacity. They indicate that the distal tubule adapts functionally and structurally to perturbations in dietary Na and Cl intake.",
+      "date": "1989-01-01",
+      "doi": "10.1172/jci113847",
+      "query": "NAED",
+      "issue_ids": [],
+      "tags": [
+        "needed_evidence"
+      ],
+      "status": "candidate"
+    },
+    {
+      "id": "R18",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC436571/",
+      "title": "Effects of acute unilateral renal denervation in the rat.",
+      "snippet": "Studies were undertaken to characterize the renal responses to acute unilateral renal denervation and the mechanisms involved in these responses. Denervation was produced in anesthetized nondiuretic rats by application of phenol to the left renal artery. Studies were also performed in sham-denervated nondiuretic rats. Whole kidney and individual nephron studies were performed before and after denervation or sham denervation. Denervation increased urine volume from the left kidney to about twice its control value (P less than 0.001) and increased urinary sodium excretion from 332 neq min minus -1 to 1,887 neq min minus -1 (P less than 0.001). Glomerular filtration rate (GFR) and renal plasma flow (RPF) remained unchanged in both kidneys after the procedure. The innervated right kidney showed no changes in urine volume or in sodium excretion. After denervation, late proximal ratio of tubular fluid inulin concentration to that of plasma [(F/P)In] decreased from 2.23 to 1.50 (P less than 0.001) while single nephron GFR remained unchanged. Absolute reabsorption decreased from 16.5 to 9.9 n. min minus -1 (P less than 0.001). (F/P)In ratios were also decreased in early distal (from 6.21 to 3.18, P less 0.001) and late distal convolutions (from 16.41 to 8.33, P less than 0.001) during the experimental period. (F/P)Na ratios remained unchanged in the early distal convolutions, but increased from 0.18 to 0.38 (P less than 0.01) in late distal convolutions after denervation. Absolute Na reabsorption after denervation increased in the loop of Henle, distal convolution, and collecting d",
+      "date": "1975-07-01",
+      "doi": "10.1172/jci108069",
+      "query": "NAED",
+      "issue_ids": [],
+      "tags": [
+        "needed_evidence"
+      ],
+      "status": "candidate"
+    },
+    {
+      "id": "R19",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC394450/",
+      "title": "A positive role for nucleosome mobility in the transcriptional activity of chromatin templates: restriction by linker histones.",
+      "snippet": "Nucleosome mobility facilitates the transcription of chromatin templates containing only histone octamers. Inclusion of linker histones in chromatin inhibits nucleosome mobility, directs nucleosome positioning and represses transcription. Transcriptional repression by linker histone occurs preferentially on templates associated with histone octamers relative to naked DNA. Mobile nucleosomes and the restriction of mobility by linker histones might be expected to exert a major influence on the accessibility of chromatin to regulatory molecules.",
+      "date": "1995-08-01",
+      "doi": "10.1002/j.1460-2075.1995.tb00045.x",
+      "query": "NAED",
+      "issue_ids": [],
+      "tags": [
+        "needed_evidence"
+      ],
+      "status": "candidate"
+    },
+    {
+      "id": "R20",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1756371/",
+      "title": "Does the use of the Advanced Medical Priority Dispatch System affect cardiac arrest detection?",
+      "snippet": " Background Cardiac arrest is the most widely recognised prehospital event that early intervention can directly affect. Chance of survival from this event decreases every minute that passes without treatment. To deliver a rapid ambulance response to these patients the early detection of cardiac arrest by control room staff is crucial. To achieve this, the London Ambulance Service (LAS) uses the Advanced Medical Priority Dispatch System. What impact has AMPDS had on identifying patients in cardiac arrest? Does compliance with AMPDS protocol influence the identification of patients in cardiac arrest? Methods A two stage study was undertaken. The first, compared cases coded as \"cardiac arrest\" and found by the responding ambulance to be in cardiac arrest before the implementation of AMPDS. This was compared with cases triaged as \"cardiac arrest\" and found to be in cardiac arrest across three years after AMPDS implementation. The second stage compared AMPDS compliance, over a 32 month period against the percentage of cardiac arrest calls that were found to be cardiac arrest upon the ambulance arrival. The correlation coefficient was calculated and analysed for statistical significance. Findings AMPDS resulted in a 200% rise in the number of patients accurately identified as suffering from cardiac arrest. A relation was identified between identification and AMPDS compliance (r(2) = 0.65, p = 0.001). Discussion The implementation of AMPDS increased accurate identification of patients in cardiac arrest. Additionally, the relation between factors identified suggests compliance with",
+      "date": "2004-01-01",
+      "doi": "10.1136/emj.2003.006940",
+      "query": "NAED",
+      "issue_ids": [],
+      "tags": [
+        "needed_evidence"
+      ],
+      "status": "candidate"
+    },
+    {
+      "id": "R21",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13439031/",
+      "title": "Special Collection: Abstracts from IUNS-ICN Paris 2025",
+      "snippet": "",
+      "date": "2026-09-04",
+      "doi": "",
+      "query": "The Wood Mackenzie Q2 2025 survey and any 2026 updates, including US coverage, how lead time is defined (order to delivery), and the distribution of lead times. The 128-week average and the 143-week average could then be checked as one origin that S1, S5 and S7 all repeat.",
+      "issue_ids": [],
+      "tags": [
+        "needed_evidence"
+      ],
+      "status": "candidate"
+    },
+    {
+      "id": "R22",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3439153/",
+      "title": "An integrated encyclopedia of DNA elements in the human genome.",
+      "snippet": "The human genome encodes the blueprint of life, but the function of the vast majority of its nearly three billion bases is unknown. The Encyclopedia of DNA Elements (ENCODE) project has systematically mapped regions of transcription, transcription factor association, chromatin structure and histone modification. These data enabled us to assign biochemical functions for 80% of the genome, in particular outside of the well-studied protein-coding regions. Many discovered candidate regulatory elements are physically associated with one another and with expressed genes, providing new insights into the mechanisms of gene regulation. The newly identified elements also show a statistical correspondence to sequence variants linked to human disease, and can thereby guide interpretation of this variation. Overall, the project provides new insights into the organization and regulation of our genes and genome, and is an expansive resource of functional annotations for biomedical research.",
+      "date": "2012-09-01",
+      "doi": "10.1038/nature11247",
+      "query": "DOE-",
+      "issue_ids": [],
+      "tags": [
+        "needed_evidence"
+      ],
+      "status": "candidate"
+    },
+    {
+      "id": "R23",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC419797/",
+      "title": "WebLogo: a sequence logo generator.",
+      "snippet": "WebLogo generates sequence logos, graphical representations of the patterns within a multiple sequence alignment. Sequence logos provide a richer and more precise description of sequence similarity than consensus sequences and can rapidly reveal significant features of the alignment otherwise difficult to perceive. Each logo consists of stacks of letters, one stack for each position in the sequence. The overall height of each stack indicates the sequence conservation at that position (measured in bits), whereas the height of symbols within the stack reflects the relative frequency of the corresponding amino or nucleic acid at that position. WebLogo has been enhanced recently with additional features and options, to provide a convenient and highly configurable sequence logo generator. A command line interface and the complete, open WebLogo source code are available for local installation and customization.",
+      "date": "2004-06-01",
+      "doi": "10.1101/gr.849004",
+      "query": "DOE-",
+      "issue_ids": [],
+      "tags": [
+        "needed_evidence"
+      ],
+      "status": "candidate"
+    },
+    {
+      "id": "R24",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2848648/",
+      "title": "Prodigal: prokaryotic gene recognition and translation initiation site identification.",
+      "snippet": " Background The quality of automated gene prediction in microbial organisms has improved steadily over the past decade, but there is still room for improvement. Increasing the number of correct identifications, both of genes and of the translation initiation sites for each gene, and reducing the overall number of false positives, are all desirable goals. Results With our years of experience in manually curating genomes for the Joint Genome Institute, we developed a new gene prediction algorithm called Prodigal (PROkaryotic DYnamic programming Gene-finding ALgorithm). With Prodigal, we focused specifically on the three goals of improved gene structure prediction, improved translation initiation site recognition, and reduced false positives. We compared the results of Prodigal to existing gene-finding methods to demonstrate that it met each of these objectives. Conclusion We built a fast, lightweight, open source gene prediction program called Prodigal http://compbio.ornl.gov/prodigal/. Prodigal achieved good results compared to existing methods, and we believe it will be a valuable asset to automated microbial annotation pipelines.",
+      "date": "2010-03-08",
+      "doi": "10.1186/1471-2105-11-119",
+      "query": "DOE-",
+      "issue_ids": [],
+      "tags": [
+        "needed_evidence"
+      ],
+      "status": "candidate"
+    },
+    {
+      "id": "R25",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2265698/",
+      "title": "The RAST Server: rapid annotations using subsystems technology.",
+      "snippet": " Background The number of prokaryotic genome sequences becoming available is growing steadily and is growing faster than our ability to accurately annotate them. Description We describe a fully automated service for annotating bacterial and archaeal genomes. The service identifies protein-encoding, rRNA and tRNA genes, assigns functions to the genes, predicts which subsystems are represented in the genome, uses this information to reconstruct the metabolic network and makes the output easily downloadable for the user. In addition, the annotated genome can be browsed in an environment that supports comparative analysis with the annotated genomes maintained in the SEED environment. The service normally makes the annotated genome available within 12-24 hours of submission, but ultimately the quality of such a service will be judged in terms of accuracy, consistency, and completeness of the produced annotations. We summarize our attempts to address these issues and discuss plans for incrementally enhancing the service. Conclusion By providing accurate, rapid annotation freely to the community we have created an important community resource. The service has now been utilized by over 120 external users annotating over 350 distinct genomes.",
+      "date": "2008-02-08",
+      "doi": "10.1186/1471-2164-9-75",
+      "query": "DOE-",
+      "issue_ids": [],
+      "tags": [
+        "needed_evidence"
+      ],
+      "status": "candidate"
+    },
+    {
+      "id": "R26",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC186604/",
+      "title": "The human genome browser at UCSC.",
+      "snippet": "As vertebrate genome sequences near completion and research refocuses to their analysis, the issue of effective genome annotation display becomes critical. A mature web tool for rapid and reliable display of any requested portion of the genome at any scale, together with several dozen aligned annotation tracks, is provided at http://genome.ucsc.edu. This browser displays assembly contigs and gaps, mRNA and expressed sequence tag alignments, multiple gene predictions, cross-species homologies, single nucleotide polymorphisms, sequence-tagged sites, radiation hybrid data, transposon repeats, and more as a stack of coregistered tracks. Text and sequence-based searches provide quick and precise access to any region of specific interest. Secondary links from individual features lead to sequence details and supplementary off-site databases. One-half of the annotation tracks are computed at the University of California, Santa Cruz from publicly available sequence data; collaborators worldwide provide the rest. Users can stably add their own custom tracks to the browser for educational or research purposes. The conceptual and technical framework of the browser, its underlying MYSQL database, and overall use are described. The web site currently serves over 50,000 pages per day to over 3000 different users.",
+      "date": "2002-06-01",
+      "doi": "10.1101/gr.229102",
+      "query": "DOE-",
+      "issue_ids": [],
+      "tags": [
+        "needed_evidence"
+      ],
+      "status": "candidate"
+    },
+    {
+      "id": "R27",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12119593/",
+      "title": "11th European Stroke Organisation Conference Abstracts - 21-23 May 2025, Helsinki, Finland.",
+      "snippet": "",
+      "date": "2025-05-28",
+      "doi": "10.1177/23969873251329993",
+      "query": "The GAO 2023 report on large power transformer lead times, to confirm the 30–36 month order-to-receipt figure.",
+      "issue_ids": [],
+      "tags": [
+        "needed_evidence"
+      ],
+      "status": "candidate"
+    },
+    {
+      "id": "R28",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11450122/",
+      "title": "ESICM LIVES 2024. Barcelona, Spain. 5–9 October 2024.",
+      "snippet": "",
+      "date": "2024-10-03",
+      "doi": "10.1186/s40635-024-00658-z",
+      "query": "The GAO 2023 report on large power transformer lead times, to confirm the 30–36 month order-to-receipt figure.",
+      "issue_ids": [],
+      "tags": [
+        "needed_evidence"
+      ],
+      "status": "candidate"
+    },
+    {
+      "id": "R29",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6183407/",
+      "title": "Program Abstracts from the 21st International Association of Gerontology and Geriatrics (IAGG) World Congress.",
+      "snippet": "",
+      "date": "2017-07-12",
+      "doi": "10.1093/geroni/igx009",
+      "query": "The GAO 2023 report on large power transformer lead times, to confirm the 30–36 month order-to-receipt figure.",
+      "issue_ids": [],
+      "tags": [
+        "needed_evidence"
+      ],
+      "status": "candidate"
+    },
+    {
+      "id": "R30",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10597918/",
+      "title": "ESICM LIVES 2023.",
+      "snippet": "",
+      "date": "2023-10-24",
+      "doi": "10.1186/s40635-023-00546-y",
+      "query": "The GAO 2023 report on large power transformer lead times, to confirm the 30–36 month order-to-receipt figure.",
+      "issue_ids": [],
+      "tags": [
+        "needed_evidence"
+      ],
+      "status": "candidate"
+    },
+    {
+      "id": "R31",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9803397/",
+      "title": "ECR 2022 Book of Abstracts.",
+      "snippet": "",
+      "date": "2022-12-31",
+      "doi": "10.1186/s13244-022-01337-x",
+      "query": "The GAO 2023 report on large power transformer lead times, to confirm the 30–36 month order-to-receipt figure.",
+      "issue_ids": [],
+      "tags": [
+        "needed_evidence"
+      ],
+      "status": "candidate"
+    },
+    {
+      "id": "R32",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12135016/",
+      "title": "Heart Disease and Stroke Statistics-2023 Update: A Report From the American Heart Association.",
+      "snippet": " Background The American Heart Association, in conjunction with the National Institutes of Health, annually reports the most up-to-date statistics related to heart disease, stroke, and cardiovascular risk factors, including core health behaviors (smoking, physical activity, diet, and weight) and health factors (cholesterol, blood pressure, and glucose control) that contribute to cardiovascular health. The Statistical Update presents the latest data on a range of major clinical heart and circulatory disease conditions (including stroke, congenital heart disease, rhythm disorders, subclinical atherosclerosis, coronary heart disease, heart failure, valvular disease, venous disease, and peripheral artery disease) and the associated outcomes (including quality of care, procedures, and economic costs). Methods The American Heart Association, through its Epidemiology and Prevention Statistics Committee, continuously monitors and evaluates sources of data on heart disease and stroke in the United States to provide the most current information available in the annual Statistical Update with review of published literature through the year before writing. The 2023 Statistical Update is the product of a full year's worth of effort in 2022 by dedicated volunteer clinicians and scientists, committed government professionals, and American Heart Association staff members. The American Heart Association strives to further understand and help heal health problems inflicted by structural racism, a public health crisis that can significantly damage physical and mental health and perpetuate dis",
+      "date": "2023-01-25",
+      "doi": "10.1161/cir.0000000000001123",
+      "query": "Quantified distributions that separate lead times by voltage or MVA class and by procurement channel (merchant market versus framework agreements), to support the claim of material variation.",
+      "issue_ids": [],
+      "tags": [
+        "needed_evidence"
+      ],
+      "status": "candidate"
+    },
+    {
+      "id": "R33",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12146881/",
+      "title": "2024 Heart Disease and Stroke Statistics: A Report of US and Global Data From the American Heart Association.",
+      "snippet": " Background The American Heart Association (AHA), in conjunction with the National Institutes of Health, annually reports the most up-to-date statistics related to heart disease, stroke, and cardiovascular risk factors, including core health behaviors (smoking, physical activity, nutrition, sleep, and obesity) and health factors (cholesterol, blood pressure, glucose control, and metabolic syndrome) that contribute to cardiovascular health. The AHA Heart Disease and Stroke Statistical Update presents the latest data on a range of major clinical heart and circulatory disease conditions (including stroke, brain health, complications of pregnancy, kidney disease, congenital heart disease, rhythm disorders, sudden cardiac arrest, subclinical atherosclerosis, coronary heart disease, cardiomyopathy, heart failure, valvular disease, venous thromboembolism, and peripheral artery disease) and the associated outcomes (including quality of care, procedures, and economic costs). Methods The AHA, through its Epidemiology and Prevention Statistics Committee, continuously monitors and evaluates sources of data on heart disease and stroke in the United States and globally to provide the most current information available in the annual Statistical Update with review of published literature through the year before writing. The 2024 AHA Statistical Update is the product of a full year's worth of effort in 2023 by dedicated volunteer clinicians and scientists, committed government professionals, and AHA staff members. The AHA strives to further understand and help heal health problems inflicted",
+      "date": "2024-01-24",
+      "doi": "10.1161/cir.0000000000001209",
+      "query": "Quantified distributions that separate lead times by voltage or MVA class and by procurement channel (merchant market versus framework agreements), to support the claim of material variation.",
+      "issue_ids": [],
+      "tags": [
+        "needed_evidence"
+      ],
+      "status": "candidate"
+    },
+    {
+      "id": "R34",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12256702/",
+      "title": "2025 Heart Disease and Stroke Statistics: A Report of US and Global Data From the American Heart Association.",
+      "snippet": " Background The American Heart Association (AHA), in conjunction with the National Institutes of Health, annually reports the most up-to-date statistics related to heart disease, stroke, and cardiovascular risk factors, including core health behaviors (smoking, physical activity, nutrition, sleep, and obesity) and health factors (cholesterol, blood pressure, glucose control, and metabolic syndrome) that contribute to cardiovascular health. The AHA Heart Disease and Stroke Statistical Update presents the latest data on a range of major clinical heart and circulatory disease conditions (including stroke, brain health, complications of pregnancy, kidney disease, congenital heart disease, rhythm disorders, sudden cardiac arrest, subclinical atherosclerosis, coronary heart disease, cardiomyopathy, heart failure, valvular disease, venous thromboembolism, and peripheral artery disease) and the associated outcomes (including quality of care, procedures, and economic costs). Methods The AHA, through its Epidemiology and Prevention Statistics Committee, continuously monitors and evaluates sources of data on heart disease and stroke in the United States and globally to provide the most current information available in the annual Statistical Update with review of published literature through the year before writing. The 2025 AHA Statistical Update is the product of a full year's worth of effort in 2024 by dedicated volunteer clinicians and scientists, committed government professionals, and AHA staff members. This year's edition includes a continued focus on health equity across severa",
+      "date": "2025-01-27",
+      "doi": "10.1161/cir.0000000000001303",
+      "query": "Quantified distributions that separate lead times by voltage or MVA class and by procurement channel (merchant market versus framework agreements), to support the claim of material variation.",
+      "issue_ids": [],
+      "tags": [
+        "needed_evidence"
+      ],
+      "status": "candidate"
+    },
+    {
+      "id": "R35",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4405523/",
+      "title": "Abstracts from the 38th annual meeting of the society of general internal medicine.",
+      "snippet": "",
+      "date": "2015-04-01",
+      "doi": "10.1007/s11606-015-3271-0",
+      "query": "Quantified distributions that separate lead times by voltage or MVA class and by procurement channel (merchant market versus framework agreements), to support the claim of material variation.",
+      "issue_ids": [],
+      "tags": [
+        "needed_evidence"
+      ],
+      "status": "candidate"
+    },
+    {
+      "id": "R36",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5391321/",
+      "title": "Abstracts from the 2017 Society of General Internal Medicine Annual Meeting.",
+      "snippet": "",
+      "date": "2017-04-01",
+      "doi": "10.1007/s11606-017-4028-8",
+      "query": "Quantified distributions that separate lead times by voltage or MVA class and by procurement channel (merchant market versus framework agreements), to support the claim of material variation.",
+      "issue_ids": [],
+      "tags": [
+        "needed_evidence"
+      ],
+      "status": "candidate"
+    }
+  ],
+  "recall_done": true,
+  "literature_requests_done": [
+    "Retrieve POWER's January 2026 review and the June 2025 NEMA/NECA/NAED/GridWise Alliance letter. Verify their exact statements, United States procurement coverage, observation dates, transformer categories, and lead-time start and end points. Determine whether the January assessment uses new 2026 observations or repeats older data. These originals have not been retrieved; their methods and definitions are not established by the supplied extracts.",
+    "Retrieve the primary Wood Mackenzie Q2 2025 survey results and a separately dated 2026 United States large-power-transformer update, if available. Seek category-specific averages or typical quoted ranges, sampling methods, sample sizes, dispersion or intervals, and procurement-interval definitions. Establish whether these details are reported in the originals rather than treating their absence from secondary summaries as proof that they were not reported.",
+    "The POWER magazine January 2026 article, to confirm the exact 'locked above two years' wording, its geographic scope and its underlying data source.",
+    "The Wood Mackenzie Q2 2025 survey and any 2026 updates, including US coverage, how lead time is defined (order to delivery), and the distribution of lead times. The 128-week average and the 143-week average could then be checked as one origin that S1, S5 and S7 all repeat.",
+    "The DOE-funded national laboratory report TP-5700-96742 (May 2026), to check its stated lead-time range, definitions and observation period. S7 and S8 are unverified, so their dates and sources need checking.",
+    "The Reuters July 2026 reporting on Wood Mackenzie GSU lead times above 160 weeks, to confirm the figure and its date.",
+    "The GAO 2023 report on large power transformer lead times, to confirm the 30–36 month order-to-receipt figure.",
+    "Evidence for a typical 2026 range in the 49–72 month claim (C2). Nothing in the graph gives such a range, since the closest figures are 36–48 months (E30) and 30–36 months (E18). It needs primary 2026 data or should be reframed.",
+    "Quantified distributions that separate lead times by voltage or MVA class and by procurement channel (merchant market versus framework agreements), to support the claim of material variation."
+  ]
+}

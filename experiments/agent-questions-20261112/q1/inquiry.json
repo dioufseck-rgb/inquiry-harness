@@ -1,0 +1,1193 @@
+{
+  "id": "q1",
+  "question": "Does Django 5.2 LTS officially support Python 3.14, and until what date will Django 5.2 receive security updates?",
+  "created_at": "2026-11-13T01:51:45+00:00",
+  "phase": "concluded",
+  "round": 1,
+  "framing": {
+    "restatement": "Does Django 5.2 LTS officially support Python 3.14, and on what date will security updates for Django 5.2 end?",
+    "question_type": "empirical",
+    "scope_in": [
+      "Official Python 3.14 support for Django 5.2 LTS, including any maintenance-release qualification.",
+      "The officially stated end date for Django 5.2 security updates."
+    ],
+    "scope_out": [
+      "Unofficial or experimental Python 3.14 compatibility.",
+      "Support lifecycles for other Django release series.",
+      "Third-party or commercial security updates beyond official Django support."
+    ],
+    "presuppositions": [
+      "Django 5.2 LTS is an identifiable release series.",
+      "Official Django documentation defines Python-version support and the security-update lifecycle for Django 5.2."
+    ],
+    "answerhood": "A complete answer states whether Django 5.2 LTS officially supports Python 3.14, identifies any maintenance-release qualification, and gives the officially stated security-update end date at the precision provided by the source.",
+    "standard_override": null
+  },
+  "graph": {
+    "issues": [
+      {
+        "id": "Q1",
+        "text": "Does Django 5.2 LTS officially support Python 3.14, and until what date will Django 5.2 receive security updates?",
+        "answerhood": "A complete answer states whether Django 5.2 LTS officially supports Python 3.14, identifies any maintenance-release qualification, and gives the officially stated security-update end date at the precision provided by the source.",
+        "question_type": "empirical",
+        "parent_id": null,
+        "depends_on": [],
+        "status": "open",
+        "presuppositions": [
+          "Django 5.2 LTS is an identifiable release series.",
+          "Official Django documentation defines Python-version support and the security-update lifecycle for Django 5.2."
+        ],
+        "search_topic": "Django 5.2 Python compatibility support lifecycle",
+        "scope": {
+          "population": "Django 5.2 LTS",
+          "comparison": "No comparative alternative specified",
+          "outcome": "Official support for Python 3.14 and the date until which Django 5.2 will receive security updates",
+          "period": "Source-reported compatibility and support lifecycle",
+          "relation": "unknown",
+          "magnitude": null,
+          "narrower_than": [],
+          "parent_scope": {}
+        }
+      },
+      {
+        "id": "Q2",
+        "text": "Does Django 5.2 LTS officially support Python 3.14, and does that support require a particular maintenance release?",
+        "answerhood": "State the official Python 3.14 support status for Django 5.2 LTS and any maintenance-release qualification documented by Django.",
+        "question_type": "empirical",
+        "parent_id": "Q1",
+        "depends_on": [],
+        "status": "open",
+        "presuppositions": [],
+        "search_topic": "Django 5.2 Python 3.14 support",
+        "scope": {
+          "population": "Django 5.2 LTS",
+          "comparison": "No comparative alternative specified",
+          "outcome": "Official support for Python 3.14",
+          "period": "Source-reported compatibility lifecycle",
+          "relation": "unknown",
+          "magnitude": null,
+          "narrower_than": [],
+          "parent_scope": {}
+        }
+      },
+      {
+        "id": "Q3",
+        "text": "Until what date will Django 5.2 receive official security updates?",
+        "answerhood": "Give the officially stated end date for Django 5.2 security updates, preserving the source's date precision.",
+        "question_type": "empirical",
+        "parent_id": "Q1",
+        "depends_on": [],
+        "status": "open",
+        "presuppositions": [],
+        "search_topic": "Django 5.2 security support lifecycle",
+        "scope": {
+          "population": "Django 5.2 LTS",
+          "comparison": "No comparative alternative specified",
+          "outcome": "The date until which Django 5.2 will receive security updates",
+          "period": "Source-reported security-support lifecycle",
+          "relation": "unknown",
+          "magnitude": null,
+          "narrower_than": [],
+          "parent_scope": {}
+        }
+      }
+    ],
+    "claims": [
+      {
+        "id": "C1",
+        "text": "Django 5.2 LTS officially supports Python 3.14 from version 5.2.8; security updates end in April twenty twenty-eight.",
+        "issue_id": "Q1",
+        "kind": "substantive",
+        "contrary_ids": [
+          "C2"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "Official compatibility documentation and the support roadmap can establish the maintenance-release qualification and security-support end date.",
+        "scope": {
+          "population": "Django 5.2 LTS",
+          "comparison": "No comparative alternative specified",
+          "outcome": "Official support for Python 3.14 and the date until which Django 5.2 will receive security updates",
+          "period": "Source-reported compatibility and support lifecycle",
+          "relation": "is",
+          "magnitude": null,
+          "narrower_than": [],
+          "parent_scope": {}
+        },
+        "target": {},
+        "superseded_by": null,
+        "revision_of": null,
+        "created_by_move": "",
+        "created_round": 0,
+        "critique_round": 0,
+        "review_note": "The single-origin finding is immaterial here: Django is authoritative for its own official compatibility announcements and support schedule. E1 explicitly identifies 5.2.8 as adding Python 3.14 compatibility; E3 and E4 establish the announced security-support endpoint of April 2028, without specifying a day.",
+        "answers_issue": true
+      },
+      {
+        "id": "C2",
+        "text": "Django 5.2 LTS does not officially support Python 3.14 and has no officially announced security-update end date.",
+        "issue_id": "Q1",
+        "kind": "null",
+        "contrary_ids": [
+          "C1"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "This is the absence-of-support and absence-of-announced-lifecycle alternative.",
+        "scope": {
+          "population": "Django 5.2 LTS",
+          "comparison": "No comparative alternative specified",
+          "outcome": "Official support for Python 3.14 and the date until which Django 5.2 will receive security updates",
+          "period": "Source-reported compatibility and support lifecycle",
+          "relation": "is",
+          "magnitude": null,
+          "narrower_than": [],
+          "parent_scope": {}
+        },
+        "target": {},
+        "superseded_by": null,
+        "revision_of": null,
+        "created_by_move": "",
+        "created_round": 0,
+        "critique_round": 0,
+        "review_note": "",
+        "answers_issue": true
+      },
+      {
+        "id": "C3",
+        "text": "Django 5.2 LTS officially supports Python 3.14 starting with Django 5.2.8.",
+        "issue_id": "Q2",
+        "kind": "substantive",
+        "contrary_ids": [
+          "C4",
+          "C5"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "Support for a newer Python version may be introduced in a maintenance release.",
+        "scope": {
+          "population": "Django 5.2 LTS",
+          "comparison": "No comparative alternative specified",
+          "outcome": "Official support for Python 3.14",
+          "period": "Source-reported compatibility lifecycle",
+          "relation": "is",
+          "magnitude": null,
+          "narrower_than": [],
+          "parent_scope": {}
+        },
+        "target": {},
+        "superseded_by": "C8",
+        "revision_of": null,
+        "created_by_move": "",
+        "created_round": 0,
+        "critique_round": 0,
+        "review_note": "Argue: evidence supports a narrower claim",
+        "answers_issue": true
+      },
+      {
+        "id": "C4",
+        "text": "Django 5.2 LTS officially supports Python 3.14 from its initial release, without requiring a later maintenance release.",
+        "issue_id": "Q2",
+        "kind": "substantive",
+        "contrary_ids": [
+          "C3",
+          "C5"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "Series-level compatibility could instead apply from the initial release rather than begin with a maintenance release.",
+        "scope": {
+          "population": "Django 5.2 LTS",
+          "comparison": "No comparative alternative specified",
+          "outcome": "Official support for Python 3.14",
+          "period": "Source-reported compatibility lifecycle",
+          "relation": "is",
+          "magnitude": null,
+          "narrower_than": [],
+          "parent_scope": {}
+        },
+        "target": {},
+        "superseded_by": null,
+        "revision_of": null,
+        "created_by_move": "",
+        "created_round": 0,
+        "critique_round": 0,
+        "review_note": "",
+        "answers_issue": true
+      },
+      {
+        "id": "C5",
+        "text": "Django 5.2 LTS does not officially support Python 3.14 in any maintenance release.",
+        "issue_id": "Q2",
+        "kind": "null",
+        "contrary_ids": [
+          "C3",
+          "C4"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "This distinguishes official compatibility from merely being able to run on that Python version.",
+        "scope": {
+          "population": "Django 5.2 LTS",
+          "comparison": "No comparative alternative specified",
+          "outcome": "Official support for Python 3.14",
+          "period": "Source-reported compatibility lifecycle",
+          "relation": "is",
+          "magnitude": null,
+          "narrower_than": [],
+          "parent_scope": {}
+        },
+        "target": {},
+        "superseded_by": null,
+        "revision_of": null,
+        "created_by_move": "",
+        "created_round": 0,
+        "critique_round": 0,
+        "review_note": "",
+        "answers_issue": true
+      },
+      {
+        "id": "C6",
+        "text": "Django 5.2 LTS will receive official security updates through April 2028.",
+        "issue_id": "Q3",
+        "kind": "substantive",
+        "contrary_ids": [
+          "C7"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "The official support roadmap can specify the security-support endpoint at month precision.",
+        "scope": {
+          "population": "Django 5.2 LTS",
+          "comparison": "No comparative alternative specified",
+          "outcome": "The date until which Django 5.2 will receive security updates",
+          "period": "Source-reported security-support lifecycle",
+          "relation": "is",
+          "magnitude": null,
+          "narrower_than": [],
+          "parent_scope": {}
+        },
+        "target": {},
+        "superseded_by": null,
+        "revision_of": null,
+        "created_by_move": "",
+        "created_round": 0,
+        "critique_round": 0,
+        "review_note": "Independent origins are not required to establish Django's own announced support commitment. Its official support table and explanatory footnote establish April 2028 as the scheduled security-update endpoint. The claim preserves month-level precision and is understood as an announced commitment, not a guarantee of future delivery.",
+        "answers_issue": true
+      },
+      {
+        "id": "C7",
+        "text": "Django 5.2 LTS has no officially announced security-update end date.",
+        "issue_id": "Q3",
+        "kind": "null",
+        "contrary_ids": [
+          "C6"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "This is the alternative that no official lifecycle endpoint has been announced.",
+        "scope": {
+          "population": "Django 5.2 LTS",
+          "comparison": "No comparative alternative specified",
+          "outcome": "The date until which Django 5.2 will receive security updates",
+          "period": "Source-reported security-support lifecycle",
+          "relation": "is",
+          "magnitude": null,
+          "narrower_than": [],
+          "parent_scope": {}
+        },
+        "target": {},
+        "superseded_by": null,
+        "revision_of": null,
+        "created_by_move": "",
+        "created_round": 0,
+        "critique_round": 0,
+        "review_note": "",
+        "answers_issue": true
+      },
+      {
+        "id": "C8",
+        "text": "Django's 5.2.9 release notes report a fix for a Python 3.14+ crash involving template tag functions with annotations requiring deferred evaluation.",
+        "issue_id": "Q2",
+        "kind": "substantive",
+        "contrary_ids": [],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "revision of C3: Argue: evidence supports a narrower claim",
+        "scope": {
+          "population": "Django 5.2 LTS",
+          "comparison": "No comparative alternative specified",
+          "outcome": "Reported fix in Django 5.2.9 for a Python 3.14+ template-tag registration crash involving deferred annotation evaluation",
+          "period": "Source-reported compatibility lifecycle",
+          "relation": "is",
+          "magnitude": null,
+          "narrower_than": [],
+          "parent_scope": {}
+        },
+        "target": {
+          "evidence_status": "reported"
+        },
+        "superseded_by": null,
+        "revision_of": "C3",
+        "created_by_move": "argue",
+        "created_round": 1,
+        "critique_round": 0,
+        "review_note": "This claim concerns what Django's release notes report, for which those official release notes are the authoritative primary record. A second origin is unnecessary. The claim remains a component finding and is not used to establish when official Python 3.14 support began.",
+        "answers_issue": false
+      }
+    ],
+    "evidence": [
+      {
+        "id": "E1",
+        "text": "The official Django 5.2.8 release notes announce that this maintenance release adds Python 3.14 compatibility, establishing official support beginning with 5.2.8.",
+        "kind": "testimonial",
+        "source_id": "S1",
+        "quote": "Django 5.2.8 fixes one security issue with severity “high”, one security issue with severity “moderate”, and several bugs in 5.2.7. It also adds compatibility with Python 3.14.",
+        "location": "Opening paragraph, Django 5.2.8 release notes",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "strong",
+          "force": "strong",
+          "credibility_notes": "The project's own release announcement directly identifies the maintenance release adding compatibility; it does not state the security-support end date."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C1": "for",
+          "C2": "against",
+          "C3": "for",
+          "C4": "against",
+          "C5": "against"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E2",
+        "text": "Django 5.2.9 fixes a Python 3.14+ crash involving registration of template tag functions whose type annotations require deferred evaluation; this documents maintenance for Python 3.14 but does not explicitly establish official support or its introduction in Django 5.2.8.",
+        "kind": "testimonial",
+        "source_id": "S2",
+        "quote": "Fixed a crash on Python 3.14+ that prevented template tag functions from being registered when their type annotations required deferred evaluation (#36712).",
+        "location": "Bugfixes, final bullet",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "strong",
+          "force": "weak",
+          "credibility_notes": "The release notes authoritatively report this fix, but a Python-specific bug fix alone does not establish official compatibility policy or the maintenance release that introduced support."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C1": "for",
+          "C2": "against",
+          "C3": "neutral",
+          "C4": "neutral",
+          "C5": "against",
+          "C8": "for"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E3",
+        "text": "Django's official supported-versions table designates 5.2 as LTS and sets its end of extended support to April 2028, with month-level precision rather than a specific day.",
+        "kind": "tangible",
+        "source_id": "S3",
+        "quote": "| 5.2 LTS | 5.2.19 | December 3, 2025 | April 2028 |",
+        "location": "Supported Versions table, Django 5.2 LTS row; End of extended support column",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "strong",
+          "force": "strong",
+          "credibility_notes": "This is the project's own published support commitment; it establishes the announced endpoint, not a guarantee about future delivery."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C1": "for",
+          "C2": "against",
+          "C6": "for",
+          "C7": "against"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E4",
+        "text": "Django defines extended support as covering security fixes and data-loss bugs, so the extended-support endpoint applies to official security updates.",
+        "kind": "tangible",
+        "source_id": "S3",
+        "quote": "[2] Security fixes and data loss bugs.",
+        "location": "Support tables, footnote 2 defining End of extended support",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "strong",
+          "force": "strong",
+          "credibility_notes": "The footnote explicitly defines the coverage of the extended-support column used for Django 5.2."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C1": "for",
+          "C2": "against",
+          "C6": "for",
+          "C7": "against"
+        },
+        "role": "evidence"
+      }
+    ],
+    "sources": [
+      {
+        "id": "S1",
+        "url": "https://docs.djangoproject.com/en/6.1/releases/5.2.8/",
+        "title": "Django 5.2.8 release notes",
+        "publisher": "Django project",
+        "date": "2025-11-05",
+        "fetched_at": "2026-11-13T01:53:19+00:00",
+        "kind": "primary",
+        "derived_from": null,
+        "derived_from_note": "",
+        "competence": "The Django project's official release notes directly document compatibility changes introduced in its own maintenance releases.",
+        "incentives": "The project has an interest in accurately informing users about release compatibility and encouraging adoption of maintained releases.",
+        "text_path": "sources\\S1.txt",
+        "query": "site.docs.djangoproject.com/en/5.2/releases/5.2.8/ \"Python 3.14\"",
+        "read_fully": true
+      },
+      {
+        "id": "S2",
+        "url": "https://docs.djangoproject.com/en/6.1/releases/5.2.9/",
+        "title": "Django 5.2.9 release notes",
+        "publisher": "Django project",
+        "date": "2025-12-02",
+        "fetched_at": "2026-11-13T01:53:26+00:00",
+        "kind": "primary",
+        "derived_from": null,
+        "derived_from_note": "",
+        "competence": "As the project's official release notes, this source is authoritative about fixes included in Django 5.2.9.",
+        "incentives": "The project has an interest in accurately informing users about maintenance changes and encouraging use of corrected releases.",
+        "text_path": "sources\\S2.txt",
+        "query": "site.docs.djangoproject.com/en/5.2/releases/5.2.8/ \"Python 3.14\"",
+        "read_fully": true
+      },
+      {
+        "id": "S3",
+        "url": "https://www.djangoproject.com/download/",
+        "title": "Download Django",
+        "publisher": "Django project",
+        "date": "",
+        "fetched_at": "2026-11-13T01:54:03+00:00",
+        "kind": "primary",
+        "derived_from": null,
+        "derived_from_note": "",
+        "competence": "The Django project publishes its own official release-support schedule and defines which fixes are included during each support period.",
+        "incentives": "The project has an interest in clearly communicating support commitments and encouraging users to maintain supported installations.",
+        "text_path": "sources\\S3.txt",
+        "query": "site:djangoproject.com/download/ \"5.2 LTS\" \"April 2028\"",
+        "read_fully": true
+      }
+    ],
+    "arguments": [
+      {
+        "id": "A1",
+        "scheme": "document_record",
+        "premise_ids": [
+          "E1",
+          "E3",
+          "E4"
+        ],
+        "claim_id": "C1",
+        "attacks": null,
+        "cq": {
+          "authentic": {
+            "status": "answered",
+            "outcome": "satisfied",
+            "answer": "The records are the Django project's official release notes and official supported-versions table with its explanatory footnote.",
+            "evidence_ids": [
+              "E1",
+              "E3",
+              "E4"
+            ],
+            "revision": 1,
+            "answer_move": ""
+          },
+          "accuracy": {
+            "status": "answered",
+            "outcome": "satisfied",
+            "answer": "The Django project is authoritative for its own compatibility announcements and official support commitments. The release notes identify the maintenance release adding compatibility, while the table and footnote establish the announced security-support endpoint.",
+            "evidence_ids": [
+              "E1",
+              "E3",
+              "E4"
+            ],
+            "revision": 1,
+            "answer_move": ""
+          },
+          "reading": {
+            "status": "answered",
+            "outcome": "satisfied",
+            "answer": "The 5.2.8 release notes explicitly add Python 3.14 compatibility. The supported-versions table gives April 2028 as the end of extended support for 5.2 LTS, and the footnote defines that support as security fixes and data-loss bugs. Together these establish official Python 3.14 support starting with 5.2.8 and an announced security-update endpoint of April 2028; no specific day is stated.",
+            "evidence_ids": [
+              "E1",
+              "E3",
+              "E4"
+            ],
+            "revision": 1,
+            "answer_move": ""
+          },
+          "definitions": {
+            "status": "open",
+            "outcome": "",
+            "answer": "",
+            "evidence_ids": [],
+            "revision": 0,
+            "answer_move": ""
+          },
+          "currency": {
+            "status": "open",
+            "outcome": "",
+            "answer": "",
+            "evidence_ids": [],
+            "revision": 0,
+            "answer_move": ""
+          }
+        },
+        "strength_override": null,
+        "origin": "proposer",
+        "note": "This establishes an official compatibility announcement and support commitment, not a guarantee of future delivery. E2 provides consistent evidence of subsequent Python 3.14 maintenance but does not independently establish the support policy or its introduction.",
+        "round": 1,
+        "withdrawn": ""
+      },
+      {
+        "id": "A2",
+        "scheme": "document_record",
+        "premise_ids": [
+          "E2"
+        ],
+        "claim_id": "C8",
+        "attacks": null,
+        "cq": {
+          "authentic": {
+            "status": "answered",
+            "outcome": "satisfied",
+            "answer": "The record is the Django project's official Django 5.2.9 release notes.",
+            "evidence_ids": [
+              "E2"
+            ],
+            "revision": 1,
+            "answer_move": ""
+          },
+          "accuracy": {
+            "status": "answered",
+            "outcome": "satisfied",
+            "answer": "The project's release notes authoritatively record the bug fix included in its maintenance release.",
+            "evidence_ids": [
+              "E2"
+            ],
+            "revision": 1,
+            "answer_move": ""
+          },
+          "reading": {
+            "status": "answered",
+            "outcome": "satisfied",
+            "answer": "The quoted bugfix entry explicitly reports this Python 3.14+ crash fix; it does not establish official support policy or its introduction date.",
+            "evidence_ids": [
+              "E2"
+            ],
+            "revision": 1,
+            "answer_move": ""
+          },
+          "definitions": {
+            "status": "open",
+            "outcome": "",
+            "answer": "",
+            "evidence_ids": [],
+            "revision": 0,
+            "answer_move": ""
+          },
+          "currency": {
+            "status": "open",
+            "outcome": "",
+            "answer": "",
+            "evidence_ids": [],
+            "revision": 0,
+            "answer_move": ""
+          }
+        },
+        "strength_override": null,
+        "origin": "proposer",
+        "note": "This is a source-reported maintenance finding, not an independent basis for the official support qualification.",
+        "round": 1,
+        "withdrawn": ""
+      },
+      {
+        "id": "A3",
+        "scheme": "document_record",
+        "premise_ids": [
+          "E3",
+          "E4"
+        ],
+        "claim_id": "C6",
+        "attacks": null,
+        "cq": {
+          "authentic": {
+            "status": "answered",
+            "outcome": "satisfied",
+            "answer": "The supported-versions table and its explanatory footnote are published on the Django project's official download page.",
+            "evidence_ids": [
+              "E3",
+              "E4"
+            ],
+            "revision": 1,
+            "answer_move": ""
+          },
+          "accuracy": {
+            "status": "answered",
+            "outcome": "satisfied",
+            "answer": "The Django project's own support schedule is authoritative for its announced official support commitment. This establishes the scheduled endpoint, not a guarantee of future delivery.",
+            "evidence_ids": [
+              "E3",
+              "E4"
+            ],
+            "revision": 1,
+            "answer_move": ""
+          },
+          "reading": {
+            "status": "answered",
+            "outcome": "satisfied",
+            "answer": "The Django 5.2 LTS row gives April 2028 as the end of extended support, and the footnote explicitly includes security fixes in extended support. The announced security-update endpoint is therefore April 2028; no specific day is stated.",
+            "evidence_ids": [
+              "E3",
+              "E4"
+            ],
+            "revision": 1,
+            "answer_move": ""
+          },
+          "definitions": {
+            "status": "open",
+            "outcome": "",
+            "answer": "",
+            "evidence_ids": [],
+            "revision": 0,
+            "answer_move": ""
+          },
+          "currency": {
+            "status": "open",
+            "outcome": "",
+            "answer": "",
+            "evidence_ids": [],
+            "revision": 0,
+            "answer_move": ""
+          }
+        },
+        "strength_override": null,
+        "origin": "proposer",
+        "note": "Preserves the official source's month-level precision.",
+        "round": 1,
+        "withdrawn": ""
+      },
+      {
+        "id": "A4",
+        "scheme": "attack",
+        "premise_ids": [
+          "E2"
+        ],
+        "claim_id": null,
+        "attacks": {
+          "target_id": "A1",
+          "type": "undercut",
+          "note": "",
+          "basis": "presence",
+          "challenged_revision": -1,
+          "answer_quote": "",
+          "was_reopened": false,
+          "raises_cq": "reading"
+        },
+        "cq": {
+          "grounds": {
+            "status": "answered",
+            "outcome": "",
+            "answer": "premises supplied",
+            "evidence_ids": [
+              "E2"
+            ],
+            "revision": 0,
+            "answer_move": ""
+          }
+        },
+        "strength_override": null,
+        "origin": "critic",
+        "note": "[reading] The reading answer claims E1 establishes official support 'starting with 5.2.8'. E1 only says 5.2.8 'adds compatibility with Python 3.14'. E2 shows a Python 3.14+ crash fix still needed in 5.2.9, so 5.2.8 compatibility was incomplete in at least one respect. Whether 'adds compatibility' amounts to 'officially supports' from 5.2.8, with no stated qualification, is an interpretation. The official supported-Python-versions table in the 5.2 docs is not in the graph, so the 5.2.8 floor is only inferred from release notes.",
+        "round": 1,
+        "withdrawn": ""
+      }
+    ],
+    "main_issue_id": "Q1"
+  },
+  "tests": [
+    {
+      "id": "T1",
+      "claim_ids": [
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "C5"
+      ],
+      "observation": "Official Django Python-compatibility documentation and release notes identify whether Python 3.14 is supported in the 5.2 series and the maintenance release that introduced support.",
+      "expected_if": {
+        "C1": "Official documentation states that Python 3.14 support was added in Django 5.2.8.",
+        "C2": "Official compatibility documentation excludes Python 3.14 from Django 5.2 support, and no maintenance release announces official support.",
+        "C3": "Official documentation states that Python 3.14 support was added in Django 5.2.8, the same compatibility prediction as C1.",
+        "C4": "Official documentation lists Python 3.14 as supported from Django 5.2's initial release, without a maintenance-release qualification.",
+        "C5": "Official compatibility documentation excludes Python 3.14 from Django 5.2 support, the same compatibility prediction as C2."
+      },
+      "diagnosticity": "high",
+      "queries": [
+        "site.docs.djangoproject.com/en/5.2/releases/5.2.8/ \"Python 3.14\"",
+        "site:docs.djangoproject.com/en/5.2/faq/install/ \"3.14\"",
+        "site:docs.djangoproject.com/en/5.2/releases/5.2/ \"Python compatibility\""
+      ],
+      "candidate_ids": [],
+      "status": "run",
+      "round": 1
+    },
+    {
+      "id": "T2",
+      "claim_ids": [
+        "C1",
+        "C2",
+        "C6",
+        "C7"
+      ],
+      "observation": "The official Django supported-versions table or release announcement specifies the end of Django 5.2 LTS extended security support, with its stated date precision.",
+      "expected_if": {
+        "C1": "The official lifecycle table or announcement gives April 2028 as the security-support end, the same lifecycle prediction as C6.",
+        "C2": "Official lifecycle sources provide no announced security-support end for Django 5.2, the same lifecycle prediction as C7.",
+        "C6": "The official lifecycle table or announcement gives April 2028 as the security-support end.",
+        "C7": "Official lifecycle sources provide no announced security-support end for Django 5.2."
+      },
+      "diagnosticity": "high",
+      "queries": [
+        "site:djangoproject.com/download/ \"5.2 LTS\" \"April 2028\"",
+        "site:djangoproject.com/weblog/ \"Django 5.2\" \"security updates\"",
+        "site:docs.djangoproject.com/en/5.2/releases/5.2/ \"2028\""
+      ],
+      "candidate_ids": [],
+      "status": "run",
+      "round": 1
+    }
+  ],
+  "reflections": [
+    {
+      "round": 1,
+      "established": [
+        "C1: Django 5.2 LTS officially supports Python 3.14 from version 5.2.8; security updates end in April twenty twenty-eight.",
+        "C6: Django 5.2 LTS will receive official security updates through April 2028.",
+        "C8: Django's 5.2.9 release notes report a fix for a Python 3.14+ crash involving template tag functions with annotations requiring deferred evaluation."
+      ],
+      "assumed": [
+        "C1 rests on one origin",
+        "C6 rests on one origin",
+        "C8 rests on one origin"
+      ],
+      "load_bearing_node_ids": [
+        "E1",
+        "E3",
+        "E4",
+        "A1",
+        "A1:authentic",
+        "A1:accuracy",
+        "A1:reading"
+      ],
+      "framing_drift": null,
+      "directive": "main issue answered by C1 at scope population=Django 5.2 LTS; comparison=No comparative alternative specified; outcome=Official support for Python 3.14 and the date until which Django 5.2 will receive security updates; period=Source-reported compatibility and support lifecycle"
+    }
+  ],
+  "stop_assessments": [
+    {
+      "round": 1,
+      "decision": "stop",
+      "reason": "main issue answered by C1 at scope population=Django 5.2 LTS; comparison=No comparative alternative specified; outcome=Official support for Python 3.14 and the date until which Django 5.2 will receive security updates; period=Source-reported compatibility and support lifecycle",
+      "undecided_on_path": [],
+      "obtainable": []
+    }
+  ],
+  "conclusion": {
+    "round": 1,
+    "answer": "Yes. Django 5.2 LTS officially supports Python 3.14 starting with Django 5.2.8. Its announced security-update support ends in April 2028; the official schedule gives a month and year, rather than a specific day. [C1, C6]",
+    "judgements": [
+      {
+        "text": "Python 3.14 support starts with Django 5.2.8, based on the official release notes explicitly stating that this release adds Python 3.14 compatibility. [C1]",
+        "confidence": "moderate",
+        "rests_on": "E1: Django's official 5.2.8 release notes, the load-bearing evidence for the maintenance-release qualification.",
+        "claim_ids": [
+          "C1"
+        ]
+      },
+      {
+        "text": "The announced security-update endpoint is April 2028, based on Django's supported-versions table and its footnote defining extended support as security fixes and data-loss bugs. [C6]",
+        "confidence": "moderate",
+        "rests_on": "E3 and E4: Django's official support table and its definition of extended support, both from the same publisher.",
+        "claim_ids": [
+          "C6"
+        ]
+      }
+    ],
+    "what_would_change_this": [
+      "An official correction to the 5.2.8 release announcement changing which maintenance release introduced Python 3.14 compatibility would change the support qualification. [C1; E1]",
+      "An official revision to the April 2028 extended-support endpoint, or to the security coverage of extended support, would change the security-update answer. [C1, C6; E3, E4]"
+    ],
+    "unresolved": [
+      "Cross-checking the maintenance-release qualification against the Django 5.2 supported-Python FAQ and main release notes remains outstanding; those documents were not retrieved in this inquiry.",
+      "The critic's request for an additional currentness check of the support schedule was not grounded by further evidence; the accepted endpoint rests on the retrieved official table and footnote."
+    ],
+    "flags": []
+  },
+  "evaluation": {
+    "applicable": {
+      "A1": true,
+      "A2": true,
+      "A3": true,
+      "A4": true
+    },
+    "inapplicable_reasons": {},
+    "argument_strength": {
+      "A1": "strong",
+      "A2": "weak",
+      "A3": "strong",
+      "A4": "weak"
+    },
+    "labels": {
+      "A1": "in",
+      "A2": "in",
+      "A3": "in",
+      "A4": "in"
+    },
+    "claims": {
+      "C1": {
+        "standard": "preponderance",
+        "status": "in",
+        "pro_ids": [
+          "A1"
+        ],
+        "con_ids": [],
+        "pro_strength": 3,
+        "con_strength": 0,
+        "corroborated": false,
+        "met": true,
+        "label": "accepted",
+        "label_reason": "surviving support meets the proof standard"
+      },
+      "C2": {
+        "standard": "preponderance",
+        "status": "out",
+        "pro_ids": [],
+        "con_ids": [
+          "A1"
+        ],
+        "pro_strength": 0,
+        "con_strength": 3,
+        "corroborated": false,
+        "met": false,
+        "label": "refuted",
+        "label_reason": "a contrary claim is accepted"
+      },
+      "C3": {
+        "standard": "preponderance",
+        "status": "undecided",
+        "pro_ids": [],
+        "con_ids": [],
+        "pro_strength": 0,
+        "con_strength": 0,
+        "corroborated": false,
+        "met": false,
+        "label": "unsupported",
+        "label_reason": "evidence bears on the claim but no supporting argument was built"
+      },
+      "C4": {
+        "standard": "preponderance",
+        "status": "undecided",
+        "pro_ids": [],
+        "con_ids": [],
+        "pro_strength": 0,
+        "con_strength": 0,
+        "corroborated": false,
+        "met": false,
+        "label": "unsupported",
+        "label_reason": "evidence bears on the claim but no supporting argument was built"
+      },
+      "C5": {
+        "standard": "preponderance",
+        "status": "undecided",
+        "pro_ids": [],
+        "con_ids": [],
+        "pro_strength": 0,
+        "con_strength": 0,
+        "corroborated": false,
+        "met": false,
+        "label": "unsupported",
+        "label_reason": "evidence bears on the claim but no supporting argument was built"
+      },
+      "C6": {
+        "standard": "preponderance",
+        "status": "in",
+        "pro_ids": [
+          "A3"
+        ],
+        "con_ids": [],
+        "pro_strength": 3,
+        "con_strength": 0,
+        "corroborated": false,
+        "met": true,
+        "label": "accepted",
+        "label_reason": "surviving support meets the proof standard"
+      },
+      "C7": {
+        "standard": "preponderance",
+        "status": "out",
+        "pro_ids": [],
+        "con_ids": [
+          "A3"
+        ],
+        "pro_strength": 0,
+        "con_strength": 3,
+        "corroborated": false,
+        "met": false,
+        "label": "refuted",
+        "label_reason": "a contrary claim is accepted"
+      },
+      "C8": {
+        "standard": "preponderance",
+        "status": "in",
+        "pro_ids": [
+          "A2"
+        ],
+        "con_ids": [],
+        "pro_strength": 1,
+        "con_strength": 0,
+        "corroborated": false,
+        "met": true,
+        "label": "accepted",
+        "label_reason": "surviving support meets the proof standard"
+      }
+    },
+    "issues": {
+      "Q1": [
+        "C1"
+      ],
+      "Q2": [],
+      "Q3": [
+        "C6"
+      ]
+    },
+    "flags": [
+      {
+        "code": "duplicate_source",
+        "node_id": "S1,S2",
+        "detail": "same origin (publisher:django project) and neither is marked as derived from the other"
+      },
+      {
+        "code": "duplicate_source",
+        "node_id": "S1,S3",
+        "detail": "same origin (publisher:django project) and neither is marked as derived from the other"
+      },
+      {
+        "code": "duplicate_source",
+        "node_id": "S2,S3",
+        "detail": "same origin (publisher:django project) and neither is marked as derived from the other"
+      },
+      {
+        "code": "single_origin",
+        "node_id": "C1",
+        "detail": "accepted on evidence from one origin"
+      },
+      {
+        "code": "single_origin",
+        "node_id": "C6",
+        "detail": "accepted on evidence from one origin"
+      },
+      {
+        "code": "single_origin",
+        "node_id": "C8",
+        "detail": "accepted on evidence from one origin"
+      }
+    ],
+    "converged": true,
+    "reopened_cqs": {}
+  },
+  "notes": [
+    "critic needs: Django 5.2 'What Python version can I use with Django?' FAQ table, to see whether Python 3.14 is listed for 5.2 and with what maintenance-release qualification",
+    "critic needs: Django 5.2 release notes (releases/5.2) stating the supported Python versions, with the 3.14 note for 5.2.8+",
+    "critic needs: Django project download page footnotes on how 'End of extended support' relates to security updates, and the current page date, to confirm the April 2028 date has not changed"
+  ],
+  "llm_usage": [
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 1101,
+      "output_tokens": 810,
+      "cached_input_tokens": 1056,
+      "cache_write_input_tokens": 42,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 1748,
+      "output_tokens": 1847,
+      "cached_input_tokens": 1192,
+      "cache_write_input_tokens": 553,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 2268,
+      "output_tokens": 610,
+      "cache_write_input_tokens": 2265,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 2878,
+      "output_tokens": 325,
+      "cache_write_input_tokens": 2875,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 3025,
+      "output_tokens": 378,
+      "cache_write_input_tokens": 3022,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 3650,
+      "output_tokens": 136,
+      "cache_write_input_tokens": 3647,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5331,
+      "output_tokens": 93,
+      "cache_write_input_tokens": 5328,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5300,
+      "output_tokens": 113,
+      "cache_write_input_tokens": 5297,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 2966,
+      "output_tokens": 95,
+      "cache_write_input_tokens": 2963,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 3986,
+      "output_tokens": 468,
+      "cache_write_input_tokens": 3983,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5696,
+      "output_tokens": 581,
+      "cached_input_tokens": 1833,
+      "cache_write_input_tokens": 3860,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5411,
+      "output_tokens": 856,
+      "cached_input_tokens": 1833,
+      "cache_write_input_tokens": 3575,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5216,
+      "output_tokens": 369,
+      "cached_input_tokens": 1833,
+      "cache_write_input_tokens": 3380,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 4615,
+      "output_tokens": 259,
+      "cached_input_tokens": 1582,
+      "cache_write_input_tokens": 3030,
+      "role": "proposer"
+    },
+    {
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "input_tokens": 6080,
+      "output_tokens": 425,
+      "cache_read_input_tokens": 1659,
+      "role": "critic"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5142,
+      "output_tokens": 586,
+      "cache_write_input_tokens": 5139,
+      "role": "proposer"
+    }
+  ],
+  "llm_config": {
+    "proposer": {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "effort": "medium"
+    },
+    "critic": {
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium"
+    }
+  },
+  "counter_drops": [],
+  "claim_reasons": {
+    "C2": "No supplied evidence supports C2: the official release notes announce Python 3.14 compatibility in 5.2.8, and the official support table announces an April 2028 security-support endpoint.",
+    "C4": "Neither item supports initial-release support; E1 explicitly identifies Python 3.14 compatibility as an addition in Django 5.2.8.",
+    "C5": "No offered evidence supports absence of official support across all maintenance releases, and E1 directly contradicts it.",
+    "C7": "The evidence contradicts this claim: Django officially announces April 2028 as the extended-support endpoint and defines that support as including security fixes."
+  },
+  "response_dispositions": {},
+  "discharge_attempts": [],
+  "candidates": [],
+  "recall_done": true,
+  "literature_requests_done": []
+}

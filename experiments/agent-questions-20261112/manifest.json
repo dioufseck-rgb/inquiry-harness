@@ -35,5 +35,102 @@
   "expected_results_sent": false,
   "shape_judge": false,
   "opus_used": false,
-  "implementation_commit": "0ae138d38f8809a097def63998fc822d09009f5d"
+  "execution_review": {
+    "q1": "authorized and concluded",
+    "q2": "authorized and concluded",
+    "q3": "authorized and concluded",
+    "q4": "authorized and concluded",
+    "q5": "authorized and concluded",
+    "q6": "authorized and concluded"
+  },
+  "authorization": {
+    "user_reply": "Approve all six live runs",
+    "payloads": "six bare questions, public retrieved source text, resulting inquiry graphs",
+    "models": {
+      "proposer": "openai:gpt-6.1-sol",
+      "critic": "anthropic:claude-sonnet-5-5"
+    },
+    "retrieval": [
+      "Serper",
+      "Europe PMC",
+      "public source websites"
+    ]
+  },
+  "prepared_from_commit": "0ae138d38f8809a097def63998fc822d09009f5d",
+  "status": "complete",
+  "validation": {
+    "complete": true,
+    "all_runs_concluded": true,
+    "all_input_and_artifact_checks_pass": true,
+    "whole_question_answered": [
+      "q1",
+      "q6"
+    ],
+    "partial_or_unanswered": [
+      "q2",
+      "q3",
+      "q4",
+      "q5"
+    ],
+    "cost_by_provider": {
+      "openai": 8.636102699999999,
+      "anthropic": 0.6429969999999999
+    },
+    "cost_usd": 9.279099699999998,
+    "costs_reconcile": true,
+    "api_calls_reconcile": true,
+    "api_calls": 425,
+    "pending_reservations": 0,
+    "per_question": [
+      {
+        "id": "q1",
+        "rounds_completed": 1,
+        "cost_usd": 0.2152563,
+        "whole_question_answered": true,
+        "error": null
+      },
+      {
+        "id": "q2",
+        "rounds_completed": 2,
+        "cost_usd": 2.3555588,
+        "whole_question_answered": false,
+        "error": null
+      },
+      {
+        "id": "q3",
+        "rounds_completed": 2,
+        "cost_usd": 0.8157416,
+        "whole_question_answered": false,
+        "error": null
+      },
+      {
+        "id": "q4",
+        "rounds_completed": 2,
+        "cost_usd": 3.7237516,
+        "whole_question_answered": false,
+        "error": null
+      },
+      {
+        "id": "q5",
+        "rounds_completed": 2,
+        "cost_usd": 1.345809,
+        "whole_question_answered": false,
+        "error": null
+      },
+      {
+        "id": "q6",
+        "rounds_completed": 1,
+        "cost_usd": 0.8229824,
+        "whole_question_answered": true,
+        "error": null
+      }
+    ],
+    "tests_before": 168,
+    "tests_after": 168,
+    "held_out_questions_run": 0,
+    "opus_used": false
+  },
+  "run_implementation_commits": [
+    "d9b5f791072d5052bbcb1c83da0b8f2f5be91a1c"
+  ]
 }

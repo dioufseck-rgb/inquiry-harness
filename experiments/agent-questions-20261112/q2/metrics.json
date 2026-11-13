@@ -1,0 +1,578 @@
+{
+  "whole_question_answered": false,
+  "answer_scope": "",
+  "components_accepted": 11,
+  "main_issue_scope_label": "unsupported",
+  "composed_claims": 0,
+  "composition_accepted": 0,
+  "id": "q2",
+  "rounds": 2,
+  "sources": 13,
+  "origins": 10,
+  "duplicate_sources": 1,
+  "evidence": 48,
+  "orphans": 10,
+  "supporting_args": 11,
+  "supporting_in": 11,
+  "claims_supported_unargued": 0,
+  "coverage_eligible_claims": [
+    "C10",
+    "C12",
+    "C14",
+    "C18",
+    "C19",
+    "C20"
+  ],
+  "main_supporting_in": 0,
+  "main_component_supporting_in": 3,
+  "undecided_empty": true,
+  "undecided_supported": false,
+  "attacks": 9,
+  "attacks_out": 4,
+  "attacks_discharged": 1,
+  "counters_dropped": 0,
+  "counters_dropped_reasons": {},
+  "counters_inapplicable": 0,
+  "counters_inapplicable_reasons": {},
+  "accepted_claims": 11,
+  "single_origin_accepts": 9,
+  "main_status": {
+    "C2": "undecided",
+    "C3": "undecided",
+    "C13": "in",
+    "C14": "in",
+    "C15": "in"
+  },
+  "main_labels": {
+    "C2": "defeated",
+    "C3": "unsupported",
+    "C13": "accepted",
+    "C14": "accepted",
+    "C15": "accepted"
+  },
+  "absence_assertions": 0,
+  "provider_proposer": "openai",
+  "provider_critic": "anthropic",
+  "model_proposer": "gpt-6.1-sol",
+  "model_critic": "claude-sonnet-5-5",
+  "effort_proposer": "medium",
+  "effort_critic": "medium",
+  "tokens_in": 796934,
+  "tokens_out": 43499,
+  "calls": 118,
+  "stop_reason": "rounds exhausted; components accepted: ['C10', 'C11', 'C12', 'C13', 'C14', 'C15', 'C16', 'C17', 'C18', 'C19', 'C20']; no whole-question answer",
+  "reopened_cqs": 0,
+  "reopened_cqs_active": 0,
+  "reopened_then_discharged": 0,
+  "supporting_original": 0,
+  "supporting_scoped": 11,
+  "applicable_original": 0,
+  "applicable_scoped": 11,
+  "main_supporting_in_original": 0,
+  "question": "Is the replacement for the Francis Scott Key Bridge in Baltimore currently on schedule, and what is the official estimated completion date as of now?",
+  "error": null,
+  "phase": "concluded",
+  "seconds": 1225.97,
+  "rounds_completed": 2,
+  "config": {
+    "models": {
+      "proposer": "openai:gpt-6.1-sol",
+      "critic": "anthropic:claude-sonnet-5-5"
+    },
+    "rounds": 2,
+    "effort": "medium",
+    "live_retrieval": true,
+    "max_sources": 8,
+    "queries": 6,
+    "hits": 5,
+    "read_parts": 36,
+    "frame_samples": 1,
+    "surrounding_context_sent": false,
+    "shape_judge": false
+  },
+  "implementation_commit": "d9b5f791072d5052bbcb1c83da0b8f2f5be91a1c",
+  "runner_sha256": "c193abb46e2bbb915fc83b98b33196056bf74d0cce39601b84f08ed457f9a471",
+  "question_sha256": "01920ea22801f3a6086e1c355bfe31cc903358c0663b89e5cbd4a9552fd14707",
+  "api_calls": 118,
+  "cost_by_provider": {
+    "anthropic": 0.1131118,
+    "openai": 2.242447
+  },
+  "references_valid": true,
+  "ledger_valid": true,
+  "final_state_anchor_valid": true,
+  "question_exact": true,
+  "accepted_main_claims": [],
+  "accepted_components": [
+    {
+      "id": "C10",
+      "text": "MDTA anticipated opening to traffic in late 2030, later than its earlier 2028 forecast.",
+      "issue_id": "Q2",
+      "scope": {
+        "population": "The replacement for the Francis Scott Key Bridge in Baltimore",
+        "comparison": "The latest official schedule compared with earlier official schedules, if revised",
+        "outcome": "MDTA's announced anticipated opening-to-traffic date and its revision from the earlier opening forecast",
+        "period": "At MDTA's November 17, 2025 announcement, compared with the June 6, 2024 forecast",
+        "relation": "is",
+        "magnitude": null,
+        "narrower_than": [
+          "period"
+        ],
+        "parent_scope": {
+          "period": "As of now, using the latest available official updates"
+        }
+      }
+    },
+    {
+      "id": "C11",
+      "text": "WBAL reported that the target remained reopening to traffic by the end of 2030.",
+      "issue_id": "Q2",
+      "scope": {
+        "population": "The replacement for the Francis Scott Key Bridge in Baltimore",
+        "comparison": "The latest official schedule compared with earlier official schedules, if revised",
+        "outcome": "WBAL's reported unchanged target for reopening to traffic",
+        "period": "As reported March 25, 2026",
+        "relation": "is",
+        "magnitude": null,
+        "narrower_than": [
+          "period"
+        ],
+        "parent_scope": {
+          "period": "As of now, using the latest available official updates"
+        }
+      }
+    },
+    {
+      "id": "C12",
+      "text": "In MDTA's November 17, 2025 update, officials reported 70% design and forecast groundbreaking in coming months, without comparing progress with the revised schedule.",
+      "issue_id": "Q3",
+      "scope": {
+        "population": "The replacement for the Francis Scott Key Bridge in Baltimore",
+        "comparison": "Currently reported project progress compared with the applicable official schedule",
+        "outcome": "MDTA reported design progress and prospective groundbreaking without an actual-versus-revised-baseline schedule assessment",
+        "period": "November 17, 2025 MDTA update",
+        "relation": "is",
+        "magnitude": null,
+        "narrower_than": [
+          "period"
+        ],
+        "parent_scope": {
+          "period": "As of now, using the latest available official updates"
+        }
+      }
+    },
+    {
+      "id": "C13",
+      "text": "MDTA's November 2025 announcement anticipated opening the replacement to traffic in late 2030; the audit records this as a two-year extension of the earlier estimate.",
+      "issue_id": "Q1",
+      "scope": {
+        "population": "The replacement for the Francis Scott Key Bridge in Baltimore",
+        "comparison": "Current project progress and estimates compared with the applicable official schedule",
+        "outcome": "MDTA's announced opening-to-traffic forecast and the recorded extension of its earlier estimate",
+        "period": "November 17, 2025 announcement, retrospectively recorded in the August 27, 2026 audit",
+        "relation": "is",
+        "magnitude": null,
+        "narrower_than": [
+          "period"
+        ],
+        "parent_scope": {
+          "period": "As of now, using the latest available official updates"
+        }
+      }
+    },
+    {
+      "id": "C14",
+      "text": "MDTA said in May 2026 that the final construction schedule would not be known until competitive procurements were completed and contracts awarded.",
+      "issue_id": "Q1",
+      "scope": {
+        "population": "The replacement for the Francis Scott Key Bridge in Baltimore",
+        "comparison": "Current project progress and estimates compared with the applicable official schedule",
+        "outcome": "MDTA's statement that the final construction schedule remained contingent on procurement completion and contract awards",
+        "period": "May 19, 2026 official update",
+        "relation": "is",
+        "magnitude": null,
+        "narrower_than": [
+          "period"
+        ],
+        "parent_scope": {
+          "period": "As of now, using the latest available official updates"
+        }
+      }
+    },
+    {
+      "id": "C15",
+      "text": "In the WJZ interview, Governor Moore affirmed that the replacement remained on schedule; the supplied report gives no supporting comparison against a defined schedule baseline.",
+      "issue_id": "Q1",
+      "scope": {
+        "population": "The replacement for the Francis Scott Key Bridge in Baltimore",
+        "comparison": "Current project progress and estimates compared with the applicable official schedule",
+        "outcome": "Governor Moore's reported affirmation that the replacement remained on schedule, without a documented baseline comparison",
+        "period": "WJZ interview listed as October 1, 2026; date not displayed in supplied article text",
+        "relation": "is",
+        "magnitude": null,
+        "narrower_than": [
+          "period"
+        ],
+        "parent_scope": {
+          "period": "As of now, using the latest available official updates"
+        }
+      }
+    },
+    {
+      "id": "C16",
+      "text": "On May 19, 2026, MDTA said a final construction schedule would not be known until competitive procurements were completed and contracts awarded.",
+      "issue_id": "Q2",
+      "scope": {
+        "population": "The replacement for the Francis Scott Key Bridge in Baltimore",
+        "comparison": "The latest official schedule compared with earlier official schedules, if revised",
+        "outcome": "MDTA's statement that the final construction schedule remained dependent on completed procurements and contract awards",
+        "period": "At MDTA's May 19, 2026 announcement",
+        "relation": "is",
+        "magnitude": null,
+        "narrower_than": [
+          "period"
+        ],
+        "parent_scope": {
+          "period": "As of now, using the latest available official updates"
+        }
+      }
+    },
+    {
+      "id": "C17",
+      "text": "WJZ reported an end-of-2030 opening and completion expectation without identifying a separate official final-completion milestone.",
+      "issue_id": "Q2",
+      "scope": {
+        "population": "The replacement for the Francis Scott Key Bridge in Baltimore",
+        "comparison": "The latest official schedule compared with earlier official schedules, if revised",
+        "outcome": "WJZ's reported opening and completion expectations, without a separately identified official final-completion milestone",
+        "period": "In the WJZ article listed as October 1, 2026",
+        "relation": "is",
+        "magnitude": null,
+        "narrower_than": [
+          "period"
+        ],
+        "parent_scope": {
+          "period": "As of now, using the latest available official updates"
+        }
+      }
+    },
+    {
+      "id": "C18",
+      "text": "In March 2026, MDTA's chief engineer said design was advancing beyond 70% and forecast full design in June; the report did not compare actual progress with scheduled milestones.",
+      "issue_id": "Q3",
+      "scope": {
+        "population": "The replacement for the Francis Scott Key Bridge in Baltimore",
+        "comparison": "Currently reported project progress compared with the applicable official schedule",
+        "outcome": "MDTA's chief engineer reported design advancement and forecast full design without an actual-versus-baseline assessment",
+        "period": "March 25, 2026 WBAL report",
+        "relation": "is",
+        "magnitude": null,
+        "narrower_than": [
+          "period"
+        ],
+        "parent_scope": {
+          "period": "As of now, using the latest available official updates"
+        }
+      }
+    },
+    {
+      "id": "C19",
+      "text": "In WJZ's October 2026 report, Governor Moore affirmed that the replacement remained on schedule and on budget, but the supplied report gave no baseline schedule comparison.",
+      "issue_id": "Q3",
+      "scope": {
+        "population": "The replacement for the Francis Scott Key Bridge in Baltimore",
+        "comparison": "Currently reported project progress compared with the applicable official schedule",
+        "outcome": "Governor Moore reported that the project remained on schedule and on budget without a documented baseline comparison",
+        "period": "October 1, 2026 WJZ report, as dated in the source listing",
+        "relation": "is",
+        "magnitude": null,
+        "narrower_than": [
+          "period"
+        ],
+        "parent_scope": {
+          "period": "As of now, using the latest available official updates"
+        }
+      }
+    },
+    {
+      "id": "C20",
+      "text": "MDTA's May 2026 release said the final construction schedule would not be known until competitive procurements were completed and contracts awarded; its construction-start dates were forecasts.",
+      "issue_id": "Q3",
+      "scope": {
+        "population": "The replacement for the Francis Scott Key Bridge in Baltimore",
+        "comparison": "Currently reported project progress compared with the applicable official schedule",
+        "outcome": "MDTA reported that the final construction schedule depended on completed procurements and contract awards",
+        "period": "May 19, 2026 MDTA update",
+        "relation": "is",
+        "magnitude": null,
+        "narrower_than": [
+          "period"
+        ],
+        "parent_scope": {
+          "period": "As of now, using the latest available official updates"
+        }
+      }
+    }
+  ],
+  "issue_results": [
+    {
+      "id": "Q1",
+      "text": "Is the replacement for the Francis Scott Key Bridge in Baltimore currently on schedule, and what is the official estimated completion date as of now?",
+      "accepted": [],
+      "claims": [
+        {
+          "id": "C2",
+          "text": "As of now, Baltimore's Francis Scott Key Bridge replacement is behind the applicable official schedule, while MDTA's latest official completion estimate is 2030.",
+          "label": "defeated",
+          "answers_issue": true,
+          "pro_strength": 0
+        },
+        {
+          "id": "C3",
+          "text": "As of now, official updates provide neither a current schedule-status assessment nor an estimated completion date for Baltimore's Francis Scott Key Bridge replacement.",
+          "label": "unsupported",
+          "answers_issue": true,
+          "pro_strength": 0
+        },
+        {
+          "id": "C13",
+          "text": "MDTA's November 2025 announcement anticipated opening the replacement to traffic in late 2030; the audit records this as a two-year extension of the earlier estimate.",
+          "label": "accepted",
+          "answers_issue": false,
+          "pro_strength": 2
+        },
+        {
+          "id": "C14",
+          "text": "MDTA said in May 2026 that the final construction schedule would not be known until competitive procurements were completed and contracts awarded.",
+          "label": "accepted",
+          "answers_issue": false,
+          "pro_strength": 2
+        },
+        {
+          "id": "C15",
+          "text": "In the WJZ interview, Governor Moore affirmed that the replacement remained on schedule; the supplied report gives no supporting comparison against a defined schedule baseline.",
+          "label": "accepted",
+          "answers_issue": false,
+          "pro_strength": 2
+        }
+      ]
+    },
+    {
+      "id": "Q2",
+      "text": "What is the latest official estimated completion date for the replacement for the Francis Scott Key Bridge in Baltimore, and has the official schedule been revised?",
+      "accepted": [],
+      "claims": [
+        {
+          "id": "C10",
+          "text": "MDTA anticipated opening to traffic in late 2030, later than its earlier 2028 forecast.",
+          "label": "accepted",
+          "answers_issue": false,
+          "pro_strength": 1
+        },
+        {
+          "id": "C11",
+          "text": "WBAL reported that the target remained reopening to traffic by the end of 2030.",
+          "label": "accepted",
+          "answers_issue": false,
+          "pro_strength": 2
+        },
+        {
+          "id": "C16",
+          "text": "On May 19, 2026, MDTA said a final construction schedule would not be known until competitive procurements were completed and contracts awarded.",
+          "label": "accepted",
+          "answers_issue": false,
+          "pro_strength": 3
+        },
+        {
+          "id": "C17",
+          "text": "WJZ reported an end-of-2030 opening and completion expectation without identifying a separate official final-completion milestone.",
+          "label": "accepted",
+          "answers_issue": false,
+          "pro_strength": 2
+        }
+      ]
+    },
+    {
+      "id": "Q3",
+      "text": "How does the currently reported progress of the replacement for the Francis Scott Key Bridge in Baltimore compare with the applicable official schedule?",
+      "accepted": [],
+      "claims": [
+        {
+          "id": "C12",
+          "text": "In MDTA's November 17, 2025 update, officials reported 70% design and forecast groundbreaking in coming months, without comparing progress with the revised schedule.",
+          "label": "accepted",
+          "answers_issue": false,
+          "pro_strength": 2
+        },
+        {
+          "id": "C18",
+          "text": "In March 2026, MDTA's chief engineer said design was advancing beyond 70% and forecast full design in June; the report did not compare actual progress with scheduled milestones.",
+          "label": "accepted",
+          "answers_issue": false,
+          "pro_strength": 2
+        },
+        {
+          "id": "C19",
+          "text": "In WJZ's October 2026 report, Governor Moore affirmed that the replacement remained on schedule and on budget, but the supplied report gave no baseline schedule comparison.",
+          "label": "accepted",
+          "answers_issue": false,
+          "pro_strength": 2
+        },
+        {
+          "id": "C20",
+          "text": "MDTA's May 2026 release said the final construction schedule would not be known until competitive procurements were completed and contracts awarded; its construction-start dates were forecasts.",
+          "label": "accepted",
+          "answers_issue": false,
+          "pro_strength": 2
+        }
+      ]
+    }
+  ],
+  "sources_detail": [
+    {
+      "id": "S1",
+      "url": "http://mdta.maryland.gov/blog-category/mdta-news-releases/maryland-transportation-authority-releases-updated-estimates-cost",
+      "title": "stay informed - Maryland Transportation Authority",
+      "date": "2025-11-17",
+      "kind": "primary",
+      "fetched_at": "2026-11-13T01:53:12+00:00",
+      "read_fully": true,
+      "derived_from": null,
+      "origin": "title:stayinformedmarylandtransportationauthority"
+    },
+    {
+      "id": "S2",
+      "url": "https://www.mdot.maryland.gov/tso/pages/newsroomdetails.aspx?PageId=38&newsId=1022",
+      "title": "Maryland Transportation Authority Releases Updated ...",
+      "date": "",
+      "kind": "derivative",
+      "fetched_at": "2026-11-13T01:53:27+00:00",
+      "read_fully": true,
+      "derived_from": "S1",
+      "origin": "title:stayinformedmarylandtransportationauthority"
+    },
+    {
+      "id": "S3",
+      "url": "https://www.facebook.com/MarylandDOT/videos/the-key-bridge-rebuild-requires-precision-this-worker-delivers-itas-the-moore-mi/1552794963195803/",
+      "title": "MDTA Chief Engineer Shows Loneliest Job on Francis ...",
+      "date": "Undated in supplied text; source listing says \"2 months ago\"",
+      "kind": "primary",
+      "fetched_at": "2026-11-13T01:53:48+00:00",
+      "read_fully": true,
+      "derived_from": null,
+      "origin": "title:mdtachiefengineershowsloneliestjobonfrancis"
+    },
+    {
+      "id": "S4",
+      "url": "https://www.wmar2news.com/keybridgecollapse/schedule-for-key-bridge-rebuild-already-pushed-back-with-construction-costing-billions-more-per-the-mdta",
+      "title": "Key Bridge rebuild schedule delayed, cost now billions ...",
+      "date": "2025-11-18",
+      "kind": "derivative",
+      "fetched_at": "2026-11-13T01:54:04+00:00",
+      "read_fully": true,
+      "derived_from": "S1",
+      "origin": "title:stayinformedmarylandtransportationauthority"
+    },
+    {
+      "id": "S5",
+      "url": "https://mdta.maryland.gov/sites/default/files/Final%20FSK%20Collapse%20Forecast%20Update%20(6-6-2024).pdf",
+      "title": "Final FSK Collapse Forecast Update (6-6-2024). ...",
+      "date": "2024-06-06",
+      "kind": "unknown",
+      "fetched_at": "2026-11-13T01:54:25+00:00",
+      "read_fully": true,
+      "derived_from": null,
+      "origin": "title:finalfskcollapseforecastupdate662024"
+    },
+    {
+      "id": "S6",
+      "url": "https://www.fox5dc.com/news/gov-wes-moore-touring-key-bridge-site-rebuild-faces-delays-cost-hikes",
+      "title": "Gov. Wes Moore tours Key Bridge site as rebuild faces ...",
+      "date": "2026-07-20 (source listing; date not shown in supplied article text)",
+      "kind": "secondary",
+      "fetched_at": "2026-11-13T01:54:52+00:00",
+      "read_fully": true,
+      "derived_from": null,
+      "origin": "title:govwesmooretourskeybridgesiteasrebuildfaces"
+    },
+    {
+      "id": "S7",
+      "url": "http://mdta.maryland.gov/Meeting_Schedules/Special_Public_Meetings_Schedule.html",
+      "title": "Special Public Meetings Schedule, Agenda and Minutes | MDTA",
+      "date": "",
+      "kind": "unknown",
+      "fetched_at": "2026-11-13T01:55:33+00:00",
+      "read_fully": true,
+      "derived_from": null,
+      "origin": "title:specialpublicmeetingsscheduleagendaandminutesmdta"
+    },
+    {
+      "id": "S8",
+      "url": "https://www.wbaltv.com/article/key-bridge-rebuild-move-next-phase-2-year-collapse-arrives/70848190",
+      "title": "Engineers give Key Bridge rebuild update as 2-year mark ...",
+      "date": "2026-03-25 (source listing)",
+      "kind": "primary",
+      "fetched_at": "2026-11-13T01:56:05+00:00",
+      "read_fully": true,
+      "derived_from": null,
+      "origin": "title:engineersgivekeybridgerebuildupdateas2yearmark"
+    },
+    {
+      "id": "S9",
+      "url": "https://www.cbsnews.com/baltimore/news/new-dashboard-will-track-progress-of-marylands-key-bridge-rebuild/",
+      "title": "New dashboard will track progress of Maryland's Key ...",
+      "date": "2026-10-01 (source listing; date not displayed in supplied article text)",
+      "kind": "primary",
+      "fetched_at": "2026-11-13T02:07:10+00:00",
+      "read_fully": true,
+      "derived_from": null,
+      "origin": "title:newdashboardwilltrackprogressofmarylandskey"
+    },
+    {
+      "id": "S10",
+      "url": "https://www.wbaltv.com/article/baltimore-key-bridge-rebuild-progress-dashboard/74001068",
+      "title": "Maryland Key Bridge rebuild progress dashboard launched",
+      "date": "2026-10-02 (source listing; not displayed in supplied article text)",
+      "kind": "derivative",
+      "fetched_at": "2026-11-13T02:07:36+00:00",
+      "read_fully": true,
+      "derived_from": null,
+      "origin": "title:marylandkeybridgerebuildprogressdashboardlaunched"
+    },
+    {
+      "id": "S11",
+      "url": "https://ola.maryland.gov/umbraco/Api/ReportFile/ViewReport?fileId=6a96e5839e660f28196a9c7a",
+      "title": "Maryland Transportation Authority - Office of Legislative Audits",
+      "date": "2026-08-27",
+      "kind": "unknown",
+      "fetched_at": "2026-11-13T02:07:52+00:00",
+      "read_fully": true,
+      "derived_from": null,
+      "origin": "title:marylandtransportationauthorityofficeoflegislativeaudits"
+    },
+    {
+      "id": "S12",
+      "url": "http://mdta.maryland.gov/blog-category/mdta-news-releases/maryland-transportation-authority-announces-four-separate",
+      "title": "key bridge rebuild construction",
+      "date": "2026-05-19",
+      "kind": "primary",
+      "fetched_at": "2026-11-13T02:08:27+00:00",
+      "read_fully": true,
+      "derived_from": null,
+      "origin": "title:keybridgerebuildconstruction"
+    },
+    {
+      "id": "S13",
+      "url": "https://www.wbaltv.com/article/key-bridge-rebuild-maryland-divides-process/71354900",
+      "title": "MDTA dividing rest of Key Bridge rebuild process",
+      "date": "2026-05-19 (source listing; date not displayed in supplied article text)",
+      "kind": "derivative",
+      "fetched_at": "2026-11-13T02:08:51+00:00",
+      "read_fully": true,
+      "derived_from": "S12",
+      "origin": "title:keybridgerebuildconstruction"
+    }
+  ],
+  "cost_usd": 2.3555588,
+  "single_origin_flag_missing": []
+}

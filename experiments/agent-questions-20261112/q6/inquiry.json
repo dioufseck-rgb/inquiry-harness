@@ -1,0 +1,1943 @@
+{
+  "id": "q6",
+  "question": "Is it accurate that global data-centre electricity consumption was about 415 TWh in 2024, and what is the primary source of that figure?",
+  "created_at": "2026-11-13T02:10:03+00:00",
+  "phase": "concluded",
+  "round": 1,
+  "framing": {
+    "restatement": "Is about 415 TWh an accurate figure for global data-centre electricity consumption in 2024, and what is the primary source of that figure?",
+    "question_type": "empirical",
+    "scope_in": [
+      "Global data-centre electricity consumption in 2024",
+      "Whether about 415 TWh accurately represents the reported estimate and its coverage",
+      "The primary source of the 415 TWh figure"
+    ],
+    "scope_out": [
+      "Electricity consumption in other years except where needed to identify the figure's provenance",
+      "Future electricity-demand projections",
+      "Environmental impacts or policy recommendations"
+    ],
+    "presuppositions": [
+      "Global data-centre electricity consumption in 2024 can be estimated meaningfully.",
+      "The figure of about 415 TWh has an identifiable source; failure to identify one is a possible finding."
+    ],
+    "answerhood": "A complete answer would state whether about 415 TWh accurately represents the reported estimate of global data-centre electricity consumption in 2024, clarify any material qualification about its coverage or status as an estimate, and identify the primary publication and the location in it where the figure is reported.",
+    "standard_override": null
+  },
+  "graph": {
+    "issues": [
+      {
+        "id": "Q1",
+        "text": "Is it accurate that global data-centre electricity consumption was about 415 TWh in 2024, and what is the primary source of that figure?",
+        "answerhood": "A complete answer would state whether about 415 TWh accurately represents the reported estimate of global data-centre electricity consumption in 2024, clarify any material qualification about its coverage or status as an estimate, and identify the primary publication and the location in it where the figure is reported.",
+        "question_type": "empirical",
+        "parent_id": null,
+        "depends_on": [],
+        "status": "open",
+        "presuppositions": [
+          "Global data-centre electricity consumption in 2024 can be estimated meaningfully.",
+          "The figure of about 415 TWh has an identifiable source; failure to identify one is a possible finding."
+        ],
+        "search_topic": "global data-centre electricity consumption",
+        "scope": {
+          "population": "global data centres",
+          "comparison": "about 415 TWh versus reported global data-centre electricity consumption in 2024",
+          "outcome": "accuracy and primary source of the 415 TWh figure",
+          "period": "2024",
+          "relation": "unknown",
+          "magnitude": null,
+          "narrower_than": [],
+          "parent_scope": {}
+        }
+      },
+      {
+        "id": "Q2",
+        "text": "What do published estimates report for global data-centre electricity consumption in 2024, and what coverage does the estimate of about 415 TWh represent?",
+        "answerhood": "Identify the reported 2024 electricity-consumption estimate and its coverage, establishing whether about 415 TWh represents it accurately.",
+        "question_type": "empirical",
+        "parent_id": "Q1",
+        "depends_on": [],
+        "status": "open",
+        "presuppositions": [],
+        "search_topic": "global data-centre electricity consumption",
+        "scope": {
+          "population": "global data centres",
+          "comparison": "about 415 TWh versus reported global data-centre electricity consumption in 2024",
+          "outcome": "reported electricity consumption and coverage of the estimate",
+          "period": "2024",
+          "relation": "unknown",
+          "magnitude": null,
+          "narrower_than": [],
+          "parent_scope": {}
+        }
+      },
+      {
+        "id": "Q3",
+        "text": "What is the primary source of the figure of about 415 TWh for global data-centre electricity consumption in 2024?",
+        "answerhood": "Identify the originating publication, its issuing organization, publication date, and the relevant passage, table, or figure, distinguishing it from secondary reporting.",
+        "question_type": "empirical",
+        "parent_id": "Q1",
+        "depends_on": [],
+        "status": "open",
+        "presuppositions": [],
+        "search_topic": "data-centre electricity consumption 415 TWh",
+        "scope": {
+          "population": "global data centres",
+          "comparison": "primary source versus secondary reporting of the 415 TWh figure",
+          "outcome": "primary source of the figure",
+          "period": "2024",
+          "relation": "unknown",
+          "magnitude": null,
+          "narrower_than": [],
+          "parent_scope": {}
+        }
+      }
+    ],
+    "claims": [
+      {
+        "id": "C1",
+        "text": "About 415 TWh accurately represents the IEA's estimate of global data-centre electricity consumption in 2024, reported in Energy and AI's executive summary; it is an estimate rather than a comprehensive metered total.",
+        "issue_id": "Q1",
+        "kind": "substantive",
+        "contrary_ids": [
+          "C2"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "The figure may accurately reproduce a primary-source estimate while requiring qualification about its estimated status.",
+        "scope": {
+          "population": "global data centres",
+          "comparison": "about 415 TWh versus reported global data-centre electricity consumption in 2024",
+          "outcome": "accuracy and primary source of the 415 TWh figure",
+          "period": "2024",
+          "relation": "is",
+          "magnitude": null,
+          "narrower_than": [],
+          "parent_scope": {}
+        },
+        "target": {},
+        "superseded_by": null,
+        "revision_of": null,
+        "created_by_move": "",
+        "created_round": 0,
+        "critique_round": 0,
+        "review_note": "The single-origin finding does not undermine this claim about accurate reporting and provenance. The originating IEA report directly states 415 TWh in its Executive Summary on printed page 14 and explicitly qualifies historical global consumption totals as modelled estimates, not measured data, on pages 60–61. The claim already limits accuracy to representing the IEA's estimate; it does not assert independent verification of actual worldwide consumption. Repeated passages are one documentary line of support, not independent corroboration.",
+        "answers_issue": true
+      },
+      {
+        "id": "C2",
+        "text": "About 415 TWh does not accurately represent the reported estimate of global data-centre electricity consumption in 2024.",
+        "issue_id": "Q1",
+        "kind": "null",
+        "contrary_ids": [
+          "C1"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "The quoted amount could misstate the reported estimate or its applicability to the named population and year.",
+        "scope": {
+          "population": "global data centres",
+          "comparison": "about 415 TWh versus reported global data-centre electricity consumption in 2024",
+          "outcome": "accuracy and primary source of the 415 TWh figure",
+          "period": "2024",
+          "relation": "differs",
+          "magnitude": null,
+          "narrower_than": [],
+          "parent_scope": {}
+        },
+        "target": {},
+        "superseded_by": null,
+        "revision_of": null,
+        "created_by_move": "",
+        "created_round": 0,
+        "critique_round": 0,
+        "review_note": "",
+        "answers_issue": true
+      },
+      {
+        "id": "C3",
+        "text": "The IEA reports estimated global data-centre electricity consumption of about 415 TWh in 2024.",
+        "issue_id": "Q2",
+        "kind": "substantive",
+        "contrary_ids": [
+          "C4",
+          "C5"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "A published estimate may directly establish the quoted quantity and year.",
+        "scope": {
+          "population": "global data centres",
+          "comparison": "about 415 TWh versus reported global data-centre electricity consumption in 2024",
+          "outcome": "reported electricity consumption and coverage of the estimate",
+          "period": "2024",
+          "relation": "is",
+          "magnitude": null,
+          "narrower_than": [],
+          "parent_scope": {}
+        },
+        "target": {},
+        "superseded_by": null,
+        "revision_of": null,
+        "created_by_move": "",
+        "created_round": 0,
+        "critique_round": 0,
+        "review_note": "A single originating publication is sufficient to establish what that publication reports. The IEA's Energy and AI directly reports 415 TWh on printed page 14 and explicitly describes around 415 TWh as estimated total data-centre electricity consumption in 2024 on printed page 49. C3 concerns the reported estimate, not independent confirmation of its empirical accuracy, so no narrowing or additional source is required.",
+        "answers_issue": true
+      },
+      {
+        "id": "C4",
+        "text": "The estimate of about 415 TWh for global data centres in 2024 covers data-centre electricity consumption generally, not only electricity used for AI.",
+        "issue_id": "Q2",
+        "kind": "substantive",
+        "contrary_ids": [
+          "C3",
+          "C5"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "The estimate's coverage may be broader than the AI-related uses emphasized in reporting about it.",
+        "scope": {
+          "population": "global data centres",
+          "comparison": "about 415 TWh versus reported global data-centre electricity consumption in 2024",
+          "outcome": "reported electricity consumption and coverage of the estimate",
+          "period": "2024",
+          "relation": "is",
+          "magnitude": null,
+          "narrower_than": [],
+          "parent_scope": {}
+        },
+        "target": {},
+        "superseded_by": null,
+        "revision_of": null,
+        "created_by_move": "",
+        "created_round": 0,
+        "critique_round": 0,
+        "review_note": "",
+        "answers_issue": true
+      },
+      {
+        "id": "C5",
+        "text": "Published estimates do not report about 415 TWh for global data-centre electricity consumption in 2024.",
+        "issue_id": "Q2",
+        "kind": "null",
+        "contrary_ids": [
+          "C3",
+          "C4"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "The cited amount may not correspond to a published estimate for the specified population and year.",
+        "scope": {
+          "population": "global data centres",
+          "comparison": "about 415 TWh versus reported global data-centre electricity consumption in 2024",
+          "outcome": "reported electricity consumption and coverage of the estimate",
+          "period": "2024",
+          "relation": "differs",
+          "magnitude": null,
+          "narrower_than": [],
+          "parent_scope": {}
+        },
+        "target": {},
+        "superseded_by": null,
+        "revision_of": null,
+        "created_by_move": "",
+        "created_round": 0,
+        "critique_round": 0,
+        "review_note": "",
+        "answers_issue": true
+      },
+      {
+        "id": "C6",
+        "text": "The primary source for the cited global data-centre electricity estimate for 2024 is the International Energy Agency's Energy and AI, published April tenth, 2025; its executive summary reports the figure.",
+        "issue_id": "Q3",
+        "kind": "substantive",
+        "contrary_ids": [
+          "C7"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "The issuing organization's report may contain the originating estimate, publication date and relevant passage.",
+        "scope": {
+          "population": "global data centres",
+          "comparison": "primary source versus secondary reporting of the 415 TWh figure",
+          "outcome": "primary source of the figure",
+          "period": "2024",
+          "relation": "is",
+          "magnitude": null,
+          "narrower_than": [],
+          "parent_scope": {}
+        },
+        "target": {},
+        "superseded_by": null,
+        "revision_of": null,
+        "created_by_move": "",
+        "created_round": 0,
+        "critique_round": 0,
+        "review_note": "",
+        "answers_issue": true
+      },
+      {
+        "id": "C7",
+        "text": "The cited figure for global data-centre electricity consumption in 2024 does not originate in the International Energy Agency's Energy and AI.",
+        "issue_id": "Q3",
+        "kind": "null",
+        "contrary_ids": [
+          "C6"
+        ],
+        "proof_standard": null,
+        "credence": null,
+        "origin": "proposer",
+        "rationale": "The apparent source could be a secondary attribution rather than the originating publication.",
+        "scope": {
+          "population": "global data centres",
+          "comparison": "primary source versus secondary reporting of the 415 TWh figure",
+          "outcome": "primary source of the figure",
+          "period": "2024",
+          "relation": "differs",
+          "magnitude": null,
+          "narrower_than": [],
+          "parent_scope": {}
+        },
+        "target": {},
+        "superseded_by": null,
+        "revision_of": null,
+        "created_by_move": "",
+        "created_round": 0,
+        "critique_round": 0,
+        "review_note": "",
+        "answers_issue": true
+      }
+    ],
+    "evidence": [
+      {
+        "id": "E1",
+        "text": "Energy and AI identifies the IEA as the institution directing the report, supporting its institutional provenance; this excerpt does not establish the 415 TWh figure or its publication date.",
+        "kind": "tangible",
+        "source_id": "S1",
+        "quote": "This report was designed and directed by Laura Cozzi, Director for Sustainability, Technology and Outlooks , of the International Energy Agency (IEA) , in co -operation with other directorates and offices in the IEA .",
+        "location": "Acknowledgements, p. 5",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "strong",
+          "force": "moderate",
+          "credibility_notes": "The report's own acknowledgements directly establish institutional responsibility, but not the origin of the specific electricity-consumption estimate."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C6": "for"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E2",
+        "text": "The executive summary of the IEA's Energy and AI reports that global data-centre electricity consumption in 2024 was 415 TWh, around 1.5% of world electricity consumption; the passage describes data centres generally rather than only AI electricity use.",
+        "kind": "statistical",
+        "source_id": "S1",
+        "quote": "Data centres accounted for around 1.5% of the world’s electricity consumption in 2024, or 415 terawatt-hours (TWh).",
+        "location": "Executive Summary, printed p. 14, opening paragraph",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "strong",
+          "force": "strong",
+          "credibility_notes": "This is the report's direct statement of the figure and its global coverage, with no attribution to an external originating publication in this passage. This part does not establish the publication date."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C1": "for",
+          "C2": "against",
+          "C3": "for",
+          "C4": "for",
+          "C5": "against",
+          "C6": "for",
+          "C7": "against"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E3",
+        "text": "The IEA describes the report's analysis as based on a new global model and a comprehensive dataset of data-centre electricity demand, supporting interpretation of the reported total as an analytical estimate rather than an explicitly comprehensive metered census.",
+        "kind": "testimonial",
+        "source_id": "S1",
+        "quote": "Based on a new global model and comprehensive dataset of data centre electricity demand,",
+        "location": "Executive Summary, printed p. 13, section 'Policy makers and markets have lacked the tools to assess implications'",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "strong",
+          "force": "moderate",
+          "credibility_notes": "The IEA is describing its own analytical approach. This passage establishes a modelling and dataset basis, but does not provide detailed measurement coverage or uncertainty for the 2024 total."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C1": "for",
+          "C6": "for",
+          "C7": "against"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E4",
+        "text": "The report distinguishes AI from data-centre workloads generally, supporting the interpretation that its global data-centre consumption estimate is not limited to AI.",
+        "kind": "testimonial",
+        "source_id": "S1",
+        "quote": "AI is only one of a range of workloads that data centres perform",
+        "location": "p. 37, section 1.4, Energy for AI and AI for energy",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "strong",
+          "force": "moderate",
+          "credibility_notes": "This explicitly distinguishes AI from total data-centre workloads, but the passage does not itself state the 415 TWh figure."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C4": "for"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E5",
+        "text": "The IEA reports that data centres globally accounted for around 1.5% of electricity consumption in 2024.",
+        "kind": "statistical",
+        "source_id": "S1",
+        "quote": "Globally, data centres consume d around 1.5% of electricity consumption in 2024.",
+        "location": "p. 37, section 1.4, Energy for AI and AI for energy",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "strong",
+          "force": "moderate",
+          "credibility_notes": "This provides a related global consumption share, not an independent confirmation of the absolute 415 TWh estimate."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C1": "neutral",
+          "C3": "neutral"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E6",
+        "text": "The report distinguishes data centres' multiple workloads from AI-driven demand growth, supporting the interpretation that data-centre electricity consumption is not synonymous with AI electricity consumption.",
+        "kind": "testimonial",
+        "source_id": "S1",
+        "quote": "Data centres serve multiple types of workloads but expected demand growth from AI is driving rapid investment.",
+        "location": "p. 38, paragraph following Figure 1.12",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "strong",
+          "force": "moderate",
+          "credibility_notes": "This passage clarifies the distinction between data centres and AI workloads, but does not itself define the coverage of the 415 TWh estimate or report that figure."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C4": "for"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E7",
+        "text": "Energy and AI's Chapter 2 summary reports estimated total data-centre electricity consumption of around 415 TWh in 2024, equivalent to about 1.5% of global electricity consumption; the figure is presented for data centres generally, not solely AI workloads.",
+        "kind": "statistical",
+        "source_id": "S1",
+        "quote": "In total, electricity consumption from data centres is estimated to amount to around 415 terawatt hours (TWh), or about 1.5% of global electricity consumption in 2024.",
+        "location": "p. 49, Chapter 2, Summary, first bullet",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "strong",
+          "force": "strong",
+          "credibility_notes": "Direct evidence of the estimate reported in the IEA publication, rather than independent verification of actual consumption. This passage does not establish the publication date or the executive-summary location."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C1": "for",
+          "C2": "against",
+          "C3": "for",
+          "C4": "for",
+          "C5": "against",
+          "C6": "for",
+          "C7": "against"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E8",
+        "text": "The IEA cautions that limited data collection and reporting create substantial uncertainty about current as well as future data-centre electricity consumption, qualifying the precision of the reported estimate.",
+        "kind": "testimonial",
+        "source_id": "S1",
+        "quote": "data collection and reporting on their electricity consumption remain limited. There is therefore substantial uncertainty about both their current and future consumption.",
+        "location": "p. 50, Section 2.1 Introduction, second paragraph",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "strong",
+          "force": "strong",
+          "credibility_notes": "The publication explicitly acknowledges limitations of its evidence base; this supports treating 415 TWh as an uncertain estimate rather than a comprehensive metered total."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C1": "for"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E9",
+        "text": "The report attributes its historical data-centre electricity-consumption analysis to the IEA, based on data from IDC, OMDIA and SemiAnalysis, rather than attributing the resulting analysis to another publication.",
+        "kind": "tangible",
+        "source_id": "S1",
+        "quote": "Sources: IEA analysis based on data from IDC (2024a), OMDIA (2025), and SemiAnalysis (2025).",
+        "location": "p. 55, Figure 2.3, source note",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "strong",
+          "force": "moderate",
+          "credibility_notes": "This is a direct attribution in the official report, but this passage alone does not establish the numerical 415 TWh estimate, its executive-summary location or the publication date."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C1": "for",
+          "C6": "for",
+          "C7": "against"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E10",
+        "text": "The historical electricity-consumption series through 2024 is presented as total data-centre consumption, broken down by equipment and data-centre type, rather than as AI-only consumption.",
+        "kind": "tangible",
+        "source_id": "S1",
+        "quote": "Total data centre electricity consumption by equipment type and data centre type, 2005-2024",
+        "location": "p. 55, Figure 2.3 title",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "strong",
+          "force": "moderate",
+          "credibility_notes": "The figure title establishes the scope of the historical series; this excerpt does not provide a readable numerical value for its 2024 endpoint."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C4": "for"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E11",
+        "text": "The report's data-centre electricity accounting includes cooling and other supporting infrastructure, not just electricity used by computing equipment.",
+        "kind": "tangible",
+        "source_id": "S1",
+        "quote": "Cooling and environmental control s consist of equipment that regulates temperature and humidity to keep IT equipment operating at optimal conditions.",
+        "location": "p. 53, section 2.1.2, equipment definitions",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "strong",
+          "force": "moderate",
+          "credibility_notes": "This scope clarification is supported by the surrounding equipment definitions and the 2024 electricity-consumption breakdown in Figure 2.2; it does not independently establish the 415 TWh amount."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C4": "for"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E12",
+        "text": "The report distinguishes AI workloads from data-centre workloads generally: AI is only one component of data-centre activity, supporting interpretation of the global total as broader than AI alone.",
+        "kind": "testimonial",
+        "source_id": "S1",
+        "quote": "AI is only one of the workloads that run on data centres",
+        "location": "p. 56, Box 2.1, first paragraph",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "strong",
+          "force": "strong",
+          "credibility_notes": ""
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C4": "for"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E13",
+        "text": "The IEA explicitly states that historical global data-centre electricity-consumption figures are estimates compiled from multiple sources, rather than comprehensive measurements.",
+        "kind": "testimonial",
+        "source_id": "S1",
+        "quote": "all data on the historical consumption of data centres at the global level are the result of estimates based on a variety of sources.",
+        "location": "p. 60, subsection 'All historical data are estimates, not measurements', first paragraph",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "strong",
+          "force": "strong",
+          "credibility_notes": ""
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C1": "for"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E14",
+        "text": "The report explains the lack of comprehensive measurement by noting that very few governments require reporting and publication of comprehensive data-centre electricity statistics.",
+        "kind": "testimonial",
+        "source_id": "S1",
+        "quote": "Currently, very few governments mandate reporting and publication of comprehensive statistics on data centre electricity consumption",
+        "location": "p. 60, subsection 'All historical data are estimates, not measurements', first paragraph",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "strong",
+          "force": "moderate",
+          "credibility_notes": ""
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C1": "for"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E15",
+        "text": "The report explicitly identifies approximately 415 TWh as estimated global data-centre electricity consumption for 2024 in Chapter 2, providing another location for the figure beyond the executive summary.",
+        "kind": "testimonial",
+        "source_id": "S1",
+        "quote": "This is more than double the estimated approximately 415 TWh for 2024 (Figure 2.10)",
+        "location": "p. 63, section 2.3.1, Global results",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "strong",
+          "force": "strong",
+          "credibility_notes": "This is a direct statement in the IEA report; this passage does not establish the publication date or the executive-summary location."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C1": "for",
+          "C2": "against",
+          "C3": "for",
+          "C5": "against",
+          "C6": "for",
+          "C7": "against"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E16",
+        "text": "The IEA explicitly cautions that historical global data-centre electricity-consumption figures are modelled estimates rather than measured totals, with a wide range across estimates.",
+        "kind": "testimonial",
+        "source_id": "S1",
+        "quote": "As a consequence, all historical data regarding global data centre electricity consumption are modelled estimates, not measured data, and the range of estimates is wide",
+        "location": "p. 61, paragraph preceding Figure 2.9",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "strong",
+          "force": "strong",
+          "credibility_notes": "This directly establishes the report's qualification of historical consumption figures, not an independently measured value or uncertainty interval for 415 TWh."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C1": "for"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E17",
+        "text": "The report identifies the historical consumption estimates in this chapter as IEA estimates and directs readers to its methodological annex for how they were produced.",
+        "kind": "testimonial",
+        "source_id": "S1",
+        "quote": "The data and methodological annex to this report provides more details on the methodology used by the IEA to estimate data centre electricity consumption from data centres.",
+        "location": "p. 61, paragraph preceding Figure 2.9",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "strong",
+          "force": "strong",
+          "credibility_notes": "The passage supports attribution of the estimation work to the IEA, while acknowledging that its estimates use external data and methods."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C1": "for",
+          "C6": "for",
+          "C7": "against"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E18",
+        "text": "Box 2.4 reiterates that estimated global electricity demand from data centres in 2024 was 415 TWh, using that estimate as the denominator for the share covered by technology companies’ renewable power purchase agreements.",
+        "kind": "testimonial",
+        "source_id": "S1",
+        "quote": "In 2024, technology companies’ renewable s PPAs were sufficient to cover roughly 20% of the estimated 415 TWh of global electricity demand from data centres.",
+        "location": "p. 77, Box 2.4, Data centre operators are leading the corporate PPA push",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "strong",
+          "force": "strong",
+          "credibility_notes": "This is an explicit statement in the IEA report and labels the total as estimated. This passage does not establish the publication date, the executive-summary location, or the underlying estimation methodology."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C1": "for",
+          "C2": "against",
+          "C3": "for",
+          "C5": "against"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E19",
+        "text": "In its discussion of renewable power purchase agreements in 2024, the report explicitly describes global data-centre electricity demand of 415 TWh as an estimate.",
+        "kind": "testimonial",
+        "source_id": "S1",
+        "quote": "the estimated 415 TWh of global electricity demand from data centres.",
+        "location": "Chapter 2, p. 77, paragraph on technology companies’ renewable PPAs immediately before p. 78",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "strong",
+          "force": "strong",
+          "credibility_notes": "This passage directly confirms the amount and its estimated status, but does not establish the publication date, executive-summary location, estimation methodology, or original attribution. The BNEF attribution later in this excerpt concerns Figure 2.16 on corporate PPAs, not explicitly the 415 TWh estimate."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C1": "for",
+          "C2": "against",
+          "C3": "for",
+          "C5": "against"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E20",
+        "text": "Section 2.5.3 reports a 2024 baseline of 460 TWh for electricity generation supplying data centres, a metric labelled differently from data-centre electricity consumption; this passage does not establish that the 415 TWh consumption estimate is incorrect.",
+        "kind": "statistical",
+        "source_id": "S1",
+        "quote": "Global electricity generation to supply data centres is projected to grow from 460 TWh in 2024 to over 1 000 TWh in 2030 and 1 300 TWh in 2035 in the Base Case.",
+        "location": "p. 86, section 2.5.3, Electricity supply in the Base Case",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "strong",
+          "force": "moderate",
+          "credibility_notes": "This is an official IEA analytical baseline, but the passage concerns electricity generation rather than consumption and does not explain the numerical difference."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C1": "neutral",
+          "C2": "neutral",
+          "C3": "neutral",
+          "C5": "neutral"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E21",
+        "text": "The Brookings briefing reports approximately 415 TWh of global data-centre electricity consumption in 2024, referring to data centres generally rather than solely to AI workloads; this passage does not identify the originating publication.",
+        "kind": "testimonial",
+        "source_id": "S2",
+        "quote": "In 2024, global data center electricity consumption was approximately 415 terrawatt hours, representing about 1.5% of the world’s total electricity use.",
+        "location": "“Energy and the hyperscaler model,” first paragraph",
+        "credentials": {
+          "relevance": "strong",
+          "credibility": "moderate",
+          "force": "moderate",
+          "credibility_notes": "This is a reported figure in a policy briefing, not an original estimate or measurement. The supplied passage does not explicitly attribute this figure to Energy and AI, establish that publication's date, or provide independent corroboration of the IEA estimate."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C1": "for",
+          "C2": "against",
+          "C3": "neutral",
+          "C4": "for",
+          "C5": "against",
+          "C6": "neutral",
+          "C7": "neutral"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E22",
+        "text": "The briefing cautions that estimates of increases in AI-related energy consumption remain uncertain because corporate disclosures are opaque and methodologies inconsistent.",
+        "kind": "testimonial",
+        "source_id": "S2",
+        "quote": "Uncertainties remain as to the extent of increases in consumption due to opacities in corporate disclosures and inconsistencies in methodologies.",
+        "location": "“Introduction,” second paragraph",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "moderate",
+          "force": "moderate",
+          "credibility_notes": "This is a general qualification about consumption increases, not a specific uncertainty assessment or description of the methodology behind the 415 TWh estimate."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C1": "neutral",
+          "C2": "neutral",
+          "C3": "neutral"
+        },
+        "role": "evidence"
+      },
+      {
+        "id": "E23",
+        "text": "Brookings lists Energy and AI as an International Energy Agency publication dated April 10, 2025, naming Laura Cozzi, Thomas Spencer, and Sangeeth Singh; this supports the publication identification and date but does not itself establish the origin or location of the 415 TWh estimate.",
+        "kind": "testimonial",
+        "source_id": "S2",
+        "quote": "Cozzi, Laura, Thomas Spencer, and Sangeeth Singh, “Energy and AI.” International Energy Agency, April 10, 2025.",
+        "location": "Recommended reading, first entry",
+        "credentials": {
+          "relevance": "moderate",
+          "credibility": "moderate",
+          "force": "moderate",
+          "credibility_notes": "This is a bibliographic citation in a later article, not the IEA publication's own date statement or the passage reporting electricity consumption."
+        },
+        "independence_group": "",
+        "origin": "proposer",
+        "provenance": {},
+        "bears_on": {
+          "C6": "for"
+        },
+        "role": "evidence"
+      }
+    ],
+    "sources": [
+      {
+        "id": "S1",
+        "url": "https://iea.blob.core.windows.net/assets/de9dea13-b07d-42c5-a398-d1b3ae17d866/EnergyandAI.pdf",
+        "title": "Energy and AI - Microsoft .NET",
+        "publisher": "International Energy Agency",
+        "date": "",
+        "fetched_at": "2026-11-13T02:12:40+00:00",
+        "kind": "unknown",
+        "derived_from": null,
+        "derived_from_note": "",
+        "competence": "The IEA describes its expertise in energy data collection and analysis and identifies dedicated authors for this report's data-centre demand analysis.",
+        "incentives": "The IEA seeks to inform energy policy and promote reliable, affordable and sustainable energy, while demonstrating its leadership on energy and AI.",
+        "text_path": "sources\\S1.txt",
+        "query": "site.iea.org/reports/energy-and-ai/executive-summary \"415\"",
+        "read_fully": false
+      },
+      {
+        "id": "S2",
+        "url": "https://www.brookings.edu/articles/global-energy-demands-within-the-ai-regulatory-landscape/",
+        "title": "Global energy demands within the AI regulatory landscape",
+        "publisher": "Brookings Institution",
+        "date": "2026-04-10",
+        "fetched_at": "2026-11-13T02:16:20+00:00",
+        "kind": "unknown",
+        "derived_from": null,
+        "derived_from_note": "",
+        "competence": "The briefing synthesizes energy-demand estimates from analytical bodies including the IEA, but this excerpt provides no original measurement or modelling of global data-centre electricity consumption.",
+        "incentives": "The briefing aims to inform an international AI-policy dialogue about energy demand and possible policy responses.",
+        "text_path": "sources\\S2.txt",
+        "query": "site.iea.org/reports/energy-and-ai/executive-summary \"415\"",
+        "read_fully": true
+      }
+    ],
+    "arguments": [
+      {
+        "id": "A1",
+        "scheme": "document_record",
+        "premise_ids": [
+          "E2",
+          "E3",
+          "E7",
+          "E8",
+          "E9",
+          "E13",
+          "E14",
+          "E16",
+          "E17"
+        ],
+        "claim_id": "C1",
+        "attacks": null,
+        "cq": {
+          "authentic": {
+            "status": "answered",
+            "outcome": "satisfied",
+            "answer": "The passages come directly from the IEA's Energy and AI report hosted on the IEA's publication asset domain, with identified sections and printed page numbers.",
+            "evidence_ids": [
+              "E2",
+              "E7",
+              "E13",
+              "E16"
+            ],
+            "revision": 1,
+            "answer_move": ""
+          },
+          "accuracy": {
+            "status": "answered",
+            "outcome": "satisfied",
+            "answer": "Direct inspection of the originating report is adequate to establish what estimate the IEA reported and how it qualified that estimate. This argument establishes accurate reporting and provenance, not independent verification of actual electricity consumption. The report describes a global model and dataset, identifies IEA estimation work using external data, and explicitly says historical totals are modelled estimates rather than measurements.",
+            "evidence_ids": [
+              "E3",
+              "E9",
+              "E13",
+              "E16",
+              "E17"
+            ],
+            "revision": 1,
+            "answer_move": ""
+          },
+          "reading": {
+            "status": "answered",
+            "outcome": "satisfied",
+            "answer": "Energy and AI's Executive Summary, printed page 14, opening paragraph, states that data centres accounted for 415 TWh in 2024. Chapter 2's summary, printed page 49, first bullet, explicitly calls this an estimate of total data-centre electricity consumption. These statements concern global data centres generally, not solely AI workloads. Pages 50, 60 and 61 qualify the evidence base: reporting is limited, current consumption is uncertain, and historical global totals are estimates rather than comprehensive measurements. The source note on page 55 and methodological statement on page 61 attribute the analysis to the IEA.",
+            "evidence_ids": [
+              "E2",
+              "E7",
+              "E8",
+              "E9",
+              "E13",
+              "E14",
+              "E16",
+              "E17"
+            ],
+            "revision": 1,
+            "answer_move": ""
+          },
+          "definitions": {
+            "status": "open",
+            "outcome": "",
+            "answer": "",
+            "evidence_ids": [],
+            "revision": 0,
+            "answer_move": ""
+          },
+          "currency": {
+            "status": "open",
+            "outcome": "",
+            "answer": "",
+            "evidence_ids": [],
+            "revision": 0,
+            "answer_move": ""
+          }
+        },
+        "strength_override": null,
+        "origin": "proposer",
+        "note": "One originating-source argument supports the complete claim: about 415 TWh accurately quotes the IEA's reported 2024 global estimate; the primary publication is Energy and AI, with the figure in the Executive Summary on printed page 14 and explicitly labelled estimated in Chapter 2's summary on printed page 49. Repetitions elsewhere in the report are not independent corroboration.",
+        "round": 1,
+        "withdrawn": ""
+      },
+      {
+        "id": "A2",
+        "scheme": "document_record",
+        "premise_ids": [
+          "E2",
+          "E7",
+          "E15",
+          "E18",
+          "E19"
+        ],
+        "claim_id": "C3",
+        "attacks": null,
+        "cq": {
+          "authentic": {
+            "status": "answered",
+            "outcome": "satisfied",
+            "answer": "The excerpts come from the IEA's Energy and AI report hosted on its official publication asset domain, with identified sections and printed page numbers.",
+            "evidence_ids": [
+              "E2",
+              "E7",
+              "E15",
+              "E18"
+            ],
+            "revision": 1,
+            "answer_move": ""
+          },
+          "accuracy": {
+            "status": "answered",
+            "outcome": "satisfied",
+            "answer": "For the claim about what the IEA reports, the report's explicit statements adequately establish the amount and its estimated status. They do not independently verify actual worldwide consumption or establish the estimation method's accuracy.",
+            "evidence_ids": [
+              "E2",
+              "E7",
+              "E18",
+              "E19"
+            ],
+            "revision": 1,
+            "answer_move": ""
+          },
+          "reading": {
+            "status": "answered",
+            "outcome": "satisfied",
+            "answer": "The Executive Summary, printed page 14, reports 415 TWh for global data-centre consumption in 2024. Chapter 2's Summary, printed page 49, explicitly calls this an estimate of around 415 TWh. Pages 63 and 77 repeat the estimate.",
+            "evidence_ids": [
+              "E2",
+              "E7",
+              "E15",
+              "E18",
+              "E19"
+            ],
+            "revision": 1,
+            "answer_move": ""
+          },
+          "definitions": {
+            "status": "open",
+            "outcome": "",
+            "answer": "",
+            "evidence_ids": [],
+            "revision": 0,
+            "answer_move": ""
+          },
+          "currency": {
+            "status": "open",
+            "outcome": "",
+            "answer": "",
+            "evidence_ids": [],
+            "revision": 0,
+            "answer_move": ""
+          }
+        },
+        "strength_override": null,
+        "origin": "proposer",
+        "note": "About 415 TWh accurately represents the reported estimate. The primary publication supplied is the IEA's Energy and AI, especially the Executive Summary, printed page 14, opening paragraph, and Chapter 2 Summary, printed page 49, first bullet. These repetitions are one documentary line of support, not independent estimates. E20 concerns electricity generation supplying data centres, a different metric, and does not contradict this consumption figure.",
+        "round": 1,
+        "withdrawn": ""
+      },
+      {
+        "id": "A3",
+        "scheme": "document_record",
+        "premise_ids": [
+          "E2",
+          "E7",
+          "E4",
+          "E6",
+          "E10",
+          "E11",
+          "E12"
+        ],
+        "claim_id": "C4",
+        "attacks": null,
+        "cq": {
+          "authentic": {
+            "status": "answered",
+            "outcome": "satisfied",
+            "answer": "The coverage statements, figure title and equipment definitions are identified passages from the same official IEA report.",
+            "evidence_ids": [
+              "E2",
+              "E7",
+              "E10",
+              "E11",
+              "E12"
+            ],
+            "revision": 1,
+            "answer_move": ""
+          },
+          "accuracy": {
+            "status": "answered",
+            "outcome": "satisfied",
+            "answer": "The publication's own labels and definitions adequately establish the intended coverage of its reported estimate: total data-centre consumption rather than AI-only consumption.",
+            "evidence_ids": [
+              "E7",
+              "E10",
+              "E11",
+              "E12"
+            ],
+            "revision": 1,
+            "answer_move": ""
+          },
+          "reading": {
+            "status": "answered",
+            "outcome": "satisfied",
+            "answer": "The amount is explicitly described as total electricity consumption from data centres. Figure 2.3 labels the historical series total data-centre consumption, while the report separately states that AI is only one workload. Equipment accounting also includes cooling and supporting infrastructure.",
+            "evidence_ids": [
+              "E2",
+              "E7",
+              "E4",
+              "E6",
+              "E10",
+              "E11",
+              "E12"
+            ],
+            "revision": 1,
+            "answer_move": ""
+          },
+          "definitions": {
+            "status": "open",
+            "outcome": "",
+            "answer": "",
+            "evidence_ids": [],
+            "revision": 0,
+            "answer_move": ""
+          },
+          "currency": {
+            "status": "open",
+            "outcome": "",
+            "answer": "",
+            "evidence_ids": [],
+            "revision": 0,
+            "answer_move": ""
+          }
+        },
+        "strength_override": null,
+        "origin": "proposer",
+        "note": "The estimate covers data-centre electricity consumption generally, including non-AI workloads and supporting infrastructure; it must not be presented as 415 TWh consumed by AI alone.",
+        "round": 1,
+        "withdrawn": ""
+      },
+      {
+        "id": "A4",
+        "scheme": "document_record",
+        "premise_ids": [
+          "E1",
+          "E2",
+          "E3",
+          "E7",
+          "E9",
+          "E17",
+          "E23"
+        ],
+        "claim_id": "C6",
+        "attacks": null,
+        "cq": {
+          "authentic": {
+            "status": "answered",
+            "outcome": "satisfied",
+            "answer": "The supplied IEA-hosted report identifies the IEA as the institution directing it. Brookings independently identifies Energy and AI as an IEA publication in its bibliography.",
+            "evidence_ids": [
+              "E1",
+              "E23"
+            ],
+            "revision": 1,
+            "answer_move": ""
+          },
+          "accuracy": {
+            "status": "answered",
+            "outcome": "satisfied",
+            "answer": "For the provenance question, the report directly records the figure and attributes the underlying estimation work to the IEA, using external datasets. Brookings records the publication date as April 10, 2025. That date is supported here by a secondary bibliographic citation, not by a supplied date statement from the report itself.",
+            "evidence_ids": [
+              "E2",
+              "E9",
+              "E17",
+              "E23"
+            ],
+            "revision": 1,
+            "answer_move": ""
+          },
+          "reading": {
+            "status": "answered",
+            "outcome": "satisfied",
+            "answer": "Energy and AI's Executive Summary, printed page 14, states: 'Data centres accounted for around 1.5% of the world’s electricity consumption in 2024, or 415 terawatt-hours (TWh).' Chapter 2, page 49, explicitly calls the total an estimate. The report describes its own modelling and attributes the analysis to the IEA, supporting identification of this publication as the primary source rather than merely a secondary repetition. Brookings supplies the stated publication date.",
+            "evidence_ids": [
+              "E2",
+              "E3",
+              "E7",
+              "E9",
+              "E17",
+              "E23"
+            ],
+            "revision": 1,
+            "answer_move": ""
+          },
+          "definitions": {
+            "status": "open",
+            "outcome": "",
+            "answer": "",
+            "evidence_ids": [],
+            "revision": 0,
+            "answer_move": ""
+          },
+          "currency": {
+            "status": "open",
+            "outcome": "",
+            "answer": "",
+            "evidence_ids": [],
+            "revision": 0,
+            "answer_move": ""
+          }
+        },
+        "strength_override": null,
+        "origin": "proposer",
+        "note": "This establishes the figure's publication provenance, not independent verification of actual electricity consumption. About 415 TWh accurately reproduces the report's estimate for global data centres generally, not AI workloads alone.",
+        "round": 1,
+        "withdrawn": ""
+      }
+    ],
+    "main_issue_id": "Q1"
+  },
+  "tests": [
+    {
+      "id": "T1",
+      "claim_ids": [
+        "C1",
+        "C2",
+        "C3",
+        "C5",
+        "C6",
+        "C7"
+      ],
+      "observation": "The official IEA Energy and AI publication page establishes its publication date, and its executive summary explicitly reports global data-centre electricity consumption in 2024 as around 415 TWh. Record the exact passage and its section or PDF page, including any attribution to another originating source.",
+      "expected_if": {
+        "C1": "The executive summary reports around 415 TWh for global data centres in 2024 as an IEA estimate.",
+        "C2": "The primary passage reports a materially different amount, year, or population, or otherwise does not support interpreting 415 TWh as the reported global 2024 estimate.",
+        "C3": "The IEA explicitly reports around 415 TWh for global data-centre electricity consumption in 2024.",
+        "C5": "The primary publication does not report around 415 TWh for global data-centre electricity consumption in 2024.",
+        "C6": "The official publication is dated 10 April 2025, its executive summary contains the figure, and its attribution identifies the estimate as the IEA's analysis rather than an externally originated figure.",
+        "C7": "The figure is absent from the specified publication or is explicitly attributed to a different originating publication or organization."
+      },
+      "diagnosticity": "high",
+      "queries": [
+        "site.iea.org/reports/energy-and-ai/executive-summary \"415\"",
+        "site.iea.org/reports/energy-and-ai \"10 April 2025\"",
+        "IEA Energy and AI 2025 PDF \"415\""
+      ],
+      "candidate_ids": [],
+      "status": "run",
+      "round": 1
+    },
+    {
+      "id": "T2",
+      "claim_ids": [
+        "C1",
+        "C2",
+        "C4"
+      ],
+      "observation": "The report's demand chapter, methodological notes, and source notes define the 2024 estimate's coverage and explain how it was constructed, distinguishing total data-centre electricity consumption from AI-only consumption and from a comprehensive metered total. Check material boundaries such as cooling and other infrastructure, cryptocurrency mining, and data-transmission networks.",
+      "expected_if": {
+        "C1": "The report describes a modelled or otherwise estimated global total assembled from data and assumptions, rather than a comprehensive metered census.",
+        "C2": "Coverage or methodological notes reveal that interpreting 415 TWh as global data-centre electricity consumption in 2024 is materially incorrect; an estimation methodology alone would not support this claim.",
+        "C4": "The 415 TWh total includes data-centre workloads generally, with AI treated as a subset, and the report specifies relevant facility-energy inclusions and sector exclusions."
+      },
+      "diagnosticity": "high",
+      "queries": [
+        "site.iea.org/reports/energy-and-ai \"415\" \"model\"",
+        "site.iea.org/reports/energy-and-ai \"data centres\" \"cryptocurrency\"",
+        "site.iea.org/reports/energy-and-ai \"electricity consumption\" \"cooling\" \"2024\""
+      ],
+      "candidate_ids": [],
+      "status": "planned",
+      "round": 1
+    }
+  ],
+  "reflections": [
+    {
+      "round": 1,
+      "established": [
+        "C1: About 415 TWh accurately represents the IEA's estimate of global data-centre electricity consumption in 2024, reported in Energy and AI's executive summary; it is an estimate rather than a comprehensive metered total.",
+        "C3: The IEA reports estimated global data-centre electricity consumption of about 415 TWh in 2024.",
+        "C6: The primary source for the cited global data-centre electricity estimate for 2024 is the International Energy Agency's Energy and AI, published April tenth, 2025; its executive summary reports the figure."
+      ],
+      "assumed": [
+        "C1 rests on one origin",
+        "C3 rests on one origin"
+      ],
+      "load_bearing_node_ids": [
+        "E2",
+        "E3",
+        "E7",
+        "E8",
+        "E9",
+        "E13",
+        "E14",
+        "E16",
+        "E17",
+        "A1",
+        "A1:authentic",
+        "A1:accuracy",
+        "A1:reading"
+      ],
+      "framing_drift": null,
+      "directive": "main issue answered by C1 at scope population=global data centres; comparison=about 415 TWh versus reported global data-centre electricity consumption in 2024; outcome=accuracy and primary source of the 415 TWh figure; period=2024"
+    }
+  ],
+  "stop_assessments": [
+    {
+      "round": 1,
+      "decision": "stop",
+      "reason": "main issue answered by C1 at scope population=global data centres; comparison=about 415 TWh versus reported global data-centre electricity consumption in 2024; outcome=accuracy and primary source of the 415 TWh figure; period=2024",
+      "undecided_on_path": [],
+      "obtainable": [
+        "T2"
+      ]
+    }
+  ],
+  "conclusion": {
+    "round": 1,
+    "answer": "Yes—about 415 TWh accurately reproduces the IEA’s reported estimate of global data-centre electricity consumption in 2024; it should not be presented as a comprehensive metered total [C1, C3]. The primary source is the International Energy Agency’s Energy and AI, published 10 April 2025 [C6]. Its Executive Summary, printed page 14, opening paragraph, states: “Data centres accounted for around 1.5% of the world’s electricity consumption in 2024, or 415 terawatt-hours (TWh).” Chapter 2’s summary, printed page 49, explicitly labels the total an estimate [C1, C3].",
+    "judgements": [
+      {
+        "text": "About 415 TWh is an accurate quotation of the IEA’s reported 2024 global estimate, resting on the explicit statements on printed pages 14 and 49 rather than independent verification of worldwide consumption [C1, C3].",
+        "confidence": "moderate",
+        "rests_on": "E2 and E7: the originating IEA report directly states the amount, year and estimated status; repeated passages constitute one documentary origin.",
+        "claim_ids": [
+          "C1",
+          "C3"
+        ]
+      },
+      {
+        "text": "The figure should be described as a modelled estimate rather than a comprehensive measured total, resting on the report’s explicit methodological qualifications on printed pages 60–61 [C1].",
+        "confidence": "moderate",
+        "rests_on": "E13 and E16: the IEA explicitly describes historical global totals as estimates rather than measured data; E8 identifies substantial uncertainty.",
+        "claim_ids": [
+          "C1"
+        ]
+      },
+      {
+        "text": "Energy and AI is the primary publication, with the figure in its Executive Summary, while the stated publication date of 10 April 2025 rests on Brookings’ bibliographic citation [C6].",
+        "confidence": "moderate",
+        "rests_on": "E2, E9 and E17 establish the report location and attribution of the estimation work to the IEA; E23 supplies the publication date.",
+        "claim_ids": [
+          "C6"
+        ]
+      }
+    ],
+    "what_would_change_this": [
+      "An authenticated correction showing that the passages on printed pages 14 and 49 misstate the amount, year or population would change the reporting-accuracy conclusion [C1, C3].",
+      "An authoritative clarification changing the report’s description of historical totals as modelled estimates would change the measurement-status qualification [C1].",
+      "Evidence that the IEA attributes the estimate to an earlier originating publication would change the primary-source identification [C6].",
+      "Independent corroboration explicitly establishing that the 415 TWh total includes non-AI workloads would address the unmet corroboration requirement for the separate coverage claim [C4]."
+    ],
+    "unresolved": [
+      "The separate claim that the total covers data-centre consumption generally rather than AI alone was not accepted in the evaluated graph, despite supporting passages in the IEA report [C4].",
+      "Independent verification of actual worldwide consumption, detailed methodological coverage and a numerical uncertainty range were not established in this inquiry.",
+      "A primary IEA statement confirming the release date was not retrieved in this inquiry; the date rests on a secondary bibliographic citation.",
+      "The explanation for the report’s separate 460 TWh electricity-generation figure, and any later correction or revision of the 2024 consumption estimate, were not established in the documents read.",
+      "Independent estimates suitable for comparison with the IEA’s 2024 total were not retrieved in this inquiry."
+    ],
+    "flags": []
+  },
+  "evaluation": {
+    "applicable": {
+      "A1": true,
+      "A2": true,
+      "A3": true,
+      "A4": true
+    },
+    "inapplicable_reasons": {},
+    "argument_strength": {
+      "A1": "moderate",
+      "A2": "strong",
+      "A3": "moderate",
+      "A4": "moderate"
+    },
+    "labels": {
+      "A1": "in",
+      "A2": "in",
+      "A3": "in",
+      "A4": "in"
+    },
+    "claims": {
+      "C1": {
+        "standard": "preponderance",
+        "status": "in",
+        "pro_ids": [
+          "A1"
+        ],
+        "con_ids": [],
+        "pro_strength": 2,
+        "con_strength": 0,
+        "corroborated": false,
+        "met": true,
+        "label": "accepted",
+        "label_reason": "surviving support meets the proof standard"
+      },
+      "C2": {
+        "standard": "preponderance",
+        "status": "out",
+        "pro_ids": [],
+        "con_ids": [
+          "A1"
+        ],
+        "pro_strength": 0,
+        "con_strength": 2,
+        "corroborated": false,
+        "met": false,
+        "label": "refuted",
+        "label_reason": "a contrary claim is accepted"
+      },
+      "C3": {
+        "standard": "preponderance",
+        "status": "in",
+        "pro_ids": [
+          "A2"
+        ],
+        "con_ids": [
+          "A3"
+        ],
+        "pro_strength": 3,
+        "con_strength": 2,
+        "corroborated": false,
+        "met": true,
+        "label": "accepted",
+        "label_reason": "surviving support meets the proof standard"
+      },
+      "C4": {
+        "standard": "preponderance",
+        "status": "out",
+        "pro_ids": [
+          "A3"
+        ],
+        "con_ids": [
+          "A2"
+        ],
+        "pro_strength": 2,
+        "con_strength": 3,
+        "corroborated": false,
+        "met": false,
+        "label": "refuted",
+        "label_reason": "a contrary claim is accepted"
+      },
+      "C5": {
+        "standard": "preponderance",
+        "status": "out",
+        "pro_ids": [],
+        "con_ids": [
+          "A2",
+          "A3"
+        ],
+        "pro_strength": 0,
+        "con_strength": 3,
+        "corroborated": false,
+        "met": false,
+        "label": "refuted",
+        "label_reason": "a contrary claim is accepted"
+      },
+      "C6": {
+        "standard": "preponderance",
+        "status": "in",
+        "pro_ids": [
+          "A4"
+        ],
+        "con_ids": [],
+        "pro_strength": 2,
+        "con_strength": 0,
+        "corroborated": false,
+        "met": true,
+        "label": "accepted",
+        "label_reason": "surviving support meets the proof standard"
+      },
+      "C7": {
+        "standard": "preponderance",
+        "status": "out",
+        "pro_ids": [],
+        "con_ids": [
+          "A4"
+        ],
+        "pro_strength": 0,
+        "con_strength": 2,
+        "corroborated": false,
+        "met": false,
+        "label": "refuted",
+        "label_reason": "a contrary claim is accepted"
+      }
+    },
+    "issues": {
+      "Q1": [
+        "C1"
+      ],
+      "Q2": [
+        "C3"
+      ],
+      "Q3": [
+        "C6"
+      ]
+    },
+    "flags": [
+      {
+        "code": "orphan_evidence",
+        "node_id": "E5",
+        "detail": "evidence used in no argument"
+      },
+      {
+        "code": "orphan_evidence",
+        "node_id": "E20",
+        "detail": "evidence used in no argument"
+      },
+      {
+        "code": "orphan_evidence",
+        "node_id": "E21",
+        "detail": "evidence used in no argument"
+      },
+      {
+        "code": "orphan_evidence",
+        "node_id": "E22",
+        "detail": "evidence used in no argument"
+      },
+      {
+        "code": "single_origin",
+        "node_id": "C1",
+        "detail": "accepted on evidence from one origin"
+      },
+      {
+        "code": "single_origin",
+        "node_id": "C3",
+        "detail": "accepted on evidence from one origin"
+      }
+    ],
+    "converged": true,
+    "reopened_cqs": {}
+  },
+  "notes": [
+    "hypothesize: no exclusive_groups returned; all claims of an issue treated as contraries",
+    "critic needs: IEA Energy and AI front matter or IEA publication page stating the release date (10 April 2025), to replace the secondary Brookings citation (E23) for the date.",
+    "critic needs: IEA Energy and AI data and methodological annex: how the 2024 data-centre total was derived, and its uncertainty range or coverage, e.g. whether it includes cooling and non-hyperscale or enterprise facilities.",
+    "critic needs: Clarification of the gap between 415 TWh of data-centre consumption and 460 TWh of electricity generation supplying data centres (E20), e.g. the IEA's explanation of grid losses, to rule out a definitional mismatch.",
+    "critic needs: Any IEA correction, erratum or later update (e.g. an Energy and AI update or World Energy Outlook 2025) that revises the 2024 data-centre figure, to address the open currency question.",
+    "critic needs: Independent estimates of 2024 global data-centre electricity use (e.g. LBNL, Goldman Sachs, Schneider Electric) to compare with the IEA figure, since E2, E7, E15, E18 and E19 all trace to one IEA source."
+  ],
+  "llm_usage": [
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 1102,
+      "output_tokens": 792,
+      "cached_input_tokens": 1056,
+      "cache_write_input_tokens": 43,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 1773,
+      "output_tokens": 1827,
+      "cached_input_tokens": 1192,
+      "cache_write_input_tokens": 578,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 2390,
+      "output_tokens": 691,
+      "cache_write_input_tokens": 2387,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5497,
+      "output_tokens": 390,
+      "cache_write_input_tokens": 5494,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 4780,
+      "output_tokens": 189,
+      "cache_write_input_tokens": 4777,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5203,
+      "output_tokens": 756,
+      "cache_write_input_tokens": 5200,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5255,
+      "output_tokens": 156,
+      "cache_write_input_tokens": 5252,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5562,
+      "output_tokens": 142,
+      "cache_write_input_tokens": 5559,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5515,
+      "output_tokens": 83,
+      "cache_write_input_tokens": 5512,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5291,
+      "output_tokens": 118,
+      "cache_write_input_tokens": 5288,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5350,
+      "output_tokens": 417,
+      "cache_write_input_tokens": 5347,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5524,
+      "output_tokens": 326,
+      "cache_write_input_tokens": 5521,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5418,
+      "output_tokens": 141,
+      "cache_write_input_tokens": 5415,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5416,
+      "output_tokens": 616,
+      "cache_write_input_tokens": 5413,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5369,
+      "output_tokens": 730,
+      "cache_write_input_tokens": 5366,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5682,
+      "output_tokens": 580,
+      "cache_write_input_tokens": 5679,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5502,
+      "output_tokens": 812,
+      "cache_write_input_tokens": 5499,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5430,
+      "output_tokens": 134,
+      "cache_write_input_tokens": 5427,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5590,
+      "output_tokens": 148,
+      "cache_write_input_tokens": 5587,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5532,
+      "output_tokens": 383,
+      "cache_write_input_tokens": 5529,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5470,
+      "output_tokens": 520,
+      "cache_write_input_tokens": 5467,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5584,
+      "output_tokens": 87,
+      "cache_write_input_tokens": 5581,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5598,
+      "output_tokens": 392,
+      "cache_write_input_tokens": 5595,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5621,
+      "output_tokens": 81,
+      "cache_write_input_tokens": 5618,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5453,
+      "output_tokens": 100,
+      "cache_write_input_tokens": 5450,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5364,
+      "output_tokens": 106,
+      "cache_write_input_tokens": 5361,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5248,
+      "output_tokens": 89,
+      "cache_write_input_tokens": 5245,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5272,
+      "output_tokens": 106,
+      "cache_write_input_tokens": 5269,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5362,
+      "output_tokens": 105,
+      "cache_write_input_tokens": 5359,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5393,
+      "output_tokens": 137,
+      "cache_write_input_tokens": 5390,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5318,
+      "output_tokens": 90,
+      "cache_write_input_tokens": 5315,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5309,
+      "output_tokens": 88,
+      "cache_write_input_tokens": 5306,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5130,
+      "output_tokens": 85,
+      "cache_write_input_tokens": 5127,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5272,
+      "output_tokens": 87,
+      "cache_write_input_tokens": 5269,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5387,
+      "output_tokens": 86,
+      "cache_write_input_tokens": 5384,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5464,
+      "output_tokens": 83,
+      "cache_write_input_tokens": 5461,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5535,
+      "output_tokens": 81,
+      "cache_write_input_tokens": 5532,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 4704,
+      "output_tokens": 85,
+      "cache_write_input_tokens": 4701,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5227,
+      "output_tokens": 641,
+      "cache_write_input_tokens": 5224,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 4959,
+      "output_tokens": 164,
+      "cache_write_input_tokens": 4956,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 5091,
+      "output_tokens": 111,
+      "cache_write_input_tokens": 5088,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 4659,
+      "output_tokens": 408,
+      "cache_write_input_tokens": 4656,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 3312,
+      "output_tokens": 13,
+      "cache_write_input_tokens": 3309,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 7864,
+      "output_tokens": 747,
+      "cached_input_tokens": 1833,
+      "cache_write_input_tokens": 6028,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 7553,
+      "output_tokens": 988,
+      "cached_input_tokens": 1833,
+      "cache_write_input_tokens": 5717,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 6703,
+      "output_tokens": 647,
+      "cached_input_tokens": 1833,
+      "cache_write_input_tokens": 4867,
+      "role": "proposer"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 8722,
+      "output_tokens": 244,
+      "cached_input_tokens": 1582,
+      "cache_write_input_tokens": 7137,
+      "role": "proposer"
+    },
+    {
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "input_tokens": 13797,
+      "output_tokens": 377,
+      "cache_creation_input_tokens": 1659,
+      "role": "critic"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "input_tokens": 9554,
+      "output_tokens": 864,
+      "cache_write_input_tokens": 9551,
+      "role": "proposer"
+    }
+  ],
+  "llm_config": {
+    "proposer": {
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "effort": "medium"
+    },
+    "critic": {
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium"
+    }
+  },
+  "counter_drops": [],
+  "claim_reasons": {
+    "C2": "No supplied evidence supports rejecting 415 TWh as the reported consumption estimate; E20's 460 TWh refers instead to electricity generation supplying data centres, while the report repeatedly states the 415 TWh consumption estimate.",
+    "C5": "No supplied evidence supports this denial: the IEA explicitly reports the estimate, and the Brookings passage repeats it.",
+    "C7": "No supplied evidence supports a different originating publication; the report directly presents the figure and attributes the estimation work to the IEA."
+  },
+  "response_dispositions": {},
+  "discharge_attempts": [],
+  "candidates": [],
+  "recall_done": true,
+  "literature_requests_done": []
+}

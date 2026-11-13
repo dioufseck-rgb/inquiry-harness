@@ -1,0 +1,255 @@
+{
+  "whole_question_answered": true,
+  "answer_scope": "population=Django 5.2 LTS; comparison=No comparative alternative specified; outcome=Official support for Python 3.14 and the date until which Django 5.2 will receive security updates; period=Source-reported compatibility and support lifecycle",
+  "components_accepted": 2,
+  "main_issue_scope_label": "accepted",
+  "composed_claims": 0,
+  "composition_accepted": 0,
+  "id": "q1",
+  "rounds": 1,
+  "sources": 3,
+  "origins": 1,
+  "duplicate_sources": 3,
+  "evidence": 4,
+  "orphans": 0,
+  "supporting_args": 3,
+  "supporting_in": 3,
+  "claims_supported_unargued": 0,
+  "coverage_eligible_claims": [
+    "C1"
+  ],
+  "main_supporting_in": 1,
+  "main_component_supporting_in": 0,
+  "undecided_empty": false,
+  "undecided_supported": false,
+  "attacks": 1,
+  "attacks_out": 0,
+  "attacks_discharged": 1,
+  "counters_dropped": 0,
+  "counters_dropped_reasons": {},
+  "counters_inapplicable": 0,
+  "counters_inapplicable_reasons": {},
+  "accepted_claims": 3,
+  "single_origin_accepts": 3,
+  "main_status": {
+    "C1": "in",
+    "C2": "out"
+  },
+  "main_labels": {
+    "C1": "accepted",
+    "C2": "refuted"
+  },
+  "absence_assertions": 0,
+  "provider_proposer": "openai",
+  "provider_critic": "anthropic",
+  "model_proposer": "gpt-6.1-sol",
+  "model_critic": "claude-sonnet-5-5",
+  "effort_proposer": "medium",
+  "effort_critic": "medium",
+  "tokens_in": 66072,
+  "tokens_out": 7951,
+  "calls": 16,
+  "stop_reason": "main issue answered by C1 at scope population=Django 5.2 LTS; comparison=No comparative alternative specified; outcome=Official support for Python 3.14 and the date until which Django 5.2 will receive security updates; period=Source-reported compatibility and support lifecycle",
+  "reopened_cqs": 0,
+  "reopened_cqs_active": 0,
+  "reopened_then_discharged": 0,
+  "supporting_original": 2,
+  "supporting_scoped": 1,
+  "applicable_original": 2,
+  "applicable_scoped": 1,
+  "main_supporting_in_original": 1,
+  "question": "Does Django 5.2 LTS officially support Python 3.14, and until what date will Django 5.2 receive security updates?",
+  "error": null,
+  "phase": "concluded",
+  "seconds": 201.78,
+  "rounds_completed": 1,
+  "config": {
+    "models": {
+      "proposer": "openai:gpt-6.1-sol",
+      "critic": "anthropic:claude-sonnet-5-5"
+    },
+    "rounds": 2,
+    "effort": "medium",
+    "live_retrieval": true,
+    "max_sources": 8,
+    "queries": 6,
+    "hits": 5,
+    "read_parts": 36,
+    "frame_samples": 1,
+    "surrounding_context_sent": false,
+    "shape_judge": false
+  },
+  "implementation_commit": "d9b5f791072d5052bbcb1c83da0b8f2f5be91a1c",
+  "runner_sha256": "c193abb46e2bbb915fc83b98b33196056bf74d0cce39601b84f08ed457f9a471",
+  "question_sha256": "056e486543f2af21ea0f7731040053a10105895828f16b22f88e271dedb8f9c0",
+  "api_calls": 16,
+  "cost_by_provider": {
+    "anthropic": 0.0165759,
+    "openai": 0.1986804
+  },
+  "references_valid": true,
+  "ledger_valid": true,
+  "final_state_anchor_valid": true,
+  "question_exact": true,
+  "accepted_main_claims": [
+    {
+      "id": "C1",
+      "text": "Django 5.2 LTS officially supports Python 3.14 from version 5.2.8; security updates end in April twenty twenty-eight.",
+      "scope": {
+        "population": "Django 5.2 LTS",
+        "comparison": "No comparative alternative specified",
+        "outcome": "Official support for Python 3.14 and the date until which Django 5.2 will receive security updates",
+        "period": "Source-reported compatibility and support lifecycle",
+        "relation": "is",
+        "magnitude": null,
+        "narrower_than": [],
+        "parent_scope": {}
+      }
+    }
+  ],
+  "accepted_components": [
+    {
+      "id": "C6",
+      "text": "Django 5.2 LTS will receive official security updates through April 2028.",
+      "issue_id": "Q3",
+      "scope": {
+        "population": "Django 5.2 LTS",
+        "comparison": "No comparative alternative specified",
+        "outcome": "The date until which Django 5.2 will receive security updates",
+        "period": "Source-reported security-support lifecycle",
+        "relation": "is",
+        "magnitude": null,
+        "narrower_than": [],
+        "parent_scope": {}
+      }
+    },
+    {
+      "id": "C8",
+      "text": "Django's 5.2.9 release notes report a fix for a Python 3.14+ crash involving template tag functions with annotations requiring deferred evaluation.",
+      "issue_id": "Q2",
+      "scope": {
+        "population": "Django 5.2 LTS",
+        "comparison": "No comparative alternative specified",
+        "outcome": "Reported fix in Django 5.2.9 for a Python 3.14+ template-tag registration crash involving deferred annotation evaluation",
+        "period": "Source-reported compatibility lifecycle",
+        "relation": "is",
+        "magnitude": null,
+        "narrower_than": [],
+        "parent_scope": {}
+      }
+    }
+  ],
+  "issue_results": [
+    {
+      "id": "Q1",
+      "text": "Does Django 5.2 LTS officially support Python 3.14, and until what date will Django 5.2 receive security updates?",
+      "accepted": [
+        "C1"
+      ],
+      "claims": [
+        {
+          "id": "C1",
+          "text": "Django 5.2 LTS officially supports Python 3.14 from version 5.2.8; security updates end in April twenty twenty-eight.",
+          "label": "accepted",
+          "answers_issue": true,
+          "pro_strength": 3
+        },
+        {
+          "id": "C2",
+          "text": "Django 5.2 LTS does not officially support Python 3.14 and has no officially announced security-update end date.",
+          "label": "refuted",
+          "answers_issue": true,
+          "pro_strength": 0
+        }
+      ]
+    },
+    {
+      "id": "Q2",
+      "text": "Does Django 5.2 LTS officially support Python 3.14, and does that support require a particular maintenance release?",
+      "accepted": [],
+      "claims": [
+        {
+          "id": "C4",
+          "text": "Django 5.2 LTS officially supports Python 3.14 from its initial release, without requiring a later maintenance release.",
+          "label": "unsupported",
+          "answers_issue": true,
+          "pro_strength": 0
+        },
+        {
+          "id": "C5",
+          "text": "Django 5.2 LTS does not officially support Python 3.14 in any maintenance release.",
+          "label": "unsupported",
+          "answers_issue": true,
+          "pro_strength": 0
+        },
+        {
+          "id": "C8",
+          "text": "Django's 5.2.9 release notes report a fix for a Python 3.14+ crash involving template tag functions with annotations requiring deferred evaluation.",
+          "label": "accepted",
+          "answers_issue": false,
+          "pro_strength": 1
+        }
+      ]
+    },
+    {
+      "id": "Q3",
+      "text": "Until what date will Django 5.2 receive official security updates?",
+      "accepted": [
+        "C6"
+      ],
+      "claims": [
+        {
+          "id": "C6",
+          "text": "Django 5.2 LTS will receive official security updates through April 2028.",
+          "label": "accepted",
+          "answers_issue": true,
+          "pro_strength": 3
+        },
+        {
+          "id": "C7",
+          "text": "Django 5.2 LTS has no officially announced security-update end date.",
+          "label": "refuted",
+          "answers_issue": true,
+          "pro_strength": 0
+        }
+      ]
+    }
+  ],
+  "sources_detail": [
+    {
+      "id": "S1",
+      "url": "https://docs.djangoproject.com/en/6.1/releases/5.2.8/",
+      "title": "Django 5.2.8 release notes",
+      "date": "2025-11-05",
+      "kind": "primary",
+      "fetched_at": "2026-11-13T01:53:19+00:00",
+      "read_fully": true,
+      "derived_from": null,
+      "origin": "publisher:django project"
+    },
+    {
+      "id": "S2",
+      "url": "https://docs.djangoproject.com/en/6.1/releases/5.2.9/",
+      "title": "Django 5.2.9 release notes",
+      "date": "2025-12-02",
+      "kind": "primary",
+      "fetched_at": "2026-11-13T01:53:26+00:00",
+      "read_fully": true,
+      "derived_from": null,
+      "origin": "publisher:django project"
+    },
+    {
+      "id": "S3",
+      "url": "https://www.djangoproject.com/download/",
+      "title": "Download Django",
+      "date": "",
+      "kind": "primary",
+      "fetched_at": "2026-11-13T01:54:03+00:00",
+      "read_fully": true,
+      "derived_from": null,
+      "origin": "publisher:django project"
+    }
+  ],
+  "cost_usd": 0.2152563,
+  "single_origin_flag_missing": []
+}

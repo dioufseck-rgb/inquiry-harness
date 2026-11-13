@@ -1,0 +1,98 @@
+[
+  {
+    "id": "q1",
+    "checks": {
+      "question_exact": true,
+      "initial_frame_is_bare_question": true,
+      "no_expected_answer_judge": true,
+      "references": true,
+      "ledger": true,
+      "state_anchor": true,
+      "api_call_count": true,
+      "costs_reconcile": true
+    },
+    "all_pass": true,
+    "phase": "concluded",
+    "error": null
+  },
+  {
+    "id": "q2",
+    "checks": {
+      "question_exact": true,
+      "initial_frame_is_bare_question": true,
+      "no_expected_answer_judge": true,
+      "references": true,
+      "ledger": true,
+      "state_anchor": true,
+      "api_call_count": true,
+      "costs_reconcile": true
+    },
+    "all_pass": true,
+    "phase": "concluded",
+    "error": null
+  },
+  {
+    "id": "q3",
+    "checks": {
+      "question_exact": true,
+      "initial_frame_is_bare_question": true,
+      "no_expected_answer_judge": true,
+      "references": true,
+      "ledger": true,
+      "state_anchor": true,
+      "api_call_count": true,
+      "costs_reconcile": true
+    },
+    "all_pass": true,
+    "phase": "concluded",
+    "error": null
+  },
+  {
+    "id": "q4",
+    "checks": {
+      "question_exact": true,
+      "initial_frame_is_bare_question": true,
+      "no_expected_answer_judge": true,
+      "references": true,
+      "ledger": true,
+      "state_anchor": true,
+      "api_call_count": true,
+      "costs_reconcile": true
+    },
+    "all_pass": true,
+    "phase": "concluded",
+    "error": null
+  },
+  {
+    "id": "q5",
+    "checks": {
+      "question_exact": true,
+      "initial_frame_is_bare_question": true,
+      "no_expected_answer_judge": true,
+      "references": true,
+      "ledger": true,
+      "state_anchor": true,
+      "api_call_count": true,
+      "costs_reconcile": true
+    },
+    "all_pass": true,
+    "phase": "concluded",
+    "error": null
+  },
+  {
+    "id": "q6",
+    "checks": {
+      "question_exact": true,
+      "initial_frame_is_bare_question": true,
+      "no_expected_answer_judge": true,
+      "references": true,
+      "ledger": true,
+      "state_anchor": true,
+      "api_call_count": true,
+      "costs_reconcile": true
+    },
+    "all_pass": true,
+    "phase": "concluded",
+    "error": null
+  }
+]

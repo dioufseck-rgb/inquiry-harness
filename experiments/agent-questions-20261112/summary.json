@@ -1,0 +1,68 @@
+{
+  "complete": true,
+  "all_runs_concluded": true,
+  "all_input_and_artifact_checks_pass": true,
+  "whole_question_answered": [
+    "q1",
+    "q6"
+  ],
+  "partial_or_unanswered": [
+    "q2",
+    "q3",
+    "q4",
+    "q5"
+  ],
+  "cost_by_provider": {
+    "openai": 8.636102699999999,
+    "anthropic": 0.6429969999999999
+  },
+  "cost_usd": 9.279099699999998,
+  "costs_reconcile": true,
+  "api_calls_reconcile": true,
+  "api_calls": 425,
+  "pending_reservations": 0,
+  "per_question": [
+    {
+      "id": "q1",
+      "rounds_completed": 1,
+      "cost_usd": 0.2152563,
+      "whole_question_answered": true,
+      "error": null
+    },
+    {
+      "id": "q2",
+      "rounds_completed": 2,
+      "cost_usd": 2.3555588,
+      "whole_question_answered": false,
+      "error": null
+    },
+    {
+      "id": "q3",
+      "rounds_completed": 2,
+      "cost_usd": 0.8157416,
+      "whole_question_answered": false,
+      "error": null
+    },
+    {
+      "id": "q4",
+      "rounds_completed": 2,
+      "cost_usd": 3.7237516,
+      "whole_question_answered": false,
+      "error": null
+    },
+    {
+      "id": "q5",
+      "rounds_completed": 2,
+      "cost_usd": 1.345809,
+      "whole_question_answered": false,
+      "error": null
+    },
+    {
+      "id": "q6",
+      "rounds_completed": 1,
+      "cost_usd": 0.8229824,
+      "whole_question_answered": true,
+      "error": null
+    }
+  ]
+}

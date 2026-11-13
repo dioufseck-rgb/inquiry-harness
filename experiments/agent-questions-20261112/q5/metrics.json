@@ -1,0 +1,769 @@
+{
+  "whole_question_answered": false,
+  "answer_scope": "",
+  "components_accepted": 17,
+  "main_issue_scope_label": "untested",
+  "composed_claims": 0,
+  "composition_accepted": 0,
+  "id": "q5",
+  "rounds": 2,
+  "sources": 13,
+  "origins": 11,
+  "duplicate_sources": 1,
+  "evidence": 42,
+  "orphans": 10,
+  "supporting_args": 18,
+  "supporting_in": 17,
+  "claims_supported_unargued": 0,
+  "coverage_eligible_claims": [
+    "C11",
+    "C13",
+    "C19",
+    "C20",
+    "C26",
+    "C29"
+  ],
+  "main_supporting_in": 0,
+  "main_component_supporting_in": 7,
+  "undecided_empty": true,
+  "undecided_supported": false,
+  "attacks": 4,
+  "attacks_out": 0,
+  "attacks_discharged": 3,
+  "counters_dropped": 0,
+  "counters_dropped_reasons": {},
+  "counters_inapplicable": 0,
+  "counters_inapplicable_reasons": {},
+  "accepted_claims": 17,
+  "single_origin_accepts": 17,
+  "main_status": {
+    "C11": "in",
+    "C13": "in",
+    "C19": "in",
+    "C20": "in",
+    "C21": "in",
+    "C22": "in",
+    "C23": "in",
+    "C29": "undecided"
+  },
+  "main_labels": {
+    "C11": "accepted",
+    "C13": "accepted",
+    "C19": "accepted",
+    "C20": "accepted",
+    "C21": "accepted",
+    "C22": "accepted",
+    "C23": "accepted",
+    "C29": "defeated"
+  },
+  "absence_assertions": 0,
+  "provider_proposer": "openai",
+  "provider_critic": "anthropic",
+  "model_proposer": "gpt-6.1-sol",
+  "model_critic": "claude-sonnet-5-5",
+  "effort_proposer": "medium",
+  "effort_critic": "medium",
+  "tokens_in": 388737,
+  "tokens_out": 45190,
+  "calls": 46,
+  "stop_reason": "rounds exhausted; components accepted: ['C11', 'C13', 'C14', 'C15', 'C16', 'C17', 'C18', 'C19', 'C20', 'C21', 'C22', 'C23', 'C24', 'C25', 'C26', 'C27', 'C28']; no whole-question answer",
+  "reopened_cqs": 1,
+  "reopened_cqs_active": 1,
+  "reopened_then_discharged": 0,
+  "supporting_original": 1,
+  "supporting_scoped": 17,
+  "applicable_original": 0,
+  "applicable_scoped": 17,
+  "main_supporting_in_original": 0,
+  "question": "Is the projected hotel occupancy uplift for 2026 World Cup host cities supported by independent forecasts, or does it trace to the organisers\u2019 and tourism boards\u2019 own estimates?",
+  "error": null,
+  "phase": "concluded",
+  "seconds": 994.62,
+  "rounds_completed": 2,
+  "config": {
+    "models": {
+      "proposer": "openai:gpt-6.1-sol",
+      "critic": "anthropic:claude-sonnet-5-5"
+    },
+    "rounds": 2,
+    "effort": "medium",
+    "live_retrieval": true,
+    "max_sources": 8,
+    "queries": 6,
+    "hits": 5,
+    "read_parts": 36,
+    "frame_samples": 1,
+    "surrounding_context_sent": false,
+    "shape_judge": false
+  },
+  "implementation_commit": "d9b5f791072d5052bbcb1c83da0b8f2f5be91a1c",
+  "runner_sha256": "c193abb46e2bbb915fc83b98b33196056bf74d0cce39601b84f08ed457f9a471",
+  "question_sha256": "e64f0f0f5fde59e1ca2869b1c08e074033266cb670951742b54b0ad9d21f7ce5",
+  "api_calls": 46,
+  "cost_by_provider": {
+    "anthropic": 0.149569,
+    "openai": 1.19624
+  },
+  "references_valid": true,
+  "ledger_valid": true,
+  "final_state_anchor_valid": true,
+  "question_exact": true,
+  "accepted_main_claims": [],
+  "accepted_components": [
+    {
+      "id": "C11",
+      "text": "Tourism Economics reports incremental room-revenue gains of 7%\u201325% in June and 1%\u20135% annually for some cities; these are not occupancy projections, and comparison baselines are not explicit.",
+      "issue_id": "Q1",
+      "scope": {
+        "population": "Host-city markets covered by the Tourism Economics briefing, with the annual range applying to unspecified cities",
+        "comparison": "independent forecasts versus the organisers\u2019 and tourism boards\u2019 own estimates",
+        "outcome": "reported incremental hotel room-revenue projections, with comparison baselines not explicitly defined",
+        "period": "June 2026 and annual 2026 with July games included",
+        "relation": "is",
+        "magnitude": null,
+        "narrower_than": [
+          "population",
+          "period"
+        ],
+        "parent_scope": {
+          "population": "2026 World Cup host cities",
+          "period": "source-reported forecast periods for the 2026 World Cup"
+        }
+      }
+    },
+    {
+      "id": "C13",
+      "text": "HVS labels the Manhattan forecasts as its own, but the cited occupancy finding concerns stabilisation in 2029, not a World Cup occupancy uplift; tournament-input independence is not established.",
+      "issue_id": "Q1",
+      "scope": {
+        "population": "Manhattan hotel market",
+        "comparison": "independent forecasts versus the organisers\u2019 and tourism boards\u2019 own estimates",
+        "outcome": "stated forecast authorship and reported occupancy stabilisation, not tournament-specific occupancy uplift",
+        "period": "2026\u20132029 forecast, with occupancy stabilisation in 2029",
+        "relation": "is",
+        "magnitude": null,
+        "narrower_than": [
+          "population",
+          "period"
+        ],
+        "parent_scope": {
+          "population": "2026 World Cup host cities",
+          "period": "source-reported forecast periods for the 2026 World Cup"
+        }
+      }
+    },
+    {
+      "id": "C14",
+      "text": "Tourism Economics' briefing projects annual incremental room-revenue growth of 1%\u20135% for some cities including July games, and about 0.4% added to US room revenue for 2026; neither figure measures occupancy.",
+      "issue_id": "Q2",
+      "scope": {
+        "population": "Some unidentified World Cup host cities and the US hotel market",
+        "comparison": "Room-revenue comparison baselines not explicitly specified in the supplied passages",
+        "outcome": "reported city and national incremental hotel room-revenue forecasts, not occupancy uplift",
+        "period": "2026 annual forecasts, including July games, with the US lift concentrated in June\u2013July",
+        "relation": "is",
+        "magnitude": null,
+        "narrower_than": [
+          "population",
+          "period"
+        ],
+        "parent_scope": {
+          "population": "2026 World Cup host cities",
+          "period": "source-reported forecast periods for the 2026 World Cup"
+        }
+      }
+    },
+    {
+      "id": "C15",
+      "text": "HVS's downtown Dallas summary anticipates FIFA-related rate gains in 2026 while occupancy may remain soft until the convention centre reopens; it gives no occupancy-change magnitude or baseline.",
+      "issue_id": "Q2",
+      "scope": {
+        "population": "Downtown Dallas hotels",
+        "comparison": "No explicit occupancy comparison baseline supplied",
+        "outcome": "reported qualitative distinction between FIFA-related rate gains and potentially soft occupancy",
+        "period": "2026 rate outlook and occupancy outlook until convention-centre reopening in 2030",
+        "relation": "is",
+        "magnitude": null,
+        "narrower_than": [
+          "population",
+          "period"
+        ],
+        "parent_scope": {
+          "population": "2026 World Cup host cities",
+          "period": "source-reported forecast periods for the 2026 World Cup"
+        }
+      }
+    },
+    {
+      "id": "C16",
+      "text": "HVS credits its Manhattan forecasts to HVS and historical data to CoStar/STR; it lists historical data, hotel supply, geopolitical and policy factors, and demand outlook as inputs.",
+      "issue_id": "Q3",
+      "scope": {
+        "population": "Manhattan hotel market",
+        "comparison": "independent forecasts versus the organisers\u2019 and tourism boards\u2019 own estimates",
+        "outcome": "reported forecast authorship, historical-data attribution and listed forecasting inputs",
+        "period": "2026\u20132029",
+        "relation": "is",
+        "magnitude": null,
+        "narrower_than": [
+          "population",
+          "period"
+        ],
+        "parent_scope": {
+          "population": "2026 World Cup host cities",
+          "period": "source-reported forecast periods for the 2026 World Cup"
+        }
+      }
+    },
+    {
+      "id": "C17",
+      "text": "The Oxford Economics briefing attributes a June 2026 incremental hotel room revenue forecast of 7%\u201325% to Tourism Economics; it does not identify an occupancy increment or explicitly define the comparison baseline.",
+      "issue_id": "Q3",
+      "scope": {
+        "population": "2026 World Cup host cities",
+        "comparison": "independent forecasts versus the organisers\u2019 and tourism boards\u2019 own estimates",
+        "outcome": "reported attribution and metric of the incremental hotel room revenue forecast, with baseline unspecified",
+        "period": "June 2026",
+        "relation": "is",
+        "magnitude": {
+          "low": 7.0,
+          "high": 25.0,
+          "unit": "percent incremental hotel room revenue; comparison baseline not explicitly defined"
+        },
+        "narrower_than": [
+          "period"
+        ],
+        "parent_scope": {
+          "period": "source-reported forecast periods for the 2026 World Cup"
+        }
+      }
+    },
+    {
+      "id": "C18",
+      "text": "HVS repeats New York City Tourism + Conventions' projection of 66.3 million visitors in 2026. This is an explicitly attributed tourism-board visitation forecast, not a quantified hotel occupancy uplift.",
+      "issue_id": "Q3",
+      "scope": {
+        "population": "New York City visitors",
+        "comparison": "independent forecasts versus the organisers\u2019 and tourism boards\u2019 own estimates",
+        "outcome": "external republication and explicit tourism-board attribution of a visitation projection",
+        "period": "2026",
+        "relation": "is",
+        "magnitude": null,
+        "narrower_than": [
+          "population",
+          "period"
+        ],
+        "parent_scope": {
+          "population": "2026 World Cup host cities",
+          "period": "source-reported forecast periods for the 2026 World Cup"
+        }
+      }
+    },
+    {
+      "id": "C19",
+      "text": "Travel And Tour World lists occupancy forecasts of 98% for Toronto and 96% for Vancouver, but supplies no uplift baseline, precise forecast window, named forecaster or underlying inputs.",
+      "issue_id": "Q1",
+      "scope": {
+        "population": "Toronto and Vancouver hotel markets listed by Travel And Tour World",
+        "comparison": "independent forecasts versus the organisers\u2019 and tourism boards\u2019 own estimates",
+        "outcome": "published occupancy-level forecasts with no stated uplift baseline, precise forecast window or estimation provenance",
+        "period": "World Cup 2026 context, with precise forecast window unspecified",
+        "relation": "is",
+        "magnitude": null,
+        "narrower_than": [
+          "population",
+          "period"
+        ],
+        "parent_scope": {
+          "population": "2026 World Cup host cities",
+          "period": "source-reported forecast periods for the 2026 World Cup"
+        }
+      }
+    },
+    {
+      "id": "C20",
+      "text": "Hotel-Online attributes the research to a U.S. Travel Association release and describes fan travel intentions across ten markets, not a host-city hotel occupancy forecast; the underlying research producer is not identified.",
+      "issue_id": "Q1",
+      "scope": {
+        "population": "Soccer fans across ten markets described in the Hotel-Online article",
+        "comparison": "independent forecasts versus the organisers\u2019 and tourism boards\u2019 own estimates",
+        "outcome": "reported release attribution and travel-intention research subject, not hotel occupancy uplift",
+        "period": "source-reported forecast periods for the 2026 World Cup",
+        "relation": "is",
+        "magnitude": null,
+        "narrower_than": [
+          "population"
+        ],
+        "parent_scope": {
+          "population": "2026 World Cup host cities"
+        }
+      }
+    },
+    {
+      "id": "C21",
+      "text": "An unidentified-publisher page asserts a New York\u2013New Jersey occupancy boost beyond the tournament, but gives no magnitude, baseline, defined window or originating forecast; it does not establish host-committee authorship.",
+      "issue_id": "Q1",
+      "scope": {
+        "population": "New York\u2013New Jersey region referenced by the unidentified-publisher page",
+        "comparison": "independent forecasts versus the organisers\u2019 and tourism boards\u2019 own estimates",
+        "outcome": "published qualitative occupancy-growth assertion with unidentified estimation provenance",
+        "period": "Beyond the 2026 World Cup tournament dates, with no defined forecast window",
+        "relation": "is",
+        "magnitude": null,
+        "narrower_than": [
+          "population",
+          "period"
+        ],
+        "parent_scope": {
+          "population": "2026 World Cup host cities",
+          "period": "source-reported forecast periods for the 2026 World Cup"
+        }
+      }
+    },
+    {
+      "id": "C22",
+      "text": "HVS describes primary local-market interviews as its general methodology, but the Los Angeles article does not establish independent estimation of its World Cup expectation or disclose tournament-specific inputs.",
+      "issue_id": "Q1",
+      "scope": {
+        "population": "Los Angeles hotel market discussed in the HVS article",
+        "comparison": "independent forecasts versus the organisers\u2019 and tourism boards\u2019 own estimates",
+        "outcome": "stated general methodology without source-specific evidence of independent tournament estimation",
+        "period": "source-reported forecast periods for the 2026 World Cup",
+        "relation": "is",
+        "magnitude": null,
+        "narrower_than": [
+          "population"
+        ],
+        "parent_scope": {
+          "population": "2026 World Cup host cities"
+        }
+      }
+    },
+    {
+      "id": "C23",
+      "text": "UDGTV reported no hotel occupancy figures available for Jalisco a month before the World Cup; the tourism secretary said occupancy was too early to determine. This does not establish absence across all hosts.",
+      "issue_id": "Q1",
+      "scope": {
+        "population": "Jalisco hotel market discussed in the UDGTV report",
+        "comparison": "independent forecasts versus the organisers\u2019 and tourism boards\u2019 own estimates",
+        "outcome": "reported local unavailability of hotel occupancy figures and official uncertainty, not universal absence of forecasts",
+        "period": "One month before the 2026 World Cup",
+        "relation": "is",
+        "magnitude": null,
+        "narrower_than": [
+          "population",
+          "period"
+        ],
+        "parent_scope": {
+          "population": "2026 World Cup host cities",
+          "period": "source-reported forecast periods for the 2026 World Cup"
+        }
+      }
+    },
+    {
+      "id": "C24",
+      "text": "Travel And Tour World lists occupancy forecasts of 98% for Toronto and 96% for Vancouver, without baselines, precise forecast windows or named forecasters.",
+      "issue_id": "Q2",
+      "scope": {
+        "population": "Toronto and Vancouver hotels",
+        "comparison": "No comparison baseline supplied",
+        "outcome": "reported occupancy-level forecasts of 98% for Toronto and 96% for Vancouver",
+        "period": "World Cup 2026 context; precise forecast window unspecified",
+        "relation": "is",
+        "magnitude": null,
+        "narrower_than": [
+          "population",
+          "period"
+        ],
+        "parent_scope": {
+          "population": "2026 World Cup host cities",
+          "period": "source-reported forecast periods for the 2026 World Cup"
+        }
+      }
+    },
+    {
+      "id": "C25",
+      "text": "A RevPAR International related-post excerpt attributes annual US hotel occupancy forecasts of 62.8%, versus 62.3% the preceding year, to CoStar and Tourism Economics; it does not isolate a World Cup uplift.",
+      "issue_id": "Q2",
+      "scope": {
+        "population": "US hotels nationally",
+        "comparison": "Forecast US hotel occupancy of 62.3% in 2025",
+        "outcome": "reported national annual hotel occupancy forecast of 62.8%, not an isolated World Cup uplift",
+        "period": "Full-year 2026 compared with full-year 2025",
+        "relation": "is",
+        "magnitude": null,
+        "narrower_than": [
+          "population",
+          "period"
+        ],
+        "parent_scope": {
+          "population": "2026 World Cup host cities",
+          "period": "source-reported forecast periods for the 2026 World Cup"
+        }
+      }
+    },
+    {
+      "id": "C26",
+      "text": "Hotel-Online attributes research to the U.S. Travel Association: it reports fans' travel intentions across ten markets, including longer stays and openness to other destinations, not a host-city hotel occupancy uplift.",
+      "issue_id": "Q3",
+      "scope": {
+        "population": "soccer fans across ten markets including North America, Europe and Latin America",
+        "comparison": "independent forecasts versus the organisers\u2019 and tourism boards\u2019 own estimates",
+        "outcome": "reported research-release attribution and travel-intention metrics, rather than hotel occupancy uplift",
+        "period": "prospective travel for the 2026 World Cup; survey dates unspecified",
+        "relation": "is",
+        "magnitude": null,
+        "narrower_than": [
+          "population",
+          "period"
+        ],
+        "parent_scope": {
+          "population": "2026 World Cup host cities",
+          "period": "source-reported forecast periods for the 2026 World Cup"
+        }
+      }
+    },
+    {
+      "id": "C27",
+      "text": "MagicBnB attributes projected average tournament earnings of $4,000 per host in eleven US host cities to a Deloitte study commissioned by Airbnb; this is an STR earnings projection, not hotel occupancy uplift.",
+      "issue_id": "Q3",
+      "scope": {
+        "population": "short-term rental hosts in the eleven US World Cup host cities",
+        "comparison": "independent forecasts versus the organisers\u2019 and tourism boards\u2019 own estimates",
+        "outcome": "reported authorship, commissioning and average tournament host-earnings projection",
+        "period": "2026 World Cup tournament",
+        "relation": "is",
+        "magnitude": {
+          "low": 4000.0,
+          "high": 4000.0,
+          "unit": "US dollars in projected average tournament earnings per short-term rental host"
+        },
+        "narrower_than": [
+          "population",
+          "period"
+        ],
+        "parent_scope": {
+          "population": "2026 World Cup host cities",
+          "period": "source-reported forecast periods for the 2026 World Cup"
+        }
+      }
+    },
+    {
+      "id": "C28",
+      "text": "UDGTV reported that Jalisco lacked available hotel occupancy figures one month before the World Cup; its tourism secretary described occupancy as premature to determine.",
+      "issue_id": "Q3",
+      "scope": {
+        "population": "Jalisco, including the Guadalajara host destination",
+        "comparison": "independent forecasts versus the organisers\u2019 and tourism boards\u2019 own estimates",
+        "outcome": "reported local unavailability of occupancy figures and official uncertainty about determining occupancy",
+        "period": "one month before the 2026 World Cup",
+        "relation": "is",
+        "magnitude": null,
+        "narrower_than": [
+          "population",
+          "period"
+        ],
+        "parent_scope": {
+          "population": "2026 World Cup host cities",
+          "period": "source-reported forecast periods for the 2026 World Cup"
+        }
+      }
+    }
+  ],
+  "issue_results": [
+    {
+      "id": "Q1",
+      "text": "Is the projected hotel occupancy uplift for 2026 World Cup host cities supported by independent forecasts, or does it trace to the organisers\u2019 and tourism boards\u2019 own estimates?",
+      "accepted": [],
+      "claims": [
+        {
+          "id": "C11",
+          "text": "Tourism Economics reports incremental room-revenue gains of 7%\u201325% in June and 1%\u20135% annually for some cities; these are not occupancy projections, and comparison baselines are not explicit.",
+          "label": "accepted",
+          "answers_issue": false,
+          "pro_strength": 2
+        },
+        {
+          "id": "C13",
+          "text": "HVS labels the Manhattan forecasts as its own, but the cited occupancy finding concerns stabilisation in 2029, not a World Cup occupancy uplift; tournament-input independence is not established.",
+          "label": "accepted",
+          "answers_issue": false,
+          "pro_strength": 1
+        },
+        {
+          "id": "C19",
+          "text": "Travel And Tour World lists occupancy forecasts of 98% for Toronto and 96% for Vancouver, but supplies no uplift baseline, precise forecast window, named forecaster or underlying inputs.",
+          "label": "accepted",
+          "answers_issue": false,
+          "pro_strength": 1
+        },
+        {
+          "id": "C20",
+          "text": "Hotel-Online attributes the research to a U.S. Travel Association release and describes fan travel intentions across ten markets, not a host-city hotel occupancy forecast; the underlying research producer is not identified.",
+          "label": "accepted",
+          "answers_issue": false,
+          "pro_strength": 2
+        },
+        {
+          "id": "C21",
+          "text": "An unidentified-publisher page asserts a New York\u2013New Jersey occupancy boost beyond the tournament, but gives no magnitude, baseline, defined window or originating forecast; it does not establish host-committee authorship.",
+          "label": "accepted",
+          "answers_issue": false,
+          "pro_strength": 1
+        },
+        {
+          "id": "C22",
+          "text": "HVS describes primary local-market interviews as its general methodology, but the Los Angeles article does not establish independent estimation of its World Cup expectation or disclose tournament-specific inputs.",
+          "label": "accepted",
+          "answers_issue": false,
+          "pro_strength": 2
+        },
+        {
+          "id": "C23",
+          "text": "UDGTV reported no hotel occupancy figures available for Jalisco a month before the World Cup; the tourism secretary said occupancy was too early to determine. This does not establish absence across all hosts.",
+          "label": "accepted",
+          "answers_issue": false,
+          "pro_strength": 2
+        },
+        {
+          "id": "C29",
+          "text": "A RevPAR International related-post excerpt reports host-market RevPAR gains of 3.8% annually and 12.7% in June/July, not occupancy uplift. The sentence reporting these figures does not name their forecaster; attribution from adjacent text and the relationship to its 1.7% June/July US RevPAR forecast remain unresolved.",
+          "label": "defeated",
+          "answers_issue": false,
+          "pro_strength": 0
+        }
+      ]
+    },
+    {
+      "id": "Q2",
+      "text": "What hotel occupancy uplift is projected for 2026 World Cup host cities, and what magnitudes, baselines, geographic coverage and forecast periods are reported?",
+      "accepted": [],
+      "claims": [
+        {
+          "id": "C14",
+          "text": "Tourism Economics' briefing projects annual incremental room-revenue growth of 1%\u20135% for some cities including July games, and about 0.4% added to US room revenue for 2026; neither figure measures occupancy.",
+          "label": "accepted",
+          "answers_issue": false,
+          "pro_strength": 2
+        },
+        {
+          "id": "C15",
+          "text": "HVS's downtown Dallas summary anticipates FIFA-related rate gains in 2026 while occupancy may remain soft until the convention centre reopens; it gives no occupancy-change magnitude or baseline.",
+          "label": "accepted",
+          "answers_issue": false,
+          "pro_strength": 1
+        },
+        {
+          "id": "C24",
+          "text": "Travel And Tour World lists occupancy forecasts of 98% for Toronto and 96% for Vancouver, without baselines, precise forecast windows or named forecasters.",
+          "label": "accepted",
+          "answers_issue": false,
+          "pro_strength": 1
+        },
+        {
+          "id": "C25",
+          "text": "A RevPAR International related-post excerpt attributes annual US hotel occupancy forecasts of 62.8%, versus 62.3% the preceding year, to CoStar and Tourism Economics; it does not isolate a World Cup uplift.",
+          "label": "accepted",
+          "answers_issue": false,
+          "pro_strength": 2
+        }
+      ]
+    },
+    {
+      "id": "Q3",
+      "text": "Who produced the identified forecasts, what estimates and inputs do they use, and which independently produced forecasts, if any, project a corresponding hotel occupancy uplift?",
+      "accepted": [],
+      "claims": [
+        {
+          "id": "C16",
+          "text": "HVS credits its Manhattan forecasts to HVS and historical data to CoStar/STR; it lists historical data, hotel supply, geopolitical and policy factors, and demand outlook as inputs.",
+          "label": "accepted",
+          "answers_issue": false,
+          "pro_strength": 2
+        },
+        {
+          "id": "C17",
+          "text": "The Oxford Economics briefing attributes a June 2026 incremental hotel room revenue forecast of 7%\u201325% to Tourism Economics; it does not identify an occupancy increment or explicitly define the comparison baseline.",
+          "label": "accepted",
+          "answers_issue": false,
+          "pro_strength": 2
+        },
+        {
+          "id": "C18",
+          "text": "HVS repeats New York City Tourism + Conventions' projection of 66.3 million visitors in 2026. This is an explicitly attributed tourism-board visitation forecast, not a quantified hotel occupancy uplift.",
+          "label": "accepted",
+          "answers_issue": false,
+          "pro_strength": 1
+        },
+        {
+          "id": "C26",
+          "text": "Hotel-Online attributes research to the U.S. Travel Association: it reports fans' travel intentions across ten markets, including longer stays and openness to other destinations, not a host-city hotel occupancy uplift.",
+          "label": "accepted",
+          "answers_issue": false,
+          "pro_strength": 1
+        },
+        {
+          "id": "C27",
+          "text": "MagicBnB attributes projected average tournament earnings of $4,000 per host in eleven US host cities to a Deloitte study commissioned by Airbnb; this is an STR earnings projection, not hotel occupancy uplift.",
+          "label": "accepted",
+          "answers_issue": false,
+          "pro_strength": 1
+        },
+        {
+          "id": "C28",
+          "text": "UDGTV reported that Jalisco lacked available hotel occupancy figures one month before the World Cup; its tourism secretary described occupancy as premature to determine.",
+          "label": "accepted",
+          "answers_issue": false,
+          "pro_strength": 2
+        }
+      ]
+    }
+  ],
+  "sources_detail": [
+    {
+      "id": "S1",
+      "url": "https://www.linkedin.com/posts/revpar-international_news-world-cup-set-to-be-a-game-of-rate-activity-7467669010696933376-VpPl",
+      "title": "2026 FIFA World Cup Hotel Performance Expectations",
+      "date": "5 months ago",
+      "kind": "derivative",
+      "fetched_at": "2026-11-13T01:58:57+00:00",
+      "read_fully": true,
+      "derived_from": null,
+      "origin": "title:2026fifaworldcuphotelperformanceexpectations"
+    },
+    {
+      "id": "S2",
+      "url": "https://static1.squarespace.com/static/6581f5a1ab7d3e180278a500/t/6ac6ab8ed8dd2c0e65e424d8/1791404942200/HERO+Post-World+Cup+Hotel+Impact+Report+2026+2.pdf",
+      "title": "post\u2013world cup impact: la city hotels",
+      "date": "2026-09-01",
+      "kind": "unknown",
+      "fetched_at": "2026-11-13T01:59:20+00:00",
+      "read_fully": true,
+      "derived_from": null,
+      "origin": "title:postworldcupimpactlacityhotels"
+    },
+    {
+      "id": "S3",
+      "url": "https://hvs.com/insights/search?term=Mexico",
+      "title": "Industry Insights",
+      "date": "",
+      "kind": "primary",
+      "fetched_at": "2026-11-13T02:00:19+00:00",
+      "read_fully": true,
+      "derived_from": null,
+      "origin": "publisher:hvs"
+    },
+    {
+      "id": "S4",
+      "url": "https://www.hvs.com/article/10358-Three-Things-to-Watch-for-Los-Angeles-Hospitality-in-2026",
+      "title": "Three Things to Watch for Los Angeles Hospitality in 2026",
+      "date": "2026-01-21",
+      "kind": "secondary",
+      "fetched_at": "2026-11-13T02:00:38+00:00",
+      "read_fully": true,
+      "derived_from": null,
+      "origin": "title:threethingstowatchforlosangeleshospitalityin2026"
+    },
+    {
+      "id": "S5",
+      "url": "https://www.hvs.com/article/10474-upward-trajectory-continued-recovery-of-the-manhattan-hotel-market",
+      "title": "Continued Recovery of the Manhattan Hotel Market",
+      "date": "",
+      "kind": "unknown",
+      "fetched_at": "2026-11-13T02:01:02+00:00",
+      "read_fully": true,
+      "derived_from": null,
+      "origin": "title:continuedrecoveryofthemanhattanhotelmarket"
+    },
+    {
+      "id": "S6",
+      "url": "https://www.hvs.com/insights/search?term=Canada",
+      "title": "Canada",
+      "date": "",
+      "kind": "primary",
+      "fetched_at": "2026-11-13T02:01:31+00:00",
+      "read_fully": true,
+      "derived_from": null,
+      "origin": "publisher:hvs"
+    },
+    {
+      "id": "S7",
+      "url": "https://www.oxfordeconomics.com/resource/north-american-cities-on-the-front-foot-for-2026-fifa-world-cup/",
+      "title": "World Cup Forecast to Boost Host City Lodging Markets",
+      "date": "2025-11-13",
+      "kind": "primary",
+      "fetched_at": "2026-11-13T02:01:53+00:00",
+      "read_fully": true,
+      "derived_from": null,
+      "origin": "title:worldcupforecasttoboosthostcitylodgingmarkets"
+    },
+    {
+      "id": "S8",
+      "url": "https://www.oxfordeconomics.com/all-solutions/?_industry_filter=transport-logistics-supply-chain",
+      "title": "World Cup Forecast to Boost Host City Lodging Markets (supplementary)",
+      "date": "",
+      "kind": "primary",
+      "fetched_at": "2026-11-13T02:02:17+00:00",
+      "read_fully": true,
+      "derived_from": "S7",
+      "origin": "title:worldcupforecasttoboosthostcitylodgingmarkets"
+    },
+    {
+      "id": "S9",
+      "url": "https://ckalagher.sacsites.csus.edu/new-york-new-jersey-2026-world-cup-host-committee-inc-the-ultimate-guide.html",
+      "title": "New York New Jersey 2026 World Cup Host Committee Inc",
+      "date": "",
+      "kind": "unknown",
+      "fetched_at": "2026-11-13T02:06:21+00:00",
+      "read_fully": true,
+      "derived_from": null,
+      "origin": "title:newyorknewjersey2026worldcuphostcommitteeinc"
+    },
+    {
+      "id": "S10",
+      "url": "https://www.hotel-online.com/news/new-study-2026-world-cup-set-to-spark-longer-stays-higher-spending-if-america-gets-ready",
+      "title": "New Study: 2026 World Cup Set To Spark Longer Stays ...",
+      "date": "2026-04-09",
+      "kind": "derivative",
+      "fetched_at": "2026-11-13T02:06:43+00:00",
+      "read_fully": true,
+      "derived_from": null,
+      "origin": "title:newstudy2026worldcupsettosparklongerstays"
+    },
+    {
+      "id": "S11",
+      "url": "https://magicbnb.io/blog/fifa-world-cup-2026-str-revenue-playbook",
+      "title": "FIFA World Cup 2026: The Complete STR Host Revenue Playbook",
+      "date": "",
+      "kind": "unknown",
+      "fetched_at": "2026-11-13T02:06:59+00:00",
+      "read_fully": true,
+      "derived_from": null,
+      "origin": "title:fifaworldcup2026thecompletestrhostrevenueplaybook"
+    },
+    {
+      "id": "S12",
+      "url": "https://www.travelandtourworld.com/news/article/calgary-unites-winnipeg-toronto-vancouver-montreal-halifax-and-ottawa-the-powerhouse-cities-dropping-a-game-changing-fifa-world-cup-update-that-is-seriously-revolutionising-international-travel/",
+      "title": "Calgary Unites Winnipeg, Toronto, Vancouver, Montreal ...",
+      "date": "May 8, 2026",
+      "kind": "unknown",
+      "fetched_at": "2026-11-13T02:07:38+00:00",
+      "read_fully": true,
+      "derived_from": null,
+      "origin": "title:calgaryuniteswinnipegtorontovancouvermontreal"
+    },
+    {
+      "id": "S13",
+      "url": "https://udgtv.com/noticias/michelle-fridman-habla-sobre-ocupacion-hotelera-copa-mundial/316092",
+      "title": "A un mes del Mundial, Jalisco a\u00fan no tiene proyecci\u00f3n ...",
+      "date": "2026-05-11",
+      "kind": "primary",
+      "fetched_at": "2026-11-13T02:08:16+00:00",
+      "read_fully": true,
+      "derived_from": null,
+      "origin": "title:aunmesdelmundialjaliscoannotieneproyeccin"
+    }
+  ],
+  "cost_usd": 1.345809,
+  "single_origin_flag_missing": []
+}
