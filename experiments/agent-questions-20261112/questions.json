@@ -1,0 +1,8 @@
+[
+  {"id": "q1", "question": "Does Django 5.2 LTS officially support Python 3.14, and until what date will Django 5.2 receive security updates?"},
+  {"id": "q2", "question": "Is the replacement for the Francis Scott Key Bridge in Baltimore currently on schedule, and what is the official estimated completion date as of now?"},
+  {"id": "q3", "question": "Are lead times for large power transformers in the United States still above two years in 2026, and what is the current typical range?"},
+  {"id": "q4", "question": "Do the EU AI Act’s obligations for general-purpose AI model providers apply as of today, and have any of its high-risk system deadlines been formally postponed since the Act entered into force?"},
+  {"id": "q5", "question": "Is the projected hotel occupancy uplift for 2026 World Cup host cities supported by independent forecasts, or does it trace to the organisers’ and tourism boards’ own estimates?"},
+  {"id": "q6", "question": "Is it accurate that global data-centre electricity consumption was about 415 TWh in 2024, and what is the primary source of that figure?"}
+]

@@ -20,3 +20,5 @@ experiments/E7/**/run/
 experiments/E7/**/*-responses.json
 experiments/E7-energy/**/run/
 experiments/E7-energy/**/*-responses.json
+experiments/agent-questions-20261112/**/run/
+experiments/agent-questions-20261112/**/*-responses.json

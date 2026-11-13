@@ -1,0 +1,39 @@
+{
+  "client_date": "2026-11-12",
+  "timezone": "America/New_York",
+  "rounds": 2,
+  "models": {
+    "proposer": "openai:gpt-6.1-sol",
+    "critic": "anthropic:claude-sonnet-5-5"
+  },
+  "effort": "medium",
+  "live_retrieval": true,
+  "tools": [
+    "SerperSearch",
+    "HttpFetcher",
+    "EuropePMCSearch"
+  ],
+  "cli_defaults": {
+    "max_sources": 8,
+    "queries": 6,
+    "hits": 5,
+    "read_parts": 36,
+    "frame_samples": 1
+  },
+  "budget_target_usd_per_question": [
+    1,
+    3
+  ],
+  "budget_is_flexible": true,
+  "operational_guards_usd": {
+    "anthropic": 12,
+    "openai": 18
+  },
+  "budget_ledger": "runs\\agent-questions-20261112\\budget.json",
+  "questions_sha256": "0dbef927cf42be8f74ae1cfcb17832b7879a7a818cd9735f884723f1a8ff9555",
+  "surrounding_context_sent": false,
+  "expected_results_sent": false,
+  "shape_judge": false,
+  "opus_used": false,
+  "implementation_commit": "0ae138d38f8809a097def63998fc822d09009f5d"
+}
