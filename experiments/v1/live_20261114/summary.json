@@ -1,0 +1,1496 @@
+{
+  "kind": "frozen_live_development_run_review",
+  "version": 1,
+  "generated_at": "2026-11-14T04:44:25.035179+00:00",
+  "implementation_commit": "3140e4128cc36d3bfd0a17f681e431cef0a9f7c9",
+  "protocol": {
+    "kind": "prespecified_live_development_run",
+    "created_at": "2026-11-14T04:31:32.903851+00:00",
+    "commit": "3140e4128cc36d3bfd0a17f681e431cef0a9f7c9",
+    "working_tree_clean": true,
+    "proposer": "openai:gpt-5.4-mini-2026-03-17",
+    "critic": "openai:gpt-5.4-2026-03-05",
+    "effort": "low",
+    "mode": "documents",
+    "arm": "harness",
+    "budget": {
+      "max_model_calls": 10,
+      "max_tool_calls": 8,
+      "max_total_tokens": 160000,
+      "max_output_tokens": 8192,
+      "timeout_seconds": 180,
+      "max_consecutive_errors": 2,
+      "max_critique_calls": 1
+    },
+    "implementation_hashes": {
+      "runtime": "f560d7541dd9147def65438f5390b5e5703229c83cb23a565f7f318be3a828a0",
+      "workers": "384ae15704916615bf705b5886c8d3538bab86bca7e6319ffcc275409bbd2b44",
+      "kernel": "ae7bbf39396f51950b03468a2c4512dc0bc3116a795d49e87a1e7c5d798640dc",
+      "models": "7a733264ada014bb9ce51cfdce3c95447939bf838e4c5955d63244e66caafe9d",
+      "evidence": "2b3f81b22fecbf3378dd20d9630591d476e02bccd45a628bfcc100297bcd57be",
+      "packets": "bbc583357f263a42fbbb39288d9c088b11f3a00adcc1ad13d288cb1333850bcd"
+    },
+    "prompt_hash": "dd26bbf6316b131a5b3368add2fdbc2c8ca70844764034fc5b7c67a7a2ab73a5",
+    "packet_hash": "52ee373ac1b6eb34b34ed510fe511968116e7b9c07867f9231ee514d036d6cb6",
+    "repetitions": 1,
+    "order": [
+      {
+        "question": "question_004",
+        "mutation": null
+      },
+      {
+        "question": "question_004",
+        "mutation": "mutation_002"
+      },
+      {
+        "question": "question_001",
+        "mutation": null
+      },
+      {
+        "question": "question_002",
+        "mutation": null
+      },
+      {
+        "question": "question_003",
+        "mutation": null
+      },
+      {
+        "question": "question_003",
+        "mutation": "mutation_003"
+      },
+      {
+        "question": "question_005",
+        "mutation": null
+      },
+      {
+        "question": "question_006",
+        "mutation": null
+      }
+    ],
+    "expectations": [
+      {
+        "question": "question_004",
+        "mutation": null,
+        "smoke": {
+          "oracle_version": "hardship-categorical-smoke-0.1",
+          "author": "model_authored",
+          "human_adjudicated": false,
+          "kind": "categorical_regression_assertion",
+          "question_id": "question_004",
+          "variant_id": "baseline",
+          "allowed_target_statuses": [
+            "established"
+          ],
+          "allowed_next_actions": [
+            "advance_intake"
+          ],
+          "required_condition_ids": [],
+          "task_completed": true,
+          "target_scope_answered": true,
+          "limitation": "Passing these categories is not a substantive outcome score or warrant judgment."
+        }
+      },
+      {
+        "question": "question_004",
+        "mutation": "mutation_002",
+        "smoke": {
+          "oracle_version": "hardship-categorical-smoke-0.1",
+          "author": "model_authored",
+          "human_adjudicated": false,
+          "kind": "categorical_regression_assertion",
+          "question_id": "question_004",
+          "variant_id": "mutation_002",
+          "allowed_target_statuses": [
+            "established"
+          ],
+          "allowed_next_actions": [
+            "request_information"
+          ],
+          "required_condition_ids": [
+            "impact_description",
+            "event_date"
+          ],
+          "task_completed": true,
+          "target_scope_answered": true,
+          "limitation": "Passing these categories is not a substantive outcome score or warrant judgment."
+        }
+      },
+      {
+        "question": "question_001",
+        "mutation": null,
+        "smoke": {
+          "oracle_version": "hardship-categorical-smoke-0.1",
+          "author": "model_authored",
+          "human_adjudicated": false,
+          "kind": "categorical_regression_assertion",
+          "question_id": "question_001",
+          "variant_id": "baseline",
+          "allowed_target_statuses": [
+            "reported"
+          ],
+          "allowed_next_actions": [
+            "answer"
+          ],
+          "required_condition_ids": [],
+          "task_completed": true,
+          "target_scope_answered": true,
+          "limitation": "Passing these categories is not a substantive outcome score or warrant judgment."
+        }
+      },
+      {
+        "question": "question_002",
+        "mutation": null,
+        "smoke": {
+          "oracle_version": "hardship-categorical-smoke-0.1",
+          "author": "model_authored",
+          "human_adjudicated": false,
+          "kind": "categorical_regression_assertion",
+          "question_id": "question_002",
+          "variant_id": "baseline",
+          "allowed_target_statuses": [
+            "established"
+          ],
+          "allowed_next_actions": [
+            "answer"
+          ],
+          "required_condition_ids": [],
+          "task_completed": true,
+          "target_scope_answered": true,
+          "limitation": "Passing these categories is not a substantive outcome score or warrant judgment."
+        }
+      },
+      {
+        "question": "question_003",
+        "mutation": null,
+        "smoke": {
+          "oracle_version": "hardship-categorical-smoke-0.1",
+          "author": "model_authored",
+          "human_adjudicated": false,
+          "kind": "categorical_regression_assertion",
+          "question_id": "question_003",
+          "variant_id": "baseline",
+          "allowed_target_statuses": [
+            "not_established",
+            "conditional"
+          ],
+          "allowed_next_actions": [
+            "prepare_assessment",
+            "request_information"
+          ],
+          "required_condition_ids": [],
+          "task_completed": true,
+          "target_scope_answered": true,
+          "limitation": "Passing these categories is not a substantive outcome score or warrant judgment."
+        }
+      },
+      {
+        "question": "question_003",
+        "mutation": "mutation_003",
+        "smoke": {
+          "oracle_version": "hardship-categorical-smoke-0.1",
+          "author": "model_authored",
+          "human_adjudicated": false,
+          "kind": "categorical_regression_assertion",
+          "question_id": "question_003",
+          "variant_id": "mutation_003",
+          "allowed_target_statuses": [
+            "established"
+          ],
+          "allowed_next_actions": [
+            "prepare_assessment",
+            "answer"
+          ],
+          "required_condition_ids": [],
+          "task_completed": true,
+          "target_scope_answered": true,
+          "limitation": "Passing these categories is not a substantive outcome score or warrant judgment."
+        }
+      },
+      {
+        "question": "question_005",
+        "mutation": null,
+        "smoke": {
+          "oracle_version": "hardship-categorical-smoke-0.1",
+          "author": "model_authored",
+          "human_adjudicated": false,
+          "kind": "categorical_regression_assertion",
+          "question_id": "question_005",
+          "variant_id": "baseline",
+          "allowed_target_statuses": [
+            "not_established",
+            "conditional"
+          ],
+          "allowed_next_actions": [
+            "prepare_assessment",
+            "request_information"
+          ],
+          "required_condition_ids": [],
+          "task_completed": true,
+          "target_scope_answered": true,
+          "limitation": "Passing these categories is not a substantive outcome score or warrant judgment."
+        }
+      },
+      {
+        "question": "question_006",
+        "mutation": null,
+        "smoke": {
+          "oracle_version": "hardship-categorical-smoke-0.1",
+          "author": "model_authored",
+          "human_adjudicated": false,
+          "kind": "categorical_regression_assertion",
+          "question_id": "question_006",
+          "variant_id": "baseline",
+          "allowed_target_statuses": [
+            "not_established",
+            "conditional"
+          ],
+          "allowed_next_actions": [
+            "answer"
+          ],
+          "required_condition_ids": [],
+          "task_completed": true,
+          "target_scope_answered": true,
+          "limitation": "Passing these categories is not a substantive outcome score or warrant judgment."
+        }
+      }
+    ],
+    "interpretation": "One synthetic development family; no human gold or architectural comparison. No code changes or post-result reruns during this batch."
+  },
+  "saved_run_summary": {
+    "attempts": 8,
+    "run_status_counts": {
+      "complete": 5,
+      "partial": 2,
+      "failed": 1
+    },
+    "task_completed_count": 5,
+    "failed_runs": 1,
+    "completion_count_interpretation": "Declared task completion, excluding scope/form rejection or incomplete evaluation; not human-adjudicated adequacy.",
+    "evaluation_completion_status_counts": {
+      "complete": 7,
+      "pending": 1
+    },
+    "usage_known_totals": {
+      "model_calls": 43,
+      "input_tokens": 300740,
+      "output_tokens": 50281,
+      "tool_calls": 13,
+      "failed_calls": 7,
+      "cost_usd": 0.0
+    },
+    "usage_unknown_run_counts": {
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "failed_calls": 0,
+      "cost_usd": 8
+    },
+    "monetary_cost_complete": false,
+    "runner_elapsed_seconds": 430.85655699999995,
+    "structural_status_counts": {
+      "pass": 7,
+      "fail": 1
+    },
+    "smoke_status_counts": {
+      "fail": 6,
+      "pass": 1,
+      "not_checkable": 1
+    },
+    "human_review_status_counts": {
+      "pending": 8
+    },
+    "automatic_substantive_accuracy": null,
+    "interpretation": "Structural and categorical smoke results are not substantive accuracy estimates."
+  },
+  "model_review_counts": {
+    "partial": 6,
+    "adequate": 1,
+    "inadequate": 1
+  },
+  "model_review_is_human_adjudication": false,
+  "protocol_audit_totals": {
+    "calls_by_role": {
+      "proposer": 36,
+      "critic": 7
+    },
+    "api_attempts": 43,
+    "failed_api_attempts": 0,
+    "input_tokens": 300740,
+    "output_tokens": 50281,
+    "multi_object_outputs": 14,
+    "ignored_complete_objects": 28,
+    "actual_source_opens": 8,
+    "critic_selected_contract_invalid": 1,
+    "worker_outputs_with_extraction_error": 1,
+    "critic_attack_proposals_distinct_within_each_run": 11,
+    "attacks_recorded_in_graphs_distinct_within_each_run": 8,
+    "final_kernel_attack_labels": {
+      "IN": 7,
+      "NOT_ADMITTED": 1
+    },
+    "all_ledger_valid": true,
+    "graph_evaluations_reproduced": 7,
+    "runs_without_graph_to_replay": 1,
+    "graph_evaluation_mismatches": 0
+  },
+  "usage_by_model": {
+    "gpt-5.4-mini-2026-03-17": {
+      "calls": 36,
+      "input_tokens": 254384,
+      "cached_input_tokens": 82304,
+      "output_tokens": 43442,
+      "posted_rate_estimate_usd": 0.3307218
+    },
+    "gpt-5.4-2026-03-05": {
+      "calls": 7,
+      "input_tokens": 46356,
+      "cached_input_tokens": 10752,
+      "output_tokens": 6839,
+      "posted_rate_estimate_usd": 0.194283
+    }
+  },
+  "cost_estimate": {
+    "saved_calls_usd": 0.5250048,
+    "complete_total": false,
+    "interpretation": "Posted-rate calculation using saved input, cached-input and output token counts; not an invoice. Excludes the unpersisted, externally interrupted attempt, whose usage and cost are unknown.",
+    "rates_usd_per_million_tokens": {
+      "gpt-5.4-mini-2026-03-17": {
+        "input": 0.75,
+        "cached_input": 0.075,
+        "output": 4.5
+      },
+      "gpt-5.4-2026-03-05": {
+        "input": 2.5,
+        "cached_input": 0.25,
+        "output": 15.0
+      }
+    },
+    "sources": [
+      "https://developers.openai.com/api/docs/models/gpt-5.4-mini",
+      "https://developers.openai.com/api/docs/models/gpt-5.4"
+    ]
+  },
+  "external_interruption": {
+    "recorded_at": "2026-11-14T04:38:21.750662+00:00",
+    "reason": "Automatic approval review rejected a read-only status poll on the mistaken premise that the wholly synthetic packet was private applicant data; the process was then unavailable.",
+    "verified_fiction_notice": "Every programme, person, entity, place, date, amount, and record in this exercise is synthetic. No real application or benefit is involved.",
+    "saved_completed_cases": [
+      "question_001-baseline",
+      "question_002-baseline",
+      "question_003-baseline",
+      "question_004-baseline",
+      "question_004-mutation_002"
+    ],
+    "interrupted_case": "question_003-mutation_003",
+    "interrupted_attempt_usage": "unknown: no final result or worker ledger persisted for this attempt",
+    "resume_cases": [
+      [
+        "question_003",
+        "mutation_003"
+      ],
+      [
+        "question_005",
+        null
+      ],
+      [
+        "question_006",
+        null
+      ]
+    ],
+    "settings": "unchanged from protocol.json",
+    "completed_cases_will_not_be_repeated": true
+  },
+  "interpretation": "One synthetic development family; one saved result per setting; no baseline comparison, human gold, or cross-model-family performance claim. Prespecified categorical scores are preserved. In Q5, a legitimate negative metaclaim reveals a polarity limitation in the status scorer.",
+  "cases": [
+    {
+      "case_id": "question_004-baseline",
+      "question": "Under the currently bound policy, prepare the next permitted response to this application at the intake stage.",
+      "run_id": "9d6681ec46b14d75807559f32cbb9ab1",
+      "runtime_status": "complete",
+      "stop_reason": "settled_for_purpose",
+      "target_claim": "The next permitted response at intake is to acknowledge the signed applicant statement, note that self-attestation is sufficient for the intake impact-evidence requirement, and, if the statement is complete, proceed to the separate final-eligibility review without requiring independent proof of causation, employer confirmation, or residence-in-footprint proof.",
+      "target_standing": "established",
+      "response": {
+        "text": "Established: The next permitted response at intake is to acknowledge the signed applicant statement, note that self-attestation is sufficient for the intake impact-evidence requirement, and, if the statement is complete, proceed to the separate final-eligibility review without requiring independent proof of causation, employer confirmation, or residence-in-footprint proof.\n\nScope: {\"as_of\": \"2026-04-12\", \"case_id\": \"case_001\", \"stage\": \"intake\"}\n\nProposed next step: Acknowledge the signed applicant statement; if it includes both an event date and impact details, accept self-attestation for intake and proceed to separate final-eligibility review, otherwise request only the missing statement details.\n\nBasis: doc_001 v1.0 [section_1]; doc_001 v1.0 [section_2]; doc_001 v1.0 [section_2]",
+        "target_claim_id": "c_target",
+        "findings": [
+          {
+            "claim_id": "c_target",
+            "text": "The next permitted response at intake is to acknowledge the signed applicant statement, note that self-attestation is sufficient for the intake impact-evidence requirement, and, if the statement is complete, proceed to the separate final-eligibility review without requiring independent proof of causation, employer confirmation, or residence-in-footprint proof.",
+            "kind": "policy",
+            "form": "rule_consequence",
+            "status": "established",
+            "scope": {
+              "as_of": "2026-04-12",
+              "case_id": "case_001",
+              "stage": "intake"
+            },
+            "conditions": [],
+            "citations": [
+              {
+                "source_id": "doc_001",
+                "version": "1.0",
+                "locator": "section_1",
+                "quote": "Intake review and final eligibility are separate stages. Preparing a response does not confer authority to approve an award or issue payment."
+              },
+              {
+                "source_id": "doc_001",
+                "version": "1.0",
+                "locator": "section_2",
+                "quote": "For intake review, accept a signed applicant statement identifying an event date and describing a personal financial disruption. Self-attestation satisfies the impact-evidence requirement at this stage. Do not require independent proof of individual causation, employer confirmation, or proof that the home lies inside a mapped flood footprint. When the statement is complete, acknowledge it and proceed to review of the separate final-eligibility requirements."
+              },
+              {
+                "source_id": "doc_001",
+                "version": "1.0",
+                "locator": "section_2",
+                "quote": "If impact details or the event date are absent, acknowledge receipt and request only the missing statement details before advancing intake."
+              }
+            ]
+          }
+        ],
+        "next_action": {
+          "kind": "answer",
+          "description": "Acknowledge the signed applicant statement; if it includes both an event date and impact details, accept self-attestation for intake and proceed to separate final-eligibility review, otherwise request only the missing statement details.",
+          "condition_ids": []
+        },
+        "task_completed": true,
+        "caveats": [
+          "This is intake-stage drafting only; it does not decide eligibility or authorize payment.",
+          "Missing residence, income, or payment-register records are not intake-stage disqualifiers under the cited policy.",
+          "No independent proof of causation, employer confirmation, or flood-footprint residence is required at intake under the cited policy.",
+          "Standing is relative to the recorded arguments, source interpretations and stated profile; it is not a guarantee of truth.",
+          "This result supplies analysis and a proposed response, not permission to execute an action."
+        ],
+        "target_scope_answered": true,
+        "target_form_answered": true,
+        "evaluation_completed": true,
+        "record_completed": true,
+        "record_defects": []
+      },
+      "errors": [],
+      "structural_status": "pass",
+      "smoke_status": "fail",
+      "model_review": {
+        "setting": "question_004-baseline",
+        "run_id": "9d6681ec46b14d75807559f32cbb9ab1",
+        "result_hash": "3b026b6a977c1036ee00a17f7deae0196a494b44dab3a53f0e4d320f31775383",
+        "author_type": "model",
+        "human_adjudication": "pending",
+        "adequacy": "partial",
+        "substantive_text": "Correct general intake policy, but leaves an if-complete/otherwise template instead of determining this application's branch.",
+        "warrant_defect": "Only policy doc_001 was acquired. No application evidence supports the case-specific antecedents marked met. Available baseline doc_003 would settle advancement.",
+        "critic_behavior": "Raw critic event13 contains two bare source/version objects followed by useful observations and three undercuts about missing case application evidence. Admitted critique event15 contains only the first bare doc_003 object. No valid critique or attacks entered the graph; this is not a no-objection review.",
+        "revision_behavior": "Final claim remains conditional on unexamined statement completeness and final graph has no attacks.",
+        "parse_incidents": [
+          {
+            "event": 2,
+            "raw_objects": 3,
+            "admitted": "First open of policy doc_001",
+            "dropped": "Application doc_003 open and duplicate policy open",
+            "material_effect": "Missing application acquisition; final branch remains unresolved."
+          },
+          {
+            "event": 13,
+            "raw_objects": 3,
+            "admitted": "Bare doc_003 source/version object as critique",
+            "dropped": "Bare doc_002 reference and substantive observations/attacks object",
+            "material_effect": "Critic correctly identified defect in raw text, but observations and all three attacks were discarded."
+          }
+        ],
+        "score_distinction": "Smoke fails only next_action answer vs advance_intake; changing the action ID would not fix the substantive missing case application.",
+        "sources_exposed": {
+          "proposer": [
+            "doc_001 v1.0 [section_1]",
+            "doc_001 v1.0 [section_2]",
+            "doc_001 v1.0 [section_3]",
+            "doc_001 v1.0 [section_4]"
+          ],
+          "critic": [
+            "doc_001 v1.0 [section_1]",
+            "doc_001 v1.0 [section_2]",
+            "doc_001 v1.0 [section_3]",
+            "doc_001 v1.0 [section_4]"
+          ]
+        },
+        "mechanical_results": {
+          "structural": "pass",
+          "smoke": "fail",
+          "failed_smoke_checks": [
+            "next_action"
+          ]
+        }
+      },
+      "human_adjudication": "pending",
+      "replay": {
+        "ledger_valid": true,
+        "evaluation_reproduced": true
+      },
+      "usage": {
+        "model_calls": 4,
+        "input_tokens": 25889,
+        "output_tokens": 3055,
+        "tool_calls": 1,
+        "failed_calls": 0,
+        "cost_usd": null,
+        "elapsed_seconds": 43.044079,
+        "estimated_usage_calls": 0,
+        "cost_complete": false,
+        "api_attempts": 4,
+        "failed_api_attempts": 0,
+        "known_cost_usd": 0.0,
+        "posted_rate_estimate_usd": 0.048682
+      },
+      "result_file_sha256": "d603e4baf9ee5380a726a3d003c441fb73efa0f1a557d1210cee6b4e93680055"
+    },
+    {
+      "case_id": "question_004-mutation_002",
+      "question": "Under the currently bound policy, prepare the next permitted response to this application at the intake stage.",
+      "run_id": "5db8f101802640ebba4b6015c0e47908",
+      "runtime_status": "complete",
+      "stop_reason": "settled_for_purpose",
+      "target_claim": "At intake, the next permitted response is to acknowledge receipt and request only the missing applicant statement details: the personal financial-disruption description and the event date, then keep final-eligibility review separate.",
+      "target_standing": "not_established",
+      "response": {
+        "text": "Not established: At intake, the next permitted response is to acknowledge receipt and request only the missing applicant statement details: the personal financial-disruption description and the event date, then keep final-eligibility review separate.\n\nScope: {\"as_of\": \"2026-04-12\", \"case_id\": \"case_001\", \"stage\": \"intake\"}\n\nProposed next step: No further source lookup is needed; the intake response can be drafted from the existing record.\n\nBasis: doc_003 v1.1 [field_group_2]; doc_001 v1.0 [section_2]; doc_001 v1.0 [section_1]",
+        "target_claim_id": "c_target",
+        "findings": [
+          {
+            "claim_id": "c_target",
+            "text": "At intake, the next permitted response is to acknowledge receipt and request only the missing applicant statement details: the personal financial-disruption description and the event date, then keep final-eligibility review separate.",
+            "kind": "policy",
+            "form": "rule_consequence",
+            "status": "not_established",
+            "scope": {
+              "as_of": "2026-04-12",
+              "case_id": "case_001",
+              "stage": "intake"
+            },
+            "conditions": [],
+            "citations": [
+              {
+                "source_id": "doc_003",
+                "version": "1.1",
+                "locator": "field_group_2",
+                "quote": "Personal financial-disruption description: not provided. Event date for the claimed impact: not provided."
+              },
+              {
+                "source_id": "doc_001",
+                "version": "1.0",
+                "locator": "section_2",
+                "quote": "For intake review, accept a signed applicant statement identifying an event date and describing a personal financial disruption. Self-attestation satisfies the impact-evidence requirement at this stage. Do not require independent proof of individual causation, employer confirmation, or proof that the home lies inside a mapped flood footprint. When the statement is complete, acknowledge it and proceed to review of the separate final-eligibility requirements. If impact details or the event date are absent, acknowledge receipt and request only the missing statement details before advancing intake."
+              },
+              {
+                "source_id": "doc_001",
+                "version": "1.0",
+                "locator": "section_1",
+                "quote": "Intake review and final eligibility are separate stages."
+              }
+            ]
+          }
+        ],
+        "next_action": {
+          "kind": "answer",
+          "description": "No further source lookup is needed; the intake response can be drafted from the existing record.",
+          "condition_ids": []
+        },
+        "task_completed": true,
+        "caveats": [
+          "This is an intake-stage drafting assessment only; it does not decide final eligibility.",
+          "Standing is relative to the recorded arguments, source interpretations and stated profile; it is not a guarantee of truth.",
+          "This result supplies analysis and a proposed response, not permission to execute an action."
+        ],
+        "target_scope_answered": true,
+        "target_form_answered": true,
+        "evaluation_completed": true,
+        "record_completed": true,
+        "record_defects": []
+      },
+      "errors": [],
+      "structural_status": "pass",
+      "smoke_status": "fail",
+      "model_review": {
+        "setting": "question_004-mutation_002",
+        "run_id": "5db8f101802640ebba4b6015c0e47908",
+        "result_hash": "f88d8c9ca65f337950daa1558a0857ca3133260aef7d1258b8320f73f40c5252",
+        "author_type": "model",
+        "human_adjudication": "pending",
+        "adequacy": "partial",
+        "substantive_text": "Correct and source-supported instruction to acknowledge receipt and request only financial-disruption description and event date, keeping final eligibility separate. Final rendered Not established label and can-be-drafted next action leave delivery unresolved.",
+        "warrant_defect": "No source gap: current doc_003 v1.1 and policy were exposed. Initial graph omitted required condition links; later repaired links, but retained the original structural attack without a recorded resolution.",
+        "critic_behavior": "Valid admitted critique accepts substantive interpretation and attacks missing conditions mapping in argument revision1.",
+        "revision_behavior": "Proposer repaired all four condition links and premise_ids at argument revision2. Original attack remains open without reply; final evaluation support_defeated, argument OUT, attack IN.",
+        "parse_incidents": [
+          {
+            "event": 2,
+            "raw_objects": 2,
+            "admitted": "Policy open",
+            "dropped": "Duplicate policy open",
+            "material_effect": "None."
+          },
+          {
+            "event": 7,
+            "raw_objects": 2,
+            "admitted": "Current application v1.1 open",
+            "dropped": "Premature finish before application exposure",
+            "material_effect": "No needed source lost; current application did execute."
+          }
+        ],
+        "score_distinction": "Smoke fails status, action and condition IDs. Prose names both required details despite lacking canonical IDs; final not_established status results from unresolved structural attack, not insufficient public evidence.",
+        "sources_exposed": {
+          "proposer": [
+            "doc_001 v1.0 [section_1]",
+            "doc_001 v1.0 [section_2]",
+            "doc_001 v1.0 [section_3]",
+            "doc_001 v1.0 [section_4]",
+            "doc_003 v1.1 [field_group_1]",
+            "doc_003 v1.1 [field_group_2]",
+            "doc_003 v1.1 [field_group_3]"
+          ],
+          "critic": [
+            "doc_001 v1.0 [section_1]",
+            "doc_001 v1.0 [section_2]",
+            "doc_001 v1.0 [section_3]",
+            "doc_001 v1.0 [section_4]",
+            "doc_003 v1.1 [field_group_1]",
+            "doc_003 v1.1 [field_group_2]",
+            "doc_003 v1.1 [field_group_3]"
+          ]
+        },
+        "mechanical_results": {
+          "structural": "pass",
+          "smoke": "fail",
+          "failed_smoke_checks": [
+            "target_status",
+            "next_action",
+            "requested_conditions"
+          ]
+        }
+      },
+      "human_adjudication": "pending",
+      "replay": {
+        "ledger_valid": true,
+        "evaluation_reproduced": true
+      },
+      "usage": {
+        "model_calls": 6,
+        "input_tokens": 45207,
+        "output_tokens": 6329,
+        "tool_calls": 2,
+        "failed_calls": 0,
+        "cost_usd": null,
+        "elapsed_seconds": 52.102818,
+        "estimated_usage_calls": 0,
+        "cost_complete": false,
+        "api_attempts": 6,
+        "failed_api_attempts": 0,
+        "known_cost_usd": 0.0,
+        "posted_rate_estimate_usd": 0.0742473
+      },
+      "result_file_sha256": "955fc56d99d385459907b83fd6ee3c2b7745caa09aaa80b10a02e4c17c0018a7"
+    },
+    {
+      "case_id": "question_001-baseline",
+      "question": "What financial impact does the applicant report, and for what date?",
+      "run_id": "7998d6d85a6d46ee85fda0468dc0c7b1",
+      "runtime_status": "complete",
+      "stop_reason": "settled_for_purpose",
+      "target_claim": "Mira Noll reports losing her scheduled four-hour morning shift on 4 April 2026 and 80 programme credits of wages.",
+      "target_standing": "reported",
+      "response": {
+        "text": "Reported: Mira Noll reports losing her scheduled four-hour morning shift on 4 April 2026 and 80 programme credits of wages.\n\nScope: {\"outcome\": \"financial impact described in the application\", \"period\": \"as stated in the application\", \"subject_id\": \"person_001\"}\n\nProposed next step: No further information is needed; the applicant statement already supplies the date and reported financial impact.\n\nBasis: doc_003 v1.0 [field_group_2]; doc_003 v1.0 [field_group_3]",
+        "target_claim_id": "c_target",
+        "findings": [
+          {
+            "claim_id": "c_target",
+            "text": "Mira Noll reports losing her scheduled four-hour morning shift on 4 April 2026 and 80 programme credits of wages.",
+            "kind": "attribution",
+            "form": "source_reports",
+            "status": "reported",
+            "scope": {
+              "subject_id": "person_001",
+              "outcome": "financial impact described in the application",
+              "period": "as stated in the application"
+            },
+            "conditions": [],
+            "citations": [
+              {
+                "source_id": "doc_003",
+                "version": "1.0",
+                "locator": "field_group_2",
+                "quote": "My workplace closed because its access road flooded on 4 April 2026. I lost my scheduled four-hour morning shift that day and 80 programme credits of wages."
+              },
+              {
+                "source_id": "doc_003",
+                "version": "1.0",
+                "locator": "field_group_3",
+                "quote": "Signed declaration: Mira Noll, 7 April 2026. I declare that the account above is accurate."
+              }
+            ]
+          }
+        ],
+        "next_action": {
+          "kind": "answer",
+          "description": "No further information is needed; the applicant statement already supplies the date and reported financial impact.",
+          "condition_ids": []
+        },
+        "task_completed": true,
+        "caveats": [
+          "Attribution is limited to the applicant's own statement; this does not independently verify the loss or amount.",
+          "Standing is relative to the recorded arguments, source interpretations and stated profile; it is not a guarantee of truth.",
+          "This result supplies analysis and a proposed response, not permission to execute an action."
+        ],
+        "target_scope_answered": true,
+        "target_form_answered": true,
+        "evaluation_completed": true,
+        "record_completed": true,
+        "record_defects": []
+      },
+      "errors": [],
+      "structural_status": "pass",
+      "smoke_status": "pass",
+      "model_review": {
+        "setting": "question_001-baseline",
+        "run_id": "7998d6d85a6d46ee85fda0468dc0c7b1",
+        "result_hash": "ac71f3a40de46d7b53f2f3769849c3882fa2350c6b54306a44be82c6cffff88d",
+        "author_type": "model",
+        "human_adjudication": "pending",
+        "adequacy": "adequate",
+        "substantive_text": "Faithful attributed summary with 4 April 2026, four-hour morning shift and 80 programme credits; explicit non-verification caveat.",
+        "warrant_defect": "No substantive defect in final response. An early discarded submission hallucinated a date, amount and quotation before source exposure.",
+        "critic_behavior": "Valid grounded no-objection critique after record repair; confirms attribution and distinguishes it from independent verification. No attacks.",
+        "revision_behavior": "Initial admitted argument had empty premise_ids. Runtime requested record repair; proposer added e1/e2 before critic. Final target reported, argument IN.",
+        "parse_incidents": [
+          {
+            "event": 2,
+            "raw_objects": 2,
+            "admitted": "Application doc_003 v1.0 open",
+            "dropped": "Premature submit claiming $480 on 2026-04-06 and quoting nonexistent On 2026-04-06, I lost $480 at field_group_1",
+            "material_effect": "Fabricated draft never entered graph or final answer. Actual exposure led to corrected source-based final result."
+          }
+        ],
+        "score_distinction": "Structural and smoke pass; final content independently meets the substantive rubric. The discarded hallucination is a process incident, not an error in final answer.",
+        "sources_exposed": {
+          "proposer": [
+            "doc_003 v1.0 [field_group_1]",
+            "doc_003 v1.0 [field_group_2]",
+            "doc_003 v1.0 [field_group_3]"
+          ],
+          "critic": [
+            "doc_003 v1.0 [field_group_1]",
+            "doc_003 v1.0 [field_group_2]",
+            "doc_003 v1.0 [field_group_3]"
+          ]
+        },
+        "mechanical_results": {
+          "structural": "pass",
+          "smoke": "pass",
+          "failed_smoke_checks": []
+        }
+      },
+      "human_adjudication": "pending",
+      "replay": {
+        "ledger_valid": true,
+        "evaluation_reproduced": true
+      },
+      "usage": {
+        "model_calls": 5,
+        "input_tokens": 30218,
+        "output_tokens": 3256,
+        "tool_calls": 1,
+        "failed_calls": 0,
+        "cost_usd": null,
+        "elapsed_seconds": 31.842143,
+        "estimated_usage_calls": 0,
+        "cost_complete": false,
+        "api_attempts": 5,
+        "failed_api_attempts": 0,
+        "known_cost_usd": 0.0,
+        "posted_rate_estimate_usd": 0.0423795
+      },
+      "result_file_sha256": "c44ee8fffd03eba2ab20337e9adf65ced710c641108374f4e1228914cae8487a"
+    },
+    {
+      "case_id": "question_002-baseline",
+      "question": "Does the supplied evidence support that street flooding occurred in North Wharf block on the morning of 4 April 2026?",
+      "run_id": "68f2f194b84348e882d292045051bb96",
+      "runtime_status": "complete",
+      "stop_reason": "settled_for_purpose",
+      "target_claim": "The supplied evidence supports that some street flooding occurred in North Wharf block on the morning of 4 April 2026.",
+      "target_standing": "not_established",
+      "response": {
+        "text": "Not established: The supplied evidence supports that some street flooding occurred in North Wharf block on the morning of 4 April 2026.\n\nScope: {\"location_id\": \"area_001\", \"location_name\": \"North Wharf block\", \"outcome\": \"street flooding\", \"period\": \"2026-04-04T06:00/2026-04-04T12:00\", \"quantifier\": \"some street flooding within the named block\"}\n\nProposed next step: Supported scoped event finding is established on the revised graph; no further investigation needed.\n\nBasis: doc_002 v1.0 [paragraph_1]",
+        "target_claim_id": "c_target",
+        "findings": [
+          {
+            "claim_id": "c_target",
+            "text": "The supplied evidence supports that some street flooding occurred in North Wharf block on the morning of 4 April 2026.",
+            "kind": "substantive",
+            "form": "assertion",
+            "status": "not_established",
+            "scope": {
+              "location_id": "area_001",
+              "location_name": "North Wharf block",
+              "outcome": "street flooding",
+              "period": "2026-04-04T06:00/2026-04-04T12:00",
+              "quantifier": "some street flooding within the named block"
+            },
+            "conditions": [],
+            "citations": [
+              {
+                "source_id": "doc_002",
+                "version": "1.0",
+                "locator": "paragraph_1",
+                "quote": "The field team recorded street flooding in North Wharf block, Riverplain Region, on 4 April 2026 between 06:00 and 12:00."
+              }
+            ]
+          }
+        ],
+        "next_action": {
+          "kind": "answer",
+          "description": "Supported scoped event finding is established on the revised graph; no further investigation needed.",
+          "condition_ids": []
+        },
+        "task_completed": true,
+        "caveats": [
+          "Support is limited to some street flooding within North Wharf block during 06:00-12:00 on 4 April 2026.",
+          "The bulletin does not support broader claims about every address, worker, household, or related losses.",
+          "Standing is relative to the recorded arguments, source interpretations and stated profile; it is not a guarantee of truth.",
+          "This result supplies analysis and a proposed response, not permission to execute an action."
+        ],
+        "target_scope_answered": true,
+        "target_form_answered": true,
+        "evaluation_completed": true,
+        "record_completed": true,
+        "record_defects": []
+      },
+      "errors": [],
+      "structural_status": "pass",
+      "smoke_status": "fail",
+      "model_review": {
+        "setting": "question_002-baseline",
+        "run_id": "68f2f194b84348e882d292045051bb96",
+        "result_hash": "2fc5f3e38bfdd8cdbfa99a979f95ae93a3cfcc8299c85c2e7f3ac58df7eacd58",
+        "author_type": "model",
+        "human_adjudication": "pending",
+        "adequacy": "partial",
+        "substantive_text": "Correct bounded event finding and scope limits. Overall delivery contradicts itself: Not established status versus next action asserting established on revised graph.",
+        "warrant_defect": "No source gap: official doc_002 was acquired. Initial argument lacked premise_ids. After attaching evidence, unresolved attack handling, not deficient event evidence, causes final not_established status.",
+        "critic_behavior": "Valid admitted critique accepts source sufficiency and correctly attacks initially missing argument premises.",
+        "revision_behavior": "Proposer attached e1 at argument revision2 and attempted replied disposition with reply reason/evidence/revision but no reply_condition_id. Admitted graph retained open disposition; final argument OUT, attack IN, support_defeated.",
+        "parse_incidents": [
+          {
+            "event": 2,
+            "raw_objects": 3,
+            "admitted": "Official bulletin doc_002 v1.0 open",
+            "dropped": "Premature submit and finish; submit includes nonverbatim guessed quote morning of 4 April 2026",
+            "material_effect": "No needed source lost. Later citation is exact; raw guessed citation did not enter final graph."
+          }
+        ],
+        "score_distinction": "Structural pass and smoke fails target_status only. Substantive event interpretation is supported, but final response misstates its own recorded standing in the next-action prose.",
+        "sources_exposed": {
+          "proposer": [
+            "doc_002 v1.0 [paragraph_1]",
+            "doc_002 v1.0 [paragraph_2]"
+          ],
+          "critic": [
+            "doc_002 v1.0 [paragraph_1]",
+            "doc_002 v1.0 [paragraph_2]"
+          ]
+        },
+        "mechanical_results": {
+          "structural": "pass",
+          "smoke": "fail",
+          "failed_smoke_checks": [
+            "target_status"
+          ]
+        }
+      },
+      "human_adjudication": "pending",
+      "replay": {
+        "ledger_valid": true,
+        "evaluation_reproduced": true
+      },
+      "usage": {
+        "model_calls": 5,
+        "input_tokens": 31071,
+        "output_tokens": 4410,
+        "tool_calls": 1,
+        "failed_calls": 0,
+        "cost_usd": null,
+        "elapsed_seconds": 37.739713,
+        "estimated_usage_calls": 0,
+        "cost_complete": false,
+        "api_attempts": 5,
+        "failed_api_attempts": 0,
+        "known_cost_usd": 0.0,
+        "posted_rate_estimate_usd": 0.0496569
+      },
+      "result_file_sha256": "84a9be095c6497770365c0d29093a85c1d308c668dd7d8a4a90f2e09d16567a0"
+    },
+    {
+      "case_id": "question_003-baseline",
+      "question": "Independently of the applicant saying so, do the supplied records establish that flood-related workplace closure caused this applicant to lose the reported paid shift on 4 April 2026?",
+      "run_id": "3651249a06bb4719868af4483a8d7fb9",
+      "runtime_status": "partial",
+      "stop_reason": "execution_failure",
+      "target_claim": "The supplied records do not independently establish that flood-related workplace closure caused Mira Noll to lose the reported paid shift on 4 April 2026.",
+      "target_standing": "not_established",
+      "response": {
+        "text": "Not established: The supplied records do not independently establish that flood-related workplace closure caused Mira Noll to lose the reported paid shift on 4 April 2026.\n\nScope: {\"event_date\": \"2026-04-04\", \"outcome\": \"reported missed four-hour shift and associated wages\", \"subject_id\": \"person_001\", \"workplace_id\": \"site_001\"}\n\nOpen conditions: An alternative explanation remains available because the record set lacks independent scheduling or payroll records that would rule out other reasons for the missed shift or wages.; The flood bulletin is a bounded area report and does not by itself establish the condition of North Wharf Workshop or Mira Noll's assigned shift.; Given the available records, the inference from area flooding to this person's missed paid shift is not established without a separate closure/scheduling/payroll trace.; The records do not contain independent operational, scheduling, or payroll documentation linking the flood to a workplace closure, the closure to Mira Noll's scheduled shift, and the cancellation to lost wages.\n\nThis finding does not supply the kind of conclusion requested by the active profile.\n\nProposed next step: No further tool use is likely to change the answer on the supplied record set; a separate closure, scheduling, or payroll record would be needed to materially strengthen the causal link.",
+        "target_claim_id": "c_target",
+        "findings": [
+          {
+            "claim_id": "c_target",
+            "text": "The supplied records do not independently establish that flood-related workplace closure caused Mira Noll to lose the reported paid shift on 4 April 2026.",
+            "kind": "causal",
+            "form": "assertion",
+            "status": "not_established",
+            "scope": {
+              "event_date": "2026-04-04",
+              "outcome": "reported missed four-hour shift and associated wages",
+              "subject_id": "person_001",
+              "workplace_id": "site_001"
+            },
+            "conditions": [
+              "An alternative explanation remains available because the record set lacks independent scheduling or payroll records that would rule out other reasons for the missed shift or wages.",
+              "The flood bulletin is a bounded area report and does not by itself establish the condition of North Wharf Workshop or Mira Noll's assigned shift.",
+              "Given the available records, the inference from area flooding to this person's missed paid shift is not established without a separate closure/scheduling/payroll trace.",
+              "The records do not contain independent operational, scheduling, or payroll documentation linking the flood to a workplace closure, the closure to Mira Noll's scheduled shift, and the cancellation to lost wages."
+            ],
+            "citations": []
+          }
+        ],
+        "next_action": {
+          "kind": "answer",
+          "description": "No further tool use is likely to change the answer on the supplied record set; a separate closure, scheduling, or payroll record would be needed to materially strengthen the causal link.",
+          "condition_ids": [
+            "cq_trace_links",
+            "cq_alternatives",
+            "cq_applicability",
+            "cq_inference_validity"
+          ]
+        },
+        "task_completed": false,
+        "caveats": [
+          "Limited to the specified 4 April 2026 shift and wages.",
+          "The applicant statement supports the account but is not independent corroboration for this use.",
+          "The flood bulletin is area-level and does not by itself establish the individual workplace closure or wage loss.",
+          "Standing is relative to the recorded arguments, source interpretations and stated profile; it is not a guarantee of truth.",
+          "This result supplies analysis and a proposed response, not permission to execute an action.",
+          "Run stopped at execution_failure; the available partial result is retained."
+        ],
+        "target_scope_answered": true,
+        "target_form_answered": false,
+        "evaluation_completed": true,
+        "record_completed": true,
+        "record_defects": []
+      },
+      "errors": [
+        "ValueError: malformed or truncated JSON in reply (Expecting ':' delimiter at char 4815); reply ends: ',\"condition_ids\":[],\"description\":\"No further tool use is likely to change the answer on the supplied record set.\",\"} ,\"'",
+        "ValueError: condition cq_trace_links changed meaning; use a new condition ID"
+      ],
+      "structural_status": "fail",
+      "smoke_status": "fail",
+      "model_review": {
+        "setting": "question_003-baseline",
+        "run_id": "3651249a06bb4719868af4483a8d7fb9",
+        "result_hash": "38c0b19578d2d85c259aa30ce25793293278f5f6374ac7799bf83d1ee916ce15",
+        "author_type": "model",
+        "human_adjudication": "pending",
+        "adequacy": "partial",
+        "substantive_text": "Correct high-level conclusion that independent causation is unestablished; distinguishes testimony and area event from missing closure, roster and payroll links without refuting actual loss. Final delivered artifact explicitly lacks requested form and is incomplete after execution failure.",
+        "warrant_defect": "Corpus-wide absence and no-further-lookup assertions exceed the demonstrated review of only partial bulletin/application snippets plus policy section3. Target claim is a non-establishment assertion rather than the requested causal form; final finding has no citations.",
+        "critic_behavior": "Valid admitted critique raises two substantive objections: incomplete corpus coverage for absence claim and potentially excessive standard of ruling out alternative explanations. Both attacks remain unresolved.",
+        "revision_behavior": "No further evidence was acquired. Malformed post-critique reply was rejected. Subsequent parseable revision attempted causal-form repair and paraphrased conditions under existing IDs; rejected for changing cq_trace_links meaning. Rejected edits/rewritten attack grounds are not accepted final fixes.",
+        "parse_incidents": [
+          {
+            "event": 2,
+            "raw_objects": 2,
+            "admitted": "Search",
+            "dropped": "Duplicate search",
+            "material_effect": "No distinct retrieval lost."
+          },
+          {
+            "event": 7,
+            "raw_objects": 3,
+            "admitted": "Policy section3 open",
+            "dropped": "Two duplicate opens",
+            "material_effect": "No distinct retrieval lost; relevant full bulletin/application locators never requested."
+          },
+          {
+            "event": 24,
+            "raw_objects": 0,
+            "admitted": null,
+            "rejected": "Malformed/truncated JSON",
+            "material_effect": "Whole repair attempt rejected; no accepted correction."
+          },
+          {
+            "event": 29,
+            "raw_objects": 1,
+            "admitted": "Parseable submit operation only; graph revision rejected",
+            "rejected": "condition cq_trace_links changed meaning; use a new condition ID",
+            "material_effect": "Original committed graph and unresolved objections remain."
+          }
+        ],
+        "score_distinction": "Target-status category passes, but structural target_form_gate fails and smoke fails action, task completion and form. Matching not_established does not make the execution successful.",
+        "sources_exposed": {
+          "proposer": [
+            "doc_001 v1.0 [section_3]",
+            "doc_002 v1.0 [paragraph_1]",
+            "doc_003 v1.0 [field_group_2]"
+          ],
+          "critic": [
+            "doc_001 v1.0 [section_3]",
+            "doc_002 v1.0 [paragraph_1]",
+            "doc_003 v1.0 [field_group_2]"
+          ]
+        },
+        "mechanical_results": {
+          "structural": "fail",
+          "failed_structural_checks": [
+            "target_form_gate"
+          ],
+          "smoke": "fail",
+          "failed_smoke_checks": [
+            "next_action",
+            "task_completed",
+            "target_form_not_rejected"
+          ]
+        }
+      },
+      "human_adjudication": "pending",
+      "replay": {
+        "ledger_valid": true,
+        "evaluation_reproduced": true
+      },
+      "usage": {
+        "model_calls": 6,
+        "input_tokens": 44543,
+        "output_tokens": 13544,
+        "tool_calls": 2,
+        "failed_calls": 2,
+        "cost_usd": null,
+        "elapsed_seconds": 105.298216,
+        "estimated_usage_calls": 0,
+        "cost_complete": false,
+        "api_attempts": 6,
+        "failed_api_attempts": 0,
+        "known_cost_usd": 0.0,
+        "posted_rate_estimate_usd": 0.11377505
+      },
+      "result_file_sha256": "a21c7fb2a2feca9d2e2cf9623e718c3ce618d5d5c0875ed110963e878b7a9827"
+    },
+    {
+      "case_id": "question_003-mutation_003",
+      "question": "Independently of the applicant saying so, do the supplied records establish that flood-related workplace closure caused this applicant to lose the reported paid shift on 4 April 2026?",
+      "run_id": "7e19256295e14c23839e1ef965612972",
+      "runtime_status": "failed",
+      "stop_reason": "execution_failure",
+      "target_claim": null,
+      "target_standing": null,
+      "response": {
+        "text": "No supported response was completed within the available resources.",
+        "target_claim_id": null,
+        "findings": [],
+        "next_action": {
+          "kind": "answer",
+          "description": "",
+          "condition_ids": []
+        },
+        "task_completed": false,
+        "caveats": [
+          "Run stopped at execution_failure; the available partial result is retained."
+        ],
+        "target_scope_answered": true
+      },
+      "errors": [
+        "EvidenceError: Unknown table: roster_row_17",
+        "EvidenceError: Unknown table: operations_log"
+      ],
+      "structural_status": "pass",
+      "smoke_status": "not_checkable",
+      "model_review": {
+        "setting": "question_003-mutation_003",
+        "run_id": "7e19256295e14c23839e1ef965612972",
+        "result_hash": "d42b00a8204c7418d7d05d840915940ce67800976666370d285a700b281d25fb",
+        "author_type": "model",
+        "human_adjudication": "pending",
+        "adequacy": "inadequate",
+        "execution_outcome": "failed_before_graph",
+        "review_scope": "Saved resumed attempt only. Prior interrupted unsaved attempt is unknown and is not counted or reconstructed.",
+        "substantive_text": "No substantive causal output: no graph, evaluation, target or findings. This is an acquisition/protocol failure, not an evidence-based unresolved causal assessment.",
+        "warrant_defect": "Sufficient employer trace exists in doc_005 reading_blocks, but no employer text was acquired. Only bulletin doc_002 was exposed.",
+        "tool_contract_defect": "doc_005 contains reading-block locators operations_log, roster_row_17, payroll_row_17 and no tables. Worker used those locators as read_table table IDs and invented columns. Correct retrieval contract is open with source_id doc_005 and version 1.0, optionally a locator.",
+        "critic_behavior": "Not invoked before failure; no critique or attacks.",
+        "revision_behavior": "No graph constructed. Two consecutive unknown-table errors stop the run after three model calls.",
+        "parse_incidents": [
+          {
+            "event": 2,
+            "raw_objects": 7,
+            "admitted": "First doc_002 open",
+            "dropped": "Two correct whole-doc_005 opens, additional bulletin opens, search, premature finish",
+            "material_effect": "Material employer source acquisition silently discarded. Only bulletin was received."
+          },
+          {
+            "event": 7,
+            "raw_objects": 2,
+            "admitted": "read_table with nonexistent table roster_row_17, resulting in error",
+            "dropped": "Duplicate invalid read_table",
+            "material_effect": "First consecutive acquisition error."
+          },
+          {
+            "event": 12,
+            "raw_objects": 5,
+            "admitted": "read_table with nonexistent table operations_log, resulting in error",
+            "dropped": "Two duplicate invalid read_table calls and two searches",
+            "material_effect": "Second consecutive error stops run; potentially useful search fallback discarded."
+          }
+        ],
+        "score_distinction": "Structural pass reflects empty-record checks, with target/form/evaluation/graph checks unassessed. Smoke is not_checkable. Neither signifies a successful causal assessment.",
+        "sources_exposed": {
+          "proposer": [
+            "doc_002 v1.0 [paragraph_1]",
+            "doc_002 v1.0 [paragraph_2]"
+          ],
+          "critic": []
+        },
+        "mechanical_results": {
+          "structural": "pass",
+          "failed_structural_checks": [],
+          "smoke": "not_checkable",
+          "failed_smoke_checks": []
+        }
+      },
+      "human_adjudication": "pending",
+      "replay": {
+        "ledger_valid": true,
+        "evaluation_reproduced": null,
+        "reason": "arm has no graph"
+      },
+      "usage": {
+        "model_calls": 3,
+        "input_tokens": 17697,
+        "output_tokens": 1344,
+        "tool_calls": 3,
+        "failed_calls": 2,
+        "cost_usd": null,
+        "elapsed_seconds": 16.24861,
+        "estimated_usage_calls": 0,
+        "cost_complete": false,
+        "api_attempts": 3,
+        "failed_api_attempts": 0,
+        "known_cost_usd": 0.0,
+        "posted_rate_estimate_usd": 0.01672875
+      },
+      "result_file_sha256": "f5e9c603113df63905213ce115a8d62286a5b8964095d6ebcb92d261f8be7450"
+    },
+    {
+      "case_id": "question_005-baseline",
+      "question": "Does the supplied record establish final eligibility for this applicant under the currently bound policy?",
+      "run_id": "07747a0d6acc4ad9a3210081c23703cc",
+      "runtime_status": "complete",
+      "stop_reason": "settled_for_purpose",
+      "target_claim": "The supplied record does not establish final eligibility for the applicant.",
+      "target_standing": "established",
+      "response": {
+        "text": "Established: The supplied record does not establish final eligibility for the applicant.\n\nScope: {\"as_of\": \"2026-04-12\", \"case_id\": \"case_001\", \"event_date\": \"2026-04-04\", \"stage\": \"final_eligibility\"}\n\nProposed next step: The record supports a non-establishment finding for final eligibility; no further intake is needed on the supplied record.\n\nBasis: doc_003 v1.0 [field_group_3]; doc_001 v1.0 [section_3]",
+        "target_claim_id": "c_target",
+        "findings": [
+          {
+            "claim_id": "c_target",
+            "text": "The supplied record does not establish final eligibility for the applicant.",
+            "kind": "policy",
+            "form": "rule_consequence",
+            "status": "established",
+            "scope": {
+              "as_of": "2026-04-12",
+              "case_id": "case_001",
+              "event_date": "2026-04-04",
+              "stage": "final_eligibility"
+            },
+            "conditions": [],
+            "citations": [
+              {
+                "source_id": "doc_003",
+                "version": "1.0",
+                "locator": "field_group_3",
+                "quote": "Residence-register extract: not supplied. Household income statement: not supplied. Programme payment-register clearance: not supplied."
+              },
+              {
+                "source_id": "doc_001",
+                "version": "1.0",
+                "locator": "section_3",
+                "quote": "Final eligibility requires all of: a qualifying flood-related disruption, for which the signed impact statement is accepted unless an applicable contradiction requires review; ordinary residence in Riverplain Region on the event date, supported by a residence-register extract; household assessable monthly income of no more than 4,000 programme credits, supported by the specified income statement; and no previous payment from this programme for the same event, confirmed by its payment register. The missing residence, income, or payment-register records do not make the applicant ineligible; they leave final eligibility undetermined."
+              }
+            ]
+          }
+        ],
+        "next_action": {
+          "kind": "answer",
+          "description": "The record supports a non-establishment finding for final eligibility; no further intake is needed on the supplied record.",
+          "condition_ids": []
+        },
+        "task_completed": true,
+        "caveats": [
+          "Assessment only; no award authority exercised.",
+          "Conclusion is limited to the supplied record and the stated final-eligibility scope.",
+          "Standing is relative to the recorded arguments, source interpretations and stated profile; it is not a guarantee of truth.",
+          "This result supplies analysis and a proposed response, not permission to execute an action."
+        ],
+        "target_scope_answered": true,
+        "target_form_answered": true,
+        "evaluation_completed": true,
+        "record_completed": true,
+        "record_defects": []
+      },
+      "errors": [
+        "ValueError: condition cq_authority changed meaning; use a new condition ID",
+        "ValueError: evidence e_policy_1 is immutable; use a new evidence ID for a correction"
+      ],
+      "structural_status": "pass",
+      "smoke_status": "fail",
+      "model_review": {
+        "setting": "question_005-baseline",
+        "run_id": "07747a0d6acc4ad9a3210081c23703cc",
+        "result_hash": "f070fc8ced857d817774233236755ea4c23173899eb52271f5f4dc385a97eacc",
+        "author_type": "model",
+        "human_adjudication": "pending",
+        "adequacy": "partial",
+        "core_determination_adequacy": "adequate",
+        "substantive_text": "Correct conclusion that supplied record does not establish final eligibility. The kernel establishes that non-establishment proposition, not applicant eligibility. Delivered report is too terse: narrative omits the three missing evidence kinds and accepted impact condition, although structured quotations include missing residence-register, household-income and payment-register documents plus the policy.",
+        "warrant_defect": "No contrary eligibility inference or award/refusal. Explicit application missing-record statement plus policy supports non-establishment. Source acquisition does not assess the full impact account; final report does not walk through all conditions.",
+        "critic_behavior": "Valid three-attack critique challenges current-policy authority wording, same-event applicability wording, and application-level versus whole-record absence. First two are literal citation-framing concerns with current status/context also present in supplied metadata; none locates contrary eligibility evidence. Critic does not review final repaired argument.",
+        "revision_behavior": "Two revisions rejected for same-ID condition text change and immutable evidence change. Final a_target_3 uses new conditions and direct evidence premises; old arguments withdrawn. Old condition attacks remain IN but do not reach new paraphrased conditions. Claim attack atk_003 omitted scope required for a claim target and is NOT_ADMITTED with attack_scope_mismatch.",
+        "parse_incidents": [
+          {
+            "event": 2,
+            "raw_objects": 2,
+            "admitted": "Search",
+            "dropped": "Duplicate search",
+            "material_effect": "No distinct retrieval lost."
+          },
+          {
+            "event": 7,
+            "raw_objects": 2,
+            "admitted": "Policy section3 open",
+            "dropped": "Premature finish",
+            "material_effect": "Policy text acquired; no distinct source request lost."
+          },
+          {
+            "event": 24,
+            "raw_objects": 1,
+            "admitted": "Parseable operation only; graph edit rejected",
+            "rejected": "condition cq_authority changed meaning; use a new condition ID",
+            "material_effect": "Not an accepted repair."
+          },
+          {
+            "event": 35,
+            "raw_objects": 1,
+            "admitted": "Parseable operation only; graph edit rejected",
+            "rejected": "evidence e_policy_1 is immutable; use a new evidence ID for a correction",
+            "material_effect": "Not an accepted repair."
+          }
+        ],
+        "score_distinction": "Structural pass; smoke fails target_status and action. Established applies to a negative epistemic proposition, so this status is not an established-eligibility error. Action answer differs from expected prepare_assessment/request_information. Report explanation remains partial independently of categorical labels.",
+        "sources_exposed": {
+          "proposer": [
+            "doc_001 v1.0 [section_3]",
+            "doc_002 v1.0 [paragraph_1]",
+            "doc_003 v1.0 [field_group_3]"
+          ],
+          "critic": [
+            "doc_001 v1.0 [section_3]",
+            "doc_002 v1.0 [paragraph_1]",
+            "doc_003 v1.0 [field_group_3]"
+          ]
+        },
+        "mechanical_results": {
+          "structural": "pass",
+          "failed_structural_checks": [],
+          "smoke": "fail",
+          "failed_smoke_checks": [
+            "target_status",
+            "next_action"
+          ]
+        },
+        "target_orientation_qualification": "The literal question asks whether the supplied record establishes eligibility. Establishing the negative metaclaim that it does not is a legitimate answer orientation. The established label does not mean the applicant is eligible; prespecified smoke target_status treats a different target polarity. The partial review concerns omission of the required condition-by-condition explanation from the rendered report, independently of categorical mismatch.",
+        "prespecified_scores_changed": false
+      },
+      "human_adjudication": "pending",
+      "replay": {
+        "ledger_valid": true,
+        "evaluation_reproduced": true
+      },
+      "usage": {
+        "model_calls": 8,
+        "input_tokens": 63560,
+        "output_tokens": 11200,
+        "tool_calls": 2,
+        "failed_calls": 2,
+        "cost_usd": null,
+        "elapsed_seconds": 70.099121,
+        "estimated_usage_calls": 0,
+        "cost_complete": false,
+        "api_attempts": 8,
+        "failed_api_attempts": 0,
+        "known_cost_usd": 0.0,
+        "posted_rate_estimate_usd": 0.10879915
+      },
+      "result_file_sha256": "1ff76006772cbd772d0c1a0aa78049398187dba80047ef65cbe29d6afa2becaf"
+    },
+    {
+      "case_id": "question_006-baseline",
+      "question": "Does this evidence establish that every worker with an employer site in North Wharf block lost wage income because of the flooding on 4 April 2026?",
+      "run_id": "2f9cff5fc3b2464aa91f144baa9f5df5",
+      "runtime_status": "partial",
+      "stop_reason": "information_unavailable",
+      "target_claim": "Every worker with an employer site in North Wharf block lost wage income because of the flooding on 4 April 2026.",
+      "target_standing": "not_established",
+      "response": {
+        "text": "Not established: Every worker with an employer site in North Wharf block lost wage income because of the flooding on 4 April 2026.\n\nScope: {\"outcome\": \"lost wage income because of flooding\", \"period\": \"2026-04-04\", \"population\": \"all workers with employer sites in North Wharf block\", \"quantifier\": \"every worker\"}\n\nNot established: The incident bulletin reports flooding in North Wharf block on 4 April 2026, but expressly says it is not a finding about every address, worker, or household in the block.\n\nNot established: The application statement shows one worker saying they lost a scheduled morning shift and wages because an access road flooded on 4 April 2026.\n\nProposed next step: No further investigation needed for this publication check; the record does not establish the universal statement.",
+        "target_claim_id": "c_target",
+        "findings": [
+          {
+            "claim_id": "c_1",
+            "text": "The incident bulletin reports flooding in North Wharf block on 4 April 2026, but expressly says it is not a finding about every address, worker, or household in the block.",
+            "kind": "substantive",
+            "form": "assertion",
+            "status": "not_established",
+            "scope": {
+              "outcome": "lost wage income because of flooding",
+              "period": "2026-04-04",
+              "population": "all workers with employer sites in North Wharf block",
+              "quantifier": "every worker"
+            },
+            "conditions": [],
+            "citations": []
+          },
+          {
+            "claim_id": "c_2",
+            "text": "The application statement shows one worker saying they lost a scheduled morning shift and wages because an access road flooded on 4 April 2026.",
+            "kind": "substantive",
+            "form": "assertion",
+            "status": "not_established",
+            "scope": {
+              "outcome": "lost wage income because of flooding",
+              "period": "2026-04-04",
+              "population": "all workers with employer sites in North Wharf block",
+              "quantifier": "every worker"
+            },
+            "conditions": [],
+            "citations": []
+          },
+          {
+            "claim_id": "c_target",
+            "text": "Every worker with an employer site in North Wharf block lost wage income because of the flooding on 4 April 2026.",
+            "kind": "substantive",
+            "form": "universal",
+            "status": "not_established",
+            "scope": {
+              "outcome": "lost wage income because of flooding",
+              "period": "2026-04-04",
+              "population": "all workers with employer sites in North Wharf block",
+              "quantifier": "every worker"
+            },
+            "conditions": [],
+            "citations": []
+          }
+        ],
+        "next_action": {
+          "kind": "answer",
+          "description": "No further investigation needed for this publication check; the record does not establish the universal statement.",
+          "condition_ids": []
+        },
+        "task_completed": false,
+        "caveats": [
+          "This is a failure to establish the universal claim, not proof that the universal claim is false or that any particular counterexample exists.",
+          "The evidence supports a bounded flooding event and one individual loss statement, but not population-wide coverage.",
+          "Standing is relative to the recorded arguments, source interpretations and stated profile; it is not a guarantee of truth.",
+          "This result supplies analysis and a proposed response, not permission to execute an action."
+        ],
+        "target_scope_answered": true,
+        "target_form_answered": true,
+        "evaluation_completed": true,
+        "record_completed": true,
+        "record_defects": []
+      },
+      "errors": [
+        "ValidationError: 5 validation errors for Operation\ncaveats\n  Extra inputs are not permitted [type=extra_forbidden, input_value=['This is an unresolved u...ulation-wide coverage.'], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden\ntarget_claim_id\n  Extra inputs are not permitted [type=extra_forbidden, input_value='c_target', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden\ntarget_scope_answered\n  Extra inputs are not permitted [type=extra_forbidden, input_value=True, input_type=bool]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden\ntask_completed\n  Extra inputs are not permitted [type=extra_forbidden, input_value=True, input_type=bool]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden\nnext_action\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'kind': 'answer', 'descr....', 'condition_ids': []}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden"
+      ],
+      "structural_status": "pass",
+      "smoke_status": "fail",
+      "model_review": {
+        "setting": "question_006-baseline",
+        "run_id": "2f9cff5fc3b2464aa91f144baa9f5df5",
+        "result_hash": "694fc3b1fb335035f16f88510a721b85d3fc219fe140c67d11dd344ba0d131a8",
+        "author_type": "model",
+        "human_adjudication": "pending",
+        "adequacy": "partial",
+        "core_determination_adequacy": "adequate",
+        "substantive_text": "Correctly declines the every-worker statement, explains area-event plus one account does not supply universal coverage, and explicitly avoids asserting falsehood or a hidden counterexample. Overall record and rendering remain incomplete and misleading for supported component claims.",
+        "warrant_defect": "Bulletin and individual-account component claims are assigned the universal wage-loss scope, have no supporting arguments and render not_established without citations. Target uses unsupported claim form universal; evaluated non-establishment comes from unsupported_claim_form and argument_claim_not_admitted, not a completed substantive derivation. Sufficient information exists to complete a useful scope correction despite the unfinished record.",
+        "critic_behavior": "Valid admitted critique identifies bounded source scope, lack of population-wide bridge, and bounded_absence/assertion form mismatch. Attack remains open. The population-bridge criticism must not be interpreted as requiring proof of a positive universal merely to decline it.",
+        "revision_behavior": "One repair with response fields placed at Operation root was rejected in full, including proposed argument withdrawal. Final admissible reply nests response correctly but leaves unsupported target form, ungrounded component claims and unrepaired bounded_absence argument. Run ends partial/information_unavailable with task_completed false.",
+        "parse_incidents": [
+          {
+            "event": 2,
+            "raw_objects": 4,
+            "admitted": "Search",
+            "dropped": "Full bulletin open, full application open and premature finish",
+            "material_effect": "Useful full-document reads were discarded; worker retained search snippets only."
+          },
+          {
+            "event": 25,
+            "raw_objects": 1,
+            "admitted": null,
+            "rejected": "Operation schema violation: caveats, target_claim_id, target_scope_answered, task_completed and next_action at root instead of response",
+            "material_effect": "Whole repair rejected, including withdrawal; not an accepted fix."
+          }
+        ],
+        "score_distinction": "Structural pass checks exact record relationships despite unsupported semantic form. Smoke fails task_completed only; status and action pass. Correct category and useful caveats do not establish successful argument completion.",
+        "sources_exposed": {
+          "proposer": [
+            "doc_001 v1.0 [section_3]",
+            "doc_002 v1.0 [paragraph_1]",
+            "doc_003 v1.0 [field_group_2]"
+          ],
+          "critic": [
+            "doc_001 v1.0 [section_3]",
+            "doc_002 v1.0 [paragraph_1]",
+            "doc_003 v1.0 [field_group_2]"
+          ]
+        },
+        "mechanical_results": {
+          "structural": "pass",
+          "failed_structural_checks": [],
+          "smoke": "fail",
+          "failed_smoke_checks": [
+            "task_completed"
+          ]
+        }
+      },
+      "human_adjudication": "pending",
+      "replay": {
+        "ledger_valid": true,
+        "evaluation_reproduced": true
+      },
+      "usage": {
+        "model_calls": 6,
+        "input_tokens": 42555,
+        "output_tokens": 7143,
+        "tool_calls": 1,
+        "failed_calls": 1,
+        "cost_usd": null,
+        "elapsed_seconds": 74.481857,
+        "estimated_usage_calls": 0,
+        "cost_complete": false,
+        "api_attempts": 6,
+        "failed_api_attempts": 0,
+        "known_cost_usd": 0.0,
+        "posted_rate_estimate_usd": 0.07073615
+      },
+      "result_file_sha256": "6f0712ec2ec363c685023dbfc5f8c1b930e4c03a5de03aedd7718c2b22dd8e49"
+    }
+  ]
+}
