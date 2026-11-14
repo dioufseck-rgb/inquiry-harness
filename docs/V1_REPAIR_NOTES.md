@@ -1,6 +1,6 @@
-# V1 operational corrections before the second live batch
+# V1 operational corrections and controlled reruns
 
-14 November 2026 · `1.0.0a3`
+14 November 2026 · `1.0.0a4`
 
 The first eight-case live batch is preserved at commit `7712518`, including its original scores. These changes address failures observed in that batch. They do not supply new inference patterns for the whole epistemic repertoire or establish an accuracy advantage.
 
@@ -9,7 +9,7 @@ The first eight-case live batch is preserved at commit `7712518`, including its 
 | Observed problem | Correction | Acceptance boundary |
 |---|---|---|
 | The first JSON object was accepted and later operations discarded | Consume exactly one complete bare JSON object; reject trailing objects, duplicate keys and malformed data | Full parser plus role-specific Pydantic validation |
-| Provider text parts and completion reasons were flattened or omitted | Preserve ordinary answer-block boundaries, response status and completion details; collapse only byte-identical completed answer messages; reject distinct answer blocks and incomplete generation | Provider adapter; private reasoning content is not recorded |
+| Provider text parts and completion reasons were flattened or omitted | Preserve ordinary answer-block boundaries, response status and completion details; use the declared final-answer channel; retain non-operative commentary, normalize only exact duplicate finals, reject conflicting finals and incomplete generation | Provider adapter; private reasoning content is not recorded |
 | Critic inherited proposer tool instructions and lacked a validated envelope | Separate critic prompt/schema; bounded repair of invalid critiques; controller executes evidence requests and presents their results before a final review | A malformed or provisional critique never counts as completed review |
 | Structural record errors became stale argumentative objections | Repair record references and condition links before critique | Code validates structure; the critic examines substantive warrant |
 | Editing an argument failed to resolve its challenge, or metadata could make a reply appear new | Stable question text plus revisable `Condition.answer`; explicit located reply; controller stamps semantic revisions, ignoring extra metadata and ID-list order | Edits alone do not discharge attacks; old challenges remain in the ledger |
@@ -37,13 +37,23 @@ The inputs are wholly synthetic. Credentials are read from the environment or a 
 Run from an installed checkout:
 
 ```sh
-python experiments/v1/rerun_known_failures.py --out runs/v1/repair_20261114_live_v2
+python experiments/v1/rerun_known_failures.py --out runs/v1/repair_20261114_live_v3
 ```
 
 ## Provider-format interruption before the completed rerun
 
 The first repair batch, frozen at `f871bc5`, stopped after two failed cases and one interrupted case. The provider returned separate completed messages with byte-identical JSON in three replies. Rejecting every multi-block response prevented these unambiguous operations from running. Another reply contained distinct commentary plus repeated final JSON and remains correctly rejected.
 
-Version `1.0.0a3` normalizes only exact repeated complete answer messages into one operation. All original message boundaries and text remain in the usage record, with normalization metadata. Distinct messages, JSON fragments, duplicate JSON keys, incomplete output and appended operations remain invalid. This compatibility change does not authorize executing multiple operations per call.
+Version `1.0.0a3` normalized only exact repeated complete answer messages into one operation. All original message boundaries and text remain in the usage record, with normalization metadata. Distinct messages, JSON fragments, duplicate JSON keys, incomplete output and appended operations remain invalid. This compatibility change does not authorize executing multiple operations per call.
 
 The stopped batch is preserved separately, including the pending request whose eventual usage and outcome were not observed. The next batch uses a new directory and frozen commit. This is an explicit restart after a provider-format repair, not an unreported retry within the earlier protocol.
+
+## Phase handling and terminal review correction
+
+The complete intermediate batch at `24dbf24` retained the strict all-message rule. Its preserved traces exposed two integration errors addressed in `1.0.0a4`.
+
+First, OpenAI's [deployment checklist](https://developers.openai.com/api/docs/guides/deployment-checklist) and [GPT-5.4 guide](https://developers.openai.com/api/docs/guides/latest-model?model=gpt-5.4) define `commentary` as intermediate progress and `final_answer` as the completed response. The adapter now treats this as an explicit channel contract: commentary is preserved with its indexes and exclusion reason but never executed as an operation or admitted as evidence. Only the final channel supplies a candidate operation. Multiple distinct final answers remain invalid; exact repeated complete finals can normalize once. A legacy single unphased message remains supported without guessing a phase. No first-object parsing or last-message preference is used.
+
+Second, a valid `finish` followed by a completed critique with no attacks should terminate when all existing task, record, scope, delivery and review gates hold. The controller previously continued despite that finish request, consuming calls on redundant confirmations and sometimes turning a complete artifact into an operational failure. The correction preserves the finish request through that review. An objection, invalid or provisional review, or incomplete record still requires further work.
+
+The intermediate results remain separate. The final comparison reports every attempted batch and does not treat repeated development cases as independent held-out evidence. Raw traces are retained privately; they were not published to the public repository.

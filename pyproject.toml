@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "inquiry-harness"
-version = "1.0.0a3"
+version = "1.0.0a4"
 description = "Research agent harness with an explicit argument model: schemes, critical questions, grounded semantics, proof standards."
 requires-python = ">=3.11"
 dependencies = [

@@ -381,7 +381,7 @@ def test_exact_duplicate_completed_final_messages_normalize_once_with_raw_items_
     assert parse_single_json_object(reply)["operation"] == "open"
     assert len(client.requests) == 1
     usage = worker.usage[0]
-    assert usage["adapter_version"] == "v1-single-request-3"
+    assert usage["adapter_version"] == "v1-single-request-4"
     assert usage["provider_output_text_count"] == count
     assert usage["provider_output_normalization"] == {
         "kind": "exact_duplicate_final_answer_messages",
@@ -420,7 +420,7 @@ def test_normalized_duplicate_open_executes_one_controller_operation_only():
         "source_id": "doc_001", "version": "1.0", "locator": "section_1"}
 
 
-def test_distinct_commentary_plus_duplicate_final_messages_remains_rejected():
+def test_distinct_commentary_is_recorded_nonoperative_before_exact_final_duplicate_normalization():
     # Exact shapes/text from question_004-mutation_002 worker_usage sequence 3.
     final_text = (
         '{"operation":"open","arguments":{"source_id":"doc_001","version":"1.0","locator":"section_1"},'
@@ -437,28 +437,188 @@ def test_distinct_commentary_plus_duplicate_final_messages_remains_rejected():
     commentary.content[0].text = commentary_text
     response.output.insert(1, commentary)
     worker = LLMWorker(handle("openai", MockClient(response)))
-    with pytest.raises(ProviderOutputError) as exc:
-        worker.complete("Instructions", "Case")
-    assert exc.value.code == "multiple_text_blocks"
+    assert worker.complete("Instructions", "Case") == final_text
     usage = worker.usage[0]
-    assert usage["provider_output_normalization"] is None
+    assert usage["provider_output_admission"] == {
+        "policy": "openai_final_answer_v1", "channel": "final_answer",
+        "candidate_final_item_indexes": [2, 3], "candidate_item_indexes": [2, 3],
+        "excluded_commentary": [{"item_index": 1, "content_indexes": [0],
+                                 "reason": "phase_commentary_nonoperative"}],
+        "selected": {"item_index": 2, "content_index": 0},
+    }
+    assert usage["provider_output_normalization"] == {
+        "kind": "exact_duplicate_final_answer_messages",
+        "retained": {"item_index": 2, "content_index": 0},
+        "duplicates": [{"item_index": 3, "content_index": 0}], "duplicate_count": 1,
+    }
     assert usage["provider_output_text_count"] == 3
     messages = usage["provider_output_items"][1:]
     assert [item["phase"] for item in messages] == ["commentary", "final_answer", "final_answer"]
     assert [item["content"][0]["text"] for item in messages] == [commentary_text, final_text, final_text]
 
 
-@pytest.mark.parametrize("field,value", [
-    ("phase", "commentary"), ("phase", None), ("role", "user"), ("role", None),
-    ("status", None), ("id", None),
+@pytest.mark.parametrize("commentary_first", [True, False])
+def test_commentary_operation_never_executes_and_only_final_operation_reaches_controller(commentary_first):
+    from inquiry.v1.packets import load_packet
+    from inquiry.v1.runtime import Budget, run_inquiry
+
+    response = duplicate_final_response(count=1)
+    commentary = copy.deepcopy(response.output[1])
+    commentary.id = "commentary_message"
+    commentary.phase = "commentary"
+    commentary.content[0].text = '{"operation":"open","arguments":{"source_id":"doc_003","version":"1.0"}}'
+    response.output.insert(1 if commentary_first else 2, commentary)
+    client = MockClient(response)
+    worker = LLMWorker(handle("openai", client))
+    result = run_inquiry(load_packet().public("question_004"), worker, mode="documents",
+                         budget=Budget(max_model_calls=1))
+
+    assert len(client.requests) == result["usage"]["model_calls"] == 1
+    assert result["usage"]["tool_calls"] == 1
+    assert result["usage"]["failed_calls"] == 0
+    operations = [event["data"] for event in result["events"] if event["kind"] == "operation"]
+    assert len(operations) == 1
+    assert operations[0]["arguments"] == {"source_id": "doc_001", "version": "1.0", "locator": "section_1"}
+    tool_results = [event["data"] for event in result["events"] if event["kind"] == "tool_result"]
+    assert [item["result"]["source_id"] for item in tool_results] == ["doc_001"]
+    assert not any(segment["source_id"] == "doc_003" for exposure in result["exposures"]
+                   for segment in exposure["segments"])
+    output = next(event["data"]["reply"] for event in result["events"] if event["kind"] == "worker_output")
+    assert output == LIVE_DUPLICATE_OPEN
+    record = worker.usage[0]
+    admission = record["provider_output_admission"]
+    commentary_index, final_index = (1, 2) if commentary_first else (2, 1)
+    assert admission["excluded_commentary"] == [{
+        "item_index": commentary_index, "content_indexes": [0], "reason": "phase_commentary_nonoperative"}]
+    assert admission["candidate_final_item_indexes"] == [final_index]
+    assert admission["selected"] == {"item_index": final_index, "content_index": 0}
+    assert record["provider_output_items"][commentary_index]["content"][0]["text"] == commentary.content[0].text
+
+
+def test_only_commentary_is_not_an_answer_even_when_it_contains_a_valid_operation():
+    response = openai_response()
+    response.output[0].phase = "commentary"
+    response.output[0].content[0].text = LIVE_DUPLICATE_OPEN
+    worker = LLMWorker(handle("openai", MockClient(response)))
+    with pytest.raises(ProviderOutputError) as exc:
+        worker.complete("Instructions", "Case")
+    assert exc.value.code == "missing_final_answer"
+    record = worker.usage[0]
+    assert record["provider_output_items"][0]["content"][0]["text"] == LIVE_DUPLICATE_OPEN
+    assert record["provider_output_admission"]["candidate_final_item_indexes"] == []
+    assert record["provider_output_admission"]["excluded_commentary"] == [{
+        "item_index": 0, "content_indexes": [0], "reason": "phase_commentary_nonoperative"}]
+    assert record["provider_output_admission"]["selected"] is None
+
+
+def test_single_legacy_unphased_message_has_an_explicit_admission_channel():
+    response = openai_response()
+    response.output[0].phase = None
+    worker = LLMWorker(handle("openai", MockClient(response)))
+    assert worker.complete("Instructions", "Case") == '{"ok": true}'
+    assert worker.usage[0]["provider_output_admission"] == {
+        "policy": "openai_final_answer_v1", "channel": "legacy_single_unphased",
+        "candidate_final_item_indexes": [], "candidate_item_indexes": [0],
+        "excluded_commentary": [], "selected": {"item_index": 0, "content_index": 0},
+    }
+
+
+@pytest.mark.parametrize("phases", [(None, None), ("commentary", None), ("commentary", "unknown")])
+def test_multiple_unphased_or_unknown_phase_messages_cannot_use_legacy_admission(phases):
+    response = duplicate_final_response()
+    for message, phase in zip(response.output[1:], phases):
+        message.phase = phase
+    worker = LLMWorker(handle("openai", MockClient(response)))
+    with pytest.raises(ProviderOutputError) as exc:
+        worker.complete("Instructions", "Case")
+    assert exc.value.code == "invalid_output_phase"
+    assert worker.usage[0]["provider_output_admission"]["channel"] == "final_answer"
+    assert worker.usage[0]["provider_output_admission"]["selected"] is None
+
+
+@pytest.mark.parametrize("phase", ["unknown", False])
+def test_single_unknown_phase_is_not_reinterpreted_as_missing_phase(phase):
+    response = openai_response()
+    response.output[0].phase = phase
+    worker = LLMWorker(handle("openai", MockClient(response)))
+    with pytest.raises(ProviderOutputError) as exc:
+        worker.complete("Instructions", "Case")
+    assert exc.value.code == "invalid_output_phase"
+    assert worker.usage[0]["provider_output_admission"]["selected"] is None
+
+
+def test_commentary_text_blocks_are_retained_without_json_parsing_or_fragment_assembly():
+    response = openai_response()
+    commentary = copy.deepcopy(response.output[0])
+    commentary.id = "commentary_message"
+    commentary.phase = "commentary"
+    commentary.content = [SimpleNamespace(type="output_text", text="I am checking the record."),
+                          SimpleNamespace(type="output_text", text='{"unfinished commentary":')]
+    response.output.insert(0, commentary)
+    worker = LLMWorker(handle("openai", MockClient(response)))
+    assert worker.complete("Instructions", "Case") == '{"ok": true}'
+    record = worker.usage[0]
+    assert record["provider_output_text_count"] == 3
+    assert record["provider_output_admission"]["excluded_commentary"] == [{
+        "item_index": 0, "content_indexes": [0, 1], "reason": "phase_commentary_nonoperative"}]
+    assert [block["text"] for block in record["provider_output_items"][0]["content"]] == [
+        "I am checking the record.", '{"unfinished commentary":']
+
+
+def test_malformed_final_cannot_fall_back_to_a_well_formed_commentary_object():
+    response = openai_response()
+    commentary = copy.deepcopy(response.output[0])
+    commentary.id = "commentary_message"
+    commentary.phase = "commentary"
+    response.output[0].content[0].text = '{"operation":'
+    response.output.insert(0, commentary)
+    worker = LLMWorker(handle("openai", MockClient(response)))
+    with pytest.raises(OutputProtocolError) as exc:
+        worker.complete("Instructions", "Case")
+    assert exc.value.code == "invalid_json"
+    record = worker.usage[0]
+    assert record["provider_output_admission"]["candidate_final_item_indexes"] == [1]
+    assert record["provider_output_admission"]["selected"] is None
+    assert record["output_error_code"] == "invalid_json"
+    assert record["provider_output_items"][0]["content"][0]["text"] == '{"ok": true}'
+    assert record["provider_output_items"][1]["content"][0]["text"] == '{"operation":'
+
+
+@pytest.mark.parametrize("defect,expected_code", [
+    ("incomplete", "provider_incomplete"), ("refusal", "provider_refusal"),
 ])
-def test_exact_text_alone_cannot_override_message_phase_role_status_or_identity(field, value):
+def test_commentary_exclusion_cannot_hide_incomplete_or_refused_provider_output(defect, expected_code):
+    response = openai_response()
+    commentary = copy.deepcopy(response.output[0])
+    commentary.id = "commentary_message"
+    commentary.phase = "commentary"
+    if defect == "incomplete":
+        commentary.status = "incomplete"
+    else:
+        commentary.content = [SimpleNamespace(type="refusal", refusal="Declined")]
+    response.output.insert(0, commentary)
+    worker = LLMWorker(handle("openai", MockClient(response)))
+    with pytest.raises(ProviderOutputError) as exc:
+        worker.complete("Instructions", "Case")
+    assert exc.value.code == expected_code
+    record = worker.usage[0]
+    assert record["provider_output_admission"]["candidate_final_item_indexes"] == [1]
+    assert record["provider_output_admission"]["selected"] is None
+    assert record["usage_known"] is True
+
+
+@pytest.mark.parametrize("field,value,expected_code", [
+    ("phase", None, "invalid_output_phase"), ("phase", "unknown", "invalid_output_phase"),
+    ("role", "user", "invalid_output_message"), ("role", None, "invalid_output_message"),
+    ("status", None, "invalid_output_message"), ("id", None, "invalid_output_message"),
+])
+def test_exact_text_alone_cannot_override_message_phase_role_status_or_identity(field, value, expected_code):
     response = duplicate_final_response()
     setattr(response.output[1], field, value)
     worker = LLMWorker(handle("openai", MockClient(response)))
     with pytest.raises(ProviderOutputError) as exc:
         worker.complete("Instructions", "Case")
-    assert exc.value.code == "multiple_text_blocks"
+    assert exc.value.code == expected_code
     assert worker.usage[0]["provider_output_normalization"] is None
 
 
@@ -496,8 +656,8 @@ def test_identical_blocks_within_one_message_are_not_duplicate_completed_message
 
 @pytest.mark.parametrize("defect,expected_code", [
     ("incomplete_response", "provider_incomplete"), ("incomplete_message", "provider_incomplete"),
-    ("unknown_response_status", "multiple_text_blocks"), ("refusal", "provider_refusal"),
-    ("extra_content", "multiple_text_blocks"), ("extra_item", "multiple_text_blocks"),
+    ("unknown_response_status", "provider_incomplete"), ("refusal", "provider_refusal"),
+    ("extra_content", "invalid_output_content"), ("extra_item", "unexpected_output_items"),
 ])
 def test_duplicate_text_never_hides_provider_failure_refusal_or_additional_content(defect, expected_code):
     response = duplicate_final_response()
@@ -612,14 +772,14 @@ def test_missing_openai_output_items_cannot_fall_back_to_flattened_text():
     assert worker.usage[0]["provider_output_boundaries_known"] is False
 
 
-def test_multiple_objects_inside_one_text_block_reach_strict_parser_intact():
+def test_multiple_objects_inside_one_final_text_block_are_rejected_with_raw_text_intact():
     response = openai_response()
     raw = '{"operation":"open","arguments":{"source_id":"first"}}{"operation":"finish"}'
     response.output[0].content[0].text = raw
     worker = LLMWorker(handle("openai", MockClient(response)))
-    reply = worker.complete("Instructions", "Case")
-    assert reply == raw
     with pytest.raises(OutputProtocolError) as exc:
-        parse_single_json_object(reply)
+        worker.complete("Instructions", "Case")
     assert exc.value.code == "trailing_data"
     assert worker.usage[0]["provider_output_items"][0]["content"][0]["text"] == raw
+    assert worker.usage[0]["provider_output_admission"]["selected"] is None
+    assert worker.usage[0]["invocation_succeeded"] is False

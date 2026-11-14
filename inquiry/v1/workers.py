@@ -161,11 +161,12 @@ class LLMWorker:
                                       texts: list[Any]) -> bool:
         """Recognize repeated complete final answers, never select among answers.
 
-        Every non-reasoning item must be a completed assistant final-answer
-        message with exactly one ordinary text block. All text must match
-        exactly, and that common text must be one complete JSON object. No
-        whitespace trimming, semantic JSON equivalence, phase filtering, or
-        fragment assembly is permitted. The original items remain untouched.
+        The declared admission channel has already separated and recorded
+        non-operative commentary. Every candidate must be a completed assistant
+        final-answer message with exactly one ordinary text block. All text must
+        match exactly, and that common text must be one complete JSON object.
+        No trimming, semantic JSON equivalence, or fragment assembly is permitted.
+        The original items remain untouched.
         """
         if self.provider != "openai" or entry["provider_status"] != "completed":
             return False
@@ -199,12 +200,66 @@ class LLMWorker:
         }
         return True
 
+    @staticmethod
+    def _record_openai_admission(entry: dict[str, Any], items: list[dict[str, Any]]) -> None:
+        """Declare channel candidates independently of their JSON contents."""
+        messages = [item for item in items if item["type"] == "message"]
+        finals = [item["index"] for item in messages if item["phase"] == "final_answer"]
+        legacy = (len(messages) == 1 and messages[0]["phase"] is None
+                  and "invalid_phase_type" not in messages[0])
+        entry["provider_output_admission"] = {
+            "policy": "openai_final_answer_v1",
+            "channel": "legacy_single_unphased" if legacy else "final_answer",
+            "candidate_final_item_indexes": finals,
+            "candidate_item_indexes": [messages[0]["index"]] if legacy else finals,
+            "excluded_commentary": [
+                {"item_index": item["index"],
+                 "content_indexes": [block["index"] for block in item["content"]],
+                 "reason": "phase_commentary_nonoperative"}
+                for item in messages if item["phase"] == "commentary"
+            ],
+            "selected": None,
+        }
+
+    @staticmethod
+    def _openai_answer_candidates(entry: dict[str, Any], items: list[dict[str, Any]]) -> list[dict[str, Any]]:
+        """Use documented message phases, with one explicit legacy exception.
+
+        Commentary is retained in the raw record and never parsed as an
+        operation or evidence. Missing/unknown phases in a multi-message reply
+        are ambiguous; message position and apparent JSON validity cannot
+        resolve them. A sole unphased assistant message is the legacy channel.
+        """
+        admission = entry["provider_output_admission"]
+        legacy = admission["channel"] == "legacy_single_unphased"
+        if not legacy and entry["provider_status"] != "completed":
+            raise ProviderOutputError("provider_incomplete", "Provider response completion is not established")
+        for item in items:
+            if item["type"] == "reasoning":
+                continue
+            if item["type"] != "message":
+                raise ProviderOutputError("unexpected_output_items", "Provider returned an unexpected non-message output item")
+            if not item["id"] or item["role"] != "assistant" or item["status"] != "completed":
+                raise ProviderOutputError("invalid_output_message", "Provider answer messages require identity, assistant role, and completed status")
+            if "invalid_phase_type" in item or (not legacy and item["phase"] not in {"commentary", "final_answer"}):
+                raise ProviderOutputError("invalid_output_phase", "Provider returned an unphased or unknown-phase message outside the single-message legacy contract")
+            if any(block["type"] != "output_text" or not isinstance(block.get("text"), str)
+                   for block in item["content"]):
+                raise ProviderOutputError("invalid_output_content", "Provider returned unsupported or invalid message content")
+        candidates = [item for item in items if item["index"] in admission["candidate_item_indexes"]]
+        if not candidates:
+            raise ProviderOutputError("missing_final_answer", "Provider returned no final-answer message; commentary is non-operative")
+        if any(len(item["content"]) != 1 for item in candidates):
+            raise ProviderOutputError("multiple_text_blocks", "Each final-answer message must contain exactly one text block")
+        return candidates
+
     def _response_text(self, entry: dict[str, Any], response: Any) -> str:
         """Capture safe output boundaries before checking provider completion.
 
         Never serialize SDK objects wholesale: reasoning, thinking, encrypted
         content, tool arguments, and unknown payloads must not enter the ledger.
-        Only ordinary answer text is retained, with its original item indexes.
+        Ordinary final-answer and commentary text is retained with its original
+        item indexes. Only the declared answer channel may return an operation.
         The SDK's flattened output_text convenience property is never used.
         """
         entry["provider_status"] = self._text_field(response, "status")
@@ -227,8 +282,11 @@ class LLMWorker:
             if self.provider == "openai":
                 for field in ("id", "status", "role", "phase"):
                     saved[field] = self._text_field(item, field)
+                raw_phase = self._field(item, "phase")
+                if raw_phase is not None and saved["phase"] is None:
+                    saved["invalid_phase_type"] = type(raw_phase).__name__
+                incomplete_items |= saved["status"] not in {None, "completed"}
                 if kind == "message":
-                    incomplete_items |= saved["status"] not in {None, "completed"}
                     saved["content"] = []
                     blocks = self._field(item, "content", [])
                     if not isinstance(blocks, (list, tuple)):
@@ -259,6 +317,8 @@ class LLMWorker:
         entry["provider_output_text_count"] = len(texts)
         entry["provider_output_normalization"] = None
         entry["provider_refused"] = refused or entry["provider_stop_reason"] == "refusal"
+        if self.provider == "openai":
+            self._record_openai_admission(entry, items)
 
         if entry["provider_refused"]:
             raise ProviderOutputError("provider_refusal", "Provider declined this request")
@@ -273,11 +333,20 @@ class LLMWorker:
             raise ProviderOutputError("provider_incomplete", "Provider stopped before completing the answer")
         if not boundaries_known:
             raise ProviderOutputError("missing_output_items", "Provider returned no inspectable output-item boundaries")
-        if len(texts) > 1 and not self._normalize_duplicate_messages(entry, items, texts):
+        candidates = self._openai_answer_candidates(entry, items) if self.provider == "openai" else items
+        if self.provider == "openai":
+            texts = [item["content"][0]["text"] for item in candidates]
+        if len(texts) > 1 and not self._normalize_duplicate_messages(entry, candidates, texts):
             raise ProviderOutputError(
                 "multiple_text_blocks", "Provider returned multiple answer text blocks that are not exact duplicate completed final answers")
         if not texts or not isinstance(texts[0], str) or not texts[0].strip():
             raise ProviderOutputError("empty_output", "Provider returned no text within the supplied request limits")
+        if self.provider == "openai":
+            # Full-object parsing is still required after channel selection;
+            # a malformed final must never fall back to a commentary object.
+            parse_single_json_object(texts[0])
+            entry["provider_output_admission"]["selected"] = {
+                "item_index": candidates[0]["index"], "content_index": candidates[0]["content"][0]["index"]}
         return texts[0]
 
     def _record_usage(self, entry: dict[str, Any], response: Any) -> None:
@@ -320,7 +389,7 @@ class LLMWorker:
             "provider": self.provider, "model": self.model, "effort": self.effort,
             "requested_model": self.model, "resolved_model": None,
             "sdk_package": self.provider, "sdk_version": self.sdk_version,
-            "adapter_version": "v1-single-request-3",
+            "adapter_version": "v1-single-request-4",
             "api_attempts": 0, "failed_api_attempts": 0, "request_status": "not_attempted",
             "invocation_succeeded": False, "usage_known": False,
             "input_tokens": None, "output_tokens": None, "cost_usd": None,
@@ -374,7 +443,7 @@ class LLMWorker:
             if entry["request_status"] != "completed" and entry["api_attempts"]:
                 entry.update(request_status="failed", failed_api_attempts=1)
             entry.update(error_type=type(error).__name__, http_status=getattr(error, "status_code", None))
-            if isinstance(error, ProviderOutputError):
+            if isinstance(error, (ProviderOutputError, OutputProtocolError)):
                 entry["output_error_code"] = error.code
             raise
         finally:

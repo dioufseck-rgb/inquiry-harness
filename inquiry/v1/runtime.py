@@ -56,7 +56,7 @@ class NextAction(BaseModel):
     model_config = ConfigDict(extra="forbid")
     kind: str = Field(default="answer", description="Proposed response category, not execution permission: answer for a finding; request_information for a focused missing condition; advance_intake when the stated policy permits progression to the next review stage; prepare_assessment for a conditional assessment for review.")
     description: str = ""
-    condition_ids: list[str] = Field(default_factory=list, description="Only unresolved conditions that this next step would address; omit conditions already met.")
+    condition_ids: list[str] = Field(default_factory=list, description="Only unresolved information this next step would obtain. In the harness, these IDs must reference existing open/reopened/assumed Conditions, distinct from a met policy antecedent establishing that information is missing. Other arms may use descriptive IDs.")
 
 
 class ResponseDraft(BaseModel):
@@ -208,8 +208,10 @@ def build_prompt(arm: str) -> str:
         prompt += "For a requested message or assessment, response.deliverable MUST contain that complete message or assessment. "
         prompt += "Include all material limits and outstanding conditions. Choose next_action.kind for the actual response "
         prompt += "(request_information for clarification, advance_intake for permitted progression, prepare_assessment for an assessment). "
-        prompt += "List the requested missing information in next_action.condition_ids using stable descriptive identifiers; "
-        prompt += "these are not the already-met critical questions establishing that a request is appropriate. "
+        prompt += "List the requested missing information in next_action.condition_ids using existing open, reopened, or assumed "
+        prompt += "Condition records with stable descriptive identifiers. Keep them distinct from a met policy antecedent establishing "
+        prompt += "that the information is missing. Do not reopen that antecedent or make the missing information a prerequisite "
+        prompt += "of a justified recommendation to request it. "
         prompt += "Once your graph and assessment are ready, return operation=finish instead of repeatedly rewording a submit."
     return prompt
 
@@ -352,7 +354,8 @@ def _graph_feedback(graph: InquiryGraph, evaluation: dict[str, Any], draft: Resp
     return messages
 
 
-def _delivery_defects(draft: ResponseDraft | None, public_case: dict[str, Any]) -> list[str]:
+def _delivery_defects(draft: ResponseDraft | None, public_case: dict[str, Any],
+                      graph: InquiryGraph | None = None) -> list[str]:
     if draft is None:
         return ["response_missing"]
     required = public_case["question"].get("profile", {}).get("required_form")
@@ -361,6 +364,13 @@ def _delivery_defects(draft: ResponseDraft | None, public_case: dict[str, Any]) 
         defects.append("requested_deliverable_missing")
     if draft.next_action.kind == "request_information" and not draft.next_action.condition_ids:
         defects.append("requested_information_not_identified")
+    if draft.next_action.kind == "request_information" and graph is not None:
+        for condition_id in sorted(set(draft.next_action.condition_ids)):
+            condition = graph.conditions.get(condition_id)
+            if condition is None:
+                defects.append("requested_condition_missing:" + condition_id)
+            elif condition.status == "met":
+                defects.append("requested_condition_already_met:" + condition_id)
     return defects
 
 
@@ -401,7 +411,7 @@ def _record_defects(graph: InquiryGraph, evaluation: dict[str, Any], draft: Resp
                         "attribution_requires_located_record", "conjunction_members_mismatch",
                         "process_trace_requires_linked_premises", "unsupported_claim_form",
                         "reply_does_not_discharge", "missing_condition", "invalid_condition_record",
-                        "condition_without_support"}
+                        "condition_without_support", "unsupported_support_cycle"}
     defects = [item["code"] + ":" + item.get("record_id", "")
                for item in evaluation.get("diagnostics", [])
                if item.get("code") in structural_codes and item.get("record_id") in relevant]
@@ -553,7 +563,7 @@ def _render_harness(graph: InquiryGraph, evaluation: dict[str, Any], draft: Resp
     response["evaluation_completed"] = evaluation_ok
     response["record_completed"] = not record_defects
     response["record_defects"] = record_defects
-    delivery_defects = _delivery_defects(draft, public_case)
+    delivery_defects = _delivery_defects(draft, public_case, graph)
     response["delivery_completed"] = not delivery_defects
     response["delivery_defects"] = delivery_defects
     response["task_completed"] = bool(draft.task_completed and selected is not None and scope_ok and form_ok and evaluation_ok and not record_defects and not delivery_defects)
@@ -803,20 +813,33 @@ def run_inquiry(public_case: dict[str, Any], worker: Any, *, arm: str = "harness
                     ledger.append("record_repair_requested", {"attempt": record_repairs,
                                   "defects": _record_defects(graph, evaluation, draft)})
                     continue
-                if _delivery_defects(draft, public_case):
+                if _delivery_defects(draft, public_case, graph):
                     if delivery_repairs >= budget.max_consecutive_errors:
                         stop = "execution_failure"
                         break
                     delivery_repairs += 1
-                    defects = _delivery_defects(draft, public_case)
+                    defects = _delivery_defects(draft, public_case, graph)
                     feedback.append("Complete the requested deliverable before review or finalization: " + _json(defects)
                                     + ". Put the actual message or assessment in response.deliverable, including missing conditions "
-                                    "and relevant limitations. Describing a future draft does not complete a drafting task.")
+                                    "and relevant limitations. Describing a future draft does not complete a drafting task. "
+                                    "In a harness graph, request_information condition_ids must name existing open, reopened, "
+                                    "or assumed Conditions describing the missing information, never an already-met inference check. "
+                                    "Create or reference distinct unresolved records for the information being requested. Preserve "
+                                    "a legitimately met policy antecedent establishing that the information is missing; do not reopen "
+                                    "it or attach the requested facts as prerequisites of the clarification recommendation.")
                     ledger.append("delivery_repair_requested", {"attempt": delivery_repairs, "defects": defects})
                     continue
-                submission_hash = digest({"graph": _dump(graph), "response": _dump(draft)})
+                submitted_graph = _dump(graph)
+                if submitted_graph is not None:
+                    # A controller snapshot number is not a new submission.
+                    # Keep every record and response field in this comparison.
+                    submitted_graph.pop("revision", None)
+                submission_hash = digest({"graph": submitted_graph, "response": _dump(draft)})
                 if (critic is not None and arm in {"repertoire", "harness"} and not critique_blocked
                         and critique_calls < budget.max_critique_calls):
+                    # Review must not erase the accepted submission used by the
+                    # existing identical-submission completion rule.
+                    last_submission_hash = submission_hash
                     critic_feedback = []
                     critic_errors = 0
                     request_rounds = 0
@@ -873,8 +896,32 @@ def run_inquiry(public_case: dict[str, Any], worker: Any, *, arm: str = "harness
                     if not completed_critique:
                         critique_blocked = True
                         feedback.append("A valid critique could not be completed within its repair limit. Retain a useful partial response; do not claim successful review.")
+                    elif operation.operation == "finish" and not critique.attacks:
+                        # Preserve an explicit finish through a completed review
+                        # that raises no new objection. Recheck the current
+                        # record instead of spending another call to repeat it.
+                        if arm == "harness":
+                            evaluation = _dump(evaluate(graph, profile, evidence_context=env))
+                            ready = _render_harness(graph, evaluation, draft, public_case, env)["task_completed"]
+                            ready = ready and not any(label in {"IN", "UNDECIDED"}
+                                                      for label in evaluation.get("attack_labels", {}).values())
+                        else:
+                            ready = bool(draft.task_completed and draft.target_scope_answered
+                                         and not _delivery_defects(draft, public_case))
+                        if ready:
+                            ledger.append("finish_accepted_after_review", {
+                                "target_claim_id": draft.target_claim_id,
+                                "graph_revision": graph.revision if graph is not None else None,
+                                "reviewed_submission_hash": submission_hash,
+                            })
+                            stop = "settled_for_purpose"
+                            break
                     continue
-                if operation.operation == "finish" or submission_hash == last_submission_hash:
+                unchanged_submission = submission_hash == last_submission_hash
+                if arm == "harness" and any(label in {"IN", "UNDECIDED"}
+                                             for label in evaluation.get("attack_labels", {}).values()):
+                    unchanged_submission = False
+                if operation.operation == "finish" or unchanged_submission:
                     stop = "settled_for_purpose" if draft.task_completed else "information_unavailable"
                     break
                 last_submission_hash = submission_hash
