@@ -582,7 +582,7 @@ def test_resource_exhaustion_withholds_current_findings_and_retains_prior_result
     assert {f.status for f in result.findings.values()} == {"not_established"}
     assert result.last_complete_evaluation["graph_revision"] == 3
     assert result.graph_revision == 4
-    assert result.task_completed is False
+    assert "task_completed" not in result.model_dump()
 
 
 def test_ill_posed_requires_a_supported_failed_presupposition_not_merely_a_mapping():
@@ -596,7 +596,7 @@ def test_ill_posed_requires_a_supported_failed_presupposition_not_merely_a_mappi
     argument(graph, "a-baseline", c.id)
     second = run(graph, profile, env)
     assert second.issue_statuses["issue-1"] == "ill_posed"
-    assert second.task_completed is False
+    assert "task_completed" not in second.model_dump()
 
 
 def test_claim_supersession_requires_a_valid_later_revision():

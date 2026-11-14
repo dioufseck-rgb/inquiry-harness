@@ -1,8 +1,10 @@
-"""Controlled authoring packets and a deliberately narrow public projection.
+"""Legacy hardship benchmark authoring packets and their public projection.
 
-This is a trusted local-process boundary, not an operating-system sandbox.  A
-worker must receive ``Packet.public(...)``, never the authoring file or Packet.
-The bundled fixture is provisional development material, not human gold.
+This is a trusted local-process boundary, not an operating-system sandbox. The
+benchmark caller passes ``Packet.public(...)`` through the explicit hardship
+adapter to obtain a neutral inquiry request. Workers never receive the authoring
+file or Packet. Generic services use ``contracts``, not this fixture validator.
+The bundled fixture remains unchanged development material, not human gold.
 """
 
 from __future__ import annotations

@@ -5,14 +5,15 @@ import json
 
 import pytest
 
-from inquiry.v1.demo import DemoWorker
+from inquiry.v1.adapters.hardship_demo import DemoWorker
+from inquiry.v1.adapters.hardship import to_inquiry_request
 from inquiry.v1.evidence import EvidenceEnvironment
 from inquiry.v1.models import InquiryGraph
 from inquiry.v1.packets import load_packet
 
 
 def scripted_draft(case, mode="supplied"):
-    environment = EvidenceEnvironment(case, mode)
+    environment = EvidenceEnvironment(to_inquiry_request(case), mode)
     initial = environment.initial_input()
     observations = []
     worker = DemoWorker()
@@ -33,7 +34,7 @@ def test_demo_all_seed_variants_have_valid_records_and_exposed_quotes(mode):
         for question in packet.question_ids:
             operation, environment, worker = scripted_draft(packet.public(question, mutation), mode)
             graph = InquiryGraph.model_validate(operation["graph"])
-            assert operation["response"]["task_completed"]
+            assert operation["response"]["inquiry_completed"]
             assert graph.claims["C_target"].scope.root == packet.public(question, mutation)["question"]["scope"]
             for item in graph.evidence.values():
                 assert environment.verify_quote(item.worker_id, item.source_id, item.source_version, item.quote, item.locator).valid
@@ -50,6 +51,10 @@ def test_demo_does_not_route_on_question_identifiers():
     renamed["question"]["profile"]["id"] = "profile_765"
     original, _, _ = scripted_draft(case)
     alternate, _, _ = scripted_draft(renamed)
+    assert original["graph"]["claims"]["C_target"].pop("target_question_id") == "question_004"
+    assert alternate["graph"]["claims"]["C_target"].pop("target_question_id") == "question_987"
+    assert original["response"]["findings"][0].pop("target_question_id") == "question_004"
+    assert alternate["response"]["findings"][0].pop("target_question_id") == "question_987"
     assert original["graph"] == alternate["graph"]
     assert original["response"] == alternate["response"]
 
@@ -70,14 +75,14 @@ def test_missing_intake_information_does_not_make_the_next_response_conditional(
     graph, response = operation["graph"], operation["response"]
     assert graph["claims"]["C_target"]["conditions"] == []
     assert response["findings"][0]["status"] == "established"
-    assert set(response["next_action"]["condition_ids"]) == {"impact_description", "event_date"}
+    assert {item["condition_id"] for item in response["information_needs"]} == {"impact_description", "event_date"}
     assert all(graph["conditions"][cid]["status"] == "met" for cid in graph["arguments"]["A_target"]["conditions"].values())
 
 
 def test_new_policy_requests_only_new_intake_declaration():
     operation, _, _ = scripted_draft(load_packet().public("question_004", "mutation_005"))
-    assert operation["response"]["next_action"]["condition_ids"] == ["prior_payment_declaration"]
-    assert "register clearance" not in operation["response"]["next_action"]["description"]
+    assert [item["condition_id"] for item in operation["response"]["information_needs"]] == ["prior_payment_declaration"]
+    assert "register clearance" not in operation["response"]["assessment"]
     policy_evidence = [e for e in operation["graph"]["evidence"].values() if e["source_id"] == "doc_001"]
     assert policy_evidence and all(e["source_version"] == "2.0" for e in policy_evidence)
 

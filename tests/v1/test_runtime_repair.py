@@ -1,4 +1,4 @@
-"""Local record repair, useful delivery, and revision integrity at the controller."""
+"""Local record repair, epistemic response integrity, and stable revisions."""
 
 import copy
 import json
@@ -9,12 +9,17 @@ from inquiry.v1.evidence import EvidenceEnvironment
 from inquiry.v1.kernel import evaluate
 from inquiry.v1.models import Attack, Condition, InquiryGraph
 from inquiry.v1.packets import load_packet
+from inquiry.v1.adapters.hardship import to_inquiry_request
 from inquiry.v1.runtime import Budget, _snapshot_revision, bind_profile, run_inquiry
 from inquiry.v1.workers import RecordedWorker
 
 
+def public_case(question_id, mutation_id=None):
+    return to_inquiry_request(load_packet().public(question_id, mutation_id))
+
+
 def attributed_record():
-    case = load_packet().public("question_001")
+    case = public_case("question_001")
     document = next(d for d in case["corpus"]["documents"] if d["id"] == "doc_003")
     block = next(b for b in document["reading_blocks"] if b["locator"] == "field_group_2")
     scope = case["question"]["scope"]
@@ -37,13 +42,13 @@ def attributed_record():
                             "premise_ids": ["e"], "scope": scope,
                             "conditions": {"attribution": "attribution", "applicability": "applicability"}}},
     }
-    response = {"target_claim_id": "c", "task_completed": True,
-                "next_action": {"kind": "answer", "description": "Return the attributed account."}}
+    response = {"target_claim_id": "c", "inquiry_completed": True,
+                "assessment": "The source reports this account; its report is preserved at the stated scope."}
     return case, graph, response
 
 
 def policy_record(question_id):
-    case = load_packet().public(question_id)
+    case = public_case(question_id)
     document = next(d for d in case["corpus"]["documents"] if d["id"] == "doc_001")
     locator = "section_2" if question_id == "question_004" else "section_3"
     block = next(b for b in document["reading_blocks"] if b["locator"] == locator)
@@ -59,7 +64,7 @@ def policy_record(question_id):
         }
         links[key] = cid
     graph = {
-        "claims": {"c": {"id": "c", "text": "A bounded response can be drafted under the supplied policy.",
+        "claims": {"c": {"id": "c", "text": "The supplied policy establishes the stated stage-specific requirements.",
                           "kind": "policy", "form": "rule_consequence", "scope": scope,
                           "target_question_id": case["question"]["id"]}},
         "evidence": {"policy": {"id": "policy", "source_id": document["id"],
@@ -70,19 +75,17 @@ def policy_record(question_id):
                             "premise_ids": ["policy"], "scope": scope, "conditions": links}},
     }
     response = {
-        "target_claim_id": "c", "task_completed": True,
-        "text": "A complete response can be drafted from the supplied record.",
-        "next_action": {"kind": "prepare_assessment",
-                        "description": "The requested response can now be drafted."},
+        "target_claim_id": "c", "inquiry_completed": True,
+        "assessment": None,
     }
-    deliverable = (
-        "We acknowledge your signed account and will proceed to review the separate final eligibility "
-        "requirements. This intake step is not final approval."
+    assessment = (
+        "The signed account satisfies the policy's intake threshold. The separate final eligibility "
+        "conditions remain unresolved."
         if question_id == "question_004" else
         "Final eligibility remains undetermined. The residence-register extract, income statement, and "
         "programme payment-register check remain outstanding. Their absence is not a finding of ineligibility."
     )
-    return case, graph, response, deliverable
+    return case, graph, response, assessment
 
 
 def test_malformed_submit_is_repaired_before_the_critic_sees_the_graph():
@@ -120,44 +123,43 @@ def test_malformed_submit_is_repaired_before_the_critic_sees_the_graph():
     assert critic.observed_graphs[0]["arguments"]["a"]["conditions"] == graph["arguments"]["a"]["conditions"]
     assert result["graph"]["attacks"] == {}
     inputs = [event for event in result["events"] if event["kind"] == "worker_input"]
-    assert [event["data"]["role"] for event in inputs] == ["proposer", "proposer", "critic", "proposer"]
+    assert [event["data"]["role"] for event in inputs] == ["proposer", "proposer", "critic"]
     repair = next(event for event in result["events"] if event["kind"] == "record_repair_requested")
     assert repair["sequence"] < inputs[2]["sequence"]
     assert result["response"]["record_completed"]
 
 
 @pytest.mark.parametrize("question_id", ["question_004", "question_005"])
-def test_saying_a_policy_response_can_be_drafted_does_not_deliver_it(question_id):
+@pytest.mark.parametrize("assessment", [None, "", " \n "])
+def test_optional_assessment_is_not_an_application_delivery_gate(question_id, assessment):
     case, graph, response, _ = policy_record(question_id)
-    response["deliverable"] = " \n "
+    response["assessment"] = assessment
     result = run_inquiry(
         case, RecordedWorker([{"operation": "finish", "graph": graph, "response": response}]),
         budget=Budget(max_model_calls=1),
     )
     assert result["evaluation"]["findings"]["c"]["status"] == "established"
     assert result["response"]["record_completed"]
-    assert not result["response"]["delivery_completed"]
-    assert "requested_deliverable_missing" in result["response"]["delivery_defects"]
-    assert not result["response"]["task_completed"]
-    assert result["status"] == "partial"
+    assert result["response"]["response_completed"]
+    assert result["response"]["response_defects"] == []
+    assert result["response"]["inquiry_completed"]
+    assert result["status"] == "complete"
+    assert not any(event["kind"] == "response_repair_requested" for event in result["events"])
 
 
 @pytest.mark.parametrize("question_id", ["question_004", "question_005"])
-def test_bounded_delivery_repair_can_supply_the_actual_requested_response(question_id):
-    case, graph, response, deliverable = policy_record(question_id)
-    completed_response = {**response, "deliverable": deliverable}
-    proposer = RecordedWorker([
-        {"operation": "finish", "graph": graph, "response": response},
-        {"operation": "finish", "graph": graph, "response": completed_response},
-    ])
-    result = run_inquiry(case, proposer, budget=Budget(max_model_calls=2))
-    assert result["status"] == "complete", result["errors"]
-    assert result["usage"]["model_calls"] == 2
-    assert result["response"]["delivery_completed"]
-    assert result["response"]["task_completed"]
-    assert result["response"]["deliverable"] == deliverable
-    assert deliverable in result["response"]["text"]
-    assert "deliverable" in json.loads(proposer.calls[1]["user"])["feedback"][-1].lower()
+def test_populated_assessment_does_not_override_inquiry_completion(question_id):
+    case, graph, response, assessment = policy_record(question_id)
+    response.update(assessment=assessment, inquiry_completed=False)
+    proposer = RecordedWorker([{"operation": "finish", "graph": graph, "response": response}])
+    result = run_inquiry(case, proposer, budget=Budget(max_model_calls=1))
+    assert result["status"] == "partial", result["errors"]
+    assert result["usage"]["model_calls"] == 1
+    assert result["response"]["response_completed"]
+    assert not result["response"]["inquiry_completed"]
+    assert result["response"]["assessment"] == assessment
+    assert assessment in result["response"]["text"]
+    assert any("not deterministically validated" in caveat for caveat in result["response"]["caveats"])
 
 
 def challenged_snapshot(*, with_stale_reply=False):
@@ -258,7 +260,7 @@ def test_argument_content_revision_is_stamped_and_cannot_delete_an_objection():
 
 
 def test_unargued_universal_with_an_open_coverage_gap_can_complete_the_assessment():
-    case = load_packet().public("question_006")
+    case = public_case("question_006")
     graph = {
         "claims": {"universal": {
             "id": "universal", "text": "Every worker in the requested population lost wages because of the event.",
@@ -272,9 +274,11 @@ def test_unargued_universal_with_an_open_coverage_gap_can_complete_the_assessmen
         }},
     }
     response = {
-        "target_claim_id": "universal", "task_completed": True,
-        "next_action": {"kind": "answer", "description": "Withhold the universal statement because population "
-                        "coverage is missing. This does not establish that the statement is false or supply a counterexample."},
+        "target_claim_id": "universal", "inquiry_completed": True,
+        "assessment": "Population coverage is missing. This does not establish that the statement is false or supply a counterexample.",
+        "information_needs": [{"condition_id": "population-coverage",
+                               "question": graph["conditions"]["population-coverage"]["text"],
+                               "what_would_resolve": "Evidence covering every member of the stated population."}],
     }
     result = run_inquiry(
         case, RecordedWorker([{"operation": "finish", "graph": graph, "response": response}]),
@@ -282,7 +286,7 @@ def test_unargued_universal_with_an_open_coverage_gap_can_complete_the_assessmen
     )
     assert result["status"] == "complete", result["errors"]
     assert result["response"]["record_completed"]
-    assert result["response"]["task_completed"]
+    assert result["response"]["inquiry_completed"]
     assert result["evaluation"]["findings"]["universal"]["status"] == "not_established"
     assert result["evaluation"]["findings"]["universal"]["open_conditions"] == ["population-coverage"]
     assert "unsupported_claim_form" not in {item["code"] for item in result["evaluation"]["diagnostics"]}
@@ -291,7 +295,7 @@ def test_unargued_universal_with_an_open_coverage_gap_can_complete_the_assessmen
 
 
 def test_open_claim_condition_is_an_evidential_gap_not_a_record_repair():
-    case, graph, response, deliverable = policy_record("question_005")
+    case, graph, response, assessment = policy_record("question_005")
     graph["claims"]["c"]["text"] = "Final eligibility is established under the supplied policy."
     graph["claims"]["c"]["conditions"] = ["residence-record"]
     graph["conditions"]["residence-record"] = {
@@ -299,78 +303,76 @@ def test_open_claim_condition_is_an_evidential_gap_not_a_record_repair():
         "answer": "The supplied record does not contain the required extract.",
         "status": "open", "evidence_ids": [],
     }
-    response["deliverable"] = deliverable
+    response["assessment"] = assessment
     result = run_inquiry(
         case, RecordedWorker([{"operation": "finish", "graph": graph, "response": response}]),
         budget=Budget(max_model_calls=1),
     )
     assert result["status"] == "complete", result["errors"]
     assert result["response"]["record_completed"]
-    assert result["response"]["task_completed"]
+    assert result["response"]["inquiry_completed"]
     finding = result["evaluation"]["findings"]["c"]
     assert finding["status"] == "not_established"
     assert finding["open_conditions"] == ["residence-record"]
     assert "argument_claim_not_admitted" in {item["code"] for item in result["evaluation"]["diagnostics"]}
     assert not any(event["kind"] == "record_repair_requested" for event in result["events"])
-    assert result["response"]["deliverable"] == deliverable
+    assert result["response"]["assessment"] == assessment
 
 
 def test_explicit_finish_survives_a_clean_review_without_an_extra_proposer_call():
-    case, graph, response, deliverable = policy_record("question_004")
-    response["deliverable"] = deliverable
+    case, graph, response, assessment = policy_record("question_004")
+    response["assessment"] = assessment
     proposer = RecordedWorker([{"operation": "finish", "graph": graph, "response": response}])
     critic = RecordedWorker([{"observations": ["The bounded response follows the supplied policy."], "attacks": {}}])
     result = run_inquiry(case, proposer, critic=critic, budget=Budget(max_model_calls=2))
     assert result["status"] == "complete", result["errors"]
     assert result["stop_reason"] == "settled_for_purpose"
     assert result["response"]["record_completed"]
-    assert result["response"]["delivery_completed"]
+    assert result["response"]["response_completed"]
     assert result["response"]["review_completed"]
-    assert result["response"]["deliverable"] == deliverable
+    assert result["response"]["assessment"] == assessment
     assert len(proposer.calls) == len(critic.calls) == 1
     assert result["usage"]["model_calls"] == 2
     assert any(event["kind"] == "finish_accepted_after_review" for event in result["events"])
 
 
-def test_identical_submit_after_review_can_settle_despite_a_new_snapshot_revision():
+def test_completed_submit_can_settle_immediately_after_a_clean_review():
     case, graph, response = attributed_record()
     submission = {"operation": "submit", "graph": graph, "response": response}
     proposer = RecordedWorker([submission, submission])
     critic = RecordedWorker([{"observations": [], "attacks": {}}])
     result = run_inquiry(case, proposer, critic=critic, budget=Budget(max_model_calls=3))
     assert result["status"] == "complete", result["errors"]
-    assert len(proposer.calls) == 2  # The first arbitrary submit is not final.
-    assert result["usage"]["model_calls"] == 3
+    assert len(proposer.calls) == 1
+    assert result["usage"]["model_calls"] == 2
     graphs = [event["data"] for event in result["events"] if event["kind"] == "graph"]
-    assert graphs[0]["revision"] + 1 == graphs[1]["revision"]
-    assert {key: value for key, value in graphs[0].items() if key != "revision"} == {
-        key: value for key, value in graphs[1].items() if key != "revision"
-    }
+    assert len(graphs) == 1
+    assert any(event["kind"] == "inquiry_completed_after_review" for event in result["events"])
     assert not any(event["kind"] == "finish_accepted_after_review" for event in result["events"])
 
 
-@pytest.mark.parametrize("change", ["graph", "response"])
-def test_a_changed_submission_does_not_match_the_artifact_reviewed_earlier(change):
+@pytest.mark.parametrize("field", ["assessment", "text", "caveats"])
+def test_presentation_changes_do_not_prevent_a_reviewed_inquiry_from_finishing(field):
     case, graph, response = attributed_record()
-    first = {"operation": "submit", "graph": graph, "response": response}
+    first = {"operation": "submit", "graph": graph, "response": {**response, "inquiry_completed": False}}
     revised = copy.deepcopy(first)
-    if change == "graph":
-        revised["graph"]["conditions"]["attribution"]["answer"] = "The report is quoted faithfully, with its source limitation retained."
-    else:
-        revised["response"]["next_action"]["description"] = "Return the attributed account with its limit on independent verification."
+    revised["response"]["inquiry_completed"] = True
+    revised["response"][field] = (["This report does not supply independent verification."] if field == "caveats"
+                                    else "The account is reported at the stated scope with its source limitation retained.")
     proposer = RecordedWorker([first, revised])
     critic = RecordedWorker([{"observations": [], "attacks": {}}])
     result = run_inquiry(case, proposer, critic=critic, budget=Budget(max_model_calls=3))
-    assert result["status"] == "partial"
-    assert result["stop_reason"] == "resource_limit"
+    assert result["status"] == "complete"
+    assert result["stop_reason"] == "settled_for_purpose"
     assert len(proposer.calls) == 2
     assert result["response"]["review_completed"]
+    assert result["response"]["inquiry_completed"]
     assert not any(event["kind"] == "finish_accepted_after_review" for event in result["events"])
 
 
 def test_a_new_substantive_attack_returns_control_to_the_proposer_after_finish():
     case, graph, response = attributed_record()
-    unresolved = {**response, "task_completed": False}
+    unresolved = {**response, "inquiry_completed": False}
     proposer = RecordedWorker([
         {"operation": "finish", "graph": graph, "response": response},
         {"operation": "finish", "response": unresolved},
@@ -385,7 +387,7 @@ def test_a_new_substantive_attack_returns_control_to_the_proposer_after_finish()
     assert result["usage"]["model_calls"] == 3
     assert result["evaluation"]["attack_labels"]["objection"] == "IN"
     assert result["stop_reason"] == "information_unavailable"
-    assert not result["response"]["task_completed"]
+    assert not result["response"]["inquiry_completed"]
     assert not any(event["kind"] == "finish_accepted_after_review" for event in result["events"])
 
 
@@ -420,7 +422,7 @@ def test_invalid_or_provisional_review_cannot_complete_a_pending_finish(review):
     result = run_inquiry(case, proposer, critic=critic, budget=Budget(max_model_calls=2))
     assert result["status"] == "partial"
     assert not result["response"]["review_completed"]
-    assert not result["response"]["task_completed"]
+    assert not result["response"]["inquiry_completed"]
     assert not any(event["kind"] == "finish_accepted_after_review" for event in result["events"])
 
 
@@ -430,7 +432,7 @@ def test_a_clean_review_does_not_override_outstanding_completion_gates(gap):
     if gap == "scope":
         graph["claims"]["c"]["scope"] = graph["arguments"]["a"]["scope"] = {"subject_id": "other-case"}
     elif gap == "completion":
-        response["task_completed"] = False
+        response["inquiry_completed"] = False
     else:
         graph["attacks"] = {"existing": {"id": "existing", "target_id": "a",
                             "grounds": "The inference still faces an unanswered source limitation.", "evidence_ids": ["e"]}}
@@ -446,7 +448,7 @@ def test_a_clean_review_does_not_override_outstanding_completion_gates(gap):
 @pytest.mark.parametrize("condition_status", ["missing", "met", "open", "reopened", "assumed"])
 def test_harness_information_requests_reference_existing_unresolved_conditions(condition_status):
     case, graph, response, _ = policy_record("question_004")
-    case = load_packet().public("question_004", "mutation_002")
+    case = public_case("question_004", "mutation_002")
     requested_id = "check_antecedents" if condition_status == "met" else "needed_statement_details"
     if condition_status not in {"missing", "met"}:
         graph["conditions"][requested_id] = {
@@ -454,19 +456,20 @@ def test_harness_information_requests_reference_existing_unresolved_conditions(c
             "answer": "The applicant still needs to provide the missing details.",
             "status": condition_status, "evidence_ids": [],
         }
-    response["deliverable"] = "We received your application. Please provide the missing statement details before intake can advance. No award decision has been made."
-    response["next_action"] = {"kind": "request_information", "description": "Request the missing statement details.",
-                               "condition_ids": [requested_id]}
+    response["assessment"] = "The statement details remain missing from the supplied record."
+    response["information_needs"] = [{"condition_id": requested_id,
+                                       "question": "Have the missing statement details been supplied?",
+                                       "what_would_resolve": "The missing details, located in the source record."}]
     result = run_inquiry(case, RecordedWorker([{"operation": "finish", "graph": graph, "response": response}]),
                          budget=Budget(max_model_calls=1))
     if condition_status in {"missing", "met"}:
-        code = "requested_condition_missing:" if condition_status == "missing" else "requested_condition_already_met:"
-        assert code + requested_id in result["response"]["delivery_defects"]
-        assert not result["response"]["delivery_completed"]
-        assert not result["response"]["task_completed"]
+        code = "information_condition_missing:" if condition_status == "missing" else "information_condition_already_met:"
+        assert code + requested_id in result["response"]["response_defects"]
+        assert not result["response"]["response_completed"]
+        assert not result["response"]["inquiry_completed"]
     else:
         assert result["status"] == "complete", result["errors"]
-        assert result["response"]["delivery_completed"]
+        assert result["response"]["response_completed"]
         assert result["evaluation"]["findings"]["c"]["status"] == "established"
         assert result["graph"]["claims"]["c"]["conditions"] == []
     assert result["graph"]["conditions"]["check_antecedents"]["status"] == "met"
@@ -474,16 +477,20 @@ def test_harness_information_requests_reference_existing_unresolved_conditions(c
 
 def test_pointer_repair_separates_requested_information_from_met_policy_antecedents():
     case, graph, response, _ = policy_record("question_004")
-    case = load_packet().public("question_004", "mutation_002")
-    response["deliverable"] = "Please provide your personal financial-disruption description and the event date. Intake cannot advance until those details are supplied; no award decision has been made."
-    response["next_action"] = {"kind": "request_information", "description": "Request the two missing statement details.",
-                               "condition_ids": ["check_antecedents"]}
+    case = public_case("question_004", "mutation_002")
+    response["assessment"] = "The record lacks the personal financial-disruption description and the event date."
+    response["information_needs"] = [{"condition_id": "check_antecedents",
+                                       "question": "Does the record contain the missing statement details?",
+                                       "what_would_resolve": "A located statement containing both missing details."}]
     repaired_graph = copy.deepcopy(graph)
     for cid, question in (("needed_description", "Has the personal financial-disruption description been supplied?"),
                           ("needed_event_when", "Has the event date been supplied?")):
         repaired_graph["conditions"][cid] = {"id": cid, "text": question, "status": "open", "evidence_ids": []}
     repaired_response = copy.deepcopy(response)
-    repaired_response["next_action"]["condition_ids"] = ["needed_description", "needed_event_when"]
+    repaired_response["information_needs"] = [
+        {"condition_id": cid, "question": repaired_graph["conditions"][cid]["text"],
+         "what_would_resolve": "A located statement supplying this missing fact."}
+        for cid in ("needed_description", "needed_event_when")]
     proposer = RecordedWorker([
         {"operation": "finish", "graph": graph, "response": response},
         {"operation": "finish", "graph": repaired_graph, "response": repaired_response},
@@ -494,29 +501,30 @@ def test_pointer_repair_separates_requested_information_from_met_policy_antecede
     assert result["graph"]["conditions"]["check_antecedents"]["status"] == "met"
     assert result["graph"]["conditions"]["check_antecedents"]["revision"] == 1
     assert result["graph"]["claims"]["c"]["conditions"] == []
-    assert all(result["graph"]["conditions"][cid]["status"] == "open"
-               for cid in repaired_response["next_action"]["condition_ids"])
+    assert all(result["graph"]["conditions"][need["condition_id"]]["status"] == "open"
+               for need in repaired_response["information_needs"])
     feedback = json.loads(proposer.calls[1]["user"])["feedback"][-1]
     assert "do not reopen" in feedback
-    assert "prerequisites of the clarification recommendation" in feedback
+    assert "separate information need" in feedback
 
 
 @pytest.mark.parametrize("arm", ["ordinary", "repertoire"])
 def test_non_graph_information_requests_keep_descriptive_ids(arm):
-    case, _, response, deliverable = policy_record("question_004")
-    response["deliverable"] = deliverable
-    response["next_action"] = {"kind": "request_information", "description": "Request missing details.",
-                               "condition_ids": ["descriptive_missing_detail"]}
+    case, _, response, assessment = policy_record("question_004")
+    response["assessment"] = assessment
+    response["information_needs"] = [{"condition_id": "descriptive_missing_detail",
+                                       "question": "Is the missing detail in the source?",
+                                       "what_would_resolve": "A located source containing the detail."}]
     result = run_inquiry(case, RecordedWorker([{"operation": "finish", "response": response}]),
                          arm=arm, budget=Budget(max_model_calls=1))
     assert result["status"] == "complete"
-    assert result["response"]["task_completed"]
+    assert result["response"]["inquiry_completed"]
     assert result["graph"] is None
 
 
 def test_direct_self_support_requires_record_repair_before_it_can_settle():
-    case, graph, response, deliverable = policy_record("question_005")
-    response["deliverable"] = deliverable
+    case, graph, response, assessment = policy_record("question_005")
+    response["assessment"] = assessment
     circular = copy.deepcopy(graph)
     circular["arguments"]["a"]["premise_ids"] = ["c"]
     proposer = RecordedWorker([

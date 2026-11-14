@@ -15,7 +15,7 @@ import json
 import re
 from typing import Any, Mapping, Sequence
 
-from .packets import canonical_json, content_hash, current_versions, validate_public_case
+from .contracts import InquiryRequest, content_hash, current_versions, validate_inquiry_request
 
 
 class EvidenceError(ValueError):
@@ -46,7 +46,7 @@ EVIDENCE_TOOL_SCHEMAS = {
     },
     "open": {
         "type": "object",
-        "description": "Read a source or one exact locator. Reading blocks, including prose named payroll or roster rows, use open.",
+        "description": "Read a source or one exact locator. Reading-block locators use open; structured tables use read_table.",
         "properties": {
             "source_id": {"type": "string", "minLength": 1},
             "version": {"type": "string", "minLength": 1},
@@ -107,9 +107,8 @@ class EvidenceEnvironment:
     lineage; they do not certify statistical or evidential independence.
     """
 
-    def __init__(self, public_case: Mapping[str, Any], mode: str = "supplied"):
-        public_case = deepcopy(dict(public_case))
-        validate_public_case(public_case)
+    def __init__(self, public_case: Mapping[str, Any] | InquiryRequest, mode: str = "supplied"):
+        public_case = validate_inquiry_request(public_case)
         if mode not in {"supplied", "documents", "search"}:
             raise EvidenceError("mode must be supplied, documents, or search")
         self.mode = mode
@@ -162,13 +161,22 @@ class EvidenceEnvironment:
         return self.exposure_log
 
     def _resolve_origins(self, key: tuple[str, str]) -> list[str]:
-        if key not in self._origins:
-            source = self._sources[key]
-            if source.get("derived_from"):
-                roots = {origin for ref in source["derived_from"] for origin in self._resolve_origins((ref["document_id"], ref["version"]))}
+        # Request validation has already rejected cycles. Resolve iteratively
+        # so a valid deep lineage is not limited by Python's recursion depth.
+        pending = [(key, False)]
+        while pending:
+            current, ready = pending.pop()
+            if current in self._origins:
+                continue
+            source = self._sources[current]
+            parents = [(ref["document_id"], ref["version"]) for ref in source.get("derived_from", [])]
+            if not parents:
+                self._origins[current] = [source["origin_id"]]
+            elif ready:
+                self._origins[current] = sorted({origin for parent in parents for origin in self._origins[parent]})
             else:
-                roots = {source["origin_id"]}
-            self._origins[key] = sorted(roots)
+                pending.append((current, True))
+                pending.extend((parent, False) for parent in parents if parent not in self._origins)
         return self._origins[key]
 
     def _source(self, source_id: str, version: str) -> tuple[tuple[str, str], dict]:
@@ -440,13 +448,14 @@ class EvidenceEnvironment:
         if not isinstance(text, str):
             raise EvidenceError("Exposed source text must be a string")
         start = reference.get("start", original["text"].find(text))
-        if not isinstance(start, int) or start < 0 or original["text"][start:start + len(text)] != text:
+        if isinstance(start, bool) or not isinstance(start, int) or not 0 <= start <= len(original["text"]) or original["text"][start:start + len(text)] != text:
             raise EvidenceError("Exposed text does not match this exact source segment")
         if reference.get("source_content_hash", self._source_hashes[key]) != self._source_hashes[key]:
             raise EvidenceError("Exposure has the wrong source content hash")
         if reference.get("content_hash", _text_hash(text)) != _text_hash(text):
             raise EvidenceError("Exposure has the wrong segment content hash")
-        if reference.get("end", start + len(text)) != start + len(text):
+        end = reference.get("end", start + len(text))
+        if isinstance(end, bool) or not isinstance(end, int) or end != start + len(text):
             raise EvidenceError("Exposure has an inconsistent span")
         result = self._slice(original, start, start + len(text))
         segment_id = self._segment_id(result)

@@ -4,7 +4,13 @@ This implementation provides a small end-to-end inquiry loop and a controlled ev
 
 The main path is a public question and profile, evidence acquisition, a proposed argument record, deterministic evaluation, and a response carrying the resulting standing. The same controller and evidence tools also support two comparison arms without kernel-assigned standing. The legacy `inquiry` command remains separate; use `inquiry-v1` or `python -m inquiry.v1` for this implementation.
 
-The harness worker receives exact tool contracts and an empty graph template derived from the requested product type. This template supplies no evidence, accepted conditions, or hidden answer. Explicit graph feedback and at most two record-repair requests distinguish malformed records from genuinely unresolved evidence. An unresolved evidence question may complete an assessment; an unfinished argument record is reported as an execution gap.
+Version `1.0.0a5` makes the shared interface purely epistemic. It accepts a generic
+source collection and explicit target kind/form, and returns findings, warrant,
+unresolved information needs and inquiry completion. Business actions and customer
+drafts live in application adapters. See [the service guide](V1_SERVICE.md) for the
+canonical contract, Python API, MCP transport and remaining implementation work.
+
+The harness worker receives exact tool contracts and an empty graph template derived from the declared target kind/form. This template supplies no evidence, accepted conditions, or hidden answer. Explicit graph feedback and at most two record-repair requests distinguish malformed records from genuinely unresolved evidence. An unresolved evidence question may complete an assessment; an unfinished argument record is reported as an execution gap.
 
 ## Install and inspect
 
@@ -23,14 +29,14 @@ python -m venv .venv
 
 The bundled packet, `inquiry/v1/data/hardship.json`, describes a fictional assistance programme, applicant, flood bulletin, and policy. The authoring file contains public material alongside hidden-world facts and provisional assessment guidance. **Never send the complete authoring file to a worker.**
 
-The loader exports exactly three public fields: `shared_context`, `corpus`, and one selected `question`. It strips oracle annotations, mutation names, other questions, and expected outcomes. The runtime receives this public projection; the scorer receives its separate oracle projection. This is a boundary within a trusted local process, not an operating-system security boundary.
+The loader exports exactly three public fields: `shared_context`, `corpus`, and one selected `question`. It strips oracle annotations, mutation names, other questions, and expected outcomes. The explicit hardship adapter translates this projection into the generic request: a source collection with current-version bindings and a declared target kind/form. The runtime receives that neutral request; the scorer receives its separate oracle projection. This is a boundary within a trusted local process, not an operating-system security boundary.
 
 The six questions ask for:
 
 1. An attributed account of the applicant's reported financial impact.
 2. A bounded event finding from the official bulletin.
 3. Independent examination of the individual causal chain.
-4. The next permitted intake response under the current policy.
+4. Which intake requirements the supplied record satisfies, and which information is missing, under the current policy.
 5. A final-eligibility assessment under that policy.
 6. Examination of a universal claim about workers in the area.
 
@@ -61,7 +67,7 @@ This gives **42 question–evidence settings**. Crossing them with three arms an
 |---|---|
 | `ordinary` | Common evidence tools and response contract; no argument graph is required and the worker supplies its findings. |
 | `repertoire` | Adds instructions to choose among the seven reasoning competences; standing remains worker-supplied. |
-| `harness` | Requires a typed graph. The kernel computes standing and the renderer checks the declared target scope and product form. |
+| `harness` | Requires a typed graph. The kernel computes standing and the renderer checks the declared target scope and kind/form. |
 
 | Mode | Initial access |
 |---|---|
@@ -92,7 +98,7 @@ The CLI defaults are 10 model calls, 30 tool calls, 200,000 total tokens, 4,096 
 
 Add `--critic-model 'provider:MODEL_ID'` to request a critic in the repertoire or harness arm. Its calls consume the same run budget; the default permits one completed final critique. Invalid envelopes are repaired within the error and total-call limits. Evidence requests are provisional: the controller acquires the material and presents it to the critic before final review. The critic needs grounded objections, and replies remain examinable. Budget exhaustion does not make either party correct. A live critic cannot be combined with `--demo` through the CLI.
 
-Version `1.0.0a4` separates proposer and critic output schemas, rejects ambiguous or incomplete replies, repairs structural graph defects before critique, and requires the actual requested draft or assessment in `response.deliverable`. See [the repair notes](V1_REPAIR_NOTES.md) for the changes motivated by the first live batch and their limits. Dynamic graph dictionaries use schema-guided generation with strict local acceptance; the system does not claim provider-enforced strict-schema generation.
+Version `1.0.0a5` retains separate proposer and critic output schemas, rejects ambiguous or incomplete replies, and repairs structural graph defects before critique. `response.assessment` is optional explanatory prose; its presence does not certify meaning. `inquiry_completed` and unresolved `information_needs` replace the old business task, letter and next-action fields. Reviewed, structurally sound inquiry results can finish without repeating identical prose; omitted argument records are preserved until explicitly withdrawn. See [the repair notes](V1_REPAIR_NOTES.md) for earlier operational changes and [the service guide](V1_SERVICE.md) for the current boundary. Dynamic graph dictionaries use schema-guided generation with strict local acceptance; the system does not claim provider-enforced strict-schema generation.
 
 There is no monetary budget flag or complete price table. Unpriced or unavailable cost remains unknown rather than becoming zero. For initial live work, use a small call/output limit and inspect usage before expanding the experiment.
 
@@ -126,7 +132,7 @@ A single `run` saves `result.json`, `ledger.jsonl`, `report.md`, and `assessment
 
 Replay verifies the saved ledger and result agreement, restores recorded exposures, and recomputes the final kernel evaluation without model or network calls. A non-graph arm has no kernel evaluation to reproduce. Replay is different from resampling a worker or rerunning an adaptive inquiry against the same corpus.
 
-Hashes detect changed content and inconsistent chains. They are not signatures: someone able to replace the entire record can recompute them. The active ledger is held in memory and saved after the run; crash recovery and durable interactive pause/resume are not implemented by this CLI.
+Hashes detect changed content and inconsistent chains. They are not signatures: someone able to replace the entire record can recompute them. The controller keeps an in-memory ledger and appends events to the live journal; final artifacts are written after the run. Automatic recovery and interactive pause/resume are not implemented by this CLI.
 
 ## Supported semantics and practical limits
 
@@ -134,8 +140,8 @@ The kernel implements a finite fragment: attribution and document-record argumen
 
 Arguments require located evidence and named condition assessments. The kernel checks forms, references, exact scope equality, permitted assumptions, provenance, source currency, founded dependencies, and grounded attack labels. It preserves challenges across exact structural aliases. It does not independently establish whether a natural-language interpretation, causal explanation, source warrant, or applicability judgment is correct.
 
-Scope comparison is exact field equality, not general entailment, quantified logic, or population transfer. The final product-form check is likewise a declared-type check. Unsupported forms and exhausted evaluation remain explicit gaps; a universal question is not silently answered by a particular finding.
+Scope comparison is exact field equality, not general entailment, quantified logic, or population transfer. The final target kind/form check is likewise a declared-type check. Unsupported forms and exhausted evaluation remain explicit gaps; a universal question is not silently answered by a particular finding.
 
-Findings can be established, reported, conditional, contested, or not established. An accepted attribution does not establish its content. Missing evidence does not establish the opposite proposition. A clarification task can complete while eligibility remains unresolved. Caller-bound profile requirements cannot be weakened by a proposed graph, and no finding authorizes sending a response, awarding assistance, making a payment, or otherwise executing an action.
+Findings can be established, reported, conditional, contested, or not established. An accepted attribution does not establish its content. Missing evidence does not establish the opposite proposition. An examination can complete while the proposition remains unresolved. Caller-bound profile requirements cannot be weakened by a proposed graph, and no finding authorizes an application action.
 
 For code changes, run `.venv/bin/python -m pytest tests/v1 -q`. Add isolated kernel counterexamples for structural rules, frozen-input worker tests for semantic products, and end-to-end cases for acquisition and response behavior. Keep the provisional fixture separate from future independently authored and human-reviewed evaluation families.

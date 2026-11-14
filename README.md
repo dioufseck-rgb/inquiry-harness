@@ -3,9 +3,19 @@
 ## Controlled inquiry v1
 
 The controlled rebuild is available as `inquiry.v1` and the `inquiry-v1`
-command, version **1.0.0a4**. It implements the first runnable slice of the new
+command, version **1.0.0a5**. It implements the first runnable slice of the new
 design: known evidence, explicit question and acceptance profiles, a bounded
 inquiry loop, deterministic argument evaluation, and a matched experiment runner.
+
+The shared core is purely epistemic: it returns scoped findings, warrant and
+unresolved information needs. Decisions, business messages and execution belong
+to the calling application. Generic requests accept arbitrary source collections
+and explicit targets without policy-case fields. The hardship example now sits
+behind an explicit adapter.
+
+The [service guide](docs/V1_SERVICE.md) documents the Python `InquiryService`,
+the optional `inquiry-service` MCP stdio transport (`inquire`, `check`, `replay`),
+cross-domain examples, resource ceilings and the remaining build sequence.
 
 Start without API credentials:
 

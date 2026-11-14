@@ -1,4 +1,9 @@
-"""Repeat the eight wholly synthetic development settings on a frozen checkout.
+"""Historical-only v1 a4 registered experiment driver.
+
+This protocol belongs to commit 6c99cdb34a2a5777c65939bd2ff0f0b5539a93ab.
+Use that frozen checkout to repeat it. The later epistemic-service contract is a
+different protocol; this script must not silently reinterpret its actions,
+letters, completion gates, or scores as current service outputs.
 
 The user-authorized provider calls receive only Packet.public() projections of
 fictional records. No real applicants, private documents, or hidden oracle
@@ -20,12 +25,7 @@ import types
 from zoneinfo import ZoneInfo
 import zipfile
 
-from inquiry.v1.experiments import summarize_runs
-from inquiry.v1.packets import load_packet
-from inquiry.v1.persistence import digest, inspect_journal, save_run
-from inquiry.v1.runtime import Budget, IMPLEMENTATION_HASHES, build_critic_prompt, build_prompt, replay_run, run_inquiry
-from inquiry.v1.scoring import SCORER_VERSION, hardship_smoke_expectation, score_run
-from inquiry.v1.workers import LLMWorker
+FROZEN_PROTOCOL_COMMIT = "6c99cdb34a2a5777c65939bd2ff0f0b5539a93ab"
 
 
 BASELINE_COMMIT = "7712518621b36e1debf32be04a64faaf88d82acf"
@@ -37,6 +37,23 @@ def write_json(path: Path, value: object) -> None:
 
 
 def main() -> int:
+    raise SystemExit(
+        "This is a historical-only a4 experiment protocol. Use the unchanged "
+        f"script and runtime from frozen commit {FROZEN_PROTOCOL_COMMIT}; "
+        "register a separate protocol for the epistemic service. No provider call was made."
+    )
+
+
+def _historical_main() -> int:
+    # Retained as a readable protocol record, not an executable migration path.
+    # Imports deliberately stay inside this unreachable historical entry point.
+    from inquiry.v1.experiments import summarize_runs
+    from inquiry.v1.packets import load_packet
+    from inquiry.v1.persistence import digest, inspect_journal, save_run
+    from inquiry.v1.runtime import Budget, IMPLEMENTATION_HASHES, build_critic_prompt, build_prompt, replay_run, run_inquiry
+    from inquiry.v1.scoring import SCORER_VERSION, hardship_smoke_expectation, score_run
+    from inquiry.v1.workers import LLMWorker
+
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--out", required=True, help="New run directory; existing output is never overwritten.")
     args = parser.parse_args()

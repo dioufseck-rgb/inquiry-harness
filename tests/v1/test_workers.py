@@ -401,11 +401,12 @@ def test_exact_duplicate_completed_final_messages_normalize_once_with_raw_items_
 
 def test_normalized_duplicate_open_executes_one_controller_operation_only():
     from inquiry.v1.packets import load_packet
+    from inquiry.v1.adapters.hardship import to_inquiry_request
     from inquiry.v1.runtime import Budget, run_inquiry
 
     client = MockClient(duplicate_final_response())
     worker = LLMWorker(handle("openai", client))
-    result = run_inquiry(load_packet().public("question_004"), worker, mode="documents",
+    result = run_inquiry(to_inquiry_request(load_packet().public("question_004")), worker, mode="documents",
                          budget=Budget(max_model_calls=1))
     assert len(client.requests) == 1
     assert result["usage"]["model_calls"] == 1
@@ -460,6 +461,7 @@ def test_distinct_commentary_is_recorded_nonoperative_before_exact_final_duplica
 @pytest.mark.parametrize("commentary_first", [True, False])
 def test_commentary_operation_never_executes_and_only_final_operation_reaches_controller(commentary_first):
     from inquiry.v1.packets import load_packet
+    from inquiry.v1.adapters.hardship import to_inquiry_request
     from inquiry.v1.runtime import Budget, run_inquiry
 
     response = duplicate_final_response(count=1)
@@ -470,7 +472,7 @@ def test_commentary_operation_never_executes_and_only_final_operation_reaches_co
     response.output.insert(1 if commentary_first else 2, commentary)
     client = MockClient(response)
     worker = LLMWorker(handle("openai", client))
-    result = run_inquiry(load_packet().public("question_004"), worker, mode="documents",
+    result = run_inquiry(to_inquiry_request(load_packet().public("question_004")), worker, mode="documents",
                          budget=Budget(max_model_calls=1))
 
     assert len(client.requests) == result["usage"]["model_calls"] == 1

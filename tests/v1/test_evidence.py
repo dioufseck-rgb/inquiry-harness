@@ -4,12 +4,16 @@ import json
 import pytest
 
 from inquiry.v1.evidence import EvidenceEnvironment, EvidenceError
+from inquiry.v1.adapters.hardship import to_inquiry_request
 from inquiry.v1.packets import content_hash, load_packet
 
 
+def public_request(question, mutation=None):
+    return to_inquiry_request(load_packet().public(question, mutation))
+
 @pytest.fixture
 def public_case():
-    return load_packet().public("question_001")
+    return public_request("question_001")
 
 
 def test_supplied_mode_records_exact_worker_exposure(public_case):
@@ -36,7 +40,7 @@ def test_initial_discovery_views_do_not_expose_source_text(public_case, mode):
 
 
 def test_manifest_identifies_roster_and_payroll_as_reading_blocks():
-    public = load_packet().public("question_003", "mutation_003")
+    public = public_request("question_003", "mutation_003")
     env = EvidenceEnvironment(public, "documents")
     initial = env.initial_input()
     source = next(s for s in initial["source_manifest"] if s["source_id"] == "doc_005")
@@ -52,7 +56,7 @@ def test_manifest_identifies_roster_and_payroll_as_reading_blocks():
 
 
 def test_read_table_on_a_reading_block_returns_exact_correction_without_reading():
-    env = EvidenceEnvironment(load_packet().public("question_003", "mutation_003"), "documents")
+    env = EvidenceEnvironment(public_request("question_003", "mutation_003"), "documents")
     before = env.exposure_log
     arguments = {"source_id": "doc_005", "version": "1.0", "table_id": "roster_row_17"}
     for request in (lambda: env.validate_request("read_table", arguments),
@@ -188,7 +192,7 @@ def test_search_returns_exact_snippets_with_separate_exposure(public_case):
 
 
 def test_current_version_search_and_historical_attribution_are_distinct():
-    env = EvidenceEnvironment(load_packet().public("question_002", "mutation_004"), "search")
+    env = EvidenceEnvironment(public_request("question_002", "mutation_004"), "search")
     hits = env.search("North Wharf")
     assert all(hit["source_id"] != "doc_002" or hit["version"] == "2.0" for hit in hits["hits"])
     history = env.search("North Wharf", {"source_id": "doc_002", "current_only": False})
@@ -201,7 +205,7 @@ def test_current_version_search_and_historical_attribution_are_distinct():
 
 
 def test_relay_root_origin_is_not_publisher_count():
-    env = EvidenceEnvironment(load_packet().public("question_002", "mutation_001"))
+    env = EvidenceEnvironment(public_request("question_002", "mutation_001"))
     sources = env.source_lookup
     assert sources["doc_004", "1.0"]["origin_ids"] == sources["doc_002", "1.0"]["origin_ids"] == ["origin_002"]
     assert sources["doc_004", "1.0"]["publication_origin_id"] == "origin_004"

@@ -2,6 +2,11 @@
 
 14 November 2026 · `1.0.0a4`
 
+Historical account of the a4 contract. Version a5 moves application products
+outside the core and replaces business-task completion with epistemic inquiry
+completion. See [the current service contract](V1_SERVICE.md); the corrections
+and experiments described below retain their original interpretation.
+
 The first eight-case live batch is preserved at commit `7712518`, including its original scores. These changes address failures observed in that batch. They do not supply new inference patterns for the whole epistemic repertoire or establish an accuracy advantage.
 
 ## Corrections

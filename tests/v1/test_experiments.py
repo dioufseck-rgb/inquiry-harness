@@ -4,13 +4,14 @@ import json
 import pytest
 
 from inquiry.v1.experiments import ExperimentCase, RunExecutionError, run_experiments, stable_hash
-from inquiry.v1.scoring import hardship_smoke_expectation
+from inquiry.v1.adapters.hardship_scoring import hardship_smoke_expectation
 
 
 def case(case_id="case_a", family_id="family_one", split="development"):
-    public = {"shared_context": {"as_of": "2026-04-12"}, "corpus": {"documents": []},
-              "question": {"id": "question_001", "question": "What is reported?",
-                           "scope": {"subject": "applicant"}, "profile": {"id": "attribution", "version": "1"}}}
+    public = {"shared_context": {"as_of": "2026-04-12"}, "corpus": {"documents": [], "current_versions": {}},
+              "question": {"id": "question_001", "question": "What is reported?", "intended_use": "Faithful attribution.",
+                           "scope": {"subject": "applicant"}, "target": {"kind": "attribution", "form": "source_reports"},
+                           "profile": {"id": "attribution", "version": "1", "authority": "test caller", "requirements": [], "kernel": {}}}}
     return ExperimentCase(case_id, family_id, public,
                           {"hidden_world": {"secret": "never_send_this_to_a_worker"},
                            "admissible_answer_spec": {"required": ["Attribution"]}},
@@ -30,9 +31,9 @@ def recorded_run(public, *, arm, mode):
     return {
         "arm": arm, "mode": mode, "status": "complete", "question_id": public["question"]["id"],
         "response": {"text": "A reported account.", "target_claim_id": "c1", "target_scope_answered": True,
-                     "findings": [{"claim_id": "c1", "text": "A reported account.", "status": "reported",
-                                   "scope": public["question"]["scope"], "conditions": [], "citations": []}],
-                     "next_action": {"kind": "answer", "condition_ids": []}, "task_completed": True},
+                     "findings": [{"claim_id": "c1", "text": "A reported account.", "status": "reported", "kind": "attribution", "form": "source_reports",
+                                   "target_question_id": public["question"]["id"], "scope": public["question"]["scope"], "conditions": [], "citations": []}],
+                     "information_needs": [], "inquiry_completed": True},
         "graph": None, "evaluation": None, "exposures": [], "errors": [],
         "usage": {"model_calls": 2, "input_tokens": 10, "output_tokens": 5,
                   "tool_calls": 1, "failed_calls": 1, "cost_usd": 0.2, "elapsed_seconds": 0.1},
@@ -79,7 +80,7 @@ def test_explicit_form_rejection_is_not_counted_as_task_completion():
         result["response"]["target_form_answered"] = False
         return result
     report = run_experiments([case()], wrong_form, arms=["harness"], modes=["supplied"])
-    assert report["summary"]["task_completed_count"] == 0
+    assert report["summary"]["inquiry_completed_count"] == 0
     assert report["summary"]["smoke_status_counts"] == {"fail": 1}
 
 
@@ -89,7 +90,7 @@ def test_incomplete_evaluation_is_not_counted_as_task_completion():
         result["response"]["evaluation_completed"] = False
         return result
     report = run_experiments([case()], incomplete, arms=["harness"], modes=["supplied"])
-    assert report["summary"]["task_completed_count"] == 0
+    assert report["summary"]["inquiry_completed_count"] == 0
     assert report["summary"]["evaluation_completion_status_counts"] == {"not_completed": 1}
     assert report["summary"]["smoke_status_counts"] == {"fail": 1}
     baseline = run_experiments([case()], recorded_run, arms=["ordinary"], modes=["supplied"])
@@ -166,7 +167,7 @@ def test_malformed_or_misbound_result_remains_failed_with_its_known_cost():
     report = run_experiments([case()], wrong_arm, arms=["ordinary"], modes=["supplied"])
     assert report["summary"]["failed_runs"] == 1
     assert report["summary"]["usage_known_totals"]["cost_usd"] == 0.2
-    assert report["summary"]["task_completed_count"] == 0
+    assert report["summary"]["inquiry_completed_count"] == 0
 
 
 def test_recorded_job_order_is_reproducible_but_repetitions_stay_in_family():

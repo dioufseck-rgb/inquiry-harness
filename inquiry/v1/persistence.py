@@ -165,11 +165,13 @@ def save_run(result: dict[str, Any], directory: str | Path) -> Path:
     _atomic_text(directory / "ledger.jsonl", "".join(canonical(x) + "\n" for x in events))
     _atomic_text(directory / "result.json", json.dumps(result, indent=2, ensure_ascii=False, allow_nan=False) + "\n")
     response = result.get("response", {})
-    report = ["# Controlled inquiry", "", response.get("text", "No response was produced."), "",
+    completion_label = "Inquiry completed" if "inquiry_completed" in response else "Legacy task completed"
+    completion = response.get("inquiry_completed", response.get("task_completed", False))
+    report = ["# Inquiry record", "", response.get("text", "No response was produced."), "",
               "## Run", "", f"- Status: {result.get('status')}",
               f"- Stop: {result.get('stop_reason')}", f"- Arm: {result.get('arm')}",
               f"- Evidence mode: {result.get('mode')}",
-              f"- Task completed: {response.get('task_completed', False)}", ""]
+              f"- {completion_label}: {completion}", ""]
     for caveat in response.get("caveats", []):
         report.append(f"- {caveat}")
     _atomic_text(directory / "report.md", "\n".join(report) + "\n")

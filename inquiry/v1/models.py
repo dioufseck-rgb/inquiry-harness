@@ -184,6 +184,6 @@ class Evaluation(Record):
     issue_statuses: dict[str, str] = Field(default_factory=dict)
     diagnostics: list[dict[str, Any]] = Field(default_factory=list)
     current_source_versions: dict[str, str] = Field(default_factory=dict)
-    # A kernel finding does not decide whether the requested task is complete.
-    task_completed: bool = False
+    # Evaluation completion concerns this snapshot only. The controller owns
+    # inquiry completion; the caller owns every application decision and task.
     last_complete_evaluation: dict[str, Any] | None = None

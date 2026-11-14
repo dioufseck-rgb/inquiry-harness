@@ -5,20 +5,27 @@ import pytest
 
 from inquiry.v1.models import Attack, InquiryGraph, Profile
 from inquiry.v1.packets import load_packet
+from inquiry.v1.adapters.hardship import to_inquiry_request
 from inquiry.v1.persistence import load_run, save_run
-from inquiry.v1.runtime import Budget, _snapshot_revision, replay_run, run_inquiry, starter_graph
+from inquiry.v1.runtime import (Budget, Operation, ResponseDraft, _answers_form, _snapshot_revision,
+                                build_critic_prompt, build_prompt, replay_run, run_inquiry, starter_graph)
 from inquiry.v1.kernel import evaluate
 from inquiry.v1.workers import RecordedWorker
 
 
+def public_case(question_id, mutation_id=None):
+    return to_inquiry_request(load_packet().public(question_id, mutation_id))
+
+
 def example():
-    case = load_packet().public("question_001")
+    case = public_case("question_001")
     document = next(d for d in case["corpus"]["documents"] if d["id"] == "doc_003")
     quote = next(b["text"] for b in document["reading_blocks"] if b["locator"] == "field_group_2")
     scope = case["question"]["scope"]
     graph = {
         "claims": {"c1": {"id": "c1", "text": "The applicant reports the financial disruption described in the signed account.",
-                              "kind": "attribution", "form": "source_reports", "scope": scope}},
+                              "kind": "attribution", "form": "source_reports", "scope": scope,
+                              "target_question_id": case["question"]["id"]}},
         "evidence": {"e1": {"id": "e1", "source_id": "doc_003", "source_version": "1.0",
                                 "locator": "field_group_2", "quote": quote}},
         "conditions": {"cq1": {"id": "cq1", "text": "The account is faithfully attributed.", "status": "met", "evidence_ids": ["e1"], "performer": "fixture", "performer_kind": "model"},
@@ -26,8 +33,8 @@ def example():
         "arguments": {"a1": {"id": "a1", "claim_id": "c1", "pattern": "attribution", "premise_ids": ["e1"],
                                 "conditions": {"attribution": "cq1", "applicability": "cq2"}, "scope": scope}},
     }
-    response = {"target_claim_id": "c1", "task_completed": True,
-                "next_action": {"kind": "answer", "description": "Retain the applicant attribution."}}
+    response = {"target_claim_id": "c1", "inquiry_completed": True,
+                "assessment": "The account is attributed to its author; no independent verification is inferred."}
     return case, graph, response
 
 
@@ -67,7 +74,7 @@ def test_resource_stop_preserves_an_explicit_partial_result(budget):
     worker = RecordedWorker([])
     result = run_inquiry(case, worker, budget=budget)
     assert result["status"] == "partial"
-    assert not result["response"]["task_completed"]
+    assert not result["response"]["inquiry_completed"]
     assert result["stop_reason"] == "resource_limit"
     assert not worker.calls
     assert not result["exposures"]
@@ -95,20 +102,20 @@ def test_a_narrower_component_cannot_complete_the_target():
     graph["arguments"]["a1"]["scope"] = {"subject_id": "a_different_person"}
     result = run_inquiry(case, RecordedWorker([{"operation": "finish", "graph": graph, "response": response}]))
     assert not result["response"]["target_scope_answered"]
-    assert not result["response"]["task_completed"]
+    assert not result["response"]["inquiry_completed"]
     assert result["status"] == "partial"
 
 
 def test_an_attributed_account_cannot_complete_a_causal_examination():
     case, graph, response = example()
-    case = load_packet().public("question_003")
+    case = public_case("question_003")
     graph["claims"]["c1"]["scope"] = case["question"]["scope"]
     graph["arguments"]["a1"]["scope"] = case["question"]["scope"]
     result = run_inquiry(case, RecordedWorker([{"operation": "finish", "graph": graph, "response": response}]))
     assert result["response"]["findings"][0]["status"] == "reported"
     assert result["response"]["target_scope_answered"]
     assert not result["response"]["target_form_answered"]
-    assert not result["response"]["task_completed"]
+    assert not result["response"]["inquiry_completed"]
     assert result["stop_reason"] == "information_unavailable"
 
 
@@ -196,7 +203,7 @@ def test_unattacked_condition_assessment_can_be_revised_with_history():
 def test_authoring_packet_never_enters_runtime():
     public, _, _ = example()
     public["evaluator_only"] = {"answer": "spoiler"}
-    with pytest.raises(ValueError, match="public case"):
+    with pytest.raises(ValueError, match="private evaluation"):
         run_inquiry(public, RecordedWorker([]))
 
 
@@ -227,7 +234,7 @@ def test_evaluator_exhaustion_cannot_complete_an_evidence_assessment():
     case["question"]["profile"]["kernel"] = {"max_derivations": 0}
     result = run_inquiry(case, RecordedWorker([{"operation": "finish", "graph": graph, "response": response}]))
     assert not result["response"]["evaluation_completed"]
-    assert not result["response"]["task_completed"]
+    assert not result["response"]["inquiry_completed"]
     assert result["status"] == "partial"
     assert "evaluation could not complete" in result["response"]["text"]
 
@@ -235,7 +242,7 @@ def test_evaluator_exhaustion_cannot_complete_an_evidence_assessment():
 def test_starter_structure_supplies_no_warrant_or_hidden_answer():
     packet = load_packet()
     for question in packet.question_ids:
-        case = packet.public(question)
+        case = to_inquiry_request(packet.public(question))
         scaffold = starter_graph(case)
         assert not scaffold["evidence"]
         assert all(condition["status"] == "open" for condition in scaffold["conditions"].values())
@@ -256,3 +263,117 @@ def test_finish_with_misplaced_condition_ids_gets_a_bounded_record_repair():
     assert result["usage"]["model_calls"] == 2
     assert result["response"]["record_completed"]
     assert any(event["kind"] == "record_repair_requested" for event in result["events"])
+
+
+def test_runtime_response_and_prompts_have_only_epistemic_output_fields():
+    properties = ResponseDraft.model_json_schema()["properties"]
+    assert set(properties) == {
+        "text", "target_claim_id", "findings", "caveats", "target_scope_answered",
+        "assessment", "inquiry_completed", "information_needs",
+    }
+    for application_field in ("next_action", "deliverable", "task_completed"):
+        with pytest.raises(ValueError):
+            Operation.model_validate({"operation": "finish", "response": {application_field: True}})
+        assert application_field not in build_prompt("harness")
+        assert application_field not in build_critic_prompt()
+    for product in ("advance_intake", "final_eligibility", "policy_grounded_next_response"):
+        assert product not in build_prompt("harness")
+
+
+@pytest.mark.parametrize("question_id", [None, "another-question"])
+def test_a_scoped_finding_must_be_anchored_to_the_active_question(question_id):
+    case, graph, response = example()
+    graph["claims"]["c1"]["target_question_id"] = question_id
+    result = run_inquiry(case, RecordedWorker([{"operation": "finish", "graph": graph, "response": response}]))
+    assert result["response"]["findings"][0]["status"] == "reported"
+    assert result["response"]["target_scope_answered"]
+    assert result["response"]["target_form_answered"]
+    assert not result["response"]["target_question_answered"]
+    assert not result["response"]["inquiry_completed"]
+    assert result["status"] == "partial"
+
+
+def test_target_contract_accepts_caller_kinds_without_a_product_lookup():
+    case, graph, response = example()
+    case["question"]["target"] = {"kind": "textual_observation", "form": "assertion"}
+    graph["claims"]["c1"].update(kind="textual_observation", form="assertion")
+    graph["arguments"]["a1"].update(pattern="document_record",
+                                    conditions={"record_warrant": "cq1", "applicability": "cq2"})
+    scaffold = starter_graph(case)
+    assert scaffold["claims"]["c_target"]["kind"] == "textual_observation"
+    assert scaffold["claims"]["c_target"]["form"] == "assertion"
+    assert scaffold["arguments"]["a_target"]["pattern"] == "document_record"
+    result = run_inquiry(case, RecordedWorker([{"operation": "finish", "graph": graph, "response": response}]))
+    assert result["status"] == "complete", result["response"]
+    assert result["response"]["findings"][0]["status"] == "established"
+
+
+def test_an_unsupported_target_form_remains_an_explicit_implementation_gap():
+    case, _, response = example()
+    case["question"]["target"] = {"kind": "forecast", "form": "calibrated_interval"}
+    graph = starter_graph(case)
+    response["target_claim_id"] = "c_target"
+    assert not graph["arguments"]
+    assert graph["claims"]["c_target"]["form"] == "calibrated_interval"
+    assert not _answers_form(graph["claims"]["c_target"], case["question"]["target"])
+    result = run_inquiry(case, RecordedWorker([{"operation": "finish", "graph": graph, "response": response}]),
+                         budget=Budget(max_model_calls=1))
+    assert result["status"] == "partial"
+    assert not result["response"]["target_form_answered"]
+    assert not result["response"]["inquiry_completed"]
+    assert "unsupported_claim_form:c_target" in result["response"]["record_defects"]
+
+
+def test_unargued_target_without_an_explicit_gap_cannot_claim_a_completed_examination():
+    case, graph, response = example()
+    graph.update(arguments={}, evidence={}, conditions={})
+    result = run_inquiry(case, RecordedWorker([{"operation": "finish", "graph": graph, "response": response}]),
+                         budget=Budget(max_model_calls=1))
+    assert result["response"]["findings"][0]["status"] == "not_established"
+    assert "unresolved_target_condition_missing" in result["response"]["record_defects"]
+    assert not result["response"]["inquiry_completed"]
+
+
+def test_omitted_records_preserve_supported_findings_across_a_response_revision():
+    case, graph, response = example()
+    worker = RecordedWorker([
+        {"operation": "submit", "graph": graph, "response": {**response, "inquiry_completed": False}},
+        {"operation": "finish", "graph": {}, "response": response},
+    ])
+    result = run_inquiry(case, worker, budget=Budget(max_model_calls=2))
+    assert result["status"] == "complete", result["errors"]
+    assert not result["graph"]["arguments"]["a1"]["withdrawn"]
+    assert result["graph"]["arguments"]["a1"]["revision"] == 1
+    assert result["graph"]["revision"] == 2
+    assert result["response"]["findings"][0]["status"] == "reported"
+    assert result["response"]["findings"][0]["citations"]
+
+
+def test_native_replay_does_not_mutate_the_committed_run():
+    case, graph, response = example()
+    result = run_inquiry(case, RecordedWorker([{"operation": "finish", "graph": graph, "response": response}]))
+    before = copy.deepcopy(result)
+    replay = replay_run(result)
+    assert replay["replay_mode"] == "native"
+    assert replay["evaluation_reproduced"]
+    assert result == before
+
+
+@pytest.mark.parametrize("field", ["max_model_calls", "max_tool_calls", "max_total_tokens",
+                                   "max_critique_calls", "max_output_tokens", "max_consecutive_errors"])
+@pytest.mark.parametrize("invalid", [True, False, 1.5, "2", None, -1])
+def test_resource_counts_require_nonboolean_integers(field, invalid):
+    with pytest.raises(ValueError, match=field):
+        Budget(**{field: invalid})
+
+
+@pytest.mark.parametrize("invalid", [True, False, 0, -1, float("nan"), float("inf"), -float("inf"), "5", None])
+def test_timeout_requires_a_finite_positive_number(invalid):
+    with pytest.raises(ValueError, match="timeout_seconds"):
+        Budget(timeout_seconds=invalid)
+
+
+@pytest.mark.parametrize("field", ["max_output_tokens", "max_consecutive_errors"])
+def test_output_and_repair_limits_cannot_be_zero(field):
+    with pytest.raises(ValueError, match=field):
+        Budget(**{field: 0})

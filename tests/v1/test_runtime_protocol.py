@@ -10,12 +10,17 @@ import json
 import pytest
 
 from inquiry.v1.packets import load_packet
+from inquiry.v1.adapters.hardship import to_inquiry_request
 from inquiry.v1.runtime import Budget, CritiqueOutput, Operation, replay_run, run_inquiry
 from inquiry.v1.workers import RecordedWorker
 
 
+def public_case(question_id, mutation_id=None):
+    return to_inquiry_request(load_packet().public(question_id, mutation_id))
+
+
 def attribution_case():
-    case = load_packet().public("question_001")
+    case = public_case("question_001")
     document = next(item for item in case["corpus"]["documents"] if item["id"] == "doc_003")
     block = next(item for item in document["reading_blocks"] if item["locator"] == "field_group_2")
     scope = case["question"]["scope"]
@@ -23,6 +28,7 @@ def attribution_case():
         "claims": {"c_report": {
             "id": "c_report", "text": "The signed account reports the applicant's financial disruption.",
             "kind": "attribution", "form": "source_reports", "scope": scope,
+            "target_question_id": case["question"]["id"],
         }},
         "evidence": {"e_report": {
             "id": "e_report", "source_id": document["id"], "source_version": document["version"],
@@ -50,8 +56,8 @@ def attribution_case():
     }
     finish = {
         "operation": "finish", "graph": graph,
-        "response": {"target_claim_id": "c_report", "task_completed": True,
-                     "next_action": {"kind": "answer", "description": "Retain the attributed account."}},
+        "response": {"target_claim_id": "c_report", "inquiry_completed": True,
+                     "assessment": "The finding remains an attributed report."},
     }
     return case, finish
 
@@ -122,7 +128,7 @@ def test_wrong_critic_envelope_cannot_be_counted_as_successful_review(wrong_enve
     assert result["usage"]["critique_completed_calls"] == 0
     assert result["usage"]["tool_calls"] == 0
     assert result["response"]["review_completed"] is False
-    assert result["response"]["task_completed"] is False
+    assert result["response"]["inquiry_completed"] is False
     assert result["status"] == "partial"
     assert result["stop_reason"] == "resource_limit"
     assert result["response"]["findings"][0]["status"] == "reported"
@@ -137,7 +143,7 @@ def test_malformed_critic_can_recover_without_consuming_the_successful_review_sl
 
     assert result["status"] == "complete"
     assert result["response"]["review_completed"] is True
-    assert result["response"]["task_completed"] is True
+    assert result["response"]["inquiry_completed"] is True
     assert len(critic.calls) == 2
     assert len(events(result, "critique")) == 1
     assert len(events(result, "worker_error", "critic")) == 1
@@ -174,7 +180,7 @@ def test_two_invalid_critic_attempts_stop_with_a_partial_record_not_false_comple
     assert result["usage"]["model_calls"] < budget.max_model_calls
     assert result["usage"]["tool_calls"] == 0
     assert result["response"]["review_completed"] is False
-    assert result["response"]["task_completed"] is False
+    assert result["response"]["inquiry_completed"] is False
     assert result["status"] == "partial"
     assert result["stop_reason"] != "settled_for_purpose"
     assert result["graph"]["attacks"] == {}
@@ -249,7 +255,7 @@ def test_critic_evidence_requests_are_provisional_controller_acquisitions(max_mo
         assert not events(result, "critique")
         assert result["usage"]["critique_completed_calls"] == 0
         assert result["response"]["review_completed"] is False
-        assert result["response"]["task_completed"] is False
+        assert result["response"]["inquiry_completed"] is False
         assert result["status"] == "partial"
         assert result["stop_reason"] == "resource_limit"
     else:

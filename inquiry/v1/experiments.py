@@ -19,11 +19,12 @@ import random
 from time import perf_counter
 from typing import Any, Callable, Mapping, Sequence
 
+from .contracts import validate_inquiry_request
 from .scoring import evaluation_completion_state, score_run
 
 ARMS = ("ordinary", "repertoire", "harness")
 MODES = ("supplied", "documents", "search")
-PROTOCOL_VERSION = "controlled-runner-0.1"
+PROTOCOL_VERSION = "controlled-epistemic-runner-0.2"
 FORBIDDEN_PUBLIC_KEYS = frozenset({
     "evaluator_only", "hidden_world", "admissible_answer_spec", "admissible_answer_specs",
     "controlled_mutations", "expected_relationships", "annotation_status", "export_requirement",
@@ -54,6 +55,7 @@ def validate_public_case(public_case: Mapping[str, Any]) -> None:
                 walk(item)
 
     walk(public_case)
+    validate_inquiry_request(public_case)
     stable_hash(public_case)  # Reject non-JSON and non-finite values before any worker sees them.
 
 
@@ -112,8 +114,8 @@ def _failed_result(error: Exception, case: ExperimentCase, arm: str, mode: str,
                   usage={**dict(usage), "elapsed_seconds": elapsed}, stop_reason="runner_exception")
     result.setdefault("response", {"text": "", "target_claim_id": None, "findings": [],
                                    "target_scope_answered": False,
-                                   "next_action": {"kind": "none", "description": "", "condition_ids": []},
-                                   "task_completed": False, "caveats": []})
+                                   "assessment": None, "information_needs": [],
+                                   "inquiry_completed": False, "caveats": []})
     result.setdefault("graph", None)
     result.setdefault("evaluation", None)
     result.setdefault("events", [])
@@ -174,10 +176,13 @@ def summarize_runs(records: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
         response = run.get("response", {})
         evaluation_done = evaluation_completion_state(run)
         evaluation_states["pending" if evaluation_done is None else "complete" if evaluation_done else "not_completed"] += 1
-        completed += int(isinstance(response, Mapping) and response.get("task_completed") is True
+        completed += int(isinstance(response, Mapping) and response.get("inquiry_completed") is True
                          and response.get("target_scope_answered") is not False
                          and response.get("target_form_answered") is not False
-                         and response.get("delivery_completed") is not False
+                         and response.get("target_question_answered") is not False
+                         and not response.get("standing_attack_ids")
+                         and response.get("record_completed") is not False
+                         and response.get("response_completed") is not False
                          and response.get("review_completed") is not False
                          and evaluation_done is not False
                          and run.get("status") != "failed")
@@ -198,8 +203,8 @@ def summarize_runs(records: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
         structural[score["structural"]["status"]] += 1
     return {
         "attempts": len(records), "run_status_counts": dict(statuses),
-        "task_completed_count": completed, "failed_runs": statuses["failed"],
-        "completion_count_interpretation": "Declared task completion, excluding scope/form rejection or incomplete evaluation, delivery or configured review; not human-adjudicated adequacy.",
+        "inquiry_completed_count": completed, "failed_runs": statuses["failed"],
+        "completion_count_interpretation": "Declared inquiry completion, excluding scope/form rejection or incomplete evaluation, record, response or configured review; not human-adjudicated adequacy.",
         "evaluation_completion_status_counts": dict(evaluation_states),
         "usage_known_totals": totals, "usage_unknown_run_counts": unknown,
         "monetary_cost_complete": unknown["cost_usd"] == 0,

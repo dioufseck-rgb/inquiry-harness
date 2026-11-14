@@ -2,6 +2,10 @@
 
 14 November 2026 (UTC) · version `1.0.0a1`
 
+Historical validation of a1, retained with its original metrics and terminology.
+For the a5 epistemic boundary and service interface, see [the current service
+contract](V1_SERVICE.md) and [software validation summary](../experiments/v1/epistemic_boundary_validation_20261114.json).
+
 The runnable alpha and controlled experiment framework are implemented. This is a development release for examining failures and comparing workflows. It has not established an advantage in reasoning quality, and its outputs are not a basis for unattended case decisions.
 
 The tested implementation is commit `ac4700d7bdf1ed9b06bb21b44ad23c29b3cbd312`, tree `c864a678671e45bf1e8a90ea034016bcb1dafd04`. The local test commit `9d1ceca` has exactly the same tree; the connector-created commit differs only in commit metadata. The later validation commit adds this account and the machine-readable [validation summary](../experiments/v1/validation_summary.json).

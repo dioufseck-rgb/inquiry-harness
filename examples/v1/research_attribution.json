@@ -1,0 +1,53 @@
+{
+  "shared_context": {
+    "as_of": "2026-04-12",
+    "context": "Synthetic integration example; no real person, equipment or study.",
+    "source_handling": "Treat the supplied export as an authentic record of its stated issuer; examine scope and preserve qualifications."
+  },
+  "corpus": {
+    "documents": [
+      {
+        "id": "study/17",
+        "version": "1",
+        "title": "Bench study summary",
+        "issuer_id": "research-lab",
+        "origin_id": "research-lab",
+        "issued_at": "2026-04-05",
+        "language": "en",
+        "reading_blocks": [
+          {
+            "locator": "record",
+            "text": "The study reports a 12 percent lower mean measured vibration at placement B than placement A across these test rigs. This observational comparison does not establish a causal effect of placement."
+          }
+        ]
+      }
+    ],
+    "current_versions": {
+      "study/17": "1"
+    }
+  },
+  "question": {
+    "id": "research:report",
+    "question": "What does the supplied study report about the association between sensor placement and measured vibration?",
+    "intended_use": "A scoped epistemic finding; downstream choices belong to the caller.",
+    "scope": {
+      "study": "bench-17",
+      "outcome": "reported association",
+      "population": "test rigs"
+    },
+    "target": {
+      "kind": "attribution",
+      "form": "source_reports"
+    },
+    "profile": {
+      "id": "located-record-v1",
+      "version": "1",
+      "authority": "Example author; development use only.",
+      "requirements": [
+        "Use the located record at its stated scope.",
+        "Retain attribution and qualifications; do not infer a stronger proposition."
+      ],
+      "kernel": {}
+    }
+  }
+}
