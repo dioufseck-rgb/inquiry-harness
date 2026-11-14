@@ -1,0 +1,22 @@
+name: Tests
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.11', '3.12']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+      - run: python -m pip install -e '.[dev]'
+      - run: python -m pytest -q
+      - run: python -m inquiry.v1 validate
+      - run: python -m inquiry.v1 run --demo --question question_004 --out runs/ci-demo
+      - run: python -m inquiry.v1 replay runs/ci-demo
+      - run: python -m inquiry.v1 bench --demo --arms ordinary repertoire harness --modes supplied documents search --out runs/ci-matrix

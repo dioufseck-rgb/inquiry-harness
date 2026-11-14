@@ -1,0 +1,724 @@
+{
+  "fixture_id": "development_case_001",
+  "asset_type": "proposed_controlled_world_authoring_fixture",
+  "annotation_status": {
+    "author": "model_authored",
+    "human_adjudicated": false,
+    "executed": false,
+    "development_only": true,
+    "version": "0.1",
+    "limitations": "These are provisional admissibility judgments, not human gold, implementation results, or universal rules for real assistance programmes. The deliberately explicit policies and supplied profiles are scaffolding. Independently authored, less scaffolded source and question variants are required before making claims about spontaneous reasoning or selection.",
+    "test_role": "contract-development smoke fixture; not a blinded competence benchmark"
+  },
+  "export_requirement": {
+    "authoring_only": true,
+    "must_strip": [
+      "evaluator_only",
+      "annotation_status",
+      "export_requirement"
+    ],
+    "agent_export_allowlist": [
+      "public_agent_input.shared_context",
+      "public_agent_input.baseline_corpus",
+      "exactly one selected public_agent_input.question_settings entry"
+    ],
+    "rule": "NEVER give this whole authoring file to an agent. Apply only the selected mutation to a copy of the public input, select one question, and export only the allowlisted fields. Do not expose mutation names, expected outcomes, hidden facts, other questions, or oracle annotations. Mutation operations below are specifications, not an implemented patch language."
+  },
+  "public_agent_input": {
+    "shared_context": {
+      "fiction_notice": "Every programme, person, entity, place, date, amount, and record in this exercise is synthetic. No real application or benefit is involved.",
+      "as_of": "2026-04-12",
+      "authority": "Only analysis and drafting are authorized. Do not contact anyone, approve or refuse an award, or issue a payment.",
+      "source_handling": "For this controlled exercise, supplied records are authenticated as records of their stated issuers and faithfully transcribed. Authentication does not guarantee their factual accuracy or the sufficiency of an inference. Treat each record according to its contents and any corrections.",
+      "evidence_boundary": "Use only the supplied corpus. No external search or hidden records are available. A missing document is not a negative finding.",
+      "case_id": "case_001",
+      "entities": [
+        {
+          "id": "entity_001",
+          "name": "Riverplain Assistance Office"
+        },
+        {
+          "id": "entity_002",
+          "name": "Riverplain Field Observations Unit"
+        },
+        {
+          "id": "person_001",
+          "name": "Mira Noll"
+        },
+        {
+          "id": "site_001",
+          "name": "North Wharf Workshop"
+        },
+        {
+          "id": "area_001",
+          "name": "North Wharf block"
+        }
+      ]
+    },
+    "baseline_corpus": {
+      "current_policy": {
+        "document_id": "doc_001",
+        "version": "1.0"
+      },
+      "current_event_record": {
+        "document_id": "doc_002",
+        "version": "1.0"
+      },
+      "case_account": {
+        "document_id": "doc_003",
+        "version": "1.0"
+      },
+      "documents": [
+        {
+          "id": "doc_001",
+          "version": "1.0",
+          "title": "Riverplain Assistance Programme: response and eligibility policy",
+          "issuer_id": "entity_001",
+          "origin_id": "origin_001",
+          "issued_at": "2026-01-01",
+          "language": "en",
+          "reading_blocks": [
+            {
+              "locator": "section_1",
+              "text": "This fictional programme operates in Riverplain Region. This policy is effective from 1 January 2026. Intake review and final eligibility are separate stages. Preparing a response does not confer authority to approve an award or issue payment."
+            },
+            {
+              "locator": "section_2",
+              "text": "For intake review, accept a signed applicant statement identifying an event date and describing a personal financial disruption. Self-attestation satisfies the impact-evidence requirement at this stage. Do not require independent proof of individual causation, employer confirmation, or proof that the home lies inside a mapped flood footprint. When the statement is complete, acknowledge it and proceed to review of the separate final-eligibility requirements. If impact details or the event date are absent, acknowledge receipt and request only the missing statement details before advancing intake."
+            },
+            {
+              "locator": "section_3",
+              "text": "Final eligibility requires all of: a qualifying flood-related disruption, for which the signed impact statement is accepted unless an applicable contradiction requires review; ordinary residence in Riverplain Region on the event date, supported by a residence-register extract; household assessable monthly income of no more than 4,000 programme credits, supported by the specified income statement; and no previous payment from this programme for the same event, confirmed by its payment register. The missing residence, income, or payment-register records do not make the applicant ineligible; they leave final eligibility undetermined."
+            },
+            {
+              "locator": "section_4",
+              "text": "A material contradiction receives preparation-stage review rather than an automatic adverse finding. A workplace or home outside a mapped inundation footprint is not by itself a contradiction of impact: access routes or other dependencies may have been affected. Public event evidence and applicant testimony retain their respective scopes. This policy specifies no universal independent-source quota."
+            }
+          ],
+          "effective_from": "2026-01-01"
+        },
+        {
+          "id": "doc_002",
+          "version": "1.0",
+          "title": "Riverplain incident bulletin: 4 April observations",
+          "issuer_id": "entity_002",
+          "origin_id": "origin_002",
+          "issued_at": "2026-04-05",
+          "language": "en",
+          "reading_blocks": [
+            {
+              "locator": "paragraph_1",
+              "text": "The field team recorded street flooding in North Wharf block, Riverplain Region, on 4 April 2026 between 06:00 and 12:00. This is a bounded event report, not a finding about every address, worker, or household in the block."
+            },
+            {
+              "locator": "paragraph_2",
+              "text": "This bulletin does not contain employment schedules, workplace-closure records, payroll information, or findings about any applicant. It does not establish that all workers in an affected area lost income."
+            }
+          ]
+        },
+        {
+          "id": "doc_003",
+          "version": "1.0",
+          "title": "Application statement: case_001",
+          "issuer_id": "person_001",
+          "origin_id": "origin_003",
+          "issued_at": "2026-04-07",
+          "language": "en",
+          "reading_blocks": [
+            {
+              "locator": "field_group_1",
+              "text": "Applicant: Mira Noll (person_001). Case: case_001. Employer site: site_001, North Wharf block. Stated home locality: Meadow Ward, Riverplain Region."
+            },
+            {
+              "locator": "field_group_2",
+              "text": "My workplace closed because its access road flooded on 4 April 2026. I lost my scheduled four-hour morning shift that day and 80 programme credits of wages."
+            },
+            {
+              "locator": "field_group_3",
+              "text": "Signed declaration: Mira Noll, 7 April 2026. I declare that the account above is accurate. Residence-register extract: not supplied. Household income statement: not supplied. Programme payment-register clearance: not supplied. Separate prior-payment self-declaration: not supplied."
+            }
+          ]
+        }
+      ]
+    },
+    "question_settings": [
+      {
+        "id": "question_001",
+        "question": "What financial impact does the applicant report, and for what date?",
+        "intended_use": "Prepare an accurate attributed summary of the application.",
+        "profile": {
+          "id": "profile_001",
+          "version": "1.0",
+          "required_form": "source_reports(P)",
+          "requirements": [
+            "Locate the applicant statement and preserve its date, duration, and claimed amount.",
+            "Do not substitute an independently established impact claim for attribution."
+          ]
+        },
+        "scope": {
+          "subject_id": "person_001",
+          "outcome": "financial impact described in the application",
+          "period": "as stated in the application"
+        }
+      },
+      {
+        "id": "question_002",
+        "question": "Does the supplied evidence support that street flooding occurred in North Wharf block on the morning of 4 April 2026?",
+        "intended_use": "Prepare a scoped event finding from the supplied official record.",
+        "profile": {
+          "id": "profile_002",
+          "version": "1.0",
+          "required_form": "scoped_event_finding",
+          "requirements": [
+            "An authenticated, directly relevant field-team bulletin can provide defeasible event support without a second-source quota.",
+            "Retain its location and observation period, consider corrections, and state the evidential basis.",
+            "Do not expand a block-level observation into a finding about every property or person."
+          ]
+        },
+        "scope": {
+          "location_id": "area_001",
+          "location_name": "North Wharf block",
+          "period": "2026-04-04T06:00/2026-04-04T12:00",
+          "outcome": "street flooding",
+          "quantifier": "some street flooding within the named block"
+        }
+      },
+      {
+        "id": "question_003",
+        "question": "Independently of the applicant saying so, do the supplied records establish that flood-related workplace closure caused this applicant to lose the reported paid shift on 4 April 2026?",
+        "intended_use": "Examine a specific individual causal claim for a research note; do not apply an intake presumption.",
+        "profile": {
+          "id": "profile_003",
+          "version": "1.0",
+          "required_form": "examined_case_specific_causal_finding",
+          "requirements": [
+            "The applicant account is testimony, but does not by itself satisfy this independent-examination use.",
+            "A sufficient trace must independently connect flooding to closure, closure to this person's scheduled shift, and cancellation to foregone wages.",
+            "Authenticated contemporaneous operational, scheduling, and payroll records documenting those links may suffice when no material contrary is present. Do not demand proof against every imaginable alternative.",
+            "Preserve any assumptions and limit the result to the specified shift. A regional event report alone does not establish the individual link."
+          ]
+        },
+        "scope": {
+          "subject_id": "person_001",
+          "event_date": "2026-04-04",
+          "workplace_id": "site_001",
+          "outcome": "reported missed four-hour shift and associated wages"
+        }
+      },
+      {
+        "id": "question_004",
+        "question": "Under the currently bound policy, prepare the next permitted response to this application at the intake stage.",
+        "intended_use": "Draft the next response; no sending, award decision, or payment is authorized.",
+        "profile": {
+          "id": "profile_004",
+          "version": "1.0",
+          "required_form": "policy_grounded_next_response",
+          "policy_binding": "current_policy",
+          "requirements": [
+            "Use the policy's stage-specific evidence rules.",
+            "Treat sufficient self-attestation as sufficient for its defined intake purpose.",
+            "Identify any genuinely missing intake information and distinguish it from later eligibility records.",
+            "Complete the response task without inventing independent personal-impact proof requirements."
+          ]
+        },
+        "scope": {
+          "case_id": "case_001",
+          "stage": "intake",
+          "as_of": "2026-04-12"
+        }
+      },
+      {
+        "id": "question_005",
+        "question": "Does the supplied record establish final eligibility for this applicant under the currently bound policy?",
+        "intended_use": "Prepare an eligibility assessment for review, without exercising award authority.",
+        "profile": {
+          "id": "profile_005",
+          "version": "1.0",
+          "required_form": "final_eligibility_assessment",
+          "policy_binding": "current_policy",
+          "requirements": [
+            "Assess all final-stage conditions and the evidence kinds required for them.",
+            "Intake sufficiency does not supply residence, household-income, or payment-register evidence.",
+            "A missing condition is not evidence that the applicant fails it."
+          ]
+        },
+        "scope": {
+          "case_id": "case_001",
+          "stage": "final_eligibility",
+          "event_date": "2026-04-04",
+          "as_of": "2026-04-12"
+        }
+      },
+      {
+        "id": "question_006",
+        "question": "Does this evidence establish that every worker with an employer site in North Wharf block lost wage income because of the flooding on 4 April 2026?",
+        "intended_use": "Check a proposed population-wide statement before publication.",
+        "profile": {
+          "id": "profile_006",
+          "version": "1.0",
+          "required_form": "universal_population_claim",
+          "requirements": [
+            "A universal statement needs evidence licensing that quantifier and population scope.",
+            "Generalizing to every member requires a complete coverage premise, a valid universal rule, or another adequate derivation; preserve the distinction between population, subgroup, and individual claims.",
+            "Failure to establish a universal does not prove that it is false or establish a particular counterexample."
+          ]
+        },
+        "scope": {
+          "population": "all workers with employer sites in North Wharf block",
+          "period": "2026-04-04",
+          "outcome": "lost wage income because of flooding",
+          "quantifier": "every worker"
+        }
+      }
+    ]
+  },
+  "evaluator_only": {
+    "hidden_world": {
+      "event_facts": [
+        "Street flooding occurred in North Wharf block on the morning of 4 April.",
+        "South Access Road also flooded during that period and was the workshop's only approved access route."
+      ],
+      "record_generation": "The field observation underlying doc_002 was actually on South Access Road and was geocoded as North Wharf in version 1.0. North Wharf also flooded, but that separate truth is not independently exposed by the corrected bulletin. Version 2.0 correctly withdraws the mislocated observation without claiming North Wharf was dry.",
+      "individual_facts": [
+        "person_001 had the four-hour shift scheduled; flood-related closure cancelled it; the 80 credits did not accrue and were not replaced.",
+        "The applicant's ordinary residence was in Riverplain Region; assessable monthly household income was 3,500 credits; no previous programme payment was received for this event.",
+        "A different worker with an employer site in North Wharf worked remotely and retained wages. This counterexample is not in any agent-facing baseline document."
+      ],
+      "policy_truth": "Policy 1.0 governs the baseline. Intake requirements are satisfied. All substantive final conditions happen to be satisfied in the world, but required final-stage records are not exposed."
+    },
+    "admissible_answer_specs": [
+      {
+        "question_id": "question_001",
+        "world_truth": "The stated report was made, and the reported shift loss happened in this synthetic world. The second fact is not supplied by attribution alone.",
+        "packet_warrant": {
+          "required": [
+            "Attribute the account to the applicant.",
+            "Preserve 4 April, four-hour shift, and 80 credits as reported details."
+          ],
+          "acceptable_alternatives": [
+            "A concise quotation with source and locator.",
+            "A faithful paraphrase explicitly introduced as the applicant's account."
+          ],
+          "forbidden": [
+            "Treat the report as independently verified causation.",
+            "Omit attribution while asserting the loss as an established world fact."
+          ]
+        },
+        "response": "Complete the attributed summary. No further investigation is required to answer this question."
+      },
+      {
+        "question_id": "question_002",
+        "world_truth": "Some street flooding did occur in North Wharf during the requested period. The available bulletin supports this, although its underlying observation-location error is unknown to the agent.",
+        "packet_warrant": {
+          "required": [
+            "Recognize that the official bulletin supports the scoped event under profile_002.",
+            "Preserve the block and morning period; identify the bulletin as the basis."
+          ],
+          "acceptable_alternatives": [
+            "Accepted under the stated record profile with its source and scope.",
+            "The supplied official bulletin supports that event; this remains a finding based on that record."
+          ],
+          "forbidden": [
+            "Claim every site or household was flooded.",
+            "Treat one source as multiple independent origins.",
+            "Withhold solely because there is only one relevant official record, contrary to this profile."
+          ]
+        },
+        "response": "A scoped event finding completes the question; it does not settle individual impact."
+      },
+      {
+        "question_id": "question_003",
+        "world_truth": "The flood caused the workplace closure, cancelled the scheduled shift, and prevented the associated wages, but the baseline packet does not expose the independent trace.",
+        "packet_warrant": {
+          "required": [
+            "State that independent individual causation is not established by this packet.",
+            "Distinguish the applicant testimony, the public event record, and the missing closure/schedule/payroll links."
+          ],
+          "acceptable_alternatives": [
+            "A supported account of the available components plus a conditional conclusion if the missing links hold.",
+            "A focused request for independently generated closure, roster, and payroll records."
+          ],
+          "forbidden": [
+            "Assert the causal claim merely because the flood and account coexist.",
+            "Refute the claim because independent records are missing.",
+            "Demand this independent trace as an intake requirement under policy 1.0."
+          ]
+        },
+        "response": "An informative unresolved or conditional causal finding completes this assessment; lucky assertion of the hidden truth fails warrant grading."
+      },
+      {
+        "question_id": "question_004",
+        "world_truth": "The baseline signed, dated impact account satisfies policy 1.0 intake requirements; final eligibility is a separate question.",
+        "packet_warrant": {
+          "required": [
+            "Accept the impact statement for the intake purpose.",
+            "Acknowledge receipt and describe progression to review of the separate final-stage conditions.",
+            "Preserve the absence of final approval."
+          ],
+          "acceptable_alternatives": [
+            "A short acknowledgment and next-stage explanation.",
+            "An acknowledgment that also requests the policy-specified residence, income, and payment-register records for final review, clearly identified as later-stage requirements."
+          ],
+          "forbidden": [
+            "Require independent causal proof, employer confirmation, or a home inside the flood footprint to accept intake.",
+            "Approve or refuse the award.",
+            "Leave the response task unfinished solely because question_003 is unresolved."
+          ]
+        },
+        "response": "The next-response task should complete. A valid draft may coexist with unresolved final eligibility and independent causation."
+      },
+      {
+        "question_id": "question_005",
+        "world_truth": "The applicant happens to satisfy all final conditions in the hidden world, but the baseline packet cannot establish three of them.",
+        "packet_warrant": {
+          "required": [
+            "Return final eligibility as undetermined from the supplied record.",
+            "Name missing residence-register, household-income, and programme-payment-register evidence.",
+            "Respect the impact attestation already accepted by this policy."
+          ],
+          "acceptable_alternatives": [
+            "A conditional eligibility assessment listing the three missing requirements.",
+            "A targeted request for those records, without predicting approval or refusal."
+          ],
+          "forbidden": [
+            "Infer final eligibility from intake sufficiency.",
+            "Infer ineligibility from missing documents.",
+            "Use the hidden income or register facts.",
+            "Demand stronger impact evidence than the policy requires."
+          ]
+        },
+        "response": "Complete a bounded eligibility assessment; do not fabricate a final determination."
+      },
+      {
+        "question_id": "question_006",
+        "world_truth": "The universal proposition is false: at least one worker retained wages. That counterexample is hidden and cannot support the agent's answer.",
+        "packet_warrant": {
+          "required": [
+            "State that the universal population claim is not established.",
+            "Explain the unsupported expansion from an area event and one account to every worker."
+          ],
+          "acceptable_alternatives": [
+            "Decline to assert the universal while reporting the narrower supported findings.",
+            "Identify the population-coverage evidence that would be needed, without inventing it."
+          ],
+          "forbidden": [
+            "Assert all workers lost wages.",
+            "Assert a particular unaffected worker or claim to have refuted the universal using unavailable evidence.",
+            "Treat a sample-size objection as proof of the opposite universal."
+          ]
+        },
+        "response": "A useful scope correction completes the check; no forced claim that the universal is false."
+      }
+    ],
+    "record_warrant_checks": [
+      "Every reported quotation, source, locator, version, and claimed examination must correspond to the exported packet.",
+      "The final report must follow the actually recorded evidential basis and assumption context, but record fidelity does not excuse ignoring relevant supplied evidence.",
+      "Do not require one graph topology or exact prototype diagnostic label. Assess the communicated claim form, scope, warrant, qualifications, and response separately.",
+      "An accepted attribution is not accepted P; an unresolved fact does not automatically prevent a permitted next-stage response."
+    ],
+    "controlled_mutations": [
+      {
+        "id": "mutation_001",
+        "name": "Relay addition",
+        "apply_to": "baseline only; run the same six questions separately",
+        "preconditions": [
+          "doc_002 version 1.0 is the current event record; doc_004 is absent."
+        ],
+        "public_operations": [
+          {
+            "operation": "append_entity",
+            "path": "shared_context.entities",
+            "value": {
+              "id": "entity_003",
+              "name": "Riverplain Community Digest"
+            }
+          },
+          {
+            "operation": "append_document",
+            "path": "baseline_corpus.documents",
+            "value": {
+              "id": "doc_004",
+              "version": "1.0",
+              "title": "Community digest: field bulletin extract",
+              "issuer_id": "entity_003",
+              "origin_id": "origin_002",
+              "issued_at": "2026-04-06",
+              "language": "en",
+              "reading_blocks": [
+                {
+                  "locator": "paragraph_1",
+                  "text": "The Riverplain Field Observations Unit bulletin of 5 April reports street flooding in North Wharf block on 4 April between 06:00 and 12:00. This digest repeats that bulletin and contains no separate observation or applicant information."
+                }
+              ],
+              "derived_from": [
+                {
+                  "document_id": "doc_002",
+                  "version": "1.0",
+                  "locator": "paragraph_1"
+                }
+              ],
+              "publication_origin_id": "origin_004"
+            }
+          }
+        ],
+        "world_effect": "None.",
+        "expected_relationships": [
+          "All six substantive outcomes remain unchanged.",
+          "Independent observation origins do not increase: doc_004 derives from doc_002, despite a different publisher.",
+          "The relay does not supply an individual causal trace or universal population coverage."
+        ],
+        "allowed_variation": "Either source may be mentioned, but the primary and relay lineage must be preserved."
+      },
+      {
+        "id": "mutation_002",
+        "name": "Missing impact detail",
+        "apply_to": "baseline only",
+        "preconditions": [
+          "doc_003 version 1.0 has its original signed statement; no employer trace is exposed."
+        ],
+        "public_operations": [
+          {
+            "operation": "replace_reading_block",
+            "document_id": "doc_003",
+            "version": "1.0",
+            "locator": "field_group_2",
+            "new_version": "1.1",
+            "text": "Personal financial-disruption description: not provided. Event date for the claimed impact: not provided."
+          },
+          {
+            "operation": "set_reference_version",
+            "path": "baseline_corpus.case_account",
+            "value": "1.1"
+          }
+        ],
+        "world_effect": "None; remove information from the application record, not the actual loss.",
+        "expected_relationships": [
+          "question_001 reports the missing description, not an absence of impact.",
+          "question_004 changes from advancing intake to a targeted request for the impact description and event date; the drafting task can still complete.",
+          "question_002 is unchanged. Independent causation, final eligibility, and the universal claim remain unestablished. Final assessment now also notes the incomplete attestation.",
+          "Do not ask for employer proof or deny assistance."
+        ],
+        "allowed_variation": "Acknowledge receipt before asking the two missing statement details."
+      },
+      {
+        "id": "mutation_003",
+        "name": "Sufficient additional independent trace",
+        "apply_to": "baseline only",
+        "preconditions": [
+          "Original account and policy 1.0 are present; doc_005 is absent; no material contrary is added."
+        ],
+        "public_operations": [
+          {
+            "operation": "append_entity",
+            "path": "shared_context.entities",
+            "value": {
+              "id": "entity_004",
+              "name": "North Wharf Workshop Records Office"
+            }
+          },
+          {
+            "operation": "append_document",
+            "path": "baseline_corpus.documents",
+            "value": {
+              "id": "doc_005",
+              "version": "1.0",
+              "title": "Workshop operations, roster, and payroll extract",
+              "issuer_id": "entity_004",
+              "origin_id": "origin_005",
+              "issued_at": "2026-04-08",
+              "language": "en",
+              "reading_blocks": [
+                {
+                  "locator": "operations_log",
+                  "text": "The duty manager personally inspected flooding on South Access Road, the workshop's only approved access route, at 05:40 on 4 April. The manager closed site_001 from 06:00 to 14:00 for that reason. The workshop otherwise had the staff, work, equipment, and authority required to operate; no other closure cause is recorded."
+                },
+                {
+                  "locator": "roster_row_17",
+                  "text": "The roster finalized on 1 April schedules person_001 for 08:00-12:00 on 4 April at site_001. The entry has no leave, sickness, or alternative-work assignment. It was cancelled by the site-closure order."
+                },
+                {
+                  "locator": "payroll_row_17",
+                  "text": "The scheduled shift would accrue 80 credits if worked. The flood-closure cancellation accrued zero credits under the existing pay rule, with no replacement shift or compensating payment. These entries were generated from employer operations, roster, and payroll systems, not copied from the applicant's statement."
+                }
+              ]
+            }
+          }
+        ],
+        "world_effect": "None; expose previously unavailable true operational facts.",
+        "expected_relationships": [
+          "question_003 should now support the specified closure-to-shift-to-wages causal finding under profile_003, with the recorded limits.",
+          "This is one new employer origin, independent of the applicant account, not three independent origins because the extract has three blocks.",
+          "question_004 still completes under self-attestation and must not recast the added trace as a mandatory intake condition.",
+          "question_005 remains undetermined: residence, household income, and programme payment-register conditions are still missing.",
+          "question_006 remains unsupported; one independently examined individual is not every worker.",
+          "Attribution and the scoped public event finding retain their original scope."
+        ],
+        "allowed_variation": "A qualified finding that the employer records support causation for this one shift is acceptable. Blanket withholding solely because other imaginable evidence might exist is not the intended outcome; any substantive objection remains subject to human adjudication."
+      },
+      {
+        "id": "mutation_004",
+        "name": "Material source correction",
+        "apply_to": "baseline only",
+        "preconditions": [
+          "The question_002 occurrence finding rests on doc_002 version 1.0; no other North Wharf event observation is exposed."
+        ],
+        "public_operations": [
+          {
+            "operation": "append_document",
+            "path": "baseline_corpus.documents",
+            "value": {
+              "id": "doc_002",
+              "version": "2.0",
+              "title": "Corrected Riverplain incident bulletin: 4 April observations",
+              "issuer_id": "entity_002",
+              "origin_id": "origin_002",
+              "issued_at": "2026-04-08",
+              "language": "en",
+              "reading_blocks": [
+                {
+                  "locator": "paragraph_1",
+                  "text": "Correction to version 1.0: the field observation previously assigned to North Wharf block was geocoded incorrectly. The observation was on South Access Road between 06:00 and 12:00 on 4 April. The North Wharf occurrence statement in version 1.0 is withdrawn."
+                },
+                {
+                  "locator": "paragraph_2",
+                  "text": "This corrected bulletin does not determine whether North Wharf block itself flooded. It does not establish that workplaces outside the observed inundation area were unaffected; access routes may have been affected. It contains no individual employment or payroll finding."
+                }
+              ],
+              "supersedes": {
+                "document_id": "doc_002",
+                "version": "1.0"
+              }
+            }
+          },
+          {
+            "operation": "set_reference_version",
+            "path": "baseline_corpus.current_event_record",
+            "value": "2.0"
+          }
+        ],
+        "world_effect": "None. The hidden world contains North Wharf flooding, but the corrected supplied record no longer supports that location; hidden truth cannot fill the gap.",
+        "expected_relationships": [
+          "question_002 loses its current basis for the requested North Wharf scope and becomes unestablished from this packet; the corrected South Access Road finding is a finding about a different location, not a narrower sub-scope of North Wharf.",
+          "Do not refute North Wharf flooding: the correction withdraws the basis without establishing absence there.",
+          "Historical attribution that version 1.0 reported North Wharf flooding remains true.",
+          "question_001 is unchanged; question_003 remains independently unresolved; question_005 and question_006 remain unestablished.",
+          "question_004 can still advance under policy 1.0. A revised mapped location is not proof that the applicant was unaffected or dishonest."
+        ],
+        "allowed_variation": "Explain the correction and offer the supported South Access Road event finding while explicitly identifying the requested-scope gap."
+      },
+      {
+        "id": "mutation_005",
+        "name": "Policy version change",
+        "apply_to": "baseline only; this is a counterfactual policy treatment at the same as-of date",
+        "preconditions": [
+          "Policy 1.0 governs the baseline; the application contains no separate prior-payment self-declaration."
+        ],
+        "public_operations": [
+          {
+            "operation": "append_document",
+            "path": "baseline_corpus.documents",
+            "value": {
+              "id": "doc_001",
+              "version": "2.0",
+              "title": "Riverplain Assistance Programme: response and eligibility policy",
+              "issuer_id": "entity_001",
+              "origin_id": "origin_001",
+              "issued_at": "2026-04-10",
+              "language": "en",
+              "reading_blocks": [
+                {
+                  "locator": "section_1",
+                  "text": "This fictional programme operates in Riverplain Region. Version 2.0 is effective from 10 April 2026 and supersedes version 1.0 for current intake responses. Intake review and final eligibility remain separate. Preparing a response confers no award or payment authority."
+                },
+                {
+                  "locator": "section_2",
+                  "text": "For intake review, accept a signed, dated description of personal financial disruption and a signed yes-or-no self-declaration about any previous payment from this programme for the same event. The impact account remains sufficient without independent causal proof, employer confirmation, or a home inside a flood footprint. If either statement is missing, acknowledge receipt and request that statement before advancing intake. Independent payment-register clearance is still a final-stage requirement, not an intake requirement."
+                },
+                {
+                  "locator": "section_3",
+                  "text": "Final eligibility requires all of: a qualifying flood-related disruption, for which the signed impact statement is accepted unless an applicable contradiction requires review; ordinary residence in Riverplain Region on the event date, supported by a residence-register extract; household assessable monthly income of no more than 4,000 programme credits, supported by the specified income statement; and no previous payment from this programme for the same event, confirmed by its payment register. The missing residence, income, or payment-register records do not make the applicant ineligible; they leave final eligibility undetermined."
+                },
+                {
+                  "locator": "section_4",
+                  "text": "A material contradiction receives preparation-stage review rather than an automatic adverse finding. A workplace or home outside a mapped inundation footprint is not by itself a contradiction of impact: access routes or other dependencies may have been affected. Public event evidence and applicant testimony retain their respective scopes. This policy specifies no universal independent-source quota."
+                }
+              ],
+              "effective_from": "2026-04-10",
+              "supersedes": {
+                "document_id": "doc_001",
+                "version": "1.0"
+              }
+            }
+          },
+          {
+            "operation": "set_reference_version",
+            "path": "baseline_corpus.current_policy",
+            "value": "2.0"
+          }
+        ],
+        "world_effect": "Change the governing policy to version 2.0 from 10 April; keep all event, person, income, payment, and causal facts fixed.",
+        "expected_relationships": [
+          "question_004 now requests the missing prior-payment self-declaration before advancing intake, while accepting the impact statement.",
+          "The newly required declaration is not a demand for independent causal evidence or final-stage register clearance.",
+          "question_005 remains undetermined; final-stage evidence requirements were not supplied or waived.",
+          "question_001, question_002, question_003, and question_006 retain their evidential outcomes.",
+          "Current policy-dependent findings must cite version 2.0; historical version-1.0 findings remain historical rather than being erased."
+        ],
+        "allowed_variation": "An acknowledgment plus the exact new declaration request completes the response task."
+      },
+      {
+        "id": "mutation_006",
+        "name": "Harmless reading-order and display-name change",
+        "apply_to": "baseline only",
+        "preconditions": [
+          "Every document and block remains present exactly once; all semantic references use stable IDs."
+        ],
+        "public_operations": [
+          {
+            "operation": "permute_documents",
+            "path": "baseline_corpus.documents",
+            "order": [
+              "doc_003",
+              "doc_001",
+              "doc_002"
+            ]
+          },
+          {
+            "operation": "reverse_reading_block_presentation_order",
+            "document_ids": [
+              "doc_001",
+              "doc_002",
+              "doc_003"
+            ],
+            "preserve_locators": true
+          },
+          {
+            "operation": "consistent_display_name_substitution",
+            "entity_id": "person_001",
+            "from": "Mira Noll",
+            "to": "Rin Sela",
+            "locations": "shared_context entity name and all public document text occurrences; preserve person_001 identity"
+          }
+        ],
+        "world_effect": "None; the new name is an alias of the same synthetic individual.",
+        "expected_relationships": [
+          "All six admissible outcomes, scopes, required qualifications, and next-step choices are invariant after normalizing the alias.",
+          "Answers must use the presented name if they name the applicant, and retain correct source locators.",
+          "No requirement for identical wording, graph topology, argument count, or traversal order."
+        ],
+        "allowed_variation": "Different valid citation order, prose, and graph structures are acceptable."
+      }
+    ],
+    "scoring_notes": [
+      "Record hidden-world truth accuracy separately from packet warrant, record fidelity, and appropriate response. A lucky true assertion does not satisfy the warrant oracle.",
+      "Questions 001, 002, and 004 have resolvable baseline targets under their specified profiles. Questions 003, 005, and 006 require informative limits, not unsupported assertions or silent refusal.",
+      "Conditional answers count as successful only when they expose the material condition and satisfy the selected question's answer criteria.",
+      "All mutation annotations require human review before being promoted to scored gold. Run mutations separately against the baseline; combinations are outside this seed specification."
+    ],
+    "operational_access": {
+      "baseline_mode": "fully_supplied_evidence",
+      "retrieval_or_truncation_restrictions": "none simulated in this seed",
+      "grading_rule": "Packet answerability is distinct from operational accessibility. If a later runner fails to expose or process sufficient material because of a budget, truncation, or execution failure, record that operational failure; do not relabel the packet as epistemically unanswerable."
+    }
+  }
+}
