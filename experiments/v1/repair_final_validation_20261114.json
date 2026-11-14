@@ -1,0 +1,39 @@
+{
+  "kind": "phase_and_terminal_control_validation",
+  "version": "1.0.0a4",
+  "parent_commit": "24dbf241a2f25352807bc956c09a9fd4abf8b238",
+  "full_suite": {
+    "command": ".venv/bin/python -m pytest -q",
+    "passed": 561,
+    "elapsed_seconds": 4.14
+  },
+  "scripted_matrix": {
+    "arms": [
+      "ordinary",
+      "repertoire",
+      "harness"
+    ],
+    "modes": [
+      "supplied",
+      "documents",
+      "search"
+    ],
+    "attempts": 378,
+    "runtime_complete": 378,
+    "structural_pass": 378,
+    "categorical_pass": 378,
+    "live_api_calls": 0,
+    "human_adjudicated": 0
+  },
+  "new_guards": [
+    "Declared final-answer channel; commentary preserved as non-operative data",
+    "Exact duplicate final messages execute once; conflicting finals and invalid JSON rejected",
+    "Valid explicit finish preserved through clean completed review",
+    "Repeated-submission comparison ignores only global snapshot revision",
+    "Outstanding attacks prevent automatic repeated-submission completion",
+    "Information requests reference existing unresolved conditions",
+    "Unsupported support cycles enter record repair"
+  ],
+  "live_rerun": "Not yet started on this frozen revision",
+  "interpretation": "Offline contract and workflow checks, not substantive accuracy estimates."
+}

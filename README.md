@@ -1,5 +1,61 @@
 # inquiry-harness
 
+## Controlled inquiry v1
+
+The controlled rebuild is available as `inquiry.v1` and the `inquiry-v1`
+command, version **1.0.0a5**. It implements the first runnable slice of the new
+design: known evidence, explicit question and acceptance profiles, a bounded
+inquiry loop, deterministic argument evaluation, and a matched experiment runner.
+
+The shared core is purely epistemic: it returns scoped findings, warrant and
+unresolved information needs. Decisions, business messages and execution belong
+to the calling application. Generic requests accept arbitrary source collections
+and explicit targets without policy-case fields. The hardship example now sits
+behind an explicit adapter.
+
+Search and evidence acquisition belong to the harness. The original harness's
+web/literature search and fetch providers remain available; connecting them to
+v1's stricter evidence contracts is the next acquisition increment. This alpha
+uses fixed source collections for controlled experiments. Caller-supplied sources
+are optional starting material in the architecture.
+
+The [service guide](docs/V1_SERVICE.md) documents the Python `InquiryService`,
+the optional `inquiry-service` MCP stdio transport (`inquire`, `check`, `replay`),
+cross-domain examples, resource ceilings and the remaining build sequence.
+
+Start without API credentials:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -e ".[dev]"
+pytest -q
+inquiry-v1 validate
+inquiry-v1 run --demo --question question_004 --out runs/v1/intake
+inquiry-v1 replay runs/v1/intake
+```
+
+The bundled fictional hardship case has six question settings and six evidence
+mutations. It supports three experimental arms (ordinary prompted inquiry,
+repertoire instructions, and the graph harness) and three evidence modes
+(supplied text, documents to open, and a corpus to search). The demo worker is a
+labelled scripted test instrument. Its results check software behavior, not
+model reasoning quality.
+
+See [the v1 guide](docs/CONTROLLED_V1.md) for live provider runs, the experiment
+matrix, output contracts, supported reasoning patterns and implementation limits.
+The [validation report](docs/V1_VALIDATION.md) records both the passing software
+checks and the remaining live-model failures.
+The [first eight-case live batch](experiments/v1/live_20261114/README.md) is preserved;
+[repair notes](docs/V1_REPAIR_NOTES.md) describe the subsequent operational fixes.
+The seven-competence repertoire is a design target; this alpha does not yet
+implement all seven competences or a live-web research service.
+
+## Earlier prototype
+
+The original `inquiry` package and command remain available. The description
+below concerns that prototype; the v1 evaluator and contracts are separate.
+
 A research agent harness whose state is an explicit argument graph. Claims are
 accepted only when a named argument scheme supports them, the scheme's critical
 questions are answered, the evidence clears a proof standard, and no surviving

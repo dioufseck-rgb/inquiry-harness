@@ -1,0 +1,54 @@
+{
+  "shared_context": {
+    "as_of": "2026-04-12",
+    "context": "Synthetic integration example; no real person, equipment or study.",
+    "source_handling": "Treat the supplied export as an authentic record of its stated issuer; examine scope and preserve qualifications."
+  },
+  "corpus": {
+    "documents": [
+      {
+        "id": "meter/day4",
+        "version": "1",
+        "title": "Household meter export",
+        "issuer_id": "meter-device-7",
+        "origin_id": "meter-device-7",
+        "issued_at": "2026-04-05",
+        "language": "en",
+        "reading_blocks": [
+          {
+            "locator": "record",
+            "text": "Meter home-meter-7 recorded electricity consumption of 9 kWh for 4 April 2026. This record covers that meter and day only."
+          }
+        ]
+      }
+    ],
+    "current_versions": {
+      "meter/day4": "1"
+    }
+  },
+  "question": {
+    "id": "personal:meter",
+    "question": "Does the supplied household meter record 9 kWh of electricity use on 4 April 2026?",
+    "intended_use": "A scoped epistemic finding; downstream choices belong to the caller.",
+    "scope": {
+      "meter": "home-meter-7",
+      "date": "2026-04-04",
+      "quantity": "electricity consumption",
+      "unit": "kWh"
+    },
+    "target": {
+      "kind": "substantive",
+      "form": "assertion"
+    },
+    "profile": {
+      "id": "located-record-v1",
+      "version": "1",
+      "authority": "Example author; development use only.",
+      "requirements": [
+        "Use the located record at its stated scope.",
+        "Retain attribution and qualifications; do not infer a stronger proposition."
+      ],
+      "kernel": {}
+    }
+  }
+}

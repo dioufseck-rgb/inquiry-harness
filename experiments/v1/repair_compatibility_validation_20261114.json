@@ -1,0 +1,16 @@
+{
+  "kind": "adapter_compatibility_validation",
+  "version": "1.0.0a3",
+  "parent_commit": "f871bc515bf1a690741c894edd6ccce1e8fe2db4",
+  "test_command": ".venv/bin/python -m pytest -q",
+  "tests_passed": 528,
+  "elapsed_seconds": 2.85,
+  "focused_protocol_and_worker_tests_passed": 123,
+  "live_shape_replay": {
+    "exact_duplicate_responses_normalized": 3,
+    "distinct_commentary_plus_duplicate_finals_rejected": 1
+  },
+  "scripted_matrix": "378 checks passed before this adapter-only change; retained in repair_validation_20261114.json",
+  "live_rerun": "not yet started on this revision",
+  "interpretation": "Offline compatibility and execution validation, not an answer accuracy result."
+}

@@ -1,0 +1,158 @@
+{
+  "kind": "software_validation_summary",
+  "date": "2026-11-14",
+  "implementation_version": "1.0.0a5",
+  "base_commit": "6c99cdb34a2a5777c65939bd2ff0f0b5539a93ab",
+  "boundary": "Purely epistemic service; application decisions and products are external consumers.",
+  "repository_suite": {
+    "command": ".venv/bin/python -m pytest -q",
+    "passed": 725,
+    "skipped": 2,
+    "skip_reason": "Optional MCP SDK is absent in the project virtual environment."
+  },
+  "mcp_service_suite": {
+    "runtime": "Primary Python with MCP 1.29.0 and project pytest",
+    "command": "pytest tests/v1/test_service.py -q",
+    "passed": 25,
+    "skipped": 0,
+    "includes": "Real stdio client/server initialization, tool discovery and check call. The two optional tests skipped above pass here; 23 tests overlap the repository suite.",
+    "warnings": [
+      "SDK PydanticSettings lifespan forward-reference warning; registration and calls complete."
+    ]
+  },
+  "scripted_integration": {
+    "execution_kind": "scripted_smoke",
+    "case_families": 1,
+    "question_settings": 42,
+    "arms": [
+      "ordinary",
+      "repertoire",
+      "harness"
+    ],
+    "modes": [
+      "supplied",
+      "documents",
+      "search"
+    ],
+    "repetitions": 1,
+    "summary": {
+      "attempts": 378,
+      "run_status_counts": {
+        "complete": 378
+      },
+      "inquiry_completed_count": 378,
+      "failed_runs": 0,
+      "completion_count_interpretation": "Declared inquiry completion, excluding scope/form rejection or incomplete evaluation, record, response or configured review; not human-adjudicated adequacy.",
+      "evaluation_completion_status_counts": {
+        "pending": 252,
+        "complete": 126
+      },
+      "usage_known_totals": {
+        "model_calls": 1332,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "tool_calls": 954,
+        "failed_calls": 0,
+        "cost_usd": 0.0
+      },
+      "usage_unknown_run_counts": {
+        "model_calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "tool_calls": 0,
+        "failed_calls": 0,
+        "cost_usd": 0
+      },
+      "monetary_cost_complete": true,
+      "runner_elapsed_seconds": 8.276072740997733,
+      "structural_status_counts": {
+        "pass": 378
+      },
+      "smoke_status_counts": {
+        "pass": 378
+      },
+      "human_review_status_counts": {
+        "pending": 378
+      },
+      "automatic_substantive_accuracy": null,
+      "interpretation": "Structural and categorical smoke results are not substantive accuracy estimates."
+    },
+    "live_provider_calls": 0,
+    "execution_implementation_hashes": {
+      "runtime": "e3b5041355f497a57101953cc2d90d8222aa6e031724d12d5114c2bd602c5a0a",
+      "workers": "1279a26636f267cd7907cff208b9eee1ab50c2ef0a3c45f5cd904890c9de9bef",
+      "scoring": "1c0fd6d7c3a9916b9130916e2d26663c1a3c506dde538a9d0c1d2056dcf0f0c5",
+      "experiments": "94c8a8d738c34eaa1318fe7951ba7df7272690abf9dd4d83bb3f03cea8bb65d2",
+      "models": "3b63d4579e72ce6cf15bc9321a16c79114806c20329595e097ef0cf193a959c1",
+      "packets": "bbc583357f263a42fbbb39288d9c088b11f3a00adcc1ad13d288cb1333850bcd"
+    },
+    "execution_prompt_hashes": {
+      "ordinary": "2382416e8bcd75f628e695eceedbd7826e98cb3942314afe051231ce1fe46b12",
+      "repertoire": "48e13419df4dc779b9903b66b785da20828d82119e4d847d1b7e235821e77267",
+      "harness": "9d2d6484baf236bdde0ccd7f1aca201e2e14b4d92884006130f771f8eed46c02"
+    },
+    "offline_rescoring": {
+      "kind": "offline_record_rescoring",
+      "reason": "Generic scorer omitted three neutral controller fields: review_required, target_question_answered, standing_attack_ids. Updated exact response allowlist and explicit target/standing-attack consistency checks.",
+      "initial_experiment_sha256": "aa0a7b091997668d4cdab34f99abdd4890bb9ade17ae3e7a9438ed55554ff5d1",
+      "initial_scorer_hash": "1c0fd6d7c3a9916b9130916e2d26663c1a3c506dde538a9d0c1d2056dcf0f0c5",
+      "current_scorer_version": "epistemic-record-audit-0.3",
+      "current_scorer_file_sha256": "55b9f4a10ff0c6e2544185d8545c968da35e8f0c0f28fc98d15d65a31766768d",
+      "original_worker_executions": 378,
+      "additional_worker_executions": 0,
+      "additional_provider_calls": 0,
+      "run_results_unchanged": true,
+      "initial_scores_retained_at": [
+        "initial_experiment.json",
+        "initial_runs.jsonl"
+      ],
+      "limitation": "Scripted integration and record audit only; no model-quality or substantive-correctness inference."
+    },
+    "interpretation": "One synthetic development family across 378 settings, not independent cases or a model-quality estimate. Executed before final capability and prompt wording clarifications; exact execution hashes are retained."
+  },
+  "generic_service_examples": [
+    "equipment_temperature",
+    "research_attribution",
+    "household_meter"
+  ],
+  "historical_records": {
+    "archived_live_records_checked": 8,
+    "original_ledgers_valid": 8,
+    "rewritten_records": 0,
+    "exact_current_evaluation_reproduced": 0,
+    "different_schema": 7,
+    "graphless": 1
+  },
+  "new_live_experiments": {
+    "runs": 0,
+    "cost_usd": 0,
+    "reason": "No model-quality inference from deterministic integration; live evaluation requires the frozen generic contract."
+  },
+  "hosted_ci": "Observed separately on the final commit; not inferred from local tests.",
+  "implementation_file_sha256": {
+    "inquiry/v1/__init__.py": "632b3076b534d4906e425ff1ad1f6f194cb4beb2383c5baaeae85d6eb5233bd3",
+    "inquiry/v1/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "inquiry/v1/adapters/__init__.py": "febdc75db4fe2d0fcde92fd154e02afac39d65519ddf5048a4b7773b832d0855",
+    "inquiry/v1/adapters/hardship.py": "ed983e64ada3f7d4528bd5d7191f78d1cfd130df99ca5b74dd78fda6a2fe0fd8",
+    "inquiry/v1/adapters/hardship_application.py": "a591835b373cadf23ced18aee7ab63d847ae95b2a62bf5084c0c805db230d423",
+    "inquiry/v1/adapters/hardship_demo.py": "cb632806882e783a70cdde84163579ee412f56a28989b9560cbd5c7e93786554",
+    "inquiry/v1/adapters/hardship_scoring.py": "7a234d00c4f1f1e265145c317b0430f4158c9bb6d8ab494c5ed855e87470cdee",
+    "inquiry/v1/adapters/history.py": "4cf2d34a8b2c262bf057322ed22aa6344e65f0f5a45c9c2d58eb88aab899d8c4",
+    "inquiry/v1/adapters/legacy.py": "fc0030d74db56571abafb1f02644d18f7740cff2d161fbd6261fe13b9a20485c",
+    "inquiry/v1/cli.py": "29a87b8d42a94ed1518156b9df736a2b7aa81ebb09ab07c6713ab65a38f563b3",
+    "inquiry/v1/contracts.py": "9293df39b581f5703dbc2bb3c46f2e837c95896574e63a519bd63648e2bdb212",
+    "inquiry/v1/demo.py": "fe5122cda92c9d0e3f24c467a4be489d441bcb7c17a46721c89180c163c14c63",
+    "inquiry/v1/evidence.py": "a0820f033d5f07522c57194aa0da72fc50dc8218861177e5772b4ea0844e6619",
+    "inquiry/v1/experiments.py": "2f19f606a4e4ec6aad660daaf678b00a27e4b5887e68f788cdfa7925aeb6320e",
+    "inquiry/v1/kernel.py": "e732c959d00397f87cb54fe99d2f9006098b306f465de95b650274ed296626f8",
+    "inquiry/v1/mcp_server.py": "09240cee95ebd979cda14d1078556c1367c9c42e961048617ca5d702176022fe",
+    "inquiry/v1/models.py": "38c9d6322bef4a5442402ee354a6264bd9ba5ebfe50f4e648323a91443c5428d",
+    "inquiry/v1/packets.py": "d1ffc5e108eb48434809594a7589c7cab4dcfc3fa877869a4aa271ead7d90e85",
+    "inquiry/v1/persistence.py": "7bf8000cb8b131d8d88f4977afcc0747b47e00e8b189945ea7aa06f1801f8bc9",
+    "inquiry/v1/protocol.py": "93d19418d7b90db386310860c7e9bd1443e59b1a8df385b4872bbb4eeb7975d3",
+    "inquiry/v1/runtime.py": "f8a78742e81636f80dfa417036c40ea20bff8abb5eb39da3dd0689eed86d5cab",
+    "inquiry/v1/scoring.py": "55b9f4a10ff0c6e2544185d8545c968da35e8f0c0f28fc98d15d65a31766768d",
+    "inquiry/v1/service.py": "773450d7fce9f0ddb76f1c0756b1d810691adec63252262c7f6fd75b291654a5",
+    "inquiry/v1/workers.py": "50c9a5c3d66e58c418c656e1a9dd0d2b08665f8398875a57bcc3c6513a0499fc"
+  }
+}

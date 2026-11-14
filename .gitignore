@@ -4,6 +4,8 @@ __pycache__/
 runs/
 .env
 *.egg-info/
+build/
+dist/
 .claude/
 experiments/**/sample-*/
 experiments/**/pre-move.json

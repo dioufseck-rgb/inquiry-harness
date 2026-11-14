@@ -1,0 +1,54 @@
+{
+  "shared_context": {
+    "as_of": "2026-04-12",
+    "context": "Synthetic integration example; no real person, equipment or study.",
+    "source_handling": "Treat the supplied export as an authentic record of its stated issuer; examine scope and preserve qualifications."
+  },
+  "corpus": {
+    "documents": [
+      {
+        "id": "logger/A4",
+        "version": "1",
+        "title": "Calibrated logger export",
+        "issuer_id": "maintenance-lab",
+        "origin_id": "maintenance-lab",
+        "issued_at": "2026-04-05",
+        "language": "en",
+        "reading_blocks": [
+          {
+            "locator": "record",
+            "text": "The calibrated logger recorded coolant temperature 82 C for pump A4 at 14:00 UTC on 4 April 2026."
+          }
+        ]
+      }
+    ],
+    "current_versions": {
+      "logger/A4": "1"
+    }
+  },
+  "question": {
+    "id": "equipment:temperature",
+    "question": "Does the supplied logger record a coolant temperature of 82 C for pump A4 at 14:00 on 4 April 2026?",
+    "intended_use": "A scoped epistemic finding; downstream choices belong to the caller.",
+    "scope": {
+      "asset": "pump-A4",
+      "quantity": "coolant temperature",
+      "unit": "C",
+      "at": "2026-04-04T14:00:00Z"
+    },
+    "target": {
+      "kind": "substantive",
+      "form": "assertion"
+    },
+    "profile": {
+      "id": "located-record-v1",
+      "version": "1",
+      "authority": "Example author; development use only.",
+      "requirements": [
+        "Use the located record at its stated scope.",
+        "Retain attribution and qualifications; do not infer a stronger proposition."
+      ],
+      "kernel": {}
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "kind": "implementation_validation_before_live_rerun",
+  "version": "1.0.0a2",
+  "date": "2026-11-14",
+  "unit_and_integration_tests": {
+    "command": ".venv/bin/python -m pytest -q",
+    "passed": 504,
+    "failed": 0
+  },
+  "scripted_full_matrix": {
+    "command": ".venv/bin/python -m inquiry.v1 bench --demo --arms ordinary repertoire harness --modes supplied documents search --out runs/v1/repair_20261114_smoke_final",
+    "attempts": 378,
+    "runtime_complete": 378,
+    "structural_pass": 378,
+    "categorical_smoke_pass": 378,
+    "human_adjudicated": 0,
+    "provider_calls": 0
+  },
+  "strict_parser_replay_of_first_batch": {
+    "saved_worker_replies": 43,
+    "single_unambiguous_json": 27,
+    "rejected_trailing_objects": 14,
+    "rejected_malformed_json": 1,
+    "rejected_duplicate_key": 1,
+    "original_artifacts_modified": false
+  },
+  "interpretation": "Regression checks and controlled integration plumbing only. These results are not live-model accuracy, human gold, or evidence of architectural advantage. Development caught an overbroad record-defect gate that incorrectly classified honest open claim conditions; it was removed and regression-tested before this final matrix."
+}

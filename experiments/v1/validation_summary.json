@@ -1,0 +1,660 @@
+{
+  "artifact": "controlled-inquiry-v1-development-validation",
+  "date_utc": "2026-11-14",
+  "version": "1.0.0a1",
+  "tested_code_commit": "ac4700d7bdf1ed9b06bb21b44ad23c29b3cbd312",
+  "tested_tree": "c864a678671e45bf1e8a90ea034016bcb1dafd04",
+  "local_test_commit_same_tree": "9d1ceca",
+  "software_tests": {
+    "passed": 342,
+    "legacy_tests": 168,
+    "new_v1_tests": 174,
+    "python": "3.12.14"
+  },
+  "tested_sdk_versions": {
+    "openai": "3.51.0",
+    "anthropic": "2.8.0",
+    "pydantic": "2.14.3"
+  },
+  "scripted_matrix": {
+    "attempts": 378,
+    "run_status_counts": {
+      "complete": 378
+    },
+    "task_completed_count": 378,
+    "failed_runs": 0,
+    "completion_count_interpretation": "Declared task completion, excluding scope/form rejection or incomplete evaluation; not human-adjudicated adequacy.",
+    "evaluation_completion_status_counts": {
+      "pending": 252,
+      "complete": 126
+    },
+    "usage_known_totals": {
+      "model_calls": 1710,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 954,
+      "failed_calls": 0,
+      "cost_usd": 0.0
+    },
+    "usage_unknown_run_counts": {
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "failed_calls": 0,
+      "cost_usd": 0
+    },
+    "monetary_cost_complete": true,
+    "runner_elapsed_seconds": 4.680888520968438,
+    "structural_status_counts": {
+      "pass": 378
+    },
+    "smoke_status_counts": {
+      "pass": 378
+    },
+    "human_review_status_counts": {
+      "pending": 378
+    },
+    "automatic_substantive_accuracy": null,
+    "interpretation": "Structural and categorical smoke results are not substantive accuracy estimates."
+  },
+  "frozen_live_pilot": [
+    {
+      "setting": "harness-documents-baseline",
+      "run_id": "db8f8366afdb479ca15934d60416fc97",
+      "result_hash": "7f6de3f20c77e4742fda5076a9a404d0720c7ae81000518fdb7559eb1fffcd5a",
+      "run_status": "complete",
+      "stop_reason": "settled_for_purpose",
+      "response": {
+        "text": "Established: The next permitted response at intake is to acknowledge Mira Noll’s complete signed impact statement and proceed to review the separate final-eligibility requirements, without demanding residence, income, or payment-register proof at this stage.\n\nScope: {\"as_of\": \"2026-04-12\", \"case_id\": \"case_001\", \"stage\": \"intake\"}\n\nProposed next step: Acknowledge the signed impact statement and proceed to separate final-eligibility review; do not request residence, income, or payment-register proof at intake.\n\nBasis: doc_001 v1.0 [section_2]; doc_001 v1.0 [section_2]; doc_003 v1.0 [field_group_2]; doc_003 v1.0 [field_group_3]",
+        "target_claim_id": "c_target",
+        "findings": [
+          {
+            "claim_id": "c_target",
+            "text": "The next permitted response at intake is to acknowledge Mira Noll’s complete signed impact statement and proceed to review the separate final-eligibility requirements, without demanding residence, income, or payment-register proof at this stage.",
+            "kind": "policy",
+            "form": "rule_consequence",
+            "status": "established",
+            "scope": {
+              "as_of": "2026-04-12",
+              "case_id": "case_001",
+              "stage": "intake"
+            },
+            "conditions": [],
+            "citations": [
+              {
+                "source_id": "doc_001",
+                "version": "1.0",
+                "locator": "section_2",
+                "quote": "For intake review, accept a signed applicant statement identifying an event date and describing a personal financial disruption. Self-attestation satisfies the impact-evidence requirement at this stage."
+              },
+              {
+                "source_id": "doc_001",
+                "version": "1.0",
+                "locator": "section_2",
+                "quote": "When the statement is complete, acknowledge it and proceed to review of the separate final-eligibility requirements."
+              },
+              {
+                "source_id": "doc_003",
+                "version": "1.0",
+                "locator": "field_group_2",
+                "quote": "My workplace closed because its access road flooded on 4 April 2026. I lost my scheduled four-hour morning shift that day and 80 programme credits of wages."
+              },
+              {
+                "source_id": "doc_003",
+                "version": "1.0",
+                "locator": "field_group_3",
+                "quote": "Signed declaration: Mira Noll, 7 April 2026. I declare that the account above is accurate."
+              }
+            ]
+          }
+        ],
+        "next_action": {
+          "kind": "advance_intake",
+          "description": "Acknowledge the signed impact statement and proceed to separate final-eligibility review; do not request residence, income, or payment-register proof at intake.",
+          "condition_ids": []
+        },
+        "task_completed": true,
+        "caveats": [
+          "Final-eligibility records remain missing, but the policy says their absence does not make the applicant ineligible at intake and does not block advancing intake.",
+          "Standing is relative to the recorded arguments, source interpretations and stated profile; it is not a guarantee of truth.",
+          "This result supplies analysis and a proposed response, not permission to execute an action."
+        ],
+        "target_scope_answered": true,
+        "target_form_answered": true,
+        "evaluation_completed": true,
+        "record_completed": true,
+        "record_defects": []
+      },
+      "usage": {
+        "model_calls": 5,
+        "input_tokens": 36341,
+        "output_tokens": 5963,
+        "tool_calls": 2,
+        "failed_calls": 0,
+        "cost_usd": null,
+        "elapsed_seconds": 31.760056,
+        "estimated_usage_calls": 0,
+        "cost_complete": false,
+        "api_attempts": 5,
+        "failed_api_attempts": 0,
+        "known_cost_usd": 0.0
+      },
+      "diagnostics": [],
+      "structural_status": "pass",
+      "smoke_status": "pass",
+      "failed_smoke_checks": [],
+      "human_review": "pending",
+      "replay": {
+        "ledger_valid": true,
+        "evaluation_reproduced": true
+      },
+      "manifest": {
+        "runtime_version": "1.0.0a1",
+        "public_case_hash": "d330eb7312fd014d3741b859f51a0362de55f4d3dac5fb7ca161c8c499cc4ad9",
+        "profile": {
+          "id": "profile_004",
+          "version": "1.0",
+          "authority": "caller-supplied controlled-case profile",
+          "min_origins": 1,
+          "premise_min_origins": null,
+          "allowed_claim_kinds": [],
+          "allowed_patterns": [],
+          "allow_conditional": false,
+          "allow_historical_sources": false,
+          "required_scope_fields": [],
+          "allowed_performer_kinds": [
+            "model",
+            "human",
+            "tool",
+            "system"
+          ],
+          "trusted_performers": {},
+          "require_independent_reply": false,
+          "max_derivations": 2000,
+          "max_depth": 32,
+          "max_evaluation_steps": 10000
+        },
+        "profile_hash": "1abe2e2fae93b6927f5edcef546491a0db24117647829351f293135ffa231f92",
+        "prompt_hash": "dd26bbf6316b131a5b3368add2fdbc2c8ca70844764034fc5b7c67a7a2ab73a5",
+        "worker": {
+          "provider": "openai",
+          "model": "gpt-5.4-mini-2026-03-17",
+          "test_instrument": false
+        },
+        "critic": null,
+        "budget": {
+          "max_model_calls": 8,
+          "max_tool_calls": 5,
+          "max_total_tokens": 150000,
+          "max_output_tokens": 8192,
+          "timeout_seconds": 90,
+          "max_consecutive_errors": 2,
+          "max_critique_calls": 1
+        },
+        "semantic_review": "not_human_adjudicated",
+        "implementation_hashes": {
+          "runtime": "f560d7541dd9147def65438f5390b5e5703229c83cb23a565f7f318be3a828a0",
+          "workers": "384ae15704916615bf705b5886c8d3538bab86bca7e6319ffcc275409bbd2b44",
+          "kernel": "ae7bbf39396f51950b03468a2c4512dc0bc3116a795d49e87a1e7c5d798640dc",
+          "models": "7a733264ada014bb9ce51cfdce3c95447939bf838e4c5955d63244e66caafe9d",
+          "evidence": "2b3f81b22fecbf3378dd20d9630591d476e02bccd45a628bfcc100297bcd57be",
+          "packets": "bbc583357f263a42fbbb39288d9c088b11f3a00adcc1ad13d288cb1333850bcd"
+        },
+        "implementation_scope": "controlled factual, rule and explicitly supported argument patterns"
+      }
+    },
+    {
+      "setting": "harness-supplied-baseline",
+      "run_id": "26100eaf44354cc0a7b2ba7130cfafb0",
+      "result_hash": "9d1ae51990de515e49bce265346280c79d3173a9b6e9af3f81786a4ecedc4216",
+      "run_status": "complete",
+      "stop_reason": "settled_for_purpose",
+      "response": {
+        "text": "Not established: At intake, the next permitted response is to acknowledge the complete signed applicant statement and proceed to review of the separate final-eligibility requirements, without requiring independent proof of individual causation, employer confirmation, or residence/income/payment-register records.\n\nScope: {\"as_of\": \"2026-04-12\", \"case_id\": \"case_001\", \"stage\": \"intake\"}\n\nProposed next step: Acknowledge the complete signed intake statement and proceed to separate final-eligibility review.",
+        "target_claim_id": "c_target",
+        "findings": [
+          {
+            "claim_id": "c_target",
+            "text": "At intake, the next permitted response is to acknowledge the complete signed applicant statement and proceed to review of the separate final-eligibility requirements, without requiring independent proof of individual causation, employer confirmation, or residence/income/payment-register records.",
+            "kind": "policy",
+            "form": "rule_consequence",
+            "status": "not_established",
+            "scope": {
+              "case_id": "case_001",
+              "as_of": "2026-04-12",
+              "stage": "intake"
+            },
+            "conditions": [],
+            "citations": []
+          }
+        ],
+        "next_action": {
+          "kind": "answer",
+          "description": "Acknowledge the complete signed intake statement and proceed to separate final-eligibility review.",
+          "condition_ids": []
+        },
+        "task_completed": true,
+        "caveats": [
+          "Intake-stage response only; it does not approve, refuse, or pay the claim.",
+          "Residence, income, and payment-register records are separate final-eligibility items, not missing intake prerequisites.",
+          "Standing is relative to the recorded arguments, source interpretations and stated profile; it is not a guarantee of truth.",
+          "This result supplies analysis and a proposed response, not permission to execute an action."
+        ],
+        "target_scope_answered": true,
+        "target_form_answered": true,
+        "evaluation_completed": true,
+        "record_completed": true,
+        "record_defects": []
+      },
+      "usage": {
+        "model_calls": 3,
+        "input_tokens": 21113,
+        "output_tokens": 4496,
+        "tool_calls": 0,
+        "failed_calls": 0,
+        "cost_usd": null,
+        "elapsed_seconds": 25.6856,
+        "estimated_usage_calls": 0,
+        "cost_complete": false,
+        "api_attempts": 3,
+        "failed_api_attempts": 0,
+        "known_cost_usd": 0.0
+      },
+      "diagnostics": [
+        {
+          "code": "unsupported_support_cycle",
+          "record_id": "c_target",
+          "detail": "c_target -> c_target"
+        }
+      ],
+      "structural_status": "pass",
+      "smoke_status": "fail",
+      "failed_smoke_checks": [
+        "target_status",
+        "next_action"
+      ],
+      "human_review": "pending",
+      "replay": {
+        "ledger_valid": true,
+        "evaluation_reproduced": true
+      },
+      "manifest": {
+        "runtime_version": "1.0.0a1",
+        "public_case_hash": "d330eb7312fd014d3741b859f51a0362de55f4d3dac5fb7ca161c8c499cc4ad9",
+        "profile": {
+          "id": "profile_004",
+          "version": "1.0",
+          "authority": "caller-supplied controlled-case profile",
+          "min_origins": 1,
+          "premise_min_origins": null,
+          "allowed_claim_kinds": [],
+          "allowed_patterns": [],
+          "allow_conditional": false,
+          "allow_historical_sources": false,
+          "required_scope_fields": [],
+          "allowed_performer_kinds": [
+            "model",
+            "human",
+            "tool",
+            "system"
+          ],
+          "trusted_performers": {},
+          "require_independent_reply": false,
+          "max_derivations": 2000,
+          "max_depth": 32,
+          "max_evaluation_steps": 10000
+        },
+        "profile_hash": "1abe2e2fae93b6927f5edcef546491a0db24117647829351f293135ffa231f92",
+        "prompt_hash": "dd26bbf6316b131a5b3368add2fdbc2c8ca70844764034fc5b7c67a7a2ab73a5",
+        "worker": {
+          "provider": "openai",
+          "model": "gpt-5.4-mini-2026-03-17",
+          "test_instrument": false
+        },
+        "critic": null,
+        "budget": {
+          "max_model_calls": 6,
+          "max_tool_calls": 5,
+          "max_total_tokens": 150000,
+          "max_output_tokens": 8192,
+          "timeout_seconds": 90,
+          "max_consecutive_errors": 2,
+          "max_critique_calls": 1
+        },
+        "semantic_review": "not_human_adjudicated",
+        "implementation_hashes": {
+          "runtime": "f560d7541dd9147def65438f5390b5e5703229c83cb23a565f7f318be3a828a0",
+          "workers": "384ae15704916615bf705b5886c8d3538bab86bca7e6319ffcc275409bbd2b44",
+          "kernel": "ae7bbf39396f51950b03468a2c4512dc0bc3116a795d49e87a1e7c5d798640dc",
+          "models": "7a733264ada014bb9ce51cfdce3c95447939bf838e4c5955d63244e66caafe9d",
+          "evidence": "2b3f81b22fecbf3378dd20d9630591d476e02bccd45a628bfcc100297bcd57be",
+          "packets": "bbc583357f263a42fbbb39288d9c088b11f3a00adcc1ad13d288cb1333850bcd"
+        },
+        "implementation_scope": "controlled factual, rule and explicitly supported argument patterns"
+      }
+    },
+    {
+      "setting": "harness-supplied-mutation_002",
+      "run_id": "996783c5d41049f88946392cf2be747a",
+      "result_hash": "f9227c43c8a3d762b28058e656f0a4beee49a2ca2997d62daacc387957af65d5",
+      "run_status": "complete",
+      "stop_reason": "settled_for_purpose",
+      "response": {
+        "text": "Established: Under the currently bound policy, the next permitted response at intake is to acknowledge receipt and request only the missing intake statement details before advancing intake.\n\nScope: {\"as_of\": \"2026-04-12\", \"case_id\": \"case_001\", \"stage\": \"intake\"}\n\nProposed next step: Acknowledge receipt and request only the missing intake statement details: the event date and the personal financial-disruption description.\n\nBasis: doc_003 v1.1 [field_group_2]; doc_003 v1.1 [field_group_3]; doc_001 v1.0 [section_2]; doc_001 v1.0 [section_2]; doc_001 v1.0 [section_2]",
+        "target_claim_id": "c_target",
+        "findings": [
+          {
+            "claim_id": "c_target",
+            "text": "Under the currently bound policy, the next permitted response at intake is to acknowledge receipt and request only the missing intake statement details before advancing intake.",
+            "kind": "policy",
+            "form": "rule_consequence",
+            "status": "established",
+            "scope": {
+              "as_of": "2026-04-12",
+              "case_id": "case_001",
+              "stage": "intake"
+            },
+            "conditions": [],
+            "citations": [
+              {
+                "source_id": "doc_003",
+                "version": "1.1",
+                "locator": "field_group_2",
+                "quote": "Personal financial-disruption description: not provided. Event date for the claimed impact: not provided."
+              },
+              {
+                "source_id": "doc_003",
+                "version": "1.1",
+                "locator": "field_group_3",
+                "quote": "Signed declaration: Mira Noll, 7 April 2026. I declare that the account above is accurate."
+              },
+              {
+                "source_id": "doc_001",
+                "version": "1.0",
+                "locator": "section_2",
+                "quote": "For intake review, accept a signed applicant statement identifying an event date and describing a personal financial disruption."
+              },
+              {
+                "source_id": "doc_001",
+                "version": "1.0",
+                "locator": "section_2",
+                "quote": "Self-attestation satisfies the impact-evidence requirement at this stage."
+              },
+              {
+                "source_id": "doc_001",
+                "version": "1.0",
+                "locator": "section_2",
+                "quote": "If impact details or the event date are absent, acknowledge receipt and request only the missing statement details before advancing intake."
+              }
+            ]
+          }
+        ],
+        "next_action": {
+          "kind": "answer",
+          "description": "Acknowledge receipt and request only the missing intake statement details: the event date and the personal financial-disruption description.",
+          "condition_ids": [
+            "cq_antecedents",
+            "cq_authority",
+            "cq_applicability",
+            "cq_inference_validity"
+          ]
+        },
+        "task_completed": true,
+        "caveats": [
+          "No award, refusal, or payment decision is authorized.",
+          "This addresses intake only; later eligibility records are not required yet.",
+          "Standing is relative to the recorded arguments, source interpretations and stated profile; it is not a guarantee of truth.",
+          "This result supplies analysis and a proposed response, not permission to execute an action."
+        ],
+        "target_scope_answered": true,
+        "target_form_answered": true,
+        "evaluation_completed": true,
+        "record_completed": true,
+        "record_defects": []
+      },
+      "usage": {
+        "model_calls": 2,
+        "input_tokens": 13452,
+        "output_tokens": 2605,
+        "tool_calls": 0,
+        "failed_calls": 0,
+        "cost_usd": null,
+        "elapsed_seconds": 15.014573,
+        "estimated_usage_calls": 0,
+        "cost_complete": false,
+        "api_attempts": 2,
+        "failed_api_attempts": 0,
+        "known_cost_usd": 0.0
+      },
+      "diagnostics": [],
+      "structural_status": "pass",
+      "smoke_status": "fail",
+      "failed_smoke_checks": [
+        "next_action",
+        "requested_conditions"
+      ],
+      "human_review": "pending",
+      "replay": {
+        "ledger_valid": true,
+        "evaluation_reproduced": true
+      },
+      "manifest": {
+        "runtime_version": "1.0.0a1",
+        "public_case_hash": "7738c8ee71a918b54a7cc3e8f664eb4319464745fb5a1e6f6f510708a849c684",
+        "profile": {
+          "id": "profile_004",
+          "version": "1.0",
+          "authority": "caller-supplied controlled-case profile",
+          "min_origins": 1,
+          "premise_min_origins": null,
+          "allowed_claim_kinds": [],
+          "allowed_patterns": [],
+          "allow_conditional": false,
+          "allow_historical_sources": false,
+          "required_scope_fields": [],
+          "allowed_performer_kinds": [
+            "model",
+            "human",
+            "tool",
+            "system"
+          ],
+          "trusted_performers": {},
+          "require_independent_reply": false,
+          "max_derivations": 2000,
+          "max_depth": 32,
+          "max_evaluation_steps": 10000
+        },
+        "profile_hash": "1abe2e2fae93b6927f5edcef546491a0db24117647829351f293135ffa231f92",
+        "prompt_hash": "dd26bbf6316b131a5b3368add2fdbc2c8ca70844764034fc5b7c67a7a2ab73a5",
+        "worker": {
+          "provider": "openai",
+          "model": "gpt-5.4-mini-2026-03-17",
+          "test_instrument": false
+        },
+        "critic": null,
+        "budget": {
+          "max_model_calls": 6,
+          "max_tool_calls": 5,
+          "max_total_tokens": 150000,
+          "max_output_tokens": 8192,
+          "timeout_seconds": 90,
+          "max_consecutive_errors": 2,
+          "max_critique_calls": 1
+        },
+        "semantic_review": "not_human_adjudicated",
+        "implementation_hashes": {
+          "runtime": "f560d7541dd9147def65438f5390b5e5703229c83cb23a565f7f318be3a828a0",
+          "workers": "384ae15704916615bf705b5886c8d3538bab86bca7e6319ffcc275409bbd2b44",
+          "kernel": "ae7bbf39396f51950b03468a2c4512dc0bc3116a795d49e87a1e7c5d798640dc",
+          "models": "7a733264ada014bb9ce51cfdce3c95447939bf838e4c5955d63244e66caafe9d",
+          "evidence": "2b3f81b22fecbf3378dd20d9630591d476e02bccd45a628bfcc100297bcd57be",
+          "packets": "bbc583357f263a42fbbb39288d9c088b11f3a00adcc1ad13d288cb1333850bcd"
+        },
+        "implementation_scope": "controlled factual, rule and explicitly supported argument patterns"
+      }
+    }
+  ],
+  "development_runs": [
+    {
+      "phase": "live-probe",
+      "setting": "harness-documents",
+      "run_id": "90e1bd5fdb2044c1990812516df211b7",
+      "status": "failed",
+      "model_calls": 1,
+      "failed_calls": 1
+    },
+    {
+      "phase": "live-probe",
+      "setting": "harness-supplied",
+      "run_id": "f57b4a1db1ae4dfdb00e8440f8df1731",
+      "status": "partial",
+      "model_calls": 4,
+      "failed_calls": 0
+    },
+    {
+      "phase": "live-probe",
+      "setting": "ordinary-supplied",
+      "run_id": "ba86bcfb3d9d4dc29f04f5821ad058c4",
+      "status": "complete",
+      "model_calls": 2,
+      "failed_calls": 0
+    },
+    {
+      "phase": "live-probe",
+      "setting": "repertoire-supplied",
+      "run_id": "175f62a444ed417ebd5c003f7ae051ee",
+      "status": "complete",
+      "model_calls": 2,
+      "failed_calls": 0
+    },
+    {
+      "phase": "live-probe-contract-fix",
+      "setting": "harness-documents-baseline",
+      "run_id": "a63dd69b11884ea0b338e534b01ffd89",
+      "status": "partial",
+      "model_calls": 6,
+      "failed_calls": 1
+    },
+    {
+      "phase": "live-probe-contract-fix",
+      "setting": "harness-supplied-baseline",
+      "run_id": "1ca259c427f34579aa01bd3a30b6b852",
+      "status": "partial",
+      "model_calls": 5,
+      "failed_calls": 0
+    },
+    {
+      "phase": "live-probe-contract-fix",
+      "setting": "harness-supplied-mutation_002",
+      "run_id": "ac876117b4464cbd871f9566f86d6eea",
+      "status": "partial",
+      "model_calls": 5,
+      "failed_calls": 1
+    },
+    {
+      "phase": "live-probe-contract-fix",
+      "setting": "ordinary-supplied-baseline",
+      "run_id": "eeda6e495f8e4b88bc2d6a81d8fe24b3",
+      "status": "complete",
+      "model_calls": 3,
+      "failed_calls": 0
+    },
+    {
+      "phase": "live-probe-contract-fix",
+      "setting": "repertoire-supplied-baseline",
+      "run_id": "35c39e87c1e64d56b5a4fe08ff5471a8",
+      "status": "complete",
+      "model_calls": 2,
+      "failed_calls": 0
+    },
+    {
+      "phase": "live-probe-scaffold",
+      "setting": "harness-documents-baseline",
+      "run_id": "3279ac811bec46128e4ad0dfb8b32854",
+      "status": "complete",
+      "model_calls": 5,
+      "failed_calls": 0
+    },
+    {
+      "phase": "live-probe-scaffold",
+      "setting": "harness-supplied-baseline",
+      "run_id": "314af9ad2a9648b7ad2e39f236e0bcd2",
+      "status": "partial",
+      "model_calls": 2,
+      "failed_calls": 0
+    },
+    {
+      "phase": "live-probe-scaffold",
+      "setting": "harness-supplied-mutation_002",
+      "run_id": "03574782882d480e87e9d50352b38e6b",
+      "status": "complete",
+      "model_calls": 1,
+      "failed_calls": 0
+    },
+    {
+      "phase": "live-probe-bounded-repair",
+      "setting": "harness-documents-baseline",
+      "run_id": "dbf810a8ada34739aa84ae872ea4fdba",
+      "status": "partial",
+      "model_calls": 6,
+      "failed_calls": 2
+    },
+    {
+      "phase": "live-probe-bounded-repair",
+      "setting": "harness-supplied-baseline",
+      "run_id": "26aa9d31e4f84361afa3b234ba793622",
+      "status": "complete",
+      "model_calls": 2,
+      "failed_calls": 0
+    },
+    {
+      "phase": "live-probe-bounded-repair",
+      "setting": "harness-supplied-mutation_002",
+      "run_id": "1676d072ceff41a6a67727522b34e26d",
+      "status": "complete",
+      "model_calls": 5,
+      "failed_calls": 2
+    },
+    {
+      "phase": "live-final",
+      "setting": "harness-documents-baseline",
+      "run_id": "db8f8366afdb479ca15934d60416fc97",
+      "status": "complete",
+      "model_calls": 5,
+      "failed_calls": 0
+    },
+    {
+      "phase": "live-final",
+      "setting": "harness-supplied-baseline",
+      "run_id": "26100eaf44354cc0a7b2ba7130cfafb0",
+      "status": "complete",
+      "model_calls": 3,
+      "failed_calls": 0
+    },
+    {
+      "phase": "live-final",
+      "setting": "harness-supplied-mutation_002",
+      "run_id": "996783c5d41049f88946392cf2be747a",
+      "status": "complete",
+      "model_calls": 2,
+      "failed_calls": 0
+    }
+  ],
+  "development_usage": {
+    "model_calls": 61,
+    "input_tokens": 360053,
+    "cached_input_tokens": 112384,
+    "output_tokens": 50386
+  },
+  "estimated_cost_usd": 0.420918,
+  "pricing_basis": {
+    "input_per_million": 0.75,
+    "cached_input_per_million": 0.075,
+    "output_per_million": 4.5,
+    "currency": "USD",
+    "source": "https://developers.openai.com/api/docs/models/gpt-5.4-mini",
+    "provider_invoice_checked": false
+  },
+  "interpretation": "Development verification and failure discovery only. One synthetic family, three frozen live pilot settings, no independent human gold, no live critic, no architectural superiority claim."
+}
