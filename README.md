@@ -28,6 +28,8 @@ model reasoning quality.
 
 See [the v1 guide](docs/CONTROLLED_V1.md) for live provider runs, the experiment
 matrix, output contracts, supported reasoning patterns and implementation limits.
+The [validation report](docs/V1_VALIDATION.md) records both the passing software
+checks and the remaining live-model failures.
 The seven-competence repertoire is a design target; this alpha does not yet
 implement all seven competences or a live-web research service.
 
