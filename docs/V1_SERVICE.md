@@ -15,10 +15,20 @@ policies, definitions and valuation criteria arrive as caller context or located
 evidence. No institutional rule or workflow is built into the shared controller.
 The model's background knowledge does not substitute for a recorded premise.
 
+The harness owns evidence search and acquisition. Caller-supplied sources are
+optional starting material. Within enabled sources and the inquiry budget, the
+harness selects queries, discovers and fetches sources, reads the relevant
+material and appraises what it finds. Domain-neutrality concerns the methods
+and contracts; domain knowledge can be acquired during the inquiry. The host
+supplies source access and credentials, while the caller can constrain scope,
+sources and cost. The current v1 integration limit is described below.
+
 The service may return an unresolved information need: the condition, the question
-left open, and what evidence could resolve it. The caller decides whether and how
-to obtain that information. A business letter, intake transition, approval or
-payment is a separate application product.
+left open, and what evidence could resolve it. It returns this when the available
+acquisition path cannot settle the gap within its limits, or when information
+requires the caller's access or clarification. The caller decides how to handle
+the remaining need. A business letter, intake transition, approval or payment
+is a separate application product.
 
 ## What is implemented
 
@@ -36,10 +46,22 @@ General estimation, forecasting, instrument building and quantitative compositio
 remain future work. The `capabilities` tool states the implemented patterns and
 distinguishes representable forms from forms with a positive proof pattern.
 
-Source search is deterministic retrieval over the caller-supplied collection.
-The service does not yet discover and fetch live external sources. The request
-currently contains one caller-framed question and explicit target kind/form;
-automatic framing of compound questions is not implemented by this interface.
+The original harness already has external acquisition:
+[`SerperSearch` and `EuropePMCSearch`](../inquiry/tools/search.py),
+[`HttpFetcher`](../inquiry/tools/fetch.py), and the search, fetch and appraisal
+loop in [`Harness`](../inquiry/live.py).
+
+The rebuilt v1 service currently uses deterministic retrieval over a fixed source
+collection so experiments can control what information is available. Its worker
+chooses `search`, `open` and `read_table` operations, but external discovery and
+dynamic source ingestion have not yet been connected to the new service. The
+acquisition increment ports the existing providers into v1's provenance,
+exposure, budget and replay contracts. It does not delegate all research to the
+caller or require a new search implementation from scratch.
+
+The request currently contains one caller-framed question and explicit target
+kind/form; automatic framing of compound questions is not implemented by this
+interface.
 
 ## Request contract
 
@@ -48,8 +70,15 @@ automatic framing of compound questions is not implemented by this interface.
 | Field | Contents |
 |---|---|
 | `shared_context` | Required `as_of` date plus caller-supplied JSON context. |
-| `corpus` | Generic `documents` and explicit `current_versions` keyed by source ID. |
+| `corpus` | Initial `documents` and explicit `current_versions` keyed by source ID; the collection may be empty. |
 | `question` | `id`, `question`, `intended_use`, `scope`, `target`, and `profile`. |
+
+The a5 envelope still requires the `corpus` field. An empty initial collection is
+`{"documents": [], "current_versions": {}}`. In the current fixed-source backend
+it remains empty; external acquisition must be connected before the service can
+populate it. The intended provider settings include fixed, live and mixed
+acquisition; the experimental `supplied`, `documents` and `search` modes instead
+control evidence exposure within a fixed collection.
 
 `target` declares a claim `kind` and `form`; it does not supply the answer.
 `profile` contains an ID, version, authority, substantive requirements and supported
@@ -199,7 +228,7 @@ implementation increments should complete the inquiry process in this order:
 | Increment | Product | Completion test |
 |---|---|---|
 | Frame and plan | Atomic issues, presuppositions, dependencies, explicit gaps and recorded competence selection. | The same evidence under different question/use settings produces the correct target and adequate depth. |
-| Acquire and appraise | Generic source-provider contract, live lookup/fetch, full relevant reading, located observations and appraisal. | Known hidden sections are found; unavailable evidence remains distinguishable from unread evidence; citations retain exposure and lineage. |
+| Acquire and appraise | Port the existing external search/fetch providers, register acquired source snapshots, and preserve full relevant reading, located observations and appraisal. | Known hidden sections are found; unavailable evidence remains distinguishable from unread evidence; frozen provider responses and replay retain exposure, lineage and budgets. |
 | Extend methods | Condition contracts for remaining patterns, E4 estimation, E6 validated instruments, and explicit comparative claims. | Paired cases discriminate warranted acceptance, withholding and invalid bridges; unsupported methods remain explicit. |
 | Re-entry and change | Issue budgets, resumable inquiries, source updates, dependency recomputation and scoped reuse. | Correcting a premise changes only affected findings and retains the original history. |
 | Watch and hosting | Evidence-change triggers and a deployment boundary for independent callers. | Staleness triggers re-examination; tenant records and budgets remain isolated; watching performs no business action. |

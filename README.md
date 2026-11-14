@@ -13,6 +13,12 @@ to the calling application. Generic requests accept arbitrary source collections
 and explicit targets without policy-case fields. The hardship example now sits
 behind an explicit adapter.
 
+Search and evidence acquisition belong to the harness. The original harness's
+web/literature search and fetch providers remain available; connecting them to
+v1's stricter evidence contracts is the next acquisition increment. This alpha
+uses fixed source collections for controlled experiments. Caller-supplied sources
+are optional starting material in the architecture.
+
 The [service guide](docs/V1_SERVICE.md) documents the Python `InquiryService`,
 the optional `inquiry-service` MCP stdio transport (`inquire`, `check`, `replay`),
 cross-domain examples, resource ceilings and the remaining build sequence.

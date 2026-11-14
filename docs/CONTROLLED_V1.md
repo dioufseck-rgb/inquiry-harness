@@ -63,6 +63,11 @@ This gives **42 question–evidence settings**. Crossing them with three arms an
 
 ## Arms and evidence modes
 
+These modes control evidence exposure in experiments. Search and acquisition
+remain harness responsibilities in the architecture. The existing external
+search/fetch providers await connection to v1's evidence and replay contracts;
+the fixed packet is not a requirement that callers conduct the research.
+
 | Arm | Worker instructions and output |
 |---|---|
 | `ordinary` | Common evidence tools and response contract; no argument graph is required and the worker supplies its findings. |
