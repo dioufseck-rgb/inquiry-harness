@@ -15,9 +15,11 @@ from time import perf_counter
 from types import SimpleNamespace
 from typing import Any, Mapping, Protocol
 
+from .protocol import OutputProtocolError, parse_single_json_object
+
 
 class ProviderOutputError(RuntimeError):
-    """A completed SDK request did not produce one complete answer text block."""
+    """A completed SDK request did not produce one admissible answer value."""
 
     def __init__(self, code: str, message: str):
         self.code = code
@@ -155,6 +157,48 @@ class LLMWorker:
         result = cls._field(value, field)
         return result if isinstance(result, str) else None
 
+    def _normalize_duplicate_messages(self, entry: dict[str, Any], items: list[dict[str, Any]],
+                                      texts: list[Any]) -> bool:
+        """Recognize repeated complete final answers, never select among answers.
+
+        Every non-reasoning item must be a completed assistant final-answer
+        message with exactly one ordinary text block. All text must match
+        exactly, and that common text must be one complete JSON object. No
+        whitespace trimming, semantic JSON equivalence, phase filtering, or
+        fragment assembly is permitted. The original items remain untouched.
+        """
+        if self.provider != "openai" or entry["provider_status"] != "completed":
+            return False
+        messages = []
+        for item in items:
+            if item["type"] == "reasoning":
+                continue
+            if (item["type"] != "message" or not item.get("id")
+                    or item.get("status") != "completed" or item.get("role") != "assistant"
+                    or item.get("phase") != "final_answer"):
+                return False
+            blocks = item.get("content", [])
+            if len(blocks) != 1 or blocks[0]["type"] != "output_text":
+                return False
+            messages.append(item)
+        if len(messages) != len(texts) or len(messages) < 2:
+            return False
+        common_text = texts[0]
+        if not isinstance(common_text, str) or any(text != common_text for text in texts[1:]):
+            return False
+        try:
+            parse_single_json_object(common_text)
+        except OutputProtocolError:
+            return False
+        indexes = [{"item_index": item["index"], "content_index": item["content"][0]["index"]}
+                   for item in messages]
+        entry["provider_output_normalization"] = {
+            "kind": "exact_duplicate_final_answer_messages",
+            "retained": indexes[0], "duplicates": indexes[1:],
+            "duplicate_count": len(indexes) - 1,
+        }
+        return True
+
     def _response_text(self, entry: dict[str, Any], response: Any) -> str:
         """Capture safe output boundaries before checking provider completion.
 
@@ -213,6 +257,7 @@ class LLMWorker:
         entry["provider_output_items"] = items
         entry["provider_output_boundaries_known"] = boundaries_known
         entry["provider_output_text_count"] = len(texts)
+        entry["provider_output_normalization"] = None
         entry["provider_refused"] = refused or entry["provider_stop_reason"] == "refusal"
 
         if entry["provider_refused"]:
@@ -228,9 +273,9 @@ class LLMWorker:
             raise ProviderOutputError("provider_incomplete", "Provider stopped before completing the answer")
         if not boundaries_known:
             raise ProviderOutputError("missing_output_items", "Provider returned no inspectable output-item boundaries")
-        if len(texts) > 1:
+        if len(texts) > 1 and not self._normalize_duplicate_messages(entry, items, texts):
             raise ProviderOutputError(
-                "multiple_text_blocks", "Provider returned multiple answer text blocks; exactly one is required")
+                "multiple_text_blocks", "Provider returned multiple answer text blocks that are not exact duplicate completed final answers")
         if not texts or not isinstance(texts[0], str) or not texts[0].strip():
             raise ProviderOutputError("empty_output", "Provider returned no text within the supplied request limits")
         return texts[0]
@@ -275,7 +320,7 @@ class LLMWorker:
             "provider": self.provider, "model": self.model, "effort": self.effort,
             "requested_model": self.model, "resolved_model": None,
             "sdk_package": self.provider, "sdk_version": self.sdk_version,
-            "adapter_version": "v1-single-request-2",
+            "adapter_version": "v1-single-request-3",
             "api_attempts": 0, "failed_api_attempts": 0, "request_status": "not_attempted",
             "invocation_succeeded": False, "usage_known": False,
             "input_tokens": None, "output_tokens": None, "cost_usd": None,

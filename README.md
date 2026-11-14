@@ -3,7 +3,7 @@
 ## Controlled inquiry v1
 
 The controlled rebuild is available as `inquiry.v1` and the `inquiry-v1`
-command, version **1.0.0a2**. It implements the first runnable slice of the new
+command, version **1.0.0a3**. It implements the first runnable slice of the new
 design: known evidence, explicit question and acceptance profiles, a bounded
 inquiry loop, deterministic argument evaluation, and a matched experiment runner.
 

@@ -350,15 +350,193 @@ def test_openai_multiple_answer_blocks_are_rejected_and_all_boundaries_persist(s
     assert usage["invocation_succeeded"] is False
 
 
-def test_anthropic_multiple_text_blocks_are_never_concatenated():
+# Exact ordinary answer text from the stopped live run's question_004-baseline,
+# worker_usage sequence 3. The response contained two completed assistant
+# final_answer messages with different IDs and this same complete JSON text.
+LIVE_DUPLICATE_OPEN = (
+    '{"operation":"open","arguments":{"source_id":"doc_001","version":"1.0","locator":"section_1"},'
+    '"graph":null,"response":null,"rationale":"Need policy text for intake-stage next permitted response and evidence rules."}'
+)
+
+
+def duplicate_final_response(text=LIVE_DUPLICATE_OPEN, count=2):
+    response = openai_response()
+    message = response.output[0]
+    response.output = [SimpleNamespace(type="reasoning", id="reasoning_1",
+                                      summary=[{"text": "PRIVATE_REASONING_SENTINEL"}])]
+    for index in range(count):
+        duplicate = copy.deepcopy(message)
+        duplicate.id = f"message_{index + 1}"
+        duplicate.content[0].text = text
+        response.output.append(duplicate)
+    return response
+
+
+@pytest.mark.parametrize("count", [2, 3])
+def test_exact_duplicate_completed_final_messages_normalize_once_with_raw_items_preserved(count):
+    client = MockClient(duplicate_final_response(count=count))
+    worker = LLMWorker(handle("openai", client))
+    reply = worker.complete("Instructions", "Case")
+    assert reply == LIVE_DUPLICATE_OPEN
+    assert parse_single_json_object(reply)["operation"] == "open"
+    assert len(client.requests) == 1
+    usage = worker.usage[0]
+    assert usage["adapter_version"] == "v1-single-request-3"
+    assert usage["provider_output_text_count"] == count
+    assert usage["provider_output_normalization"] == {
+        "kind": "exact_duplicate_final_answer_messages",
+        "retained": {"item_index": 1, "content_index": 0},
+        "duplicates": [{"item_index": index, "content_index": 0} for index in range(2, count + 1)],
+        "duplicate_count": count - 1,
+    }
+    messages = usage["provider_output_items"][1:]
+    assert [item["id"] for item in messages] == [f"message_{index + 1}" for index in range(count)]
+    assert all(item["content"] == [{"index": 0, "type": "output_text", "text": LIVE_DUPLICATE_OPEN}]
+               for item in messages)
+    assert all(item["status"] == "completed" and item["role"] == "assistant"
+               and item["phase"] == "final_answer" for item in messages)
+    assert usage["invocation_succeeded"] is True
+    assert "PRIVATE_" not in json.dumps(usage)
+
+
+def test_normalized_duplicate_open_executes_one_controller_operation_only():
+    from inquiry.v1.packets import load_packet
+    from inquiry.v1.runtime import Budget, run_inquiry
+
+    client = MockClient(duplicate_final_response())
+    worker = LLMWorker(handle("openai", client))
+    result = run_inquiry(load_packet().public("question_004"), worker, mode="documents",
+                         budget=Budget(max_model_calls=1))
+    assert len(client.requests) == 1
+    assert result["usage"]["model_calls"] == 1
+    assert result["usage"]["tool_calls"] == 1
+    assert result["usage"]["failed_calls"] == 0
+    operations = [event["data"] for event in result["events"] if event["kind"] == "operation"]
+    assert len(operations) == 1
+    assert operations[0]["operation"] == "open"
+    tool_results = [event for event in result["events"] if event["kind"] == "tool_result"]
+    assert len(tool_results) == 1
+    assert tool_results[0]["data"]["arguments"] == {
+        "source_id": "doc_001", "version": "1.0", "locator": "section_1"}
+
+
+def test_distinct_commentary_plus_duplicate_final_messages_remains_rejected():
+    # Exact shapes/text from question_004-mutation_002 worker_usage sequence 3.
+    final_text = (
+        '{"operation":"open","arguments":{"source_id":"doc_001","version":"1.0","locator":"section_1"},'
+        '"rationale":"Read policy section governing intake evidence rules and next response."}'
+    )
+    commentary_text = (
+        '{"operation":"open","arguments":{"source_id":"doc_001","version":"1.0","locator":"section_1"},'
+        '"graph":null,"response":null,"rationale":"Read policy section governing intake evidence rules and next response."}'
+    )
+    response = duplicate_final_response(final_text)
+    commentary = copy.deepcopy(response.output[1])
+    commentary.id = "commentary_message"
+    commentary.phase = "commentary"
+    commentary.content[0].text = commentary_text
+    response.output.insert(1, commentary)
+    worker = LLMWorker(handle("openai", MockClient(response)))
+    with pytest.raises(ProviderOutputError) as exc:
+        worker.complete("Instructions", "Case")
+    assert exc.value.code == "multiple_text_blocks"
+    usage = worker.usage[0]
+    assert usage["provider_output_normalization"] is None
+    assert usage["provider_output_text_count"] == 3
+    messages = usage["provider_output_items"][1:]
+    assert [item["phase"] for item in messages] == ["commentary", "final_answer", "final_answer"]
+    assert [item["content"][0]["text"] for item in messages] == [commentary_text, final_text, final_text]
+
+
+@pytest.mark.parametrize("field,value", [
+    ("phase", "commentary"), ("phase", None), ("role", "user"), ("role", None),
+    ("status", None), ("id", None),
+])
+def test_exact_text_alone_cannot_override_message_phase_role_status_or_identity(field, value):
+    response = duplicate_final_response()
+    setattr(response.output[1], field, value)
+    worker = LLMWorker(handle("openai", MockClient(response)))
+    with pytest.raises(ProviderOutputError) as exc:
+        worker.complete("Instructions", "Case")
+    assert exc.value.code == "multiple_text_blocks"
+    assert worker.usage[0]["provider_output_normalization"] is None
+
+
+@pytest.mark.parametrize("text", [
+    '{"operation":', '{"operation":"open"}{"operation":"finish"}',
+    '{"operation":"open","operation":"finish"}', '[{"operation":"open"}]', " ",
+])
+def test_identical_fragments_multiple_objects_or_ambiguous_json_cannot_be_normalized(text):
+    worker = LLMWorker(handle("openai", MockClient(duplicate_final_response(text))))
+    with pytest.raises(ProviderOutputError) as exc:
+        worker.complete("Instructions", "Case")
+    assert exc.value.code == "multiple_text_blocks"
+    assert worker.usage[0]["provider_output_normalization"] is None
+
+
+def test_json_equivalent_but_textually_distinct_messages_are_not_duplicates():
+    response = duplicate_final_response()
+    response.output[2].content[0].text = json.dumps(json.loads(LIVE_DUPLICATE_OPEN), indent=2)
+    worker = LLMWorker(handle("openai", MockClient(response)))
+    with pytest.raises(ProviderOutputError) as exc:
+        worker.complete("Instructions", "Case")
+    assert exc.value.code == "multiple_text_blocks"
+    assert worker.usage[0]["provider_output_normalization"] is None
+
+
+def test_identical_blocks_within_one_message_are_not_duplicate_completed_messages():
+    response = openai_response()
+    response.output[0].content.append(copy.deepcopy(response.output[0].content[0]))
+    worker = LLMWorker(handle("openai", MockClient(response)))
+    with pytest.raises(ProviderOutputError) as exc:
+        worker.complete("Instructions", "Case")
+    assert exc.value.code == "multiple_text_blocks"
+    assert worker.usage[0]["provider_output_normalization"] is None
+
+
+@pytest.mark.parametrize("defect,expected_code", [
+    ("incomplete_response", "provider_incomplete"), ("incomplete_message", "provider_incomplete"),
+    ("unknown_response_status", "multiple_text_blocks"), ("refusal", "provider_refusal"),
+    ("extra_content", "multiple_text_blocks"), ("extra_item", "multiple_text_blocks"),
+])
+def test_duplicate_text_never_hides_provider_failure_refusal_or_additional_content(defect, expected_code):
+    response = duplicate_final_response()
+    if defect == "incomplete_response":
+        response.status = "incomplete"
+        response.incomplete_details = SimpleNamespace(reason="max_output_tokens")
+    elif defect == "incomplete_message":
+        response.output[2].status = "incomplete"
+    elif defect == "unknown_response_status":
+        response.status = None
+    elif defect == "refusal":
+        response.output[1].content.append(SimpleNamespace(type="refusal", refusal="Declined"))
+    elif defect == "extra_content":
+        response.output[1].content.append(SimpleNamespace(type="unknown_content", data="PRIVATE_UNKNOWN_SENTINEL"))
+    else:
+        response.output.append(SimpleNamespace(type="function_call", arguments="PRIVATE_ARGUMENTS_SENTINEL"))
+    worker = LLMWorker(handle("openai", MockClient(response)))
+    with pytest.raises(ProviderOutputError) as exc:
+        worker.complete("Instructions", "Case")
+    assert exc.value.code == expected_code
+    usage = worker.usage[0]
+    assert usage["provider_output_normalization"] is None
+    assert usage["provider_output_text_count"] == 2
+    assert usage["usage_known"] is True
+    assert usage["failed_api_attempts"] == 0
+    assert usage["invocation_succeeded"] is False
+    assert "PRIVATE_" not in json.dumps(usage)
+
+
+@pytest.mark.parametrize("second_text", ['{"second": true}', '{"ok": true}'])
+def test_anthropic_multiple_text_blocks_are_never_concatenated(second_text):
     response = anthropic_response()
-    response.content.append(SimpleNamespace(type="text", text='{"second": true}'))
+    response.content.append(SimpleNamespace(type="text", text=second_text))
     worker = LLMWorker(handle("anthropic", MockClient(response)))
     with pytest.raises(ProviderOutputError, match="multiple answer text blocks"):
         worker.complete("Instructions", "Case")
     assert worker.usage[0]["provider_output_items"] == [
         {"index": 0, "type": "text", "text": '{"ok": true}'},
-        {"index": 1, "type": "text", "text": '{"second": true}'}]
+        {"index": 1, "type": "text", "text": second_text}]
 
 
 @pytest.mark.parametrize("status,reason", [
