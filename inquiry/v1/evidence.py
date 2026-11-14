@@ -22,6 +22,63 @@ class EvidenceError(ValueError):
     """Invalid tool request, reference, or claimed exposure."""
 
 
+EVIDENCE_TOOL_SCHEMAS = {
+    "search": {
+        "type": "object",
+        "description": "Find source metadata and bounded text snippets by lexical search.",
+        "properties": {
+            "query": {"type": "string", "minLength": 1},
+            "filters": {
+                "type": ["object", "null"],
+                "properties": {
+                    "source_id": {"type": "string", "minLength": 1},
+                    "issuer_id": {"type": "string", "minLength": 1},
+                    "origin_id": {"type": "string", "minLength": 1},
+                    "version": {"type": "string", "minLength": 1},
+                    "current_only": {"type": "boolean", "default": True},
+                },
+                "additionalProperties": False,
+            },
+            "limit": {"type": "integer", "minimum": 1, "maximum": 100, "default": 5},
+        },
+        "required": ["query"],
+        "additionalProperties": False,
+    },
+    "open": {
+        "type": "object",
+        "description": "Read a source or one exact locator. Reading blocks, including prose named payroll or roster rows, use open.",
+        "properties": {
+            "source_id": {"type": "string", "minLength": 1},
+            "version": {"type": "string", "minLength": 1},
+            "locator": {"type": ["string", "null"], "minLength": 1,
+                        "description": "An exact locator from the source metadata; omit for the full source."},
+            "limit": {"type": ["integer", "null"], "minimum": 0,
+                      "description": "Maximum returned characters; omit for all selected text."},
+        },
+        "required": ["source_id", "version"],
+        "additionalProperties": False,
+    },
+    "read_table": {
+        "type": "object",
+        "description": "Read only a structured table explicitly listed in the source's table_ids. A reading-block locator is not a table ID.",
+        "properties": {
+            "source_id": {"type": "string", "minLength": 1},
+            "version": {"type": "string", "minLength": 1},
+            "table_id": {"type": "string", "minLength": 1,
+                         "description": "An exact ID from table_ids; no table exists when table_ids is empty."},
+            "rows": {"type": ["array", "null"], "items": {"type": "string", "minLength": 1},
+                     "uniqueItems": True, "description": "Exact row IDs; omit for all rows."},
+            "columns": {"type": ["array", "null"], "items": {"type": "string", "minLength": 1},
+                        "uniqueItems": True, "description": "Exact column names; omit for all columns."},
+            "limit": {"type": ["integer", "null"], "minimum": 0,
+                      "description": "Maximum returned characters; omit for all selected text."},
+        },
+        "required": ["source_id", "version", "table_id"],
+        "additionalProperties": False,
+    },
+}
+
+
 @dataclass(frozen=True)
 class QuoteVerification:
     valid: bool
@@ -77,6 +134,11 @@ class EvidenceEnvironment:
         return dict(self._current)
 
     @property
+    def tool_schemas(self) -> dict[str, dict]:
+        """Argument schemas only; requesting them does not read any source."""
+        return deepcopy(EVIDENCE_TOOL_SCHEMAS)
+
+    @property
     def source_lookup(self) -> dict[tuple[str, str], dict]:
         result = deepcopy(self._sources)
         for key, record in result.items():
@@ -110,9 +172,13 @@ class EvidenceEnvironment:
         return self._origins[key]
 
     def _source(self, source_id: str, version: str) -> tuple[tuple[str, str], dict]:
+        self._nonempty_string(source_id, "source_id")
+        self._nonempty_string(version, "version")
         key = (source_id, version)
         if key not in self._sources:
-            raise EvidenceError(f"Unknown source version: {source_id}@{version}")
+            versions = [v for sid, v in self._sources if sid == source_id]
+            suffix = f"; available versions for {source_id}: {versions}" if versions else ""
+            raise EvidenceError(f"Unknown source version: {source_id}@{version}{suffix}")
         return key, self._sources[key]
 
     def _segment(self, key: tuple[str, str], locator: str, text: str, kind: str, **extra: Any) -> dict:
@@ -136,8 +202,108 @@ class EvidenceEnvironment:
                 result.append(self._segment(key, prefix + "/footnote:" + str(index), note, "table_footnote", table_id=table["id"]))
         return result
 
+    def _structure(self, key: tuple[str, str]) -> dict:
+        """Advertise valid addressing operations without returning source text."""
+        source = self._sources[key]
+        return {
+            "locators": [s["locator"] for s in self._all_segments.get(key, [])],
+            "reading_blocks": [{"locator": block["locator"], "operation": "open"}
+                               for block in source["reading_blocks"]],
+            "table_ids": [table["id"] for table in source.get("tables", [])],
+            "tables": [{"table_id": table["id"], "operation": "read_table",
+                        "row_ids": [row["id"] for row in table["rows"]],
+                        "columns": list(table["columns"])}
+                       for table in source.get("tables", [])],
+        }
+
     def _manifest(self) -> list[dict]:
-        return [{"source_id": key[0], "version": key[1], "title": source["title"], "issuer_id": source["issuer_id"], "origin_ids": self._origins[key], "issued_at": source["issued_at"], "is_current": self._current[key[0]] == key[1], "source_content_hash": self._source_hashes[key], "locators": [s["locator"] for s in self._all_segments.get(key, [])]} for key, source in self._sources.items()]
+        return [{"source_id": key[0], "version": key[1], "title": source["title"], "issuer_id": source["issuer_id"], "origin_ids": self._origins[key], "issued_at": source["issued_at"], "is_current": self._current[key[0]] == key[1], "source_content_hash": self._source_hashes[key], **self._structure(key)} for key, source in self._sources.items()]
+
+    @staticmethod
+    def _nonempty_string(value: Any, name: str) -> None:
+        if not isinstance(value, str) or not value.strip():
+            raise EvidenceError(f"{name} must be a nonempty string")
+
+    def _table(self, key: tuple[str, str], table_id: str) -> dict:
+        source = self._sources[key]
+        table = next((t for t in source.get("tables", []) if t["id"] == table_id), None)
+        if table is not None:
+            return table
+        structure = self._structure(key)
+        if table_id in structure["locators"]:
+            remedy = (f"{table_id!r} is a locator, not a table ID; use "
+                      f"open(source_id={key[0]!r}, version={key[1]!r}, locator={table_id!r}).")
+        else:
+            remedy = (f"Use open(source_id={key[0]!r}, version={key[1]!r}, locator=<exact locator>) "
+                      f"for reading blocks. Available locators: {structure['locators']}.")
+        raise EvidenceError(f"Unknown table: {table_id!r} in {key[0]}@{key[1]}. "
+                            f"Valid table_ids: {structure['table_ids']}. {remedy}")
+
+    def validate_request(self, operation: str, arguments: Mapping[str, Any]) -> None:
+        """Preflight a tool request without reading, issuing, logging, or fixing it.
+
+        The caller must still execute the same operation and arguments after
+        validation. Corrections are explicit error messages, never substituted
+        requests. Both the controller and direct tool methods use this contract.
+        """
+        if not isinstance(operation, str) or operation not in EVIDENCE_TOOL_SCHEMAS:
+            raise EvidenceError("Unknown evidence operation; use search, open, or read_table")
+        if not isinstance(arguments, Mapping):
+            raise EvidenceError(f"{operation} arguments must be an object")
+        schema = EVIDENCE_TOOL_SCHEMAS[operation]
+        missing = set(schema["required"]) - arguments.keys()
+        unknown = arguments.keys() - schema["properties"].keys()
+        if missing or unknown:
+            raise EvidenceError(f"Invalid {operation} arguments: missing={sorted(missing)}, "
+                                f"unknown={sorted(map(str, unknown))}; "
+                                f"valid arguments: {sorted(schema['properties'])}")
+        for field in schema["required"]:
+            self._nonempty_string(arguments[field], field)
+        if operation == "search":
+            limit = arguments.get("limit", 5)
+            if isinstance(limit, bool) or not isinstance(limit, int) or not 1 <= limit <= 100:
+                raise EvidenceError("Search limit must be between 1 and 100")
+            filters = arguments.get("filters")
+            if filters is not None and not isinstance(filters, Mapping):
+                raise EvidenceError("Search filters must be an object or None")
+            filters = filters or {}
+            allowed_filters = schema["properties"]["filters"]["properties"]
+            if filters.keys() - allowed_filters.keys():
+                raise EvidenceError(f"Unsupported search filter; valid filters: {sorted(allowed_filters)}")
+            for name, value in filters.items():
+                if name == "current_only":
+                    if not isinstance(value, bool):
+                        raise EvidenceError("current_only must be boolean")
+                else:
+                    self._nonempty_string(value, f"filters.{name}")
+            return
+
+        self._limit(arguments.get("limit"))
+        key, source = self._source(arguments["source_id"], arguments["version"])
+        if operation == "open":
+            locator = arguments.get("locator")
+            if locator is not None:
+                self._nonempty_string(locator, "locator")
+                structure = self._structure(key)
+                if locator not in structure["locators"]:
+                    remedy = (f" Use read_table with table_id={locator!r}."
+                              if locator in structure["table_ids"] else "")
+                    raise EvidenceError(f"Unknown locator: {locator!r} in {key[0]}@{key[1]}; "
+                                        f"valid locators: {structure['locators']}.{remedy}")
+            return
+
+        table = self._table(key, arguments["table_id"])
+        for field, allowed in (("rows", [row["id"] for row in table["rows"]]),
+                               ("columns", table["columns"])):
+            requested = arguments.get(field)
+            if requested is None:
+                continue
+            if not isinstance(requested, (list, tuple)) or any(
+                not isinstance(item, str) or not item.strip() for item in requested
+            ):
+                raise EvidenceError(f"read_table {field} must be an array of nonempty strings or None")
+            if len(set(requested)) != len(requested) or not set(requested) <= set(allowed):
+                raise EvidenceError(f"Unknown or duplicate table {field}; valid {field}: {allowed}")
 
     @staticmethod
     def _limit(limit: int | None) -> None:
@@ -212,15 +378,8 @@ class EvidenceEnvironment:
         return result
 
     def search(self, query: str, filters: Mapping[str, Any] | None = None, limit: int = 5) -> dict:
-        if not isinstance(query, str) or not query.strip():
-            raise EvidenceError("Search query must be a nonempty string")
-        if isinstance(limit, bool) or not isinstance(limit, int) or not 1 <= limit <= 100:
-            raise EvidenceError("Search limit must be between 1 and 100")
+        self.validate_request("search", {"query": query, "filters": filters, "limit": limit})
         filters = dict(filters or {})
-        if set(filters) - {"source_id", "issuer_id", "origin_id", "version", "current_only"}:
-            raise EvidenceError("Unsupported search filter")
-        if not isinstance(filters.get("current_only", True), bool):
-            raise EvidenceError("current_only must be boolean")
         terms = set(_tokens(query))
         hits = []
         for key, source in self._sources.items():
@@ -240,31 +399,30 @@ class EvidenceEnvironment:
             positions = [match.start() for match in re.finditer(r"\w+", segment["text"], re.UNICODE) if match.group().casefold() in terms]
             start = max(0, min(positions) - 40) if positions else 0
             snippet = self._slice(segment, start, start + 240)
-            hits.append({"source_id": key[0], "version": key[1], "title": source["title"], "issuer_id": source["issuer_id"], "origin_ids": list(self._origins[key]), "is_current": self._current[key[0]] == key[1], "source_content_hash": self._source_hashes[key], "score": score, "snippet": snippet["text"], "locator": snippet["locator"], "segments": [snippet]})
+            hits.append({"source_id": key[0], "version": key[1], "title": source["title"], "issuer_id": source["issuer_id"], "origin_ids": list(self._origins[key]), "is_current": self._current[key[0]] == key[1], "source_content_hash": self._source_hashes[key], "score": score, "snippet": snippet["text"], "locator": snippet["locator"], "segments": [snippet], **self._structure(key)})
         hits.sort(key=lambda hit: (-hit["score"], hit["source_id"], hit["version"]))
         return self._return("search", {"query": query, "filters": filters, "limit": limit}, {"query": query, "hits": hits[:limit], "total_matches": len(hits), "truncated": len(hits) > limit, "current_only": filters.get("current_only", True), "ranking": "lexical_counts_title_weight_2_stable_source_id_version"})
 
     def open(self, source_id: str, version: str, locator: str | None = None, limit: int | None = None) -> dict:
+        self.validate_request("open", {"source_id": source_id, "version": version,
+                                       "locator": locator, "limit": limit})
         key, source = self._source(source_id, version)
         selected = self._all_segments[key]
         if locator is not None:
             selected = [s for s in selected if s["locator"] == locator]
-            if not selected:
-                raise EvidenceError(f"Unknown locator: {locator}")
         segments, coverage = self._bounded(selected, limit)
         coverage["complete_document"] = locator is None and not coverage["truncated"]
-        return self._return("open", {"source_id": source_id, "version": version, "locator": locator, "limit": limit}, {"source_id": source_id, "version": version, "title": source["title"], "is_current": self._current[source_id] == version, "origin_ids": list(self._origins[key]), "source_content_hash": self._source_hashes[key], "segments": segments, "coverage": coverage, "truncated": coverage["truncated"]})
+        return self._return("open", {"source_id": source_id, "version": version, "locator": locator, "limit": limit}, {"source_id": source_id, "version": version, "title": source["title"], "is_current": self._current[source_id] == version, "origin_ids": list(self._origins[key]), "source_content_hash": self._source_hashes[key], "segments": segments, "coverage": coverage, "truncated": coverage["truncated"], **self._structure(key)})
 
     def read_table(self, source_id: str, version: str, table_id: str, rows: Sequence[str] | None = None, columns: Sequence[str] | None = None, limit: int | None = None) -> dict:
+        self.validate_request("read_table", {"source_id": source_id, "version": version,
+                                             "table_id": table_id, "rows": rows,
+                                             "columns": columns, "limit": limit})
         key, source = self._source(source_id, version)
-        table = next((t for t in source.get("tables", []) if t["id"] == table_id), None)
-        if table is None:
-            raise EvidenceError(f"Unknown table: {table_id}")
+        table = self._table(key, table_id)
         row_ids = [row["id"] for row in table["rows"]]
         requested_rows = row_ids if rows is None else list(rows)
         requested_columns = table["columns"] if columns is None else list(columns)
-        if len(set(requested_rows)) != len(requested_rows) or not set(requested_rows) <= set(row_ids) or len(set(requested_columns)) != len(requested_columns) or not set(requested_columns) <= set(table["columns"]):
-            raise EvidenceError("Unknown or duplicate table rows/columns")
         selected = [s for s in self._all_segments[key] if s.get("table_id") == table_id and (s.get("row_id") is None or s["row_id"] in requested_rows) and (s.get("column") is None or s["column"] in requested_columns)]
         segments, coverage = self._bounded(selected, limit)
         coverage["complete_table"] = rows is None and columns is None and not coverage["truncated"]

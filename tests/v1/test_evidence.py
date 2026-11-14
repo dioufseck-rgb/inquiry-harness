@@ -35,6 +35,68 @@ def test_initial_discovery_views_do_not_expose_source_text(public_case, mode):
     assert not env.verify_quote("proposer", "doc_003", "1.0", "80 programme credits").valid
 
 
+def test_manifest_identifies_roster_and_payroll_as_reading_blocks():
+    public = load_packet().public("question_003", "mutation_003")
+    env = EvidenceEnvironment(public, "documents")
+    initial = env.initial_input()
+    source = next(s for s in initial["source_manifest"] if s["source_id"] == "doc_005")
+    assert source["table_ids"] == source["tables"] == []
+    assert source["reading_blocks"] == [
+        {"locator": locator, "operation": "open"}
+        for locator in ["operations_log", "roster_row_17", "payroll_row_17"]
+    ]
+    serialized = json.dumps(initial)
+    document = next(d for d in public["corpus"]["documents"] if d["id"] == "doc_005")
+    assert all(block["text"] not in serialized for block in document["reading_blocks"])
+    assert env.exposures[0]["segments"] == []
+
+
+def test_read_table_on_a_reading_block_returns_exact_correction_without_reading():
+    env = EvidenceEnvironment(load_packet().public("question_003", "mutation_003"), "documents")
+    before = env.exposure_log
+    arguments = {"source_id": "doc_005", "version": "1.0", "table_id": "roster_row_17"}
+    for request in (lambda: env.validate_request("read_table", arguments),
+                    lambda: env.read_table(**arguments)):
+        with pytest.raises(EvidenceError) as caught:
+            request()
+        error = str(caught.value)
+        assert "Valid table_ids: []" in error
+        assert "is a locator, not a table ID" in error
+        assert "open(source_id='doc_005', version='1.0', locator='roster_row_17')" in error
+    assert env.exposure_log == before
+    assert env.tool_events == env.exposures == []
+
+
+def test_valid_preflight_does_not_issue_segments_or_mutate_request(public_case):
+    env = EvidenceEnvironment(public_case, "documents")
+    request = {"source_id": "doc_003", "version": "1.0", "locator": "field_group_2", "limit": 10}
+    original = deepcopy(request)
+    before = env.exposure_log
+    assert env.validate_request("open", request) is None
+    assert request == original and env.exposure_log == before
+    with pytest.raises(EvidenceError, match="never issued"):
+        env.expose("proposer", references=[{"source_id": "doc_003", "version": "1.0", "locator": "field_group_2"}])
+    assert env.open(**request)["coverage"]["characters_returned"] == 10
+
+
+@pytest.mark.parametrize("operation,arguments,error", [
+    ("open", {"source_id": "doc_003"}, "missing=.*version"),
+    ("open", {"source_id": "doc_003", "version": "1.0", "table_id": "payroll"}, "unknown=.*table_id"),
+    ("open", {"source_id": [], "version": "1.0"}, "source_id must be a nonempty string"),
+    ("open", {"source_id": "doc_003", "version": "1.0", "limit": True}, "Character limit"),
+    ("search", {"query": "shift", "filters": []}, "filters must be an object"),
+    ("search", {"query": "shift", "filters": {"current_only": "false"}}, "must be boolean"),
+    ("search", {"query": "shift", "filters": {"source_id": ["doc_003"]}}, "nonempty string"),
+    ("finish", {}, "Unknown evidence operation"),
+])
+def test_preflight_rejects_malformed_tool_requests_without_events(public_case, operation, arguments, error):
+    env = EvidenceEnvironment(public_case, "documents")
+    before = env.exposure_log
+    with pytest.raises(EvidenceError, match=error):
+        env.validate_request(operation, arguments)
+    assert env.exposure_log == before
+
+
 def test_prepared_input_is_not_exposed_until_admitted_call(public_case):
     env = EvidenceEnvironment(public_case, "supplied")
     prepared = env.initial_input(record_exposure=False)
@@ -230,6 +292,35 @@ def test_table_read_preserves_cells_units_footnotes_and_coverage(public_case):
     assert env.read_table("doc_003", "1.0", "payroll", limit=10)["truncated"]
     with pytest.raises(EvidenceError):
         env.read_table("doc_003", "1.0", "payroll", rows=["missing"])
+
+
+def test_structured_table_discovery_exposes_addressing_metadata_only(public_case):
+    env = EvidenceEnvironment(table_case(public_case), "documents")
+    initial = env.initial_input()
+    manifest = next(s for s in initial["source_manifest"] if s["source_id"] == "doc_003")
+    assert manifest["table_ids"] == ["payroll"]
+    assert manifest["tables"] == [{"table_id": "payroll", "operation": "read_table",
+                                    "row_ids": ["row_1", "row_2"], "columns": ["hours", "wages"]}]
+    assert "Applicant-reported amounts; not independent payroll verification." not in json.dumps(initial)
+    assert env.exposures[0]["segments"] == []
+    hit = env.search("shift", {"source_id": "doc_003"})["hits"][0]
+    assert hit["table_ids"] == manifest["table_ids"]
+    assert hit["reading_blocks"] == manifest["reading_blocks"]
+    schemas = env.tool_schemas
+    assert schemas["read_table"]["required"] == ["source_id", "version", "table_id"]
+    assert schemas["read_table"]["additionalProperties"] is False
+    schemas["read_table"]["required"].clear()
+    assert env.tool_schemas["read_table"]["required"]
+
+
+@pytest.mark.parametrize("selection", [{"rows": "row_1"}, {"rows": ["missing"]},
+                                         {"rows": ["row_1", "row_1"]}, {"columns": [["wages"]]}])
+def test_table_selection_preflight_rejects_invalid_addressing(public_case, selection):
+    env = EvidenceEnvironment(table_case(public_case), "documents")
+    with pytest.raises(EvidenceError):
+        env.validate_request("read_table", {"source_id": "doc_003", "version": "1.0",
+                                            "table_id": "payroll", **selection})
+    assert env.tool_events == []
 
 
 @pytest.mark.parametrize("operation", [lambda e: e.open("doc_999", "1.0"), lambda e: e.open("doc_001", "99.0"), lambda e: e.open("doc_001", "1.0", "missing"), lambda e: e.open("doc_001", "1.0", limit=-1), lambda e: e.search("flood", {"oracle": True}), lambda e: e.search("flood", limit=0)])

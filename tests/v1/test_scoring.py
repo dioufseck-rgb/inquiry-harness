@@ -3,7 +3,8 @@ from copy import deepcopy
 import pytest
 
 from inquiry.v1.scoring import (
-    HUMAN_DIMENSIONS, categorical_smoke_assertions, hardship_smoke_expectation,
+    HUMAN_DIMENSIONS, SCORER_VERSION, SMOKE_METRIC_VERSION, SMOKE_ORACLE_VERSION,
+    categorical_smoke_assertions, hardship_smoke_expectation,
     hardship_smoke_matrix, human_rubric_review, result_fingerprint, score_run, structural_audit,
 )
 
@@ -162,6 +163,159 @@ def test_absent_baseline_evaluation_remains_unassessed():
     check = next(c for c in result["structural"]["checks"] if c["name"] == "evaluation_completion_gate")
     assert check["passed"] is None
     assert result["human"]["status"] == "pending"
+
+
+def test_failed_run_without_a_target_or_graph_is_unassessed_not_a_vacuous_pass():
+    run = valid_run()
+    run["status"] = "failed"
+    run["response"].update(target_claim_id=None, findings=[], task_completed=False)
+    result = score_run(run, public_case(), smoke_expectation=hardship_smoke_expectation("question_001"))
+    audit = result["structural"]
+    assert audit["status"] == "unassessed"
+    assert audit["failed_checks"] == []
+    assert set(audit["unassessed_checks"]) >= {
+        "target_references_finding", "evaluation_completion_gate", "graph_report_alignment"
+    }
+    assert audit["assessment_coverage"]["target_finding_present"] is False
+    assert audit["assessment_coverage"]["graph_returned"] is False
+    assert audit["assessment_coverage"]["evaluation_returned"] is False
+    assert result["smoke"]["status"] == "not_checkable"
+    assert result["human"]["status"] == "pending"
+
+
+def test_structural_coverage_distinguishes_audited_baseline_records_from_missing_graph():
+    audit = structural_audit(valid_run(), public_case())
+    assert audit["status"] == "pass"
+    assert audit["assessment_coverage"]["target_finding_present"] is True
+    assert audit["assessment_coverage"]["graph_returned"] is False
+    assert "graph_report_alignment" in audit["unassessed_checks"]
+    assert audit["assessment_coverage"]["unassessed_checks"] == len(audit["unassessed_checks"])
+    assert audit["substantive_validity_established"] is False
+
+
+def declared_non_establishment_run():
+    public = public_case()
+    public["question"].update(id="question_005", question="Does the record establish final eligibility?",
+                              profile={"id": "profile_005", "required_form": "final_eligibility_assessment"},
+                              scope={"case_id": "case_001", "stage": "final_eligibility"})
+    run = valid_run()
+    run["question_id"] = "question_005"
+    finding = run["response"]["findings"][0]
+    finding.update(text="The supplied record does not establish final eligibility.",
+                   kind="policy", form="rule_consequence", status="established",
+                   target_relation="record_non_establishment", target_question_id="question_005",
+                   scope=deepcopy(public["question"]["scope"]))
+    run["response"].update(text=finding["text"], target_form_answered=True,
+                            next_action={"kind": "prepare_assessment", "condition_ids": []})
+    return public, run
+
+
+def test_explicit_anchored_non_establishment_has_distinct_claim_and_target_statuses():
+    public, run = declared_non_establishment_run()
+    result = score_run(run, public, smoke_expectation=hardship_smoke_expectation("question_005"))
+    assert result["smoke"]["status"] == "pass"
+    comparison = result["smoke"]["target_status_comparison"]
+    assert comparison["claim_status"] == "established"
+    assert comparison["compared_target_status"] == "not_established"
+    assert comparison["method"] == "declared_record_non_establishment"
+    assert comparison["semantic_alignment"] == "pending_human_review"
+    assert result["human"]["status"] == "pending"
+    assert result["structural"]["substantive_validity_established"] is False
+
+
+@pytest.mark.parametrize("deliverable", ["", "   ", None])
+def test_delivery_completion_cannot_replace_the_required_artifact(deliverable):
+    public, run = declared_non_establishment_run()
+    run["response"].update(delivery_completed=True, delivery_defects=[], deliverable=deliverable)
+    result = score_run(run, public, smoke_expectation=hardship_smoke_expectation("question_005"))
+    assert "declared_delivery_has_required_artifact" in result["structural"]["failed_checks"]
+    assert result["smoke"]["status"] == "fail"
+    run["response"]["deliverable"] = "Final eligibility remains undetermined pending the required register records."
+    assert score_run(run, public, smoke_expectation=hardship_smoke_expectation("question_005"))["smoke"]["status"] == "pass"
+
+
+@pytest.mark.parametrize("flag", ["delivery_completed", "review_completed"])
+def test_explicit_incomplete_delivery_or_review_cannot_claim_task_completion(flag):
+    run = valid_run()
+    run["response"][flag] = False
+    result = score_run(run, public_case(), smoke_expectation=hardship_smoke_expectation("question_001"))
+    assert f"{flag}:task_completion_consistent" in result["structural"]["failed_checks"]
+    assert result["smoke"]["status"] == "fail"
+    assert result["human"]["status"] == "pending"
+
+
+def test_delivery_success_must_not_retain_recorded_delivery_defects():
+    run = valid_run()
+    run["response"].update(delivery_completed=True, delivery_defects=["requested_deliverable_missing"])
+    assert "declared_delivery_has_no_recorded_defects" in structural_audit(run, public_case())["failed_checks"]
+
+
+@pytest.mark.parametrize("text", [
+    "The supplied record does not establish final eligibility.",
+    "The applicant certainly satisfies every final eligibility requirement.",
+    "An unrelated positive claim is established.",
+])
+def test_prose_alone_never_reclassifies_an_established_direct_target(text):
+    public, run = declared_non_establishment_run()
+    finding = run["response"]["findings"][0]
+    finding.pop("target_relation")
+    finding.pop("target_question_id")
+    finding["text"] = text
+    result = score_run(run, public, smoke_expectation=hardship_smoke_expectation("question_005"))
+    assert result["smoke"]["status"] == "fail"
+    assert result["smoke"]["target_status_comparison"]["compared_target_status"] == "established"
+    assert next(c for c in result["smoke"]["checks"] if c["name"] == "target_status")["passed"] is False
+    assert result["human"]["status"] == "pending"
+
+
+@pytest.mark.parametrize("field,value", [
+    ("target_question_id", None), ("target_question_id", "question_003"),
+    ("scope", {"case_id": "another_case", "stage": "final_eligibility"}),
+    ("kind", "substantive"), ("form", "assertion"),
+])
+def test_non_establishment_normalization_requires_explicit_question_scope_and_form(field, value):
+    public, run = declared_non_establishment_run()
+    run["response"]["findings"][0][field] = value
+    smoke = categorical_smoke_assertions(run, hardship_smoke_expectation("question_005"), public_case=public)
+    assert smoke["status"] == "fail"
+    assert smoke["target_status_comparison"]["compared_target_status"] is None
+
+
+def test_non_establishment_cannot_be_retagged_only_in_the_rendered_finding():
+    public, run = declared_non_establishment_run()
+    finding = deepcopy(run["response"]["findings"][0])
+    run["graph"] = {"claims": {"c1": {**finding, "id": "c1", "target_relation": "direct"}}}
+    run["evaluation"] = {"findings": {"c1": finding}}
+    result = score_run(run, public, smoke_expectation=hardship_smoke_expectation("question_005"))
+    assert result["smoke"]["status"] == "fail"
+    assert "finding:c1:record_target_relation" in result["structural"]["failed_checks"]
+    assert result["smoke"]["target_status_comparison"]["compared_target_status"] is None
+
+
+@pytest.mark.parametrize("relation,status", [("negated", "established"),
+                                            ("record_non_establishment", "not_established"),
+                                            ("record_non_establishment", "conditional")])
+def test_other_negative_status_combinations_are_not_inverted(relation, status):
+    public, run = declared_non_establishment_run()
+    run["response"]["findings"][0].update(target_relation=relation, status=status)
+    result = score_run(run, public, smoke_expectation=hardship_smoke_expectation("question_005"))
+    assert result["smoke"]["status"] == "not_checkable"
+    assert result["smoke"]["target_status_comparison"]["compared_target_status"] is None
+    assert result["human"]["status"] == "pending"
+
+
+def test_scoring_changes_are_versioned_without_rewriting_supplied_expectations():
+    expectation = hardship_smoke_expectation("question_001")
+    assert expectation["oracle_version"] == SMOKE_ORACLE_VERSION == "hardship-categorical-smoke-0.2"
+    old_expectation = deepcopy(expectation)
+    old_expectation["oracle_version"] = "hardship-categorical-smoke-0.1"
+    original = deepcopy(old_expectation)
+    result = score_run(valid_run(), public_case(), smoke_expectation=old_expectation)
+    assert old_expectation == original
+    assert result["scorer_version"] == SCORER_VERSION
+    assert result["smoke"]["metric_version"] == SMOKE_METRIC_VERSION
+    assert result["smoke"]["oracle_version"] == "hardship-categorical-smoke-0.1"
+    assert result["smoke"]["status"] == "pass"
 
 
 def test_correct_component_does_not_mask_overclaimed_target():

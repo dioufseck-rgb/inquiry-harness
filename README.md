@@ -3,7 +3,7 @@
 ## Controlled inquiry v1
 
 The controlled rebuild is available as `inquiry.v1` and the `inquiry-v1`
-command, version **1.0.0a1**. It implements the first runnable slice of the new
+command, version **1.0.0a2**. It implements the first runnable slice of the new
 design: known evidence, explicit question and acceptance profiles, a bounded
 inquiry loop, deterministic argument evaluation, and a matched experiment runner.
 
@@ -30,6 +30,8 @@ See [the v1 guide](docs/CONTROLLED_V1.md) for live provider runs, the experiment
 matrix, output contracts, supported reasoning patterns and implementation limits.
 The [validation report](docs/V1_VALIDATION.md) records both the passing software
 checks and the remaining live-model failures.
+The [first eight-case live batch](experiments/v1/live_20261114/README.md) is preserved;
+[repair notes](docs/V1_REPAIR_NOTES.md) describe the subsequent operational fixes.
 The seven-competence repertoire is a design target; this alpha does not yet
 implement all seven competences or a live-web research service.
 

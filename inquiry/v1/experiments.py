@@ -177,6 +177,8 @@ def summarize_runs(records: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
         completed += int(isinstance(response, Mapping) and response.get("task_completed") is True
                          and response.get("target_scope_answered") is not False
                          and response.get("target_form_answered") is not False
+                         and response.get("delivery_completed") is not False
+                         and response.get("review_completed") is not False
                          and evaluation_done is not False
                          and run.get("status") != "failed")
         usage = run.get("usage", {})
@@ -197,7 +199,7 @@ def summarize_runs(records: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
     return {
         "attempts": len(records), "run_status_counts": dict(statuses),
         "task_completed_count": completed, "failed_runs": statuses["failed"],
-        "completion_count_interpretation": "Declared task completion, excluding scope/form rejection or incomplete evaluation; not human-adjudicated adequacy.",
+        "completion_count_interpretation": "Declared task completion, excluding scope/form rejection or incomplete evaluation, delivery or configured review; not human-adjudicated adequacy.",
         "evaluation_completion_status_counts": dict(evaluation_states),
         "usage_known_totals": totals, "usage_unknown_run_counts": unknown,
         "monetary_cost_complete": unknown["cost_usd"] == 0,

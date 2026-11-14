@@ -132,6 +132,54 @@ def test_attribution_cannot_be_promoted_by_reusing_the_same_pattern():
     assert "pattern_claim_form_mismatch" in codes(result)
 
 
+def test_a_universal_target_can_record_an_honest_population_gap_without_a_proof():
+    graph, profile, env = example()
+    condition(graph, "population-coverage", evidence=(), status="open")
+    target = claim(
+        graph, "all-sites", form="universal", conditions=["population-coverage"],
+        scope=Scope({"population": "all workshops in the district", "date": "2026-04-04",
+                     "quantifier": "every"}),
+    )
+    target.target_question_id = "population-question"
+    result = run(graph, profile, env)
+    finding = result.findings[target.id]
+    assert result.evaluation_status == "complete"
+    assert finding.status == "not_established"
+    assert finding.form == "universal"
+    assert finding.open_conditions == ["population-coverage"]
+    assert finding.target_question_id == "population-question"
+    assert finding.target_relation == "direct"
+    assert "unsupported_claim_form" not in codes(result)
+    assert "condition_unresolved" in finding.reasons
+    assert finding.argument_ids == finding.evidence_ids == []
+
+
+@pytest.mark.parametrize("kind, form", [("substantive", "universal"), ("universal", "assertion")])
+def test_located_source_records_cannot_establish_a_universal_population_claim(kind, form):
+    graph, profile, env = example()
+    claim(graph, "all-sites", kind=kind, form=form,
+          scope=Scope({"population": "all workshops in the district", "quantifier": "every"}))
+    argument(graph, "one-record", "all-sites")
+    result = run(graph, profile, env)
+    assert result.evaluation_status == "complete"
+    assert result.findings["all-sites"].status == "not_established"
+    assert result.findings["all-sites"].form == "universal"
+    assert "unsupported_claim_form" not in codes(result)
+    assert "pattern_claim_form_mismatch" in codes(result)
+
+
+@pytest.mark.parametrize("relation", ["negated", "record_non_establishment"])
+def test_declared_question_orientation_is_preserved_without_licensing_support(relation):
+    graph, profile, env = example()
+    target = claim(graph, "unsupported")
+    target.target_relation = relation
+    target.target_question_id = "question-1"
+    result = run(graph, profile, env)
+    assert result.findings[target.id].status == "not_established"
+    assert result.findings[target.id].target_relation == relation
+    assert result.findings[target.id].target_question_id == "question-1"
+
+
 def test_missing_or_reused_required_conditions_are_not_completed_assessments():
     graph, profile, env = example()
     claim(graph, "c")
@@ -366,6 +414,89 @@ def test_a_bare_discharge_flag_and_evidence_id_do_not_answer_an_objection():
     assert "reply_does_not_discharge" in codes(result)
 
 
+def test_an_unrelated_assessment_and_argument_edit_do_not_expire_an_objection():
+    graph, profile, env = example()
+    claim(graph, "c")
+    a = argument(graph, "a", "c")
+    graph.attacks["x"] = Attack(
+        id="x", target_id="a", kind="answer_inadequate",
+        condition_id=a.conditions["record_warrant"], challenged_revision=1, raised_revision=1,
+        grounds="The inference omits a material limitation.", evidence_ids=["e2"],
+    )
+    condition(graph, "unrelated-later-assessment", revision=3)
+    graph.conditions[a.conditions["record_warrant"]].answer = "The original assessment is reaffirmed."
+    graph.conditions[a.conditions["record_warrant"]].revision = 3
+    a.revision = 3
+    result = run(graph, profile, env)
+    assert result.findings["c"].status == "not_established"
+    assert result.attack_labels["x"] == "IN"
+
+
+@pytest.mark.parametrize("defect", [
+    "assessment_precedes_attack", "assessment_after_reply", "conditional_assessment",
+    "unsupported_evidence", "evidence_outside_assessment", "open_assessment",
+])
+def test_an_invalid_explicit_reply_preserves_the_live_attack(defect):
+    graph, profile, env = example()
+    graph.revision = 5
+    profile.allow_conditional = True
+    claim(graph, "c")
+    a = argument(graph, "a", "c")
+    reply = condition(graph, "reply-assessment", revision=3)
+    attack = Attack(
+        id="x", target_id="a", kind="answer_inadequate",
+        condition_id=a.conditions["record_warrant"], challenged_revision=1, raised_revision=2,
+        grounds="The recorded inference misses a material source limitation.", evidence_ids=["e2"],
+        reply_condition_id=reply.id, reply_revision=4,
+        reply_reason="A subsequent assessment addresses this limitation with located support.",
+        reply_evidence_ids=["e1"],
+    )
+    graph.attacks[attack.id] = attack
+    if defect == "assessment_precedes_attack":
+        reply.revision = 2
+    elif defect == "assessment_after_reply":
+        reply.revision = 5
+    elif defect == "conditional_assessment":
+        reply.context_id = "hypothetical-response"
+    elif defect == "unsupported_evidence":
+        reply.evidence_ids = attack.reply_evidence_ids = ["unverified"]
+    elif defect == "evidence_outside_assessment":
+        attack.reply_evidence_ids = ["e2"]
+    elif defect == "open_assessment":
+        reply.status = "open"
+    result = run(graph, profile, env)
+    assert result.findings["c"].status == "not_established"
+    assert result.attack_labels["x"] == "IN"
+    assert "reply_does_not_discharge" in codes(result)
+
+
+def test_a_supported_later_reply_can_be_attached_after_its_assessment_and_challenged():
+    graph, profile, env = example()
+    graph.revision = 5
+    claim(graph, "c")
+    a = argument(graph, "a", "c")
+    reply = condition(graph, "reply-assessment", revision=3)
+    graph.attacks["x"] = Attack(
+        id="x", target_id="a", kind="answer_inadequate",
+        condition_id=a.conditions["record_warrant"], challenged_revision=1, raised_revision=2,
+        grounds="The recorded inference misses a material source limitation.", evidence_ids=["e2"],
+        reply_condition_id=reply.id, reply_revision=4,
+        reply_reason="A later assessment resolves the cited limitation.", reply_evidence_ids=["e1"],
+    )
+    resolved = run(graph, profile, env)
+    assert resolved.findings["c"].status == "established"
+    assert resolved.attack_labels["x"] == "OUT"
+    graph.attacks["reply-objection"] = Attack(
+        id="reply-objection", target_id=reply.id, raised_revision=5,
+        grounds="The reply's stated support is itself undermined by a located correction.",
+        evidence_ids=["e2"],
+    )
+    challenged = run(graph, profile, env)
+    assert challenged.attack_labels["reply-objection"] == "IN"
+    assert challenged.attack_labels["x"] == "IN"
+    assert challenged.findings["c"].status == "not_established"
+
+
 def test_replacing_a_challenged_condition_does_not_erase_the_objection():
     graph, profile, env = example()
     claim(graph, "c")
@@ -397,7 +528,8 @@ def test_cloning_a_challenged_argument_and_its_records_cannot_evade_the_attack()
     for key, cid in list(copied.conditions.items()):
         clone_id = f"{cid}-cloned"
         graph.conditions[clone_id] = graph.conditions[cid].model_copy(
-            update={"id": clone_id, "evidence_ids": ["e1-cloned"], "revision": 2})
+            update={"id": clone_id, "evidence_ids": ["e1-cloned"], "revision": 2,
+                    "answer": "Reworded assessment of the same obligation and evidence."})
         copied.conditions[key] = clone_id
     graph.arguments[copied.id] = copied
     after = run(graph, profile, env)

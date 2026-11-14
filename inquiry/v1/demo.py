@@ -148,6 +148,7 @@ class DemoWorker:
         next_action = {"kind": "answer", "description": "Return the scoped analysis; no external action is authorized.", "condition_ids": []}
         status = "not_established"
         answer = ""
+        deliverable = ""
 
         if form == "source_reports(P)":
             ids = evidence("account")
@@ -231,6 +232,11 @@ class DemoWorker:
                 gap(cid, "Before advancing intake, obtain the missing " + text + ".", ids, target_dependency=False)
             next_action = {"kind": "request_information" if needed else "advance_intake", "description": description, "condition_ids": [cid for cid, _ in needed]}
             answer = description
+            deliverable = ("Thank you for your application. Please provide " + "; ".join(text for _, text in needed)
+                           + ". Your own signed statement satisfies the intake impact-evidence requirement. "
+                           "We will review the separate final-eligibility requirements after intake is complete."
+                           if needed else "Thank you for your complete signed statement. It satisfies the intake impact-evidence requirement. "
+                           "Your application can proceed to review of the separate final-eligibility requirements; no award decision has been made.")
 
         elif form == "final_eligibility_assessment":
             ids = evidence("policy") + evidence("account")
@@ -246,15 +252,16 @@ class DemoWorker:
             for cid, label in missing:
                 gap(cid, "Obtain and assess the required " + label + ".", ids)
             answer = "Final eligibility remains undetermined because the required final-stage records are not supplied; this is not a finding of ineligibility."
+            deliverable = answer + " Missing evidence: " + "; ".join(label for _, label in missing) + ". "
+            deliverable += ("The intake impact statement still needs its missing details. " if impact_missing or date_missing
+                            else "The policy accepts the supplied signed impact statement for the disruption requirement. ")
+            deliverable += "Obtain and assess the outstanding records before a final determination; no award or payment is authorized."
             next_action = {"kind": "request_information", "description": "Obtain and assess the missing final-stage records for review; do not approve, refuse or pay an award.", "condition_ids": [cid for cid, _ in missing]}
 
         elif form == "universal_population_claim":
             ids = evidence("event") + evidence("account") + evidence("trace")
             target("Every worker in the question's population lost wage income because of the flooding during the specified period.", "substantive", "universal")
-            if ids:
-                argument("document_record", ids, {"record_warrant": "The supplied area bulletin and individual records provide no complete worker-population coverage premise or universal rule.", "applicability": "A block-level event and one person's account or trace do not license the every-worker quantifier."}, {"record_warrant", "applicability"})
-            else:
-                gap("K_population", "Evidence licensing the requested universal population scope is unavailable.", [])
+            gap("K_population", "The available area and individual records do not supply complete worker-population coverage or a universal rule.", ids)
             answer = "The universal claim is not established. The records concern an area event and one applicant; no particular unaffected worker or refutation is supplied."
             next_action = {"kind": "answer", "description": "Limit publication to supported area or individual findings, or obtain an adequate population-coverage basis; do not assert a hidden counterexample.", "condition_ids": graph["claims"]["C_target"]["conditions"][:]}
         else:
@@ -263,5 +270,5 @@ class DemoWorker:
         citations = [{"source_id": e["source_id"], "version": e["source_version"], "locator": e["locator"], "quote": e["quote"]} for e in graph["evidence"].values()]
         target_record = graph["claims"]["C_target"]
         open_texts = [graph["conditions"][cid]["text"] for cid in target_record["conditions"]]
-        response = {"text": answer, "target_claim_id": "C_target", "findings": [{"claim_id": "C_target", "text": target_record["text"], "status": status, "scope": deepcopy(scope), "conditions": open_texts, "citations": citations}], "next_action": next_action, "task_completed": True, "target_scope_answered": True, "caveats": ["Deterministic scripted development instrument; not an independent model evaluation or substantive adjudication.", "All findings remain limited to the supplied fictional records and active profile; execution is not authorized."]}
+        response = {"text": answer, "deliverable": deliverable, "target_claim_id": "C_target", "findings": [{"claim_id": "C_target", "text": target_record["text"], "status": status, "scope": deepcopy(scope), "conditions": open_texts, "citations": citations}], "next_action": next_action, "task_completed": True, "target_scope_answered": True, "caveats": ["Deterministic scripted development instrument; not an independent model evaluation or substantive adjudication.", "All findings remain limited to the supplied fictional records and active profile; execution is not authorized."]}
         return graph, response

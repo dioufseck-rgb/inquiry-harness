@@ -6,6 +6,7 @@ from dataclasses import asdict
 import json
 from pathlib import Path
 import subprocess
+import uuid
 from typing import Any
 
 from . import __version__
@@ -130,7 +131,8 @@ def main(argv: list[str] | None = None) -> int:
         if args.command == "run":
             public = packet.public(args.question, args.mutation)
             critic = LLMWorker.from_spec(args.critic_model, effort=args.effort) if args.critic_model else None
-            result = run_inquiry(public, _worker(args), arm=args.arm, mode=args.mode, budget=budget, critic=critic)
+            result = run_inquiry(public, _worker(args), arm=args.arm, mode=args.mode, budget=budget, critic=critic,
+                                 event_path=Path(args.out) / "events.live.jsonl")
             path = save_run(result, args.out)
             score = score_run(result, public, answer_spec=packet.oracle(args.question, args.mutation),
                               smoke_expectation=hardship_smoke_expectation(args.question, args.mutation))
@@ -138,7 +140,7 @@ def main(argv: list[str] | None = None) -> int:
             print(result["response"]["text"])
             print(f"\nRun: {result['status']} | stop: {result['stop_reason']} | output: {path.resolve()}")
             print("Development test instrument; no model-quality inference." if args.demo else "Human semantic adjudication remains pending.")
-            return 1 if result["status"] == "failed" else 0
+            return 0 if result["status"] == "complete" else 1
         cases = []
         questions = args.questions or packet.question_ids
         variants = (None,) if args.baseline_only else (None, *packet.mutation_ids)
@@ -161,7 +163,8 @@ def main(argv: list[str] | None = None) -> int:
                     "execution_kind": "scripted_smoke" if args.demo else "model_experiment"}
         def run_case(public_case, *, arm, mode):
             critic = LLMWorker.from_spec(args.critic_model, effort=args.effort) if args.critic_model else None
-            return run_inquiry(public_case, _worker(args), arm=arm, mode=mode, budget=budget, critic=critic)
+            return run_inquiry(public_case, _worker(args), arm=arm, mode=mode, budget=budget, critic=critic,
+                               event_path=Path(args.out) / "journals" / (uuid.uuid4().hex + ".jsonl"))
         result = run_experiments(cases, run_case, arms=args.arms, modes=args.modes,
                                  repetitions=args.repetitions, manifest=manifest,
                                  order_seed=args.order_seed, output_dir=args.out)
@@ -171,6 +174,7 @@ def main(argv: list[str] | None = None) -> int:
         unsuccessful = (summary.get("failed_runs", 0)
                         or summary.get("structural_status_counts", {}).get("fail", 0)
                         or summary.get("structural_status_counts", {}).get("error", 0)
+                        or summary.get("structural_status_counts", {}).get("unassessed", 0)
                         or summary.get("smoke_status_counts", {}).get("fail", 0)
                         or summary.get("smoke_status_counts", {}).get("not_checkable", 0))
         return 1 if unsuccessful else 0

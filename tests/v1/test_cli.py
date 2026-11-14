@@ -62,6 +62,7 @@ def mock_bench(monkeypatch, summary):
     {"failed_runs": 1},
     {"structural_status_counts": {"fail": 1}},
     {"structural_status_counts": {"error": 1}},
+    {"structural_status_counts": {"unassessed": 1}},
     {"smoke_status_counts": {"fail": 1}},
     {"smoke_status_counts": {"not_checkable": 1}},
 ])

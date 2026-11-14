@@ -17,10 +17,22 @@ from typing import Any, Mapping
 STATUSES = frozenset(
     {"established", "reported", "conditional", "contested", "not_established"}
 )
-SMOKE_ORACLE_VERSION = "hardship-categorical-smoke-0.1"
+TARGET_RELATIONS = frozenset({"direct", "negated", "record_non_establishment"})
+SCORER_VERSION = "record-audit-and-declared-target-0.2"
+STRUCTURAL_AUDIT_VERSION = "exact-structural-audit-0.2"
+SMOKE_METRIC_VERSION = "categorical-declared-target-0.2"
+SMOKE_ORACLE_VERSION = "hardship-categorical-smoke-0.2"
 HUMAN_DIMENSIONS = (
     "world_truth", "packet_warrant", "record_warrant", "response_appropriateness"
 )
+_TARGET_FORMS = {
+    "source_reports(P)": ("attribution", "source_reports"),
+    "scoped_event_finding": ("substantive", "assertion"),
+    "examined_case_specific_causal_finding": ("causal", "causal"),
+    "policy_grounded_next_response": ("policy", "rule_consequence"),
+    "final_eligibility_assessment": ("policy", "rule_consequence"),
+    "universal_population_claim": ("substantive", "universal"),
+}
 
 
 def _mapping(value: Any) -> dict[str, Any]:
@@ -100,6 +112,34 @@ def evaluation_completion_state(run: Mapping[str, Any]) -> bool | None:
     return None
 
 
+def _delivery_and_review_checks(response: Mapping[str, Any],
+                                public_case: Mapping[str, Any] | None) -> list[dict[str, Any]]:
+    """Validate optional completion declarations without judging artifact prose."""
+    checks = []
+    for field in ("delivery_completed", "review_completed"):
+        if field not in response:
+            continue
+        value = response[field]
+        checks.append({"name": f"{field}:boolean", "passed": isinstance(value, bool),
+                       "detail": "Completion declarations must be explicit booleans."})
+        checks.append({"name": f"{field}:task_completion_consistent",
+                       "passed": not (value is False and response.get("task_completed") is True),
+                       "detail": "An explicitly incomplete delivery or configured review cannot accompany a completed task."})
+    if response.get("delivery_completed") is True:
+        question = _mapping(_mapping(public_case).get("question"))
+        required_form = _mapping(question.get("profile")).get("required_form")
+        if required_form in {"policy_grounded_next_response", "final_eligibility_assessment"}:
+            deliverable = response.get("deliverable")
+            checks.append({"name": "declared_delivery_has_required_artifact",
+                           "passed": isinstance(deliverable, str) and bool(deliverable.strip()),
+                           "detail": "This checks that the requested artifact exists, not that its prose is adequate."})
+        if "delivery_defects" in response:
+            checks.append({"name": "declared_delivery_has_no_recorded_defects",
+                           "passed": response["delivery_defects"] == [],
+                           "detail": "A successful delivery declaration cannot retain recorded delivery defects."})
+    return checks
+
+
 def structural_audit(run: Mapping[str, Any], public_case: Mapping[str, Any]) -> dict[str, Any]:
     """Check exact record relationships, without judging what source text means."""
     run = _mapping(run)
@@ -124,6 +164,10 @@ def structural_audit(run: Mapping[str, Any], public_case: Mapping[str, Any]) -> 
         check("target_references_finding", isinstance(target, str) and target in claim_ids)
     check("finding_status_vocabulary", all(isinstance(f.get("status"), str)
                                             and f["status"] in STATUSES for f in findings))
+    check("finding_target_relation_vocabulary", all(
+        isinstance(f.get("target_relation", "direct"), str)
+        and f.get("target_relation", "direct") in TARGET_RELATIONS for f in findings
+    ))
     question_id = _mapping(public_case.get("question")).get("id")
     check("active_question_identity", run.get("question_id") == question_id)
     form_answered = response.get("target_form_answered")
@@ -143,8 +187,13 @@ def structural_audit(run: Mapping[str, Any], public_case: Mapping[str, Any]) -> 
     if evaluation_status is not None and response.get("evaluation_completed") is not None:
         check("declared_evaluation_matches_record",
               response["evaluation_completed"] is (evaluation_status == "complete"))
+    checks.extend(_delivery_and_review_checks(response, public_case))
     target_findings = [f for f in findings if f.get("claim_id") == target]
     if len(target_findings) == 1:
+        if target_findings[0].get("target_relation", "direct") != "direct":
+            check("target_relation_question_anchor",
+                  target_findings[0].get("target_question_id") == question_id,
+                  "A non-direct proposition must explicitly name the active question; its prose meaning remains unadjudicated.")
         matches_scope = target_findings[0].get("scope") == _mapping(public_case.get("question")).get("scope")
         check("declared_target_scope_matches_record", response.get("target_scope_answered") is matches_scope,
               "This prototype checks exact explicit scope fields, not natural-language equivalence.")
@@ -199,9 +248,16 @@ def structural_audit(run: Mapping[str, Any], public_case: Mapping[str, Any]) -> 
             if claim is not None:
                 check(f"{prefix}:record_text", finding.get("text") == claim.get("text"),
                       "The structured finding must retain the committed claim text; prose is reviewed separately.")
+                check(f"{prefix}:record_target_relation",
+                      finding.get("target_relation", "direct") == claim.get("target_relation", "direct")
+                      and finding.get("target_question_id") == claim.get("target_question_id"),
+                      "Declared orientation must retain the committed claim's question anchor and relation.")
             if disposition is not None:
                 check(f"{prefix}:evaluated_status", finding.get("status") == disposition.get("status"))
                 check(f"{prefix}:evaluated_scope", finding.get("scope") == disposition.get("scope"))
+                check(f"{prefix}:evaluated_target_relation",
+                      finding.get("target_relation", "direct") == disposition.get("target_relation", "direct")
+                      and finding.get("target_question_id") == disposition.get("target_question_id"))
                 if "condition_texts" in disposition:
                     check(f"{prefix}:evaluated_conditions",
                           finding.get("conditions", []) == disposition["condition_texts"])
@@ -220,11 +276,22 @@ def structural_audit(run: Mapping[str, Any], public_case: Mapping[str, Any]) -> 
                 ))
 
     failures = [c["name"] for c in checks if c["passed"] is False]
+    unassessed = [c["name"] for c in checks if c["passed"] is None]
+    target_present = isinstance(target, str) and bool(target) and len(target_findings) == 1
+    status = "fail" if failures else "pass" if target_present else "unassessed"
     return {
-        "track": "exact_structural_audit", "status": "fail" if failures else "pass",
-        "checks": checks, "failed_checks": failures,
+        "track": "exact_structural_audit", "audit_version": STRUCTURAL_AUDIT_VERSION,
+        "status": status, "checks": checks, "failed_checks": failures,
+        "unassessed_checks": unassessed,
+        "assessment_coverage": {
+            "target_finding_present": target_present,
+            "graph_returned": bool(graph), "evaluation_returned": bool(evaluation),
+            "passed_checks": sum(c["passed"] is True for c in checks),
+            "failed_checks": len(failures), "unassessed_checks": len(unassessed),
+        },
         "substantive_validity_established": False,
         "limitations": [
+            "A missing target draft cannot pass on vacuously true record checks; unavailable checks are listed separately.",
             "Source-span and exposure checks do not establish truth, relevance, entailment, or attention.",
             "Graph/report agreement does not show that the graph is adequate for the question.",
             "Natural-language response fidelity and appropriate reliance require rubric review.",
@@ -284,9 +351,72 @@ def hardship_smoke_matrix() -> list[dict[str, Any]]:
             for variant in ["baseline", *(f"mutation_{i:03d}" for i in range(1, 7))]]
 
 
-def categorical_smoke_assertions(run: Mapping[str, Any], expectation: Mapping[str, Any] | None) -> dict[str, Any]:
+def _target_status_comparison(run: Mapping[str, Any], target: Mapping[str, Any],
+                              expectation: Mapping[str, Any],
+                              public_case: Mapping[str, Any] | None) -> tuple[dict[str, Any], list[dict[str, Any]]]:
+    """Compare declared propositions, without interpreting their natural language.
+
+    Established(P) and established(the record does not establish P) are different
+    record claims. Only the latter's explicit, anchored declaration can project
+    to a not_established status for P. This is categorical bookkeeping, not a
+    decision that the declared relation describes the claim text faithfully.
+    """
+    relation = target.get("target_relation", "direct")
+    claim_status = target.get("status")
+    comparison: dict[str, Any] = {
+        "claim_status": claim_status, "declared_target_relation": relation,
+        "target_question_id": target.get("target_question_id"),
+        "compared_target_status": None, "method": "unsupported_relation",
+        "semantic_alignment": "pending_human_review",
+        "limitation": "Explicit orientation and status categories do not establish that the proposition or prose means what its author declares.",
+    }
+    checks: list[dict[str, Any]] = []
+    if relation == "direct":
+        comparison.update(compared_target_status=claim_status, method="direct_status")
+        return comparison, checks
+    if relation == "negated":
+        # Not establishing P does not establish not-P, and this status vocabulary
+        # has no general negation transform. Leave the comparison uncheckable.
+        comparison["method"] = "negation_not_normalized"
+        return comparison, checks
+    if relation != "record_non_establishment":
+        checks.append({"name": "target_relation_supported", "passed": False})
+        return comparison, checks
+
+    question = _mapping(_mapping(public_case).get("question"))
+    question_id = question.get("id")
+    shape = _TARGET_FORMS.get(_mapping(question.get("profile")).get("required_form"))
+    checks.extend([
+        {"name": "target_relation_question_anchor", "passed": isinstance(question_id, str)
+         and bool(question_id) and target.get("target_question_id") == question_id
+         and run.get("question_id") == question_id and expectation.get("question_id") == question_id},
+        {"name": "target_relation_scope", "passed": isinstance(question.get("scope"), Mapping)
+         and target.get("scope") == question["scope"]},
+        {"name": "target_relation_form", "passed": shape is not None
+         and (target.get("kind"), target.get("form")) == shape},
+    ])
+    for name, records in (
+        ("graph", _records(_mapping(run.get("graph")).get("claims"))),
+        ("evaluation", _records(_mapping(run.get("evaluation")).get("findings"))),
+    ):
+        if run.get(name) is not None:
+            record = records.get(str(target.get("claim_id")), {})
+            checks.append({"name": f"target_relation_{name}_alignment", "passed":
+                           record.get("target_relation", "direct") == relation
+                           and record.get("target_question_id") == question_id})
+    if all(check["passed"] for check in checks) and claim_status == "established":
+        comparison.update(compared_target_status="not_established",
+                          method="declared_record_non_establishment")
+    else:
+        comparison["method"] = "record_non_establishment_not_normalized"
+    return comparison, checks
+
+
+def categorical_smoke_assertions(run: Mapping[str, Any], expectation: Mapping[str, Any] | None, *,
+                                 public_case: Mapping[str, Any] | None = None) -> dict[str, Any]:
     result: dict[str, Any] = {
         "track": "categorical_regression_assertion", "human_outcome_score": None,
+        "metric_version": SMOKE_METRIC_VERSION, "semantic_alignment": "pending_human_review",
         "status": "not_configured", "checks": [],
     }
     if expectation is None:
@@ -303,19 +433,31 @@ def categorical_smoke_assertions(run: Mapping[str, Any], expectation: Mapping[st
         return result
     action = _mapping(response.get("next_action"))
     conditions = action.get("condition_ids", [])
+    comparison, relation_checks = _target_status_comparison(run, targets[0], expectation, public_case)
+    result["target_status_comparison"] = comparison
+    compared_status = comparison["compared_target_status"]
     checks = [
-        {"name": "target_status", "passed": targets[0].get("status") in expectation["allowed_target_statuses"]},
+        {"name": "target_status", "passed": compared_status in expectation["allowed_target_statuses"]
+         if compared_status is not None else None},
+        *relation_checks,
         {"name": "next_action", "passed": action.get("kind") in expectation["allowed_next_actions"]},
         {"name": "task_completed", "passed": response.get("task_completed") is expectation["task_completed"]},
         {"name": "target_scope_answered", "passed": response.get("target_scope_answered") is True},
         {"name": "target_form_not_rejected", "passed": response.get("target_form_answered") is None
          or response.get("target_form_answered") is True},
         {"name": "evaluation_not_incomplete", "passed": evaluation_completion_state(run) is not False},
+        {"name": "delivery_not_incomplete", "passed": response.get("delivery_completed") is not False},
+        {"name": "review_not_incomplete", "passed": response.get("review_completed") is not False},
+        *_delivery_and_review_checks(response, public_case),
         {"name": "requested_conditions", "passed": isinstance(conditions, list)
          and all(isinstance(c, str) for c in conditions)
          and set(expectation.get("required_condition_ids", [])) <= set(conditions)},
     ]
-    result.update(checks=checks, status="pass" if all(c["passed"] for c in checks) else "fail")
+    status = ("fail" if any(c["passed"] is False for c in checks) else
+              "not_checkable" if any(c["passed"] is None for c in checks) else "pass")
+    result.update(checks=checks, status=status)
+    if compared_status is None:
+        result["reason"] = "The declared target relation cannot be normalized by this categorical metric; semantic review remains pending."
     return result
 
 
@@ -367,7 +509,8 @@ def score_run(run: Mapping[str, Any], public_case: Mapping[str, Any], *,
         human.update(status="invalid_adjudication", ratings={d: None for d in HUMAN_DIMENSIONS},
                      error="Outcome adjudication is not bound to this exact run and result hash.")
     return {
+        "scorer_version": SCORER_VERSION,
         "structural": structural_audit(run, public_case),
-        "smoke": categorical_smoke_assertions(run, smoke_expectation),
+        "smoke": categorical_smoke_assertions(run, smoke_expectation, public_case=public_case),
         "human": human,
     }

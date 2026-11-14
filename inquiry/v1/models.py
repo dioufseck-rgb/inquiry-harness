@@ -32,6 +32,10 @@ class Claim(Record):
     form: str = "assertion"
     scope: Scope = Field(default_factory=Scope)
     issue_id: str | None = None
+    # Declared orientation to an active question is checked by the controller;
+    # these tags neither license an inference nor adjudicate natural language.
+    target_relation: Literal["direct", "negated", "record_non_establishment"] = "direct"
+    target_question_id: str | None = None
     revision: int = 1
     supersedes: str | None = None
     conditions: list[str] = Field(default_factory=list)
@@ -53,7 +57,9 @@ class Evidence(Record):
 
 class Condition(Record):
     id: str
+    # Keep the question/obligation stable while its assessed answer evolves.
     text: str
+    answer: str = ""
     status: Literal["met", "open", "assumed", "reopened"] = "open"
     evidence_ids: list[str] = Field(default_factory=list)
     performer: str | None = None
@@ -147,6 +153,8 @@ FindingStatus = Literal[
 
 class ClaimFinding(Record):
     claim_id: str
+    target_relation: Literal["direct", "negated", "record_non_establishment"] = "direct"
+    target_question_id: str | None = None
     status: FindingStatus = "not_established"
     reasons: list[str] = Field(default_factory=list)
     open_conditions: list[str] = Field(default_factory=list)

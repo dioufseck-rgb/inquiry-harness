@@ -90,7 +90,9 @@ The CLI defaults to `--effort none`, which omits provider reasoning-effort param
 
 The CLI defaults are 10 model calls, 30 tool calls, 200,000 total tokens, 4,096 maximum output tokens per call, and a 180-second scheduling deadline. The controller checks limits before admission, reserves for serialized input and requested output, and records known usage separately from estimates. Failed attempts consume limits. Provider timeouts receive the remaining time; this is not a process-kill sandbox.
 
-Add `--critic-model 'provider:MODEL_ID'` to request a critic in the repertoire or harness arm. Its calls consume the same run budget; the default permits one critique. The critic needs grounded objections, and replies remain examinable. Budget exhaustion does not make either party correct. A live critic cannot be combined with `--demo` through the CLI.
+Add `--critic-model 'provider:MODEL_ID'` to request a critic in the repertoire or harness arm. Its calls consume the same run budget; the default permits one completed final critique. Invalid envelopes are repaired within the error and total-call limits. Evidence requests are provisional: the controller acquires the material and presents it to the critic before final review. The critic needs grounded objections, and replies remain examinable. Budget exhaustion does not make either party correct. A live critic cannot be combined with `--demo` through the CLI.
+
+Version `1.0.0a2` separates proposer and critic output schemas, rejects ambiguous or incomplete replies, repairs structural graph defects before critique, and requires the actual requested draft or assessment in `response.deliverable`. See [the repair notes](V1_REPAIR_NOTES.md) for the changes motivated by the first live batch and their limits. Dynamic graph dictionaries use schema-guided generation with strict local acceptance; the system does not claim provider-enforced strict-schema generation.
 
 There is no monetary budget flag or complete price table. Unpriced or unavailable cost remains unknown rather than becoming zero. For initial live work, use a small call/output limit and inspect usage before expanding the experiment.
 
@@ -116,7 +118,7 @@ Assessment separates exact structural audits, provisional categorical smoke expe
 
 ## Records and replay
 
-A single `run` saves `result.json`, `ledger.jsonl`, `report.md`, and `assessment.json`. Results include the final graph and evaluation, worker exposures, usage, errors, stopping reason, and configuration. Bench output uses `runs.jsonl` and `experiment.json` to retain individual attempts and grouped summaries. These scorer-facing experiment records can include oracle material; do not use them as worker inputs.
+A single `run` saves `result.json`, `ledger.jsonl`, `report.md`, and `assessment.json`. It also appends each event to `events.live.jsonl` during execution, so completed calls survive a process interruption. Use a new output directory; a live journal is never overwritten. `inspect_journal()` verifies and reports partial journals without presenting them as completed results. Results include the final graph and evaluation, worker exposures, usage, errors, stopping reason, and configuration. Bench output uses `runs.jsonl` and `experiment.json` to retain individual attempts and grouped summaries, with per-attempt journals under `journals/`. These scorer-facing experiment records can include oracle material; do not use them as worker inputs.
 
 ```bash
 .venv/bin/python -m inquiry.v1 replay runs/v1/demo-intake

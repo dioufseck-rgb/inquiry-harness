@@ -62,6 +62,10 @@ PATTERN_ASSUMABLE: dict[str, tuple[str, ...]] = {
 SUPPORTED_FORMS = {
     "assertion", "source_reports", "rule_consequence", "conjunction",
     "bounded_absence", "causal", "presupposition_failure", "conditional",
+    # A universal proposition can be the question under examination even when
+    # this fragment has no licensed pattern for proving it. In particular,
+    # document_record must not turn a located report into population coverage.
+    "universal",
 }
 
 
@@ -74,6 +78,7 @@ def _form(claim: Claim) -> str:
         "policy": "rule_consequence", "conjunction": "conjunction",
         "absence": "bounded_absence", "causal": "causal",
         "presupposition_failure": "presupposition_failure",
+        "universal": "universal",
     }.get(claim.kind, "assertion")
 
 
@@ -558,12 +563,19 @@ class _Evaluator:
                           and all(eid in self.evidence_basis for eid in attack.reply_evidence_ids))
             if condition is not None:
                 enough = enough and set(attack.reply_evidence_ids).issubset(condition.evidence_ids)
+                # A fresh reply timestamp cannot recycle an assessment made
+                # before the objection. Both timestamps are controller-owned;
+                # a later attachment may refer to an already-recorded response
+                # to this objection, but not to an even later assessment.
+                later = (later and attack.reply_revision is not None
+                         and attack.raised_revision < condition.revision <= attack.reply_revision)
                 if attack.challenged_revision is not None:
                     later = later and condition.revision > attack.challenged_revision
                 original = self.graph.conditions.get(attack.condition_id or "")
                 if self.profile.require_independent_reply and original and condition.performer == original.performer:
                     enough = False
-            if adequate is None or condition is None or condition.status != "met" or not later or not enough:
+            if (adequate is None or adequate.assumptions or adequate.contexts
+                    or condition is None or condition.status != "met" or not later or not enough):
                 self.diagnostic("reply_does_not_discharge", aid)
                 continue
             reply = self.intern("reply", aid, None, adequate)
@@ -599,6 +611,9 @@ class _Evaluator:
             record = self.graph.conditions.get(cid)
             if record is None:
                 return ("missing_condition", cid)
+            # Answer prose and performer/revision metadata do not create a
+            # fresh inference identity. Rephrasing an answer under a new ID
+            # cannot evade a challenge to the same obligation and evidence.
             return ("condition", record.text, record.status, record.assumption_kind,
                     record.context_id, tuple(sorted(evidence_key(eid) for eid in record.evidence_ids)))
 
@@ -675,7 +690,10 @@ class _Evaluator:
             else:
                 self.result.attack_labels.setdefault(aid, "NOT_ADMITTED")
         for cid, claim in sorted(self.graph.claims.items()):
-            finding = ClaimFinding(claim_id=cid, scope=claim.scope, form=_form(claim), components=claim.components)
+            finding = ClaimFinding(
+                claim_id=cid, scope=claim.scope, form=_form(claim), components=claim.components,
+                target_relation=claim.target_relation, target_question_id=claim.target_question_id,
+            )
             candidates = [self.nodes[nid] for nid in self.by_claim[cid]]
             standing = [node for node in candidates if labels[node.id] == "IN"]
             qualified = [node for node in standing if len(node.basis.support_origins) >= self.profile.min_origins]
@@ -782,7 +800,9 @@ class _Evaluator:
     def unresolved_findings(self, reason: str) -> None:
         self.result.findings = {
             cid: ClaimFinding(claim_id=cid, scope=claim.scope, form=_form(claim),
-                              components=claim.components, reasons=[reason])
+                              components=claim.components, reasons=[reason],
+                              target_relation=claim.target_relation,
+                              target_question_id=claim.target_question_id)
             for cid, claim in self.graph.claims.items()
         }
         self.result.argument_labels = {}
