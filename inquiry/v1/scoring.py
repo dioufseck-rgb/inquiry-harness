@@ -18,8 +18,8 @@ STATUSES = frozenset(
     {"established", "reported", "conditional", "contested", "not_established"}
 )
 TARGET_RELATIONS = frozenset({"direct", "negated", "record_non_establishment"})
-SCORER_VERSION = "epistemic-record-audit-0.3"
-STRUCTURAL_AUDIT_VERSION = "exact-epistemic-audit-0.3"
+SCORER_VERSION = "epistemic-record-audit-0.4"
+STRUCTURAL_AUDIT_VERSION = "exact-epistemic-audit-0.4"
 SMOKE_METRIC_VERSION = "categorical-epistemic-target-0.3"
 HUMAN_DIMENSIONS = (
     "world_truth", "packet_warrant", "record_warrant", "response_appropriateness"

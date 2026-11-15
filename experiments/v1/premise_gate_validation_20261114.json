@@ -1,0 +1,156 @@
+{
+  "kind": "software_validation_summary",
+  "date": "2026-11-14",
+  "implementation_version": "1.0.0a6",
+  "increment": "A: premise gate contract (stakes, tiers, cost ceiling, resolver, triage, premise check)",
+  "base_commit": "031f8523dae0809b8d31b75d01780220a3f038e1",
+  "head_commit": "bf1bf44843a8df5577476414839b3d2265702b9a",
+  "branch": "premise-gate-v1",
+  "boundary": "Purely epistemic service; the premise check returns per-premise standing and routing, never a go/no-go value.",
+  "repository_suite": {
+    "command": "python -m pytest -q",
+    "passed": 806,
+    "failed": 1,
+    "skipped": 0,
+    "known_environment_failure": "tests/v1/test_service.py::test_symlink_cannot_select_another_store fails on this Windows host with WinError 1314 (symlink creation needs a privilege); it also failed on the a5 base commit here and is not caused by this increment.",
+    "platform": "Windows 11, CPython 3.12, MCP SDK installed (the two optional MCP tests run and pass)"
+  },
+  "ci_commands": {
+    "validate": "passed",
+    "run_demo": "complete, settled_for_purpose",
+    "replay_demo": "ledger_valid true, evaluation_reproduced true",
+    "bench_matrix": "see scripted_integration"
+  },
+  "scripted_integration": {
+    "execution_kind": "scripted_smoke",
+    "arms": [
+      "ordinary",
+      "repertoire",
+      "harness"
+    ],
+    "modes": [
+      "supplied",
+      "documents",
+      "search"
+    ],
+    "summary": {
+      "attempts": 378,
+      "run_status_counts": {
+        "complete": 378
+      },
+      "inquiry_completed_count": 378,
+      "failed_runs": 0,
+      "completion_count_interpretation": "Declared inquiry completion, excluding scope/form rejection or incomplete evaluation, record, response or configured review; not human-adjudicated adequacy.",
+      "evaluation_completion_status_counts": {
+        "pending": 252,
+        "complete": 126
+      },
+      "usage_known_totals": {
+        "model_calls": 1332,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "tool_calls": 954,
+        "failed_calls": 0,
+        "cost_usd": 0.0
+      },
+      "usage_unknown_run_counts": {
+        "model_calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "tool_calls": 0,
+        "failed_calls": 0,
+        "cost_usd": 0
+      },
+      "monetary_cost_complete": true,
+      "runner_elapsed_seconds": 23.832910699478816,
+      "structural_status_counts": {
+        "pass": 378
+      },
+      "smoke_status_counts": {
+        "pass": 378
+      },
+      "human_review_status_counts": {
+        "pending": 378
+      },
+      "automatic_substantive_accuracy": null,
+      "interpretation": "Structural and categorical smoke results are not substantive accuracy estimates."
+    },
+    "live_provider_calls": 0,
+    "execution_prompt_hashes": {
+      "ordinary": "e9da3bdda99714cfeb04500b3e47cf898188e36aae306d8e3aad6f60c776d822",
+      "repertoire": "e2917305b109f12dc5cfd91167b3ce0aad1519e19ff967c69be8bcf4898de82a",
+      "harness": "4a5058303709af2329b360d113c684011c394d981ba321de0ce336bbc615650d"
+    },
+    "execution_implementation_hashes": {
+      "runtime": "7f918c2b23a2891f9c05e350fb411f868e5b1ae28e8e52a0a8a19d892dc176b0",
+      "workers": "1279a26636f267cd7907cff208b9eee1ab50c2ef0a3c45f5cd904890c9de9bef",
+      "protocol": "89687ff97234f08e1ebb783cb621e5cc9d2d6aa0157daafdcec7586ce17d3693",
+      "kernel": "6adff31163fabd8b7eec63d3c8486887a6ae825c07b40abcb4a28278e2e5cc39",
+      "models": "e29a28f8876bc0ce6cb575105ab65daac401af47a0624a24969831ba973383d3",
+      "contracts": "fa3a95f3ca0c21832cd4225f9186dd977d1657d48ffdd08ecac698a479d0a0f9",
+      "evidence": "a49f16bbd91f4d478c85029730a2bc697c33248d964bf1cacdb26480339d971f",
+      "persistence": "8a59decd7112603e6345ee2aec557188f293702799134936d620624c9ddc6fab",
+      "triage": "209e3ff4cefdd5d711259651547d22128ceee4931709896be4d7b37f5b7d261c"
+    }
+  },
+  "new_live_experiments": {
+    "runs": 0,
+    "cost_usd": 0,
+    "reason": "Increment A makes no provider calls by rule."
+  },
+  "contracts": {
+    "request_schema_version": "inquiry-request/v1.1",
+    "response_schema_version": "epistemic-response/v1.1",
+    "scorer_version": "epistemic-record-audit-0.4",
+    "additive_to_a5": true,
+    "a5_examples_validate_unchanged": [
+      "equipment_temperature",
+      "research_attribution",
+      "household_meter"
+    ],
+    "frozen_a5_record_replays_natively": "experiments/v1/a5_record_question_004",
+    "new_example": "examples/v1/premise_set_maintenance_release.json",
+    "mcp_tools": [
+      "capabilities",
+      "inquire",
+      "check",
+      "replay",
+      "triage",
+      "examine_premises"
+    ]
+  },
+  "decisions_to_confirm": [
+    "resolution_state: an incomplete inquiry that neither failed nor hit a limit is reported as open_needs.",
+    "Cost cap at the service: hosts pass worker_identities (provider:model) so the price check runs before worker construction; a capped request without identities is refused.",
+    "Zero-cost workers: providers recorded, demo and scripted, and any worker marked is_test_instrument, cost 0.0 under a cap."
+  ],
+  "implementation_file_sha256": {
+    "inquiry/v1/__init__.py": "0c243ce0a5beb648cc0b04ee2ae5b67191673ea591f038d967e7d762b2078bd5",
+    "inquiry/v1/__main__.py": "482b8693e2fe6dbd732e3d7961e03827d3efa187bad11d29da188be580ebbeea",
+    "inquiry/v1/adapters/__init__.py": "ad72c7906d1519060d8481e5e17ea1e9e9a19a3835bcf0484c4e1c64ace02a02",
+    "inquiry/v1/adapters/hardship.py": "6a64424a3191d706bec14868bf7a63f89abb547ee2ee00a84135bbcafd95e95f",
+    "inquiry/v1/adapters/hardship_application.py": "4b292a5c319f4a2e8ac6bacef52dc502593908feafd8d4282065a8dd40f25849",
+    "inquiry/v1/adapters/hardship_demo.py": "6c68fe84eb9ba899e1e59d44cd04feacd0fd460378eff4d07c6f3704d5ad8124",
+    "inquiry/v1/adapters/hardship_scoring.py": "7514c550e0314331fcc99c55965369d1300c414f381c8190eea1ee391405511e",
+    "inquiry/v1/adapters/history.py": "fea90b0b28b2ade3a82b44a32d9034578e285655edcbb7245f08c7907fa5867c",
+    "inquiry/v1/adapters/legacy.py": "99d5cbda2c8fc7f0aa78038e8673be395e756d6aec8d118334a7213d7cc66fea",
+    "inquiry/v1/cli.py": "3137fb22b56e016406e86526255f3dbf261ecb777e58bf4e0230c113086f1a73",
+    "inquiry/v1/contracts.py": "6bd4eca0e87fc7e0e7c8bfa6e310c4b1228fcecc07c4978b316af4545cbdbbc5",
+    "inquiry/v1/demo.py": "99cb3825bcb6eb1ec806df87106f6f3c866440ca5681847148ca607c4f57bac4",
+    "inquiry/v1/evidence.py": "edbfd62309acba562dbf48b1d5b6b79196a6773a05303cbf3361581dbcc10b10",
+    "inquiry/v1/experiments.py": "a757268b1baa65c42678ba972eb2f1fc02a727429a3f8acc030924081bca4948",
+    "inquiry/v1/kernel.py": "fee57f1e69ba871108ef5425f33b026334c5f205004c7cf88a96607383cf3c56",
+    "inquiry/v1/mcp_server.py": "2ea999a9f0fc3b6b72ec7ee39be5486af7d6ea31c145842af75edad9dcc8f2aa",
+    "inquiry/v1/models.py": "4594f11da39aea2820521eaf4425eb43289194e1a663aa4771dad42e70dcb238",
+    "inquiry/v1/packets.py": "aca60c0f7e4973a8afd332e844a5d853602147dcbaea33a7f76f931dfdf98136",
+    "inquiry/v1/persistence.py": "73045f87ccd1be78e1a75972e031bb7da845af895afaef17cef0383e074c6172",
+    "inquiry/v1/premises.py": "2af6adb872c9b9a81d23ab54be9e6258c64fe2ca4b6b59d7acdb9622479afd23",
+    "inquiry/v1/protocol.py": "fed66aabe458f7131fda3921650d0d9c5c0cda4a9c15021984f08783e43a9c69",
+    "inquiry/v1/runtime.py": "c9d1032d8048df36fff8b46357166e646b2baa7df68b061a28c1d03227cf7e29",
+    "inquiry/v1/scoring.py": "4f083f7ad0e10e512dce0f9df53bddd8edfb78f75483ef40673e039e255566a3",
+    "inquiry/v1/service.py": "88c758b468d4502de02a285ff44ee9e928e07ae293cedd48549ba11ebe51ba0d",
+    "inquiry/v1/triage.py": "0eb01efc26eab0e7143765ce5d710422c9c731b4796a69df21dbd057a3bd7d39",
+    "inquiry/v1/workers.py": "bc6ba244ad031a358a786885a96751c6c3e97a7fe3f6aac8576e5f421d94fb26"
+  },
+  "hosted_ci": "Not observed from this host; local runs of the six CI commands are recorded above."
+}

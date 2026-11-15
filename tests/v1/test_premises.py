@@ -179,6 +179,18 @@ def test_premises_never_share_an_environment_or_workers():
     assert records[0]["manifest"]["public_case_hash"] != records[1]["manifest"]["public_case_hash"]
 
 
+def test_maintenance_release_example_validates_with_one_premise_per_class():
+    example = json.loads((EXAMPLES / "premise_set_maintenance_release.json").read_text(encoding="utf-8"))
+    validated = validate_premise_set(example, max_premises=8)
+    ids = [q["question"]["id"] for q in validated["questions"]]
+    assert ids == ["premise:coolant-reading", "premise:inspection-satisfies-rts7",
+                   "premise:pressure-test-waived", "premise:seal-delivery-by-15-april"]
+    assert [q["question"]["stakes"]["level"] for q in validated["questions"]] == ["low", "high", "high", "medium"]
+    assert validated["action_context"].startswith("Release pump A4")
+    # the four premises are one per triage class once classified; the example carries no classification itself
+    assert all("premise_class" not in p for p in example["premises"])
+
+
 def test_caller_set_budget_is_capped_by_the_host_set_ceiling():
     called = []
     service = InquiryService(lambda: called.append(True), max_set_budget=Budget(max_model_calls=5))

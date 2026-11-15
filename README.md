@@ -3,7 +3,7 @@
 ## Controlled inquiry v1
 
 The controlled rebuild is available as `inquiry.v1` and the `inquiry-v1`
-command, version **1.0.0a5**. It implements the first runnable slice of the new
+command, version **1.0.0a6**. It implements the first runnable slice of the new
 design: known evidence, explicit question and acceptance profiles, a bounded
 inquiry loop, deterministic argument evaluation, and a matched experiment runner.
 
@@ -18,6 +18,13 @@ web/literature search and fetch providers remain available; connecting them to
 v1's stricter evidence contracts is the next acquisition increment. This alpha
 uses fixed source collections for controlled experiments. Caller-supplied sources
 are optional starting material in the architecture.
+
+Version 1.0.0a6 adds the premise gate: a caller declares the propositions an
+action rests on, each with its stakes; the service triages each one (state,
+judgment, tacit, intent), examines those that need an inquiry under a budget
+tier and an optional dollar cap, and returns per-premise standing and routing.
+It never returns a go or no-go value. Information needs now say who could
+resolve them. See `examples/v1/premise_set_maintenance_release.json`.
 
 The [service guide](docs/V1_SERVICE.md) documents the Python `InquiryService`,
 the optional `inquiry-service` MCP stdio transport (`inquire`, `check`, `replay`),

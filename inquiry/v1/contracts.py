@@ -20,7 +20,7 @@ from pydantic import BaseModel, ConfigDict, model_validator
 from .models import FINDING_STATUSES
 
 
-REQUEST_SCHEMA_VERSION = "inquiry-request/v1"
+REQUEST_SCHEMA_VERSION = "inquiry-request/v1.1"  # a6: optional question.stakes; additive to v1
 STAKES_LEVELS = ("low", "medium", "high")
 
 # Evaluation annotations belong to the caller's private experiment records,

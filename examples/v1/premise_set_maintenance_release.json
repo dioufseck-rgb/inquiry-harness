@@ -1,0 +1,145 @@
+{
+  "shared_context": {
+    "as_of": "2026-04-12",
+    "context": "Synthetic plant-maintenance example; no real site, person, supplier or equipment.",
+    "source_handling": "Treat each supplied record as an authentic record of its stated issuer; examine scope and preserve qualifications."
+  },
+  "corpus": {
+    "documents": [
+      {
+        "id": "logger/A4",
+        "version": "1",
+        "title": "Calibrated logger export, pump A4",
+        "issuer_id": "maintenance-lab",
+        "origin_id": "maintenance-lab",
+        "issued_at": "2026-04-05",
+        "language": "en",
+        "reading_blocks": [
+          {
+            "locator": "record",
+            "text": "The calibrated logger recorded coolant temperature 82 C for pump A4 at 14:00 UTC on 4 April 2026."
+          }
+        ]
+      },
+      {
+        "id": "inspection/A4-2026-04",
+        "version": "1",
+        "title": "Post-overhaul inspection record, pump A4",
+        "issuer_id": "contractor-nw-mechanical",
+        "origin_id": "contractor-nw-mechanical",
+        "issued_at": "2026-04-10",
+        "language": "en",
+        "reading_blocks": [
+          {
+            "locator": "summary",
+            "text": "Visual inspection, alignment check and vibration reading completed on pump A4 on 10 April 2026. Vibration 2.1 mm/s RMS at the drive end. Pressure test not recorded on this form."
+          },
+          {
+            "locator": "sign-off",
+            "text": "Signed by the contractor site lead on 10 April 2026. Client witness signature: blank."
+          }
+        ]
+      },
+      {
+        "id": "procedure/RTS-7",
+        "version": "3",
+        "title": "Return-to-service procedure RTS-7, rotating equipment",
+        "issuer_id": "plant-engineering",
+        "origin_id": "plant-engineering",
+        "issued_at": "2025-11-02",
+        "effective_from": "2025-12-01",
+        "language": "en",
+        "reading_blocks": [
+          {
+            "locator": "section-4",
+            "text": "Before a pump returns to service after an overhaul, the inspection record must show a completed visual inspection, alignment check, vibration reading below 2.8 mm/s RMS, and a pressure test at 1.5 times working pressure, each witnessed by a client representative."
+          },
+          {
+            "locator": "section-6",
+            "text": "A step may be waived only in writing by the area engineering manager, with the waiver attached to the inspection record."
+          }
+        ]
+      },
+      {
+        "id": "supplier/seal-order-4471",
+        "version": "1",
+        "title": "Supplier order acknowledgement 4471, mechanical seal",
+        "issuer_id": "supplier-seals-ltd",
+        "origin_id": "supplier-seals-ltd",
+        "issued_at": "2026-04-08",
+        "language": "en",
+        "reading_blocks": [
+          {
+            "locator": "acknowledgement",
+            "text": "Order 4471 for one mechanical seal, type MS-40, acknowledged on 8 April 2026. Requested delivery date 15 April 2026. Estimated dispatch from stock within 5 working days, subject to availability."
+          }
+        ]
+      }
+    ],
+    "current_versions": {
+      "logger/A4": "1",
+      "inspection/A4-2026-04": "1",
+      "procedure/RTS-7": "3",
+      "supplier/seal-order-4471": "1"
+    }
+  },
+  "action_context": "Release pump A4 to service on 13 April 2026 after its overhaul.",
+  "premises": [
+    {
+      "id": "premise:coolant-reading",
+      "question": "Does the supplied logger record a coolant temperature of 82 C for pump A4 at 14:00 on 4 April 2026?",
+      "intended_use": "A scoped epistemic finding about one located reading; the caller decides what follows.",
+      "scope": {"asset": "pump-A4", "quantity": "coolant temperature", "unit": "C", "at": "2026-04-04T14:00:00Z"},
+      "target": {"kind": "substantive", "form": "assertion"},
+      "profile": {
+        "id": "located-record-v1", "version": "1", "authority": "Example author; development use only.",
+        "requirements": ["Use the located record at its stated scope.", "Retain attribution and qualifications."],
+        "kernel": {}
+      },
+      "stakes": {"level": "low", "required_standing": ["established", "reported"], "basis": "A wrong reading would be re-checked at the next walk-down; it does not gate the release by itself."},
+      "examine": "auto"
+    },
+    {
+      "id": "premise:inspection-satisfies-rts7",
+      "question": "Does the post-overhaul inspection record for pump A4 satisfy the return-to-service requirements of procedure RTS-7 section 4?",
+      "intended_use": "A scoped epistemic finding comparing a record with a procedure; the release decision belongs to the caller.",
+      "scope": {"asset": "pump-A4", "procedure": "RTS-7", "procedure_version": "3", "record": "inspection/A4-2026-04"},
+      "target": {"kind": "substantive", "form": "assertion"},
+      "profile": {
+        "id": "rule-application-v1", "version": "1", "authority": "Example author; development use only.",
+        "requirements": ["Apply the current version of the procedure to the located inspection record.", "Treat an unrecorded step as unrecorded, not as failed or passed."],
+        "kernel": {"allowed_patterns": ["rule_application", "document_record"]}
+      },
+      "stakes": {"level": "high", "required_standing": ["established"], "basis": "Releasing on an unsatisfied inspection is a safety exposure and a procedure breach."},
+      "examine": "auto"
+    },
+    {
+      "id": "premise:pressure-test-waived",
+      "question": "Did the area engineering manager waive the pressure-test step for pump A4?",
+      "intended_use": "A scoped epistemic finding; a verbal waiver is not a recorded one.",
+      "scope": {"asset": "pump-A4", "step": "pressure test", "procedure": "RTS-7"},
+      "target": {"kind": "substantive", "form": "assertion"},
+      "profile": {
+        "id": "located-record-v1", "version": "1", "authority": "Example author; development use only.",
+        "requirements": ["Only a located written waiver attached to the inspection record counts under RTS-7 section 6."],
+        "kernel": {}
+      },
+      "stakes": {"level": "high", "required_standing": ["established"], "basis": "Without a valid waiver the missing pressure test blocks the release."},
+      "examine": "auto"
+    },
+    {
+      "id": "premise:seal-delivery-by-15-april",
+      "question": "Will the supplier deliver the replacement mechanical seal for pump A4 by 15 April 2026?",
+      "intended_use": "A scoped epistemic finding about a supplier's commitment; scheduling belongs to the caller.",
+      "scope": {"asset": "pump-A4", "order": "4471", "by": "2026-04-15"},
+      "target": {"kind": "substantive", "form": "assertion"},
+      "profile": {
+        "id": "located-record-v1", "version": "1", "authority": "Example author; development use only.",
+        "requirements": ["Distinguish an acknowledged request from a committed delivery date."],
+        "kernel": {}
+      },
+      "stakes": {"level": "medium", "required_standing": ["established", "reported"], "basis": "A late seal delays the release by days; it does not create a safety exposure."},
+      "examine": "auto"
+    }
+  ]
+}

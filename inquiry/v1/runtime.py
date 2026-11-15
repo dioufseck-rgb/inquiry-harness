@@ -30,7 +30,7 @@ IMPLEMENTATION_HASHES = {
     name: digest(Path(__file__).with_name(name + ".py").read_text(encoding="utf-8"))
     for name in ("runtime", "workers", "protocol", "kernel", "models", "contracts", "evidence", "persistence", "triage")
 }
-RESPONSE_SCHEMA_VERSION = "epistemic-response/v1"
+RESPONSE_SCHEMA_VERSION = "epistemic-response/v1.1"  # a6: meets_declared_standing, resolution_state, resolver fields
 
 
 @dataclass(frozen=True)

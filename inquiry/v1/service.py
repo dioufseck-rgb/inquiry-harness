@@ -176,6 +176,9 @@ class InquiryService:
                 "Timeouts are scheduling deadlines with provider timeouts, not process-kill guarantees.",
                 "Live discovery, instrument execution and scheduled watch are not implemented by this service.",
                 "Budget tiers scale resources by declared stakes; they never change the acceptance profile.",
+                "A premise check returns per-premise standing and routing; the host decides which actions require one and what follows.",
+                "Triage is a model-authored classification; its routing is fixed in code and it sees no source text.",
+                "A cost cap is enforced from the host price table; a cap that cannot be priced is refused.",
             ],
         }
 

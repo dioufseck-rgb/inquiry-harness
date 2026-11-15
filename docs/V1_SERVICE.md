@@ -1,6 +1,6 @@
 # Epistemic inquiry service
 
-Version 1.0.0a5 — 14 November 2026
+Version 1.0.0a6 — 14 November 2026
 
 ## Architectural boundary
 
@@ -129,6 +129,119 @@ states remain distinct. Completion requires the correct target question, exact
 declared scope/form, a sound record, completed configured review and no standing
 attack. It does not require repeated identical wording or a customer letter.
 
+## Stakes, tiers and the cost ceiling (a6)
+
+A question may declare `stakes`: `level` (`low`, `medium`, `high`), `required_standing`
+(a non-empty list of finding statuses at which the caller's use is satisfied) and `basis`
+(the caller's reason, recorded and never interpreted). All three are required when
+`stakes` is present; a request without it behaves as before. The request schema is
+additive: every a5 request still validates unchanged.
+
+Two fields are derived in code after kernel evaluation, never from model output:
+
+| Field | Values |
+|---|---|
+| `meets_declared_standing` | `null` without stakes or when the inquiry did not complete; `true` only when it completed and the target finding is a direct proposition with a status in `required_standing`; `false` otherwise. An established negated or record-non-establishment target is `false`: it establishes that the asked proposition is not supported. |
+| `resolution_state` | `execution_failed`, `budget_limited`, `open_needs` (an information need or an open condition on the target remains, or the inquiry did not complete), `settled`. |
+
+A caveat accompanies every non-null comparison: it reports a comparison against the
+caller's declared threshold and authorizes nothing.
+
+The host holds three budget tiers, reported in `capabilities`: `low` is the focused
+ceiling, `high` the host ceiling, `medium` half the host ceiling per field, rounded
+down and never below `low`. With declared stakes and no explicit budget, `inquire`
+uses the tier for the declared level; an explicit budget still wins and is still
+capped; `check` keeps its focused ceiling whatever the level. Tiers never change the
+acceptance profile.
+
+`Budget.max_cost_usd` caps an inquiry in dollars. The host supplies a price table
+keyed by `provider:model` with `input`, `cached_input` and `output` rates per million
+tokens (`--prices FILE` and `--max-cost-usd` on `inquiry-service` and `inquiry-v1
+run`). A usage record without a reported cost is priced from its recorded tokens,
+cached input at the cached rate, and the entry used is written on the record. Before
+each call the worst case (the input reservation plus `max_output_tokens`, priced) is
+reserved; a call that would exceed the cap ends the run at `resource_limit`. The limit
+that ended a run (`calls`, `tool_calls`, `tokens`, `time`, `cost`, `kernel_work`) is
+recorded in `usage.limit_reached` and as a ledger event. A cap is refused when any
+configured live worker has no price entry; recorded and demo workers cost zero.
+
+## Information needs name a resolver (a6)
+
+Each `information_needs` item carries `resolver_kind` and `resolver_hint`:
+
+| `resolver_kind` | Meaning |
+|---|---|
+| `source` | a document or record that could be acquired |
+| `person` | someone in the caller's organization who holds knowledge that is not recorded |
+| `counterparty` | the other party to the matter |
+| `caller` | a clarification of question or scope, or access only the caller can grant |
+| `unspecified` | the default, kept so stored records still load |
+
+The hint describes a role or source type. It is not an instruction to contact anyone.
+In the harness arm a new need left `unspecified` or without a hint is a response
+defect that goes through the bounded response repair and then fails closed.
+
+## Triage (a6)
+
+`triage(request, action_context=None)` classifies one question with one model call
+under a small ceiling (one call plus one repair, 4,096 total tokens, 512 output
+tokens). It sees the question, its context, the optional action context and the
+source manifest (titles, issuers, dates, structure), never source text, and creates no
+evidence exposure. The classification is model-authored and labelled as such; routing
+is fixed in code:
+
+| `premise_class` | `route` |
+|---|---|
+| `state`: answerable by reading one located record at its stated scope | `lookup` |
+| `judgment`: needs an inference across records, a rule, a causal account, or a weighing of sources that may disagree | `inquire` |
+| `tacit`: depends on knowledge that no accessible source records | `ask_person` |
+| `intent`: concerns what another party wants or will do | `ask_counterparty` |
+| `unclassified`: two inadmissible replies | the host default, `inquire` unless configured |
+
+The result records `reason`, `performer` (set by the controller), the authorship label
+and the attempts used. Its usage and cost count against the caller's budget.
+
+## Premise check (a6)
+
+`examine_premises(request, budget=None, mode="documents")` takes `shared_context`,
+`corpus`, `premises` (a list of question objects with unique ids, each carrying
+`stakes`, optionally `examine: "auto"` or `"always"`) and an optional `action_context`
+that is recorded and shown to triage only. The whole set is validated before any worker
+is constructed; the host sets `max_premises` (default 8).
+
+Every premise is triaged. A premise is examined when its route is `inquire` or it is
+marked `always`, as an ordinary inquiry with its own evidence environment, workers,
+ledger and record. Examined premises run high stakes first, then request order, each
+under the smaller of its tier budget and what remains of the set budget; triage usage
+counts against that budget; when the remainder cannot fund the `low` tier the rest are
+not examined. The caller may pass one `budget` for the set; the host has a separate
+set ceiling.
+
+The response is per premise: `premise_id`, `triage`, `examined`, `not_examined_reason`
+(`routed`, `budget` or `null`) and, for examined premises, `inquiry_id`,
+`execution_status`, `stop_reason`, `finding_status`, `meets_declared_standing`,
+`resolution_state`, `information_needs` and `record_ref`. The set carries
+`premise_set_id`, `unmet_premise_ids` (examined and not meeting the declared
+standing), `unexamined_premise_ids`, total `usage` and a set `record_ref`
+(`inquiry://premise-sets/{id}`) linking the inquiry records.
+
+No single go or no-go value is returned. `approved`, `all_clear`, `proceed`, `go` and
+`cleared` are forbidden response fields. The caller combines the per-premise results.
+The example `examples/v1/premise_set_maintenance_release.json` holds four premises,
+one per class: a logger reading, whether an inspection record satisfies the release
+procedure, whether a supervisor waived a step verbally, and whether a supplier will
+deliver by a date.
+
+## Host integration
+
+The host decides which action classes require a premise check and what it does with
+the result. A reasonable host makes the declaration mandatory for gated actions: the
+agent lists the propositions the action rests on, with stakes, and the host calls
+`examine_premises` before the action is permitted to proceed. The service returns
+findings, routing and comparisons against declared thresholds. It authorizes nothing,
+and an unmet or unexamined premise is information for the host's own rule, not a
+verdict from the service.
+
 ## Python use
 
 ```python
@@ -180,8 +293,11 @@ credentials through the environment. The server exposes:
 | `inquire` | Conduct one bounded inquiry and return scoped findings and warrant. |
 | `check` | Conduct a focused inquiry with a smaller ceiling and unchanged acceptance requirements. |
 | `replay` | Verify and recompute a stored inquiry without model calls. |
+| `triage` | Classify one question (state, judgment, tacit, intent) and route it; one small call, no source text. |
+| `examine_premises` | Triage and examine the premises an action rests on; per-premise standing, never a go/no-go. |
 
-The resource `inquiry://records/{inquiry_id}` returns a stored record. Record IDs
+The resource `inquiry://records/{inquiry_id}` returns a stored record and
+`inquiry://premise-sets/{set_id}` a stored premise-set record. Record IDs
 come from the controller; caller-supplied filesystem paths are not accepted.
 The transport uses the official MCP Python SDK v1 API, tested with 1.29.0 and pinned
 to `<2`. SDK documentation: <https://github.com/modelcontextprotocol/python-sdk/tree/v1.29.0>.
@@ -211,6 +327,13 @@ require an explicit adapter. A requested business product is evaluated by its
 application test, not by generic inquiry completion.
 
 ## Historical records
+
+Version a6 bumps the request contract to `inquiry-request/v1.1`, the response
+contract to `epistemic-response/v1.1` and the scorer to 0.4. Both bumps are
+additive: a5 requests validate unchanged and a5 records replay natively; a
+record frozen from the a5 implementation is kept under
+`experiments/v1/a5_record_question_004` and replayed in the suite. Old records
+keep their original scores.
 
 Version a5 changes request and response schemas. Old records and registered
 protocols are retained. `replay --legacy-hardship` verifies the unchanged ledger
