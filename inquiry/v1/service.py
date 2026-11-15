@@ -16,7 +16,7 @@ from typing import Any, Callable, Mapping
 from uuid import uuid4
 
 from . import __version__
-from .contracts import canonical_json, validate_inquiry_request
+from .contracts import STAKES_LEVELS, canonical_json, validate_inquiry_request
 from .kernel import PATTERN_FORMS, PATTERN_REQUIREMENTS, SUPPORTED_FORMS
 from .models import Profile
 from .persistence import load_run, save_run
@@ -50,7 +50,8 @@ class InquiryService:
                  max_budget: Budget | None = None,
                  max_kernel_work: Mapping[str, int] | None = None,
                  record_root: str | Path | None = None,
-                 max_request_bytes: int = 4 * 1024 * 1024):
+                 max_request_bytes: int = 4 * 1024 * 1024,
+                 tiers: Mapping[str, Budget | Mapping[str, Any]] | None = None):
         if not callable(worker_factory) or (critic_factory is not None and not callable(critic_factory)):
             raise TypeError("worker factories must be callable")
         if isinstance(max_request_bytes, bool) or not isinstance(max_request_bytes, int) or max_request_bytes < 1:
@@ -67,6 +68,22 @@ class InquiryService:
             raise ValueError("Kernel resource limits must be nonnegative integers")
         self._record_root = Path(record_root).resolve() if record_root is not None else None
         self._max_request_bytes = max_request_bytes
+        self._tiers = self._default_tiers()
+        for level, value in dict(tiers or {}).items():
+            if level not in STAKES_LEVELS:
+                raise ValueError(f"Unknown budget tier {level!r}; expected one of {list(STAKES_LEVELS)}")
+            # _limits rejects any field above the host ceiling
+            self._tiers[level] = self._limits(value, focused=False)
+
+    def _default_tiers(self) -> dict[str, Budget]:
+        """low: the focused ceiling; high: the host ceiling; medium: half of high, never below low."""
+        high = asdict(self._ceiling)
+        low = {key: min(value, _FOCUSED_LIMITS[key]) for key, value in high.items()}
+        medium = {}
+        for key, value in high.items():
+            half = value / 2 if key == "timeout_seconds" else value // 2
+            medium[key] = max(low[key], half)
+        return {"low": Budget(**low), "medium": Budget(**medium), "high": Budget(**high)}
 
     def capabilities(self) -> dict[str, Any]:
         """Describe implemented operations without promising unbuilt competences."""
@@ -85,6 +102,7 @@ class InquiryService:
             "forms_without_proof_pattern": sorted(set(SUPPORTED_FORMS) -
                                                     {form for forms in PATTERN_FORMS.values() for form in forms}),
             "per_inquiry_ceiling": asdict(self._ceiling),
+            "budget_tiers": {level: asdict(budget) for level, budget in self._tiers.items()},
             "kernel_work_ceiling": dict(self._kernel_ceiling),
             "focused_check_ceiling": self._limits(None, focused=True).__dict__,
             "max_request_bytes": self._max_request_bytes,
@@ -97,6 +115,7 @@ class InquiryService:
                 "Profiles do not grant permission to act.",
                 "Timeouts are scheduling deadlines with provider timeouts, not process-kill guarantees.",
                 "Live discovery, instrument execution and scheduled watch are not implemented by this service.",
+                "Budget tiers scale resources by declared stakes; they never change the acceptance profile.",
             ],
         }
 
@@ -144,7 +163,11 @@ class InquiryService:
             raise ValueError("Unknown evidence mode")
         if not isinstance(include_record, bool):
             raise TypeError("include_record must be boolean")
-        limits = self._limits(budget, focused=focused)
+        if budget is None and not focused and "stakes" in public["question"]:
+            # the caller declared stakes and no explicit budget: the tier applies
+            limits = self._tiers[public["question"]["stakes"]["level"]]
+        else:
+            limits = self._limits(budget, focused=focused)
         profile_work = {**_KERNEL_DEFAULTS, **{key: value for key, value in
                         public["question"]["profile"]["kernel"].items() if key in _KERNEL_RESOURCE_FIELDS}}
         exceeded = [key for key, value in profile_work.items() if value > self._kernel_ceiling[key]]
