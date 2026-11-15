@@ -196,7 +196,7 @@ def test_capabilities_are_epistemic_and_explicit_about_current_limits():
     service = InquiryService(lambda: None)
     caps = service.capabilities()
     assert caps["epistemic_only"] is True
-    assert caps["operations"] == ["inquire", "check", "replay"]
+    assert caps["operations"] == ["inquire", "check", "replay", "triage"]
     assert caps["request_schema"]["properties"]["corpus"]["required"] == ["documents", "current_versions"]
     assert "process_trace" in caps["patterns"]
     assert "universal" in caps["representable_target_forms"]

@@ -21,6 +21,7 @@ from .kernel import PATTERN_FORMS, PATTERN_REQUIREMENTS, SUPPORTED_FORMS
 from .models import Profile
 from .persistence import load_run, save_run
 from .runtime import Budget, ZERO_COST_PROVIDERS, replay_run, run_inquiry, validate_prices
+from .triage import ROUTES, run_triage
 
 
 SERVICE_VERSION = "epistemic-inquiry/v1"
@@ -53,7 +54,8 @@ class InquiryService:
                  max_request_bytes: int = 4 * 1024 * 1024,
                  tiers: Mapping[str, Budget | Mapping[str, Any]] | None = None,
                  prices: Mapping[str, Mapping[str, float]] | None = None,
-                 worker_identities: list[str] | None = None):
+                 worker_identities: list[str] | None = None,
+                 unclassified_route: str = "inquire"):
         if not callable(worker_factory) or (critic_factory is not None and not callable(critic_factory)):
             raise TypeError("worker factories must be callable")
         if isinstance(max_request_bytes, bool) or not isinstance(max_request_bytes, int) or max_request_bytes < 1:
@@ -75,6 +77,9 @@ class InquiryService:
                                               or any(not isinstance(x, str) or ":" not in x for x in worker_identities)):
             raise ValueError("worker_identities must be a list of provider:model strings")
         self._worker_identities = list(worker_identities) if worker_identities is not None else None
+        if unclassified_route not in ROUTES:
+            raise ValueError(f"unclassified_route must be one of {list(ROUTES)}")
+        self._unclassified_route = unclassified_route
         self._tiers = self._default_tiers()
         for level, value in dict(tiers or {}).items():
             if level not in STAKES_LEVELS:
@@ -103,7 +108,11 @@ class InquiryService:
             "implementation_version": __version__,
             "purpose": "Examine propositions and return scoped standing and warrant.",
             "epistemic_only": True,
-            "operations": ["inquire", "check", "replay"],
+            "operations": ["inquire", "check", "replay", "triage"],
+            "triage": {"classes": ["state", "judgment", "tacit", "intent", "unclassified"],
+                       "routes": list(ROUTES), "unclassified_route": self._unclassified_route,
+                       "ceiling": {"max_model_calls": 2, "max_total_tokens": 4096, "max_output_tokens": 512},
+                       "sees_source_text": False},
             "evidence_modes": ["supplied", "documents", "search"],
             "evidence_access": "Caller-supplied source collection; search is local corpus search.",
             "patterns": {name: {"forms": list(PATTERN_FORMS[name]), "conditions": list(conditions)}
@@ -235,6 +244,36 @@ class InquiryService:
             "profile": deepcopy(result.get("manifest", {}).get("profile")),
             "usage": deepcopy(result.get("usage", {})),
             "record_ref": record_ref,
+        }
+        if include_record:
+            response["record"] = result
+        return response
+
+    def triage(self, request: Mapping[str, Any], *, action_context: str | None = None,
+               include_record: bool = False) -> dict[str, Any]:
+        """Classify one question and route it in code; one small model call, no source text exposed."""
+        if hasattr(request, "model_dump"):
+            request = request.model_dump(mode="json")
+        raw = deepcopy(dict(request))
+        if len(canonical_json(raw).encode("utf-8")) > self._max_request_bytes:
+            raise ValueError("Inquiry request exceeds the host byte limit")
+        public = validate_inquiry_request(raw)
+        if action_context is not None and not isinstance(action_context, str):
+            raise TypeError("action_context must be a string")
+        if not isinstance(include_record, bool):
+            raise TypeError("include_record must be boolean")
+        if self._ceiling.max_cost_usd is not None:
+            self._check_prices_cover_workers()
+        worker = self._worker_factory()
+        result = run_triage(public, worker, action_context=action_context,
+                            unclassified_route=self._unclassified_route, prices=self._prices)
+        response = {
+            "service_version": SERVICE_VERSION,
+            "operation": "triage",
+            "question_id": result["question_id"],
+            "triage": deepcopy(result["triage"]),
+            "usage": deepcopy(result["usage"]),
+            "exposures": deepcopy(result["exposures"]),
         }
         if include_record:
             response["record"] = result

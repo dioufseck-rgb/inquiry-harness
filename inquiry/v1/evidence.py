@@ -224,6 +224,10 @@ class EvidenceEnvironment:
                        for table in source.get("tables", [])],
         }
 
+    def manifest(self) -> list[dict]:
+        """Source titles, issuers, dates and structure, never text; the view documents mode shows up front."""
+        return deepcopy(self._manifest())
+
     def _manifest(self) -> list[dict]:
         return [{"source_id": key[0], "version": key[1], "title": source["title"], "issuer_id": source["issuer_id"], "origin_ids": self._origins[key], "issued_at": source["issued_at"], "is_current": self._current[key[0]] == key[1], "source_content_hash": self._source_hashes[key], **self._structure(key)} for key, source in self._sources.items()]
 
