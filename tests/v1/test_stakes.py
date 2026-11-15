@@ -41,7 +41,8 @@ def reply(public, *, open_condition=None, target_relation="direct"):
                                   "answer": "" if status == "open" else "The located record supports this scoped test claim.",
                                   "status": status, "evidence_ids": [] if status == "open" else ["E"]}
     needs = ([{"condition_id": "K_" + open_condition, "question": "Examine " + open_condition,
-               "what_would_resolve": "A located record covering this condition."}] if open_condition else [])
+               "what_would_resolve": "A located record covering this condition.",
+               "resolver_kind": "source", "resolver_hint": "the issuing record's scope section"}] if open_condition else [])
     return {"operation": "finish", "graph": {
         "id": "inquiry", "revision": 1,
         "claims": {"C": {"id": "C", "text": block["text"], **q["target"], "scope": deepcopy(q["scope"]),

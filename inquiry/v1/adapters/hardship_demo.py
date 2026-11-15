@@ -269,6 +269,7 @@ class DemoWorker:
         citations = [{"source_id": e["source_id"], "version": e["source_version"], "locator": e["locator"], "quote": e["quote"]} for e in graph["evidence"].values()]
         target_record = graph["claims"]["C_target"]
         open_texts = [graph["conditions"][cid]["text"] for cid in target_record["conditions"]]
-        information_needs = [{"condition_id": cid, "question": f"What evidence resolves {cid}?", "what_would_resolve": graph["conditions"][cid]["text"]} for cid in information_condition_ids]
+        information_needs = [{"condition_id": cid, "question": f"What evidence resolves {cid}?", "what_would_resolve": graph["conditions"][cid]["text"],
+                              "resolver_kind": "caller", "resolver_hint": "the applicant or caller supplying the missing intake record"} for cid in information_condition_ids]
         response = {"text": answer, "assessment": assessment, "target_claim_id": "C_target", "findings": [{"claim_id": "C_target", "text": target_record["text"], "kind": target_record["kind"], "form": target_record["form"], "target_question_id": question["id"], "status": status, "scope": deepcopy(scope), "conditions": open_texts, "citations": citations}], "information_needs": information_needs, "inquiry_completed": True, "target_scope_answered": True, "caveats": ["Deterministic scripted development instrument; not an independent model evaluation or substantive adjudication.", "All findings remain limited to the supplied fictional records and active profile."]}
         return graph, response

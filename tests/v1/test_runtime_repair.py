@@ -278,7 +278,7 @@ def test_unargued_universal_with_an_open_coverage_gap_can_complete_the_assessmen
         "assessment": "Population coverage is missing. This does not establish that the statement is false or supply a counterexample.",
         "information_needs": [{"condition_id": "population-coverage",
                                "question": graph["conditions"]["population-coverage"]["text"],
-                               "what_would_resolve": "Evidence covering every member of the stated population."}],
+                               "what_would_resolve": "Evidence covering every member of the stated population.", "resolver_kind": "source", "resolver_hint": "the located source record"}],
     }
     result = run_inquiry(
         case, RecordedWorker([{"operation": "finish", "graph": graph, "response": response}]),
@@ -459,7 +459,7 @@ def test_harness_information_requests_reference_existing_unresolved_conditions(c
     response["assessment"] = "The statement details remain missing from the supplied record."
     response["information_needs"] = [{"condition_id": requested_id,
                                        "question": "Have the missing statement details been supplied?",
-                                       "what_would_resolve": "The missing details, located in the source record."}]
+                                       "what_would_resolve": "The missing details, located in the source record.", "resolver_kind": "source", "resolver_hint": "the located source record"}]
     result = run_inquiry(case, RecordedWorker([{"operation": "finish", "graph": graph, "response": response}]),
                          budget=Budget(max_model_calls=1))
     if condition_status in {"missing", "met"}:
@@ -481,7 +481,7 @@ def test_pointer_repair_separates_requested_information_from_met_policy_antecede
     response["assessment"] = "The record lacks the personal financial-disruption description and the event date."
     response["information_needs"] = [{"condition_id": "check_antecedents",
                                        "question": "Does the record contain the missing statement details?",
-                                       "what_would_resolve": "A located statement containing both missing details."}]
+                                       "what_would_resolve": "A located statement containing both missing details.", "resolver_kind": "source", "resolver_hint": "the located source record"}]
     repaired_graph = copy.deepcopy(graph)
     for cid, question in (("needed_description", "Has the personal financial-disruption description been supplied?"),
                           ("needed_event_when", "Has the event date been supplied?")):
@@ -489,7 +489,7 @@ def test_pointer_repair_separates_requested_information_from_met_policy_antecede
     repaired_response = copy.deepcopy(response)
     repaired_response["information_needs"] = [
         {"condition_id": cid, "question": repaired_graph["conditions"][cid]["text"],
-         "what_would_resolve": "A located statement supplying this missing fact."}
+         "what_would_resolve": "A located statement supplying this missing fact.", "resolver_kind": "source", "resolver_hint": "the located source record"}
         for cid in ("needed_description", "needed_event_when")]
     proposer = RecordedWorker([
         {"operation": "finish", "graph": graph, "response": response},
@@ -514,7 +514,7 @@ def test_non_graph_information_requests_keep_descriptive_ids(arm):
     response["assessment"] = assessment
     response["information_needs"] = [{"condition_id": "descriptive_missing_detail",
                                        "question": "Is the missing detail in the source?",
-                                       "what_would_resolve": "A located source containing the detail."}]
+                                       "what_would_resolve": "A located source containing the detail.", "resolver_kind": "source", "resolver_hint": "the located source record"}]
     result = run_inquiry(case, RecordedWorker([{"operation": "finish", "response": response}]),
                          arm=arm, budget=Budget(max_model_calls=1))
     assert result["status"] == "complete"

@@ -155,10 +155,13 @@ def structural_audit(run: Mapping[str, Any], public_case: Mapping[str, Any]) -> 
         check("standing_attack_completion_consistent",
               not (bool(attacks) and response.get("inquiry_completed") is True))
     needs = response.get("information_needs", [])
+    need_keys = {"condition_id", "question", "what_would_resolve"}
+    resolver_kinds = {"source", "person", "counterparty", "caller", "unspecified"}
     needs_valid = isinstance(needs, list) and all(
-        isinstance(item, Mapping) and set(item) == {"condition_id", "question", "what_would_resolve"}
-        and all(isinstance(item.get(key), str) and bool(item[key].strip())
-                for key in ("condition_id", "question", "what_would_resolve")) for item in needs
+        isinstance(item, Mapping) and need_keys <= set(item) <= need_keys | {"resolver_kind", "resolver_hint"}
+        and all(isinstance(item.get(key), str) and bool(item[key].strip()) for key in need_keys)
+        and item.get("resolver_kind", "unspecified") in resolver_kinds
+        and isinstance(item.get("resolver_hint", ""), str) for item in needs
     )
     check("information_needs_are_records", needs_valid)
     if needs_valid:

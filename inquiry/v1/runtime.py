@@ -124,12 +124,28 @@ def record_cost(record: dict[str, Any], prices: dict[str, dict[str, float]]) -> 
     return computed
 
 
+RESOLVER_KINDS = ("source", "person", "counterparty", "caller", "unspecified")
+
+
 class InformationNeed(BaseModel):
-    """An unresolved epistemic condition, not an instruction to act."""
+    """An unresolved epistemic condition, not an instruction to act.
+
+    ``resolver_kind`` says who or what could resolve it: a document or
+    record that could be acquired (source), someone in the caller's
+    organization holding unrecorded knowledge (person), the other party to
+    the matter (counterparty), or a clarification or access only the caller
+    can give (caller). ``unspecified`` is the default so stored records load;
+    the harness arm treats a new need left unspecified as a response defect.
+    The hint names a role or source type; it is not an instruction to
+    contact anyone.
+    """
     model_config = ConfigDict(extra="forbid")
     condition_id: str = Field(min_length=1, description="ID of an existing open, reopened, or assumed graph Condition. Non-graph experimental arms may use descriptive IDs.")
     question: str = Field(min_length=1, description="The unresolved question identified by that condition.")
     what_would_resolve: str = Field(min_length=1, description="The evidence or assessment needed to resolve this question; not an instruction or authorization to act.")
+    resolver_kind: Literal["source", "person", "counterparty", "caller", "unspecified"] = Field(
+        default="unspecified", description="source: an acquirable document or record; person: unrecorded knowledge held by someone in the caller's organization; counterparty: the other party to the matter; caller: a clarification of question or scope, or access only the caller can grant.")
+    resolver_hint: str = Field(default="", description="A short description of the role or source type that could resolve the need; never an instruction to contact anyone.")
 
 
 class ResponseDraft(BaseModel):
@@ -286,6 +302,10 @@ def build_prompt(arm: str) -> str:
         prompt += "The optional assessment is an epistemic narrative, not a downstream message; a populated field does not validate its meaning. "
         prompt += "Include all material limits and outstanding conditions. Each information_needs item identifies an existing open, "
         prompt += "reopened, or assumed Condition, states its unresolved question, and describes what evidence or assessment would resolve it. "
+        prompt += "It also names who could resolve it: resolver_kind is source (a document or record that could be acquired), "
+        prompt += "person (unrecorded knowledge held by someone in the caller's organization), counterparty (the other party "
+        prompt += "to the matter) or caller (a clarification or access only the caller can give), and resolver_hint describes "
+        prompt += "the role or source type. unspecified is not acceptable for a new need. The hint is not an instruction to contact anyone. "
         prompt += "Keep the missing information distinct from a met inference condition establishing that it is missing. "
         prompt += "Do not reopen an otherwise justified inference merely to name a separate information need. "
         prompt += "Once the graph is ready, return operation=finish. A completed, reviewed inquiry with no standing attack can also "
@@ -420,8 +440,13 @@ def _graph_feedback(graph: InquiryGraph, evaluation: dict[str, Any], draft: Resp
     return messages
 
 
-def _response_defects(draft: ResponseDraft | None, graph: InquiryGraph | None = None) -> list[str]:
-    """Validate references and nonblank needs, not arbitrary narrative meaning."""
+def _response_defects(draft: ResponseDraft | None, graph: InquiryGraph | None = None, *,
+                      require_resolver: bool = False) -> list[str]:
+    """Validate references and nonblank needs, not arbitrary narrative meaning.
+
+    With ``require_resolver`` (the harness arm), a need must say who or what
+    could resolve it: a kind other than unspecified and a nonblank hint.
+    """
     if draft is None:
         return ["response_missing"]
     defects = []
@@ -433,6 +458,8 @@ def _response_defects(draft: ResponseDraft | None, graph: InquiryGraph | None = 
         seen.add(condition_id)
         if not all(value.strip() for value in (condition_id, need.question, need.what_would_resolve)):
             defects.append("information_need_incomplete:" + condition_id)
+        if require_resolver and (need.resolver_kind == "unspecified" or not need.resolver_hint.strip()):
+            defects.append("information_need_resolver_missing:" + condition_id)
         if graph is None:
             continue
         condition = graph.conditions.get(condition_id)
@@ -653,7 +680,7 @@ def _render_harness(graph: InquiryGraph, evaluation: dict[str, Any], draft: Resp
     response["evaluation_completed"] = evaluation_ok
     response["record_completed"] = not record_defects
     response["record_defects"] = record_defects
-    response_defects = _response_defects(draft, graph)
+    response_defects = _response_defects(draft, graph, require_resolver=True)
     response["response_completed"] = not response_defects
     response["response_defects"] = response_defects
     standing_attacks = sorted(key for key, label in evaluation.get("attack_labels", {}).items()
@@ -699,7 +726,9 @@ def _render_harness(graph: InquiryGraph, evaluation: dict[str, Any], draft: Resp
         lines.append("Worker assessment:\n\n" + draft.assessment.strip())
     if response["information_needs"]:
         lines.append("Information needs:\n" + "\n".join(
-            f"{need['condition_id']}: {need['question']} What would resolve it: {need['what_would_resolve']}"
+            f"{need['condition_id']}: {need['question']} What would resolve it: {need['what_would_resolve']} "
+            f"(resolver: {need.get('resolver_kind', 'unspecified')}"
+            + (f"; {need['resolver_hint']}" if need.get("resolver_hint") else "") + ")"
             for need in response["information_needs"]))
     if selected and selected["citations"]:
         lines.append("Basis: " + "; ".join(f"{c['source_id']} v{c['version']} [{c['locator']}]" for c in selected["citations"]))
@@ -984,14 +1013,16 @@ def run_inquiry(public_case: dict[str, Any], worker: Any, *, arm: str = "harness
                     ledger.append("record_repair_requested", {"attempt": record_repairs,
                                   "defects": _record_defects(graph, evaluation, draft)})
                     continue
-                if _response_defects(draft, graph):
+                if _response_defects(draft, graph, require_resolver=arm == "harness"):
                     if response_repairs >= budget.max_consecutive_errors:
                         stop = "execution_failure"
                         break
                     response_repairs += 1
-                    defects = _response_defects(draft, graph)
+                    defects = _response_defects(draft, graph, require_resolver=arm == "harness")
                     feedback.append("Repair the epistemic response references before review or finalization: " + _json(defects)
-                                    + ". Each information_needs item supplies condition_id, question, and what_would_resolve. "
+                                    + ". Each information_needs item supplies condition_id, question, what_would_resolve, "
+                                    "resolver_kind (source, person, counterparty or caller; never unspecified) and a nonblank "
+                                    "resolver_hint naming the role or source type that could resolve it. "
                                     "In a harness graph, the ID must name an existing open, reopened, or assumed Condition. "
                                     "Create or reference a distinct unresolved record for the missing information. Preserve "
                                     "a legitimately met inference condition establishing that information is missing; do not reopen "
