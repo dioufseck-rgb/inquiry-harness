@@ -110,9 +110,14 @@ it; it is data for the proposer's `interest` assessment and for the critic.
 
 Setting: plant maintenance. Question: was the required post-overhaul
 inspection of a unit completed before the unit returned to service on a given
-date. Profile: `min_origins` 2, `allowed_patterns` `["attribution",
-"source_adjudication"]`, so a single origin cannot establish the assertion
-and the adjudication pattern is selectable.
+date. Profile: `min_origins` 2, `premise_min_origins` 1, `allowed_patterns`
+`["attribution", "source_adjudication"]`, so a single origin cannot establish
+the assertion and the adjudication pattern is selectable. The
+`premise_min_origins` setting is the existing profile field for this split:
+a report from one source is usable as a premise of the adjudication while its
+own finding stays `not_established` with `minimum_support_origins_not_met`.
+Without it the finding standard would apply to each report and no
+adjudication could be built from single-source reports.
 
 Sources, with their declared interest:
 

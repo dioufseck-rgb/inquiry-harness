@@ -216,8 +216,10 @@ separately from model execution; E7 comparative propositions under caller-suppli
 goals, constraints and values. Choosing values or taking action is outside this
 service. These names do not imply that every competence is implemented.
 The current kernel supports attribution, document records, rule application,
-single-event process tracing, explicit conjunction/composition, and bounded
-absence: parts of E1, E2, E3 and E5. General causal-effect identification, E4
+single-event process tracing, explicit conjunction/composition, bounded
+absence, and source adjudication (a world assertion from several attributed
+reports, including opposed ones, under positioning, interest, independence and
+opposition conditions): parts of E1, E2, E3 and E5. General causal-effect identification, E4
 estimation, E6 instruments, E7 comparative analysis and quantitative composition
 remain unimplemented. Use the supplied pattern catalogue; state unsupported needs.
 Ask what would materially change a finding; avoid unnecessary investigation.
@@ -392,9 +394,13 @@ def starter_graph(public_case: dict[str, Any]) -> dict[str, Any]:
     target = copy.deepcopy(question["target"])
     scope = copy.deepcopy(question.get("scope", {}))
     # Form support comes from the kernel catalogue. Application labels and
-    # output products play no part in selecting this empty scaffold.
+    # output products play no part in selecting this empty scaffold. The
+    # first fitting pattern the profile permits is taken, in catalogue order;
+    # a profile that lists none permits all. A caller selects adjudication
+    # by listing it in allowed_patterns without document_record.
+    allowed = question.get("profile", {}).get("kernel", {}).get("allowed_patterns") or None
     pattern = next((name for name, forms in PATTERN_FORMS.items()
-                    if target["form"] in forms), None)
+                    if target["form"] in forms and (allowed is None or name in allowed)), None)
     conditions = {f"cq_{name}": {"id": f"cq_{name}", "text": f"Assess {name} for the proposed inference.",
                                "status": "open", "evidence_ids": []}
                   for name in PATTERN_REQUIREMENTS.get(pattern, ())}

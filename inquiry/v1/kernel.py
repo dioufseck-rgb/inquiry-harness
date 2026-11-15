@@ -34,6 +34,13 @@ PATTERN_REQUIREMENTS: dict[str, tuple[str, ...]] = {
     "composition": ("joint_rule", "inference_validity", "applicability"),
     "bounded_absence": ("coverage", "detection", "absence_strength", "inference_validity", "applicability"),
     "process_trace": ("trace_links", "alternatives", "inference_validity", "applicability"),
+    # A world assertion from several attributed reports, including opposed ones.
+    # positioning: each relied-on source was placed to observe or know; interest: each
+    # source's stake is identified and weighed; independence: the reports do not share
+    # an origin (the support-origin count is the code part); opposition: every opposed
+    # report in the exposed evidence is recorded as a rebut and answered.
+    "source_adjudication": ("positioning", "interest", "independence", "opposition",
+                            "inference_validity", "applicability"),
 }
 
 PATTERN_FORMS: dict[str, tuple[str, ...]] = {
@@ -44,6 +51,7 @@ PATTERN_FORMS: dict[str, tuple[str, ...]] = {
     "composition": ("conjunction",),
     "bounded_absence": ("bounded_absence",),
     "process_trace": ("causal",),
+    "source_adjudication": ("assertion",),
 }
 
 # These names identify empirical premises that may be explicitly hypothesized.
@@ -57,6 +65,7 @@ PATTERN_ASSUMABLE: dict[str, tuple[str, ...]] = {
     "composition": ("applicability",),
     "bounded_absence": ("detection",),
     "process_trace": ("trace_links", "applicability"),
+    "source_adjudication": (),
 }
 
 SUPPORTED_FORMS = {
@@ -370,6 +379,12 @@ class _Evaluator:
             if argument.pattern == "process_trace" and len(argument.premise_ids) < 2:
                 self.diagnostic("process_trace_requires_linked_premises", aid)
                 continue
+            if argument.pattern == "source_adjudication" and (
+                    len(argument.premise_ids) < 2
+                    or any(pid not in self.graph.claims or _form(self.graph.claims[pid]) != "source_reports"
+                           for pid in argument.premise_ids)):
+                self.diagnostic("adjudication_requires_attributed_reports", aid)
+                continue
             missing = set(required) - argument.conditions.keys()
             if missing:
                 self.diagnostic("required_conditions_missing", aid, ",".join(sorted(missing)))
@@ -402,6 +417,19 @@ class _Evaluator:
             if good:
                 self.valid_arguments[aid] = basis
                 self.arguments_for_claim.setdefault(claim.id, []).append(argument)
+        # An adjudication rests on reports that are themselves attributed: each
+        # premise claim needs at least one admitted attribution argument.
+        for aid, argument in sorted(self.graph.arguments.items()):
+            if aid not in self.valid_arguments or argument.pattern != "source_adjudication":
+                continue
+            attributed = all(any(other.pattern == "attribution" and other.id in self.valid_arguments
+                                 for other in self.arguments_for_claim.get(pid, []))
+                             for pid in argument.premise_ids)
+            if not attributed:
+                self.diagnostic("adjudication_requires_attributed_reports", aid)
+                del self.valid_arguments[aid]
+                self.arguments_for_claim[argument.claim_id] = [
+                    other for other in self.arguments_for_claim.get(argument.claim_id, []) if other.id != aid]
 
     def intern(self, kind: str, record_id: str, conclusion: str | None,
                basis: _Basis, children: tuple[str, ...] = ()) -> str | None:
