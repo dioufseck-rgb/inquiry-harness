@@ -196,7 +196,7 @@ def test_capabilities_are_epistemic_and_explicit_about_current_limits():
     service = InquiryService(lambda: None)
     caps = service.capabilities()
     assert caps["epistemic_only"] is True
-    assert caps["operations"] == ["inquire", "check", "replay", "triage"]
+    assert caps["operations"] == ["inquire", "check", "replay", "triage", "examine_premises"]
     assert caps["request_schema"]["properties"]["corpus"]["required"] == ["documents", "current_versions"]
     assert "process_trace" in caps["patterns"]
     assert "universal" in caps["representable_target_forms"]
@@ -211,7 +211,7 @@ def test_mcp_surface_contains_only_inquiry_tools():
     service = InquiryService(lambda: RecordedWorker([supported_reply(request())]))
     server = create_server(service)
     tools = asyncio.run(server.list_tools())
-    assert {tool.name for tool in tools} == {"capabilities", "inquire", "check", "replay"}
+    assert {tool.name for tool in tools} == {"capabilities", "inquire", "check", "replay", "triage", "examine_premises"}
     result = asyncio.run(server.call_tool("capabilities", {}))
     assert result
     checked = asyncio.run(server.call_tool("check", {"request": request()}))
@@ -227,20 +227,35 @@ def test_mcp_stdio_client_can_discover_and_call_service():
     from mcp.client.stdio import stdio_client
     public = request()
     reply = supported_reply(public)
+    stakes = {"level": "high", "required_standing": ["established"], "basis": "release decision"}
+    premise_set = {"shared_context": public["shared_context"], "corpus": public["corpus"],
+                   "premises": [{**public["question"], "stakes": stakes}], "action_context": "Return the pump to service."}
+    classification = {"premise_class": "judgment", "reason": "Needs a reading of the record against the procedure."}
+    # factory calls in order: check, triage, then examine_premises (one triage, one inquiry)
     script = ("from inquiry.v1.mcp_server import create_server\n"
               "from inquiry.v1.service import InquiryService\n"
               "from inquiry.v1.workers import RecordedWorker\n"
               f"reply = {reply!r}\n"
-              "create_server(InquiryService(lambda: RecordedWorker([reply]))).run(transport='stdio')\n")
+              f"classification = {classification!r}\n"
+              "workers = [RecordedWorker([reply]), RecordedWorker([classification]), RecordedWorker([classification]), RecordedWorker([reply])]\n"
+              "create_server(InquiryService(lambda: workers.pop(0))).run(transport='stdio')\n")
     async def exercise():
         params = StdioServerParameters(command=sys.executable, args=["-c", script])
         async with stdio_client(params) as (read, write):
             async with ClientSession(read, write) as session:
                 await session.initialize()
                 tools = await session.list_tools()
-                assert {tool.name for tool in tools.tools} == {"capabilities", "inquire", "check", "replay"}
+                assert {tool.name for tool in tools.tools} == {"capabilities", "inquire", "check", "replay", "triage", "examine_premises"}
                 result = await session.call_tool("check", {"request": public})
                 assert not result.isError
                 assert result.structuredContent["response"]["inquiry_completed"] is True
                 assert result.structuredContent["response"]["findings"][0]["status"] == "established"
+                triaged = await session.call_tool("triage", {"request": public, "action_context": "Return the pump to service."})
+                assert not triaged.isError and triaged.structuredContent["triage"]["route"] == "inquire"
+                checked = await session.call_tool("examine_premises", {"request": premise_set, "mode": "supplied"})
+                assert not checked.isError
+                premise = checked.structuredContent["premises"][0]
+                assert premise["examined"] is True and premise["meets_declared_standing"] is True
+                assert checked.structuredContent["unmet_premise_ids"] == []
+                assert {"approved", "all_clear", "proceed", "go", "cleared"}.isdisjoint(checked.structuredContent)
     asyncio.run(asyncio.wait_for(exercise(), timeout=20))

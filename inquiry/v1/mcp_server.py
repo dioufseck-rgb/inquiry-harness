@@ -51,9 +51,25 @@ def create_server(service: InquiryService):
                                        mode=mode, include_record=include_record)
 
     @server.tool()
+    async def triage(request: dict[str, Any], action_context: str | None = None) -> dict[str, Any]:
+        """Classify one question (state, judgment, tacit, intent) and route it; one small call, no source text."""
+        return await asyncio.to_thread(service.triage, request, action_context=action_context)
+
+    @server.tool()
+    async def examine_premises(request: dict[str, Any], budget: dict[str, Any] | None = None,
+                               mode: str = "documents") -> dict[str, Any]:
+        """Triage and examine the premises an action rests on; per-premise standing, never a go/no-go."""
+        return await asyncio.to_thread(service.examine_premises, request, budget=budget, mode=mode)
+
+    @server.tool()
     async def replay(inquiry_id: str) -> dict[str, Any]:
         """Verify and recompute a stored inquiry; no model calls or truth guarantee."""
         return await asyncio.to_thread(service.replay, inquiry_id)
+
+    @server.resource("inquiry://premise-sets/{set_id}")
+    def premise_set_record(set_id: str) -> str:
+        """A stored premise-set record linking its inquiry records."""
+        return json.dumps(service.read_premise_set(set_id), ensure_ascii=False, allow_nan=False)
 
     @server.resource("inquiry://records/{inquiry_id}")
     def inquiry_record(inquiry_id: str) -> str:

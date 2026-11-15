@@ -10,6 +10,7 @@ from __future__ import annotations
 
 from copy import deepcopy
 from dataclasses import asdict
+import json
 from pathlib import Path
 import re
 from typing import Any, Callable, Mapping
@@ -20,13 +21,16 @@ from .contracts import STAKES_LEVELS, canonical_json, validate_inquiry_request
 from .kernel import PATTERN_FORMS, PATTERN_REQUIREMENTS, SUPPORTED_FORMS
 from .models import Profile
 from .persistence import load_run, save_run
+from .premises import (add_usage, can_fund, examination_order, premise_budget, premise_set_json_schema,
+                       premise_summary, remaining_budget, validate_premise_set)
 from .runtime import Budget, ZERO_COST_PROVIDERS, replay_run, run_inquiry, validate_prices
 from .triage import ROUTES, run_triage
 
 
 SERVICE_VERSION = "epistemic-inquiry/v1"
 _BUSINESS_RESPONSE_FIELDS = frozenset({"next_action", "deliverable", "task_completed",
-                                     "decision", "authorization", "approved_action"})
+                                     "decision", "authorization", "approved_action",
+                                     "approved", "all_clear", "proceed", "go", "cleared"})
 _FOCUSED_LIMITS = {"max_model_calls": 4, "max_tool_calls": 4,
                    "max_total_tokens": 32000, "max_output_tokens": 4096,
                    "timeout_seconds": 60.0, "max_consecutive_errors": 2,
@@ -55,7 +59,9 @@ class InquiryService:
                  tiers: Mapping[str, Budget | Mapping[str, Any]] | None = None,
                  prices: Mapping[str, Mapping[str, float]] | None = None,
                  worker_identities: list[str] | None = None,
-                 unclassified_route: str = "inquire"):
+                 unclassified_route: str = "inquire",
+                 max_premises: int = 8,
+                 max_set_budget: Budget | None = None):
         if not callable(worker_factory) or (critic_factory is not None and not callable(critic_factory)):
             raise TypeError("worker factories must be callable")
         if isinstance(max_request_bytes, bool) or not isinstance(max_request_bytes, int) or max_request_bytes < 1:
@@ -80,12 +86,42 @@ class InquiryService:
         if unclassified_route not in ROUTES:
             raise ValueError(f"unclassified_route must be one of {list(ROUTES)}")
         self._unclassified_route = unclassified_route
+        if isinstance(max_premises, bool) or not isinstance(max_premises, int) or max_premises < 1:
+            raise ValueError("max_premises must be a positive integer")
+        self._max_premises = max_premises
+        self._set_ceiling = Budget(**asdict(max_set_budget)) if max_set_budget is not None else self._default_set_ceiling()
         self._tiers = self._default_tiers()
         for level, value in dict(tiers or {}).items():
             if level not in STAKES_LEVELS:
                 raise ValueError(f"Unknown budget tier {level!r}; expected one of {list(STAKES_LEVELS)}")
             # _limits rejects any field above the host ceiling
             self._tiers[level] = self._limits(value, focused=False)
+
+    def _default_set_ceiling(self) -> Budget:
+        """A premise set may spend up to max_premises inquiries at the per-inquiry ceiling."""
+        high = asdict(self._ceiling)
+        scaled = {}
+        for key, value in high.items():
+            if key in ("max_output_tokens", "max_consecutive_errors", "max_critique_calls") or value is None:
+                scaled[key] = value
+            else:
+                scaled[key] = value * self._max_premises
+        return Budget(**scaled)
+
+    def _set_limits(self, requested: Mapping[str, Any] | Budget | None) -> Budget:
+        ceiling = asdict(self._set_ceiling)
+        if requested is None:
+            return Budget(**ceiling)
+        values = asdict(requested) if isinstance(requested, Budget) else dict(requested)
+        unknown = set(values) - ceiling.keys()
+        if unknown:
+            raise ValueError(f"Unknown budget fields: {sorted(unknown)}")
+        budget = Budget(**{**ceiling, **values})
+        exceeded = [key for key, value in asdict(budget).items()
+                    if ceiling[key] is not None and (value is None or value > ceiling[key])]
+        if exceeded:
+            raise ValueError(f"Requested set budget exceeds the host set ceiling: {sorted(exceeded)}")
+        return budget
 
     def _default_tiers(self) -> dict[str, Budget]:
         """low: the focused ceiling; high: the host ceiling; medium: half of high, never below low."""
@@ -108,7 +144,10 @@ class InquiryService:
             "implementation_version": __version__,
             "purpose": "Examine propositions and return scoped standing and warrant.",
             "epistemic_only": True,
-            "operations": ["inquire", "check", "replay", "triage"],
+            "operations": ["inquire", "check", "replay", "triage", "examine_premises"],
+            "premise_check": {"max_premises": self._max_premises, "set_ceiling": asdict(self._set_ceiling),
+                              "returns": "per-premise standing and routing; never a single go or no-go value",
+                              "request_schema": premise_set_json_schema()},
             "triage": {"classes": ["state", "judgment", "tacit", "intent", "unclassified"],
                        "routes": list(ROUTES), "unclassified_route": self._unclassified_route,
                        "ceiling": {"max_model_calls": 2, "max_total_tokens": 4096, "max_output_tokens": 512},
@@ -278,6 +317,105 @@ class InquiryService:
         if include_record:
             response["record"] = result
         return response
+
+    def examine_premises(self, request: Mapping[str, Any], *,
+                         budget: Mapping[str, Any] | Budget | None = None,
+                         mode: str = "documents", include_record: bool = False) -> dict[str, Any]:
+        """Triage every premise, examine those routed to inquiry or marked always, report per premise.
+
+        Examined premises run high stakes first, then request order, each with
+        the smaller of its tier budget and what remains of the set budget, in
+        its own evidence environment with fresh workers and its own record.
+        When the remainder cannot fund the low tier the rest are not examined.
+        No field combines the results into a decision; the caller does that.
+        """
+        if hasattr(request, "model_dump"):
+            request = request.model_dump(mode="json")
+        raw = deepcopy(dict(request))
+        if len(canonical_json(raw).encode("utf-8")) > self._max_request_bytes:
+            raise ValueError("Premise-set request exceeds the host byte limit")
+        validated = validate_premise_set(raw, max_premises=self._max_premises)
+        if mode not in {"supplied", "documents", "search"}:
+            raise ValueError("Unknown evidence mode")
+        if not isinstance(include_record, bool):
+            raise TypeError("include_record must be boolean")
+        set_budget = self._set_limits(budget)
+        if set_budget.max_cost_usd is not None or self._ceiling.max_cost_usd is not None:
+            self._check_prices_cover_workers()
+        questions, examine = validated["questions"], validated["examine"]
+        set_id = uuid4().hex
+        usage_total: dict[str, Any] = {"cost_complete": True, "cost_usd": 0.0, "known_cost_usd": 0.0}
+        triages = []
+        for question in questions:
+            record = run_triage(question, self._worker_factory(), action_context=validated["action_context"],
+                                unclassified_route=self._unclassified_route, prices=self._prices)
+            triages.append(record)
+            add_usage(usage_total, record["usage"])
+        selected = [index for index, record in enumerate(triages)
+                    if record["triage"]["route"] == "inquire" or examine[index] == "always"]
+        reasons: dict[int, str | None] = {index: (None if index in selected else "routed") for index in range(len(questions))}
+        results: dict[int, dict[str, Any]] = {}
+        funded = True
+        for index in examination_order(questions, selected):
+            remaining = remaining_budget(set_budget, usage_total)
+            if not funded or not can_fund(remaining, self._tiers["low"]):
+                funded = False
+                reasons[index] = "budget"
+                continue
+            tier = self._tiers[questions[index]["question"]["stakes"]["level"]]
+            out = self._run(questions[index], budget=premise_budget(tier, remaining), mode=mode,
+                            include_record=include_record, focused=False)
+            results[index] = out
+            add_usage(usage_total, out["usage"])
+        premises = []
+        for index, question in enumerate(questions):
+            summary = premise_summary(question["question"]["id"], triages[index]["triage"], examine[index],
+                                      examined=index in results, not_examined_reason=reasons[index],
+                                      inquiry=results.get(index))
+            if include_record:
+                summary["triage_record"] = triages[index]
+                if index in results:
+                    summary["record"] = results[index]["record"]
+            premises.append(summary)
+        if usage_total["cost_complete"] is False:
+            usage_total["cost_usd"] = None
+        response: dict[str, Any] = {
+            "service_version": SERVICE_VERSION,
+            "operation": "examine_premises",
+            "premise_set_id": set_id,
+            "action_context": validated["action_context"],
+            "premises": premises,
+            "unmet_premise_ids": [p["premise_id"] for p in premises if p["examined"] and p["meets_declared_standing"] is not True],
+            "unexamined_premise_ids": [p["premise_id"] for p in premises if not p["examined"]],
+            "usage": usage_total,
+            "record_ref": None,
+        }
+        forbidden = _BUSINESS_RESPONSE_FIELDS.intersection(response)
+        for premise in premises:
+            forbidden |= _BUSINESS_RESPONSE_FIELDS.intersection(premise)
+        if forbidden:
+            raise RuntimeError(f"Premise check returned fields outside the epistemic boundary: {sorted(forbidden)}")
+        if self._record_root is not None:
+            directory = self._record_root / ("set_" + set_id)
+            directory.mkdir(parents=True, exist_ok=False)
+            stored = {key: value for key, value in response.items() if key != "record_ref"}
+            stored["premises"] = [{key: value for key, value in p.items() if key != "record"} for p in premises]
+            stored["inquiry_record_refs"] = [p["record_ref"] for p in premises if p.get("record_ref")]
+            (directory / "set.json").write_text(json.dumps(stored, indent=2, ensure_ascii=False, allow_nan=False) + "\n",
+                                                encoding="utf-8")
+            response["record_ref"] = "inquiry://premise-sets/" + set_id
+        return response
+
+    def read_premise_set(self, set_id: str) -> dict[str, Any]:
+        """Read a stored premise-set record; it links the per-premise inquiry records."""
+        if not isinstance(set_id, str) or not re.fullmatch(r"[0-9a-f]{32}", set_id):
+            raise ValueError("Invalid premise set ID")
+        if self._record_root is None:
+            raise ValueError("Persistent records are not configured")
+        directory = self._record_root / ("set_" + set_id)
+        if directory.is_symlink() or directory.resolve().parent != self._record_root:
+            raise ValueError("Record is outside the configured store")
+        return json.loads((directory / "set.json").read_text(encoding="utf-8"))
 
     def read_record(self, inquiry_id: str) -> dict[str, Any]:
         """Read a host-owned stored record; callers cannot select filesystem paths."""
