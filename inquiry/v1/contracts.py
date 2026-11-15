@@ -171,9 +171,13 @@ def _table(table: Any, at: str) -> list[str]:
 
 def _source(document: Any, at: str) -> set[str]:
     _fields(document, {"id", "version", "title", "issuer_id", "origin_id", "issued_at", "language", "reading_blocks"},
-            {"effective_from", "derived_from", "publication_origin_id", "supersedes", "tables"}, at)
+            {"effective_from", "derived_from", "publication_origin_id", "supersedes", "tables", "issuer_interest"}, at)
     for field in ("id", "version", "title", "issuer_id", "origin_id", "language"):
         _text(document[field], f"{at}.{field}")
+    # The issuer's declared stake in the matter, supplied by the caller and shown
+    # to workers; the kernel never reads it.
+    if "issuer_interest" in document:
+        _text(document["issuer_interest"], at + ".issuer_interest")
     if "publication_origin_id" in document:
         _text(document["publication_origin_id"], at + ".publication_origin_id")
     for field in ("issued_at", "effective_from"):
@@ -401,7 +405,7 @@ def request_json_schema() -> dict[str, Any]:
         "id": text, "version": text, "title": text, "issuer_id": text,
         "origin_id": text, "issued_at": iso_date, "language": text,
         "reading_blocks": {"type": "array", "items": record({"locator": text, "text": text})},
-        "effective_from": iso_date, "publication_origin_id": text,
+        "effective_from": iso_date, "publication_origin_id": text, "issuer_interest": text,
         "derived_from": {"type": "array", "items": {"$ref": "#/$defs/lineage_reference"}},
         "supersedes": {"$ref": "#/$defs/source_reference"},
         "tables": {"type": "array", "items": {"$ref": "#/$defs/table"}},

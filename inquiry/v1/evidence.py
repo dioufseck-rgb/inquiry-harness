@@ -210,6 +210,12 @@ class EvidenceEnvironment:
                 result.append(self._segment(key, prefix + "/footnote:" + str(index), note, "table_footnote", table_id=table["id"]))
         return result
 
+    def _interest(self, key: tuple[str, str]) -> dict:
+        """The issuer's declared stake, when the caller supplied one; data for the
+        proposer's interest assessment and for the critic, never read by the kernel."""
+        source = self._sources[key]
+        return {"issuer_interest": source["issuer_interest"]} if "issuer_interest" in source else {}
+
     def _structure(self, key: tuple[str, str]) -> dict:
         """Advertise valid addressing operations without returning source text."""
         source = self._sources[key]
@@ -229,7 +235,7 @@ class EvidenceEnvironment:
         return deepcopy(self._manifest())
 
     def _manifest(self) -> list[dict]:
-        return [{"source_id": key[0], "version": key[1], "title": source["title"], "issuer_id": source["issuer_id"], "origin_ids": self._origins[key], "issued_at": source["issued_at"], "is_current": self._current[key[0]] == key[1], "source_content_hash": self._source_hashes[key], **self._structure(key)} for key, source in self._sources.items()]
+        return [{"source_id": key[0], "version": key[1], "title": source["title"], "issuer_id": source["issuer_id"], **self._interest(key), "origin_ids": self._origins[key], "issued_at": source["issued_at"], "is_current": self._current[key[0]] == key[1], "source_content_hash": self._source_hashes[key], **self._structure(key)} for key, source in self._sources.items()]
 
     @staticmethod
     def _nonempty_string(value: Any, name: str) -> None:
@@ -411,7 +417,7 @@ class EvidenceEnvironment:
             positions = [match.start() for match in re.finditer(r"\w+", segment["text"], re.UNICODE) if match.group().casefold() in terms]
             start = max(0, min(positions) - 40) if positions else 0
             snippet = self._slice(segment, start, start + 240)
-            hits.append({"source_id": key[0], "version": key[1], "title": source["title"], "issuer_id": source["issuer_id"], "origin_ids": list(self._origins[key]), "is_current": self._current[key[0]] == key[1], "source_content_hash": self._source_hashes[key], "score": score, "snippet": snippet["text"], "locator": snippet["locator"], "segments": [snippet], **self._structure(key)})
+            hits.append({"source_id": key[0], "version": key[1], "title": source["title"], "issuer_id": source["issuer_id"], **self._interest(key), "origin_ids": list(self._origins[key]), "is_current": self._current[key[0]] == key[1], "source_content_hash": self._source_hashes[key], "score": score, "snippet": snippet["text"], "locator": snippet["locator"], "segments": [snippet], **self._structure(key)})
         hits.sort(key=lambda hit: (-hit["score"], hit["source_id"], hit["version"]))
         return self._return("search", {"query": query, "filters": filters, "limit": limit}, {"query": query, "hits": hits[:limit], "total_matches": len(hits), "truncated": len(hits) > limit, "current_only": filters.get("current_only", True), "ranking": "lexical_counts_title_weight_2_stable_source_id_version"})
 
@@ -424,7 +430,7 @@ class EvidenceEnvironment:
             selected = [s for s in selected if s["locator"] == locator]
         segments, coverage = self._bounded(selected, limit)
         coverage["complete_document"] = locator is None and not coverage["truncated"]
-        return self._return("open", {"source_id": source_id, "version": version, "locator": locator, "limit": limit}, {"source_id": source_id, "version": version, "title": source["title"], "is_current": self._current[source_id] == version, "origin_ids": list(self._origins[key]), "source_content_hash": self._source_hashes[key], "segments": segments, "coverage": coverage, "truncated": coverage["truncated"], **self._structure(key)})
+        return self._return("open", {"source_id": source_id, "version": version, "locator": locator, "limit": limit}, {"source_id": source_id, "version": version, "title": source["title"], **self._interest(key), "is_current": self._current[source_id] == version, "origin_ids": list(self._origins[key]), "source_content_hash": self._source_hashes[key], "segments": segments, "coverage": coverage, "truncated": coverage["truncated"], **self._structure(key)})
 
     def read_table(self, source_id: str, version: str, table_id: str, rows: Sequence[str] | None = None, columns: Sequence[str] | None = None, limit: int | None = None) -> dict:
         self.validate_request("read_table", {"source_id": source_id, "version": version,

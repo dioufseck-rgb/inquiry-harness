@@ -184,7 +184,9 @@ def validate_public_case(case: Any) -> None:
     _list(corpus["documents"], "documents")
     lookup: dict[tuple[str, str], dict] = {}
     for document in corpus["documents"]:
-        _fields(document, {"id", "version", "title", "issuer_id", "origin_id", "issued_at", "language", "reading_blocks"}, {"effective_from", "derived_from", "publication_origin_id", "supersedes", "tables"}, "document")
+        _fields(document, {"id", "version", "title", "issuer_id", "origin_id", "issued_at", "language", "reading_blocks"}, {"effective_from", "derived_from", "publication_origin_id", "supersedes", "tables", "issuer_interest"}, "document")
+        if "issuer_interest" in document:
+            _text(document["issuer_interest"], "document.issuer_interest")
         _id(document["id"], "doc", "document.id")
         _id(document["origin_id"], "origin", "document.origin_id")
         if "publication_origin_id" in document:
