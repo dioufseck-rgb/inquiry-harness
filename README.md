@@ -3,7 +3,7 @@
 ## Controlled inquiry v1
 
 The controlled rebuild is available as `inquiry.v1` and the `inquiry-v1`
-command, version **1.0.0a6**. It implements the first runnable slice of the new
+command, version **1.0.0a7**. It implements the first runnable slice of the new
 design: known evidence, explicit question and acceptance profiles, a bounded
 inquiry loop, deterministic argument evaluation, and a matched experiment runner.
 
@@ -25,6 +25,13 @@ judgment, tacit, intent), examines those that need an inquiry under a budget
 tier and an optional dollar cap, and returns per-premise standing and routing.
 It never returns a go or no-go value. Information needs now say who could
 resolve them. See `examples/v1/premise_set_maintenance_release.json`.
+
+Version 1.0.0a7 adds the first judgment pattern, `source_adjudication`: a
+world assertion concluded from several attributed reports, some opposed, under
+positioning, interest, independence and opposition conditions. Sources may
+declare an `issuer_interest`. A twelve-case plant-maintenance fixture family
+with a scripted test instrument joins the bench behind `--adapter adjudication`.
+See [docs/V1_ADJUDICATION.md](docs/V1_ADJUDICATION.md).
 
 The [service guide](docs/V1_SERVICE.md) documents the Python `InquiryService`,
 the optional `inquiry-service` MCP stdio transport (`inquire`, `check`, `replay`),

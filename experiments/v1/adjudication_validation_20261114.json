@@ -1,0 +1,1033 @@
+{
+  "kind": "software_validation_summary",
+  "date": "2026-11-14",
+  "implementation_version": "1.0.0a7",
+  "increment": "B: source_adjudication pattern, issuer_interest, adjudication fixture family and scripted instrument",
+  "base_commit": "031f8523dae0809b8d31b75d01780220a3f038e1",
+  "previous_increment_head": "bf1bf44843a8df5577476414839b3d2265702b9a",
+  "head_commit_before_this_record": "357ccd26495d3ea4fa23fee741e47f77a2d0a983",
+  "branch": "premise-gate-v1",
+  "boundary": "Purely epistemic service; the adjudication returns a scoped finding with its open conditions and standing objections, never a decision.",
+  "repository_suite": {
+    "command": "python -m pytest -q",
+    "passed": 840,
+    "failed": 1,
+    "skipped": 0,
+    "failed_tests": [
+      "tests/v1/test_service.py::test_symlink_cannot_select_another_store"
+    ],
+    "known_environment_failure": "tests/v1/test_service.py::test_symlink_cannot_select_another_store fails on this Windows host with WinError 1314 (symlink creation needs a privilege); it also failed on the a5 base commit here and is not caused by this increment.",
+    "platform": "Windows 11, CPython 3.12, MCP SDK installed (the two optional MCP tests run and pass)"
+  },
+  "ci_commands": {
+    "install": "passed (exit 0)",
+    "validate": "passed (exit 0)",
+    "run_demo": "Run: complete | stop: settled_for_purpose | output: C:\\Users\\diouf\\inquiry-harness-v0.1\\inquiry-harness\\runs\\ci-demo\nDevelopment test instrument; no model-quality inference.\nrun exit 0",
+    "replay_demo": {
+      "ledger_valid": true,
+      "evaluation_reproduced": true,
+      "replay_mode": "native",
+      "request_contract": "inquiry-request/v1.1"
+    },
+    "bench_matrix": "see scripted_integration"
+  },
+  "scripted_integration": {
+    "execution_kind": "scripted_smoke",
+    "arms": [
+      "ordinary",
+      "repertoire",
+      "harness"
+    ],
+    "modes": [
+      "supplied",
+      "documents",
+      "search"
+    ],
+    "summary": {
+      "attempts": 378,
+      "run_status_counts": {
+        "complete": 378
+      },
+      "inquiry_completed_count": 378,
+      "failed_runs": 0,
+      "completion_count_interpretation": "Declared inquiry completion, excluding scope/form rejection or incomplete evaluation, record, response or configured review; not human-adjudicated adequacy.",
+      "evaluation_completion_status_counts": {
+        "pending": 252,
+        "complete": 126
+      },
+      "usage_known_totals": {
+        "model_calls": 1332,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "tool_calls": 954,
+        "failed_calls": 0,
+        "cost_usd": 0.0
+      },
+      "usage_unknown_run_counts": {
+        "model_calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "tool_calls": 0,
+        "failed_calls": 0,
+        "cost_usd": 0
+      },
+      "monetary_cost_complete": true,
+      "runner_elapsed_seconds": 35.23001910070889,
+      "structural_status_counts": {
+        "pass": 378
+      },
+      "smoke_status_counts": {
+        "pass": 378
+      },
+      "human_review_status_counts": {
+        "pending": 378
+      },
+      "automatic_substantive_accuracy": null,
+      "interpretation": "Structural and categorical smoke results are not substantive accuracy estimates."
+    },
+    "live_provider_calls": 0,
+    "execution_prompt_hashes": {
+      "ordinary": "e9da3bdda99714cfeb04500b3e47cf898188e36aae306d8e3aad6f60c776d822",
+      "repertoire": "ce1eae6dd9296bda8bfe8ce7b390fae3dd107e2afb09ec7004c761c00a1bf9b2",
+      "harness": "c11f9b206f9483bceb452ed06600861233c8920d82ab02928035bfc01ddf36bf"
+    },
+    "execution_implementation_hashes": {
+      "runtime": "a283b220b21cbe5840ee5a9e05d3c483d2bea6d0b860d9b37b6bd7cefee6c6d3",
+      "workers": "1279a26636f267cd7907cff208b9eee1ab50c2ef0a3c45f5cd904890c9de9bef",
+      "scoring": "c4f7acce164e9849aa27982a74b8d32697ca74d98c0ae55cbd83ce39a368dd3c",
+      "experiments": "c71b29be9024d50c046163714109206b21978a84abdacb70020254e6954fc368",
+      "models": "e29a28f8876bc0ce6cb575105ab65daac401af47a0624a24969831ba973383d3",
+      "packets": "014bc1b7bfd0337da052c04c805dd7fc0faffb460d3722b5bc1e64f743f17a65"
+    },
+    "kernel_hash": "c284fdea1e07127dd2df720d7dd6ffc2098c00e3d8be254af458beb70724dc5b"
+  },
+  "adjudication_family": {
+    "command": "python -m inquiry.v1 bench --demo --adapter adjudication --arms ordinary repertoire harness --modes supplied documents search --out runs/ci-adjudication",
+    "execution_kind": "scripted_smoke",
+    "worker": "scripted-adjudication (test instrument; keyword rules, no model)",
+    "summary": {
+      "attempts": 108,
+      "run_status_counts": {
+        "complete": 90,
+        "partial": 18
+      },
+      "inquiry_completed_count": 90,
+      "failed_runs": 0,
+      "completion_count_interpretation": "Declared inquiry completion, excluding scope/form rejection or incomplete evaluation, record, response or configured review; not human-adjudicated adequacy.",
+      "evaluation_completion_status_counts": {
+        "complete": 36,
+        "pending": 72
+      },
+      "usage_known_totals": {
+        "model_calls": 336,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "tool_calls": 216,
+        "failed_calls": 0,
+        "cost_usd": 0.0
+      },
+      "usage_unknown_run_counts": {
+        "model_calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "tool_calls": 0,
+        "failed_calls": 0,
+        "cost_usd": 0
+      },
+      "monetary_cost_complete": true,
+      "runner_elapsed_seconds": 7.520975800289307,
+      "structural_status_counts": {
+        "pass": 108
+      },
+      "smoke_status_counts": {
+        "pass": 108
+      },
+      "human_review_status_counts": {
+        "pending": 108
+      },
+      "automatic_substantive_accuracy": null,
+      "interpretation": "Structural and categorical smoke results are not substantive accuracy estimates."
+    },
+    "target_status_by_case": {
+      "corroborated:compressor": {
+        "established": 9
+      },
+      "corroborated:pump": {
+        "established": 9
+      },
+      "hearsay:compressor": {
+        "not_established": 9
+      },
+      "hearsay:pump": {
+        "not_established": 9
+      },
+      "interested_only:compressor": {
+        "not_established": 9
+      },
+      "interested_only:pump": {
+        "not_established": 9
+      },
+      "opposed_answered:compressor": {
+        "established": 9
+      },
+      "opposed_answered:pump": {
+        "established": 9
+      },
+      "opposed_unanswered:compressor": {
+        "not_established": 9
+      },
+      "opposed_unanswered:pump": {
+        "not_established": 9
+      },
+      "superseded:compressor": {
+        "established": 9
+      },
+      "superseded:pump": {
+        "established": 9
+      }
+    },
+    "runs_by_case": {
+      "interested_only:pump": {
+        "harness/documents": {
+          "run_status": "complete",
+          "target_status": "not_established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "ordinary/search": {
+          "run_status": "complete",
+          "target_status": "not_established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "repertoire/documents": {
+          "run_status": "complete",
+          "target_status": "not_established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "repertoire/search": {
+          "run_status": "complete",
+          "target_status": "not_established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "repertoire/supplied": {
+          "run_status": "complete",
+          "target_status": "not_established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "harness/supplied": {
+          "run_status": "complete",
+          "target_status": "not_established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "ordinary/documents": {
+          "run_status": "complete",
+          "target_status": "not_established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "harness/search": {
+          "run_status": "complete",
+          "target_status": "not_established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "ordinary/supplied": {
+          "run_status": "complete",
+          "target_status": "not_established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        }
+      },
+      "hearsay:compressor": {
+        "ordinary/documents": {
+          "run_status": "complete",
+          "target_status": "not_established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "harness/supplied": {
+          "run_status": "complete",
+          "target_status": "not_established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "harness/search": {
+          "run_status": "complete",
+          "target_status": "not_established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "ordinary/search": {
+          "run_status": "complete",
+          "target_status": "not_established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "ordinary/supplied": {
+          "run_status": "complete",
+          "target_status": "not_established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "harness/documents": {
+          "run_status": "complete",
+          "target_status": "not_established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "repertoire/supplied": {
+          "run_status": "complete",
+          "target_status": "not_established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "repertoire/documents": {
+          "run_status": "complete",
+          "target_status": "not_established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "repertoire/search": {
+          "run_status": "complete",
+          "target_status": "not_established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        }
+      },
+      "corroborated:pump": {
+        "ordinary/documents": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "harness/search": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "harness/supplied": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "ordinary/search": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "repertoire/documents": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "ordinary/supplied": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "repertoire/supplied": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "repertoire/search": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "harness/documents": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        }
+      },
+      "superseded:pump": {
+        "repertoire/supplied": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "ordinary/documents": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "harness/search": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "ordinary/search": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "ordinary/supplied": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "repertoire/documents": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "harness/documents": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "repertoire/search": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "harness/supplied": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        }
+      },
+      "opposed_answered:pump": {
+        "ordinary/supplied": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "ordinary/documents": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "repertoire/documents": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "harness/documents": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "harness/supplied": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "repertoire/supplied": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "ordinary/search": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "repertoire/search": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "harness/search": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        }
+      },
+      "opposed_unanswered:pump": {
+        "harness/search": {
+          "run_status": "partial",
+          "target_status": "not_established",
+          "inquiry_completed": false,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "harness/documents": {
+          "run_status": "partial",
+          "target_status": "not_established",
+          "inquiry_completed": false,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "repertoire/supplied": {
+          "run_status": "partial",
+          "target_status": "not_established",
+          "inquiry_completed": false,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "repertoire/search": {
+          "run_status": "partial",
+          "target_status": "not_established",
+          "inquiry_completed": false,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "repertoire/documents": {
+          "run_status": "partial",
+          "target_status": "not_established",
+          "inquiry_completed": false,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "ordinary/search": {
+          "run_status": "partial",
+          "target_status": "not_established",
+          "inquiry_completed": false,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "ordinary/documents": {
+          "run_status": "partial",
+          "target_status": "not_established",
+          "inquiry_completed": false,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "ordinary/supplied": {
+          "run_status": "partial",
+          "target_status": "not_established",
+          "inquiry_completed": false,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "harness/supplied": {
+          "run_status": "partial",
+          "target_status": "not_established",
+          "inquiry_completed": false,
+          "smoke": "pass",
+          "structural": "pass"
+        }
+      },
+      "superseded:compressor": {
+        "ordinary/supplied": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "harness/search": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "ordinary/documents": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "ordinary/search": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "repertoire/documents": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "repertoire/search": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "repertoire/supplied": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "harness/documents": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "harness/supplied": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        }
+      },
+      "interested_only:compressor": {
+        "harness/supplied": {
+          "run_status": "complete",
+          "target_status": "not_established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "ordinary/documents": {
+          "run_status": "complete",
+          "target_status": "not_established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "harness/search": {
+          "run_status": "complete",
+          "target_status": "not_established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "repertoire/documents": {
+          "run_status": "complete",
+          "target_status": "not_established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "repertoire/supplied": {
+          "run_status": "complete",
+          "target_status": "not_established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "repertoire/search": {
+          "run_status": "complete",
+          "target_status": "not_established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "harness/documents": {
+          "run_status": "complete",
+          "target_status": "not_established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "ordinary/supplied": {
+          "run_status": "complete",
+          "target_status": "not_established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "ordinary/search": {
+          "run_status": "complete",
+          "target_status": "not_established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        }
+      },
+      "hearsay:pump": {
+        "repertoire/documents": {
+          "run_status": "complete",
+          "target_status": "not_established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "repertoire/supplied": {
+          "run_status": "complete",
+          "target_status": "not_established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "harness/documents": {
+          "run_status": "complete",
+          "target_status": "not_established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "ordinary/search": {
+          "run_status": "complete",
+          "target_status": "not_established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "harness/supplied": {
+          "run_status": "complete",
+          "target_status": "not_established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "harness/search": {
+          "run_status": "complete",
+          "target_status": "not_established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "ordinary/supplied": {
+          "run_status": "complete",
+          "target_status": "not_established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "ordinary/documents": {
+          "run_status": "complete",
+          "target_status": "not_established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "repertoire/search": {
+          "run_status": "complete",
+          "target_status": "not_established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        }
+      },
+      "opposed_answered:compressor": {
+        "ordinary/search": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "repertoire/documents": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "ordinary/supplied": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "ordinary/documents": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "repertoire/search": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "harness/search": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "harness/documents": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "repertoire/supplied": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "harness/supplied": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        }
+      },
+      "corroborated:compressor": {
+        "repertoire/search": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "repertoire/supplied": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "repertoire/documents": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "harness/documents": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "ordinary/search": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "harness/supplied": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "ordinary/supplied": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "ordinary/documents": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "harness/search": {
+          "run_status": "complete",
+          "target_status": "established",
+          "inquiry_completed": true,
+          "smoke": "pass",
+          "structural": "pass"
+        }
+      },
+      "opposed_unanswered:compressor": {
+        "harness/documents": {
+          "run_status": "partial",
+          "target_status": "not_established",
+          "inquiry_completed": false,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "harness/supplied": {
+          "run_status": "partial",
+          "target_status": "not_established",
+          "inquiry_completed": false,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "ordinary/documents": {
+          "run_status": "partial",
+          "target_status": "not_established",
+          "inquiry_completed": false,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "repertoire/supplied": {
+          "run_status": "partial",
+          "target_status": "not_established",
+          "inquiry_completed": false,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "repertoire/search": {
+          "run_status": "partial",
+          "target_status": "not_established",
+          "inquiry_completed": false,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "ordinary/supplied": {
+          "run_status": "partial",
+          "target_status": "not_established",
+          "inquiry_completed": false,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "ordinary/search": {
+          "run_status": "partial",
+          "target_status": "not_established",
+          "inquiry_completed": false,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "harness/search": {
+          "run_status": "partial",
+          "target_status": "not_established",
+          "inquiry_completed": false,
+          "smoke": "pass",
+          "structural": "pass"
+        },
+        "repertoire/documents": {
+          "run_status": "partial",
+          "target_status": "not_established",
+          "inquiry_completed": false,
+          "smoke": "pass",
+          "structural": "pass"
+        }
+      }
+    },
+    "interpretation": "The scripted worker reaching the expected statuses shows the kernel checks and the two-submission reply path work; it is not evidence about any model."
+  },
+  "new_live_experiments": {
+    "runs": 0,
+    "cost_usd": 0,
+    "reason": "Increment B makes no provider calls by rule."
+  },
+  "contracts": {
+    "request_schema_version": "inquiry-request/v1.1",
+    "response_schema_version": "epistemic-response/v1.1",
+    "scorer_version": "epistemic-record-audit-0.4",
+    "additive_to_a6": true,
+    "a5_examples_validate_unchanged": [
+      "equipment_temperature",
+      "research_attribution",
+      "household_meter"
+    ],
+    "frozen_a5_record_replays_natively": "experiments/v1/a5_record_question_004",
+    "new_source_field": "issuer_interest (optional)",
+    "new_pattern": "source_adjudication",
+    "new_diagnostic": "adjudication_requires_attributed_reports",
+    "starter_graph_change": "first fitting pattern permitted by profile.allowed_patterns; document_record when none listed"
+  },
+  "decisions_to_confirm": [
+    "Fixture profiles use min_origins 2 with premise_min_origins 1 (an existing profile field) so a single-source report can be a premise while establishing nothing alone; without it no adjudication could be built from single-source reports.",
+    "opposed_unanswered is expected to end with inquiry_completed false: a standing founded rebut blocks completion by the existing rule, and the honest proposer leaves opposition open.",
+    "The scripted worker excludes relay sources (clerk's note, shift note) from the relied-on reports when two placed reports exist, and includes them with positioning left open otherwise.",
+    "The open result does not add issuer_id (only issuer_interest when supplied) so frozen records' tool-response hashes are unchanged."
+  ],
+  "implementation_file_sha256": {
+    "inquiry/v1/__init__.py": "4f2f295ee26bdb1673f13c9bb07d755bcb5e24cb378627986742ffdb8e061c98",
+    "inquiry/v1/__main__.py": "482b8693e2fe6dbd732e3d7961e03827d3efa187bad11d29da188be580ebbeea",
+    "inquiry/v1/adapters/__init__.py": "ad72c7906d1519060d8481e5e17ea1e9e9a19a3835bcf0484c4e1c64ace02a02",
+    "inquiry/v1/adapters/adjudication.py": "36bbf0ebeea70a45af83537f1b6a25e444ac107184c8850e11bebda1cb41b521",
+    "inquiry/v1/adapters/adjudication_demo.py": "06310554344c9cb4652246e900f45b82a4ca0270d7a458a8f1616e3e4d5d7198",
+    "inquiry/v1/adapters/hardship.py": "6a64424a3191d706bec14868bf7a63f89abb547ee2ee00a84135bbcafd95e95f",
+    "inquiry/v1/adapters/hardship_application.py": "4b292a5c319f4a2e8ac6bacef52dc502593908feafd8d4282065a8dd40f25849",
+    "inquiry/v1/adapters/hardship_demo.py": "6c68fe84eb9ba899e1e59d44cd04feacd0fd460378eff4d07c6f3704d5ad8124",
+    "inquiry/v1/adapters/hardship_scoring.py": "7514c550e0314331fcc99c55965369d1300c414f381c8190eea1ee391405511e",
+    "inquiry/v1/adapters/history.py": "fea90b0b28b2ade3a82b44a32d9034578e285655edcbb7245f08c7907fa5867c",
+    "inquiry/v1/adapters/legacy.py": "99d5cbda2c8fc7f0aa78038e8673be395e756d6aec8d118334a7213d7cc66fea",
+    "inquiry/v1/cli.py": "a8462cc16cbec62a907074d7fa758e19886661ecc706907e9ee5ba84e2414e52",
+    "inquiry/v1/contracts.py": "40d7c384d5744c48cf65825ceb10588839e355bc5960fdf2678b87e5e741eccb",
+    "inquiry/v1/data/adjudication/cases.json": "c586716bb19dfb097eec53d5b12c70ab9c4c3bdef15e355cfe82ad857bee6ec2",
+    "inquiry/v1/data/adjudication/expectations.json": "b0f4cd5025f30a932fbc627db5b3bf4d148f7e07024e19f15871184ec2ad06c0",
+    "inquiry/v1/demo.py": "99cb3825bcb6eb1ec806df87106f6f3c866440ca5681847148ca607c4f57bac4",
+    "inquiry/v1/evidence.py": "c200911f06369ba98e8a845f22cbfc0bf1baedc8f6f01ae5f50aa9e084c33574",
+    "inquiry/v1/experiments.py": "a757268b1baa65c42678ba972eb2f1fc02a727429a3f8acc030924081bca4948",
+    "inquiry/v1/kernel.py": "9953858ab25006929bc018b98aa1e731c11e002cc5a0d5c8f933971eb1e984b7",
+    "inquiry/v1/mcp_server.py": "2ea999a9f0fc3b6b72ec7ee39be5486af7d6ea31c145842af75edad9dcc8f2aa",
+    "inquiry/v1/models.py": "4594f11da39aea2820521eaf4425eb43289194e1a663aa4771dad42e70dcb238",
+    "inquiry/v1/packets.py": "56c885465ce1eda53a3dfd7b14f3b0e956ffeb71a65ed19a63a17de002e780de",
+    "inquiry/v1/persistence.py": "73045f87ccd1be78e1a75972e031bb7da845af895afaef17cef0383e074c6172",
+    "inquiry/v1/premises.py": "2af6adb872c9b9a81d23ab54be9e6258c64fe2ca4b6b59d7acdb9622479afd23",
+    "inquiry/v1/protocol.py": "fed66aabe458f7131fda3921650d0d9c5c0cda4a9c15021984f08783e43a9c69",
+    "inquiry/v1/runtime.py": "bb44b8c2b7bcd7b79ab98e65ddd57327bce8871d593b762d88a2338cb18f4160",
+    "inquiry/v1/scoring.py": "4f083f7ad0e10e512dce0f9df53bddd8edfb78f75483ef40673e039e255566a3",
+    "inquiry/v1/service.py": "88c758b468d4502de02a285ff44ee9e928e07ae293cedd48549ba11ebe51ba0d",
+    "inquiry/v1/triage.py": "0eb01efc26eab0e7143765ce5d710422c9c731b4796a69df21dbd057a3bd7d39",
+    "inquiry/v1/workers.py": "bc6ba244ad031a358a786885a96751c6c3e97a7fe3f6aac8576e5f421d94fb26"
+  },
+  "hosted_ci": "Not observed from this host; local runs of the six CI commands and the adjudication bench are recorded above."
+}

@@ -1,6 +1,6 @@
 # Epistemic inquiry service
 
-Version 1.0.0a6 — 14 November 2026
+Version 1.0.0a7 — 14 November 2026
 
 ## Architectural boundary
 
@@ -39,8 +39,9 @@ graph, ledger and fresh workers supplied by host factories. No benchmark oracle
 or application adapter is imported by the service.
 
 The kernel currently supports attribution, document records, rule application,
-single-event process tracing, explicit conjunction/composition, and bounded
-absence. This is part of E1, E2, E3 and E5. A universal target can be represented
+single-event process tracing, explicit conjunction/composition, bounded
+absence, and source adjudication (a7: a world assertion from several attributed
+reports, including opposed ones). This is part of E1, E2, E3 and E5. A universal target can be represented
 and examined without being forced into an unsupported positive proof pattern.
 General estimation, forecasting, instrument building and quantitative composition
 remain future work. The `capabilities` tool states the implemented patterns and
@@ -232,6 +233,51 @@ one per class: a logger reading, whether an inspection record satisfies the rele
 procedure, whether a supervisor waived a step verbally, and whether a supplier will
 deliver by a date.
 
+## Source adjudication (a7)
+
+The first judgment pattern. `source_adjudication` concludes a `substantive`
+`assertion` from two or more admitted attribution claims (form
+`source_reports`), each with its own admitted `attribution` argument. Six
+conditions are required and none may be assumed: `positioning` (each relied-on
+source was placed to observe or know), `interest` (each source's stake is
+identified and weighed), `independence` (the reports do not share an origin),
+`opposition` (every opposed report is recorded and answered),
+`inference_validity` and `applicability`. The design note is
+[`V1_ADJUDICATION.md`](V1_ADJUDICATION.md).
+
+What the kernel checks in code: at least two premises, each an admitted
+`source_reports` claim with an admitted attribution argument
+(`adjudication_requires_attributed_reports`); the six conditions present,
+distinct and met; the support-origin count of the standing derivation against
+`profile.min_origins`; each opposed report as a `rebut` on the claim founded on
+its own attribution argument (`support_argument_id`), discharged only by a reply
+condition with located evidence from a later revision. What a model judges: the
+truth of the six assessments and whether a report is opposed. The kernel never
+reads prose for either.
+
+Profiles: a profile with `min_origins` 2 and `premise_min_origins` 1 lets a
+single-source report serve as a premise while establishing nothing on its own.
+`starter_graph` now takes the first fitting pattern the profile's
+`allowed_patterns` permits, in catalogue order; a profile that lists none still
+gets `document_record` for an assertion. A caller selects adjudication by
+listing `allowed_patterns` without `document_record`.
+
+Sources gain an optional `issuer_interest` string: the issuer's declared stake,
+supplied by the caller, shown beside the issuer in the manifest and in `search`
+and `open` results. The kernel ignores it; it is data for the proposer's
+`interest` assessment and for the critic.
+
+The adjudication fixture family (`inquiry/v1/data/adjudication/`): twelve
+public requests in a plant-maintenance setting, six case types (corroborated,
+interested_only, opposed_unanswered, opposed_answered, superseded, hearsay) in a
+pump and a compressor variant. `cases.json` holds the requests and nothing
+else; `expectations.json` is read only by the loader. A scripted worker,
+labelled a test instrument, reaches the expected status for every case in the
+harness arm; it is plumbing for the kernel checks, not evidence about a model.
+`bench --adapter adjudication` and `run --adapter adjudication --question
+<case>` select the family; `--demo` uses the scripted worker, `--model` a live
+one.
+
 ## Host integration
 
 The host decides which action classes require a premise check and what it does with
@@ -326,7 +372,19 @@ benchmark oracle or selecting hardship expectations. Custom authoring packets
 require an explicit adapter. A requested business product is evaluated by its
 application test, not by generic inquiry completion.
 
+The adjudication family (a7) is the second bundled fixture, behind
+`--adapter adjudication`; it has no authoring packet, so `--packet`,
+`--mutation` and `--baseline-only` are refused with it. Its loader and scripted
+worker live in `inquiry.v1.adapters.adjudication` and
+`inquiry.v1.adapters.adjudication_demo`.
+
 ## Historical records
+
+Version a7 adds the `source_adjudication` pattern, the optional
+`issuer_interest` source field and the adjudication fixture family. The request
+and response contract versions are unchanged: the new field is optional, the
+seven earlier patterns keep their semantics, and a6 and a5 records replay
+unchanged. The hardship matrix is unaffected.
 
 Version a6 bumps the request contract to `inquiry-request/v1.1`, the response
 contract to `epistemic-response/v1.1` and the scorer to 0.4. Both bumps are
