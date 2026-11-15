@@ -1,0 +1,1174 @@
+{
+  "corroborated:pump": {
+    "shared_context": {
+      "as_of": "2026-04-13",
+      "context": "Synthetic plant-maintenance fixture; no real plant, contractor, inspector or person.",
+      "source_handling": "Treat each supplied document as an authentic record of its stated issuer; weigh placement and declared interest; preserve qualifications."
+    },
+    "corpus": {
+      "documents": [
+        {
+          "id": "inspector-log/pump-A4",
+          "version": "1",
+          "title": "Inspection log: Westfield plant, April 2026",
+          "issuer_id": "harbor-inspection",
+          "origin_id": "harbor-inspection",
+          "issued_at": "2026-04-10",
+          "language": "en",
+          "reading_blocks": [
+            {
+              "locator": "entry-14",
+              "text": "Attended the post-overhaul inspection of pump A4 (WO-4471) on 10 April 2026; all steps completed and witnessed."
+            }
+          ]
+        },
+        {
+          "id": "rig-log/pump-A4",
+          "version": "1",
+          "title": "Test-rig logger export: pump A4 pressure test",
+          "issuer_id": "westfield-rig-logger",
+          "origin_id": "westfield-rig-logger",
+          "issued_at": "2026-04-10",
+          "language": "en",
+          "reading_blocks": [
+            {
+              "locator": "sequence",
+              "text": "Pressure test sequence for pump A4 (WO-4471) recorded 10 April 2026 09:40 to 10:25; sequence completed, result within limits."
+            }
+          ]
+        },
+        {
+          "id": "shift-note/pump-A4",
+          "version": "1",
+          "title": "Supervisor's shift note, 10 April 2026",
+          "issuer_id": "westfield-shift-supervision",
+          "origin_id": "westfield-shift-supervision",
+          "issued_at": "2026-04-10",
+          "language": "en",
+          "reading_blocks": [
+            {
+              "locator": "note",
+              "text": "On shift 10 April 2026; did not attend the pump A4 inspection; informed by the contractor that it was completed."
+            }
+          ]
+        }
+      ],
+      "current_versions": {
+        "inspector-log/pump-A4": "1",
+        "rig-log/pump-A4": "1",
+        "shift-note/pump-A4": "1"
+      }
+    },
+    "question": {
+      "id": "adjudication:corroborated:pump",
+      "question": "Was the required post-overhaul inspection of pump A4 (WO-4471) completed before the unit returned to service on 2026-04-13?",
+      "intended_use": "A scoped epistemic finding about the inspection; the release decision belongs to the caller.",
+      "scope": {
+        "unit": "pump-A4",
+        "work_order": "WO-4471",
+        "returned_to_service": "2026-04-13"
+      },
+      "target": {
+        "kind": "substantive",
+        "form": "assertion"
+      },
+      "stakes": {
+        "level": "high",
+        "required_standing": [
+          "established"
+        ],
+        "basis": "A wrong belief about the inspection would return an uninspected unit to service."
+      },
+      "profile": {
+        "id": "adjudication-v1",
+        "version": "1",
+        "authority": "Fixture author; development use only.",
+        "requirements": [
+          "Conclude about the inspection from the supplied reports, not about what any one report says.",
+          "Weigh each source's placement and declared interest; record and answer opposed reports.",
+          "Two independent origins are needed to establish the assertion."
+        ],
+        "kernel": {
+          "min_origins": 2,
+          "premise_min_origins": 1,
+          "allowed_patterns": [
+            "attribution",
+            "source_adjudication"
+          ]
+        }
+      }
+    }
+  },
+  "corroborated:compressor": {
+    "shared_context": {
+      "as_of": "2026-05-26",
+      "context": "Synthetic plant-maintenance fixture; no real plant, contractor, inspector or person.",
+      "source_handling": "Treat each supplied document as an authentic record of its stated issuer; weigh placement and declared interest; preserve qualifications."
+    },
+    "corpus": {
+      "documents": [
+        {
+          "id": "inspector-log/compressor-C7",
+          "version": "1",
+          "title": "Inspection log: Eastgate plant, May 2026",
+          "issuer_id": "delta-verification",
+          "origin_id": "delta-verification",
+          "issued_at": "2026-05-22",
+          "language": "en",
+          "reading_blocks": [
+            {
+              "locator": "entry-14",
+              "text": "22 May 2026: present for the compressor C7 (WO-5120) post-overhaul inspection; each step completed in my presence."
+            }
+          ]
+        },
+        {
+          "id": "rig-log/compressor-C7",
+          "version": "1",
+          "title": "Test-rig logger export: compressor C7 pressure test",
+          "issuer_id": "eastgate-rig-logger",
+          "origin_id": "eastgate-rig-logger",
+          "issued_at": "2026-05-22",
+          "language": "en",
+          "reading_blocks": [
+            {
+              "locator": "sequence",
+              "text": "Test-rig log, compressor C7 (WO-5120): pressure test sequence started 22 May 2026 13:05 and completed 13:48 within limits."
+            }
+          ]
+        },
+        {
+          "id": "shift-note/compressor-C7",
+          "version": "1",
+          "title": "Supervisor's shift note, 22 May 2026",
+          "issuer_id": "eastgate-shift-supervision",
+          "origin_id": "eastgate-shift-supervision",
+          "issued_at": "2026-05-22",
+          "language": "en",
+          "reading_blocks": [
+            {
+              "locator": "note",
+              "text": "Shift note 22 May 2026: compressor C7 inspection completed according to the contractor; I did not attend."
+            }
+          ]
+        }
+      ],
+      "current_versions": {
+        "inspector-log/compressor-C7": "1",
+        "rig-log/compressor-C7": "1",
+        "shift-note/compressor-C7": "1"
+      }
+    },
+    "question": {
+      "id": "adjudication:corroborated:compressor",
+      "question": "Was the required post-overhaul inspection of compressor C7 (WO-5120) completed before the unit returned to service on 2026-05-26?",
+      "intended_use": "A scoped epistemic finding about the inspection; the release decision belongs to the caller.",
+      "scope": {
+        "unit": "compressor-C7",
+        "work_order": "WO-5120",
+        "returned_to_service": "2026-05-26"
+      },
+      "target": {
+        "kind": "substantive",
+        "form": "assertion"
+      },
+      "stakes": {
+        "level": "high",
+        "required_standing": [
+          "established"
+        ],
+        "basis": "A wrong belief about the inspection would return an uninspected unit to service."
+      },
+      "profile": {
+        "id": "adjudication-v1",
+        "version": "1",
+        "authority": "Fixture author; development use only.",
+        "requirements": [
+          "Conclude about the inspection from the supplied reports, not about what any one report says.",
+          "Weigh each source's placement and declared interest; record and answer opposed reports.",
+          "Two independent origins are needed to establish the assertion."
+        ],
+        "kernel": {
+          "min_origins": 2,
+          "premise_min_origins": 1,
+          "allowed_patterns": [
+            "attribution",
+            "source_adjudication"
+          ]
+        }
+      }
+    }
+  },
+  "interested_only:pump": {
+    "shared_context": {
+      "as_of": "2026-04-13",
+      "context": "Synthetic plant-maintenance fixture; no real plant, contractor, inspector or person.",
+      "source_handling": "Treat each supplied document as an authentic record of its stated issuer; weigh placement and declared interest; preserve qualifications."
+    },
+    "corpus": {
+      "documents": [
+        {
+          "id": "contractor-report/pump-A4",
+          "version": "1",
+          "title": "Completion report: pump A4 overhaul (WO-4471)",
+          "issuer_id": "northfield-mechanical",
+          "origin_id": "northfield-mechanical",
+          "issued_at": "2026-04-10",
+          "language": "en",
+          "reading_blocks": [
+            {
+              "locator": "summary",
+              "text": "Northfield Mechanical completed the post-overhaul inspection of pump A4 (WO-4471) on 10 April 2026; all required steps, including the pressure test, were performed and signed off."
+            }
+          ],
+          "issuer_interest": "Paid on certified completion of the overhaul this report describes."
+        },
+        {
+          "id": "memo/pump-A4",
+          "version": "1",
+          "title": "Office memo: pump A4 inspection status",
+          "issuer_id": "westfield-plant-office",
+          "origin_id": "westfield-plant-office",
+          "issued_at": "2026-04-10",
+          "language": "en",
+          "reading_blocks": [
+            {
+              "locator": "memo",
+              "text": "Per the contractor's completion report, the pump A4 inspection was completed on 10 April 2026."
+            }
+          ],
+          "derived_from": [
+            {
+              "document_id": "contractor-report/pump-A4",
+              "version": "1",
+              "locator": "summary"
+            }
+          ]
+        }
+      ],
+      "current_versions": {
+        "contractor-report/pump-A4": "1",
+        "memo/pump-A4": "1"
+      }
+    },
+    "question": {
+      "id": "adjudication:interested_only:pump",
+      "question": "Was the required post-overhaul inspection of pump A4 (WO-4471) completed before the unit returned to service on 2026-04-13?",
+      "intended_use": "A scoped epistemic finding about the inspection; the release decision belongs to the caller.",
+      "scope": {
+        "unit": "pump-A4",
+        "work_order": "WO-4471",
+        "returned_to_service": "2026-04-13"
+      },
+      "target": {
+        "kind": "substantive",
+        "form": "assertion"
+      },
+      "stakes": {
+        "level": "high",
+        "required_standing": [
+          "established"
+        ],
+        "basis": "A wrong belief about the inspection would return an uninspected unit to service."
+      },
+      "profile": {
+        "id": "adjudication-v1",
+        "version": "1",
+        "authority": "Fixture author; development use only.",
+        "requirements": [
+          "Conclude about the inspection from the supplied reports, not about what any one report says.",
+          "Weigh each source's placement and declared interest; record and answer opposed reports.",
+          "Two independent origins are needed to establish the assertion."
+        ],
+        "kernel": {
+          "min_origins": 2,
+          "premise_min_origins": 1,
+          "allowed_patterns": [
+            "attribution",
+            "source_adjudication"
+          ]
+        }
+      }
+    }
+  },
+  "interested_only:compressor": {
+    "shared_context": {
+      "as_of": "2026-05-26",
+      "context": "Synthetic plant-maintenance fixture; no real plant, contractor, inspector or person.",
+      "source_handling": "Treat each supplied document as an authentic record of its stated issuer; weigh placement and declared interest; preserve qualifications."
+    },
+    "corpus": {
+      "documents": [
+        {
+          "id": "contractor-report/compressor-C7",
+          "version": "1",
+          "title": "Completion report: compressor C7 overhaul (WO-5120)",
+          "issuer_id": "ridgeline-rotating",
+          "origin_id": "ridgeline-rotating",
+          "issued_at": "2026-05-22",
+          "language": "en",
+          "reading_blocks": [
+            {
+              "locator": "summary",
+              "text": "Post-overhaul inspection of compressor C7 (WO-5120) completed by Ridgeline Rotating Equipment on 22 May 2026. Every required step was carried out and the sign-off sheet is attached."
+            }
+          ],
+          "issuer_interest": "Paid on certified completion of the overhaul this report describes."
+        },
+        {
+          "id": "memo/compressor-C7",
+          "version": "1",
+          "title": "Office memo: compressor C7 inspection status",
+          "issuer_id": "eastgate-plant-office",
+          "origin_id": "eastgate-plant-office",
+          "issued_at": "2026-05-22",
+          "language": "en",
+          "reading_blocks": [
+            {
+              "locator": "memo",
+              "text": "Status for compressor C7: the contractor's completion report states the inspection was completed on 22 May 2026."
+            }
+          ],
+          "derived_from": [
+            {
+              "document_id": "contractor-report/compressor-C7",
+              "version": "1",
+              "locator": "summary"
+            }
+          ]
+        }
+      ],
+      "current_versions": {
+        "contractor-report/compressor-C7": "1",
+        "memo/compressor-C7": "1"
+      }
+    },
+    "question": {
+      "id": "adjudication:interested_only:compressor",
+      "question": "Was the required post-overhaul inspection of compressor C7 (WO-5120) completed before the unit returned to service on 2026-05-26?",
+      "intended_use": "A scoped epistemic finding about the inspection; the release decision belongs to the caller.",
+      "scope": {
+        "unit": "compressor-C7",
+        "work_order": "WO-5120",
+        "returned_to_service": "2026-05-26"
+      },
+      "target": {
+        "kind": "substantive",
+        "form": "assertion"
+      },
+      "stakes": {
+        "level": "high",
+        "required_standing": [
+          "established"
+        ],
+        "basis": "A wrong belief about the inspection would return an uninspected unit to service."
+      },
+      "profile": {
+        "id": "adjudication-v1",
+        "version": "1",
+        "authority": "Fixture author; development use only.",
+        "requirements": [
+          "Conclude about the inspection from the supplied reports, not about what any one report says.",
+          "Weigh each source's placement and declared interest; record and answer opposed reports.",
+          "Two independent origins are needed to establish the assertion."
+        ],
+        "kernel": {
+          "min_origins": 2,
+          "premise_min_origins": 1,
+          "allowed_patterns": [
+            "attribution",
+            "source_adjudication"
+          ]
+        }
+      }
+    }
+  },
+  "opposed_unanswered:pump": {
+    "shared_context": {
+      "as_of": "2026-04-13",
+      "context": "Synthetic plant-maintenance fixture; no real plant, contractor, inspector or person.",
+      "source_handling": "Treat each supplied document as an authentic record of its stated issuer; weigh placement and declared interest; preserve qualifications."
+    },
+    "corpus": {
+      "documents": [
+        {
+          "id": "contractor-report/pump-A4",
+          "version": "1",
+          "title": "Completion report: pump A4 overhaul (WO-4471)",
+          "issuer_id": "northfield-mechanical",
+          "origin_id": "northfield-mechanical",
+          "issued_at": "2026-04-10",
+          "language": "en",
+          "reading_blocks": [
+            {
+              "locator": "summary",
+              "text": "Northfield Mechanical completed the post-overhaul inspection of pump A4 (WO-4471) on 10 April 2026; all required steps, including the pressure test, were performed and signed off."
+            }
+          ],
+          "issuer_interest": "Paid on certified completion of the overhaul this report describes."
+        },
+        {
+          "id": "rig-log/pump-A4",
+          "version": "1",
+          "title": "Test-rig logger export: pump A4 pressure test",
+          "issuer_id": "westfield-rig-logger",
+          "origin_id": "westfield-rig-logger",
+          "issued_at": "2026-04-10",
+          "language": "en",
+          "reading_blocks": [
+            {
+              "locator": "sequence",
+              "text": "Pressure test sequence for pump A4 (WO-4471) recorded 10 April 2026 09:40 to 10:25; sequence completed, result within limits."
+            }
+          ]
+        },
+        {
+          "id": "inspector-log/pump-A4",
+          "version": "1",
+          "title": "Inspection log: Westfield plant, April 2026",
+          "issuer_id": "harbor-inspection",
+          "origin_id": "harbor-inspection",
+          "issued_at": "2026-04-10",
+          "language": "en",
+          "reading_blocks": [
+            {
+              "locator": "entry-15",
+              "text": "pump A4 (WO-4471) inspection not completed; pressure test outstanding as of 10 April 2026."
+            }
+          ]
+        }
+      ],
+      "current_versions": {
+        "contractor-report/pump-A4": "1",
+        "rig-log/pump-A4": "1",
+        "inspector-log/pump-A4": "1"
+      }
+    },
+    "question": {
+      "id": "adjudication:opposed_unanswered:pump",
+      "question": "Was the required post-overhaul inspection of pump A4 (WO-4471) completed before the unit returned to service on 2026-04-13?",
+      "intended_use": "A scoped epistemic finding about the inspection; the release decision belongs to the caller.",
+      "scope": {
+        "unit": "pump-A4",
+        "work_order": "WO-4471",
+        "returned_to_service": "2026-04-13"
+      },
+      "target": {
+        "kind": "substantive",
+        "form": "assertion"
+      },
+      "stakes": {
+        "level": "high",
+        "required_standing": [
+          "established"
+        ],
+        "basis": "A wrong belief about the inspection would return an uninspected unit to service."
+      },
+      "profile": {
+        "id": "adjudication-v1",
+        "version": "1",
+        "authority": "Fixture author; development use only.",
+        "requirements": [
+          "Conclude about the inspection from the supplied reports, not about what any one report says.",
+          "Weigh each source's placement and declared interest; record and answer opposed reports.",
+          "Two independent origins are needed to establish the assertion."
+        ],
+        "kernel": {
+          "min_origins": 2,
+          "premise_min_origins": 1,
+          "allowed_patterns": [
+            "attribution",
+            "source_adjudication"
+          ]
+        }
+      }
+    }
+  },
+  "opposed_unanswered:compressor": {
+    "shared_context": {
+      "as_of": "2026-05-26",
+      "context": "Synthetic plant-maintenance fixture; no real plant, contractor, inspector or person.",
+      "source_handling": "Treat each supplied document as an authentic record of its stated issuer; weigh placement and declared interest; preserve qualifications."
+    },
+    "corpus": {
+      "documents": [
+        {
+          "id": "contractor-report/compressor-C7",
+          "version": "1",
+          "title": "Completion report: compressor C7 overhaul (WO-5120)",
+          "issuer_id": "ridgeline-rotating",
+          "origin_id": "ridgeline-rotating",
+          "issued_at": "2026-05-22",
+          "language": "en",
+          "reading_blocks": [
+            {
+              "locator": "summary",
+              "text": "Post-overhaul inspection of compressor C7 (WO-5120) completed by Ridgeline Rotating Equipment on 22 May 2026. Every required step was carried out and the sign-off sheet is attached."
+            }
+          ],
+          "issuer_interest": "Paid on certified completion of the overhaul this report describes."
+        },
+        {
+          "id": "rig-log/compressor-C7",
+          "version": "1",
+          "title": "Test-rig logger export: compressor C7 pressure test",
+          "issuer_id": "eastgate-rig-logger",
+          "origin_id": "eastgate-rig-logger",
+          "issued_at": "2026-05-22",
+          "language": "en",
+          "reading_blocks": [
+            {
+              "locator": "sequence",
+              "text": "Test-rig log, compressor C7 (WO-5120): pressure test sequence started 22 May 2026 13:05 and completed 13:48 within limits."
+            }
+          ]
+        },
+        {
+          "id": "inspector-log/compressor-C7",
+          "version": "1",
+          "title": "Inspection log: Eastgate plant, May 2026",
+          "issuer_id": "delta-verification",
+          "origin_id": "delta-verification",
+          "issued_at": "2026-05-22",
+          "language": "en",
+          "reading_blocks": [
+            {
+              "locator": "entry-15",
+              "text": "As of 22 May 2026 the compressor C7 (WO-5120) inspection was not completed: the pressure test remains outstanding."
+            }
+          ]
+        }
+      ],
+      "current_versions": {
+        "contractor-report/compressor-C7": "1",
+        "rig-log/compressor-C7": "1",
+        "inspector-log/compressor-C7": "1"
+      }
+    },
+    "question": {
+      "id": "adjudication:opposed_unanswered:compressor",
+      "question": "Was the required post-overhaul inspection of compressor C7 (WO-5120) completed before the unit returned to service on 2026-05-26?",
+      "intended_use": "A scoped epistemic finding about the inspection; the release decision belongs to the caller.",
+      "scope": {
+        "unit": "compressor-C7",
+        "work_order": "WO-5120",
+        "returned_to_service": "2026-05-26"
+      },
+      "target": {
+        "kind": "substantive",
+        "form": "assertion"
+      },
+      "stakes": {
+        "level": "high",
+        "required_standing": [
+          "established"
+        ],
+        "basis": "A wrong belief about the inspection would return an uninspected unit to service."
+      },
+      "profile": {
+        "id": "adjudication-v1",
+        "version": "1",
+        "authority": "Fixture author; development use only.",
+        "requirements": [
+          "Conclude about the inspection from the supplied reports, not about what any one report says.",
+          "Weigh each source's placement and declared interest; record and answer opposed reports.",
+          "Two independent origins are needed to establish the assertion."
+        ],
+        "kernel": {
+          "min_origins": 2,
+          "premise_min_origins": 1,
+          "allowed_patterns": [
+            "attribution",
+            "source_adjudication"
+          ]
+        }
+      }
+    }
+  },
+  "opposed_answered:pump": {
+    "shared_context": {
+      "as_of": "2026-04-13",
+      "context": "Synthetic plant-maintenance fixture; no real plant, contractor, inspector or person.",
+      "source_handling": "Treat each supplied document as an authentic record of its stated issuer; weigh placement and declared interest; preserve qualifications."
+    },
+    "corpus": {
+      "documents": [
+        {
+          "id": "contractor-report/pump-A4",
+          "version": "1",
+          "title": "Completion report: pump A4 overhaul (WO-4471)",
+          "issuer_id": "northfield-mechanical",
+          "origin_id": "northfield-mechanical",
+          "issued_at": "2026-04-10",
+          "language": "en",
+          "reading_blocks": [
+            {
+              "locator": "summary",
+              "text": "Northfield Mechanical completed the post-overhaul inspection of pump A4 (WO-4471) on 10 April 2026; all required steps, including the pressure test, were performed and signed off."
+            }
+          ],
+          "issuer_interest": "Paid on certified completion of the overhaul this report describes."
+        },
+        {
+          "id": "rig-log/pump-A4",
+          "version": "1",
+          "title": "Test-rig logger export: pump A4 pressure test",
+          "issuer_id": "westfield-rig-logger",
+          "origin_id": "westfield-rig-logger",
+          "issued_at": "2026-04-10",
+          "language": "en",
+          "reading_blocks": [
+            {
+              "locator": "sequence",
+              "text": "Pressure test sequence for pump A4 (WO-4471) recorded 10 April 2026 09:40 to 10:25; sequence completed, result within limits."
+            }
+          ]
+        },
+        {
+          "id": "inspector-log/pump-A4",
+          "version": "1",
+          "title": "Inspection log: Westfield plant, April 2026",
+          "issuer_id": "harbor-inspection",
+          "origin_id": "harbor-inspection",
+          "issued_at": "2026-04-10",
+          "language": "en",
+          "reading_blocks": [
+            {
+              "locator": "entry-15",
+              "text": "Entry 15: inspection not completed; pressure test outstanding."
+            },
+            {
+              "locator": "entry-15-header",
+              "text": "Entry 15 concerns compressor K2 (WO-4468), not pump A4."
+            }
+          ]
+        }
+      ],
+      "current_versions": {
+        "contractor-report/pump-A4": "1",
+        "rig-log/pump-A4": "1",
+        "inspector-log/pump-A4": "1"
+      }
+    },
+    "question": {
+      "id": "adjudication:opposed_answered:pump",
+      "question": "Was the required post-overhaul inspection of pump A4 (WO-4471) completed before the unit returned to service on 2026-04-13?",
+      "intended_use": "A scoped epistemic finding about the inspection; the release decision belongs to the caller.",
+      "scope": {
+        "unit": "pump-A4",
+        "work_order": "WO-4471",
+        "returned_to_service": "2026-04-13"
+      },
+      "target": {
+        "kind": "substantive",
+        "form": "assertion"
+      },
+      "stakes": {
+        "level": "high",
+        "required_standing": [
+          "established"
+        ],
+        "basis": "A wrong belief about the inspection would return an uninspected unit to service."
+      },
+      "profile": {
+        "id": "adjudication-v1",
+        "version": "1",
+        "authority": "Fixture author; development use only.",
+        "requirements": [
+          "Conclude about the inspection from the supplied reports, not about what any one report says.",
+          "Weigh each source's placement and declared interest; record and answer opposed reports.",
+          "Two independent origins are needed to establish the assertion."
+        ],
+        "kernel": {
+          "min_origins": 2,
+          "premise_min_origins": 1,
+          "allowed_patterns": [
+            "attribution",
+            "source_adjudication"
+          ]
+        }
+      }
+    }
+  },
+  "opposed_answered:compressor": {
+    "shared_context": {
+      "as_of": "2026-05-26",
+      "context": "Synthetic plant-maintenance fixture; no real plant, contractor, inspector or person.",
+      "source_handling": "Treat each supplied document as an authentic record of its stated issuer; weigh placement and declared interest; preserve qualifications."
+    },
+    "corpus": {
+      "documents": [
+        {
+          "id": "contractor-report/compressor-C7",
+          "version": "1",
+          "title": "Completion report: compressor C7 overhaul (WO-5120)",
+          "issuer_id": "ridgeline-rotating",
+          "origin_id": "ridgeline-rotating",
+          "issued_at": "2026-05-22",
+          "language": "en",
+          "reading_blocks": [
+            {
+              "locator": "summary",
+              "text": "Post-overhaul inspection of compressor C7 (WO-5120) completed by Ridgeline Rotating Equipment on 22 May 2026. Every required step was carried out and the sign-off sheet is attached."
+            }
+          ],
+          "issuer_interest": "Paid on certified completion of the overhaul this report describes."
+        },
+        {
+          "id": "rig-log/compressor-C7",
+          "version": "1",
+          "title": "Test-rig logger export: compressor C7 pressure test",
+          "issuer_id": "eastgate-rig-logger",
+          "origin_id": "eastgate-rig-logger",
+          "issued_at": "2026-05-22",
+          "language": "en",
+          "reading_blocks": [
+            {
+              "locator": "sequence",
+              "text": "Test-rig log, compressor C7 (WO-5120): pressure test sequence started 22 May 2026 13:05 and completed 13:48 within limits."
+            }
+          ]
+        },
+        {
+          "id": "inspector-log/compressor-C7",
+          "version": "1",
+          "title": "Inspection log: Eastgate plant, May 2026",
+          "issuer_id": "delta-verification",
+          "origin_id": "delta-verification",
+          "issued_at": "2026-05-22",
+          "language": "en",
+          "reading_blocks": [
+            {
+              "locator": "entry-15",
+              "text": "Entry 22: inspection not completed; pressure test still outstanding."
+            },
+            {
+              "locator": "entry-15-header",
+              "text": "Entry 22 refers to pump B1 (WO-5117), not compressor C7."
+            }
+          ]
+        }
+      ],
+      "current_versions": {
+        "contractor-report/compressor-C7": "1",
+        "rig-log/compressor-C7": "1",
+        "inspector-log/compressor-C7": "1"
+      }
+    },
+    "question": {
+      "id": "adjudication:opposed_answered:compressor",
+      "question": "Was the required post-overhaul inspection of compressor C7 (WO-5120) completed before the unit returned to service on 2026-05-26?",
+      "intended_use": "A scoped epistemic finding about the inspection; the release decision belongs to the caller.",
+      "scope": {
+        "unit": "compressor-C7",
+        "work_order": "WO-5120",
+        "returned_to_service": "2026-05-26"
+      },
+      "target": {
+        "kind": "substantive",
+        "form": "assertion"
+      },
+      "stakes": {
+        "level": "high",
+        "required_standing": [
+          "established"
+        ],
+        "basis": "A wrong belief about the inspection would return an uninspected unit to service."
+      },
+      "profile": {
+        "id": "adjudication-v1",
+        "version": "1",
+        "authority": "Fixture author; development use only.",
+        "requirements": [
+          "Conclude about the inspection from the supplied reports, not about what any one report says.",
+          "Weigh each source's placement and declared interest; record and answer opposed reports.",
+          "Two independent origins are needed to establish the assertion."
+        ],
+        "kernel": {
+          "min_origins": 2,
+          "premise_min_origins": 1,
+          "allowed_patterns": [
+            "attribution",
+            "source_adjudication"
+          ]
+        }
+      }
+    }
+  },
+  "superseded:pump": {
+    "shared_context": {
+      "as_of": "2026-04-13",
+      "context": "Synthetic plant-maintenance fixture; no real plant, contractor, inspector or person.",
+      "source_handling": "Treat each supplied document as an authentic record of its stated issuer; weigh placement and declared interest; preserve qualifications."
+    },
+    "corpus": {
+      "documents": [
+        {
+          "id": "inspector-log/pump-A4",
+          "version": "1",
+          "title": "Inspection log: Westfield plant, April 2026",
+          "issuer_id": "harbor-inspection",
+          "origin_id": "harbor-inspection",
+          "issued_at": "2026-04-10",
+          "language": "en",
+          "reading_blocks": [
+            {
+              "locator": "entry-14",
+              "text": "pump A4 (WO-4471) inspection not completed; pressure test outstanding as of 10 April 2026."
+            }
+          ]
+        },
+        {
+          "id": "inspector-log/pump-A4",
+          "version": "2",
+          "title": "Inspection log: Westfield plant, April 2026",
+          "issuer_id": "harbor-inspection",
+          "origin_id": "harbor-inspection",
+          "issued_at": "2026-04-10",
+          "language": "en",
+          "reading_blocks": [
+            {
+              "locator": "entry-14",
+              "text": "Correction to the earlier entry: attended the pump A4 (WO-4471) inspection on 10 April 2026; all steps completed and witnessed."
+            }
+          ],
+          "supersedes": {
+            "document_id": "inspector-log/pump-A4",
+            "version": "1"
+          }
+        },
+        {
+          "id": "rig-log/pump-A4",
+          "version": "1",
+          "title": "Test-rig logger export: pump A4 pressure test",
+          "issuer_id": "westfield-rig-logger",
+          "origin_id": "westfield-rig-logger",
+          "issued_at": "2026-04-10",
+          "language": "en",
+          "reading_blocks": [
+            {
+              "locator": "sequence",
+              "text": "Pressure test sequence for pump A4 (WO-4471) recorded 10 April 2026 09:40 to 10:25; sequence completed, result within limits."
+            }
+          ]
+        }
+      ],
+      "current_versions": {
+        "inspector-log/pump-A4": "2",
+        "rig-log/pump-A4": "1"
+      }
+    },
+    "question": {
+      "id": "adjudication:superseded:pump",
+      "question": "Was the required post-overhaul inspection of pump A4 (WO-4471) completed before the unit returned to service on 2026-04-13?",
+      "intended_use": "A scoped epistemic finding about the inspection; the release decision belongs to the caller.",
+      "scope": {
+        "unit": "pump-A4",
+        "work_order": "WO-4471",
+        "returned_to_service": "2026-04-13"
+      },
+      "target": {
+        "kind": "substantive",
+        "form": "assertion"
+      },
+      "stakes": {
+        "level": "high",
+        "required_standing": [
+          "established"
+        ],
+        "basis": "A wrong belief about the inspection would return an uninspected unit to service."
+      },
+      "profile": {
+        "id": "adjudication-v1",
+        "version": "1",
+        "authority": "Fixture author; development use only.",
+        "requirements": [
+          "Conclude about the inspection from the supplied reports, not about what any one report says.",
+          "Weigh each source's placement and declared interest; record and answer opposed reports.",
+          "Two independent origins are needed to establish the assertion."
+        ],
+        "kernel": {
+          "min_origins": 2,
+          "premise_min_origins": 1,
+          "allowed_patterns": [
+            "attribution",
+            "source_adjudication"
+          ]
+        }
+      }
+    }
+  },
+  "superseded:compressor": {
+    "shared_context": {
+      "as_of": "2026-05-26",
+      "context": "Synthetic plant-maintenance fixture; no real plant, contractor, inspector or person.",
+      "source_handling": "Treat each supplied document as an authentic record of its stated issuer; weigh placement and declared interest; preserve qualifications."
+    },
+    "corpus": {
+      "documents": [
+        {
+          "id": "inspector-log/compressor-C7",
+          "version": "1",
+          "title": "Inspection log: Eastgate plant, May 2026",
+          "issuer_id": "delta-verification",
+          "origin_id": "delta-verification",
+          "issued_at": "2026-05-22",
+          "language": "en",
+          "reading_blocks": [
+            {
+              "locator": "entry-14",
+              "text": "As of 22 May 2026 the compressor C7 (WO-5120) inspection was not completed: the pressure test remains outstanding."
+            }
+          ]
+        },
+        {
+          "id": "inspector-log/compressor-C7",
+          "version": "2",
+          "title": "Inspection log: Eastgate plant, May 2026",
+          "issuer_id": "delta-verification",
+          "origin_id": "delta-verification",
+          "issued_at": "2026-05-22",
+          "language": "en",
+          "reading_blocks": [
+            {
+              "locator": "entry-14",
+              "text": "Corrected entry: present for the compressor C7 (WO-5120) inspection on 22 May 2026; each step completed in my presence."
+            }
+          ],
+          "supersedes": {
+            "document_id": "inspector-log/compressor-C7",
+            "version": "1"
+          }
+        },
+        {
+          "id": "rig-log/compressor-C7",
+          "version": "1",
+          "title": "Test-rig logger export: compressor C7 pressure test",
+          "issuer_id": "eastgate-rig-logger",
+          "origin_id": "eastgate-rig-logger",
+          "issued_at": "2026-05-22",
+          "language": "en",
+          "reading_blocks": [
+            {
+              "locator": "sequence",
+              "text": "Test-rig log, compressor C7 (WO-5120): pressure test sequence started 22 May 2026 13:05 and completed 13:48 within limits."
+            }
+          ]
+        }
+      ],
+      "current_versions": {
+        "inspector-log/compressor-C7": "2",
+        "rig-log/compressor-C7": "1"
+      }
+    },
+    "question": {
+      "id": "adjudication:superseded:compressor",
+      "question": "Was the required post-overhaul inspection of compressor C7 (WO-5120) completed before the unit returned to service on 2026-05-26?",
+      "intended_use": "A scoped epistemic finding about the inspection; the release decision belongs to the caller.",
+      "scope": {
+        "unit": "compressor-C7",
+        "work_order": "WO-5120",
+        "returned_to_service": "2026-05-26"
+      },
+      "target": {
+        "kind": "substantive",
+        "form": "assertion"
+      },
+      "stakes": {
+        "level": "high",
+        "required_standing": [
+          "established"
+        ],
+        "basis": "A wrong belief about the inspection would return an uninspected unit to service."
+      },
+      "profile": {
+        "id": "adjudication-v1",
+        "version": "1",
+        "authority": "Fixture author; development use only.",
+        "requirements": [
+          "Conclude about the inspection from the supplied reports, not about what any one report says.",
+          "Weigh each source's placement and declared interest; record and answer opposed reports.",
+          "Two independent origins are needed to establish the assertion."
+        ],
+        "kernel": {
+          "min_origins": 2,
+          "premise_min_origins": 1,
+          "allowed_patterns": [
+            "attribution",
+            "source_adjudication"
+          ]
+        }
+      }
+    }
+  },
+  "hearsay:pump": {
+    "shared_context": {
+      "as_of": "2026-04-13",
+      "context": "Synthetic plant-maintenance fixture; no real plant, contractor, inspector or person.",
+      "source_handling": "Treat each supplied document as an authentic record of its stated issuer; weigh placement and declared interest; preserve qualifications."
+    },
+    "corpus": {
+      "documents": [
+        {
+          "id": "contractor-report/pump-A4",
+          "version": "1",
+          "title": "Completion report: pump A4 overhaul (WO-4471)",
+          "issuer_id": "northfield-mechanical",
+          "origin_id": "northfield-mechanical",
+          "issued_at": "2026-04-10",
+          "language": "en",
+          "reading_blocks": [
+            {
+              "locator": "summary",
+              "text": "Northfield Mechanical completed the post-overhaul inspection of pump A4 (WO-4471) on 10 April 2026; all required steps, including the pressure test, were performed and signed off."
+            }
+          ],
+          "issuer_interest": "Paid on certified completion of the overhaul this report describes."
+        },
+        {
+          "id": "clerk-note/pump-A4",
+          "version": "1",
+          "title": "Clerk's note: pump A4",
+          "issuer_id": "westfield-plant-clerk",
+          "origin_id": "westfield-plant-clerk",
+          "issued_at": "2026-04-10",
+          "language": "en",
+          "reading_blocks": [
+            {
+              "locator": "note",
+              "text": "The contractor's foreman told me the pump A4 inspection was completed on 10 April 2026."
+            }
+          ]
+        }
+      ],
+      "current_versions": {
+        "contractor-report/pump-A4": "1",
+        "clerk-note/pump-A4": "1"
+      }
+    },
+    "question": {
+      "id": "adjudication:hearsay:pump",
+      "question": "Was the required post-overhaul inspection of pump A4 (WO-4471) completed before the unit returned to service on 2026-04-13?",
+      "intended_use": "A scoped epistemic finding about the inspection; the release decision belongs to the caller.",
+      "scope": {
+        "unit": "pump-A4",
+        "work_order": "WO-4471",
+        "returned_to_service": "2026-04-13"
+      },
+      "target": {
+        "kind": "substantive",
+        "form": "assertion"
+      },
+      "stakes": {
+        "level": "high",
+        "required_standing": [
+          "established"
+        ],
+        "basis": "A wrong belief about the inspection would return an uninspected unit to service."
+      },
+      "profile": {
+        "id": "adjudication-v1",
+        "version": "1",
+        "authority": "Fixture author; development use only.",
+        "requirements": [
+          "Conclude about the inspection from the supplied reports, not about what any one report says.",
+          "Weigh each source's placement and declared interest; record and answer opposed reports.",
+          "Two independent origins are needed to establish the assertion."
+        ],
+        "kernel": {
+          "min_origins": 2,
+          "premise_min_origins": 1,
+          "allowed_patterns": [
+            "attribution",
+            "source_adjudication"
+          ]
+        }
+      }
+    }
+  },
+  "hearsay:compressor": {
+    "shared_context": {
+      "as_of": "2026-05-26",
+      "context": "Synthetic plant-maintenance fixture; no real plant, contractor, inspector or person.",
+      "source_handling": "Treat each supplied document as an authentic record of its stated issuer; weigh placement and declared interest; preserve qualifications."
+    },
+    "corpus": {
+      "documents": [
+        {
+          "id": "contractor-report/compressor-C7",
+          "version": "1",
+          "title": "Completion report: compressor C7 overhaul (WO-5120)",
+          "issuer_id": "ridgeline-rotating",
+          "origin_id": "ridgeline-rotating",
+          "issued_at": "2026-05-22",
+          "language": "en",
+          "reading_blocks": [
+            {
+              "locator": "summary",
+              "text": "Post-overhaul inspection of compressor C7 (WO-5120) completed by Ridgeline Rotating Equipment on 22 May 2026. Every required step was carried out and the sign-off sheet is attached."
+            }
+          ],
+          "issuer_interest": "Paid on certified completion of the overhaul this report describes."
+        },
+        {
+          "id": "clerk-note/compressor-C7",
+          "version": "1",
+          "title": "Clerk's note: compressor C7",
+          "issuer_id": "eastgate-plant-clerk",
+          "origin_id": "eastgate-plant-clerk",
+          "issued_at": "2026-05-22",
+          "language": "en",
+          "reading_blocks": [
+            {
+              "locator": "note",
+              "text": "Ridgeline Rotating Equipment's site lead told me that the compressor C7 inspection was completed on 22 May 2026."
+            }
+          ]
+        }
+      ],
+      "current_versions": {
+        "contractor-report/compressor-C7": "1",
+        "clerk-note/compressor-C7": "1"
+      }
+    },
+    "question": {
+      "id": "adjudication:hearsay:compressor",
+      "question": "Was the required post-overhaul inspection of compressor C7 (WO-5120) completed before the unit returned to service on 2026-05-26?",
+      "intended_use": "A scoped epistemic finding about the inspection; the release decision belongs to the caller.",
+      "scope": {
+        "unit": "compressor-C7",
+        "work_order": "WO-5120",
+        "returned_to_service": "2026-05-26"
+      },
+      "target": {
+        "kind": "substantive",
+        "form": "assertion"
+      },
+      "stakes": {
+        "level": "high",
+        "required_standing": [
+          "established"
+        ],
+        "basis": "A wrong belief about the inspection would return an uninspected unit to service."
+      },
+      "profile": {
+        "id": "adjudication-v1",
+        "version": "1",
+        "authority": "Fixture author; development use only.",
+        "requirements": [
+          "Conclude about the inspection from the supplied reports, not about what any one report says.",
+          "Weigh each source's placement and declared interest; record and answer opposed reports.",
+          "Two independent origins are needed to establish the assertion."
+        ],
+        "kernel": {
+          "min_origins": 2,
+          "premise_min_origins": 1,
+          "allowed_patterns": [
+            "attribution",
+            "source_adjudication"
+          ]
+        }
+      }
+    }
+  }
+}

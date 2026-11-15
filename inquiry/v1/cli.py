@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+from copy import deepcopy
 from dataclasses import asdict
 import json
 from pathlib import Path
@@ -12,6 +13,7 @@ from typing import Any
 from . import __version__
 from .adapters.hardship import to_inquiry_request
 from .adapters.hardship_scoring import hardship_smoke_expectation
+from .adapters.adjudication import adjudication_case, load_adjudication_cases
 from .contracts import validate_inquiry_request
 from .experiments import ExperimentCase, run_experiments
 from .packets import DEFAULT_PACKET_PATH, load_packet
@@ -29,6 +31,9 @@ def _write_json(path: str | Path, value: Any) -> None:
 
 def _worker(args: argparse.Namespace):
     if args.demo:
+        if args.adapter == "adjudication":
+            from .adapters.adjudication_demo import AdjudicationWorker
+            return AdjudicationWorker()
         if args.adapter != "hardship":
             raise ValueError("--demo is the explicit hardship benchmark fixture; neutral --request runs require --model.")
         from .adapters.hardship_demo import DemoWorker
@@ -113,7 +118,8 @@ def main(argv: list[str] | None = None) -> int:
     source = run.add_mutually_exclusive_group()
     source.add_argument("--packet", help="Benchmark authoring packet; the bundled hardship fixture is the default.")
     source.add_argument("--request", help="Canonical domain-neutral inquiry request JSON; no benchmark expectations are selected.")
-    run.add_argument("--adapter", choices=["hardship"], help="Explicit authoring-packet adapter; defaults only for the bundled fixture.")
+    run.add_argument("--adapter", choices=["hardship", "adjudication"],
+                     help="Explicit fixture adapter: the hardship authoring packet (default for the bundled fixture) or the adjudication family.")
     run.add_argument("--question")
     run.add_argument("--mutation")
     run.add_argument("--arm", choices=["ordinary", "repertoire", "harness"], default="harness")
@@ -122,7 +128,7 @@ def main(argv: list[str] | None = None) -> int:
     _execution_options(run)
     bench = commands.add_parser("bench", help="Run matched controlled cases; smoke checks and human review are separate.")
     bench.add_argument("--packet")
-    bench.add_argument("--adapter", choices=["hardship"])
+    bench.add_argument("--adapter", choices=["hardship", "adjudication"])
     bench.add_argument("--arms", nargs="+", choices=["ordinary", "repertoire", "harness"], default=["ordinary", "repertoire", "harness"])
     bench.add_argument("--modes", nargs="+", choices=["supplied", "documents", "search"], default=["supplied"])
     bench.add_argument("--questions", nargs="+")
@@ -167,6 +173,14 @@ def main(argv: list[str] | None = None) -> int:
                     raise ValueError("--request already binds its question and profile; --adapter, --question, and --mutation apply only to authoring packets.")
                 public = validate_inquiry_request(json.loads(Path(args.request).read_text(encoding="utf-8")))
                 answer_spec = expectation = None
+            elif args.adapter == "adjudication":
+                if args.packet or args.mutation:
+                    raise ValueError("--adapter adjudication reads the bundled fixture family; --packet and --mutation do not apply.")
+                if not args.question:
+                    raise ValueError("--adapter adjudication needs --question naming a fixture case, such as corroborated:pump.")
+                case = adjudication_case(args.question)
+                public = deepcopy(dict(case.public_case))
+                answer_spec, expectation = case.oracle, case.smoke_expectation
             else:
                 packet = _benchmark_packet(args)
                 args.question = args.question or "question_004"
@@ -183,16 +197,21 @@ def main(argv: list[str] | None = None) -> int:
             print(f"\nRun: {result['status']} | stop: {result['stop_reason']} | output: {path.resolve()}")
             print("Development test instrument; no model-quality inference." if args.demo else "Human semantic adjudication remains pending.")
             return 0 if result["status"] == "complete" else 1
-        packet = _benchmark_packet(args)
-        cases = []
-        questions = args.questions or packet.question_ids
-        variants = (None,) if args.baseline_only else (None, *packet.mutation_ids)
-        for mutation in variants:
-            for question in questions:
-                cases.append(ExperimentCase(case_id=f"{question}/{mutation or 'baseline'}", family_id=packet.fixture_id,
-                    public_case=to_inquiry_request(packet.public(question, mutation)), oracle=packet.oracle(question, mutation),
-                    question_id=question, variant_id=mutation or "baseline",
-                    smoke_expectation=hardship_smoke_expectation(question, mutation)))
+        if args.adapter == "adjudication":
+            if args.packet or args.baseline_only:
+                raise ValueError("--adapter adjudication reads the bundled fixture family; --packet and --baseline-only do not apply.")
+            cases = load_adjudication_cases(args.questions)
+        else:
+            packet = _benchmark_packet(args)
+            cases = []
+            questions = args.questions or packet.question_ids
+            variants = (None,) if args.baseline_only else (None, *packet.mutation_ids)
+            for mutation in variants:
+                for question in questions:
+                    cases.append(ExperimentCase(case_id=f"{question}/{mutation or 'baseline'}", family_id=packet.fixture_id,
+                        public_case=to_inquiry_request(packet.public(question, mutation)), oracle=packet.oracle(question, mutation),
+                        question_id=question, variant_id=mutation or "baseline",
+                        smoke_expectation=hardship_smoke_expectation(question, mutation)))
         worker_description = "deterministic-demo" if args.demo else args.model
         manifest = {"adapter": args.adapter, "model_pool": [worker_description] + ([args.critic_model] if args.critic_model else []),
                     "effort": args.effort,

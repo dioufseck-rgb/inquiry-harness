@@ -27,7 +27,7 @@ include = ["inquiry*"]
 
 [tool.setuptools.package-data]
 inquiry = ["skills/*.md", "CURRICULUM.md"]
-"inquiry.v1" = ["data/*.json"]
+"inquiry.v1" = ["data/*.json", "data/adjudication/*.json"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

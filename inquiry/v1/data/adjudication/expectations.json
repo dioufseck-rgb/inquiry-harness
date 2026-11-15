@@ -1,0 +1,177 @@
+{
+  "oracle_version": "adjudication-development-0.1",
+  "status": "development fixture, not human-adjudicated gold",
+  "note": "Expectations for the public cases in cases.json; never merged into a request.",
+  "cases": {
+    "corroborated:pump": {
+      "case_type": "corroborated",
+      "variant": "pump",
+      "expected_mechanism": "two independent origins, all conditions met",
+      "smoke": {
+        "allowed_target_statuses": [
+          "established"
+        ],
+        "required_condition_ids": [],
+        "inquiry_completed": true,
+        "target_scope_answered": true
+      }
+    },
+    "corroborated:compressor": {
+      "case_type": "corroborated",
+      "variant": "compressor",
+      "expected_mechanism": "two independent origins, all conditions met",
+      "smoke": {
+        "allowed_target_statuses": [
+          "established"
+        ],
+        "required_condition_ids": [],
+        "inquiry_completed": true,
+        "target_scope_answered": true
+      }
+    },
+    "interested_only:pump": {
+      "case_type": "interested_only",
+      "variant": "pump",
+      "expected_mechanism": "support origins 1 of 2; independence left open by an honest proposer",
+      "smoke": {
+        "allowed_target_statuses": [
+          "not_established"
+        ],
+        "required_condition_ids": [
+          "K_independence"
+        ],
+        "inquiry_completed": true,
+        "target_scope_answered": true
+      }
+    },
+    "interested_only:compressor": {
+      "case_type": "interested_only",
+      "variant": "compressor",
+      "expected_mechanism": "support origins 1 of 2; independence left open by an honest proposer",
+      "smoke": {
+        "allowed_target_statuses": [
+          "not_established"
+        ],
+        "required_condition_ids": [
+          "K_independence"
+        ],
+        "inquiry_completed": true,
+        "target_scope_answered": true
+      }
+    },
+    "opposed_unanswered:pump": {
+      "case_type": "opposed_unanswered",
+      "variant": "pump",
+      "expected_mechanism": "a founded rebut on the claim with no admitted reply; opposition left open",
+      "smoke": {
+        "allowed_target_statuses": [
+          "not_established",
+          "contested"
+        ],
+        "required_condition_ids": [
+          "K_opposition"
+        ],
+        "inquiry_completed": false,
+        "target_scope_answered": true
+      }
+    },
+    "opposed_unanswered:compressor": {
+      "case_type": "opposed_unanswered",
+      "variant": "compressor",
+      "expected_mechanism": "a founded rebut on the claim with no admitted reply; opposition left open",
+      "smoke": {
+        "allowed_target_statuses": [
+          "not_established",
+          "contested"
+        ],
+        "required_condition_ids": [
+          "K_opposition"
+        ],
+        "inquiry_completed": false,
+        "target_scope_answered": true
+      }
+    },
+    "opposed_answered:pump": {
+      "case_type": "opposed_answered",
+      "variant": "pump",
+      "expected_mechanism": "the rebut is recorded and discharged by a reply condition quoting the other unit, in a later revision",
+      "smoke": {
+        "allowed_target_statuses": [
+          "established"
+        ],
+        "required_condition_ids": [],
+        "inquiry_completed": true,
+        "target_scope_answered": true
+      }
+    },
+    "opposed_answered:compressor": {
+      "case_type": "opposed_answered",
+      "variant": "compressor",
+      "expected_mechanism": "the rebut is recorded and discharged by a reply condition quoting the other unit, in a later revision",
+      "smoke": {
+        "allowed_target_statuses": [
+          "established"
+        ],
+        "required_condition_ids": [],
+        "inquiry_completed": true,
+        "target_scope_answered": true
+      }
+    },
+    "superseded:pump": {
+      "case_type": "superseded",
+      "variant": "pump",
+      "expected_mechanism": "the superseded version is not current; the current version and the sensor record are two origins",
+      "smoke": {
+        "allowed_target_statuses": [
+          "established"
+        ],
+        "required_condition_ids": [],
+        "inquiry_completed": true,
+        "target_scope_answered": true
+      }
+    },
+    "superseded:compressor": {
+      "case_type": "superseded",
+      "variant": "compressor",
+      "expected_mechanism": "the superseded version is not current; the current version and the sensor record are two origins",
+      "smoke": {
+        "allowed_target_statuses": [
+          "established"
+        ],
+        "required_condition_ids": [],
+        "inquiry_completed": true,
+        "target_scope_answered": true
+      }
+    },
+    "hearsay:pump": {
+      "case_type": "hearsay",
+      "variant": "pump",
+      "expected_mechanism": "positioning fails for the relay; the proposer leaves it open",
+      "smoke": {
+        "allowed_target_statuses": [
+          "not_established"
+        ],
+        "required_condition_ids": [
+          "K_positioning"
+        ],
+        "inquiry_completed": true,
+        "target_scope_answered": true
+      }
+    },
+    "hearsay:compressor": {
+      "case_type": "hearsay",
+      "variant": "compressor",
+      "expected_mechanism": "positioning fails for the relay; the proposer leaves it open",
+      "smoke": {
+        "allowed_target_statuses": [
+          "not_established"
+        ],
+        "required_condition_ids": [
+          "K_positioning"
+        ],
+        "inquiry_completed": true,
+        "target_scope_answered": true
+      }
+    }
+  }
+}
