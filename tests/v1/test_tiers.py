@@ -25,7 +25,9 @@ def test_default_tiers_follow_the_host_ceiling():
     tiers = InquiryService(lambda: None, max_budget=ceiling).capabilities()["budget_tiers"]
     assert set(tiers) == {"low", "medium", "high"}
     assert tiers["high"] == asdict(ceiling)
-    assert tiers["low"] == {key: min(value, _FOCUSED_LIMITS[key]) for key, value in asdict(ceiling).items()}
+    # fields without a focused limit (the cost cap) keep the ceiling value in the low tier
+    assert tiers["low"] == {key: (min(value, _FOCUSED_LIMITS[key]) if key in _FOCUSED_LIMITS else value)
+                            for key, value in asdict(ceiling).items()}
     # medium: half the ceiling per field, rounded down, never below low
     assert tiers["medium"]["max_model_calls"] == 10 and tiers["medium"]["max_tool_calls"] == 4
     assert tiers["medium"]["max_total_tokens"] == 150_000

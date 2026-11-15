@@ -13,7 +13,9 @@ from functools import partial
 import json
 from typing import Any
 
-from .runtime import Budget
+from pathlib import Path
+
+from .runtime import Budget, validate_prices
 from .service import InquiryService
 from .workers import LLMWorker
 
@@ -61,7 +63,7 @@ def create_server(service: InquiryService):
     return server
 
 
-def main(argv: list[str] | None = None) -> int:
+def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Epistemic inquiry service over MCP stdio.")
     parser.add_argument("--model", required=True, help="Explicit provider:model; credentials use provider environment variables.")
     parser.add_argument("--critic-model", help="Optional separate critic provider:model.")
@@ -72,16 +74,32 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--tokens", type=int, default=160000)
     parser.add_argument("--output-tokens", type=int, default=8192)
     parser.add_argument("--timeout", type=float, default=180)
-    args = parser.parse_args(argv)
+    parser.add_argument("--prices", help="JSON price table keyed by provider:model (input, cached_input, output USD per million tokens).")
+    parser.add_argument("--max-cost-usd", type=float, default=None,
+                        help="Host dollar cap per inquiry; requires a price entry for every configured worker.")
+    return parser.parse_args(argv)
+
+
+def build_service(args: argparse.Namespace) -> InquiryService:
+    """Build the host-configured service; the cap is checked against the price table before any request."""
     effort = None if args.effort == "none" else args.effort
+    prices = validate_prices(json.loads(Path(args.prices).read_text(encoding="utf-8"))) if args.prices else {}
+    identities = [args.model] + ([args.critic_model] if args.critic_model else [])
     service = InquiryService(
         partial(LLMWorker.from_spec, args.model, effort=effort),
         critic_factory=partial(LLMWorker.from_spec, args.critic_model, effort=effort) if args.critic_model else None,
         max_budget=Budget(max_model_calls=args.calls, max_tool_calls=args.tool_calls,
                           max_total_tokens=args.tokens, max_output_tokens=args.output_tokens,
-                          timeout_seconds=args.timeout),
-        record_root=args.record_root,
+                          timeout_seconds=args.timeout, max_cost_usd=args.max_cost_usd),
+        record_root=args.record_root, prices=prices, worker_identities=identities,
     )
+    if args.max_cost_usd is not None:
+        service._check_prices_cover_workers()
+    return service
+
+
+def main(argv: list[str] | None = None) -> int:
+    service = build_service(parse_args(argv))
     create_server(service).run(transport="stdio")
     return 0
 

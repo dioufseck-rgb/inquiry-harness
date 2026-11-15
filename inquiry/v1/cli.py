@@ -16,7 +16,7 @@ from .contracts import validate_inquiry_request
 from .experiments import ExperimentCase, run_experiments
 from .packets import DEFAULT_PACKET_PATH, load_packet
 from .persistence import digest, load_run, save_run
-from .runtime import Budget, build_prompt, replay_run, run_inquiry
+from .runtime import Budget, build_prompt, replay_run, run_inquiry, validate_prices
 from .scoring import score_run
 from .workers import LLMWorker
 
@@ -39,7 +39,14 @@ def _worker(args: argparse.Namespace):
 def _budget(args: argparse.Namespace) -> Budget:
     return Budget(max_model_calls=args.calls, max_tool_calls=args.tool_calls,
                   max_total_tokens=args.tokens, max_output_tokens=args.output_tokens,
-                  timeout_seconds=args.timeout)
+                  timeout_seconds=args.timeout, max_cost_usd=getattr(args, "max_cost_usd", None))
+
+
+def _prices(args: argparse.Namespace) -> dict:
+    path = getattr(args, "prices", None)
+    if not path:
+        return {}
+    return validate_prices(json.loads(Path(path).read_text(encoding="utf-8")))
 
 
 def _execution_options(parser: argparse.ArgumentParser) -> None:
@@ -54,6 +61,9 @@ def _execution_options(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--tokens", type=int, default=200000)
     parser.add_argument("--output-tokens", type=int, default=4096)
     parser.add_argument("--timeout", type=float, default=180)
+    parser.add_argument("--prices", help="JSON price table keyed by provider:model with input, cached_input and output USD per million tokens.")
+    parser.add_argument("--max-cost-usd", type=float, default=None,
+                        help="Stop before a model call whose worst case would exceed this dollar cap; requires --prices for every live worker.")
 
 
 def _code_version() -> str:
@@ -165,7 +175,7 @@ def main(argv: list[str] | None = None) -> int:
                 expectation = hardship_smoke_expectation(args.question, args.mutation)
             critic = LLMWorker.from_spec(args.critic_model, effort=args.effort) if args.critic_model else None
             result = run_inquiry(public, _worker(args), arm=args.arm, mode=args.mode, budget=budget, critic=critic,
-                                 event_path=Path(args.out) / "events.live.jsonl")
+                                 event_path=Path(args.out) / "events.live.jsonl", prices=_prices(args))
             path = save_run(result, args.out)
             score = score_run(result, public, answer_spec=answer_spec, smoke_expectation=expectation)
             _write_json(path / "assessment.json", score)
@@ -197,7 +207,8 @@ def main(argv: list[str] | None = None) -> int:
         def run_case(public_case, *, arm, mode):
             critic = LLMWorker.from_spec(args.critic_model, effort=args.effort) if args.critic_model else None
             return run_inquiry(public_case, _worker(args), arm=arm, mode=mode, budget=budget, critic=critic,
-                               event_path=Path(args.out) / "journals" / (uuid.uuid4().hex + ".jsonl"))
+                               event_path=Path(args.out) / "journals" / (uuid.uuid4().hex + ".jsonl"),
+                               prices=_prices(args))
         result = run_experiments(cases, run_case, arms=args.arms, modes=args.modes,
                                  repetitions=args.repetitions, manifest=manifest,
                                  order_seed=args.order_seed, output_dir=args.out)

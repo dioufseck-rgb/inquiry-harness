@@ -42,6 +42,8 @@ class Budget:
     timeout_seconds: float = 180.0
     max_consecutive_errors: int = 2
     max_critique_calls: int = 1
+    # None means no dollar cap, as before. A cap needs a host price table to be enforceable.
+    max_cost_usd: float | None = None
 
     def __post_init__(self) -> None:
         minimums = {"max_model_calls": 0, "max_tool_calls": 0, "max_total_tokens": 0,
@@ -53,6 +55,73 @@ class Budget:
         if (isinstance(self.timeout_seconds, bool) or not isinstance(self.timeout_seconds, (int, float))
                 or not math.isfinite(self.timeout_seconds) or self.timeout_seconds <= 0):
             raise ValueError("timeout_seconds must be finite and positive")
+        cap = self.max_cost_usd
+        if cap is not None and (isinstance(cap, bool) or not isinstance(cap, (int, float))
+                                or not math.isfinite(cap) or cap < 0):
+            raise ValueError("max_cost_usd must be None or a finite nonnegative number")
+
+
+PRICE_FIELDS = ("input", "cached_input", "output")
+ZERO_COST_PROVIDERS = frozenset({"recorded", "demo", "scripted"})
+LIMIT_NAMES = ("calls", "tool_calls", "tokens", "time", "cost", "kernel_work")
+
+
+def validate_prices(prices: Any) -> dict[str, dict[str, float]]:
+    """A host price table keyed by provider:model, USD per million tokens for input, cached_input, output."""
+    if prices is None:
+        return {}
+    if not isinstance(prices, dict):
+        raise ValueError("prices must be an object keyed by provider:model")
+    result: dict[str, dict[str, float]] = {}
+    for key, entry in prices.items():
+        if not isinstance(key, str) or ":" not in key or not key.split(":", 1)[1].strip():
+            raise ValueError(f"price key must be provider:model, got {key!r}")
+        if not isinstance(entry, dict) or set(entry) != set(PRICE_FIELDS):
+            raise ValueError(f"price entry {key!r} must have exactly {list(PRICE_FIELDS)}")
+        rates = {}
+        for field in PRICE_FIELDS:
+            rate = entry[field]
+            if isinstance(rate, bool) or not isinstance(rate, (int, float)) or not math.isfinite(rate) or rate < 0:
+                raise ValueError(f"price entry {key!r}.{field} must be a finite nonnegative number")
+            rates[field] = float(rate)
+        result[key] = rates
+    return result
+
+
+def worker_price_key(worker: Any) -> str:
+    return f"{getattr(worker, 'provider', 'unknown')}:{getattr(worker, 'model', getattr(worker, 'name', 'unknown'))}"
+
+
+def is_zero_cost_instrument(worker: Any) -> bool:
+    return bool(getattr(worker, "is_test_instrument", False)) or getattr(worker, "provider", None) in ZERO_COST_PROVIDERS
+
+
+def record_cost(record: dict[str, Any], prices: dict[str, dict[str, float]]) -> float | None:
+    """The cost of one usage record: as reported, else computed from its recorded tokens and a price.
+
+    OpenAI reports cached input inside input_tokens; Anthropic reports cache
+    reads as a disjoint partition that LLMWorker has already folded into
+    input_tokens. Both are therefore priced as input minus cached at the
+    input rate plus cached at the cached-input rate. Cache creation is
+    priced as ordinary input. The entry used is recorded on the record.
+    """
+    cost = record.get("cost_usd")
+    if isinstance(cost, (int, float)) and not isinstance(cost, bool) and math.isfinite(cost) and cost >= 0:
+        return float(cost)
+    key = f"{record.get('provider')}:{record.get('model')}"
+    price = prices.get(key)
+    input_tokens, output_tokens = record.get("input_tokens"), record.get("output_tokens")
+    known = all(isinstance(n, int) and not isinstance(n, bool) and n >= 0 for n in (input_tokens, output_tokens))
+    if price is None or not known or record.get("usage_known") is False:
+        return None
+    cached = record.get("cached_input_tokens")
+    if cached is None:
+        cached = record.get("cache_read_input_tokens")
+    cached = cached if isinstance(cached, int) and not isinstance(cached, bool) and 0 <= cached <= input_tokens else 0
+    computed = ((input_tokens - cached) * price["input"] + cached * price["cached_input"]
+                + output_tokens * price["output"]) / 1_000_000
+    record.update(cost_usd=computed, price_entry=key, cost_source="computed_from_recorded_tokens")
+    return computed
 
 
 class InformationNeed(BaseModel):
@@ -680,11 +749,25 @@ def declared_standing(public_case: dict[str, Any], response: dict[str, Any], sto
 
 def run_inquiry(public_case: dict[str, Any], worker: Any, *, arm: str = "harness",
                 mode: str = "supplied", budget: Budget | None = None, critic: Any = None,
-                event_path: str | Path | None = None) -> dict[str, Any]:
+                event_path: str | Path | None = None,
+                prices: dict[str, dict[str, float]] | None = None) -> dict[str, Any]:
     if arm not in {"ordinary", "repertoire", "harness"}:
         raise ValueError("unknown experimental arm")
     public_case = validate_inquiry_request(public_case)
     budget = budget or Budget()
+    prices = validate_prices(prices)
+    if budget.max_cost_usd is not None:
+        # a cap that cannot be enforced must not be accepted
+        for role, selected in (("proposer", worker), ("critic", critic)):
+            if selected is not None and not is_zero_cost_instrument(selected) and worker_price_key(selected) not in prices:
+                raise ValueError(f"max_cost_usd is set but there is no price entry for the {role} "
+                                 f"{worker_price_key(selected)}; the cap could not be enforced")
+
+    def worst_case_cost(selected: Any, input_reservation: int) -> float:
+        if is_zero_cost_instrument(selected):
+            return 0.0
+        price = prices[worker_price_key(selected)]
+        return (input_reservation * price["input"] + budget.max_output_tokens * price["output"]) / 1_000_000
     env = EvidenceEnvironment(public_case, mode=mode)
     profile = bind_profile(public_case)
     ledger = Ledger(journal_path=event_path)
@@ -702,7 +785,8 @@ def run_inquiry(public_case: dict[str, Any], worker: Any, *, arm: str = "harness
              "tool_calls": 0, "failed_calls": 0, "cost_usd": 0.0, "elapsed_seconds": 0.0,
              "estimated_usage_calls": 0, "cost_complete": True,
              "api_attempts": 0, "failed_api_attempts": 0,
-             "critique_attempts": 0, "critique_completed_calls": 0}
+             "critique_attempts": 0, "critique_completed_calls": 0,
+             "limit_reached": None, "price_entries": []}
     stop = "resource_limit"
     consecutive_errors = 0
     critique_calls = 0
@@ -711,17 +795,31 @@ def run_inquiry(public_case: dict[str, Any], worker: Any, *, arm: str = "harness
     response_repairs = 0
     review_required = critic is not None and arm in {"repertoire", "harness"} and budget.max_critique_calls > 0
 
+    def limit(name: str, detail: dict[str, Any]) -> StopIteration:
+        """Record which limit ended the run; the stop reason stays resource_limit."""
+        usage["limit_reached"] = name
+        ledger.append("limit_reached", {"limit": name, **detail})
+        return StopIteration("resource_limit")
+
     def call(selected_worker: Any, role: str, system: str, payload: dict[str, Any]) -> Any:
         elapsed = time.monotonic() - start
         remaining = budget.timeout_seconds - elapsed
-        if remaining <= 0 or usage["model_calls"] >= budget.max_model_calls:
-            raise StopIteration("resource_limit")
+        if remaining <= 0:
+            raise limit("time", {"elapsed_seconds": elapsed, "timeout_seconds": budget.timeout_seconds})
+        if usage["model_calls"] >= budget.max_model_calls:
+            raise limit("calls", {"model_calls": usage["model_calls"], "max_model_calls": budget.max_model_calls})
         user = _json(payload)
         # UTF-8 byte length is a conservative input reservation for the tested
         # provider encodings. Actual SDK tokens replace it after the call.
         reservation = len(system.encode()) + len(user.encode()) + 256
         if usage["input_tokens"] + usage["output_tokens"] + reservation + budget.max_output_tokens > budget.max_total_tokens:
-            raise StopIteration("resource_limit")
+            raise limit("tokens", {"used": usage["input_tokens"] + usage["output_tokens"], "reservation": reservation,
+                                   "max_output_tokens": budget.max_output_tokens, "max_total_tokens": budget.max_total_tokens})
+        if budget.max_cost_usd is not None:
+            worst = worst_case_cost(selected_worker, reservation)
+            if usage["cost_usd"] + worst > budget.max_cost_usd:
+                raise limit("cost", {"known_cost_usd": usage["cost_usd"], "worst_case_call_usd": worst,
+                                     "max_cost_usd": budget.max_cost_usd})
         setter = getattr(selected_worker, "set_timeout", None)
         if callable(setter):
             setter(remaining)
@@ -764,11 +862,14 @@ def run_inquiry(public_case: dict[str, Any], worker: Any, *, arm: str = "harness
                     usage["estimated_usage_calls"] += 1
                 usage["api_attempts"] += int(record.get("api_attempts", 0))
                 usage["failed_api_attempts"] += int(record.get("failed_api_attempts", 0))
-                cost = record.get("cost_usd")
+                cost = record_cost(record, prices) if isinstance(record, dict) else None
                 if cost is None:
                     usage["cost_complete"] = False
                 else:
                     usage["cost_usd"] += float(cost)
+                    entry = record.get("price_entry")
+                    if entry and entry not in usage["price_entries"]:
+                        usage["price_entries"].append(entry)
             ledger.append("worker_usage", {"role": role, "records": new_usage,
                                           "input_reservation": reservation,
                                           "output_reservation": budget.max_output_tokens})
@@ -1015,6 +1116,7 @@ def run_inquiry(public_case: dict[str, Any], worker: Any, *, arm: str = "harness
         response = _render_harness(graph, evaluation, draft, public_case, env)
         if evaluation.get("evaluation_status") == "incomplete":
             stop = "resource_limit"
+            usage["limit_reached"] = usage["limit_reached"] or "kernel_work"
         elif evaluation.get("evaluation_status") == "failed":
             stop = "execution_failure"
     else:

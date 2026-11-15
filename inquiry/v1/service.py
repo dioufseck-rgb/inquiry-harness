@@ -20,7 +20,7 @@ from .contracts import STAKES_LEVELS, canonical_json, validate_inquiry_request
 from .kernel import PATTERN_FORMS, PATTERN_REQUIREMENTS, SUPPORTED_FORMS
 from .models import Profile
 from .persistence import load_run, save_run
-from .runtime import Budget, replay_run, run_inquiry
+from .runtime import Budget, ZERO_COST_PROVIDERS, replay_run, run_inquiry, validate_prices
 
 
 SERVICE_VERSION = "epistemic-inquiry/v1"
@@ -51,7 +51,9 @@ class InquiryService:
                  max_kernel_work: Mapping[str, int] | None = None,
                  record_root: str | Path | None = None,
                  max_request_bytes: int = 4 * 1024 * 1024,
-                 tiers: Mapping[str, Budget | Mapping[str, Any]] | None = None):
+                 tiers: Mapping[str, Budget | Mapping[str, Any]] | None = None,
+                 prices: Mapping[str, Mapping[str, float]] | None = None,
+                 worker_identities: list[str] | None = None):
         if not callable(worker_factory) or (critic_factory is not None and not callable(critic_factory)):
             raise TypeError("worker factories must be callable")
         if isinstance(max_request_bytes, bool) or not isinstance(max_request_bytes, int) or max_request_bytes < 1:
@@ -68,6 +70,11 @@ class InquiryService:
             raise ValueError("Kernel resource limits must be nonnegative integers")
         self._record_root = Path(record_root).resolve() if record_root is not None else None
         self._max_request_bytes = max_request_bytes
+        self._prices = validate_prices(dict(prices) if prices is not None else None)
+        if worker_identities is not None and (not isinstance(worker_identities, list)
+                                              or any(not isinstance(x, str) or ":" not in x for x in worker_identities)):
+            raise ValueError("worker_identities must be a list of provider:model strings")
+        self._worker_identities = list(worker_identities) if worker_identities is not None else None
         self._tiers = self._default_tiers()
         for level, value in dict(tiers or {}).items():
             if level not in STAKES_LEVELS:
@@ -78,10 +85,13 @@ class InquiryService:
     def _default_tiers(self) -> dict[str, Budget]:
         """low: the focused ceiling; high: the host ceiling; medium: half of high, never below low."""
         high = asdict(self._ceiling)
-        low = {key: min(value, _FOCUSED_LIMITS[key]) for key, value in high.items()}
+        low = {key: (min(value, _FOCUSED_LIMITS[key]) if key in _FOCUSED_LIMITS else value) for key, value in high.items()}
         medium = {}
         for key, value in high.items():
-            half = value / 2 if key == "timeout_seconds" else value // 2
+            if value is None:
+                medium[key] = None
+                continue
+            half = value / 2 if key in ("timeout_seconds", "max_cost_usd") else value // 2
             medium[key] = max(low[key], half)
         return {"low": Budget(**low), "medium": Budget(**medium), "high": Budget(**high)}
 
@@ -102,6 +112,8 @@ class InquiryService:
             "forms_without_proof_pattern": sorted(set(SUPPORTED_FORMS) -
                                                     {form for forms in PATTERN_FORMS.values() for form in forms}),
             "per_inquiry_ceiling": asdict(self._ceiling),
+            "price_entries": sorted(self._prices),
+            "worker_identities": list(self._worker_identities) if self._worker_identities is not None else None,
             "budget_tiers": {level: asdict(budget) for level, budget in self._tiers.items()},
             "kernel_work_ceiling": dict(self._kernel_ceiling),
             "focused_check_ceiling": self._limits(None, focused=True).__dict__,
@@ -122,7 +134,8 @@ class InquiryService:
     def _limits(self, requested: Mapping[str, Any] | Budget | None, *, focused: bool) -> Budget:
         ceiling = asdict(self._ceiling)
         if focused:
-            ceiling = {key: min(value, _FOCUSED_LIMITS[key]) for key, value in ceiling.items()}
+            ceiling = {key: (min(value, _FOCUSED_LIMITS[key]) if key in _FOCUSED_LIMITS else value)
+                       for key, value in ceiling.items()}
         if requested is None:
             return Budget(**ceiling)
         values = asdict(requested) if isinstance(requested, Budget) else dict(requested)
@@ -130,10 +143,21 @@ class InquiryService:
         if unknown:
             raise ValueError(f"Unknown budget fields: {sorted(unknown)}")
         budget = Budget(**{**ceiling, **values})
-        exceeded = [key for key, value in asdict(budget).items() if value > ceiling[key]]
+        exceeded = [key for key, value in asdict(budget).items()
+                    if ceiling[key] is not None and (value is None or value > ceiling[key])]
         if exceeded:
             raise ValueError(f"Requested budget exceeds the host ceiling: {sorted(exceeded)}")
         return budget
+
+    def _check_prices_cover_workers(self) -> None:
+        """A cost cap is accepted only when every configured worker can be priced; checked before construction."""
+        if self._worker_identities is None:
+            raise ValueError("max_cost_usd is set but the host supplied no worker_identities; the cap could not be enforced")
+        for identity in self._worker_identities:
+            if identity.split(":", 1)[0] in ZERO_COST_PROVIDERS:
+                continue
+            if identity not in self._prices:
+                raise ValueError(f"max_cost_usd is set but there is no price entry for {identity}")
 
     def inquire(self, request: Mapping[str, Any], *,
                 budget: Mapping[str, Any] | Budget | None = None,
@@ -168,6 +192,8 @@ class InquiryService:
             limits = self._tiers[public["question"]["stakes"]["level"]]
         else:
             limits = self._limits(budget, focused=focused)
+        if limits.max_cost_usd is not None:
+            self._check_prices_cover_workers()
         profile_work = {**_KERNEL_DEFAULTS, **{key: value for key, value in
                         public["question"]["profile"]["kernel"].items() if key in _KERNEL_RESOURCE_FIELDS}}
         exceeded = [key for key, value in profile_work.items() if value > self._kernel_ceiling[key]]
@@ -184,7 +210,8 @@ class InquiryService:
             pending = self._record_root / ("pending_" + uuid4().hex)
             pending.mkdir()
         result = run_inquiry(public, worker, critic=critic, arm="harness", mode=mode, budget=limits,
-                             event_path=pending / "events.live.jsonl" if pending else None)
+                             event_path=pending / "events.live.jsonl" if pending else None,
+                             prices=self._prices)
         forbidden = _BUSINESS_RESPONSE_FIELDS.intersection(result.get("response", {}))
         if forbidden:
             raise RuntimeError(f"Core returned fields outside the epistemic boundary: {sorted(forbidden)}")
