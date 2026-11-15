@@ -143,7 +143,8 @@ def structural_audit(run: Mapping[str, Any], public_case: Mapping[str, Any]) -> 
                        "target_scope_answered", "inquiry_completed", "information_needs",
                        "target_form_answered", "target_question_answered", "evaluation_completed", "record_completed",
                        "standing_attack_ids",
-                       "record_defects", "response_completed", "response_defects", "review_required", "review_completed"}
+                       "record_defects", "response_completed", "response_defects", "review_required", "review_completed",
+                       "meets_declared_standing", "resolution_state"}
     check("epistemic_response_fields", set(response) <= response_fields,
           "Current service records contain only epistemic content and controller gates; historical records use their versioned scorer.")
     check("inquiry_completion_is_boolean", isinstance(response.get("inquiry_completed"), bool))

@@ -642,6 +642,42 @@ def _render_harness(graph: InquiryGraph, evaluation: dict[str, Any], draft: Resp
     return response
 
 
+RESOLUTION_STATES = ("execution_failed", "budget_limited", "open_needs", "settled")
+
+
+def declared_standing(public_case: dict[str, Any], response: dict[str, Any], stop: str) -> dict[str, Any]:
+    """Compare the target finding with the caller's declared threshold; computed in code only.
+
+    ``meets_declared_standing`` is None without declared stakes or when the
+    inquiry did not complete; True only for a completed inquiry whose target
+    finding is a direct proposition with a status in ``required_standing``. An
+    established negated or record-non-establishment target is False: it
+    establishes that the asked proposition is not supported.
+    ``resolution_state`` names why the caller has what it has. An incomplete
+    inquiry that neither failed nor ran out of budget is reported as
+    ``open_needs``: its question remains open even if no need was itemized.
+    """
+    stakes = public_case["question"].get("stakes")
+    completed = response.get("inquiry_completed") is True
+    target = next((f for f in response.get("findings", []) if isinstance(f, dict)
+                   and f.get("claim_id") == response.get("target_claim_id")), None)
+    if stop == "execution_failure":
+        state = "execution_failed"
+    elif stop == "resource_limit":
+        state = "budget_limited"
+    elif response.get("information_needs") or (target is not None and target.get("conditions")):
+        state = "open_needs"
+    elif completed:
+        state = "settled"
+    else:
+        state = "open_needs"
+    meets = None
+    if stakes is not None and completed:
+        meets = bool(target is not None and target.get("target_relation", "direct") == "direct"
+                     and target.get("status") in stakes["required_standing"])
+    return {"meets_declared_standing": meets, "resolution_state": state}
+
+
 def run_inquiry(public_case: dict[str, Any], worker: Any, *, arm: str = "harness",
                 mode: str = "supplied", budget: Budget | None = None, critic: Any = None,
                 event_path: str | Path | None = None) -> dict[str, Any]:
@@ -1002,6 +1038,11 @@ def run_inquiry(public_case: dict[str, Any], worker: Any, *, arm: str = "harness
                 else "information_unavailable")
     if stop in {"resource_limit", "execution_failure"}:
         response["caveats"].append("Run stopped at " + stop + "; the available partial result is retained.")
+    response.update(declared_standing(public_case, response, stop))
+    if response["meets_declared_standing"] is not None:
+        response["caveats"].append(
+            "meets_declared_standing compares the target finding with the caller's declared required_standing; "
+            "it reports that comparison and does not authorize anything.")
     usage["elapsed_seconds"] = round(time.monotonic() - start, 6)
     if not usage["cost_complete"]:
         usage["known_cost_usd"] = usage["cost_usd"]

@@ -17,8 +17,11 @@ from typing import Any, Mapping
 
 from pydantic import BaseModel, ConfigDict, model_validator
 
+from .models import FINDING_STATUSES
+
 
 REQUEST_SCHEMA_VERSION = "inquiry-request/v1"
+STAKES_LEVELS = ("low", "medium", "high")
 
 # Evaluation annotations belong to the caller's private experiment records,
 # never to the public input of an inquiry worker. Check every nested object.
@@ -285,10 +288,28 @@ def current_versions(corpus: Mapping[str, Any]) -> dict[str, str]:
     return _validate_corpus(_snapshot(corpus, "corpus"))
 
 
+def _stakes(value: Any, at: str) -> None:
+    """The caller's declared stakes: a budget tier, a satisfaction threshold and a recorded reason."""
+    _fields(value, {"level", "required_standing", "basis"}, set(), at)
+    if value["level"] not in STAKES_LEVELS:
+        raise InquiryValidationError(f"{at}.level: expected one of {list(STAKES_LEVELS)}")
+    _list(value["required_standing"], at + ".required_standing")
+    if not value["required_standing"]:
+        raise InquiryValidationError(f"{at}.required_standing: expected a nonempty list of finding statuses")
+    for item in value["required_standing"]:
+        if item not in FINDING_STATUSES:
+            raise InquiryValidationError(f"{at}.required_standing: unknown finding status {item!r}")
+    if len(set(value["required_standing"])) != len(value["required_standing"]):
+        raise InquiryValidationError(f"{at}.required_standing: entries must be unique")
+    _text(value["basis"], at + ".basis")
+
+
 def _question(question: Any) -> None:
-    _fields(question, {"id", "question", "intended_use", "scope", "target", "profile"}, set(), "question")
+    _fields(question, {"id", "question", "intended_use", "scope", "target", "profile"}, {"stakes"}, "question")
     for field in ("id", "question", "intended_use"):
         _text(question[field], "question." + field)
+    if "stakes" in question:
+        _stakes(question["stakes"], "question.stakes")
     if not isinstance(question["scope"], dict):
         raise InquiryValidationError("question.scope: expected an object")
     _fields(question["target"], {"kind", "form"}, set(), "question.target")
@@ -397,7 +418,13 @@ def request_json_schema() -> dict[str, Any]:
             "target": record({"kind": text, "form": text}),
             "profile": record({"id": text, "version": text, "authority": text,
                                "requirements": string_list, "kernel": record(kernel_fields, [])}),
-        }),
+            "stakes": record({
+                "level": {"type": "string", "enum": list(STAKES_LEVELS)},
+                "required_standing": {"type": "array", "minItems": 1, "uniqueItems": True,
+                                      "items": {"type": "string", "enum": list(FINDING_STATUSES)}},
+                "basis": text,
+            }),
+        }, ["id", "question", "intended_use", "scope", "target", "profile"]),
     })
     schema.update({
         "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -441,7 +468,7 @@ class InquiryRequest(BaseModel):
 
 
 __all__ = [
-    "REQUEST_SCHEMA_VERSION", "FORBIDDEN_PUBLIC_KEYS", "KERNEL_PROFILE_FIELDS",
+    "REQUEST_SCHEMA_VERSION", "FORBIDDEN_PUBLIC_KEYS", "KERNEL_PROFILE_FIELDS", "STAKES_LEVELS",
     "InquiryRequest", "InquiryValidationError", "canonical_json", "content_hash",
     "current_versions", "request_json_schema", "validate_inquiry_request", "validate_public_case",
 ]

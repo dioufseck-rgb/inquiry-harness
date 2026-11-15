@@ -149,6 +149,7 @@ class InquiryGraph(Record):
 FindingStatus = Literal[
     "established", "reported", "conditional", "contested", "not_established"
 ]
+FINDING_STATUSES: tuple[str, ...] = ("established", "reported", "conditional", "contested", "not_established")
 
 
 class ClaimFinding(Record):
